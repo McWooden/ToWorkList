@@ -1,11 +1,13 @@
+#navbar {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
 .navigation {
     display: flex;
     flex-direction: row;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
     height: 100vh;
+    width: fit-content;
 }
 .hideNavbar {
     display: none;
@@ -98,13 +100,13 @@ nav .nav-1 {
 }
 .modeNavbarHeader {
     box-shadow: var(--shadow-1);
-    padding: 0 16px;
+    padding: 1.5px 16px;
     display: flex;
     align-items: center;
+    height: 48px;
 }
 .guild-name {
     flex: 1;
-    height: 24px;
     padding: 12px 0;
     margin: 0;
     color: var(--white-1);
@@ -116,10 +118,9 @@ nav .nav-1 {
     border-radius: 5px;
 }
 .closeNavbar:hover {
-    background-color: var(--black-3);
+    background-color: var(--black-4);
 }
 .modeNavbarList {
-    height: 100%;
     overflow: auto;
 }
 .group-task {
@@ -163,6 +164,9 @@ nav .nav-1 {
     color: var(--white-2);
 }
 /* nav top */
+#navTop {
+    margin-left: 314px;
+}
 header {
     display: flex;
     align-items: center;
@@ -170,6 +174,9 @@ header {
     padding: 0 8px;
     box-shadow: var(--shadow-1);
     height: 48px;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 .bars {
     margin: 0 .5em;

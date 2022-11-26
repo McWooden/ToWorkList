@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#todoApp {
+    display: inline-block;
+    background-color: var(--black-1);
+    margin-top: 48px;
+    height: calc(100vh - 48px);
+}

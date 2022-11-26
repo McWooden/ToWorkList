@@ -8,26 +8,31 @@ export class Navbar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isHidden : false
+            isHidden : false,
+            marginLeftOn: '314px',
+            marginLeftOff: '0'
         }
         this.handleHidden = this.handleHidden.bind(this)
         this.handleShow = this.handleShow.bind(this)
     }
     handleHidden() {
         this.setState({
-            isHidden: true
+            isHidden: true,
         })
+        document.getElementById('navTop').style.marginLeft = this.state.marginLeftOff
     }
     handleShow() {
         this.setState({
-            isHidden: false
+            isHidden: false,
         })
+        document.getElementById('navTop').style.marginLeft = this.state.marginLeftOn
     }
     
     render() {
         return (
             <>
-            <div style={{transform: `${this.state.isHidden ? 'translateX(-100%)' : 'translateX(0)'}`}} id='navbar'>
+            <NavTop open={this.handleShow} marginLeft={this.state.isHidden}/>
+            <div style={{marginLeft: `${this.state.isHidden ? '-100%' : '0'}`}} id='navbar'>
                 <div className='navigation'>
                     <nav>
                         <div className='nav-1'>
@@ -39,7 +44,6 @@ export class Navbar extends React.Component {
                     <ModeNavbar closeFunction={this.handleHidden}/>
                 </div>
             </div>
-            <NavTop open={this.handleShow}/>
             </>
         )
     }
@@ -222,7 +226,7 @@ export class NavTop extends React.Component {
     }
     render() {
         return (
-            <section>
+            <section id='navTop'>
                 <header onClick={this.open} className='pointer'>
                 <FontAwesomeIcon icon={faCheck} className={'bars pointer'} style={{color: 'var(--white-3)'}}/>
                 <h4 className='pageTitle'>main todo</h4>
