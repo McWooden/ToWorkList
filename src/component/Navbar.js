@@ -47,8 +47,10 @@ class ModeNavbar extends React.Component {
     render() {
         return (
             <div className='modeNavbar'>
-                <ModeNavbarHeader closeFunction={this.props.closeFunction}/>
-                <ModeNavbarList/>
+                <div>
+                    <ModeNavbarHeader closeFunction={this.props.closeFunction}/>
+                    <ModeNavbarList/>
+                </div>
                 <Profile/>
             </div>
         )
