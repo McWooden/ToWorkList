@@ -28,7 +28,7 @@ export class Navbar extends React.Component {
         return (
             <>
             <div style={{transform: `${this.state.isHidden ? 'translateX(-100%)' : 'translateX(0)'}`}} id='navbar'>
-                <div className={'navigation'}>
+                <div className='navigation'>
                     <nav>
                         <div>
                             <HomeButton/>
@@ -47,10 +47,8 @@ class ModeNavbar extends React.Component {
     render() {
         return (
             <div className='modeNavbar'>
-                <div>
-                    <ModeNavbarHeader closeFunction={this.props.closeFunction}/>
-                    <ModeNavbarList/>
-                </div>
+                <ModeNavbarHeader closeFunction={this.props.closeFunction}/>
+                <ModeNavbarList/>
                 <Profile/>
             </div>
         )
@@ -105,6 +103,51 @@ function ModeNavbarList() {
             </div>
             <div className="group-task">
                 <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>third todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
             </div>
         </div>
     )
