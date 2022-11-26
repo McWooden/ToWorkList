@@ -9,7 +9,18 @@
   --white-3: #96989d;
   --purple-1: #7253ee;
   --purple-2: #9753ee;
+  --orange-1: #fbbb17;
+  --orange-2: #daa520;
   --shadow-1: 0 1px 0 rgba(0,0,0,0.2),0 1.5px 0 rgba(0,0,0,0.05),0 2px 0 rgba(0,0,0,0.05);
+}
+::-webkit-scrollbar {
+  width: 1px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--purple-1);
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 body {
   margin: 0;
@@ -20,6 +31,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--black-4);
   color: var(--white-1);
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 code {

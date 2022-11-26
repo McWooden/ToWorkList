@@ -2,7 +2,7 @@ import React from 'react'
 import './style/Navbar.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faHouse, faCheck, faArrowLeft, faBars} from '@fortawesome/free-solid-svg-icons'
+import {faHouse, faCheck, faArrowLeft, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
 
 export class Navbar extends React.Component {
     constructor(props) {
@@ -30,9 +30,10 @@ export class Navbar extends React.Component {
             <div style={{transform: `${this.state.isHidden ? 'translateX(-100%)' : 'translateX(0)'}`}} id='navbar'>
                 <div className='navigation'>
                     <nav>
-                        <div>
+                        <div className='nav-1'>
                             <HomeButton/>
                             <PartyList/>
+                            <FindCreate/>
                         </div>
                     </nav>
                     <ModeNavbar closeFunction={this.handleHidden}/>
@@ -77,9 +78,57 @@ function HomeButton() {
         </div>
     )
 }
+function FindCreate() {
+    return (
+        <div className='find-create-frame'>
+            <div className='home-profile find-create'>
+                <FontAwesomeIcon icon={faPlus} className={'nav-icon nav-icon-2'}/>
+            </div>
+            <div className='home-profile find-create'>
+                <FontAwesomeIcon icon={faCompass} className={'nav-icon nav-icon-2'}/>
+            </div>
+        </div>
+    )
+}
 function PartyList() {
     return (
         <div className="nav-party">
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
+            <div>
+                <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
+            </div>
             <div>
                 <img src={'https://nvhibgshtzxykdbwmats.supabase.co/storage/v1/object/public/img/user-picture/no-pic.png'} className={' party-photo-profile'} alt='no-person'/>
             </div>
@@ -174,9 +223,9 @@ export class NavTop extends React.Component {
     render() {
         return (
             <section>
-                <header>
-                <FontAwesomeIcon icon={faBars} className='bars pointer' onClick={this.open}/>
-                    <h4 className='pageTitle'>TodoList</h4>
+                <header onClick={this.open} className='pointer'>
+                <FontAwesomeIcon icon={faCheck} className={'bars pointer'} style={{color: 'var(--white-3)'}}/>
+                <h4 className='pageTitle'>main todo</h4>
                 </header>
             </section>
         )
