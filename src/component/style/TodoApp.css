@@ -5,7 +5,8 @@
 }
 #todoApp {
     display: inline-block;
-    background-color: var(--black-1);
+    background-color: var(--black-4);
     margin-top: 48px;
     height: calc(100vh - 48px);
+    padding: .5em;
 }

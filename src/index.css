@@ -31,8 +31,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--black-4);
   color: var(--white-1);
-  min-height: 100vh;
-  overflow: hidden;
 }
 
 code {
