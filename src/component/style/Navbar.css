@@ -131,7 +131,7 @@ nav .nav-1 {
 .group-task-icon {
     color: var(--white-1);
     height: 16px;
-    margin-right: 5px;
+    margin: 0 5px;
 }
 .group-task:hover {
     background-color: var(--black-4);
@@ -164,9 +164,6 @@ nav .nav-1 {
     color: var(--white-2);
 }
 /* nav top */
-#navTop {
-    margin-left: 314px;
-}
 header {
     display: flex;
     align-items: center;

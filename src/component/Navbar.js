@@ -9,29 +9,19 @@ export class Navbar extends React.Component {
         super(props)
         this.state = {
             isHidden : false,
-            marginLeftOn: '314px',
-            marginLeftOff: '0'
         }
         this.handleHidden = this.handleHidden.bind(this)
-        this.handleShow = this.handleShow.bind(this)
     }
     handleHidden() {
         this.setState({
-            isHidden: true,
+            isHidden: !this.state.isHidden
         })
-        document.getElementById('navTop').style.marginLeft = this.state.marginLeftOff
-    }
-    handleShow() {
-        this.setState({
-            isHidden: false,
-        })
-        document.getElementById('navTop').style.marginLeft = this.state.marginLeftOn
     }
     
     render() {
         return (
             <>
-            <NavTop open={this.handleShow} marginLeft={this.state.isHidden}/>
+            <NavTop open={this.handleHidden} marginLeft={this.state.isHidden}/>
             <div style={{marginLeft: `${this.state.isHidden ? '-100%' : '0'}`}} id='navbar'>
                 <div className='navigation'>
                     <nav>
@@ -45,6 +35,7 @@ export class Navbar extends React.Component {
                 </div>
             </div>
             </>
+            
         )
     }
 }
@@ -148,6 +139,30 @@ function PartyList() {
 function ModeNavbarList() {
     return(
         <div className='modeNavbarList'>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span>main todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>second todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>third todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span>main todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>second todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>third todo</span>
+            </div>
+            <div className="group-task">
+                <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span style={{color: 'var(--white-3)'}}>-th todo</span>
+            </div>
             <div className="group-task">
                 <FontAwesomeIcon icon={faCheck} className={'group-task-icon'} style={{color: 'var(--white-3)'}}/> <span>main todo</span>
             </div>
