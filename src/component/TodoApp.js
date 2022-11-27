@@ -22,7 +22,6 @@ export class TodoApp extends React.Component {
     }
     render() {
         return (
-            // <div id='todoApp'style={{transform: `translateX(${this.state.isMinimize?'314px' : '0px'})`}}>
             <div id='todoApp'style={{left: `${this.state.isMinimize?'314px' : '0px'}`}}>
             <NavTop handleMinimize={this.handleMinimize} color={this.state.isMinimize?'var(--orange-2)' : 'var(--white-3)'}/>
                 <div className='base'>
