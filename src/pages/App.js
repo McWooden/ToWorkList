@@ -4,10 +4,10 @@ import TodoApp from '../component/TodoApp';
 
 function App() {
   return (
-    <>
+    <div id='app'>
       <Navbar/>
       <TodoApp/>
-    </>
+    </div>
   )
 }
 

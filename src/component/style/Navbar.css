@@ -6,7 +6,7 @@
 .navigation {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: 100svh;
     width: fit-content;
 }
 .hideNavbar {
