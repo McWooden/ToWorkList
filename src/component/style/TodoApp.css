@@ -11,6 +11,7 @@
     left: 0;
     bottom: 0;
     right: 0;
+    width: 100vw;
 }
 header {
     display: flex;
@@ -36,4 +37,5 @@ header h4 {
 /* base */
 .base  {
     padding: .5em;
+    overflow: hidden;
 }

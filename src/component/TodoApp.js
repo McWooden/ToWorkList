@@ -8,7 +8,7 @@ export class TodoApp extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            isMinimize: true
+            isMinimize: false
         }
         this.toRight = '314px'
         this.color = 'var(--orange-2)'
