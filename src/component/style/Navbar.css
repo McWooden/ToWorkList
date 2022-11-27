@@ -1,12 +1,10 @@
 #navbar {
-    display: inline-block;
-    position: absolute;
-    top: 0;
+
 }
 .navigation {
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: 100%;
 }
 .hideNavbar {
     display: none;

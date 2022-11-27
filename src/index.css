@@ -29,10 +29,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--black-4);
+  background-color: var(--orange-2);
   color: var(--white-1);
-  width: 100vh;
-  overflow-x: hidden;
 }
 
 code {
