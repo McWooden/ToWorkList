@@ -5,6 +5,12 @@
 }
 #todoApp {
     background-color: var(--black-4);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
 }
 header {
     display: flex;
@@ -30,5 +36,4 @@ header h4 {
 /* base */
 .base  {
     padding: .5em;
-    overflow: hidden;
 }
