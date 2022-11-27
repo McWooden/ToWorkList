@@ -1,11 +1,11 @@
 #navbar {
-    max-height: 100vh;
+    width: fit-content;
 }
 .navigation {
     display: flex;
     flex-direction: row;
-    height: 100%;
-    max-height: 100vh;
+    height: 100vh;
+    position: fixed;
 }
 .hideNavbar {
     display: none;
