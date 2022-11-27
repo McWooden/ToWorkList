@@ -2,27 +2,13 @@ import React from 'react'
 import './style/Navbar.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faHouse, faCheck, faArrowLeft, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
+import {faHouse, faCheck, faGear, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
 
 export class Navbar extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            isHidden : false,
-        }
-        this.handleHidden = this.handleHidden.bind(this)
-    }
-    handleHidden() {
-        this.setState({
-            isHidden: !this.state.isHidden
-        })
-    }
-    
     render() {
         return (
             <>
-            <NavTop open={this.handleHidden} marginLeft={this.state.isHidden}/>
-            <div style={{marginLeft: `${this.state.isHidden ? '-100%' : '0'}`}} id='navbar'>
+            <div id='navbar'>
                 <div className='navigation'>
                     <nav>
                         <div className='nav-1'>
@@ -31,7 +17,7 @@ export class Navbar extends React.Component {
                             <FindCreate/>
                         </div>
                     </nav>
-                    <ModeNavbar closeFunction={this.handleHidden}/>
+                    <ModeNavbar/>
                 </div>
             </div>
             </>
@@ -43,7 +29,7 @@ class ModeNavbar extends React.Component {
     render() {
         return (
             <div className='modeNavbar'>
-                <ModeNavbarHeader closeFunction={this.props.closeFunction}/>
+                <ModeNavbarHeader/>
                 <ModeNavbarList/>
                 <Profile/>
             </div>
@@ -51,15 +37,11 @@ class ModeNavbar extends React.Component {
     }
 }
 class ModeNavbarHeader extends React.Component {
-    constructor(props) {
-        super(props)
-        this.close = this.props.closeFunction
-    }
     render() {
         return (
             <div className="modeNavbarHeader">
                 <h4 className='guild-name'>Guild Name</h4>
-                <FontAwesomeIcon icon={faArrowLeft} className='closeNavbar pointer' onClick={this.close}/>
+                <FontAwesomeIcon icon={faGear} className='settingNavbar pointer'/>
             </div>
         )
     }
@@ -232,23 +214,6 @@ function Profile() {
             </div>
         </div>
     )
-}
-
-export class NavTop extends React.Component {
-    constructor(props) {
-        super(props)
-        this.open = this.props.open
-    }
-    render() {
-        return (
-            <section id='navTop'>
-                <header onClick={this.open} className='pointer'>
-                <FontAwesomeIcon icon={faCheck} className={'bars pointer'} style={{color: 'var(--white-3)'}}/>
-                <h4 className='pageTitle'>main todo</h4>
-                </header>
-            </section>
-        )
-    }
 }
 
 export default Navbar
