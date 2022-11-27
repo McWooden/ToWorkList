@@ -1,14 +1,12 @@
-#navbar {
-    width: fit-content;
-}
 .navigation {
     display: flex;
     flex-direction: row;
     height: 100vh;
     position: fixed;
+    width: fit-content;
 }
 .hideNavbar {
-    display: none;
+    transform: translateX(-100%);
 }
 .pointer {
     cursor: pointer;

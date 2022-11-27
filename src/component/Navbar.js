@@ -4,21 +4,21 @@ import './style/Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faCheck, faGear, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
 
+import '../utils/hideNavbar'
+
 export class Navbar extends React.Component {
     render() {
         return (
             <>
-            <div id='navbar'>
-                <div className='navigation'>
-                    <nav>
-                        <div className='nav-1'>
-                            <HomeButton/>
-                            <PartyList/>
-                            <FindCreate/>
-                        </div>
-                    </nav>
-                    <ModeNavbar/>
-                </div>
+            <div className='navigation'>
+                <nav>
+                    <div className='nav-1'>
+                        <HomeButton/>
+                        <PartyList/>
+                        <FindCreate/>
+                    </div>
+                </nav>
+                <ModeNavbar/>
             </div>
             </>
             
@@ -46,10 +46,14 @@ class ModeNavbarHeader extends React.Component {
         )
     }
 }
+function handleNavbar() {
+    console.log('ok')
+    document.querySelector('.navigation').classList.toggle('hideNavbar')
+}
 function HomeButton() {
     return (
         <div className='home-frame'>
-            <div className='home-profile'>
+            <div className='home-profile' onClick={handleNavbar}>
                 <FontAwesomeIcon icon={faHouse} className={'nav-icon'}/>
             </div>
         </div>

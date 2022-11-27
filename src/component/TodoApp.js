@@ -3,6 +3,7 @@ import './style/TodoApp.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars} from '@fortawesome/free-solid-svg-icons'
+import handleNavbar from '../utils/hideNavbar'
 
 export class TodoApp extends React.Component {
     constructor(props) {
@@ -41,8 +42,8 @@ export class NavTop extends React.Component {
     render() {
         return (
             <section id='navTop'>
-                <header className='pointer'>
-                <FontAwesomeIcon icon={faBars} className={'bars pointer'} style={{color: this.props.color}} onClick={this.handleMinimize}/>
+                <header>
+                <FontAwesomeIcon icon={faBars} className={'bars pointer'} style={{color: this.props.color}} onClick={handleNavbar}/>
                 <h4 className='pageTitle'>main todo</h4>
                 </header>
             </section>
