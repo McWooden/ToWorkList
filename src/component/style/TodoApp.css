@@ -6,7 +6,7 @@
 }
 #todoApp {
     background-color: var(--black-4);
-    height: 100vh;
+    height: calc(100vh - 48px);
 }
 .pointer {
     cursor: pointer;

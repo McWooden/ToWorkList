@@ -1,4 +1,19 @@
 .base  {
-    padding: .5em;
+    display: flex;
     margin-top: 48px;
+    background-color: var(--black-4);
+    min-height: calc(100vh - 48px);
+}
+.base-left, .base-center, .base-right {
+    padding: .5em;
+}
+.base-left {
+    flex: 1;
+}
+.base-center {
+    flex: 2;
+    background-color: var(--black-4);
+}
+.base-right {
+    flex: 1;
 }
