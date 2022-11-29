@@ -1,5 +1,5 @@
 function handleNavbar() {
-    console.log('ok')
+    document.querySelector('.bars').classList.toggle('bars-active')
     document.querySelector('.navigation').classList.toggle('hideNavbar')
 }
 

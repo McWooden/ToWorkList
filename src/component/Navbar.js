@@ -4,8 +4,6 @@ import './style/Navbar.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faCheck, faGear, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
 
-import handleNavbar from '../utils/hideNavbar'
-
 export class Navbar extends React.Component {
     render() {
         return (
@@ -49,7 +47,7 @@ class ModeNavbarHeader extends React.Component {
 function HomeButton() {
     return (
         <div className='home-frame'>
-            <div className='home-profile pointer' onClick={handleNavbar}>
+            <div className='home-profile pointer'>
                 <FontAwesomeIcon icon={faHouse} className={'nav-icon'}/>
             </div>
         </div>
