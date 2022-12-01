@@ -17,26 +17,16 @@ export class Base extends Component {
 class BaseLeft extends Component {
     render() {
         return (
-            <div className="base-left">
-                <div className="sidebar-right">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolorem optio magni hic quibusdam, cupiditate numquam ducimus ullam vitae aut nobis aliquid doloribus ipsa id eos enim reiciendis saepe? Earum!</p>
+            <div className="base-left base-left-hide">
+                <div className="sidebar-left">
+                    <div className="progress">
+                        <div className="progress-bar">
+                            <div className="progress-value undone"></div>
+                        </div>
+                        <div className="progress-bar">
+                            <div className="progress-value done"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
@@ -47,39 +37,34 @@ class BaseCenter extends Component {
         return (
             <div className="base-center">
                 <div className="center">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae perspiciatis repellendus, laborum laboriosam expedita laudantium incidunt accusantium illum est porro earum quo at? Sint quidem ipsa illum accusantium porro debitis!</p>
-                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nisi ullam voluptates harum, asperiores soluta error, iste voluptatem non commodi, molestias repellat cum saepe laborum deleniti. Repudiandae dolorum aperiam pariatur consequatur.</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ducimus accusantium commodi quasi, laboriosam animi iusto repudiandae. Possimus veniam iusto magnam porro eum cumque adipisci quod, fuga non voluptatum velit. Nisi?</p>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
+                    <div className="todo-card"></div>
                 </div>
             </div>
         )
@@ -88,20 +73,28 @@ class BaseCenter extends Component {
 class BaseRight extends Component {
     render() {
         return (
-            <div className="base-right">
+            <div className="base-right base-right-hide">
                 <div className="sidebar-right">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum voluptatem doloremque non tenetur? Tenetur, velit id nesciunt, quibusdam sit perferendis qui, fuga modi expedita nam deleniti at nihil ad corporis.</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor consectetur, provident, optio voluptatem architecto nam maiores harum quos beatae odit dicta assumenda ipsa accusantium molestiae nihil at nesciunt repellat ea!</p>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
+                    <div className="box-card-message"></div>
                 </div>
             </div>
         )

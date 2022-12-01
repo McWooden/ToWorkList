@@ -4,7 +4,7 @@
     height: calc(100vh - 48px);
     margin-top: 48px;
     position: fixed;
-    width: fit-content;
+    z-index: 1;
 }
 .hideNavbar {
     transform: translateX(-100%);
@@ -55,6 +55,9 @@ nav .nav-1 {
 .home-profile:hover {
     background-color: var(--purple-1);
 }
+.find-create {
+    cursor: pointer;
+}
 .find-create:hover, .find-create:hover > * {
     background-color: var(--orange-2);
     color: var(--black-2);
@@ -78,6 +81,7 @@ nav .nav-1 {
 }
 .nav-party div {
     padding: 0 .5em;
+    cursor: pointer;
 }
 .nav-party div:hover {
     background-color: var(--black-2);
@@ -130,6 +134,7 @@ nav .nav-1 {
     padding: .5em;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .group-task-icon {
     color: var(--white-1);
@@ -140,7 +145,7 @@ nav .nav-1 {
     background-color: var(--black-4);
 }
 .group-task span {
-    font-size: 16px;
+    font-size: small;
 }
 .profile-container {
     width: 100%;

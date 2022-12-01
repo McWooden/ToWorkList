@@ -2,9 +2,10 @@ import React from 'react'
 import './style/TodoApp.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBars} from '@fortawesome/free-solid-svg-icons'
-import handleNavbar from '../utils/hideNavbar'
+import {faBars, faChartSimple, faWindowMaximize} from '@fortawesome/free-solid-svg-icons'
+import {handleRightBase, handleLeftBase, handleNavbar} from '../utils/hideNavbar'
 import { Base } from './Base'
+
 
 export class TodoApp extends React.Component {
     render() {
@@ -27,8 +28,14 @@ export class NavTop extends React.Component {
         return (
             <section id='navTop'>
                 <header>
-                <FontAwesomeIcon icon={faBars} className={'bars bars-active pointer'} onClick={handleNavbar}/>
-                <h4 className='pageTitle'>main todo</h4>
+                <div className='header-left'>
+                    <FontAwesomeIcon icon={faBars} className={'bars bars-active pointer'} onClick={handleNavbar}/>
+                    <h4 className='pageTitle'>main todo</h4>
+                </div>
+                <div className="sidebar-button">
+                    <FontAwesomeIcon icon={faChartSimple} className="btn-sidebar btn-sidebar-left pointer" onClick={handleLeftBase}/>
+                    <FontAwesomeIcon icon={faWindowMaximize} className="btn-sidebar btn-sidebar-right pointer" onClick={handleRightBase}/>
+                </div>
                 </header>
             </section>
         )
