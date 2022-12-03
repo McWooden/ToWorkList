@@ -21,7 +21,6 @@
     padding: 0 2px;
     position: fixed;
     bottom: 0;
-    left: 0;
     right: 0;
 }
 .base-right-form input {
@@ -90,6 +89,11 @@
         background-color: var(--black-4);
         right: 0;
         width: 314px;
+    }
+    .base-right-form {
+        width: 314px;
+        margin: 0;
+        padding: 0 3px 8px;
     }
     .base-right-hide {
         transform: translateX(100%);
