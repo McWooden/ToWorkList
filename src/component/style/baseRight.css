@@ -1,0 +1,66 @@
+.base-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.sidebar-right {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    height: calc(100vh - 48px);
+    overflow: auto;
+}
+.base-right-form {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 58px;
+    background-color: var(--black-4);
+    margin-bottom: 8px;
+    padding: 0 2px;
+}
+.base-right-form input {
+    flex: 4;
+    background-color: var(--black-5);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: var(--white-2);
+    height: 40px;
+    padding: 0 5px;
+}
+.base-right-form button {
+    height: 40px;
+    flex: 1;
+    color: var(--white-1);
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+}
+.btn-off {
+    background-color: var(--black-5);
+}
+.btn-on {
+    background-color: var(--light-blue);
+    box-shadow: var(--shadow-2-blue);
+}
+.box-card-message {
+    border-radius: 5px;
+    min-height: 48px;
+    background-color: var(--black-5);
+}
+.base-right-hide {
+    transform: translateX(0);
+}
+@media (max-width: 768px) {
+    .base-right {
+        height: calc(100vh - 48px);
+        position: fixed;
+        width: 223px;
+        background-color: var(--black-4);
+        right: 0;
+    }
+    .base-right-hide {
+        transform: translateX(100%);
+    }
+}

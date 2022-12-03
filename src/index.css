@@ -20,10 +20,12 @@ html {
   --purple-2: #9753ee;
   --orange-1: #fbbb17;
   --orange-2: #daa520;
+  --light-blue: #277BC0;
   --ok: #0d7377;
   --danger: #774360;
   --shadow-1: 0 1px 0 rgba(0,0,0,0.2),0 1.5px 0 rgba(0,0,0,0.05),0 2px 0 rgba(0,0,0,0.05);
   --shadow-1-reverse: 0 -1px 0 rgba(0,0,0,0.2),0 -1.5px 0 rgba(0,0,0,0.05),0 -2px 0 rgba(0,0,0,0.05);
+  --shadow-2-blue: #277bc060 0px 8px 24px;
 }
 ::-webkit-scrollbar {
   width: 1px;

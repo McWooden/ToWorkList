@@ -1,3 +1,6 @@
+@import url(./baseRight.css);
+@import url(./baseLeft.css);
+
 .base  {
     padding-top: 48px;
     background-color: var(--black-4);
@@ -14,51 +17,13 @@
 .base-center {
     flex: 2;
 }
-.base-right {
-    flex: 1;
-}
 .sidebar-left, .center, .sidebar-right {
-    margin: .5em;
-}
-.sidebar-left {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-.progress {
-    display: flex;
-    flex-direction: column;
-    gap: .5em;
-    width: 100%;
-}
-.progress-bar {
-    background-color: var(--black-3);
-    height: 20px;
-    width: 100%;
-    border-radius: 5px;
-    overflow: hidden;
-}
-.progress-value {
-    height: 100%;
-}
-.undone {
-    background-color: var(--ok);
-    width: 75%;
-}
-.done {
-    background-color: var(--danger);
-    width: 25%;
+    padding: .5em;
 }
 .center {
     display: flex;
     gap: 5px;
     flex-direction: column;
-}
-.sidebar-right {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
 }
 .box-card-image {
     width: 48px;
@@ -66,47 +31,9 @@
     border-radius: 5px;
     background-color: var(--black-3);
 }
-.box-card-message {
-    border-radius: 5px;
-    min-height: 48px;
-    background-color: var(--black-5);
-}
-
 .todo-card {
     width: 100%;
     height: 48px;
     border-radius: 5px;
     background-color: var(--black-3);
-}
-
-/* feature */
-.base-left-hide {
-    transform: translateX(0);
-}
-.base-right-hide {
-    transform: translateX(0);
-}
-
-@media (max-width: 768px) {
-    .base-right {
-        height: calc(100vh - 48px);
-        position: fixed;
-        width: 223px;
-        background-color: var(--black-4);
-        right: 0;
-    }
-    .base-right-hide {
-        transform: translateX(100%);
-    }
-}
-@media (max-width: 892px) {
-    .base-left {
-        height: calc(100vh - 48px);
-        position: fixed;
-        width: 223px;
-        background-color: var(--black-4);
-    }
-    .base-left-hide {
-        transform: translateX(-100%);
-    }
 }
