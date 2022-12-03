@@ -65,30 +65,93 @@ function BaseCenter() {
         </div>
     )
 }
+const chatData = [
+    {
+        nickname: 'McWooden',
+        msg: 'Yo wassap',
+        time: '20.00',
+        date: '12/2/2022'
+    },
+    {
+        nickname: 'McWooden',
+        msg: 'am here',
+        time: '20.00',
+        date: '12/2/2022'
+    },
+    {
+        nickname: 'Putra',
+        msg: 'heyyy',
+        time: '20.04',
+        date: '12/2/2022'
+    },
+    {
+        nickname: 'Putra',
+        msg: 'am here too',
+        time: '20.04',
+        date: '12/2/2022'
+    },
+    {
+        nickname: 'Putra',
+        msg: 'you guys using this app to talk about daily task?',
+        time: '20.05',
+        date: '12/3/2022'
+    },
+    {
+        nickname: 'Hudin',
+        msg: 'Hai',
+        time: '20.20',
+        date: '12/3/2022'
+    },
+    {
+        nickname: 'Frank',
+        msg: 'wow new member Hi!',
+        time: '20.23',
+        date: '12/3/2022'
+    },
+    {
+        nickname: 'Frank',
+        msg: 'welcome! hope you enjoy',
+        time: '20.24',
+        date: '12/3/2022'
+    },
+    {
+        nickname: 'McWooden',
+        msg: 'ini adalah data chat dummy. Huddin akan menyelesaikan frontEnd dan bermain database segera :D',
+        time: '20.24',
+        date: '12/3/2022'
+    },
+]
 function BaseRight() {
+    let chatBox = []
+    let lastDate = null
+    let lastNickname = null
+
+    chatData.forEach((item, index) => {
+        if (item.date !== lastDate) {
+            chatBox.push(
+                <div key={`${index}-${item.date}`} className='chat-card-date'>{item.date}</div>
+            )
+            lastDate = item.date
+            lastNickname = null
+        }
+        if (item.nickname !== lastNickname) {
+            chatBox.push(
+                <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
+            )
+            lastNickname = item.nickname
+        }
+        chatBox.push(
+            <div key={index} className='chat-card'>
+                <div className='chat-card-message'>{item.msg}</div>
+                <div className='chat-card-time'>{item.time}</div>
+            </div>
+        )
+    })
+
     return (
         <div className="base-right base-right-hide">
             <div className="sidebar-right">
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
-                <div className="box-card-message"></div>
+                {chatBox}
             </div>
             <FormBaseRight/>
         </div>

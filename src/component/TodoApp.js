@@ -2,7 +2,7 @@ import React from 'react'
 import './style/TodoApp.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBars, faChartSimple, faWindowMaximize} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faChartSimple, faMessage} from '@fortawesome/free-solid-svg-icons'
 import {handleRightBase, handleLeftBase, handleNavbar} from '../utils/hideNavbar'
 import { Base } from './Base'
 
@@ -34,7 +34,7 @@ export class NavTop extends React.Component {
                 </div>
                 <div className="sidebar-button">
                     <FontAwesomeIcon icon={faChartSimple} className="btn-sidebar btn-sidebar-left pointer" onClick={handleLeftBase}/>
-                    <FontAwesomeIcon icon={faWindowMaximize} className="btn-sidebar btn-sidebar-right pointer" onClick={handleRightBase}/>
+                    <FontAwesomeIcon icon={faMessage} className="btn-sidebar btn-sidebar-right pointer" onClick={handleRightBase}/>
                 </div>
                 </header>
             </section>

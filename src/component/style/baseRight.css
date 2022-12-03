@@ -6,7 +6,7 @@
 .sidebar-right {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 1px;
     height: calc(100vh - 48px);
     overflow: auto;
 }
@@ -14,9 +14,9 @@
     display: flex;
     align-items: center;
     gap: 3px;
-    height: 58px;
+    height: 48px;
     background-color: var(--black-4);
-    margin-bottom: 8px;
+    margin: 0 3px 8px;
     padding: 0 2px;
 }
 .base-right-form input {
@@ -26,11 +26,11 @@
     border: none;
     border-radius: 5px;
     color: var(--white-2);
-    height: 40px;
+    height: 35px;
     padding: 0 5px;
 }
 .base-right-form button {
-    height: 40px;
+    height:35px;
     flex: 1;
     color: var(--white-1);
     border: none;
@@ -44,10 +44,35 @@
     background-color: var(--light-blue);
     box-shadow: var(--shadow-2-blue);
 }
-.box-card-message {
+.chat-card-date {
     border-radius: 5px;
-    min-height: 48px;
+    color: var(--white-3);
+    width: fit-content;
+    align-self: center;
+    font-size: .5em;
+    padding: .25em .5em;
+    margin: .5em 0;
+}
+.chat-card-nickname {
+    font-size: .7em;
+    color: var(--white-2);
+    margin-top: .5em;
+}
+.chat-card {
+    display: flex;
+    margin-bottom: 1px;
+}
+.chat-card-message {
+    border-radius: 5px 10px 10px 0;
+    padding: 2px 5px;
     background-color: var(--black-5);
+    font-size: .7em;
+}
+.chat-card-time {
+    font-size: .5em;
+    color: var(--white-3);
+    align-self: flex-end;
+    margin-left: 2px;
 }
 .base-right-hide {
     transform: translateX(0);
