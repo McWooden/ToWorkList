@@ -38,7 +38,7 @@
     font-size: 1em;
 }
 .btn-off {
-    background-color: var(--black-5);
+    background-color: var(--light-blue);
 }
 .btn-on {
     background-color: var(--light-blue);
@@ -59,6 +59,7 @@
         width: 223px;
         background-color: var(--black-4);
         right: 0;
+        width: 314px;
     }
     .base-right-hide {
         transform: translateX(100%);
