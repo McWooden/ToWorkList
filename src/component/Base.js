@@ -120,6 +120,12 @@ const chatData = [
         time: '20.24',
         date: '12/3/2022'
     },
+    {
+        nickname: 'McWooden',
+        msg: 'dan ini versi ke 3 dari project sebelumnya https://mcwooden.github.io/todo/x6',
+        time: '20.24',
+        date: '12/3/2022'
+    },
 ]
 function BaseRight() {
     let chatBox = []
