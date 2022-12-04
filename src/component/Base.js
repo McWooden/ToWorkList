@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faFeather, faEllipsisVertical} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 
 export function Base() {
@@ -27,26 +27,60 @@ function BaseLeft() {
             </div>
         </div>
     )
-
 }
+const todoData = [
+    {
+        title: 'Informatika',
+        desc: 'Ini kisi-kisi ulangan hehe',
+        color: 'tomato'
+    },
+    {
+        title: 'todoV3',
+        desc: 'versi ketiga dari project sebelumnya',
+        color: 'goldenrod'
+    },
+    {
+        title: 'Camp',
+        desc: 'saya gasuka kemah :)',
+        color: 'royalblue'
+    },
+    {
+        title: 'ulangan',
+        desc: 'masih ulangan sampe rabu',
+        color: 'yellowgreen'
+    },
+]
 function BaseCenter() {
+    let box = []
+    todoData.forEach((item, index) => box.push(<TodoModel key={index} item={item}/>))
     return (
         <div className="base-center">
             <div className="center">
-                <div className="todo-card">
-                    <div className="todo-left">
-                    <div className="card-color"></div>
-                    <div className="card-text">
-                        <div className="card-title">Informatika</div>
-                        <div className="card-description">Ini adalah contekan informatika hehe</div>
-                    </div>
-                    </div>
-                    <div className="todo-right">
-                        <div className="card-finish">
-                            <div className="card-finish-value"></div>
-                        </div>
-                    </div>
-                    <div className="card-more"></div>
+                {box}
+            </div>
+        </div>
+    )
+}
+function TodoModel({item}) {
+    const [on, setOn] = useState(false)
+    function handleClick() {
+        setOn(!on)
+    }
+    return (
+        <div className="todo-card">
+            <div className="todo-left">
+            <div className="card-color" style={{backgroundColor: item.color}}></div>
+            <div className="card-text">
+                <div className="card-title">{item.title}</div>
+                <div className="card-description">{item.desc}</div>
+            </div>
+            </div>
+            <div className="todo-right">
+                <div className={`card-finish ${on == true && 'finish-on'}`} onClick={handleClick}>
+                    <div className="card-finish-value"></div>
+                </div>
+                <div className="card-more">
+                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer'/>
                 </div>
             </div>
         </div>
@@ -115,25 +149,25 @@ const chatData = [
     },
 ]
 function BaseRight() {
-    let chatBox = []
+    let box = []
     let lastDate = null
     let lastNickname = null
 
     chatData.forEach((item, index) => {
         if (item.date !== lastDate) {
-            chatBox.push(
+            box.push(
                 <div key={`${index}-${item.date}`} className='chat-card-date'>{item.date}</div>
             )
             lastDate = item.date
             lastNickname = null
         }
         if (item.nickname !== lastNickname) {
-            chatBox.push(
+            box.push(
                 <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
             )
             lastNickname = item.nickname
         }
-        chatBox.push(
+        box.push(
             <div key={index} className='chat-card'>
                 <div className='chat-card-message'>{item.msg}</div>
                 <div className='chat-card-time'>{item.time}</div>
@@ -144,7 +178,7 @@ function BaseRight() {
     return (
         <div className="base-right base-right-hide">
             <div className="sidebar-right">
-                {chatBox}
+                {box}
             </div>
             <FormBaseRight/>
         </div>

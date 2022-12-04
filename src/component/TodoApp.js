@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars, faChartSimple, faMessage} from '@fortawesome/free-solid-svg-icons'
 import {handleRightBase, handleLeftBase, handleNavbar} from '../utils/hideNavbar'
 import { Base } from './Base'
+import { useState } from 'react'
 
 
 export class TodoApp extends React.Component {
