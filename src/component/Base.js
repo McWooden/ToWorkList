@@ -76,7 +76,7 @@ function TodoModel({item}) {
             </div>
             </div>
             <div className="todo-right">
-                <div className={`card-finish ${on == true && 'finish-on'}`} onClick={handleClick}>
+                <div className={`card-finish ${on === true && 'finish-on'}`} onClick={handleClick}>
                     <div className="card-finish-value"></div>
                 </div>
                 <div className="card-more">
