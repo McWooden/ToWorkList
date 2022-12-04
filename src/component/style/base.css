@@ -1,5 +1,6 @@
-@import url(./baseRight.css);
 @import url(./baseLeft.css);
+@import url(./baseCenter.css);
+@import url(./baseRight.css);
 
 .base  {
     padding-top: 48px;
@@ -20,19 +21,9 @@
 .sidebar-left, .center, .sidebar-right {
     padding: .5em;
 }
-.center {
-    display: flex;
-    gap: 5px;
-    flex-direction: column;
-}
+
 .box-card-image {
     width: 48px;
-    height: 48px;
-    border-radius: 5px;
-    background-color: var(--black-3);
-}
-.todo-card {
-    width: 100%;
     height: 48px;
     border-radius: 5px;
     background-color: var(--black-3);

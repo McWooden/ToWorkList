@@ -1,10 +1,10 @@
 .navigation {
     display: flex;
     flex-direction: row;
-    height: calc(100vh - 48px);
     margin-top: 48px;
     position: fixed;
     z-index: 1;
+    height: -webkit-fill-available;
 }
 .hideNavbar {
     transform: translateX(-100%);

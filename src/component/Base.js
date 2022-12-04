@@ -33,34 +33,21 @@ function BaseCenter() {
     return (
         <div className="base-center">
             <div className="center">
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
-                <div className="todo-card"></div>
+                <div className="todo-card">
+                    <div className="todo-left">
+                    <div className="card-color"></div>
+                    <div className="card-text">
+                        <div className="card-title">Informatika</div>
+                        <div className="card-description">Ini adalah contekan informatika hehe</div>
+                    </div>
+                    </div>
+                    <div className="todo-right">
+                        <div className="card-finish">
+                            <div className="card-finish-value"></div>
+                        </div>
+                    </div>
+                    <div className="card-more"></div>
+                </div>
             </div>
         </div>
     )
@@ -176,7 +163,7 @@ function FormBaseRight() {
     }
     return (
         <form className='base-right-form' onSubmit={handleSubmit}>
-            <input type="text" placeholder='messege main todo' name='msg' autoComplete='off' value={msg} onChange={handleInput}/>
+            <input type='text' placeholder='messege main todo' name='msg' value={msg} onChange={handleInput}/>
             {
                 msg ? 
                     <button className='pointer btn-on'>

@@ -19,9 +19,6 @@
     background-color: var(--black-4);
     margin: 0 3px 8px;
     padding: 0 2px;
-    position: fixed;
-    bottom: 0;
-    right: 0;
 }
 .base-right-form input {
     flex: 4;
@@ -30,11 +27,12 @@
     border: none;
     border-radius: 5px;
     color: var(--white-2);
-    height: 35px;
     padding: 0 5px;
+    height: 35px;
+    font-size: .8em;
 }
 .base-right-form button {
-    height:35px;
+    height: 35px;
     flex: 1;
     color: var(--white-1);
     border: none;
@@ -71,6 +69,7 @@
     padding: 2px 5px;
     background-color: var(--black-5);
     font-size: .7em;
+    word-break: break-all;
 }
 .chat-card-time {
     font-size: .5em;
@@ -89,8 +88,12 @@
         background-color: var(--black-4);
         right: 0;
         width: 314px;
+        box-shadow: var(--shadow-1-left);
     }
     .base-right-form {
+        position: fixed;
+        bottom: 0;
+        right: 0;
         width: 314px;
         margin: 0;
         padding: 0 3px 8px;
