@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faFeather, faEllipsisVertical} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faFeather, faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 
 export function Base() {
@@ -63,9 +63,16 @@ function BaseCenter() {
 }
 function TodoModel({item}) {
     const [on, setOn] = useState(false)
-    function handleClick() {
-        setOn(!on)
-    }
+    const [dropDown, setDropDown] = useState(false)
+    let menuRef = useRef()
+    useEffect(() => {
+        let handler = (e) => {
+            if (!menuRef.current.contains(e.target)) {
+                setDropDown(false)
+            }
+        }
+        document.addEventListener('mousedown', handler)
+    })
     return (
         <div className="todo-card">
             <div className="todo-left">
@@ -76,11 +83,23 @@ function TodoModel({item}) {
             </div>
             </div>
             <div className="todo-right">
-                <div className={`card-finish ${on === true && 'finish-on'}`} onClick={handleClick}>
+                <div className={`card-finish ${on?'finish-on':'finish-off'}`} onClick={() => setOn(!on)}>
                     <div className="card-finish-value"></div>
                 </div>
                 <div className="card-more">
-                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer'/>
+                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(!dropDown)}/>
+                </div>
+                <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
+                    <ul>
+                        <li className='pointer'>
+                            <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn'/>
+                            <span>edit</span>
+                        </li>
+                        <li className='pointer'>
+                            <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                            <span>delete</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

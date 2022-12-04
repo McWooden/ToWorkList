@@ -11,7 +11,9 @@
     display: flex;
     flex-direction: row;
     height: 100%;
-    overflow: auto;
+}
+.todo-right {
+    position: relative;
 }
 .card-color {
     width: 10px;
@@ -31,21 +33,26 @@
     color: var(--white-3);
 }
 .card-finish {
-    background-color: var(--black-2);
+    display: flex;
     width: 55px;
     border-radius: 50px;
     margin: 1em 0 1em 1em;
 }
 .card-finish-value {
     width: 30px;
-    background-color: var(--white-2);
     height: 100%;
     border-radius: 50px;
+    background-color: var(--white-2);
 }
 .finish-on {
-    display: flex;
-    justify-content: flex-end;
+    padding-left: 25px;
     background-color: var(--ok);
+    transition: .3s ease-out;
+}
+.finish-off {
+    padding-right: 25px;
+    transition: .3s ease-out;
+    background-color: var(--black-2);
 }
 .card-more {
     display: flex;
@@ -59,6 +66,41 @@
 }
 .card-more-btn:hover {
     background-color: var(--black-2);
+}
+.card-drop-down {
+    background-color: tomato;
+}
+.card-drop-down.active {
+    opacity: 1;
+    visibility: visible;
+    transition: .3s ease;
+}
+.card-drop-down.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+}
+.card-drop-down ul {
+    background-color: var(--black-2);
+    list-style: none;
+    font-size: small;
+    position: absolute;
+    right: 25px;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border-radius: 5px 0 5px 5px;
+    overflow: hidden;
+}
+.card-drop-down ul li {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    padding: 0 15px;
+}
+.card-drop-down ul li:hover {
+    background-color: var(--black-5);
 }
 @media (max-width: 375px) {
     .card-description {
