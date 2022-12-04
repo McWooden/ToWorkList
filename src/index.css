@@ -7,7 +7,6 @@
 html {
     scroll-behavior: smooth;
     height: -webkit-fill-available;
-    overflow: hidden;
 }
 :root {
   --black-1: #202225;

@@ -1,7 +1,7 @@
 @import url(./container.css);
 #todoApp {
     background-color: var(--black-4);
-    height: -webkit-fill-available;
+    height: 100vh;
 }
 .pointer {
     cursor: pointer;
