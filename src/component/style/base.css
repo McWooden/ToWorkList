@@ -3,11 +3,11 @@
 @import url(./baseRight.css);
 
 .base  {
-    padding-top: 48px;
     background-color: var(--black-4);
     overflow: hidden;
     display: flex;
-    height: 100vh;
+    padding-top: 48px;
+    height: -webkit-fill-available;
 }
 .base-left, .base-center, .base-right {
     overflow: auto;
