@@ -31,7 +31,6 @@ header {
     border-radius: 5px;
 }
 .bars-active {
-    background-color: var(--black-2);
     color: var(--orange-2);
 }
 .bars:hover {

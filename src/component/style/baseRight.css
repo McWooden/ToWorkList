@@ -1,3 +1,4 @@
+@import url(./chat.css);
 .base-right {
     display: flex;
     flex-direction: column;
@@ -45,40 +46,6 @@
 .btn-on {
     background-color: var(--light-blue);
     box-shadow: var(--shadow-2-blue);
-}
-.chat-card-date {
-    border-radius: 5px;
-    color: var(--white-3);
-    width: fit-content;
-    align-self: center;
-    font-size: .5em;
-    padding: .25em .5em;
-    margin: .5em 0;
-}
-.chat-card-nickname {
-    font-size: .7em;
-    color: var(--white-2);
-    margin-top: .5em;
-}
-.chat-card {
-    display: flex;
-    margin-bottom: 1px;
-}
-.chat-card-message {
-    border-radius: 5px 10px 10px 0;
-    padding: 2px 5px;
-    background-color: var(--black-5);
-    font-size: .7em;
-    word-break: break-all;
-}
-.chat-card-time {
-    font-size: .5em;
-    color: var(--white-3);
-    align-self: flex-end;
-    margin-left: 2px;
-}
-.base-right-hide {
-    transform: translateX(0);
 }
 @media (max-width: 768px) {
     .base-right {

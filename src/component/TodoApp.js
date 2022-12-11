@@ -7,39 +7,29 @@ import {handleRightBase, handleLeftBase, handleNavbar} from '../utils/hideNavbar
 import { Base } from './Base'
 
 
-export class TodoApp extends React.Component {
-    render() {
-        return (
-            <div id='todoApp'>
-                <NavTop/>
-                <Base/>
-            </div>
-        )
-    }
+export function TodoApp(props) {
+    return (
+        <div id='todoApp'>
+            <NavTop/>
+            <Base/>
+        </div>
+    )
 }
-export class NavTop extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            bars: false
-        }
-    }
-    render() {
-        return (
-            <section id='navTop'>
-                <header>
-                <div className='header-left'>
-                    <FontAwesomeIcon icon={faBars} className={'bars bars-active pointer'} onClick={handleNavbar}/>
-                    <h4 className='pageTitle'>main todo</h4>
-                </div>
-                <div className="sidebar-button">
-                    <FontAwesomeIcon icon={faChartSimple} className="btn-sidebar btn-sidebar-left pointer" onClick={handleLeftBase}/>
-                    <FontAwesomeIcon icon={faMessage} className="btn-sidebar btn-sidebar-right pointer" onClick={handleRightBase}/>
-                </div>
-                </header>
-            </section>
-        )
-    }
+export function NavTop(props) {
+    return (
+        <section id='navTop'>
+            <header>
+            <div className='header-left'>
+                <FontAwesomeIcon icon={faBars} className={'bars bars-active pointer'} onClick={handleNavbar}/>
+                <h4 className='pageTitle'>home</h4>
+            </div>
+            <div className="sidebar-button">
+                <FontAwesomeIcon icon={faChartSimple} className="btn-sidebar btn-sidebar-left pointer" onClick={handleLeftBase}/>
+                <FontAwesomeIcon icon={faMessage} className="btn-sidebar btn-sidebar-right pointer" onClick={handleRightBase}/>
+            </div>
+            </header>
+        </section>
+    )
 }
 
 export default TodoApp

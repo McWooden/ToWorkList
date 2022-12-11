@@ -1,7 +1,9 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faFeather, faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
+import {ChatModel, TodoModel} from './model'
+import {todoData, chatData} from './dataJSON'
 
 export function Base() {
     return (
@@ -28,28 +30,6 @@ function BaseLeft() {
         </div>
     )
 }
-const todoData = [
-    {
-        title: 'Informatika',
-        desc: 'Ini kisi-kisi ulangan hehe',
-        color: 'tomato'
-    },
-    {
-        title: 'todoV3',
-        desc: 'versi ketiga dari project sebelumnya',
-        color: 'goldenrod'
-    },
-    {
-        title: 'Camp',
-        desc: 'saya gasuka kemah :)',
-        color: 'royalblue'
-    },
-    {
-        title: 'ulangan',
-        desc: 'masih ulangan sampe rabu',
-        color: 'yellowgreen'
-    },
-]
 function BaseCenter() {
     let box = []
     todoData.forEach((item, index) => box.push(<TodoModel key={index} item={item}/>))
@@ -61,112 +41,6 @@ function BaseCenter() {
         </div>
     )
 }
-function TodoModel({item}) {
-    const [on, setOn] = useState(false)
-    const [dropDown, setDropDown] = useState(false)
-    let menuRef = useRef()
-    useEffect(() => {
-        let handler = (e) => {
-            if (!menuRef.current.contains(e.target)) {
-                setDropDown(false)
-            }
-        }
-        document.addEventListener('mousedown', handler)
-    })
-    return (
-        <div className="todo-card">
-            <div className="todo-left">
-            <div className="card-color" style={{backgroundColor: item.color}}></div>
-            <div className="card-text">
-                <div className="card-title">{item.title}</div>
-                <div className="card-description">{item.desc}</div>
-            </div>
-            </div>
-            <div className="todo-right">
-                <div className={`card-finish ${on?'finish-on':'finish-off'}`} onClick={() => setOn(!on)}>
-                    <div className="card-finish-value"></div>
-                </div>
-                <div className="card-more">
-                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(!dropDown)}/>
-                </div>
-                <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                    <ul>
-                        <li className='pointer'>
-                            <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn'/>
-                            <span>edit</span>
-                        </li>
-                        <li className='pointer'>
-                            <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
-                            <span>delete</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    )
-}
-const chatData = [
-    {
-        nickname: 'McWooden',
-        msg: 'Yo wassap',
-        time: '20.00',
-        date: '12/2/2022'
-    },
-    {
-        nickname: 'McWooden',
-        msg: 'am here',
-        time: '20.00',
-        date: '12/2/2022'
-    },
-    {
-        nickname: 'Putra',
-        msg: 'heyyy',
-        time: '20.04',
-        date: '12/2/2022'
-    },
-    {
-        nickname: 'Putra',
-        msg: 'am here too',
-        time: '20.04',
-        date: '12/2/2022'
-    },
-    {
-        nickname: 'Putra',
-        msg: 'you guys using this app to talk about daily task?',
-        time: '20.05',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'Hudin',
-        msg: 'Hai',
-        time: '20.20',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'Frank',
-        msg: 'wow new member Hi!',
-        time: '20.23',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'Frank',
-        msg: 'welcome! hope you enjoy',
-        time: '20.24',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'McWooden',
-        msg: 'ini adalah data chat dummy. Huddin akan menyelesaikan frontEnd dan bermain database segera :D',
-        time: '20.24',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'McWooden',
-        msg: 'dan ini versi ke 3 dari project sebelumnya https://mcwooden.github.io/todo/x6',
-        time: '20.24',
-        date: '12/3/2022'
-    },
-]
 function BaseRight() {
     let box = []
     let lastDate = null
@@ -187,10 +61,7 @@ function BaseRight() {
             lastNickname = item.nickname
         }
         box.push(
-            <div key={index} className='chat-card'>
-                <div className='chat-card-message'>{item.msg}</div>
-                <div className='chat-card-time'>{item.time}</div>
-            </div>
+            <ChatModel key={index} item={item}/>
         )
     })
 

@@ -72,6 +72,9 @@ nav .nav-1 {
     padding: .25em;
     margin: 0 auto;
 }
+.party-photo-profile.active {
+    border-radius: 15px;
+}
 .party-photo-profile:hover {
     border-radius: 15px;
 }
@@ -98,18 +101,19 @@ nav .nav-1 {
 /* navbar 2 */
 .modeNavbar {
     position: relative;
-    background-color: var(--black-2);
+    background-color: var(--black-3);
     width: 240px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 .modeNavbarHeader {
-    box-shadow: var(--shadow-1);
     padding: 1.5px 10px 1.5px 16px;
     display: flex;
     align-items: center;
     height: 48px;
+    background-color: var(--black-2);
+    box-shadow: var(--shadow-1);
 }
 .guild-name {
     flex: 1;
@@ -130,21 +134,22 @@ nav .nav-1 {
 .modeNavbarList {
     overflow: auto;
 }
-.group-task {
+.room {
     padding: .5em;
     display: flex;
     align-items: center;
     cursor: pointer;
+    background-color: var(--black-2);
 }
-.group-task-icon {
+.room-icon {
     color: var(--white-1);
     height: 16px;
     margin: 0 5px;
 }
-.group-task:hover {
+.room:hover {
     background-color: var(--black-4);
 }
-.group-task span {
+.room span {
     font-size: small;
 }
 .profile-container {
