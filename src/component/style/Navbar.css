@@ -31,6 +31,9 @@ nav .nav-1 {
     width: fit-content;
     margin: 0 auto;
 }
+.guild-frame.active {
+    background-color: var(--black-3);
+}
 .find-create-frame {
     border-top: 2px solid var(--black-5);
     display: flex;
@@ -55,6 +58,9 @@ nav .nav-1 {
 .home-profile:hover {
     background-color: var(--purple-1);
 }
+.home-profile.active {
+    background-color: var(--purple-1);
+}
 .find-create {
     cursor: pointer;
 }
@@ -62,7 +68,7 @@ nav .nav-1 {
     background-color: var(--orange-2);
     color: var(--black-2);
 }
-.party-photo-profile {
+.guild-photo-profile {
     width: 48px;
     height: 48px;
     display: flex;
@@ -72,21 +78,21 @@ nav .nav-1 {
     padding: .25em;
     margin: 0 auto;
 }
-.party-photo-profile.active {
+.guild-photo-profile.active {
     border-radius: 15px;
 }
-.party-photo-profile:hover {
+.guild-photo-profile:hover {
     border-radius: 15px;
 }
-.nav-party {
+.nav-guild {
     flex: 1;
     overflow: auto;
 }
-.nav-party div {
+.nav-guild div {
     padding: 0 .5em;
     cursor: pointer;
 }
-.nav-party div:hover {
+.nav-guild div:hover {
     background-color: var(--black-2);
     padding: 0 .5em;
 }
@@ -131,7 +137,7 @@ nav .nav-1 {
 .settingNavbar:hover {
     background-color: var(--black-4);
 }
-.modeNavbarList {
+.roomList {
     overflow: auto;
 }
 .room {
@@ -141,16 +147,26 @@ nav .nav-1 {
     cursor: pointer;
     background-color: var(--black-2);
 }
-.room-icon {
-    color: var(--white-1);
-    height: 16px;
-    margin: 0 5px;
+.room.active {
+    background-color: var(--black-3);
 }
 .room:hover {
     background-color: var(--black-4);
 }
+.room-icon {
+    color: var(--white-3);
+    height: 16px;
+    margin: 0 5px;
+}
+.room-icon.active {
+    color: var(--purple-1);
+}
 .room span {
     font-size: small;
+    color: var(--white-2);
+}
+.room span.active {
+    color: var(--purple-1);
 }
 .profile-container {
     width: 100%;

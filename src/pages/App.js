@@ -18,7 +18,7 @@ function App() {
   }
   return (
     <div id='app'>
-      <Navbar handleGuild={handleGuild} handleRoom={handleRoom} guildName={guild.profile.name || guild.profile.nickname} guildRooms={guild.rooms}/>
+      <Navbar handleGuild={handleGuild} handleRoom={handleRoom} guildName={guild.profile.name || guild.profile.nickname} guildRooms={guild.rooms} currentRoom={room}/>
       <TodoApp currentRoom={room}/>
     </div>
   )

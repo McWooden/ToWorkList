@@ -20,7 +20,7 @@ export function NavTop({currentRoom}) {
         <section id='navTop'>
             <header>
             <div className='header-left'>
-                <FontAwesomeIcon icon={faBars} className={'bars bars-active pointer'} onClick={handleNavbar}/>
+                <FontAwesomeIcon icon={faBars} className={'bars pointer'} onClick={handleNavbar}/>
                 <h4 className='pageTitle'>{currentRoom}</h4>
             </div>
             <div className="sidebar-button">

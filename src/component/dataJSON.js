@@ -14,7 +14,7 @@ export const myAccount = {
     ]
 }
 
-export const partyData = [
+export const guildData = [
     {
         profile: {
             name: 'Huddin guilds',
