@@ -3,24 +3,24 @@ import './style/TodoApp.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars, faChartSimple, faMessage} from '@fortawesome/free-solid-svg-icons'
-import {handleRightBase, handleLeftBase, handleNavbar} from '../utils/hideNavbar'
+import {handleRightBase, handleLeftBase} from '../utils/hideNavbar'
 import { Base } from './Base'
 
 
 export function TodoApp(props) {
     return (
         <div id='todoApp'>
-            <NavTop currentRoom={props.currentRoom}/>
+            <NavTop currentRoom={props.currentRoom} handleNavbar={props.handleNavbar} hideNavbar={props.hideNavbar}/>
             <Base/>
         </div>
     )
 }
-export function NavTop({currentRoom}) {
+export function NavTop({currentRoom, handleNavbar, hideNavbar}) {
     return (
         <section id='navTop'>
             <header>
             <div className='header-left'>
-                <FontAwesomeIcon icon={faBars} className={'bars pointer'} onClick={handleNavbar}/>
+                <FontAwesomeIcon icon={faBars} className={`bars pointer ${hideNavbar?'':'bars-active'}`} onClick={handleNavbar}/>
                 <h4 className='pageTitle'>{currentRoom}</h4>
             </div>
             <div className="sidebar-button">

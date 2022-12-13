@@ -7,7 +7,7 @@ import { myAccount, guildData } from '../component/dataJSON'
 function Navbar(props) {
     return (
         <>
-        <div className='navigation hideNavbar'>
+        <div className={`navigation ${props.hideNavbar?'hideNavbar':'showNavbar'}`}>
             <nav>
                 <div className='nav-1'>
                     <HomeButton handleGuild={props.handleGuild} guildName={props.guildName}/>

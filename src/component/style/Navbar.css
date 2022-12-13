@@ -8,6 +8,11 @@
 }
 .hideNavbar {
     transform: translateX(-100%);
+    transition: .1s ease-in;
+}
+.showNavbar {
+    transform: translateX(0);
+    transition: .1s ease-out;
 }
 .pointer {
     cursor: pointer;
@@ -80,6 +85,8 @@ nav .nav-1 {
 }
 .guild-photo-profile.active {
     border-radius: 15px;
+    border-left: 5px solid var(--purple-1);
+    transition: .1s ease;
 }
 .guild-photo-profile:hover {
     border-radius: 15px;
@@ -107,7 +114,7 @@ nav .nav-1 {
 /* navbar 2 */
 .modeNavbar {
     position: relative;
-    background-color: var(--black-3);
+    background-color: var(--black-2);
     width: 240px;
     display: flex;
     flex-direction: column;
@@ -139,6 +146,7 @@ nav .nav-1 {
 }
 .roomList {
     overflow: auto;
+    flex: 1;
 }
 .room {
     padding: .5em;
@@ -149,6 +157,8 @@ nav .nav-1 {
 }
 .room.active {
     background-color: var(--black-3);
+    padding-left: .75em;
+    transition: .1s ease;
 }
 .room:hover {
     background-color: var(--black-4);
