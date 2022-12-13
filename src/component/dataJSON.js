@@ -1,5 +1,19 @@
 import noPic from '../assets/images/noPic.png';
 
+export const myAccount = {
+    profile: {
+        nickname: 'McWooden',
+        pic: noPic,
+        email: 'example@gmail.com'
+    },
+    rooms: [
+        'Main todo',
+        'daily task',
+        'monthly task',
+        'big project',
+    ]
+}
+
 export const partyData = [
     {
         profile: {
@@ -8,9 +22,9 @@ export const partyData = [
             by: 'Huddin'
         },
         rooms: [
-            'main',
-            'beginner',
-            'adven'
+            'welcome',
+            'peraturan',
+            'tugas'
         ],
         users: {
             admins: ['Huddin', 'Rizky', 'bima'],
@@ -24,7 +38,7 @@ export const partyData = [
             by: 'afif'
         },
         rooms: [
-            'main',
+            'chat',
             'meme',
             'picture'
         ],

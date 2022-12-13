@@ -2,40 +2,24 @@ import './App.css';
 import Navbar from '../component/Navbar';
 import TodoApp from '../component/TodoApp';
 import { useState } from 'react';
-import noPic from '../assets/images/noPic.png';
+import { myAccount } from '../component/dataJSON';
 
 
 
 function App() {
-  const [guild, setGuild] = useState({
-    profile: {
-      name: 'Homes',
-      src: noPic,
-      by: 'You'
-    },
-    rooms: [
-      'main',
-      'oi',
-      'main',
-      'main',
-    ],
-    users: {
-      admins: ['You'],
-      members: ['You']
-    }
-  })
-  const [room, setRoom] = useState(guild.rooms)
+  const [guild, setGuild] = useState(myAccount)
+  const [room, setRoom] = useState(guild.rooms[0])
   function handleGuild(guild) {
     setGuild(guild)
-    setRoom(guild.rooms)
+    setRoom(guild.rooms[0])
   }
   function handleRoom(room) {
     setRoom(room)
   }
   return (
     <div id='app'>
-      <Navbar handleGuild={handleGuild} handleRoom={handleRoom} guildName={guild.profile.name} rooms={room}/>
-      <TodoApp room={room}/>
+      <Navbar handleGuild={handleGuild} handleRoom={handleRoom} guildName={guild.profile.name || guild.profile.nickname} guildRooms={guild.rooms}/>
+      <TodoApp currentRoom={room}/>
     </div>
   )
 }

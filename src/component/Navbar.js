@@ -15,7 +15,7 @@ function Navbar(props) {
                     <FindCreate/>
                 </div>
             </nav>
-            <ModeNavbar handleRoom={props.handleRoom} rooms={props.rooms} guildName={props.guildName}/>
+            <ModeNavbar handleRoom={props.handleRoom} guildRooms={props.guildRooms} guildName={props.guildName}/>
         </div>
         </>
     )
@@ -24,7 +24,7 @@ function ModeNavbar(props) {
     return (
         <div className='modeNavbar'>
             <ModeNavbarHeader guildName={props.guildName}/>
-            <ModeNavbarList handleRoom={props.handleRoom} rooms={props.rooms}/>
+            <ModeNavbarList handleRoom={props.handleRoom} guildRooms={props.guildRooms}/>
             <Profile/>
         </div>
     )
@@ -80,7 +80,7 @@ function PartyList(props) {
 }
 function ModeNavbarList(props) {
     const lists = []
-    props.rooms.forEach((item, index) => {
+    props.guildRooms.forEach((item, index) => {
         function handleRoom() {
             props.handleRoom(item)
         }

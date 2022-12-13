@@ -10,18 +10,18 @@ import { Base } from './Base'
 export function TodoApp(props) {
     return (
         <div id='todoApp'>
-            <NavTop/>
+            <NavTop currentRoom={props.currentRoom}/>
             <Base/>
         </div>
     )
 }
-export function NavTop(props) {
+export function NavTop({currentRoom}) {
     return (
         <section id='navTop'>
             <header>
             <div className='header-left'>
                 <FontAwesomeIcon icon={faBars} className={'bars bars-active pointer'} onClick={handleNavbar}/>
-                <h4 className='pageTitle'>home</h4>
+                <h4 className='pageTitle'>{currentRoom}</h4>
             </div>
             <div className="sidebar-button">
                 <FontAwesomeIcon icon={faChartSimple} className="btn-sidebar btn-sidebar-left pointer" onClick={handleLeftBase}/>
