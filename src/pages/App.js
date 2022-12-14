@@ -1,11 +1,11 @@
 import './App.css';
 import Navbar from '../component/Navbar';
 import TodoApp from '../component/TodoApp';
-import { useState } from 'react';
+import { useState, createContext } from 'react';
 import { myAccount } from '../component/dataJSON';
 
 
-
+export const GuildContext = createContext()
 function App() {
   const [guild, setGuild] = useState(myAccount)
   const [room, setRoom] = useState(guild.rooms[0])
@@ -21,10 +21,12 @@ function App() {
     setHideNavbar(!hideNavbar)
   }
   return (
-    <div id='app'>
-      <Navbar handleGuild={handleGuild} handleRoom={handleRoom} guildName={guild.profile.name || guild.profile.nickname} guildRooms={guild.rooms} currentRoom={room} hideNavbar={hideNavbar}/>
-      <TodoApp currentRoom={room} handleNavbar={handleNavbar} hideNavbar={hideNavbar}/>
-    </div>
+    <GuildContext.Provider value={{guild, room, hideNavbar, handleNavbar, guildRooms : guild.rooms, guildName : guild.profile.name || guild.profile.nickname, handleGuild, handleRoom}}>
+      <div id='app'>
+        <Navbar/>
+        <TodoApp/>
+      </div>
+    </GuildContext.Provider>
   )
 }
 

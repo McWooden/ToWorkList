@@ -87,14 +87,14 @@ function FormBaseRight() {
     }
     return (
         <form className='base-right-form' onSubmit={handleSubmit}>
-            <input type='text' placeholder='messege main todo' name='msg' value={msg} onChange={handleInput}/>
+            <input type='text' placeholder='messege main todo' name='msg' value={msg} onChange={handleInput} autoComplete='off'/>
             {
                 msg ? 
-                    <button className='pointer btn-on'>
+                    <button className='pointer btn-on' title='write text first'>
                         <FontAwesomeIcon icon={faPaperPlane}/>
                     </button>
                 :
-                    <button className='btn-off'>
+                    <button className='btn-off' title='send'>
                         <FontAwesomeIcon icon={faFeather}/>
                     </button>
             }

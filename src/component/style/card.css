@@ -19,6 +19,7 @@
 }
 .card-color {
     width: 10px;
+    min-width: 10px;
     margin: .5em;
     border-radius: 3px;
 }

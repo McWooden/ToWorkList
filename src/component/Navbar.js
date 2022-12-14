@@ -1,50 +1,52 @@
 import './style/Navbar.css'
+import { GuildContext } from '../pages/App'
+import { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faCheck, faGear, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
 import noPic from '../assets/images/noPic.png';
 import { myAccount, guildData } from '../component/dataJSON'
 
-function Navbar(props) {
+function Navbar() {
+    const {hideNavbar} = useContext(GuildContext)
     return (
         <>
-        <div className={`navigation ${props.hideNavbar?'hideNavbar':'showNavbar'}`}>
+        <div className={`navigation ${hideNavbar?'hideNavbar':'showNavbar'}`}>
             <nav>
                 <div className='nav-1'>
-                    <HomeButton handleGuild={props.handleGuild} guildName={props.guildName}/>
-                    <GuildList handleGuild={props.handleGuild} guildName={props.guildName}/>
+                    <HomeButton/>
+                    <GuildList/>
                     <FindCreate/>
                 </div>
             </nav>
-            <ModeNavbar handleRoom={props.handleRoom} guildRooms={props.guildRooms} guildName={props.guildName} currentRoom={props.currentRoom}/>
+            <ModeNavbar/>
         </div>
         </>
     )
 }
-function ModeNavbar(props) {
+function ModeNavbar() {
     return (
         <div className='modeNavbar'>
-            <ModeNavbarHeader guildName={props.guildName}/>
-            <RoomList handleRoom={props.handleRoom} guildRooms={props.guildRooms} currentRoom={props.currentRoom}/>
+            <ModeNavbarHeader/>
+            <RoomList/>
             <Profile/>
         </div>
     )
 }
 
-function ModeNavbarHeader(props) {
+function ModeNavbarHeader() {
+    const {guildName} = useContext(GuildContext)
     return (
         <div className="modeNavbarHeader">
-            <h4 className='guild-name'>{props.guildName}</h4>
+            <h4 className='guild-name'>{guildName}</h4>
             <FontAwesomeIcon icon={faGear} className='settingNavbar pointer'/>
         </div>
     )
 }
-function HomeButton(props) {
-    function handleGuild() {
-        props.handleGuild(myAccount)
-    }
+function HomeButton() {
+    const {handleGuild, guildName} = useContext(GuildContext)
     return (
         <div className='home-frame'>
-            <div className={`home-profile pointer ${myAccount.profile.nickname === props.guildName ? 'active' : ''}`} onClick={handleGuild}>
+            <div className={`home-profile pointer ${myAccount.profile.nickname === guildName ? 'active' : ''}`} onClick={() => handleGuild(myAccount)}>
                 <FontAwesomeIcon icon={faHouse} className={'nav-icon'}/>
             </div>
         </div>
@@ -63,15 +65,13 @@ function FindCreate() {
     )
 }
 
-function GuildList(props) {
+function GuildList() {
+    const {guildName, handleGuild} = useContext(GuildContext)
     const guild = []
     guildData.forEach((item, index) => {
-        function handleGuild() {
-            props.handleGuild(item)
-        }
         guild.push(
-            <div key={index} onClick={handleGuild} className={`guild-frame ${item.profile.name === props.guildName ? 'active' : ''}`}>
-                <img src={item.profile.src} className={`guild-photo-profile ${item.profile.name === props.guildName ? 'active' : ''}`} alt={item.profile.name} title={item.profile.name}/>
+            <div key={index} onClick={() => handleGuild(item)} className={`guild-frame ${item.profile.name === guildName ? 'active' : ''}`}>
+                <img src={item.profile.src} className={`guild-photo-profile ${item.profile.name === guildName ? 'active' : ''}`} alt={item.profile.name} title={item.profile.name}/>
             </div>
         )
     })
@@ -82,14 +82,12 @@ function GuildList(props) {
     )
 }
 function RoomList(props) {
+    const {guildRooms, handleRoom, room} = useContext(GuildContext)
     const lists = []
-    props.guildRooms.forEach((item, index) => {
-        function handleRoom() {
-            props.handleRoom(item)
-        }
+    guildRooms.forEach((item, index) => {
         lists.push(
-            <div key={index} className={`room ${props.currentRoom === item?'active':''}`} onClick={handleRoom}>
-                <FontAwesomeIcon icon={faCheck} className={`room-icon ${props.currentRoom === item?'active':''}`}/> <span className={props.currentRoom === item?'active':''}>{item}</span>
+            <div key={index} className={`room ${room === item?'active':''}`} onClick={() => handleRoom(item)}>
+                <FontAwesomeIcon icon={faCheck} className={`room-icon ${room === item?'active':''}`}/> <span className={room === item?'active':''}>{item}</span>
             </div>
         )
     })
