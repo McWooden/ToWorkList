@@ -51,7 +51,7 @@ export const guildData = [
 export const todoData = [
     {
         title: 'Informatika',
-        desc: 'Ini kisi-kisi ulangan hehe lala la la laaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaa la la lalalal lala lalala',
+        desc: 'Ini kisi-kisi ulangan hehe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas',
         color: 'tomato'
     },
     {

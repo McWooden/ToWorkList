@@ -4,6 +4,9 @@ import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 import {ChatModel, TodoModel} from './model'
 import {todoData, chatData} from './dataJSON'
+import { useContext } from 'react';
+import { ItemData } from './TodoApp';
+import {HideBase} from './TodoApp'
 
 export function Base() {
     return (
@@ -15,8 +18,9 @@ export function Base() {
     )
 }
 function BaseLeft() {
+    const { hideLeftBase } = useContext(HideBase)
     return (
-        <div className="base-left base-left-hide">
+        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
             <div className="sidebar-left">
                 <div className="progress">
                     <div className="progress-bar">
@@ -32,16 +36,20 @@ function BaseLeft() {
 }
 function BaseCenter() {
     let box = []
-    todoData.forEach((item, index) => box.push(<TodoModel key={index} item={item}/>))
+    const {item} = useContext(ItemData)
+    item ? box.push('its card on click') : todoData.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
     return (
+        <>
         <div className="base-center">
             <div className="center">
                 {box}
             </div>
         </div>
+        </>
     )
 }
 function BaseRight() {
+    const { hideRightBase } = useContext(HideBase)
     let box = []
     let lastDate = null
     let lastNickname = null
@@ -66,7 +74,7 @@ function BaseRight() {
     })
 
     return (
-        <div className="base-right base-right-hide">
+        <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
             <div className="sidebar-right">
                 {box}
             </div>

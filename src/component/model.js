@@ -1,11 +1,15 @@
-import React, {useState, useEffect, useRef} from 'react';
+import {useState, useEffect, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { ItemData } from './TodoApp';
+import { useContext } from 'react';
+
 
 export function TodoModel({item}) {
     const [on, setOn] = useState(false)
     const [dropDown, setDropDown] = useState(false)
     let menuRef = useRef()
+    const {handleItem} = useContext(ItemData)
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -24,11 +28,11 @@ export function TodoModel({item}) {
             <div className="card-color" style={{backgroundColor: item.color}}></div>
             <div className="card-text">
                 <div className="card-title">{item.title}</div>
-                <div className="card-description">{item.desc}</div>
+                <div className="card-description pointer" onClick={() => handleItem(item)}>{item.desc}</div>
             </div>
             </div>
             <div className="todo-right">
-                <div className={`card-finish ${on?'finish-on':'finish-off'}`} onClick={() => setOn(!on)}>
+                <div className={`card-finish pointer ${on?'finish-on':'finish-off'}`} onClick={() => setOn(!on)}>
                     <div className="card-finish-value"></div>
                 </div>
                 <div className="card-more">

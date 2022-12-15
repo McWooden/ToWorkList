@@ -51,7 +51,6 @@
     .base-right {
         height: calc(100vh - 48px);
         position: fixed;
-        width: 223px;
         background-color: var(--black-4);
         right: 0;
         width: 314px;
@@ -67,5 +66,10 @@
     }
     .base-right-hide {
         transform: translateX(100%);
+        transition: .1s ease;
+    }
+    .base-right-show {
+        transform: translateX(0);
+        transition: .1s ease;
     }
 }

@@ -17,6 +17,11 @@
     }
     .base-left-hide {
         transform: translateX(-100%);
+        transition: .1s ease;
+    }
+    .base-left-show {
+        transform: translateX(0);
+        transition: .1s ease;
     }
 }
 
