@@ -1,4 +1,10 @@
 import noPic from '../assets/images/noPic.png';
+const defaultChat = [{
+    nickname: 'McWooden',
+    msg: 'wait for next update',
+    time: '20.29',
+    date: '12/3/2022'
+}]
 
 export const myAccount = {
     profile: {
@@ -17,17 +23,59 @@ export const myAccount = {
                 {
                     title: 'Buat aplikasi',
                     desc: 'web aplikasi ini yang akan ku selesaikan',
-                    color: 'tomato'
+                    color: 'tomato',
+                    chat: [
+                        {
+                            nickname: 'Developer',
+                            msg: 'whatsupp its still on going',
+                            time: '20.25',
+                            date: '12/3/2022'
+                        },
+                        {
+                            nickname: 'McWooden',
+                            msg: 'wait for next update',
+                            time: '20.25',
+                            date: '12/3/2022'
+                        },
+                    ]
                 },
                 {
                     title: 'lari pagi',
                     desc: 'gajadi soalnya pake sepatu',
-                    color: 'goldenrod'
+                    color: 'goldenrod',
+                    chat: [
+                        {
+                            nickname: 'Developer',
+                            msg: 'its good for your body :D',
+                            time: '20.25',
+                            date: '12/3/2022'
+                        },
+                        {
+                            nickname: 'McWooden',
+                            msg: 'wait for next update',
+                            time: '20.29',
+                            date: '12/3/2022'
+                        },
+                    ]
                 },
                 {
                     title: 'mandi',
                     desc: 'ntar mandi biar kedinginan',
-                    color: 'royalblue'
+                    color: 'royalblue',
+                    chat: [
+                        {
+                            nickname: 'Developer',
+                            msg: 'mandi hanya untuk orang orang bau',
+                            time: '20.25',
+                            date: '12/3/2022'
+                        },
+                        {
+                            nickname: 'McWooden',
+                            msg: 'wait for next update',
+                            time: '20.29',
+                            date: '12/3/2022'
+                        },
+                    ]
                 },
             ],
         },
@@ -62,7 +110,8 @@ export const guildData = [
                     {
                         title: 'welkam buddy',
                         desc: 'disini kita pake stackoverflow :)?',
-                        color: 'yellowgreen'
+                        color: 'yellowgreen',
+                        chat: defaultChat
                     },
                 ],
             },
@@ -74,7 +123,8 @@ export const guildData = [
                     {
                         title: 'fullstack',
                         desc: 'roadmap fullstack?',
-                        color: 'maroon'
+                        color: 'maroon',
+                        chat: defaultChat
                     },
                 ],
             },
@@ -86,7 +136,8 @@ export const guildData = [
                     {
                         title: 'fullstack',
                         desc: 'roadmap fullstack?',
-                        color: 'royalblue'
+                        color: 'royalblue',
+                        chat: defaultChat
                     },
                 ],
             },
@@ -112,7 +163,8 @@ export const guildData = [
                     {
                         title: 'buat air mancur',
                         desc: 'di tengah pake cobblestone',
-                        color: 'goldenrod'
+                        color: 'goldenrod',
+                        chat: defaultChat
                     },
                 ],
             },
@@ -124,7 +176,8 @@ export const guildData = [
                     {
                         title: 'buat perkampungan',
                         desc: 'nebang pohon terus nguras laut',
-                        color: 'royalblue'
+                        color: 'royalblue',
+                        chat: defaultChat
                     },
                 ],
             },
@@ -134,28 +187,6 @@ export const guildData = [
             members: ['arga', 'levram', 'ceka', 'farel']
         }
     }
-]
-export const todoData = [
-    {
-        title: 'Informatika',
-        desc: 'Ini kisi-kisi ulangan hehe aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaas',
-        color: 'tomato'
-    },
-    {
-        title: 'todoV3',
-        desc: 'versi ketiga dari project sebelumnya',
-        color: 'goldenrod'
-    },
-    {
-        title: 'Camp',
-        desc: 'saya gasuka kemah :)',
-        color: 'royalblue'
-    },
-    {
-        title: 'ulangan',
-        desc: 'masih ulangan sampe rabu',
-        color: 'yellowgreen'
-    },
 ]
 export const chatData = [
     {

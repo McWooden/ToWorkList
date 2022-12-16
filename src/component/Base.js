@@ -19,17 +19,25 @@ export function Base() {
 }
 function BaseLeft() {
     const { hideLeftBase } = useContext(HideBase)
+    const {item} = useContext(ItemData)
+    let box = null
+    item ?
+        box = <p>its detail about card</p>
+    :
+        box = (
+            <div className="progress">
+                <div className="progress-bar">
+                    <div className="progress-value undone"></div>
+                </div>
+                <div className="progress-bar">
+                    <div className="progress-value done"></div>
+                </div>
+            </div>
+        )
     return (
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
             <div className="sidebar-left">
-                <div className="progress">
-                    <div className="progress-bar">
-                        <div className="progress-value undone"></div>
-                    </div>
-                    <div className="progress-bar">
-                        <div className="progress-value done"></div>
-                    </div>
-                </div>
+                {box}
             </div>
         </div>
     )
@@ -38,7 +46,10 @@ function BaseCenter() {
     const {room} = useContext(GuildContext)
     const {item} = useContext(ItemData)
     let box = []
-    item ? box.push('its card on click') : room.item.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
+    item ?
+        box.push('its card notes')
+    :
+        room.item.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
     return (
         <>
         <div className="base-center">
@@ -51,28 +62,31 @@ function BaseCenter() {
 }
 function BaseRight() {
     const { hideRightBase } = useContext(HideBase)
+    const {item} = useContext(ItemData)
     let box = []
     let lastDate = null
     let lastNickname = null
-
-    chatData.forEach((item, index) => {
-        if (item.date !== lastDate) {
+    item ? 
+        box.push('wadafak its a chat') 
+    :
+        chatData.forEach((item, index) => {
+            if (item.date !== lastDate) {
+                box.push(
+                    <div key={`${index}-${item.date}`} className='chat-card-date'>{item.date}</div>
+                )
+                lastDate = item.date
+                lastNickname = null
+            }
+            if (item.nickname !== lastNickname) {
+                box.push(
+                    <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
+                )
+                lastNickname = item.nickname
+            }
             box.push(
-                <div key={`${index}-${item.date}`} className='chat-card-date'>{item.date}</div>
+                <ChatModel key={index} item={item}/>
             )
-            lastDate = item.date
-            lastNickname = null
-        }
-        if (item.nickname !== lastNickname) {
-            box.push(
-                <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
-            )
-            lastNickname = item.nickname
-        }
-        box.push(
-            <ChatModel key={index} item={item}/>
-        )
-    })
+        })
 
     return (
         <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>

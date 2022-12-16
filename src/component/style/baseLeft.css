@@ -1,6 +1,5 @@
 .sidebar-left {
     display: flex;
-    justify-content: flex-end;
     flex-wrap: wrap;
     gap: 5px;
 }
