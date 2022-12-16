@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 import {ChatModel, TodoModel} from './model'
-import {todoData, chatData} from './dataJSON'
+import { chatData } from '../utils/dataJSON'
 import { useContext } from 'react';
-import { ItemData } from './TodoApp';
-import {HideBase} from './TodoApp'
+import { ItemData, HideBase } from './TodoApp';
+import { GuildContext } from '../pages/App';
 
 export function Base() {
     return (
@@ -35,9 +35,10 @@ function BaseLeft() {
     )
 }
 function BaseCenter() {
-    let box = []
+    const {room} = useContext(GuildContext)
     const {item} = useContext(ItemData)
-    item ? box.push('its card on click') : todoData.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
+    let box = []
+    item ? box.push('its card on click') : room.item.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
     return (
         <>
         <div className="base-center">

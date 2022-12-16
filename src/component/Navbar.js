@@ -3,14 +3,13 @@ import { GuildContext } from '../pages/App'
 import { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faCheck, faGear, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
-import noPic from '../assets/images/noPic.png';
-import { myAccount, guildData } from '../component/dataJSON'
+import { myAccount, guildData } from '../utils/dataJSON'
 
 function Navbar() {
-    const {hideNavbar} = useContext(GuildContext)
+    const {hideNavbar, navRef} = useContext(GuildContext)
     return (
         <>
-        <div className={`navigation ${hideNavbar?'hideNavbar':'showNavbar'}`}>
+        <div className={`navigation ${hideNavbar?'hideNavbar':'showNavbar'}`} ref={navRef}>
             <nav>
                 <div className='nav-1'>
                     <HomeButton/>
@@ -70,8 +69,8 @@ function GuildList() {
     const guild = []
     guildData.forEach((item, index) => {
         guild.push(
-            <div key={index} onClick={() => handleGuild(item)} className={`guild-frame ${item.profile.name === guildName ? 'active' : ''}`}>
-                <img src={item.profile.src} className={`guild-photo-profile ${item.profile.name === guildName ? 'active' : ''}`} alt={item.profile.name} title={item.profile.name}/>
+            <div key={index} onClick={() => handleGuild(item)} className={`guild-frame ${item.profile.guildName === guildName ? 'active' : ''}`}>
+                <img src={item.profile.src} className={`guild-photo-profile ${item.profile.guildName === guildName ? 'active' : ''}`} alt={item.profile.guildName} title={item.profile.guildName}/>
             </div>
         )
     })
@@ -81,13 +80,13 @@ function GuildList() {
         </div>
     )
 }
-function RoomList(props) {
-    const {guildRooms, handleRoom, room} = useContext(GuildContext)
+function RoomList() {
+    const {guildRooms, handleRoom, currentRoom} = useContext(GuildContext)
     const lists = []
-    guildRooms.forEach((item, index) => {
+    guildRooms.forEach((room, index) => {
         lists.push(
-            <div key={index} className={`room ${room === item?'active':''}`} onClick={() => handleRoom(item)}>
-                <FontAwesomeIcon icon={faCheck} className={`room-icon ${room === item?'active':''}`}/> <span className={room === item?'active':''}>{item}</span>
+            <div key={index} className={`room ${currentRoom === room.roomName?'active':''}`} onClick={() => handleRoom(room)}>
+                <FontAwesomeIcon icon={faCheck} className={`room-icon ${currentRoom === room.roomName?'active':''}`}/> <span className={currentRoom === room.roomName?'active':''}>{room.roomName}</span>
             </div>
         )
     })
@@ -101,10 +100,10 @@ function Profile() {
     return (
         <div className="profile-container">
             <div className='profile'>
-                <img src={noPic} alt='no-person'/>
+                <img src={myAccount.profile.pic} alt='no-person'/>
                 <div className="profile-body">
-                    <div className="profile-nickname">McWooden</div>
-                    <div className="profile-id">#2521</div>
+                    <div className="profile-nickname">{myAccount.profile.nickname}</div>
+                    <div className="profile-id">#{myAccount.profile.id}</div>
                 </div>
             </div>
         </div>

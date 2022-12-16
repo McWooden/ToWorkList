@@ -1,6 +1,5 @@
 import './style/TodoApp.css'
 import { GuildContext } from '../pages/App'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars, faChartSimple, faMessage, faCube, faUserGroup} from '@fortawesome/free-solid-svg-icons'
 import { Base } from './Base'
@@ -36,14 +35,14 @@ export function TodoApp() {
 } 
 export function NavTop() {
     const {hideRightBase, handleRightBase, hideLeftBase, handleLeftBase} = useContext(HideBase)
-    const {hideNavbar, handleNavbar, room} = useContext(GuildContext)
+    const {hideNavbar, handleNavbar, currentRoom, navTopRef} = useContext(GuildContext)
     const {item} = useContext(ItemData)
     return (
         <section id='navTop'>
-            <header>
+            <header ref={navTopRef}>
             <div className='header-left'>
-                <FontAwesomeIcon icon={faBars} className={`bars pointer ${hideNavbar?'btn-inactive':'btn-active'}`} onClick={handleNavbar}/>
-                <h4 className='pageTitle'>{room}</h4>
+                <FontAwesomeIcon icon={faBars} className={`bars pointer ${hideNavbar?'btn-inactive':'btn-active'}`} onClick={() => handleNavbar(hideNavbar)}/>
+                <h4 className='pageTitle'>{currentRoom}</h4>
             </div>
             <div className="sidebar-button">
                 <FontAwesomeIcon icon={item?faCube:faChartSimple} className={`btn-sidebar btn-sidebar-left pointer  ${hideLeftBase?'btn-inactive':'btn-active'}`} onClick={() => handleLeftBase(hideLeftBase)}/>
