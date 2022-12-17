@@ -91,7 +91,26 @@ export const myAccount = {
                 },
             ],
         },
-    ]
+    ],
+    users: {
+        friends: {
+            color: 'royalblue',
+            user: [
+                {name: 'Huddin', id: '7364', pic: noPic},
+                {name: 'Rizky', id: '7364', pic: noPic},
+                {name: 'bima', id: '7364', pic: noPic},
+            ]
+        },
+        followers: {
+            color: 'greenyellow',
+            user: [
+                {name: 'aldo', id: '7364', pic: noPic},
+                {name: 'irfan', id: '7364', pic: noPic},
+                {name: 'naufal', id: '7364', pic: noPic},
+                {name: 'hendra', id: '7364', pic: noPic},
+            ]
+        },
+    }
 }
 
 export const guildData = [
@@ -143,8 +162,23 @@ export const guildData = [
             },
         ],
         users: {
-            admins: ['Huddin', 'Rizky', 'bima'],
-            members: ['aldo', 'irfan', 'nofal', 'hendra']
+            admins: {
+                color: 'goldenrod',
+                user: [
+                    {name: 'Huddin', id: '4830', pic: noPic},
+                    {name: 'Rizky', id: '4830', pic: noPic},
+                    {name: 'bima', id: '4830', pic: noPic},
+                ]
+            },
+            members: {
+                color: 'greenyellow',
+                user: [
+                    {name: 'naufal', id: '4830', pic: noPic},
+                    {name: 'irfan', id: '4830', pic: noPic},
+                    {name: 'aldo', id: '4830', pic: noPic},
+                    {name: 'hendra', id: '4830', pic: noPic},
+                ]
+            },
         }
 
     },
@@ -183,8 +217,23 @@ export const guildData = [
             },
         ],
         users: {
-            admins: ['wijdan', 'bagas', 'Huddin'],
-            members: ['arga', 'levram', 'ceka', 'farel']
+            admins: {
+                color: 'goldenrod',
+                user: [
+                    {name: 'wijdan', id: '3827', pic: noPic},
+                    {name: 'bagas', id: '3827', pic: noPic},
+                    {name: 'Huddin', id: '3827', pic: noPic},
+                ]
+            },
+            members: {
+                color: 'greenyellow',
+                user: [
+                    {name: 'arga', id: '3827', pic: noPic},
+                    {name: 'levram', id: '3827', pic: noPic},
+                    {name: 'ceka', id: '3827', pic: noPic},
+                    {name: 'farel', id: '3827', pic: noPic},
+                ]
+            },
         }
     }
 ]

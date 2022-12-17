@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 import {ChatModel, TodoModel} from './model'
-import { chatData } from '../utils/dataJSON'
 import { useContext } from 'react';
 import { ItemData, HideBase } from './TodoApp';
 import { GuildContext } from '../pages/App';
@@ -61,15 +60,14 @@ function BaseCenter() {
     )
 }
 function BaseRight() {
+    const {users} = useContext(GuildContext)
     const { hideRightBase } = useContext(HideBase)
     const {item} = useContext(ItemData)
     let box = []
     let lastDate = null
     let lastNickname = null
     item ? 
-        box.push('wadafak its a chat') 
-    :
-        chatData.forEach((item, index) => {
+        item.chat.forEach((item, index) => {
             if (item.date !== lastDate) {
                 box.push(
                     <div key={`${index}-${item.date}`} className='chat-card-date'>{item.date}</div>
@@ -87,13 +85,27 @@ function BaseRight() {
                 <ChatModel key={index} item={item}/>
             )
         })
+    :
+    Object.keys(users).forEach((propertyName) => {
+        box.push(
+            <p className='users-group' key={propertyName}>{propertyName}</p>
+        )
+        users[propertyName].user.forEach((user, index) => {
+            box.push(
+                <div className='group-user pointer' key={`${user.name}-${index}`}>
+                    <img src={user.pic} alt={user.name} />
+                    <p style={{color: users[propertyName].color}} >{user.name}</p>
+                </div>
+            )
+        })
+    })
 
     return (
         <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
             <div className="sidebar-right">
                 {box}
             </div>
-            <FormBaseRight/>
+            {item? <FormBaseRight/>: ''}
         </div>
     )
 }

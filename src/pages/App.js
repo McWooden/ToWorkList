@@ -37,7 +37,7 @@ function App() {
     setHideNavbar(!boolean)
   }
   return (
-    <GuildContext.Provider value={{guild, room, currentRoom: room.roomName, hideNavbar, handleNavbar, guildRooms : guild.rooms, guildName : guild.profile.guildName || guild.profile.nickname, handleGuild, handleRoom, navRef, navTopRef}}>
+    <GuildContext.Provider value={{guild, room, currentRoom: room.roomName, hideNavbar, handleNavbar, guildRooms : guild.rooms, guildName : guild.profile.guildName || guild.profile.nickname, handleGuild, handleRoom, navRef, navTopRef, users : guild.users}}>
       <div id='app'>
         <Navbar/>
         <TodoApp/>
