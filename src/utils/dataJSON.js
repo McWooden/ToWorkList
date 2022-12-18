@@ -24,6 +24,7 @@ export const defaultItem = {
     desc: 'ini webapp toworklist',
     color: 'tomato',
     done: ['McWooden'],
+    deadline: '12/19/2022',
     notes: defaultNotes,
     chat: [
         {
@@ -61,6 +62,7 @@ export const myAccount = {
                     desc: 'gajadi soalnya pake sepatu',
                     color: 'goldenrod',
                     notes: defaultNotes,
+                    deadline: '18/19/2022',
                     done: [],
                     chat: [
                         {
@@ -82,6 +84,7 @@ export const myAccount = {
                     desc: 'ntar mandi biar kedinginan',
                     color: 'royalblue',
                     notes: defaultNotes,
+                    deadline: '18/19/2022',
                     done: [],
                     chat: [
                         {
@@ -109,6 +112,9 @@ export const myAccount = {
                     title: 'Sekolah',
                     desc: 'gajadi soalnya besok libur',
                     color: 'royalblue',
+                    notes: defaultNotes,
+                    deadline: '18/19/2022',
+                    done: [],
                     chat: [
                         {
                             nickname: 'Developer',
@@ -166,7 +172,9 @@ export const guildData = [
                         desc: 'disini kita pake stackoverflow :)?',
                         color: 'yellowgreen',
                         done: [],
-                        chat: defaultChat
+                        chat: defaultChat,
+                        notes: defaultNotes,
+                        deadline: '18/19/2022',
                     },
                 ],
             },
@@ -180,7 +188,9 @@ export const guildData = [
                         desc: 'roadmap fullstack?',
                         color: 'maroon',
                         done: [],
-                        chat: defaultChat
+                        chat: defaultChat,
+                        notes: defaultNotes,
+                        deadline: '18/19/2022',
                     },
                 ],
             },
@@ -194,7 +204,9 @@ export const guildData = [
                         desc: 'roadmap fullstack?',
                         color: 'royalblue',
                         done: [],
-                        chat: defaultChat
+                        chat: defaultChat,
+                        notes: defaultNotes,
+                        deadline: '18/19/2022',
                     },
                 ],
             },
@@ -237,7 +249,9 @@ export const guildData = [
                         desc: 'di tengah pake cobblestone',
                         color: 'goldenrod',
                         done: [],
-                        chat: defaultChat
+                        chat: defaultChat,
+                        notes: defaultNotes,
+                        deadline: '18/19/2022',
                     },
                 ],
             },
@@ -251,7 +265,9 @@ export const guildData = [
                         desc: 'nebang pohon terus nguras laut',
                         color: 'royalblue',
                         done: [],
-                        chat: defaultChat
+                        chat: defaultChat,
+                        notes: defaultNotes,
+                        deadline: '18/19/2022',
                     },
                 ],
             },

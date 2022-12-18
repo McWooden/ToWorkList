@@ -10,12 +10,10 @@
 .todo-left, .todo-right {
     display: flex;
     flex-direction: row;
-}
-.todo-right {
     position: relative;
 }
-.todo-right {
-    position: relative;
+.todo-left {
+    flex: 1;
 }
 .card-color {
     width: 10px;
@@ -29,11 +27,12 @@
     justify-content: center;
     padding: 8px 0;
     word-break: break-all;
+    flex: 1;
 }
 .card-title {
     color: var(--white-1);
 }
-.card-description {
+.card-description, .card-deadline {
     font-size: small;
     color: var(--white-3);
 }

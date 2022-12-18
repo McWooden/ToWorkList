@@ -1,9 +1,8 @@
 import './App.css';
 import Navbar from '../component/Navbar';
 import TodoApp from '../component/TodoApp';
-import { useState, createContext } from 'react';
+import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
-import { useRef, useEffect } from 'react';
 
 export const GuildContext = createContext()
 function App() {

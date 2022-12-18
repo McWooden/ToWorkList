@@ -23,7 +23,7 @@ function BaseLeft() {
     const {item} = useContext(ItemData)
     let box = null
     item ?
-        box = <p>its detail about card</p>
+        box = <MoreInfoCard/>
     :
         box = (
             <div className="progress">
@@ -137,6 +137,7 @@ function FormBaseRight() {
         </form>
     )
 }
+
 function DetailCard() {
     const {item, handleItem} = useContext(ItemData)
     return(
@@ -150,6 +151,22 @@ function DetailCard() {
             <p>{item.desc}</p>
         </div>
         <Notes/>
+        </>
+    )
+}
+function MoreInfoCard() {
+    const {item} = useContext(ItemData)
+    return (
+        <>
+        <div className='todo-card'>
+            <div className="todo-left">
+                <div className="card-color" style={{backgroundColor: item.color}}></div>
+                <div className="card-text">
+                    <div className="card-title">{item.title}</div>
+                    <div className="card-deadline">{convertDateToString(item.deadline)}</div>
+                </div>
+            </div>
+        </div>
         </>
     )
 }
