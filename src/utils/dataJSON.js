@@ -5,6 +5,41 @@ const defaultChat = [{
     time: '20.29',
     date: '12/3/2022'
 }]
+const defaultNotes = [
+    {
+        context: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quos nostrum minus esse cum adipisci id, velit provident commodi enim quaerat eaque harum, deserunt sed unde eum impedit fugit autem?. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores suscipit modi reprehenderit incidunt laudantium! Odio, hic. Quidem error sapiente libero excepturi dolores voluptatem nihil doloremque, fugit impedit, ad asperiores molestias repellendus nam eum, perspiciatis possimus.',
+        by: 'afrizal',
+        date: '12/18/2022',
+        color: 'royalblue'
+    },
+    {
+        context: 'i have no note',
+        by: 'alek',
+        date: '12/19/2022',
+        color: 'tomato'
+    }
+]
+export const defaultItem = {
+    title: 'Buat aplikasi',
+    desc: 'ini webapp toworklist',
+    color: 'tomato',
+    done: ['McWooden'],
+    notes: defaultNotes,
+    chat: [
+        {
+            nickname: 'Developer',
+            msg: 'whatsupp its still on going',
+            time: '20.25',
+            date: '12/3/2022'
+        },
+        {
+            nickname: 'McWooden',
+            msg: 'wait for next update',
+            time: '20.25',
+            date: '12/3/2022'
+        },
+    ]
+}
 
 export const myAccount = {
     profile: {
@@ -20,29 +55,13 @@ export const myAccount = {
             icon: 'check',
             public: true,
             item: [
-                {
-                    title: 'Buat aplikasi',
-                    desc: 'web aplikasi ini yang akan ku selesaikan',
-                    color: 'tomato',
-                    chat: [
-                        {
-                            nickname: 'Developer',
-                            msg: 'whatsupp its still on going',
-                            time: '20.25',
-                            date: '12/3/2022'
-                        },
-                        {
-                            nickname: 'McWooden',
-                            msg: 'wait for next update',
-                            time: '20.25',
-                            date: '12/3/2022'
-                        },
-                    ]
-                },
+                defaultItem,
                 {
                     title: 'lari pagi',
                     desc: 'gajadi soalnya pake sepatu',
                     color: 'goldenrod',
+                    notes: defaultNotes,
+                    done: [],
                     chat: [
                         {
                             nickname: 'Developer',
@@ -62,6 +81,8 @@ export const myAccount = {
                     title: 'mandi',
                     desc: 'ntar mandi biar kedinginan',
                     color: 'royalblue',
+                    notes: defaultNotes,
+                    done: [],
                     chat: [
                         {
                             nickname: 'Developer',
@@ -87,22 +108,36 @@ export const myAccount = {
                 {
                     title: 'Sekolah',
                     desc: 'gajadi soalnya besok libur',
-                    color: 'royalblue'
+                    color: 'royalblue',
+                    chat: [
+                        {
+                            nickname: 'Developer',
+                            msg: 'libur 2 minggu kan?',
+                            time: '20.25',
+                            date: '12/3/2022'
+                        },
+                        {
+                            nickname: 'McWooden',
+                            msg: 'wait for next update',
+                            time: '20.29',
+                            date: '12/3/2022'
+                        },
+                    ]
                 },
             ],
         },
     ],
     users: {
-        friends: {
-            color: 'royalblue',
+        Friends: {
+            color: 'aquamarine',
             user: [
                 {name: 'Huddin', id: '7364', pic: noPic},
                 {name: 'Rizky', id: '7364', pic: noPic},
                 {name: 'bima', id: '7364', pic: noPic},
             ]
         },
-        followers: {
-            color: 'greenyellow',
+        Followers: {
+            color: 'whitesmoke',
             user: [
                 {name: 'aldo', id: '7364', pic: noPic},
                 {name: 'irfan', id: '7364', pic: noPic},
@@ -130,6 +165,7 @@ export const guildData = [
                         title: 'welkam buddy',
                         desc: 'disini kita pake stackoverflow :)?',
                         color: 'yellowgreen',
+                        done: [],
                         chat: defaultChat
                     },
                 ],
@@ -143,6 +179,7 @@ export const guildData = [
                         title: 'fullstack',
                         desc: 'roadmap fullstack?',
                         color: 'maroon',
+                        done: [],
                         chat: defaultChat
                     },
                 ],
@@ -156,6 +193,7 @@ export const guildData = [
                         title: 'fullstack',
                         desc: 'roadmap fullstack?',
                         color: 'royalblue',
+                        done: [],
                         chat: defaultChat
                     },
                 ],
@@ -198,6 +236,7 @@ export const guildData = [
                         title: 'buat air mancur',
                         desc: 'di tengah pake cobblestone',
                         color: 'goldenrod',
+                        done: [],
                         chat: defaultChat
                     },
                 ],
@@ -211,6 +250,7 @@ export const guildData = [
                         title: 'buat perkampungan',
                         desc: 'nebang pohon terus nguras laut',
                         color: 'royalblue',
+                        done: [],
                         chat: defaultChat
                     },
                 ],

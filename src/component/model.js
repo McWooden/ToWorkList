@@ -3,13 +3,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { ItemData } from './TodoApp';
 import { useContext } from 'react';
+import { myAccount } from '../utils/dataJSON';
+import { convertDateToString } from '../utils/convertDateFormat';
 
 
 export function TodoModel({item}) {
-    const [on, setOn] = useState(false)
+    const myNickname = myAccount.profile.nickname
+    const [done, setDone] = useState(item.done)
     const [dropDown, setDropDown] = useState(false)
     let menuRef = useRef()
     const {handleItem} = useContext(ItemData)
+    function reverse() {
+        if (done.includes(myNickname)) {
+            setDone(done.filter(e => e !== myNickname));
+        } else {
+            setDone([...done, myNickname]);
+        }
+    }
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -26,13 +36,13 @@ export function TodoModel({item}) {
         <div className="todo-card">
             <div className="todo-left">
             <div className="card-color" style={{backgroundColor: item.color}}></div>
-            <div className="card-text">
+            <div className="card-text pointer" onClick={() => handleItem(item)}>
                 <div className="card-title">{item.title}</div>
-                <div className="card-description pointer" onClick={() => handleItem(item)}>{item.desc}</div>
+                <div className="card-description">{item.desc}</div>
             </div>
             </div>
             <div className="todo-right">
-                <div className={`card-finish pointer ${on?'finish-on':'finish-off'}`} onClick={() => setOn(!on)}>
+                <div className={`card-finish pointer ${done.includes(myNickname)?'finish-on':'finish-off'}`} onClick={reverse}>
                     <div className="card-finish-value"></div>
                 </div>
                 <div className="card-more">
@@ -57,6 +67,7 @@ export function TodoModel({item}) {
 
 export function ChatModel({item}) {
     const [dropDown, setDropDown] = useState(false)
+    const itsMe = item.nickname === myAccount.profile.nickname
     let cardRef = useRef()
     useEffect(() => {
         let handler = (e) => {
@@ -71,9 +82,9 @@ export function ChatModel({item}) {
         document.addEventListener('mousedown', handler)
     })
     return (
-        <div className='chat-card' ref={cardRef}>
-            <div className={`chat-card-message ${dropDown?'active':'inactive'}`}>{item.msg}</div>
-            <div className='chat-card-time pointer' onClick={() => setDropDown(!dropDown)}>{item.time}</div>
+        <div className={`${itsMe&&'my'} chat-card`} ref={cardRef}>
+            <div className={`${itsMe&&'my'} chat-card-message ${dropDown?'active':'inactive'}`}>{item.msg}</div>
+            <div className={`${itsMe&&'my'} chat-card-time pointer`} onClick={() => setDropDown(!dropDown)}>{item.time}</div>
             <div className={`chat-dropdown ${dropDown?'active':'inactive'}`}>
                 <ul>
                     <li className='pointer'>
@@ -81,6 +92,35 @@ export function ChatModel({item}) {
                     </li>
                 </ul>
             </div>
+        </div>
+    )
+}
+
+export function Notes() {
+    const {item} = useContext(ItemData)
+    const notes = []
+    item.notes.forEach((item, index) => {
+        notes.push(
+                <div className='note' key={index}>
+                    <div className='note-head'>
+                        <div className="note-color" style={{backgroundColor: item.color}}></div>
+                        <div className="note-btn">
+                            <FontAwesomeIcon icon={faTrash}/>
+                            <FontAwesomeIcon icon={faPenToSquare}/>
+                        </div>
+                    </div>
+                    <div className='note-body'>
+                        <pre>
+                            {item.context}
+                        </pre>
+                        <span className='note-info'>{`${item.by} ${convertDateToString(item.date)}`}</span>
+                    </div>
+                </div>
+            )
+        })
+    return(
+        <div className='notes-container'>
+            {notes}
         </div>
     )
 }

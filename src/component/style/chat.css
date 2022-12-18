@@ -17,11 +17,9 @@
     margin-bottom: 1px;
     position: relative;
 }
-.chat-card-message {
-    border-radius: 5px 10px 10px 0;
-    padding: 2px 5px;
-    font-size: .7em;
-    word-break: break-all;
+.chat-card.my {
+    flex-direction: row-reverse;
+    align-self: flex-end;
 }
 .chat-card-message.active {
     background-color: var(--light-blue);
@@ -29,11 +27,25 @@
 .chat-card-message.inactive {
     background-color: var(--black-5);
 }
+.chat-card-message {
+    border-radius: 5px 10px 10px 0;
+    padding: 2px 5px;
+    font-size: .7em;
+    word-break: break-all;
+}
+.chat-card-message.my {
+    border-radius: 10px 5px 0 10px;
+    background-color: var(--light-blue);
+}
 .chat-card-time {
     font-size: .5em;
     color: var(--white-3);
     align-self: flex-end;
     margin-left: 2px;
+}
+.chat-card-time.my {
+    margin-left: 0;
+    margin-right: 2px;
 }
 .base-right-hide {
     transform: translateX(0);

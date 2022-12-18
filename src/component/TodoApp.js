@@ -6,13 +6,14 @@ import { Base } from './Base'
 import { useContext } from 'react'
 import { createContext } from 'react'
 import { useState } from 'react'
+import { defaultItem } from '../utils/dataJSON'
 
 export const HideBase = createContext()
 export const ItemData = createContext()
 export function TodoApp() {
     const [hideRightBase, setHideRightBase] = useState(true)
     const [hideLeftBase, setHideLeftBase] = useState(true)
-    const [item, setItem] = useState()
+    const [item, setItem] = useState(defaultItem)
     function handleItem(item) {
         setItem(item)
     }

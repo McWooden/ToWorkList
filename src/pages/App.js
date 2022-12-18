@@ -24,6 +24,7 @@ function App() {
             
         }
     }
+    document.querySelector('title').innerText = guild.profile.nickname || guild.profile.guildName
     document.addEventListener('mousedown', handler)
   })
   function handleGuild(guild) {

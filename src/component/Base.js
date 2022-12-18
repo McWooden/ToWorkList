@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faFeather, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
-import {ChatModel, TodoModel} from './model'
+import {ChatModel, TodoModel, Notes} from './model'
 import { useContext } from 'react';
 import { ItemData, HideBase } from './TodoApp';
 import { GuildContext } from '../pages/App';
+import { myAccount } from '../utils/dataJSON';
+import {convertDateToString} from '../utils/convertDateFormat'
 
 export function Base() {
     return (
@@ -45,15 +47,12 @@ function BaseCenter() {
     const {room} = useContext(GuildContext)
     const {item} = useContext(ItemData)
     let box = []
-    item ?
-        box.push('its card notes')
-    :
-        room.item.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
+    !item && room.item.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
     return (
         <>
         <div className="base-center">
             <div className="center">
-                {box}
+                {item ? <DetailCard/>:box}
             </div>
         </div>
         </>
@@ -70,12 +69,12 @@ function BaseRight() {
         item.chat.forEach((item, index) => {
             if (item.date !== lastDate) {
                 box.push(
-                    <div key={`${index}-${item.date}`} className='chat-card-date'>{item.date}</div>
+                    <div key={`${index}-${item.date}`} className='chat-card-date'>{convertDateToString(item.date)}</div>
                 )
                 lastDate = item.date
                 lastNickname = null
             }
-            if (item.nickname !== lastNickname) {
+            if (item.nickname !== lastNickname && item.nickname !== myAccount.profile.nickname) {
                 box.push(
                     <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
                 )
@@ -90,14 +89,16 @@ function BaseRight() {
         box.push(
             <p className='users-group' key={propertyName}>{propertyName}</p>
         )
+        let container = []
         users[propertyName].user.forEach((user, index) => {
-            box.push(
+            container.push(
                 <div className='group-user pointer' key={`${user.name}-${index}`}>
                     <img src={user.pic} alt={user.name} />
                     <p style={{color: users[propertyName].color}} >{user.name}</p>
                 </div>
             )
         })
+        box.push(<div key={`${propertyName}-container`} className='group-user-container'>{container}</div>)
     })
 
     return (
@@ -105,7 +106,7 @@ function BaseRight() {
             <div className="sidebar-right">
                 {box}
             </div>
-            {item? <FormBaseRight/>: ''}
+            {item? <FormBaseRight/>:''}
         </div>
     )
 }
@@ -134,6 +135,22 @@ function FormBaseRight() {
                     </button>
             }
         </form>
+    )
+}
+function DetailCard() {
+    const {item, handleItem} = useContext(ItemData)
+    return(
+        <>
+        <div className='detail-back pointer' onClick={() => handleItem()}>
+            <FontAwesomeIcon icon={faArrowLeft}/>
+            <span>Back</span>
+        </div>
+        <div className='detail-desc'>
+            <div className="color" style={{backgroundColor: item.color}}></div>
+            <p>{item.desc}</p>
+        </div>
+        <Notes/>
+        </>
     )
 }
 
