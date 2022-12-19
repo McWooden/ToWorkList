@@ -28,11 +28,82 @@
 .detail-desc .color {
     width: 10px;
     min-width: 10px;
-    max-height: 45px;
+    max-height: 50px;
     border-radius: 3px;
+}
+.detail-desc-context {
+    flex: 1;
 }
 .detail-desc p {
     font-size: small;
+    margin-bottom: 10px;
+}
+.images-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 50px;
+    padding: 5px;
+    border-radius: 3px;
+    background-color: var(--black-3);
+}
+.images-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+/* card image */
+.card-img {
+    background-color: var(--black-4);
+    display: flex;
+    border-radius: 3px;
+    overflow: hidden;
+    flex-grow: 1;
+}
+.card-img-pic {
+    width: 40px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: .1s ease;
+}
+.card-img-pic.full {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    object-fit: contain;
+    background-color: #20222557;
+    transition: .3s ease;
+}
+.card-img-context {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 5px;
+    font-size: xx-small;
+    color: var(--white-2);
+}
+.card-img-context-deep {
+    flex: 1;
+}
+.card-img-by {
+    color: var(--white-1);
+}
+.card-img-date {
+    color: var(--white-3);
+    align-self: flex-end;
+}
+.card-img-context p {
+    margin: 0;
+    font-size: xx-small;
+}
+.add-image {
+    margin-top: 10px;
+    background-color: var(--light-blue);
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
 }
 /* note */
 .note {
@@ -54,24 +125,23 @@
     align-items: center;
     gap: 5px;
 }
-.note-color {
-    min-width: 45px;
-    height: 15px;
-    margin: 5px;
-    border-radius: 5px;
-}
 .note-head svg {
     min-width: 15px;
     border-radius: 50px;
     font-size: small;
     padding: 5px;
-    cursor: pointer;
-    border: 1px solid var(--black-4);
     color: var(--white-3);
 }
 .note-head svg:hover {
     background-color: var(--black-4);
-    color: var(--white-1);
+    color: var(--white-2);
+}
+.note-color {
+    min-width: 45px;
+    height: 15px;
+}
+.note-color:hover {
+    background-color: unset !important;
 }
 .note-body {
     display: flex;

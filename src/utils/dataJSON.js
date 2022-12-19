@@ -19,13 +19,34 @@ const defaultNotes = [
         color: 'tomato'
     }
 ]
+export const defaultImages = [
+    {
+        pic: 'https://source.unsplash.com/random/1',
+        desc: 'ini gambar centang',
+        date: '12/18/2022',
+        by: 'anak magang'
+    },
+    {
+        pic: 'https://source.unsplash.com/random/2',
+        desc: 'what color is the sky',
+        date: '12/18/2022',
+        by: 'ai amour'
+    },
+    {
+        pic: 'https://source.unsplash.com/random/3',
+        desc: 'asu kayang',
+        date: '12/19/2022',
+        by: 'alucard'
+    }
+]
 export const defaultItem = {
     title: 'Buat aplikasi',
     desc: 'ini webapp toworklist',
-    color: 'tomato',
+    color: 'goldenrod',
     done: ['McWooden'],
     deadline: '12/19/2022',
     notes: defaultNotes,
+    images: defaultImages,
     chat: [
         {
             nickname: 'Developer',
@@ -60,9 +81,10 @@ export const myAccount = {
                 {
                     title: 'lari pagi',
                     desc: 'gajadi soalnya pake sepatu',
-                    color: 'goldenrod',
+                    color: 'tomato',
                     notes: defaultNotes,
                     deadline: '18/19/2022',
+                    images: defaultImages,
                     done: [],
                     chat: [
                         {
@@ -85,6 +107,7 @@ export const myAccount = {
                     color: 'royalblue',
                     notes: defaultNotes,
                     deadline: '18/19/2022',
+                    images: defaultImages,
                     done: [],
                     chat: [
                         {
@@ -114,6 +137,7 @@ export const myAccount = {
                     color: 'royalblue',
                     notes: defaultNotes,
                     deadline: '18/19/2022',
+                    images: defaultImages,
                     done: [],
                     chat: [
                         {
@@ -174,6 +198,7 @@ export const guildData = [
                         done: [],
                         chat: defaultChat,
                         notes: defaultNotes,
+                        images: defaultImages,
                         deadline: '18/19/2022',
                     },
                 ],
@@ -190,6 +215,7 @@ export const guildData = [
                         done: [],
                         chat: defaultChat,
                         notes: defaultNotes,
+                        images: defaultImages,
                         deadline: '18/19/2022',
                     },
                 ],
@@ -206,6 +232,7 @@ export const guildData = [
                         done: [],
                         chat: defaultChat,
                         notes: defaultNotes,
+                        images: defaultImages,
                         deadline: '18/19/2022',
                     },
                 ],
@@ -251,6 +278,7 @@ export const guildData = [
                         done: [],
                         chat: defaultChat,
                         notes: defaultNotes,
+                        images: defaultImages,
                         deadline: '18/19/2022',
                     },
                 ],
@@ -267,6 +295,7 @@ export const guildData = [
                         done: [],
                         chat: defaultChat,
                         notes: defaultNotes,
+                        images: defaultImages,
                         deadline: '18/19/2022',
                     },
                 ],

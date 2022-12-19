@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaperPlane, faFeather, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
-import {ChatModel, TodoModel, Notes} from './model'
+import {ChatModel, TodoModel, Notes, CardImages} from './model'
 import { useContext } from 'react';
 import { ItemData, HideBase } from './TodoApp';
 import { GuildContext } from '../pages/App';
@@ -148,7 +148,10 @@ function DetailCard() {
         </div>
         <div className='detail-desc'>
             <div className="color" style={{backgroundColor: item.color}}></div>
-            <p>{item.desc}</p>
+            <div className='detail-desc-context'>
+                <p>{item.desc}</p>
+                <CardImages/>
+            </div>
         </div>
         <Notes/>
         </>

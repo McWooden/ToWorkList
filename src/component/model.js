@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faEllipsisVertical, faPenToSquare, faTrash, faNoteSticky, faPlus} from '@fortawesome/free-solid-svg-icons'
 import { ItemData } from './TodoApp';
 import { useContext } from 'react';
 import { myAccount } from '../utils/dataJSON';
@@ -103,10 +103,10 @@ export function Notes() {
         notes.push(
                 <div className='note' key={index}>
                     <div className='note-head'>
-                        <div className="note-color" style={{backgroundColor: item.color}}></div>
+                        <FontAwesomeIcon icon={faNoteSticky} style={{color: item.color}} className='note-color'/>
                         <div className="note-btn">
-                            <FontAwesomeIcon icon={faTrash}/>
-                            <FontAwesomeIcon icon={faPenToSquare}/>
+                            <FontAwesomeIcon icon={faTrash} className='pointer'/>
+                            <FontAwesomeIcon icon={faPenToSquare} className='pointer'/>
                         </div>
                     </div>
                     <div className='note-body'>
@@ -121,6 +121,41 @@ export function Notes() {
     return(
         <div className='notes-container'>
             {notes}
+        </div>
+    )
+}
+export function CardImages() {
+    const {item} = useContext(ItemData)
+    const box = []
+    item.images.forEach((data, index) => {
+        box.push(
+            <Image key={index} data={data}/>
+        )
+    })
+    return (
+        <div className='images-container'>
+            <div className='images-list'>
+                {box}
+            </div>
+            <FontAwesomeIcon icon={faPlus} className='add-image'/>
+        </div>
+    )
+}
+function Image({data}) {
+    const [full, setFull] = useState(false)
+    function handleFull() {
+        setFull(!full)
+    }
+    return (
+        <div className='card-img'>
+            <img alt={data.by} className={`card-img-pic ${full&&'full'}`} src={data.pic} onClick={handleFull}/>
+            <div className='card-img-context'>
+                <div className='card-img-context-deep'>
+                    <div className="card-img-by">{data.by}</div>
+                    <p className="card-img-desc">{data.desc}</p>
+                </div>
+                <div className="card-img-date">{convertDateToString(data.date)}</div>
+            </div>
         </div>
     )
 }
