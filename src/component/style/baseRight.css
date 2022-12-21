@@ -14,22 +14,12 @@
 }
 .base-right-form {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 3px;
     min-height: 48px;
     margin: 0 3px 8px;
     padding: 0 2px;
-}
-.base-right-form input {
-    flex: 4;
-    background-color: var(--black-4);
-    outline: none;
-    border: none;
-    border-radius: 5px;
-    color: var(--white-2);
-    padding: 0 5px;
-    height: 35px;
-    font-size: .8em;
+    background-color: transparent;
 }
 .base-right-form .textarea-container {
     display: flex;
@@ -39,6 +29,7 @@
     border-radius: 5px;
     padding: 5px;
     min-height: 35px;
+    overflow: auto;
 }
 .base-right-form textarea {
     display: flex;
@@ -51,6 +42,8 @@
     resize: none;
     font-family: inherit;
     font-size: x-small;
+    max-height: 160px;
+    overflow: scroll;
 }
 .base-right-form button {
     height: 35px;

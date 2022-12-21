@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faFeather, faArrowLeft, faCheck, faNoteSticky, faImage, faMessage} from '@fortawesome/free-solid-svg-icons'
+import {faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
-import {ChatModel, TodoModel, Notes, CardImages, InfoMenu, Contributor, DetailLeftAction, CenterActionButton} from './model'
-import { useContext, useEffect } from 'react';
+import {ChatModel, TodoModel} from './model'
+import { useContext } from 'react';
 import { ItemData, HideBase } from './TodoApp';
 import { GuildContext } from '../pages/App';
 import { myAccount } from '../utils/dataJSON';
 import {convertDateToString} from '../utils/convertDateFormat'
-import { useRef } from 'react';
+import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
+import {FormBaseRight} from './rightSideComponent'
+
+import { Notes, CardImages, CenterActionButton } from './centerComponent';
 
 export function Base() {
     return (
@@ -117,39 +119,6 @@ function BaseRight() {
     )
 }
 
-function FormBaseRight() {
-    const [msg, setMsg] = useState('')
-    const textarea = useRef()
-    function handleSubmit(e) {
-        e.preventDefault()
-        setMsg('')
-        console.log(msg)
-    }
-    function handleInput(e) {
-        setMsg(e.target.value)
-        textarea.current.style.height = '15px'
-        let height = textarea.current.scrollHeight
-        textarea.current.style.height = height + 'px'
-    }
-    return (
-        <form className='base-right-form' onSubmit={handleSubmit}>
-            <div className="textarea-container">
-                <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea}/>
-            </div>
-            {
-                msg ? 
-                    <button className='pointer btn-on' title='send'>
-                        <FontAwesomeIcon icon={faPaperPlane}/>
-                    </button>
-                :
-                    <button className='btn-off' title='write text first'>
-                        <FontAwesomeIcon icon={faFeather}/>
-                    </button>
-            }
-        </form>
-    )
-}
-
 function DetailCard() {
     const {item, handleItem} = useContext(ItemData)
     return(
@@ -166,29 +135,6 @@ function DetailCard() {
             </div>
         </div>
         <Notes/>
-        </>
-    )
-}
-function MoreInfoCard() {
-    const {item} = useContext(ItemData)
-    return (
-        <>
-        <div className='todo-card'>
-            <div className="todo-left">
-                <div className="card-color" style={{backgroundColor: item.color}}></div>
-                <div className="card-text">
-                    <div className="card-title">{item.title}</div>
-                    <div className="card-deadline">{convertDateToString(item.deadline)}</div>
-                </div>
-            </div>
-        </div>
-        <div className='info-menu'>
-            <InfoMenu icon={faCheck} count={item.chat.length}/>
-            <InfoMenu icon={faNoteSticky} count={item.notes.length}/>
-            <InfoMenu icon={faImage} count={item.images.length}/>
-            <InfoMenu icon={faMessage} count={item.chat.length}/>
-        </div>
-        <Contributor/>
         </>
     )
 }
