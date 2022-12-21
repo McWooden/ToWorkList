@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     gap: 3px;
-    height: 48px;
+    min-height: 48px;
     background-color: var(--black-2);
     margin: 0 3px 8px;
     padding: 0 2px;
@@ -31,6 +31,25 @@
     padding: 0 5px;
     height: 35px;
     font-size: .8em;
+}
+.base-right-form .textarea-container {
+    display: flex;
+    align-items: center;
+    flex: 4;
+    background-color: var(--black-4);
+    border-radius: 5px;
+    padding: 5px;
+    min-height: 35px;
+}
+.base-right-form textarea {
+    width: 100%;
+    outline: none;
+    border: none;
+    color: var(--white-2);
+    background-color: inherit;
+    resize: none;
+    font-family: inherit;
+    font-size: x-small;
 }
 .base-right-form button {
     height: 35px;

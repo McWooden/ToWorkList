@@ -3,11 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaperPlane, faFeather, faArrowLeft, faCheck, faNoteSticky, faImage, faMessage} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 import {ChatModel, TodoModel, Notes, CardImages, InfoMenu, Contributor, DetailLeftAction, CenterActionButton} from './model'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ItemData, HideBase } from './TodoApp';
 import { GuildContext } from '../pages/App';
 import { myAccount } from '../utils/dataJSON';
 import {convertDateToString} from '../utils/convertDateFormat'
+import { useRef } from 'react';
 
 export function Base() {
     return (
@@ -118,6 +119,7 @@ function BaseRight() {
 
 function FormBaseRight() {
     const [msg, setMsg] = useState('')
+    const textarea = useRef()
     function handleSubmit(e) {
         e.preventDefault()
         setMsg('')
@@ -126,16 +128,27 @@ function FormBaseRight() {
     function handleInput(e) {
         setMsg(e.target.value)
     }
+    useEffect(() => {
+        let handler = () => {
+        textarea.current.style.height = '15px'
+        let height = textarea.current.scrollHeight
+        textarea.current.style.height = height + 'px'
+        }
+        
+        document.addEventListener('keyup', handler)
+    })
     return (
         <form className='base-right-form' onSubmit={handleSubmit}>
-            <input type='text' placeholder='messege main todo' name='msg' value={msg} onChange={handleInput} autoComplete='off'/>
+            <div className="textarea-container">
+                <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea}/>
+            </div>
             {
                 msg ? 
-                    <button className='pointer btn-on' title='write text first'>
+                    <button className='pointer btn-on' title='send'>
                         <FontAwesomeIcon icon={faPaperPlane}/>
                     </button>
                 :
-                    <button className='btn-off' title='send'>
+                    <button className='btn-off' title='write text first'>
                         <FontAwesomeIcon icon={faFeather}/>
                     </button>
             }
