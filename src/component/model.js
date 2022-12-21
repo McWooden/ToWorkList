@@ -1,6 +1,6 @@
 import {useState, useEffect, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faEllipsisVertical, faPenToSquare, faTrash, faNoteSticky, faPlus} from '@fortawesome/free-solid-svg-icons'
+import {faEllipsisVertical, faPenToSquare, faTrash, faNoteSticky, faPlus, faCheck} from '@fortawesome/free-solid-svg-icons'
 import { ItemData } from './TodoApp';
 import { useContext } from 'react';
 import { myAccount } from '../utils/dataJSON';
@@ -155,6 +155,53 @@ function Image({data}) {
                     <p className="card-img-desc">{data.desc}</p>
                 </div>
                 <div className="card-img-date">{convertDateToString(data.date)}</div>
+            </div>
+        </div>
+    )
+}
+
+export function InfoMenu({icon, count}) {
+    return (
+        <div className="info-menu-box">
+            <FontAwesomeIcon icon={icon} className='info-menu-box-icon'/>
+            <div className='info-menu-box-count'>{count}</div>
+        </div>
+    )
+}
+
+export function Contributor() {
+    const {item} = useContext(ItemData)
+    const box = []
+    const nicknames = []
+    item.notes.forEach((note, index) => {
+        if (nicknames.includes(note.by)) return
+        box.push(<p key={index}>{note.by}</p>)
+        nicknames.push(note.by)
+    })
+    return (
+        <div className="contributor-container">
+            <p>Contributor</p>
+            <div className="contributor">
+                {box}
+            </div>
+        </div>
+    )
+}
+
+export function DetailLeftAction() {
+    return (
+        <div className='detail-Left-action'>
+            <FontAwesomeIcon icon={faTrash} className='action-left action-trash-left'/>
+            <FontAwesomeIcon icon={faPenToSquare} className='action-left action-edit-left'/>
+        </div>
+    )
+}
+export function CenterActionButton() {
+    const {item} = useContext(ItemData)
+    return (
+        <div className='center-action-btn'>
+            <div className="action-add">
+                <FontAwesomeIcon icon={item ? faNoteSticky : faCheck} className='add-btn pointer'/>
             </div>
         </div>
     )

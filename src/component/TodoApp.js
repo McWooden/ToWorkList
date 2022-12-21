@@ -19,9 +19,11 @@ export function TodoApp() {
     }
     function handleRightBase(boolean) {
         setHideRightBase(!boolean)
+        setHideLeftBase(true)
     }
     function handleLeftBase(boolean) {
         setHideLeftBase(!boolean)
+        setHideRightBase(true)
     }
     return (
         <HideBase.Provider value={{hideRightBase, handleRightBase, hideLeftBase, handleLeftBase}}>

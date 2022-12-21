@@ -9,9 +9,8 @@
     display: flex;
     flex-direction: column;
     gap: 1px;
-    height: calc(100vh - 48px);
+    flex: 1;
     overflow: auto;
-    margin-bottom: 48px;
 }
 .base-right-form {
     display: flex;

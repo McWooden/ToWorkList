@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faFeather, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faFeather, faArrowLeft, faCheck, faNoteSticky, faImage, faMessage} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
-import {ChatModel, TodoModel, Notes, CardImages} from './model'
+import {ChatModel, TodoModel, Notes, CardImages, InfoMenu, Contributor, DetailLeftAction, CenterActionButton} from './model'
 import { useContext } from 'react';
 import { ItemData, HideBase } from './TodoApp';
 import { GuildContext } from '../pages/App';
@@ -36,11 +36,14 @@ function BaseLeft() {
             </div>
         )
     return (
+        <>
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
             <div className="sidebar-left">
                 {box}
             </div>
+            {item? <DetailLeftAction/>:''}
         </div>
+        </>
     )
 }
 function BaseCenter() {
@@ -53,6 +56,7 @@ function BaseCenter() {
         <div className="base-center">
             <div className="center">
                 {item ? <DetailCard/>:box}
+                <CenterActionButton/>
             </div>
         </div>
         </>
@@ -74,7 +78,8 @@ function BaseRight() {
                 lastDate = item.date
                 lastNickname = null
             }
-            if (item.nickname !== lastNickname && item.nickname !== myAccount.profile.nickname) {
+            if (item.nickname !== lastNickname) {
+                item.nickname !== myAccount.profile.nickname &&
                 box.push(
                     <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
                 )
@@ -170,6 +175,13 @@ function MoreInfoCard() {
                 </div>
             </div>
         </div>
+        <div className='info-menu'>
+            <InfoMenu icon={faCheck} count={item.chat.length}/>
+            <InfoMenu icon={faNoteSticky} count={item.notes.length}/>
+            <InfoMenu icon={faImage} count={item.images.length}/>
+            <InfoMenu icon={faMessage} count={item.chat.length}/>
+        </div>
+        <Contributor/>
         </>
     )
 }

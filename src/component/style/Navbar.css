@@ -3,7 +3,7 @@
     flex-direction: row;
     margin-top: 48px;
     position: fixed;
-    z-index: 1;
+    z-index: 2;
     height: -webkit-fill-available;
 }
 .hideNavbar {

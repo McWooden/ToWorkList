@@ -1,7 +1,13 @@
+.base-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 .sidebar-left {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 5px;
+    flex: 1;
 }
 .base-left-hide {
     transform: translateX(0);

@@ -13,11 +13,23 @@ const defaultNotes = [
         color: 'royalblue'
     },
     {
+        context: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolor commodi velit a.',
+        by: 'afrizal',
+        date: '12/20/2022',
+        color: 'greenyellow'
+    },
+    {
         context: 'i have no note',
         by: 'alek',
         date: '12/19/2022',
         color: 'tomato'
-    }
+    },
+    {
+        context: 'test',
+        by: 'Developer',
+        date: '12/22/2022',
+        color: 'goldenrod'
+    },
 ]
 export const defaultImages = [
     {
@@ -57,6 +69,12 @@ export const defaultItem = {
         {
             nickname: 'McWooden',
             msg: 'wait for next update',
+            time: '20.25',
+            date: '12/3/2022'
+        },
+        {
+            nickname: 'Developer',
+            msg: 'almost there',
             time: '20.25',
             date: '12/3/2022'
         },

@@ -1,9 +1,63 @@
 /* left */
-
-
-
-
-
+.info-menu {
+    display: flex;
+    gap: 4px;
+    padding: 3px;
+    overflow: auto;
+}
+.info-menu-box {
+    background-color: var(--black-3);
+    color: var(--white-2);
+    padding: 2px 5px;
+    font-size: small;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+}
+.info-menu-box-icon {
+    min-width: 20px;
+}
+.info-menu-box-count {
+    flex: 1;
+    text-align: center;
+    min-width: 10px;
+}
+.contributor-container {
+    color: var(--white-2);
+}
+.contributor {
+    background-color: var(--black-3);
+    height: 150px;
+    border-radius: 5px;
+    padding: 3px 5px;
+    overflow: auto;
+}
+.contributor p {
+    margin: 3px 0;
+    font-size: small;
+}
+.detail-Left-action {
+    display: flex;
+    padding: 4px 5px 8px;
+    gap: 8px;
+}
+.action-left {
+    padding: 8px 5px;
+    border-radius: 5px;
+    font-size: large;
+    cursor: pointer;
+    background-color: var(--black-3);
+}
+.action-trash-left {
+    color: var(--danger);
+    flex: 1;
+}
+.action-edit-left {
+    color: var(--light-blue);
+    flex: 3;
+}
 /* center */
 .detail-back {
     display: flex;
@@ -63,7 +117,6 @@
     width: 40px;
     object-fit: cover;
     cursor: pointer;
-    /* transition: .1s ease; */
 }
 .card-img-pic.full {
     position: fixed;

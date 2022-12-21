@@ -12,14 +12,24 @@
 .base-left, .base-center, .base-right {
     overflow: auto;
 }
+.base-center {
+    position: relative;
+}
 .base-left {
     flex: 1;
+    z-index: 1;
 }
 .base-center {
     flex: 2;
 }
 .sidebar-left, .center, .sidebar-right {
     padding: .5em;
+}
+.center {
+    padding-bottom: 50px;
+}
+.sidebar-right {
+    padding-bottom: 0;
 }
 
 .box-card-image {
