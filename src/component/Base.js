@@ -127,16 +127,10 @@ function FormBaseRight() {
     }
     function handleInput(e) {
         setMsg(e.target.value)
-    }
-    useEffect(() => {
-        let handler = () => {
         textarea.current.style.height = '15px'
         let height = textarea.current.scrollHeight
         textarea.current.style.height = height + 'px'
-        }
-        
-        document.addEventListener('keyup', handler)
-    })
+    }
     return (
         <form className='base-right-form' onSubmit={handleSubmit}>
             <div className="textarea-container">
