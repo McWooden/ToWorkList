@@ -31,6 +31,10 @@ html {
   --shadow-1-right: 1px 0 0 rgba(0,0,0,0.2), 1.5px 0 0 rgba(0,0,0,0.05), 2px 0 0 rgba(0,0,0,0.05);
   --shadow-2-blue: #277bc060 0px 8px 24px;
 }
+.tomato {
+  background-color: tomato;
+  color: tomato;
+}
 ::-webkit-scrollbar {
   width: 1px;
   height: 1px;

@@ -3,8 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 import {convertDateToString} from '../utils/convertDateFormat'
 import { useContext, useState } from 'react';
-
-
+import { Modal } from './Modal'
 
 export function CardImages() {
     const {item} = useContext(ItemData)
@@ -69,13 +68,90 @@ export function Notes() {
         </div>
     )
 }
-export function CenterActionButton() {
+export function CenterActionButton({handleModalOpen}) {
     const {item} = useContext(ItemData)
     return (
         <div className='center-action-btn'>
             <div className="action-add">
-                <FontAwesomeIcon icon={item ? faNoteSticky : faCheck} className='add-btn pointer'/>
+                <FontAwesomeIcon icon={item ? faNoteSticky : faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
             </div>
         </div>
+    )
+}
+
+export function AddTaskModal({modalOpen, handleModalClose, title}) {
+    const [currentColor, setCurrentColor] = useState('grey')
+    const borderStyle = {border: `1px solid ${currentColor}`}
+    const date = convertDateToString(new Date().toLocaleDateString())
+    function handleColor(e) {
+        setCurrentColor(e.target.value)
+    }
+    function colorDefault() {
+        setCurrentColor('grey')
+    }
+    return (
+        <Modal open={modalOpen} close={handleModalClose} colorDefault={colorDefault}>
+            <div className="add-modal">
+                <div className="general-modal">
+                    <FontAwesomeIcon icon={faCheck} className="icon-modal" style={{color: currentColor}}/>
+                </div>
+                <form className="form-modal">
+                    <div className="general-info" style={{borderBottom: `1px solid ${currentColor}`}}>
+                        <h3>{title}</h3>
+                        <p className="date">{date}</p>
+                    </div>
+                    <div className="input-left">
+                        <input type="text" placeholder='Judul' style={borderStyle} required/>
+                        <select style={borderStyle} onChange={handleColor}>
+                            <option value="grey">grey</option>
+                            <option value="tomato">tomato</option>
+                            <option value="royalblue">royalblue</option>
+                            <option value="goldenrod">goldenrod</option>
+                            <option value="greenyellow">greenyellow</option>
+                        </select>
+                    </div>
+                    <textarea placeholder='deskripsi' rows="10" style={borderStyle}/>
+                    <div className='task-submit'>Tambah</div>
+                </form>
+            </div>
+        </Modal>
+    )
+}
+
+export function AddNoteModal({modalOpen, handleModalClose, title}) {
+    const [currentColor, setCurrentColor] = useState('grey')
+    const borderStyle = {border: `1px solid ${currentColor}`}
+    const date = convertDateToString(new Date().toLocaleDateString())
+    function handleColor(e) {
+        setCurrentColor(e.target.value)
+    }
+    function colorDefault() {
+        setCurrentColor('grey')
+    }
+    return (
+        <Modal open={modalOpen} close={handleModalClose} colorDefault={colorDefault}>
+            <div className='add-modal'>
+                <div className="general-modal">
+                    <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/>
+                </div>
+                <form className="form-modal">
+                    <div className="general-info" style={{borderBottom: `1px solid ${currentColor}`}}>
+                        <h3>{title}</h3>
+                        <p className="date">{date}</p>
+                    </div>
+                    <div className="input-left">
+                        <select style={borderStyle} onChange={handleColor}>
+                            <option value="grey">grey</option>
+                            <option value="tomato">tomato</option>
+                            <option value="royalblue">royalblue</option>
+                            <option value="goldenrod">goldenrod</option>
+                            <option value="greenyellow">greenyellow</option>
+                        </select>
+                    </div>
+                    <textarea placeholder='deskripsi' rows="10" style={borderStyle}/>
+                    <div className='task-submit'>Tambah</div>
+                </form>
+            </div>
+        </Modal>
     )
 }

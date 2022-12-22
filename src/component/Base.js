@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
+import './style/Modal.css'
 import {ChatModel, TodoModel} from './model'
 import { useContext } from 'react';
 import { ItemData, HideBase } from './TodoApp';
@@ -10,7 +11,8 @@ import {convertDateToString} from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
 import {FormBaseRight} from './rightSideComponent'
 
-import { Notes, CardImages, CenterActionButton } from './centerComponent';
+import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal } from './centerComponent';
+import { useState } from 'react'
 
 export function Base() {
     return (
@@ -50,16 +52,24 @@ function BaseLeft() {
     )
 }
 function BaseCenter() {
-    const {room} = useContext(GuildContext)
+    const {room, currentRoom} = useContext(GuildContext)
     const {item} = useContext(ItemData)
+    const [modalOpen, setModalOpen] = useState(false)
+    function handleModalOpen() {
+        setModalOpen(true)
+    }
+    function handleModalClose() {
+        setModalOpen(false)
+    }
     let box = []
     !item && room.item.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
     return (
         <>
         <div className="base-center">
             <div className="center">
+                {item? <AddNoteModal modalOpen={modalOpen} title={item.title} handleModalClose={handleModalClose}/>:<AddTaskModal modalOpen={modalOpen} title={currentRoom} handleModalClose={handleModalClose}/>}
                 {item ? <DetailCard/>:box}
-                <CenterActionButton/>
+                <CenterActionButton handleModalOpen={handleModalOpen}/>
             </div>
         </div>
         </>
@@ -138,5 +148,3 @@ function DetailCard() {
         </>
     )
 }
-
-export default Base
