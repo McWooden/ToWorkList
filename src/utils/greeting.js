@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import { convertDateToString } from './convertDateFormat';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faCloud, faMoon, faMountainSun } from '@fortawesome/free-solid-svg-icons'
@@ -7,37 +6,35 @@ import { faSun, faCloud, faMoon, faMountainSun } from '@fortawesome/free-solid-s
 export function Greeting() {
     const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
     const day = days[new Date().getDay()];
-    const [time, setTime] = useState(null)
-    const [color, setColor] = useState(null)
-    const [greetingIcon, setGreetingIcon] = useState(null)
+    let time = null
+    let color = null
+    let greetingIcon = null
 
-    useEffect(() => {
         const currentTime = new Date()
         const hour = currentTime.getHours()
 
         if (hour < 12) {
-            setTime('pagi')
-            setColor('greenyellow')
-            setGreetingIcon(faSun)
+            time = ('pagi')
+            color = ('greenyellow')
+            greetingIcon = <FontAwesomeIcon icon={faSun}/>
         } else if (hour < 15) {
-            setTime('siang')
-            setColor('royalblue')
-            setGreetingIcon(faCloud)
+            time = ('siang')
+            color = ('royalblue')
+            greetingIcon = <FontAwesomeIcon icon={faCloud}/>
         } else if (hour < 18) {
-            setTime('sore')
-            setColor('tomato')
-            setGreetingIcon(faMountainSun)
+            time = ('sore')
+            color = ('tomato')
+            greetingIcon = <FontAwesomeIcon icon={faMountainSun}/>
         } else {
-            setTime('malam')
-            setColor('goldenrod')
-            setGreetingIcon(faMoon)
+            time = ('malam')
+            color = ('goldenrod')
+            greetingIcon = <FontAwesomeIcon icon={faMoon}/>
         }
-    }, [])
 
     return (
         <div className='greeting'>
-            <div className="color">
-                <FontAwesomeIcon style={{color: color}} icon={greetingIcon}/>
+            <div className="color" style={{color: color}}>
+                {greetingIcon}
             </div>
             <div className="greeting-context">
                 <p className='selamat'>Selamat {time}!</p>

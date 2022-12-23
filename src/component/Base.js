@@ -38,11 +38,11 @@ function BaseLeft() {
                 :
                 <>
                 <Greeting/>
+                <RoomProggress/>
                 <div className="left-menu-box">
                     <FontAwesomeIcon icon={faMoneyCheck} className="left-menu-box-icon"/>
                     <p className="left-menu-box-count">{room.items.length}</p>
                 </div>
-                <RoomProggress/>
                 </>
                 }
             </div>
