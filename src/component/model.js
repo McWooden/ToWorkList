@@ -1,24 +1,16 @@
 import {useState, useEffect, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
-import { ItemData } from './TodoApp';
 import { useContext } from 'react';
 import { myAccount } from '../utils/dataJSON';
+import { ItemData } from '../pages/App';
 
 
-export function TodoModel({item}) {
+export function TodoModel({item, indexItem, reverseDone}) {
     const myNickname = myAccount.profile.nickname
-    const [done, setDone] = useState(item.done)
     const [dropDown, setDropDown] = useState(false)
     let menuRef = useRef()
     const {handleItem} = useContext(ItemData)
-    function reverse() {
-        if (done.includes(myNickname)) {
-            setDone(done.filter(e => e !== myNickname));
-        } else {
-            setDone([...done, myNickname]);
-        }
-    }
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -35,13 +27,13 @@ export function TodoModel({item}) {
         <div className="todo-card">
             <div className="todo-left">
             <div className="card-color" style={{backgroundColor: item.color}}></div>
-            <div className="card-text pointer" onClick={() => handleItem(item)}>
+            <div className="card-text pointer" onClick={() => handleItem(indexItem)}>
                 <div className="card-title">{item.title}</div>
                 <div className="card-description">{item.desc}</div>
             </div>
             </div>
             <div className="todo-right">
-                <div className={`card-finish pointer ${done.includes(myNickname)?'finish-on':'finish-off'}`} onClick={reverse}>
+                <div className={`card-finish pointer ${item.dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={() => reverseDone(indexItem)}>
                     <div className="card-finish-value"></div>
                 </div>
                 <div className="card-more">

@@ -85,7 +85,7 @@ function RoomList() {
     const lists = []
     guildRooms.forEach((room, index) => {
         lists.push(
-            <div key={index} className={`room ${currentRoom === room.roomName?'active':''}`} onClick={() => handleRoom(room)}>
+            <div key={index} className={`room ${currentRoom === room.roomName?'active':''}`} onClick={() => handleRoom(index)}>
                 <FontAwesomeIcon icon={faCheck} className={`room-icon ${currentRoom === room.roomName?'active':''}`}/> <span className={currentRoom === room.roomName?'active':''}>{room.roomName}</span>
             </div>
         )

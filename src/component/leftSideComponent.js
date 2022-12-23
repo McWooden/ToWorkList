@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faNoteSticky, faImage, faMessage, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
 import {convertDateToString} from '../utils/convertDateFormat'
-import { ItemData } from './TodoApp';
+import { ItemData } from '../pages/App';
 
 export function MoreInfoCard() {
     const {item} = useContext(ItemData)

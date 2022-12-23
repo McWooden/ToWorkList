@@ -6,17 +6,13 @@ import { Base } from './Base'
 import { useContext } from 'react'
 import { createContext } from 'react'
 import { useState } from 'react'
+import { ItemData } from '../pages/App'
 // import { defaultItem } from '../utils/dataJSON'
 
 export const HideBase = createContext()
-export const ItemData = createContext()
-export function TodoApp() {
+export function TodoApp({room, reverseDone}) {
     const [hideRightBase, setHideRightBase] = useState(true)
     const [hideLeftBase, setHideLeftBase] = useState(true)
-    const [item, setItem] = useState()
-    function handleItem(item) {
-        setItem(item)
-    }
     function handleRightBase(boolean) {
         setHideRightBase(!boolean)
         setHideLeftBase(true)
@@ -27,12 +23,10 @@ export function TodoApp() {
     }
     return (
         <HideBase.Provider value={{hideRightBase, handleRightBase, hideLeftBase, handleLeftBase}}>
-            <ItemData.Provider value={{item, handleItem}}>
-                <div id='todoApp'>
-                    <NavTop/>
-                    <Base/>
-                </div>
-            </ItemData.Provider>
+            <div id='todoApp'>
+                <NavTop/>
+                <Base room={room} reverseDone={reverseDone}/>
+            </div>
         </HideBase.Provider>
     )
 } 
@@ -49,7 +43,7 @@ export function NavTop() {
             </div>
             <div className="sidebar-button">
                 <FontAwesomeIcon icon={item?faCube:faChartSimple} className={`btn-sidebar btn-sidebar-left pointer  ${hideLeftBase?'btn-inactive':'btn-active'}`} onClick={() => handleLeftBase(hideLeftBase)}/>
-                <FontAwesomeIcon icon={item?faUserGroup:faMessage} className={`btn-sidebar btn-sidebar-right pointer ${hideRightBase?'btn-inactive':'btn-active'}`} onClick={() => handleRightBase(hideRightBase)}/>
+                <FontAwesomeIcon icon={item?faMessage:faUserGroup} className={`btn-sidebar btn-sidebar-right pointer ${hideRightBase?'btn-inactive':'btn-active'}`} onClick={() => handleRightBase(hideRightBase)}/>
             </div>
             </header>
         </section>

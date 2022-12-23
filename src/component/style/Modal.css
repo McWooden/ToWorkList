@@ -6,6 +6,8 @@
     left: 0;
     z-index: 3;
     background-color: rgba(0, 0, 0, .7);
+    transition: .3s ease;
+    transition-delay: 1s;
 }
 .modal {
     position: fixed;
@@ -45,7 +47,7 @@
     gap: 5px;
 }
 .form-modal .date {
-    font-size: small;
+    font-size: x-small;
     margin-bottom: 3px;
     color: var(--white-2);
 }

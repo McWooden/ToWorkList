@@ -4,21 +4,21 @@ import './style/base.css'
 import './style/Modal.css'
 import {ChatModel, TodoModel} from './model'
 import { useContext } from 'react';
-import { ItemData, HideBase } from './TodoApp';
+import { HideBase } from './TodoApp';
+import { ItemData } from '../pages/App';
 import { GuildContext } from '../pages/App';
 import { myAccount } from '../utils/dataJSON';
 import {convertDateToString} from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
 import {FormBaseRight} from './rightSideComponent'
-
 import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal } from './centerComponent';
 import { useState } from 'react'
 
-export function Base() {
+export function Base({reverseDone}) {
     return (
         <div className='base'>
             <BaseLeft/>
-            <BaseCenter/>
+            <BaseCenter reverseDone={reverseDone}/>
             <BaseRight/>
         </div>
     )
@@ -51,9 +51,9 @@ function BaseLeft() {
         </>
     )
 }
-function BaseCenter() {
-    const {room, currentRoom} = useContext(GuildContext)
-    const {item} = useContext(ItemData)
+function BaseCenter({reverseDone}) {
+    const { room, currentRoom } = useContext(GuildContext)
+    const { item } = useContext(ItemData)
     const [modalOpen, setModalOpen] = useState(false)
     function handleModalOpen() {
         setModalOpen(true)
@@ -62,7 +62,7 @@ function BaseCenter() {
         setModalOpen(false)
     }
     let box = []
-    !item && room.item.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
+    !item && room.items.forEach((data, index) => box.push(<TodoModel key={index} item={data} indexItem={index} reverseDone={reverseDone}/>))
     return (
         <>
         <div className="base-center">

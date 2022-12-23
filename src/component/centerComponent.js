@@ -1,9 +1,10 @@
-import { ItemData } from './TodoApp';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
 import {convertDateToString} from '../utils/convertDateFormat'
 import { useContext, useState } from 'react';
 import { Modal } from './Modal'
+import { ItemData } from '../pages/App';
+
 
 export function CardImages() {
     const {item} = useContext(ItemData)

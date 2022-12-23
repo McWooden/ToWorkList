@@ -52,10 +52,11 @@ export const defaultImages = [
     }
 ]
 export const defaultItem = {
+    id: '7ijnyt6v',
     title: 'Buat aplikasi',
     desc: 'ini webapp toworklist',
     color: 'goldenrod',
-    done: ['McWooden'],
+    dones: ['McWooden', 'ketua'],
     deadline: '12/19/2022',
     notes: defaultNotes,
     images: defaultImages,
@@ -91,19 +92,57 @@ export const myAccount = {
     },
     rooms: [
         {
+            id: '5exirycuv',
             roomName: 'Main todo',
             icon: 'check',
             public: true,
-            item: [
+            items: [
                 defaultItem,
                 {
+                    id: '83haox',
+                    title: 'parkour sore',
+                    desc: 'awokowako jatoh',
+                    color: 'tomato',
+                    notes: defaultNotes,
+                    deadline: '18/19/2022',
+                    images: defaultImages,
+                    dones: [],
+                    chat: [
+                        {
+                            nickname: 'Developer',
+                            msg: 'ngak sakit sih',
+                            time: '20.25',
+                            date: '12/3/2022'
+                        },
+                        {
+                            nickname: 'McWooden',
+                            msg: 'mampus awawokwo',
+                            time: '20.29',
+                            date: '12/3/2022'
+                        },
+                        {
+                            nickname: 'Developer',
+                            msg: '>:(',
+                            time: '20.30',
+                            date: '12/3/2022'
+                        },
+                        {
+                            nickname: 'woody',
+                            msg: 'bisa gini ngak',
+                            time: '20.31',
+                            date: '12/3/2022'
+                        },
+                    ]
+                },
+                {
+                    id: 'iwoxksa135',
                     title: 'lari pagi',
                     desc: 'gajadi soalnya pake sepatu',
                     color: 'tomato',
                     notes: defaultNotes,
                     deadline: '18/19/2022',
                     images: defaultImages,
-                    done: [],
+                    dones: [],
                     chat: [
                         {
                             nickname: 'Developer',
@@ -120,13 +159,14 @@ export const myAccount = {
                     ]
                 },
                 {
+                    id: 'ofuoabadv',
                     title: 'mandi',
                     desc: 'ntar mandi biar kedinginan',
                     color: 'royalblue',
                     notes: defaultNotes,
                     deadline: '18/19/2022',
                     images: defaultImages,
-                    done: [],
+                    dones: [],
                     chat: [
                         {
                             nickname: 'Developer',
@@ -145,18 +185,20 @@ export const myAccount = {
             ],
         },
         {
+            id: '68rcugt7',
             roomName: 'daily task',
             icon: 'check',
             public: true,
-            item: [
+            items: [
                 {
+                    id: '39f8bBeud',
                     title: 'Sekolah',
                     desc: 'gajadi soalnya besok libur',
                     color: 'royalblue',
                     notes: defaultNotes,
                     deadline: '18/19/2022',
                     images: defaultImages,
-                    done: [],
+                    dones: [],
                     chat: [
                         {
                             nickname: 'Developer',
@@ -205,15 +247,17 @@ export const guildData = [
         },
         rooms: [
             {
+                id: '825435ityfg',
                 roomName: 'welcome',
                 icon: 'check',
                 public: true,
-                item: [
+                items: [
                     {
+                        id: 'txrctv83v8ev8',
                         title: 'welkam buddy',
                         desc: 'disini kita pake stackoverflow :)?',
                         color: 'yellowgreen',
-                        done: [],
+                        dones: [],
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
@@ -222,15 +266,17 @@ export const guildData = [
                 ],
             },
             {
+                id: '8l7ikg',
                 roomName: 'peraturan',
                 icon: 'check',
                 public: true,
-                item: [
+                items: [
                     {
+                        id: 'e67cti',
                         title: 'fullstack',
                         desc: 'roadmap fullstack?',
                         color: 'maroon',
-                        done: [],
+                        dones: [],
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
@@ -239,15 +285,17 @@ export const guildData = [
                 ],
             },
             {
+                id: '24etrcy',
                 roomName: 'tugas',
                 icon: 'check',
                 public: true,
-                item: [
+                items: [
                     {
+                        id: 'l9ke5jy',
                         title: 'fullstack',
                         desc: 'roadmap fullstack?',
                         color: 'royalblue',
-                        done: [],
+                        dones: [],
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
@@ -275,7 +323,6 @@ export const guildData = [
                 ]
             },
         }
-
     },
     {
         profile: {
@@ -285,15 +332,17 @@ export const guildData = [
         },
         rooms: [
             {
+                id: '8otf456fg',
                 roomName: 'kampung villager',
                 icon: 'check',
                 public: true,
-                item: [
+                items: [
                     {
+                        id: '5uryjf',
                         title: 'buat air mancur',
                         desc: 'di tengah pake cobblestone',
                         color: 'goldenrod',
-                        done: [],
+                        dones: [],
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
@@ -302,15 +351,17 @@ export const guildData = [
                 ],
             },
             {
+                id: '3s6d7t',
                 roomName: 'meme',
                 icon: 'check',
                 public: true,
-                item: [
+                items: [
                     {
+                        id: '8wusmd',
                         title: 'buat perkampungan',
                         desc: 'nebang pohon terus nguras laut',
                         color: 'royalblue',
-                        done: [],
+                        dones: [],
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
@@ -340,65 +391,30 @@ export const guildData = [
         }
     }
 ]
-export const chatData = [
-    {
-        nickname: 'McWooden',
-        msg: 'Yo wassap',
-        time: '20.00',
-        date: '12/2/2022'
-    },
-    {
-        nickname: 'McWooden',
-        msg: 'am here',
-        time: '20.00',
-        date: '12/2/2022'
-    },
-    {
-        nickname: 'Putra',
-        msg: 'heyyy',
-        time: '20.04',
-        date: '12/2/2022'
-    },
-    {
-        nickname: 'Putra',
-        msg: 'am here too',
-        time: '20.04',
-        date: '12/2/2022'
-    },
-    {
-        nickname: 'Putra',
-        msg: 'you guys using this app to talk about daily task?',
-        time: '20.05',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'Hudin',
-        msg: 'Hai',
-        time: '20.20',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'Frank',
-        msg: 'wow new member Hi!',
-        time: '20.23',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'Frank',
-        msg: 'welcome! hope you enjoy',
-        time: '20.24',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'McWooden',
-        msg: 'ini adalah data chat dummy. Huddin akan menyelesaikan frontEnd dan bermain database segera :D',
-        time: '20.24',
-        date: '12/3/2022'
-    },
-    {
-        nickname: 'McWooden',
-        msg: 'dan ini versi ke 3 dari project sebelumnya https://mcwooden.github.io/todo/x6',
-        time: '20.24',
-        date: '12/3/2022'
-    },
-]
+// const guild = [
+//     {
+//         profile: {
+//             guildName: 'hoover'
+//         },
+//         rooms: [
+//             {
+//                 id: '1',
+//                 items: [
+//                     {
+//                         id: '1-a',
+//                         hasDone: ["me", "you"]
+//                     }
+//                 ]
+//             },
+//             {
+//                 id: '2',
+//                 items: [
+//                     {
+//                         id: '2-a',
+//                         hasDone: ["we", "our"]
+//                     }
+//                 ]
+//             }
+//         ],
+//     }
+// ]
