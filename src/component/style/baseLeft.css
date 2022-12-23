@@ -29,7 +29,57 @@
         transition: .1s ease;
     }
 }
-
+/* greet */
+.greeting {
+    background-color: var(--black-3);
+    min-height: 58px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    gap: 5px;
+    overflow: hidden;
+}
+.greeting .color {
+    flex: 1;
+    border-radius: 3px;
+    background-color: var(--black-2);
+    display: grid;
+    place-items: center;
+    font-size: large;
+}
+.greeting-context {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.greeting-context .date {
+    color: var(--white-3);
+    font-size: small;
+}
+/* menu box */
+.left-menu-box {
+    background-color: var(--black-3);
+    color: var(--white-2);
+    padding: 2px 5px;
+    font-size: small;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    width: fit-content;
+    margin: 3px;
+}
+.left-menu-box-icon {
+    min-width: 20px;
+}
+.left-menu-box-count {
+    flex: 1;
+    text-align: center;
+    min-width: 10px;
+}
+/* proggress */
 .progress {
     display: flex;
     flex-direction: column;
@@ -45,12 +95,11 @@
 }
 .progress-value {
     height: 100%;
+    transition: .3s ease;
 }
 .undone {
     background-color: var(--ok);
-    width: 75%;
 }
 .done {
     background-color: var(--danger);
-    width: 25%;
 }

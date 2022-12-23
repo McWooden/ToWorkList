@@ -1,18 +1,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faArrowLeft} from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 import './style/Modal.css'
-import {ChatModel, TodoModel} from './model'
+import { ChatModel, TodoModel } from './model'
 import { useContext } from 'react';
 import { HideBase } from './TodoApp';
 import { ItemData } from '../pages/App';
 import { GuildContext } from '../pages/App';
 import { myAccount } from '../utils/dataJSON';
-import {convertDateToString} from '../utils/convertDateFormat'
+import { convertDateToString } from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
-import {FormBaseRight} from './rightSideComponent'
+import { FormBaseRight } from './rightSideComponent'
 import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal } from './centerComponent';
 import { useState } from 'react'
+import { RoomProggress } from '../utils/progress'
+import { Greeting } from '../utils/greeting'
 
 export function Base({reverseDone}) {
     return (
@@ -25,26 +27,24 @@ export function Base({reverseDone}) {
 }
 function BaseLeft() {
     const { hideLeftBase } = useContext(HideBase)
-    const {item} = useContext(ItemData)
-    let box = null
-    item ?
-        box = <MoreInfoCard/>
-    :
-        box = (
-            <div className="progress">
-                <div className="progress-bar">
-                    <div className="progress-value undone"></div>
-                </div>
-                <div className="progress-bar">
-                    <div className="progress-value done"></div>
-                </div>
-            </div>
-        )
+    const { item } = useContext(ItemData)
+    const { room } = useContext(GuildContext)
     return (
         <>
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
             <div className="sidebar-left">
-                {box}
+                {item?
+                <MoreInfoCard/>
+                :
+                <>
+                <Greeting/>
+                <div className="left-menu-box">
+                    <FontAwesomeIcon icon={faMoneyCheck} className="left-menu-box-icon"/>
+                    <p className="left-menu-box-count">{room.items.length}</p>
+                </div>
+                <RoomProggress/>
+                </>
+                }
             </div>
             {item? <DetailLeftAction/>:''}
         </div>

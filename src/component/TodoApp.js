@@ -45,7 +45,7 @@ export function NavTop() {
                 <FontAwesomeIcon icon={item?faCube:faChartSimple} className={`btn-sidebar btn-sidebar-left pointer  ${hideLeftBase?'btn-inactive':'btn-active'}`} onClick={() => handleLeftBase(hideLeftBase)}/>
                 <FontAwesomeIcon icon={item?faMessage:faUserGroup} className={`btn-sidebar btn-sidebar-right pointer ${hideRightBase?'btn-inactive':'btn-active'}`} onClick={() => handleRightBase(hideRightBase)}/>
             </div>
-            </header>
+            </header> 
         </section>
     )
 }
