@@ -31,6 +31,12 @@ function BaseLeft() {
     const { hideLeftBase } = useContext(HideBase)
     const { item } = useContext(ItemData)
     const { room } = useContext(GuildContext)
+
+    const colors = [
+        { date: new Date('1/1/2022'), color: 'red', title: 'Tahun Baru' },
+        { date: new Date('3/1/2022'), color: 'green', title: 'Hari Buruh' },
+        { date: new Date('12/25/2022'), color: 'blue', title: 'Natal' },
+    ]
     return (
         <>
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
@@ -43,8 +49,20 @@ function BaseLeft() {
                 <Calendar 
                     className="calendar-dark" 
                     locale='id-ID'
+                    format='mm/dd/yyyy'
                     next2Label={null}
                     prev2Label={null}
+
+                    tileContent={({ date, view }) => {
+                        const color = colors.find((c) => c.date.getTime() === date.getTime());
+                        if (color) {
+                            return (
+                                <div className='repalace' style={{ color: color.color }} title={color.title}>
+                                {date.getDate()}
+                                </div>
+                            )
+                        }
+                    }}
                 />
                 <RoomProggress/>
                 <div className="left-menu-box">
