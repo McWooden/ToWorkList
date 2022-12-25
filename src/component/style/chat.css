@@ -22,7 +22,7 @@
     align-self: flex-end;
 }
 .chat-card-message.active {
-    background-color: var(--light-blue);
+    background-color: var(--ok);
 }
 .chat-card-message.inactive {
     background-color: var(--black-5);

@@ -32,11 +32,6 @@ function BaseLeft() {
     const { item } = useContext(ItemData)
     const { room } = useContext(GuildContext)
 
-    // const colors = [
-    //     { date: new Date('1/1/2022'), color: 'red', title: 'Tahun Baru' },
-    //     { date: new Date('3/1/2022'), color: 'green', title: 'Hari Buruh' },
-    //     { date: new Date('12/25/2022'), color: 'blue', title: 'Natal' },
-    // ]
     const colors = room.items.map(item => ({
         date: new Date(item.deadline),
         color: item.color,
@@ -107,9 +102,9 @@ function BaseCenter({reverseDone}) {
     )
 }
 function BaseRight() {
-    const {users} = useContext(GuildContext)
+    const { users } = useContext(GuildContext)
     const { hideRightBase } = useContext(HideBase)
-    const {item} = useContext(ItemData)
+    const { item } = useContext(ItemData)
     let box = []
     let lastDate = null
     let lastNickname = null

@@ -4,6 +4,7 @@ import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-soli
 import { useContext } from 'react';
 import { myAccount } from '../utils/dataJSON';
 import { ItemData } from '../pages/App';
+import { Confirm } from './Modal';
 
 
 export function TodoModel({item, indexItem, reverseDone}) {
@@ -11,6 +12,7 @@ export function TodoModel({item, indexItem, reverseDone}) {
     const [dropDown, setDropDown] = useState(false)
     let menuRef = useRef()
     const {handleItem} = useContext(ItemData)
+    const [deleteOpen, setDeleteOpen] = useState(false)
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -23,7 +25,9 @@ export function TodoModel({item, indexItem, reverseDone}) {
         }
         document.addEventListener('mousedown', handler)
     })
+    useEffect(() => console.log('render'))
     return (
+        <>
         <div className="todo-card">
             <div className="todo-left">
             <div className="card-color" style={{backgroundColor: item.color}}></div>
@@ -45,7 +49,7 @@ export function TodoModel({item, indexItem, reverseDone}) {
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn'/>
                             <span>edit</span>
                         </li>
-                        <li className='pointer'>
+                        <li className='pointer' onClick={() => setDeleteOpen(true)}>
                             <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
                             <span>delete</span>
                         </li>
@@ -53,6 +57,11 @@ export function TodoModel({item, indexItem, reverseDone}) {
                 </div>
             </div>
         </div>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)}>
+            <p className='msg'><span style={{color: item.color}}>{item.title}</span> akan terhapus secara permanen</p>
+            <p className='next-text'>yakin ingin melanjutkan?</p>
+        </Confirm>
+        </>
     )
 }
 

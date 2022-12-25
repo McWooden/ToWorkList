@@ -9,17 +9,19 @@
     transition: .3s ease;
     transition-delay: 1s;
 }
-.modal {
+.modal, .confirm {
     position: fixed;
     top: 50%;
     left: 50%;
-    width: 90vw;
-    height: 75vh;
     transform: translate(-50%, -50%);
     z-index: 3;
     background-color: var(--black-2);
-    border-radius: 35px;
     overflow: hidden;
+}
+.modal {
+    width: 90vw;
+    height: 75vh;
+    border-radius: 35px;
 }
 .add-modal {
     display: flex;
@@ -114,4 +116,43 @@
     .input-left {
         flex-direction: column-reverse;
     }
+}
+/* confirm */
+.confirm {
+    width: 80vw;
+    border-radius: 5px;
+}
+.confirm-header, .confirm-body, .confirm-button {
+    padding: 5px 10px;
+}
+.confirm-header {
+    background-color: var(--black-3);
+}
+.confirm-header span {
+    margin-left: 10px;
+}
+.confirm-body {
+    font-size: small;
+}
+.next-text {
+    margin-top: 5px;
+}
+.confirm-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    font-size: small;
+    margin: 15px 10px 10px;
+}
+.confirm-btn {
+    padding: 5px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.confirm-no {
+    color: var(--danger);
+}
+.confirm-yes {
+    background-color: royalblue;
 }

@@ -9,7 +9,7 @@ const defaultNotes = [
     {
         context: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quos nostrum minus esse cum adipisci id, velit provident commodi enim quaerat eaque harum, deserunt sed unde eum impedit fugit autem?. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores suscipit modi reprehenderit incidunt laudantium! Odio, hic. Quidem error sapiente libero excepturi dolores voluptatem nihil doloremque, fugit impedit, ad asperiores molestias repellendus nam eum, perspiciatis possimus.',
         by: 'afrizal',
-        date: '12/18/2022',
+        date: '12/12/2022',
         color: 'royalblue'
     },
     {
@@ -35,13 +35,13 @@ export const defaultImages = [
     {
         pic: 'https://source.unsplash.com/random/1',
         desc: 'ini gambar centang',
-        date: '12/18/2022',
+        date: '12/12/2022',
         by: 'anak magang'
     },
     {
         pic: 'https://source.unsplash.com/random/2',
         desc: 'what color is the sky',
-        date: '12/18/2022',
+        date: '12/12/2022',
         by: 'ai amour'
     },
     {
@@ -79,6 +79,18 @@ export const defaultItem = {
             time: '20.25',
             date: '12/3/2022'
         },
+        {
+            nickname: 'Developer',
+            msg: 'buat alert',
+            time: '00.22',
+            date: '12/26/2022'
+        },
+        {
+            nickname: 'Developer',
+            msg: 'buat setting',
+            time: '00.22',
+            date: '12/26/2022'
+        },
     ]
 }
 
@@ -105,7 +117,7 @@ export const myAccount = {
                     desc: 'awokowako jatoh',
                     color: 'tomato',
                     notes: defaultNotes,
-                    deadline: '12/18/2022',
+                    deadline: '12/12/2022',
                     images: defaultImages,
                     dones: [],
                     chat: [
@@ -197,7 +209,7 @@ export const myAccount = {
                     desc: 'gajadi soalnya besok libur',
                     color: 'royalblue',
                     notes: defaultNotes,
-                    deadline: '18/19/2022',
+                    deadline: '12/19/2022',
                     images: defaultImages,
                     dones: [],
                     chat: [
@@ -263,7 +275,7 @@ export const guildData = [
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
-                        deadline: '18/19/2022',
+                        deadline: '12/19/2022',
                     },
                 ],
             },
@@ -282,7 +294,7 @@ export const guildData = [
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
-                        deadline: '18/19/2022',
+                        deadline: '12/19/2022',
                     },
                 ],
             },
@@ -301,7 +313,7 @@ export const guildData = [
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
-                        deadline: '18/19/2022',
+                        deadline: '12/19/2022',
                     },
                 ],
             },
@@ -349,7 +361,7 @@ export const guildData = [
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
-                        deadline: '18/19/2022',
+                        deadline: '12/19/2022',
                     },
                 ],
             },
@@ -368,7 +380,7 @@ export const guildData = [
                         chat: defaultChat,
                         notes: defaultNotes,
                         images: defaultImages,
-                        deadline: '18/19/2022',
+                        deadline: '12/19/2022',
                     },
                 ],
             },
