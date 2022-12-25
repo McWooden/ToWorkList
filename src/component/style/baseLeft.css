@@ -16,7 +16,7 @@
     .base-left {
         height: calc(100vh - 48px);
         position: fixed;
-        width: 223px;
+        width: 255px;
         background-color: var(--black-4);
         box-shadow: var(--shadow-1-right);
     }
