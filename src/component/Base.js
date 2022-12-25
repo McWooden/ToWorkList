@@ -32,11 +32,16 @@ function BaseLeft() {
     const { item } = useContext(ItemData)
     const { room } = useContext(GuildContext)
 
-    const colors = [
-        { date: new Date('1/1/2022'), color: 'red', title: 'Tahun Baru' },
-        { date: new Date('3/1/2022'), color: 'green', title: 'Hari Buruh' },
-        { date: new Date('12/25/2022'), color: 'blue', title: 'Natal' },
-    ]
+    // const colors = [
+    //     { date: new Date('1/1/2022'), color: 'red', title: 'Tahun Baru' },
+    //     { date: new Date('3/1/2022'), color: 'green', title: 'Hari Buruh' },
+    //     { date: new Date('12/25/2022'), color: 'blue', title: 'Natal' },
+    // ]
+    const colors = room.items.map(item => ({
+        date: new Date(item.deadline),
+        color: item.color,
+        title: item.title,
+    }))
     return (
         <>
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
@@ -57,7 +62,7 @@ function BaseLeft() {
                         const color = colors.find((c) => c.date.getTime() === date.getTime());
                         if (color) {
                             return (
-                                <div className='repalace' style={{ color: color.color }} title={color.title}>
+                                <div className='repalace' style={{ border: `1px solid ${color.color}`, borderRadius: '50px' }} title={color.title}>
                                 {date.getDate()}
                                 </div>
                             )

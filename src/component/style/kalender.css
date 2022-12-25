@@ -140,7 +140,10 @@
 .react-calendar__tile abbr {
     padding: 3px 5px;
 }
-.react-calendar__tile--now abbr {
+.react-calendar__tile--now > * {
     background-color: royalblue;
+    color: var(--white-1);
+}
+.react-calendar__tile--now abbr {
     border-radius: 50px;
 }

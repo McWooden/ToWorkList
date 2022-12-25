@@ -105,7 +105,7 @@ export const myAccount = {
                     desc: 'awokowako jatoh',
                     color: 'tomato',
                     notes: defaultNotes,
-                    deadline: '18/19/2022',
+                    deadline: '12/18/2022',
                     images: defaultImages,
                     dones: [],
                     chat: [
@@ -141,7 +141,7 @@ export const myAccount = {
                     desc: 'gajadi soalnya pake sepatu',
                     color: 'tomato',
                     notes: defaultNotes,
-                    deadline: '18/19/2022',
+                    deadline: '12/3/2022',
                     images: defaultImages,
                     dones: [],
                     chat: [
@@ -165,7 +165,7 @@ export const myAccount = {
                     desc: 'ntar mandi biar kedinginan',
                     color: 'royalblue',
                     notes: defaultNotes,
-                    deadline: '18/19/2022',
+                    deadline: '12/27/2022',
                     images: defaultImages,
                     dones: [],
                     chat: [
