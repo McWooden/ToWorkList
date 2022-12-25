@@ -31,7 +31,6 @@ function BaseLeft() {
     const { hideLeftBase } = useContext(HideBase)
     const { item } = useContext(ItemData)
     const { room } = useContext(GuildContext)
-    const labels = []
     return (
         <>
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
