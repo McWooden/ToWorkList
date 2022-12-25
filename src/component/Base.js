@@ -11,10 +11,12 @@ import { myAccount } from '../utils/dataJSON';
 import { convertDateToString } from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
 import { FormBaseRight } from './rightSideComponent'
-import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal } from './centerComponent';
+import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal} from './centerComponent';
 import { useState } from 'react'
 import { RoomProggress } from '../utils/progress'
 import { Greeting } from '../utils/greeting'
+import Calendar from 'react-calendar';
+import './style/kalender.css'
 
 export function Base({reverseDone}) {
     return (
@@ -38,6 +40,10 @@ function BaseLeft() {
                 :
                 <>
                 <Greeting/>
+                <Calendar 
+                    className="calendar-dark" 
+                    locale='id-ID'
+                />
                 <RoomProggress/>
                 <div className="left-menu-box">
                     <FontAwesomeIcon icon={faMoneyCheck} className="left-menu-box-icon"/>

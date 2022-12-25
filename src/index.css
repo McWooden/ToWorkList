@@ -10,6 +10,9 @@ html {
     overflow: hidden;
 }
 :root {
+  --defaultFont: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   --black-1: #202225;
   --black-2: #2f3136;
   --black-3: #292b2f;

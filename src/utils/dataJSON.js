@@ -88,7 +88,8 @@ export const myAccount = {
         name: 'Sholahuddin A',
         id: '2521',
         pic: noPic,
-        email: 'example@gmail.com'
+        email: 'example@gmail.com',
+        createdDate: '12/15/2022',
     },
     rooms: [
         {
@@ -243,7 +244,8 @@ export const guildData = [
         profile: {
             guildName: 'Huddin guilds',
             src: noPic,
-            by: 'Huddin'
+            by: 'Huddin',
+            createdDate: '12/15/2022',
         },
         rooms: [
             {
@@ -328,7 +330,8 @@ export const guildData = [
         profile: {
             guildName: 'minecraft x-6',
             src: noPic,
-            by: 'afif'
+            by: 'afif',
+            createdDate: '12/15/2022',
         },
         rooms: [
             {
@@ -391,30 +394,3 @@ export const guildData = [
         }
     }
 ]
-// const guild = [
-//     {
-//         profile: {
-//             guildName: 'hoover'
-//         },
-//         rooms: [
-//             {
-//                 id: '1',
-//                 items: [
-//                     {
-//                         id: '1-a',
-//                         hasDone: ["me", "you"]
-//                     }
-//                 ]
-//             },
-//             {
-//                 id: '2',
-//                 items: [
-//                     {
-//                         id: '2-a',
-//                         hasDone: ["we", "our"]
-//                     }
-//                 ]
-//             }
-//         ],
-//     }
-// ]
