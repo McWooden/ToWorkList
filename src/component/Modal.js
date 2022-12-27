@@ -21,22 +21,35 @@ export function Modal({children, open, close, colorDefault}) {
     )
 }
 
-export function Confirm({ children, open, close }) {
+export function Confirm({ metode, open, close, target, color, callback }) {
     if (!open) return null
+    let icon = null
+    let msg = null
+    if (metode === 'delete') {
+        icon = <FontAwesomeIcon icon={faTrash}/>
+        msg = <p className='msg'><span style={{color: color}}>{target}</span> akan terhapus secara permanen</p>
+    }
+    function acceptCallback() {
+        close()
+        callback()
+    }
     return ReactDOM.createPortal(
         <>
         <div className='overlay' onClick={close}/>
-            <div className="confirm">
-                <div className="confirm-header">
-                    <FontAwesomeIcon icon={faTrash}/>
-                    <span>Hapus</span>
-                </div>
-                <div className="confirm-body">
-                    {children}
+        <div className="confirm">
+            <div className="confirm-header">
+                {icon}
+            </div>
+            <div className="confirm-body">
+                <div className="confirm-context">
+                    <h3>Hapus</h3>
+                    {msg}
+                    <p className='next-text'>apa kamu yakin?</p>
                 </div>
                 <div className="confirm-button">
                     <div className="confirm-btn confirm-no" onClick={close}>Batal</div>
-                    <div className="confirm-btn confirm-yes">Yakin</div>
+                    <div className="confirm-btn confirm-yes" onClick={acceptCallback}>Yakin</div>
+                </div>
             </div>
         </div>
         </>,

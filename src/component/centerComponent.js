@@ -4,6 +4,11 @@ import {convertDateToString} from '../utils/convertDateFormat'
 import { useContext, useState } from 'react';
 import { Modal } from './Modal'
 import { ItemData } from '../pages/App';
+import { TodoModel } from './model';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './style/notif.css'
+
 
 
 export function CardImages() {
@@ -154,5 +159,42 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
                 </form>
             </div>
         </Modal>
+    )
+}
+
+export function CardContainer({items, reverseDone}) {
+    function editToast() {
+        toast(
+        <div className="myToast myToast-edit">
+            <div className="icon">
+                <FontAwesomeIcon icon={faPenToSquare}/>
+            </div>
+            <p>Edit</p>
+        </div>, {
+            closeButton: false
+        })
+    }
+    function deleteToast() {
+        toast(
+        <div className="myToast myToast-delete">
+            <div className="icon">
+                <FontAwesomeIcon icon={faTrash}/>
+            </div>
+            <p>Terhapus</p>
+        </div>, {
+            closeButton: false
+        })
+    }
+    let box = []
+    items.forEach((data, index) => box.push(<TodoModel key={index} item={data} indexItem={index} reverseDone={reverseDone} deleteToast={deleteToast} editToast={editToast}/>))
+    return (
+        <>
+        {box}
+        <ToastContainer
+                pauseOnFocusLoss={false}
+                theme="colored"
+                autoClose={3000}
+            />
+        </>
     )
 }

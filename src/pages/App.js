@@ -63,6 +63,8 @@ function App() {
     document.querySelector('title').innerText = guild.profile.nickname || guild.profile.guildName
     document.addEventListener('mousedown', handler)
   })
+  // tracker
+
   
   return (
     <GuildContext.Provider value={{guild, room:guild.rooms[indexRoom], currentRoom: room.roomName, hideNavbar, handleNavbar, guildRooms : guild.rooms, guildName : guild.profile.guildName || guild.profile.nickname, handleGuild, handleRoom, navRef, navTopRef, users : guild.users}}>

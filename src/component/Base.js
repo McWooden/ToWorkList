@@ -2,16 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 import './style/Modal.css'
-import { ChatModel, TodoModel } from './model'
+import { ChatModel } from './model'
 import { useContext } from 'react';
 import { HideBase } from './TodoApp';
-import { ItemData } from '../pages/App';
-import { GuildContext } from '../pages/App';
+import { ItemData, GuildContext } from '../pages/App';
 import { myAccount } from '../utils/dataJSON';
 import { convertDateToString } from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
 import { FormBaseRight } from './rightSideComponent'
-import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal} from './centerComponent';
+import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal, CardContainer} from './centerComponent';
 import { useState } from 'react'
 import { RoomProggress } from '../utils/progress'
 import { Greeting } from '../utils/greeting'
@@ -87,16 +86,15 @@ function BaseCenter({reverseDone}) {
     function handleModalClose() {
         setModalOpen(false)
     }
-    let box = []
-    !item && room.items.forEach((data, index) => box.push(<TodoModel key={index} item={data} indexItem={index} reverseDone={reverseDone}/>))
     return (
         <>
         <div className="base-center">
             <div className="center">
                 {item? <AddNoteModal modalOpen={modalOpen} title={item.title} handleModalClose={handleModalClose}/>:<AddTaskModal modalOpen={modalOpen} title={currentRoom} handleModalClose={handleModalClose}/>}
-                {item ? <DetailCard/>:box}
+                {item ? <DetailCard/>:<CardContainer items={room.items} reverseDone={reverseDone}/>}
                 <CenterActionButton handleModalOpen={handleModalOpen}/>
             </div>
+
         </div>
         </>
     )
@@ -138,7 +136,10 @@ function BaseRight() {
             container.push(
                 <div className='group-user pointer' key={`${user.name}-${index}`}>
                     <img src={user.pic} alt={user.name} />
-                    <p style={{color: users[propertyName].color}} >{user.name}</p>
+                    <div className="user-context">
+                        <p style={{color: users[propertyName].color}} >{user.name}</p>
+                        <p className='user-status'>{user.status}</p>
+                    </div>
                 </div>
             )
         })

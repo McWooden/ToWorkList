@@ -64,27 +64,36 @@
     color: var(--white-3);
 }
 .group-user-container {
-    padding: 5px;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 .group-user {
     display: flex;
     align-items: center;
-    padding: 5px 2px;
+    padding: 5px;
     gap: 5px;
     border-radius: 5px;
+    margin: 4px 0;
 }
 .group-user:hover {
-    background-color: var(--black-4);
+    background-color: var(--black-5);
     transition: .1s ease;
 }
+.user-context {
+    display: flex;
+    flex-direction: column;
+}
 .group-user img {
-    width: 34px;
+    width: 38px;
     border-radius: 50px;
 }
 .group-user p {
     font-size: small;
+    font-weight: 500;
+}
+.group-user .user-status {
+    color: var(--white-2);
+    font-size: xx-small;
 }
 @media (max-width: 768px) {
     .base-right {

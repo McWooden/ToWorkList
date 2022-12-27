@@ -234,18 +234,18 @@ export const myAccount = {
         Friends: {
             color: 'aquamarine',
             user: [
-                {name: 'Huddin', id: '7364', pic: noPic},
-                {name: 'Rizky', id: '7364', pic: noPic},
-                {name: 'bima', id: '7364', pic: noPic},
+                {name: 'Huddin', id: '7364', pic: noPic, status: 'bangun'},
+                {name: 'Rizky', id: '7364', pic: noPic, status: 'makan'},
+                {name: 'bima', id: '7364', pic: noPic, status: 'buang air'},
             ]
         },
         Followers: {
             color: 'whitesmoke',
             user: [
-                {name: 'aldo', id: '7364', pic: noPic},
-                {name: 'irfan', id: '7364', pic: noPic},
-                {name: 'naufal', id: '7364', pic: noPic},
-                {name: 'hendra', id: '7364', pic: noPic},
+                {name: 'aldo', id: '7364', pic: noPic, status: 'nonton spongebob'},
+                {name: 'irfan', id: '7364', pic: noPic, status: 'mabar'},
+                {name: 'naufal', id: '7364', pic: noPic, status: 'lose streak'},
+                {name: 'hendra', id: '7364', pic: noPic, status: 'tidur'},
             ]
         },
     }
@@ -322,18 +322,18 @@ export const guildData = [
             admins: {
                 color: 'goldenrod',
                 user: [
-                    {name: 'Huddin', id: '4830', pic: noPic},
-                    {name: 'Rizky', id: '4830', pic: noPic},
-                    {name: 'bima', id: '4830', pic: noPic},
+                    {name: 'Huddin', id: '4830', pic: noPic, status: 'mabar'},
+                    {name: 'Rizky', id: '4830', pic: noPic, status: 'mabar'},
+                    {name: 'bima', id: '4830', pic: noPic, status: 'mabar'},
                 ]
             },
             members: {
                 color: 'greenyellow',
                 user: [
-                    {name: 'naufal', id: '4830', pic: noPic},
-                    {name: 'irfan', id: '4830', pic: noPic},
-                    {name: 'aldo', id: '4830', pic: noPic},
-                    {name: 'hendra', id: '4830', pic: noPic},
+                    {name: 'naufal', id: '4830', pic: noPic, status: 'mabar'},
+                    {name: 'irfan', id: '4830', pic: noPic, status: 'mabar'},
+                    {name: 'aldo', id: '4830', pic: noPic, status: 'mabar'},
+                    {name: 'hendra', id: '4830', pic: noPic, status: 'mabar'},
                 ]
             },
         }
@@ -389,18 +389,18 @@ export const guildData = [
             admins: {
                 color: 'goldenrod',
                 user: [
-                    {name: 'wijdan', id: '3827', pic: noPic},
-                    {name: 'bagas', id: '3827', pic: noPic},
-                    {name: 'Huddin', id: '3827', pic: noPic},
+                    {name: 'wijdan', id: '3827', pic: noPic, status: 'mabar'},
+                    {name: 'bagas', id: '3827', pic: noPic, status: 'mabar'},
+                    {name: 'Huddin', id: '3827', pic: noPic, status: 'mabar'},
                 ]
             },
             members: {
                 color: 'greenyellow',
                 user: [
-                    {name: 'arga', id: '3827', pic: noPic},
-                    {name: 'levram', id: '3827', pic: noPic},
-                    {name: 'ceka', id: '3827', pic: noPic},
-                    {name: 'farel', id: '3827', pic: noPic},
+                    {name: 'arga', id: '3827', pic: noPic, status: 'mabar'},
+                    {name: 'levram', id: '3827', pic: noPic, status: 'mabar'},
+                    {name: 'ceka', id: '3827', pic: noPic, status: 'mabar'},
+                    {name: 'farel', id: '3827', pic: noPic, status: 'mabar'},
                 ]
             },
         }

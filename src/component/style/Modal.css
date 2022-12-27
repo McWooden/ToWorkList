@@ -119,23 +119,36 @@
 }
 /* confirm */
 .confirm {
-    width: 80vw;
+    width: calc(100% - 30px);
+    max-width: 650px;
     border-radius: 5px;
+    display: flex;
+    flex-direction: row;
 }
 .confirm-header, .confirm-body, .confirm-button {
     padding: 5px 10px;
 }
 .confirm-header {
     background-color: var(--black-3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    padding: 25px 30px;
 }
 .confirm-header span {
     margin-left: 10px;
 }
 .confirm-body {
     font-size: small;
+    flex: 1;
+}
+.confirm-body h3 {
+    color: var(--danger);
 }
 .next-text {
-    margin-top: 5px;
+    color: var(--white-2);
 }
 .confirm-button {
     display: flex;
@@ -143,10 +156,10 @@
     justify-content: flex-end;
     gap: 20px;
     font-size: small;
-    margin: 15px 10px 10px;
+    margin: 10px 0 5px;
 }
 .confirm-btn {
-    padding: 5px 15px;
+    padding: 5px 20px;
     border-radius: 3px;
     cursor: pointer;
 }
