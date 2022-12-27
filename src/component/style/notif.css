@@ -38,3 +38,6 @@
 .myToast-delete .icon {
     color: var(--danger);
 }
+.myToast-info .icon {
+    color: var(--light-blue);
+}

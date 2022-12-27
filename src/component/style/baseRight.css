@@ -102,6 +102,9 @@
         right: 0;
         width: 314px;
         box-shadow: var(--shadow-1-left);
+
+        background: rgba(41, 43, 47, .9);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
     .base-right-form {
         position: fixed;

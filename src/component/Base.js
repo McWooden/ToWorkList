@@ -94,7 +94,6 @@ function BaseCenter() {
                 {item ? <DetailCard/>:<CardContainer items={room.items}/>}
                 <CenterActionButton handleModalOpen={handleModalOpen}/>
             </div>
-
         </div>
         </>
     )

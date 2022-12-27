@@ -17,8 +17,10 @@
         height: calc(100vh - 48px);
         position: fixed;
         width: 255px;
-        background-color: var(--black-4);
         box-shadow: var(--shadow-1-right);
+
+        background: rgba(54, 57, 63, 0.79);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     }
     .base-left-hide {
         transform: translateX(-100%);

@@ -3,6 +3,7 @@ import { faCheck, faNoteSticky, faImage, faMessage, faPenToSquare, faTrash} from
 import { useContext } from 'react';
 import {convertDateToString} from '../utils/convertDateFormat'
 import { ItemData } from '../pages/App';
+import { deleteToast, editToast } from '../utils/notif';
 
 export function MoreInfoCard() {
     const {item} = useContext(ItemData)
@@ -57,10 +58,16 @@ export function Contributor() {
 }
 
 export function DetailLeftAction() {
+    function handleEdit() {
+        editToast('mengedit tugas')
+    }
+    function handleDelete() {
+        deleteToast('menghapus tugas')
+    }
     return (
         <div className='detail-Left-action'>
-            <FontAwesomeIcon icon={faTrash} className='action-left action-trash-left'/>
-            <FontAwesomeIcon icon={faPenToSquare} className='action-left action-edit-left'/>
+            <FontAwesomeIcon icon={faTrash} className='action-left action-trash-left' onClick={handleDelete}/>
+            <FontAwesomeIcon icon={faPenToSquare} className='action-left action-edit-left' onClick={handleEdit}/>
         </div>
     )
 }

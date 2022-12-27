@@ -89,6 +89,8 @@
     background-color: royalblue;
     justify-self: flex-end;
     margin-top: 20px;
+    border: none;
+    font-family: inherit;
 }
 .task-submit:hover {
     background-color: rgb(76, 121, 255);
@@ -168,4 +170,8 @@
 }
 .confirm-yes {
     background-color: royalblue;
+}
+/* add images */
+.form-image {
+    
 }

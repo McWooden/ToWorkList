@@ -91,6 +91,18 @@ export const defaultItem = {
             time: '00.22',
             date: '12/26/2022'
         },
+        {
+            nickname: 'McWooden',
+            msg: 'alert sudah tinggal pake',
+            time: '00.12',
+            date: '12/28/2022'
+        },
+        {
+            nickname: 'Developer',
+            msg: 'buat form image',
+            time: '00.24',
+            date: '12/28/2022'
+        },
     ]
 }
 

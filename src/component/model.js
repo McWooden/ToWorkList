@@ -6,10 +6,11 @@ import { myAccount } from '../utils/dataJSON';
 import { ItemData } from '../pages/App';
 import { Confirm } from './Modal';
 import { GuildContext } from '../pages/App';
+import { editToast, deleteToast } from '../utils/notif';
 
 
 
-export function TodoModel({item, indexItem, deleteToast, editToast}) {
+export function TodoModel({item, indexItem}) {
     const { reverseDone } = useContext(GuildContext)
     const myNickname = myAccount.profile.nickname
     const [dropDown, setDropDown] = useState(false)
@@ -56,7 +57,7 @@ export function TodoModel({item, indexItem, deleteToast, editToast}) {
                 </div>
                 <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
                     <ul>
-                        <li className='pointer' onClick={editToast}>
+                        <li className='pointer' onClick={() => editToast()}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                             <span>edit</span>
                         </li>
@@ -89,13 +90,17 @@ export function ChatModel({item}) {
         }
         document.addEventListener('mousedown', handler)
     })
+    function handleDelete() {
+        setDropDown(false)
+        deleteToast('menghapus chat')
+    }
     return (
         <div className={`${itsMe&&'my'} chat-card`} ref={cardRef}>
             <div className={`${itsMe&&'my'} chat-card-message ${dropDown?'active':'inactive'}`}>{item.msg}</div>
             <div className={`${itsMe&&'my'} chat-card-time pointer`} onClick={() => setDropDown(!dropDown)}>{item.time}</div>
             <div className={`chat-dropdown ${dropDown?'active':'inactive'}`}>
                 <ul>
-                    <li className='pointer'>
+                    <li className='pointer' onClick={handleDelete}>
                         <FontAwesomeIcon icon={faTrash}/>
                     </li>
                 </ul>

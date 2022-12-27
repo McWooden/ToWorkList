@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
 import { useState, useRef } from 'react'
+import { sendToast } from '../utils/notif'
 
 export function FormBaseRight() {
     const [msg, setMsg] = useState('')
@@ -9,7 +10,7 @@ export function FormBaseRight() {
         e.preventDefault()
         setMsg('')
         textarea.current.style.height = '15px'
-        console.log(msg)
+        sendToast()
     }
     function handleInput(e) {
         setMsg(e.target.value)
@@ -20,7 +21,7 @@ export function FormBaseRight() {
     return (
         <form className='base-right-form' onSubmit={handleSubmit}>
             <div className="textarea-container">
-                <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea}/>
+                <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{height: '15px'}}/>
             </div>
             {
                 msg ? 

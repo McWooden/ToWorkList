@@ -65,13 +65,13 @@
     visibility: hidden;
     transition: .1s ease;
 }
-.chat-dropdown ul {
+.chat-dropdown ul li {
     background-color: var(--black-2);
     list-style: none;
     font-size: small;
     padding: 0 5px;
     border-radius: 5px 0 5px 5px;
 }
-.chat-dropdown ul:hover {
+.chat-dropdown ul li:hover {
     background-color: var(--black-5);
 }

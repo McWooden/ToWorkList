@@ -4,6 +4,7 @@ import './style/Modal.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
+// parent
 export function Modal({children, open, close, colorDefault}) {
     if (!open) return null
     function setClose() {
@@ -20,7 +21,7 @@ export function Modal({children, open, close, colorDefault}) {
         document.getElementById('portal')
     )
 }
-
+// extends
 export function Confirm({ metode, open, close, target, color, callback }) {
     if (!open) return null
     let icon = null
