@@ -62,16 +62,17 @@ function App() {
     }
     document.querySelector('title').innerText = guild.profile.nickname || guild.profile.guildName
     document.addEventListener('mousedown', handler)
+    console.log('first')
   })
   // tracker
 
   
   return (
-    <GuildContext.Provider value={{guild, room:guild.rooms[indexRoom], currentRoom: room.roomName, hideNavbar, handleNavbar, guildRooms : guild.rooms, guildName : guild.profile.guildName || guild.profile.nickname, handleGuild, handleRoom, navRef, navTopRef, users : guild.users}}>
+    <GuildContext.Provider value={{guild, room:guild.rooms[indexRoom], currentRoom: room.roomName, hideNavbar, handleNavbar, guildRooms : guild.rooms, guildName : guild.profile.guildName || guild.profile.nickname, handleGuild, handleRoom, navRef, navTopRef, users : guild.users, reverseDone}}>
       <ItemData.Provider value={{item, handleItem}}>
         <div id='app'>
           <Navbar/>
-          <TodoApp reverseDone={reverseDone}/>
+          <TodoApp/>
         </div>
       </ItemData.Provider>
     </GuildContext.Provider>

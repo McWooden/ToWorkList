@@ -8,7 +8,7 @@ import { ItemData } from '../pages/App'
 // import { defaultItem } from '../utils/dataJSON'
 
 export const HideBase = createContext()
-export function TodoApp({room, reverseDone}) {
+export function TodoApp({room}) {
     const [hideRightBase, setHideRightBase] = useState(true)
     const [hideLeftBase, setHideLeftBase] = useState(true)
     function handleRightBase(boolean) {
@@ -23,7 +23,7 @@ export function TodoApp({room, reverseDone}) {
         <HideBase.Provider value={{hideRightBase, handleRightBase, hideLeftBase, handleLeftBase}}>
             <div id='todoApp'>
                 <NavTop/>
-                <Base room={room} reverseDone={reverseDone}/>
+                <Base room={room}/>
             </div>
         </HideBase.Provider>
     )

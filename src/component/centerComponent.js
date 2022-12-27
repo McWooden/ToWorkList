@@ -194,6 +194,7 @@ export function CardContainer({items, reverseDone}) {
                 pauseOnFocusLoss={false}
                 theme="colored"
                 autoClose={3000}
+                position="bottom-left"
             />
         </>
     )

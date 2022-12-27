@@ -10,7 +10,6 @@
 .Toastify__toast-theme--colored {
     background-color: var(--black-2) !important;
     padding: 0 !important;
-    margin-left: auto;
     margin-bottom: 0;
 }
 .Toastify__toast-body {

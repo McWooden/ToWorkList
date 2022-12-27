@@ -5,10 +5,12 @@ import { useContext } from 'react';
 import { myAccount } from '../utils/dataJSON';
 import { ItemData } from '../pages/App';
 import { Confirm } from './Modal';
+import { GuildContext } from '../pages/App';
 
 
 
-export function TodoModel({item, indexItem, reverseDone, deleteToast, editToast}) {
+export function TodoModel({item, indexItem, deleteToast, editToast}) {
+    const { reverseDone } = useContext(GuildContext)
     const myNickname = myAccount.profile.nickname
     const [dropDown, setDropDown] = useState(false)
     let menuRef = useRef()

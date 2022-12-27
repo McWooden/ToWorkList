@@ -17,11 +17,11 @@ import { Greeting } from '../utils/greeting'
 import Calendar from 'react-calendar';
 import './style/kalender.css'
 
-export function Base({reverseDone}) {
+export function Base() {
     return (
         <div className='base'>
             <BaseLeft/>
-            <BaseCenter reverseDone={reverseDone}/>
+            <BaseCenter/>
             <BaseRight/>
         </div>
     )
@@ -76,7 +76,7 @@ function BaseLeft() {
         </>
     )
 }
-function BaseCenter({reverseDone}) {
+function BaseCenter() {
     const { room, currentRoom } = useContext(GuildContext)
     const { item } = useContext(ItemData)
     const [modalOpen, setModalOpen] = useState(false)
@@ -91,7 +91,7 @@ function BaseCenter({reverseDone}) {
         <div className="base-center">
             <div className="center">
                 {item? <AddNoteModal modalOpen={modalOpen} title={item.title} handleModalClose={handleModalClose}/>:<AddTaskModal modalOpen={modalOpen} title={currentRoom} handleModalClose={handleModalClose}/>}
-                {item ? <DetailCard/>:<CardContainer items={room.items} reverseDone={reverseDone}/>}
+                {item ? <DetailCard/>:<CardContainer items={room.items}/>}
                 <CenterActionButton handleModalOpen={handleModalOpen}/>
             </div>
 
