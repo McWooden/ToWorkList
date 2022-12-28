@@ -60,13 +60,13 @@ export function noteToast({color}) {
         closeButton: false
     })
 }
-export function imageToast({color}) {
+export function imageToast(text) {
     toast(
     <div className="myToast myToast-greenyellow">
-        <div className="icon" style={{backgroundColor: color}}>
+        <div className="icon">
             <FontAwesomeIcon icon={faImage}/>
         </div>
-        <p>foto baru ditambahkan!</p>
+        <p>{text || 'foto baru ditambahkan!'}</p>
     </div>, {
         closeButton: false
     })

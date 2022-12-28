@@ -53,7 +53,7 @@ export function CardImages() {
             image: image,
             desc: e.target.desc.value
         }
-        imageToast(data)
+        imageToast()
         console.log(data)
         setModalOpen(false)
         formRef.current.reset()
@@ -91,7 +91,7 @@ export function CardImages() {
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
                         <textarea placeholder='deskripsi' rows="10"name='desc'/>
-                        <button className='task-submit' onClick={() => console.log(formRef.current.submit)}>Tambah</button>
+                        <button className='task-submit' onClick={() => formRef.current.submit}>Tambah</button>
                     </div>
                 </form>
             </FileDrop>
@@ -183,8 +183,12 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
         handleModalClose()
         colorDefault()
     }
+    function modalClose() {
+        handleModalClose()
+        colorDefault()
+    }
     return (
-        <Modal open={modalOpen} close={handleModalClose} colorDefault={colorDefault}>
+        <Modal open={modalOpen} close={modalClose}>
             <div className="add-modal">
                 <div className="general-modal">
                     <FontAwesomeIcon icon={faCheck} className="icon-modal" style={{color: currentColor}}/>
@@ -232,8 +236,12 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
         handleModalClose()
         colorDefault()
     }
+    function modalClose() {
+        handleModalClose()
+        colorDefault()
+    }
     return (
-        <Modal open={modalOpen} close={handleModalClose} colorDefault={colorDefault}>
+        <Modal open={modalOpen} close={modalClose}>
             <div className='add-modal'>
                 <div className="general-modal">
                     <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/>

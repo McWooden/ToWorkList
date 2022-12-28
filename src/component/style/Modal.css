@@ -201,6 +201,7 @@
 }
 .img-form {
     flex: 1;
+    justify-content: center;
 }
 .general-info {
     border-bottom: 1px solid royalblue;
@@ -235,6 +236,12 @@
     }
     .img-view {
         height: 250px;
+    }
+    .file-drop.jadwal-form .img-view {
+        flex: 3;
+    }
+    .file-drop.jadwal-form .img-form {
+        flex: 1;
     }
 }
 @media (max-width: 375px) {

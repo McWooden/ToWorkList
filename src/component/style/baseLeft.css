@@ -32,7 +32,7 @@
     }
 }
 /* greet */
-.greeting {
+.greeting, .jadwal {
     background-color: var(--black-3);
     min-height: 58px;
     display: flex;
@@ -50,7 +50,7 @@
     place-items: center;
     font-size: large;
 }
-.greeting-context {
+.greeting-context, .jadwal .open-jadwal {
     flex: 5;
     display: flex;
     flex-direction: column;
@@ -59,6 +59,58 @@
 .greeting-context .date {
     color: var(--white-3);
     font-size: small;
+}
+/* jadwal */
+.jadwal {
+    position: relative;
+    padding-right: 0;
+    background-color: var(--black-5);
+    gap: 0;
+    min-height: 38px;
+}
+.jadwal .preview {
+    flex: 1;
+    background-repeat: no-repeat;
+}
+.jadwal .preview:hover .setting-btn {
+    opacity: 1;
+}
+.jadwal .preview:hover .setting {
+    opacity: 0;
+    background-color: var(--black-2);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.jadwal .preview:hover .setting, .jadwal .preview:hover .setting-btn {
+    opacity: 1;
+}
+.jadwal .setting-btn {
+    opacity: 0;
+}
+.jadwal .open-jadwal {
+    background-color: var(--black-3);
+    transition: .1s;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+    align-items: center;
+    font-size: small;
+}
+.jadwal .open-jadwal:hover {
+    background-color: var(--black-1);
+}
+.jadwal-image {
+    width: 100%;
+    height: 100%;
+    background-color: var(--black-1);
+}
+.jadwal-image img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
 }
 /* menu box */
 .left-menu-box {

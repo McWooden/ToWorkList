@@ -5,11 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 // parent
-export function Modal({children, open, close, colorDefault}) {
+export function Modal({children, open, close}) {
     if (!open) return null
     function setClose() {
         close()
-        colorDefault()
     }
     return ReactDOM.createPortal(
         <>

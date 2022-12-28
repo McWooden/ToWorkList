@@ -121,6 +121,7 @@ export const myAccount = {
             roomName: 'Main todo',
             icon: 'check',
             public: true,
+            jadwal: noPic,
             items: [
                 defaultItem,
                 {
@@ -214,6 +215,7 @@ export const myAccount = {
             roomName: 'daily task',
             icon: 'check',
             public: true,
+            jadwal: noPic,
             items: [
                 {
                     id: '39f8bBeud',
@@ -277,6 +279,7 @@ export const guildData = [
                 roomName: 'welcome',
                 icon: 'check',
                 public: true,
+                jadwal: noPic,
                 items: [
                     {
                         id: 'txrctv83v8ev8',
@@ -296,6 +299,7 @@ export const guildData = [
                 roomName: 'peraturan',
                 icon: 'check',
                 public: true,
+                jadwal: noPic,
                 items: [
                     {
                         id: 'e67cti',
@@ -315,6 +319,7 @@ export const guildData = [
                 roomName: 'tugas',
                 icon: 'check',
                 public: true,
+                jadwal: noPic,
                 items: [
                     {
                         id: 'l9ke5jy',
@@ -363,6 +368,7 @@ export const guildData = [
                 roomName: 'kampung villager',
                 icon: 'check',
                 public: true,
+                jadwal: noPic,
                 items: [
                     {
                         id: '5uryjf',
@@ -382,6 +388,7 @@ export const guildData = [
                 roomName: 'meme',
                 icon: 'check',
                 public: true,
+                jadwal: noPic,
                 items: [
                     {
                         id: '8wusmd',

@@ -4,8 +4,7 @@ import TodoApp from '../component/TodoApp';
 import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
 import { ToastContainer } from 'react-toastify';
-
-import { defaultItem } from '../utils/dataJSON'
+// import { defaultItem } from '../utils/dataJSON'
 
 
 export const GuildContext = createContext()
@@ -30,7 +29,7 @@ function App() {
     SetIndexRoom(indexRoom)
   }
   // item
-  const [item, setItem] = useState(defaultItem)
+  const [item, setItem] = useState()
   function handleItem(itemIndex) {
     setItem(guild.rooms[indexRoom].items[itemIndex])
   }
@@ -66,7 +65,6 @@ function App() {
     }
     document.querySelector('title').innerText = guild.profile.nickname || guild.profile.guildName
     document.addEventListener('mousedown', handler)
-    console.log('first')
   })
   // tracker
 

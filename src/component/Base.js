@@ -8,7 +8,7 @@ import { HideBase } from './TodoApp';
 import { ItemData, GuildContext } from '../pages/App';
 import { myAccount } from '../utils/dataJSON';
 import { convertDateToString } from '../utils/convertDateFormat'
-import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
+import { MoreInfoCard, DetailLeftAction, JadwalRoom } from './leftSideComponent';
 import { FormBaseRight } from './rightSideComponent'
 import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal, CardContainer} from './centerComponent';
 import { useState } from 'react'
@@ -36,6 +36,7 @@ function BaseLeft() {
         color: item.color,
         title: item.title,
     }))
+
     return (
         <>
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
@@ -45,6 +46,7 @@ function BaseLeft() {
                 :
                 <>
                 <Greeting/>
+                <JadwalRoom/>
                 <Calendar 
                     className="calendar-dark" 
                     locale='id-ID'
