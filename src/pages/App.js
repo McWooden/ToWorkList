@@ -5,6 +5,8 @@ import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
 import { ToastContainer } from 'react-toastify';
 
+import { defaultItem } from '../utils/dataJSON'
+
 
 export const GuildContext = createContext()
 export const ItemData = createContext()
@@ -28,7 +30,7 @@ function App() {
     SetIndexRoom(indexRoom)
   }
   // item
-  const [item, setItem] = useState()
+  const [item, setItem] = useState(defaultItem)
   function handleItem(itemIndex) {
     setItem(guild.rooms[indexRoom].items[itemIndex])
   }

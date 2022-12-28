@@ -6,8 +6,6 @@ import { Base } from './Base'
 import { useContext, createContext, useState } from 'react'
 import { ItemData } from '../pages/App'
 
-// import { defaultItem } from '../utils/dataJSON'
-
 export const HideBase = createContext()
 export function TodoApp({room}) {
     const [hideRightBase, setHideRightBase] = useState(true)
@@ -25,7 +23,6 @@ export function TodoApp({room}) {
             <div id='todoApp'>
                 <NavTop/>
                 <Base room={room}/>
-                
             </div>
         </HideBase.Provider>
     )

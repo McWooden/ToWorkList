@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../component/style/notif.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage} from '@fortawesome/free-solid-svg-icons'
 
 export function editToast(text) {
     toast(
@@ -56,6 +56,17 @@ export function noteToast({color}) {
             <FontAwesomeIcon icon={faNoteSticky}/>
         </div>
         <p>catatan baru ditambahkan!</p>
+    </div>, {
+        closeButton: false
+    })
+}
+export function imageToast({color}) {
+    toast(
+    <div className="myToast myToast-greenyellow">
+        <div className="icon" style={{backgroundColor: color}}>
+            <FontAwesomeIcon icon={faImage}/>
+        </div>
+        <p>foto baru ditambahkan!</p>
     </div>, {
         closeButton: false
     })

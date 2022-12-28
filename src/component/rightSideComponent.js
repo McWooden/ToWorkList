@@ -10,7 +10,7 @@ export function FormBaseRight() {
         e.preventDefault()
         setMsg('')
         textarea.current.style.height = '15px'
-        sendToast()
+        sendToast(e.target.msg.value)
     }
     function handleInput(e) {
         setMsg(e.target.value)

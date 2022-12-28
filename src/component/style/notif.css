@@ -41,3 +41,6 @@
 .myToast-info .icon {
     color: var(--light-blue);
 }
+.myToast-greenyellow {
+    color: greenyellow;
+}

@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare, faImage} from '@fortawesome/free-solid-svg-icons'
 import {convertDateToString} from '../utils/convertDateFormat'
 import { useContext, useState } from 'react';
-import { Modal } from './Modal'
+import { FileDrop, Modal } from './Modal'
 import { ItemData } from '../pages/App';
 import { TodoModel } from './model';
 import { useRef } from 'react';
-import { deleteToast, editToast, noteToast, todoToast } from '../utils/notif';
+import { deleteToast, editToast, imageToast, noteToast, todoToast } from '../utils/notif';
 
 
 
@@ -20,11 +20,45 @@ export function CardImages() {
             <Image key={index} data={data}/>
         )
     })
+    const date = convertDateToString(new Date().toLocaleDateString())
     function handleModalOpen() {
         setModalOpen(true)
     }
     function handleModalClose() {
         setModalOpen(false)
+    }
+    // file drop
+    const fileInput = useRef(null)
+    const[image, setImage] = useState(null)
+    const[previewUrl, setPreviewUrl] = useState('')
+    const handleFile = file => {
+        setImage(file)
+        setPreviewUrl(URL.createObjectURL(file))
+    }
+
+    const handleOndragOver = event => {
+        event.preventDefault()
+    }
+    const handleOndrop = event => {
+        event.preventDefault()
+        event.stopPropagation()
+        let imageFile = event.dataTransfer.files[0]
+        handleFile(imageFile)
+    }
+    // form
+    const formRef = useRef()
+    function handleSubmit(e) {
+        e.preventDefault()
+        const data = {
+            image: image,
+            desc: e.target.desc.value
+        }
+        imageToast(data)
+        console.log(data)
+        setModalOpen(false)
+        formRef.current.reset()
+        setImage(null)
+        setPreviewUrl('')
     }
     return (
         <div className='images-container'>
@@ -32,14 +66,35 @@ export function CardImages() {
                 {box}
             </div>
             <FontAwesomeIcon icon={faPlus} className='add-image' onClick={handleModalOpen}/>
-            <Modal open={modalOpen} close={handleModalClose}>
-                <form className='form-image'>
-                    <div className="img-view">
-                        
+            <FileDrop open={modalOpen} close={handleModalClose}>
+                <form ref={formRef} className='file-drop' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
+                    <div className="img-view" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
+                    { previewUrl ? 
+                        <img src={previewUrl} alt={image.name} /> 
+                    :
+                        <div className="drop-zone">
+                            <FontAwesomeIcon icon={faImage} className='drop-icon'/>
+                            <p className='drop-text'>click atau drop disini</p>
+                            <input 
+                                type="file" 
+                                accept='image/*' 
+                                ref={fileInput} hidden 
+                                onChange={e => handleFile(e.target.files[0])}
+                            />
+                        </div>
+                    }
                     </div>
-                    <button type='submit' className='task-submit' form='addTask'>Tambah</button>
+                    <div className="img-form">
+                        <div className="general-info">
+                            <h3>Menambah foto</h3>
+                            <p className='date'>{date}</p>
+                        </div>
+                        <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
+                        <textarea placeholder='deskripsi' rows="10"name='desc'/>
+                        <button className='task-submit' onClick={() => console.log(formRef.current.submit)}>Tambah</button>
+                    </div>
                 </form>
-            </Modal>
+            </FileDrop>
         </div>
     )
 }
