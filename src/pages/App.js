@@ -78,7 +78,7 @@ function App() {
           <ToastContainer
                     pauseOnFocusLoss={false}
                     theme="colored"
-                    autoClose={3000}
+                    autoClose={1000}
                     position="top-left"
                 />
         </div>

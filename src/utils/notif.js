@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../component/style/notif.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 
 export function editToast(text) {
     toast(
@@ -13,7 +13,7 @@ export function editToast(text) {
         </div>
         <p>{text || 'edit'}</p>
     </div>, {
-        closeButton: false
+        closeButton: false,
     })
 }
 export function deleteToast(text) {
@@ -24,7 +24,7 @@ export function deleteToast(text) {
         </div>
         <p>{text || 'terhapus'}</p>
     </div>, {
-        closeButton: false
+        closeButton: false,
     })
 }
 export function sendToast(text) {
@@ -35,7 +35,7 @@ export function sendToast(text) {
         </div>
         <p>{text || 'terkirim'}</p>
     </div>, {
-        closeButton: false
+        closeButton: false,
     })
 }
 export function todoToast({title:text, color}) {
@@ -46,7 +46,7 @@ export function todoToast({title:text, color}) {
         </div>
         <p>tugas baru ditambahkan! {text || 'tugas'}</p>
     </div>, {
-        closeButton: false
+        closeButton: false,
     })
 }
 export function noteToast({color}) {
@@ -57,7 +57,7 @@ export function noteToast({color}) {
         </div>
         <p>catatan baru ditambahkan!</p>
     </div>, {
-        closeButton: false
+        closeButton: false,
     })
 }
 export function imageToast(text) {
@@ -68,6 +68,17 @@ export function imageToast(text) {
         </div>
         <p>{text || 'foto baru ditambahkan!'}</p>
     </div>, {
-        closeButton: false
+        closeButton: false,
+    })
+}
+export function leaveToast(text) {
+    toast(
+    <div className="myToast">
+        <div className="icon">
+            <FontAwesomeIcon icon={faRightFromBracket}/>
+        </div>
+        <p>{text || 'keluar'}</p>
+    </div>, {
+        closeButton: false,
     })
 }

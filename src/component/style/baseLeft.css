@@ -70,7 +70,6 @@
 }
 .jadwal .preview {
     flex: 1;
-    background-repeat: no-repeat;
 }
 .jadwal .preview:hover .setting-btn {
     opacity: 1;
@@ -86,6 +85,10 @@
 }
 .jadwal .preview:hover .setting, .jadwal .preview:hover .setting-btn {
     opacity: 1;
+    transition: .5s;
+}
+.jadwal .preview:hover .setting-btn {
+    transform: rotate(22deg);
 }
 .jadwal .setting-btn {
     opacity: 0;

@@ -1,9 +1,11 @@
 import './style/Navbar.css'
 import { GuildContext } from '../pages/App'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faCheck, faGear, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
 import { myAccount, guildData } from '../utils/dataJSON'
+import { GuildSetting } from './setting'
+
 
 function Navbar() {
     const {hideNavbar, navRef} = useContext(GuildContext)
@@ -34,10 +36,33 @@ function ModeNavbar() {
 
 function ModeNavbarHeader() {
     const {guildName} = useContext(GuildContext)
+    const [settingOpen, setSettingOpen] = useState(true)
+    function handleClose() {
+        setSettingOpen(false)
+    }
+    useEffect(() => {
+        function handleKeyDown(event) {
+            if (event.key === 'Escape') {
+                setSettingOpen(false)
+            }
+        }
+
+        if (settingOpen) {
+            document.addEventListener('keydown', handleKeyDown)
+        } else {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [settingOpen])
+    
     return (
         <div className="modeNavbarHeader">
             <h4 className='guild-name'>{guildName}</h4>
-            <FontAwesomeIcon icon={faGear} className='settingNavbar pointer'/>
+            <FontAwesomeIcon icon={faGear} className='settingNavbar pointer' onClick={() => setSettingOpen(true)}/>
+            <GuildSetting open={settingOpen} close={handleClose}/>
         </div>
     )
 }

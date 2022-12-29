@@ -245,7 +245,7 @@ export const myAccount = {
         },
     ],
     users: {
-        Friends: {
+        Teman: {
             color: 'aquamarine',
             user: [
                 {name: 'Huddin', id: '7364', pic: noPic, status: 'bangun'},
@@ -253,7 +253,7 @@ export const myAccount = {
                 {name: 'bima', id: '7364', pic: noPic, status: 'buang air'},
             ]
         },
-        Followers: {
+        Pengikut: {
             color: 'whitesmoke',
             user: [
                 {name: 'aldo', id: '7364', pic: noPic, status: 'nonton spongebob'},
