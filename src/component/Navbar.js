@@ -36,7 +36,7 @@ function ModeNavbar() {
 
 function ModeNavbarHeader() {
     const {guildName} = useContext(GuildContext)
-    const [settingOpen, setSettingOpen] = useState(true)
+    const [settingOpen, setSettingOpen] = useState(false)
     function handleClose() {
         setSettingOpen(false)
     }

@@ -83,7 +83,9 @@
 .setting_full_pp_guild {
     width: 100%;
     max-width: 70px;
+    max-height: 70px;
     transition: .3s;
+    border-radius: 5px;
 }
 .setting_full_pp_guild:hover {
     border-radius: 5px;
@@ -217,6 +219,7 @@
     }
     .setting_full_pp_guild {
         max-width: none;
+        max-height: 250px;
     }
     .setting_full_name_guild {
         margin-top: 10px;

@@ -1,4 +1,4 @@
-import noPic from '../assets/images/noPic.png';
+// import noPic from '../assets/images/noPic.png';
 const defaultChat = [{
     nickname: 'McWooden',
     msg: 'wait for next update',
@@ -111,7 +111,7 @@ export const myAccount = {
         nickname: 'McWooden',
         name: 'Sholahuddin A',
         id: '2521',
-        pic: noPic,
+        pic: 'https://source.unsplash.com/random/mcwooden',
         email: 'example@gmail.com',
         createdDate: '12/15/2022',
     },
@@ -121,7 +121,7 @@ export const myAccount = {
             roomName: 'Main todo',
             icon: 'check',
             public: true,
-            jadwal: noPic,
+            jadwal: 'https://source.unsplash.com/random/main-todo',
             items: [
                 defaultItem,
                 {
@@ -215,7 +215,7 @@ export const myAccount = {
             roomName: 'daily task',
             icon: 'check',
             public: true,
-            jadwal: noPic,
+            jadwal: 'https://source.unsplash.com/random/daily',
             items: [
                 {
                     id: '39f8bBeud',
@@ -248,20 +248,15 @@ export const myAccount = {
         Teman: {
             color: 'aquamarine',
             user: [
-                {name: 'Huddin', id: '7364', pic: noPic, status: 'bangun'},
-                {name: 'Rizky', id: '7364', pic: noPic, status: 'makan'},
-                {name: 'bima', id: '7364', pic: noPic, status: 'buang air'},
+                {name: 'Huddin', id: '7364', pic: 'https://source.unsplash.com/random/Huddin', status: 'bangun'},
+                {name: 'Rizky', id: '7364', pic: 'https://source.unsplash.com/random/Rizky', status: 'makan'},
+                {name: 'bima', id: '7364', pic: 'https://source.unsplash.com/random/bima', status: 'buang air'},
+                {name: 'aldo', id: '7364', pic: 'https://source.unsplash.com/random/aldo', status: 'nonton spongebob'},
+                {name: 'irfan', id: '7364', pic: 'https://source.unsplash.com/random/irfan', status: 'mabar'},
+                {name: 'naufal', id: '7364', pic: 'https://source.unsplash.com/random/naufal', status: 'lose streak'},
+                {name: 'hendra', id: '7364', pic: 'https://source.unsplash.com/random/hendra', status: 'tidur'},
             ]
-        },
-        Pengikut: {
-            color: 'whitesmoke',
-            user: [
-                {name: 'aldo', id: '7364', pic: noPic, status: 'nonton spongebob'},
-                {name: 'irfan', id: '7364', pic: noPic, status: 'mabar'},
-                {name: 'naufal', id: '7364', pic: noPic, status: 'lose streak'},
-                {name: 'hendra', id: '7364', pic: noPic, status: 'tidur'},
-            ]
-        },
+        }
     }
 }
 
@@ -269,7 +264,7 @@ export const guildData = [
     {
         profile: {
             guildName: 'Huddin guilds',
-            src: noPic,
+            src: 'https://source.unsplash.com/random/huddinguilds',
             by: 'Huddin',
             createdDate: '12/15/2022',
         },
@@ -279,7 +274,7 @@ export const guildData = [
                 roomName: 'welcome',
                 icon: 'check',
                 public: true,
-                jadwal: noPic,
+                jadwal: 'https://source.unsplash.com/random/welcome',
                 items: [
                     {
                         id: 'txrctv83v8ev8',
@@ -299,7 +294,7 @@ export const guildData = [
                 roomName: 'peraturan',
                 icon: 'check',
                 public: true,
-                jadwal: noPic,
+                jadwal: 'https://source.unsplash.com/random/peratuan',
                 items: [
                     {
                         id: 'e67cti',
@@ -319,7 +314,7 @@ export const guildData = [
                 roomName: 'tugas',
                 icon: 'check',
                 public: true,
-                jadwal: noPic,
+                jadwal: 'https://source.unsplash.com/random/tugas',
                 items: [
                     {
                         id: 'l9ke5jy',
@@ -339,18 +334,18 @@ export const guildData = [
             admins: {
                 color: 'goldenrod',
                 user: [
-                    {name: 'Huddin', id: '4830', pic: noPic, status: 'mabar'},
-                    {name: 'Rizky', id: '4830', pic: noPic, status: 'mabar'},
-                    {name: 'bima', id: '4830', pic: noPic, status: 'mabar'},
+                    {name: 'Huddin', id: '4830', pic: 'https://source.unsplash.com/random/aldo', status: 'mabar'},
+                    {name: 'Rizky', id: '4830', pic: 'https://source.unsplash.com/random/Rizky', status: 'mabar'},
+                    {name: 'bima', id: '4830', pic: 'https://source.unsplash.com/random/bima', status: 'mabar'},
                 ]
             },
             members: {
                 color: 'greenyellow',
                 user: [
-                    {name: 'naufal', id: '4830', pic: noPic, status: 'mabar'},
-                    {name: 'irfan', id: '4830', pic: noPic, status: 'mabar'},
-                    {name: 'aldo', id: '4830', pic: noPic, status: 'mabar'},
-                    {name: 'hendra', id: '4830', pic: noPic, status: 'mabar'},
+                    {name: 'naufal', id: '4830', pic: 'https://source.unsplash.com/random/naufal', status: 'mabar'},
+                    {name: 'irfan', id: '4830', pic: 'https://source.unsplash.com/random/irfan', status: 'mabar'},
+                    {name: 'aldo', id: '4830', pic: 'https://source.unsplash.com/random/aldo', status: 'mabar'},
+                    {name: 'hendra', id: '4830', pic: 'https://source.unsplash.com/random/hendra', status: 'mabar'},
                 ]
             },
         }
@@ -358,7 +353,7 @@ export const guildData = [
     {
         profile: {
             guildName: 'minecraft x-6',
-            src: noPic,
+            src: 'https://source.unsplash.com/random/minecraft',
             by: 'afif',
             createdDate: '12/15/2022',
         },
@@ -368,7 +363,7 @@ export const guildData = [
                 roomName: 'kampung villager',
                 icon: 'check',
                 public: true,
-                jadwal: noPic,
+                jadwal: 'https://source.unsplash.com/random/kampung',
                 items: [
                     {
                         id: '5uryjf',
@@ -388,7 +383,7 @@ export const guildData = [
                 roomName: 'meme',
                 icon: 'check',
                 public: true,
-                jadwal: noPic,
+                jadwal: 'https://source.unsplash.com/random/meme',
                 items: [
                     {
                         id: '8wusmd',
@@ -408,18 +403,18 @@ export const guildData = [
             admins: {
                 color: 'goldenrod',
                 user: [
-                    {name: 'wijdan', id: '3827', pic: noPic, status: 'mabar'},
-                    {name: 'bagas', id: '3827', pic: noPic, status: 'mabar'},
-                    {name: 'Huddin', id: '3827', pic: noPic, status: 'mabar'},
+                    {name: 'wijdan', id: '3827', pic: 'https://source.unsplash.com/random/wijdan', status: 'mabar'},
+                    {name: 'bagas', id: '3827', pic: 'https://source.unsplash.com/random/bagas', status: 'mabar'},
+                    {name: 'Huddin', id: '3827', pic: 'https://source.unsplash.com/random/Huddin', status: 'mabar'},
                 ]
             },
             members: {
                 color: 'greenyellow',
                 user: [
-                    {name: 'arga', id: '3827', pic: noPic, status: 'mabar'},
-                    {name: 'levram', id: '3827', pic: noPic, status: 'mabar'},
-                    {name: 'ceka', id: '3827', pic: noPic, status: 'mabar'},
-                    {name: 'farel', id: '3827', pic: noPic, status: 'mabar'},
+                    {name: 'arga', id: '3827', pic: 'https://source.unsplash.com/random/arga', status: 'mabar'},
+                    {name: 'levram', id: '3827', pic: 'https://source.unsplash.com/random/levram', status: 'mabar'},
+                    {name: 'ceka', id: '3827', pic: 'https://source.unsplash.com/random/ceka', status: 'mabar'},
+                    {name: 'farel', id: '3827', pic: 'https://source.unsplash.com/random/farel', status: 'mabar'},
                 ]
             },
         }
