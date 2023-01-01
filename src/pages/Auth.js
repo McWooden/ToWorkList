@@ -10,6 +10,7 @@ function Auth() {
     function handleChangeUser(data) {
         setUser(data)
     }
+    console.log(process.env.REACT_APP_CLIENT_ID)
     return (
         <>
             <div className="auth">
