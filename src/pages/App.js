@@ -3,7 +3,6 @@ import Navbar from '../component/Navbar';
 import TodoApp from '../component/TodoApp';
 import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
-import { ToastContainer } from 'react-toastify';
 // import { defaultItem } from '../utils/dataJSON'
 
 
@@ -75,12 +74,6 @@ function App() {
         <div id='app'>
           <Navbar/>
           <TodoApp/>
-          <ToastContainer
-                    pauseOnFocusLoss={false}
-                    theme="colored"
-                    autoClose={1000}
-                    position="top-left"
-          />
         </div>
       </ItemData.Provider>
     </GuildContext.Provider>

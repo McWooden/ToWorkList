@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faCheck, faGear, faPlus, faCompass} from '@fortawesome/free-solid-svg-icons'
 import { myAccount, guildData } from '../utils/dataJSON'
 import { GuildSetting } from './setting'
+import { useNavigate } from 'react-router-dom'
 
 
 function Navbar() {
@@ -122,8 +123,9 @@ function RoomList() {
     )
 }
 function Profile() {
+    const navigate = useNavigate()
     return (
-        <div className="profile-container">
+        <div className="profile-container" onClick={() => navigate('/auth')}>
             <div className='profile'>
                 <img src={myAccount.profile.pic} alt='no-person'/>
                 <div className="profile-body">

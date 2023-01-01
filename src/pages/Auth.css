@@ -1,5 +1,4 @@
 .auth {
-    max-width: 670px;
     height: 100vh;
     margin: 0 auto;
     display: flex;
@@ -7,13 +6,76 @@
     justify-content: center;
 }
 .auth-context {
-    background-color: var(--black-4);
+    background-color: var(--black-2);
     width: 100%;
-    min-height: 200px;
     border-radius: 5px;
-    padding: 15px;
+    max-width: 400px;
 }
 .login {
+    padding: 15px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.account_preview {
+    display: flex;
+    align-items: center;
+    padding: 10px 5px;
+    gap: 10px;
+    background-color: var(--black-1);
+    border-radius: 5px;
+    margin: 10px 0 20px;
+}
+.nickname_preview {
+    font-size: xx-small;
+    color: var(--white-2);
+}
+.account_preview img {
+    max-width: 48px;
+    border-radius: 50px;
+}
+.sign_up {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 25px;
+}
+.sign_up h4 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 1.2em;
+}
+.register_form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.register_form label {
+    font-size: small;
+    margin-bottom: 10px;
+}
+.register_form input {
+    display: block;
+    background-color: var(--black-3);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    height: 40px;
+    padding: 8px 10px;
+    color: var(--white-1);
+    width: 100%;
+    font-family: inherit;
+    color: var(--white-2);
+    margin-top: 4px;
+}
+.register_form input[type="submit"] {
+    background-color: royalblue;
+    color: var(--white-1);
+    border: none;
+    cursor: pointer;
+    height: 48px;
+}
+.register_form input[type="submit"]:hover {
+    filter: brightness(110%);
 }

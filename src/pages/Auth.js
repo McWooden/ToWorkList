@@ -2,6 +2,9 @@ import './Auth.css'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import jwt_decode from 'jwt-decode'
 import { useState } from 'react'
+import { accountToast } from '../utils/notif'
+import { useNavigate } from 'react-router-dom'
+
 
 
 
@@ -19,7 +22,6 @@ function Auth() {
                         <FormRegist data={user}/>
                     :
                         <>
-                        <h4>Buat akun dengan</h4>
                         <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
                             <div className="login">
                             <GoogleLogin
@@ -36,7 +38,6 @@ function Auth() {
                                     console.log('Login Failed')
                                 }}
                                 useOneTap
-                                text='lanjutkan dengan'
                                 />
                             </div>
                         </GoogleOAuthProvider>
@@ -48,16 +49,56 @@ function Auth() {
     )
 }
 function FormRegist({data}) {
+    const [inputLock,] = useState(data)
+    const [nickname, setNickname] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const navigate = useNavigate()
+    function handleSubmit(event) {
+        event.preventDefault()
+        let data = {
+            ...inputLock,
+            nickname: nickname,
+            password: password,
+        }
+        console.log(data)
+        accountToast('akun berhasil dibuat!')
+        setTimeout(() => {
+            accountToast('tapi blom dikirim ke backend')
+        }, 2000)
+        setTimeout(() => {
+            accountToast('aowkokwao')
+        }, 2500)
+        navigate('/')
+    }
     return (
-        <>
-            <h1>Register</h1>
-            <form>
-                <input type="text" placeholder='Name' value={data.name}/>
-                <input type="text" placeholder='Nickname' value=''/>
-                <input type="text" placeholder='avatar url' value={data.avatar}/>
-                <input type="email" placeholder='email' value={data.email}/>
+        <div className='sign_up'>
+            <h4>Sign up</h4>
+            <div className="account_preview">
+                <img src={inputLock.avatar} alt={inputLock.name}/>
+                <div>
+                    <p>{inputLock.name}</p>
+                    <p className='nickname_preview'>{nickname}</p>
+                </div>
+            </div>
+            <form className='register_form' onSubmit={handleSubmit}>
+                <label>
+                Nickname
+                <input type="text" value={nickname} onChange={event => setNickname(event.target.value)} placeholder='Nama panggilan'/>
+                </label>
+                <label>
+                    Password
+                    <input type="password" value={password} onChange={event => setPassword(event.target.value)} placeholder='Password'/>
+                </label>
+                <label>
+                    Confirm Password
+                    <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password'/>
+                </label>
+                <input type="submit" value="Sign up" />
             </form>
-        </>
+        </div>
     )
 }
+
 export default Auth

@@ -5,6 +5,8 @@ import App from './pages/App'
 import Auth from './pages/Auth'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +17,12 @@ root.render(
         <Route path='/auth' element={<Auth />}/>
       </Routes>
     </BrowserRouter>
+    <ToastContainer
+              pauseOnFocusLoss={false}
+              theme="colored"
+              autoClose={1000}
+              position="top-left"
+    />
   </React.StrictMode>
 )
 
