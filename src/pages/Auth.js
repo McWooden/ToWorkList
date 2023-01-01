@@ -1,8 +1,7 @@
-import './Login.css'
+import './Auth.css'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import jwt_decode from 'jwt-decode'
 import { useState } from 'react'
-import { SocialButton } from 'react-social-login';
 
 
 
@@ -13,52 +12,39 @@ function Auth() {
     }
     return (
         <>
-        <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
             <div className="auth">
                 <div className="auth-context">
                 {
                     user ?
                         <FormRegist data={user}/>
                     :
-                        <GetData callback={handleChangeUser}/>
+                        <>
+                        <h4>Buat akun dengan</h4>
+                        <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+                            <div className="login">
+                            <GoogleLogin
+                                onSuccess={credentialResponse => {
+                                    const decode = jwt_decode(credentialResponse.credential)
+                                    let data = {
+                                        name: decode.name,
+                                        email: decode.email,
+                                        avatar: decode.picture
+                                    }
+                                    handleChangeUser(data)
+                                }}
+                                onError={() => {
+                                    console.log('Login Failed')
+                                }}
+                                useOneTap
+                                text='lanjutkan dengan'
+                                />
+                            </div>
+                        </GoogleOAuthProvider>
+                        </>
                 }
                 </div>
             </div>
-        </GoogleOAuthProvider>
         </>
-    )
-}
-function GetData({callback}) {
-    const handleSocialLogin = (user) => {
-        console.log(user)
-    }
-    return (
-        <div className="login-google">
-            <h3>Lanjutkan dengan</h3>
-            <GoogleLogin
-                onSuccess={credentialResponse => {
-                    const decode = jwt_decode(credentialResponse.credential)
-                    let data = {
-                        name: decode.name,
-                        email: decode.email,
-                        avatar: decode.picture
-                    }
-                    callback(data)
-                }}
-                onError={() => {
-                    console.log('Login Failed')
-                }}
-                useOneTap
-                text='lanjutkan dengan'
-            />
-            <SocialButton
-            provider='facebook'
-            appId='425755386336327'
-            onLoginSuccess={handleSocialLogin}
-            >
-            Login with Facebook
-            </SocialButton>
-        </div>
     )
 }
 function FormRegist({data}) {
