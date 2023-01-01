@@ -1,0 +1,32 @@
+@import url(./card.css);
+@import url(./detailCard.css);
+.center {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    position: relative;
+}
+.center-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: tomato;
+}
+.action-add {
+    min-width: 19px;
+    min-height: 19px;
+    position: fixed;
+    bottom: 5px;
+}
+.add-btn {
+    background-color: var(--black-3);
+    color: royalblue;
+    padding: 16px;
+    border-radius: 50px;
+    font-size: large;
+    transition: .1s ease;
+}
+.add-btn:hover {
+    background-color: royalblue;
+    color: var(--white-1);
+}

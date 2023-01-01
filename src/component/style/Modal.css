@@ -1,0 +1,251 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, .7);
+    transition: .3s ease;
+    transition-delay: 1s;
+}
+.modal, .confirm {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    background-color: var(--black-2);
+    overflow: hidden;
+}
+.modal {
+    width: 90vw;
+    height: 75vh;
+    border-radius: 35px;
+}
+.add-modal {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+.general-modal {
+    background-color: var(--black-3);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.icon-modal {
+    font-size: 5em;
+    color: royalblue;
+    padding: 5px;
+}
+.form-modal, .img-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+    gap: 5px;
+}
+.form-modal .date, .img-form .date {
+    font-size: x-small;
+    margin-bottom: 3px;
+    color: var(--white-2);
+}
+.input-left {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.form-modal select {
+    flex: 1;
+    border: 1px solid grey;
+}
+.form-modal input {
+    flex: 3;
+}
+.form-modal input, .form-modal textarea, .form-modal select, .img-form textarea {
+    outline: none;
+    background-color: var(--black-3);
+    resize: none;
+    padding: 3px;
+    border: 1px solid var(--black-4);
+    border-radius: 5px;
+    font-family: inherit;
+    color: var(--white-1);
+}
+.form-modal textarea, .img-form textarea {
+    flex: 1;
+}
+.task-submit {
+    font-size: small;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0 3em;
+    border-radius: 5px;
+    cursor: pointer;
+    color: var(--white-1);
+    background-color: royalblue;
+    justify-self: flex-end;
+    margin-top: 20px;
+    border: none;
+    font-family: inherit;
+}
+.task-submit:hover {
+    background-color: rgb(76, 121, 255);
+    transition: .1s ease;
+}
+/* confirm */
+.confirm {
+    width: calc(100% - 30px);
+    max-width: 650px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+}
+.confirm-header, .confirm-body, .confirm-button {
+    padding: 5px 10px;
+}
+.confirm-header {
+    background-color: var(--black-3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    padding: 25px 30px;
+}
+.confirm-header span {
+    margin-left: 10px;
+}
+.confirm-body {
+    font-size: small;
+    flex: 1;
+}
+.confirm-body h3 {
+    color: var(--danger);
+}
+.next-text {
+    color: var(--white-2);
+}
+.confirm-button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    font-size: small;
+    margin: 10px 0 5px;
+}
+.confirm-btn {
+    padding: 5px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.confirm-no {
+    color: var(--danger);
+}
+.confirm-yes {
+    background-color: royalblue;
+}
+/* filedrop */
+.file-drop {
+    display: flex;
+    height: 100%;
+    overflow: scroll;
+}
+.img-view {
+    flex: 1;
+    background-color: var(--black-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.img-view img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+.drop-zone {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 10px solid var(--black-4);
+    border-style:dashed;
+    cursor: pointer;
+    transition: .3s;
+    position: relative;
+    border-radius: 5px;
+}
+.drop-icon {
+    font-size: 5em;
+    color: var(--black-3);
+    transition: .3s;
+}
+.drop-text {
+    font-size: small;
+    position: absolute;
+    transition: .3s;
+}
+.drop-zone:hover {
+    background-color: var(--black-4);
+}
+.drop-zone:hover .drop-icon {
+    color: var(--white-3);
+}
+.drop-zone:hover .drop-text {
+    opacity: 0;
+}
+.img-form {
+    flex: 1;
+    justify-content: center;
+}
+.general-info {
+    border-bottom: 1px solid royalblue;
+}
+.url-image {
+    color: var(--white-2);
+    font-size: xx-small;
+}
+/* media query */
+@media (max-width: 768px) {
+    .form-modal {
+        flex: 3;
+    }
+}
+@media (max-width: 524px) {
+    .modal {
+        height: 90vh;
+    }
+    .add-modal {
+        flex-direction: column;
+    }
+    .form-modal {
+        padding: .5em 1em 1em;
+        overflow: auto;
+    }
+    .img-form {
+        padding: .5em .5em 1em;
+        flex: 2;
+    }
+    .file-drop {
+        flex-direction: column;
+    }
+    .img-view {
+        height: 250px;
+    }
+    .file-drop.jadwal-form .img-view {
+        flex: 3;
+    }
+    .file-drop.jadwal-form .img-form {
+        flex: 1;
+    }
+}
+@media (max-width: 375px) {
+    .input-left {
+        flex-direction: column-reverse;
+    }
+}

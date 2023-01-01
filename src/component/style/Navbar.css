@@ -1,0 +1,203 @@
+.navigation {
+    display: flex;
+    flex-direction: row;
+    margin-top: 48px;
+    position: fixed;
+    z-index: 2;
+    height: -webkit-fill-available;
+}
+.hideNavbar {
+    transform: translateX(-100%);
+    transition: .1s ease-in;
+}
+.showNavbar {
+    transform: translateX(0);
+    transition: .1s ease-out;
+}
+.pointer {
+    cursor: pointer;
+}
+nav {
+    background-color: var(--black-1);
+    width: 75px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+nav .nav-1 {
+    max-height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.home-frame {
+    padding: 8px 2px;
+    border-bottom: 2px solid var(--black-5);
+    width: fit-content;
+    margin: 0 auto;
+}
+.guild-frame.active {
+    background-color: var(--black-3);
+}
+.find-create-frame {
+    border-top: 2px solid var(--black-5);
+    display: flex;
+    width: 58px;
+    margin: .5em;
+    margin-top: 0;
+    padding-top: 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: .5em;
+}
+.home-profile {
+    background-color: var(--black-3);
+    border-radius: 15px;
+    width: 48px;
+    height: 48px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.home-profile:hover {
+    background-color: var(--purple-1);
+}
+.home-profile.active {
+    background-color: var(--purple-1);
+}
+.find-create {
+    cursor: pointer;
+}
+.find-create:hover, .find-create:hover > * {
+    background-color: var(--orange-2);
+    color: var(--black-2);
+}
+.guild-photo-profile {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    padding: .25em;
+    margin: 0 auto;
+}
+.guild-photo-profile.active {
+    border-radius: 15px;
+    border-left: 5px solid var(--purple-1);
+    transition: .1s ease;
+}
+.guild-photo-profile:hover {
+    border-radius: 15px;
+}
+.nav-guild {
+    flex: 1;
+    overflow: auto;
+}
+.nav-guild div {
+    padding: 0 .5em;
+    cursor: pointer;
+}
+.nav-guild div:hover {
+    background-color: var(--black-2);
+    padding: 0 .5em;
+}
+.nav-icon {
+    color: var(--white-1);
+    height: 20px;
+}
+.nav-icon-2 {
+    color: var(--orange-2);
+}
+
+/* navbar 2 */
+.modeNavbar {
+    position: relative;
+    background-color: var(--black-2);
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.modeNavbarHeader {
+    padding: 1.5px 10px 1.5px 16px;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    background-color: var(--black-3);
+}
+.guild-name {
+    flex: 1;
+    padding: 12px 0;
+    margin: 0;
+    color: var(--white-1);
+    display: inline-block;
+}
+.settingNavbar {
+    color: var(--white-1);
+    padding: 5px;
+    border-radius: 5px;
+}
+.settingNavbar:hover {
+    background-color: var(--black-4);
+}
+.roomList {
+    overflow: auto;
+    flex: 1;
+}
+.room {
+    padding: .5em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    background-color: var(--black-2);
+}
+.room.active {
+    background-color: var(--black-3);
+    padding-left: .75em;
+    transition: .1s ease;
+}
+.room:hover {
+    background-color: var(--black-4);
+}
+.room-icon {
+    color: var(--white-3);
+    height: 16px;
+    margin: 0 5px;
+}
+.room-icon.active {
+    color: var(--purple-1);
+}
+.room span {
+    font-size: small;
+    color: var(--white-2);
+}
+.room span.active {
+    color: var(--purple-1);
+}
+.profile-container {
+    width: 100%;
+}
+.profile {
+    display: flex;
+    align-items: center;
+    padding: 5px 8px;
+    background-color: var(--black-3);
+    box-shadow: var(--shadow-1-reverse);
+}
+.profile img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+    margin-right: .5em;
+}
+.profile-nickname {
+    font-size: 14px;
+    color: var(--white-1);
+    font-weight: bold;
+}
+.profile-id {
+    font-size: 12px;
+    color: var(--white-2);
+}

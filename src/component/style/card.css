@@ -1,0 +1,113 @@
+.todo-card {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 58px;
+    border-radius: 5px;
+    background-color: var(--black-3);
+    justify-content: space-between;
+}
+.todo-left, .todo-right {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+}
+.todo-left {
+    flex: 1;
+}
+.card-color {
+    width: 10px;
+    min-width: 10px;
+    margin: .5em;
+    border-radius: 3px;
+}
+.card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 0;
+    word-break: break-all;
+    flex: 1;
+}
+.card-title {
+    color: var(--white-1);
+}
+.card-description, .card-deadline {
+    font-size: small;
+    color: var(--white-3);
+}
+.card-finish {
+    width: 55px;
+    height: 28px;
+    border-radius: 50px;
+    margin: auto 0 auto 1em;
+}
+.card-finish-value {
+    width: 30px;
+    height: 100%;
+    border-radius: 50px;
+    background-color: var(--white-2);
+}
+.finish-on {
+    padding-left: 25px;
+    background-color: var(--ok);
+    transition: .3s ease-out;
+}
+.finish-off {
+    padding-right: 25px;
+    transition: .3s ease-out;
+    background-color: var(--black-2);
+}
+.card-more {
+    display: flex;
+    align-items: center;
+}
+.card-more-btn {
+    margin: .5em;
+    padding: .5em;
+    border-radius: 50px;
+    width: 15px;
+}
+.card-more-btn:hover {
+    background-color: var(--black-2);
+}
+.card-drop-down {
+    z-index: 1;
+}
+.card-drop-down.active {
+    opacity: 1;
+    visibility: visible;
+    transition: .1s ease;
+}
+.card-drop-down.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transition: .1s ease;
+}
+.card-drop-down ul {
+    background-color: var(--black-2);
+    list-style: none;
+    font-size: small;
+    position: absolute;
+    right: 25px;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border-radius: 5px 0 5px 5px;
+    overflow: hidden;
+}
+.card-drop-down ul li {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+    padding: 5px 15px;
+}
+.card-drop-down ul li:hover {
+    background-color: var(--black-5);
+}
+@media (max-width: 375px) {
+    .card-description {
+        font-size: xx-small;
+    }
+}

@@ -1,0 +1,126 @@
+@import url(./chat.css);
+.base-right {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    background-color: var(--black-2);
+}
+.sidebar-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    flex: 1;
+    overflow: auto;
+}
+.base-right-form {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    min-height: 48px;
+    margin: 0 3px 8px;
+    padding: 0 2px;
+    background-color: transparent;
+}
+.base-right-form .textarea-container {
+    display: flex;
+    align-items: center;
+    flex: 4;
+    background-color: var(--black-4);
+    border-radius: 5px;
+    padding: 5px;
+    min-height: 35px;
+    overflow: auto;
+}
+.base-right-form textarea {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: var(--white-2);
+    background-color: inherit;
+    resize: none;
+    font-family: inherit;
+    font-size: x-small;
+    max-height: 160px;
+    overflow: scroll;
+}
+.base-right-form button {
+    height: 35px;
+    flex: 1;
+    color: var(--white-1);
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+}
+.btn-off {
+    background-color: var(--light-blue);
+}
+.btn-on {
+    background-color: var(--light-blue);
+    box-shadow: var(--shadow-2-blue);
+}
+.users-group {
+    color: var(--white-3);
+}
+.group-user-container {
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.group-user {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    gap: 5px;
+    border-radius: 5px;
+    margin: 4px 0;
+}
+.group-user:hover {
+    background-color: var(--black-5);
+    transition: .1s ease;
+}
+.user-context {
+    display: flex;
+    flex-direction: column;
+}
+.group-user img {
+    width: 38px;
+    height: 38px;
+    border-radius: 50px;
+}
+.group-user p {
+    font-size: small;
+    font-weight: 500;
+}
+.group-user .user-status {
+    color: var(--white-2);
+    font-size: xx-small;
+}
+@media (max-width: 768px) {
+    .base-right {
+        height: calc(100vh - 48px);
+        position: fixed;
+        right: 0;
+        width: 314px;
+        box-shadow: var(--shadow-1-left);
+
+        background: rgba(41, 43, 47, .9);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+    .base-right-form {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 314px;
+        margin: 0;
+        padding: 0 3px 8px;
+    }
+    .base-right-hide {
+        transform: translateX(100%);
+        transition: .1s ease;
+    }
+    .base-right-show {
+        transform: translateX(0);
+        transition: .1s ease;
+    }
+}

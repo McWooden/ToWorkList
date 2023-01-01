@@ -1,0 +1,231 @@
+.setting_full {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+}
+.setting_full_close {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    color: var(--white-2);
+}
+.setting_full_close:hover .x_mark {
+    color: var(--white-1);
+}
+.setting_full_close p {
+    font-size: xx-small;
+}
+.x_mark {
+    font-size: 1.2em;
+    border: 2px solid var(--white-2);
+    color: var(--white-2);
+    padding: 6px 10px;
+    border-radius: 50px;
+    display: grid;
+    place-items: center;
+}
+/* nav */
+.setting_full_nav {
+    flex: 1;
+    background-color: var(--black-2);
+    padding: 4em 0;
+}
+.setting_full_nav ul {
+    max-width: 200px;
+    margin-left: auto;
+}
+.setting_full_nav_list {
+    display: flex;
+    align-items: center;
+    padding: .5em 1em;
+    color: var(--white-2);
+    gap: .5em;
+    cursor: pointer;
+}
+.setting_full_nav_list:hover {
+    background-color: var(--black-3);
+}
+.setting_full_nav_list.active {
+    color: var(--purple-2);
+    background-color: var(--black-1);
+}
+.setting_full_body {
+    flex: 3;
+    background-color: var(--black-4);
+    padding: 4em 1em;
+    position: relative;
+    overflow: auto;
+}
+.setting_full_body section {
+    max-width: 670px;
+}
+/* profile */
+.setting_full_profile_view {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--black-3);
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+.setting_full_profile_view_header {
+    display: flex;
+    align-items: center;
+}
+.setting_full_pp_guild {
+    width: 100%;
+    max-width: 70px;
+    max-height: 70px;
+    transition: .3s;
+    border-radius: 5px;
+}
+.setting_full_pp_guild:hover {
+    border-radius: 5px;
+}
+.setting_full_name_guild {
+    font-size: larger;
+    margin-left: 20px;
+}
+.setting_full_name_guild span {
+    color: var(--white-3);
+}
+.setting_full_profile_view_body {
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 1em;
+    color: var(--white-3);
+    font-size: small;
+}
+.setting_keluar {
+    padding: 10px;
+}
+.setting_keluar p {
+    color: var(--white-2);
+    font-weight: bold;
+    font-size: small;
+    margin-bottom: 10px;
+}
+.setting_keluar-action {
+    display: flex;
+    gap: 10px;
+}
+.setting_keluar_btn {
+    padding: 5px 20px;
+    border-radius: 3px;
+    font-size: x-small;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.setting_keluar_btn.delete_btn {
+    background-color: #d83c3e;
+}
+.setting_keluar_btn.delete_btn:hover {
+    background-color: maroon;
+}
+.setting_keluar_btn.keluar_btn {
+    border: 1px solid #d83c3e;
+}
+.setting_keluar_btn.keluar_btn:hover {
+    border-color: maroon;
+    background-color: maroon;
+}
+.setting_keluar_btn.edit_btn {
+    background-color: var(--light-blue);
+    width: fit-content;
+    color: var(--white-1);
+    margin-left: auto;
+}
+
+/* room */
+.setting_header {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--black-5);
+}
+.setting_header p {
+    color: var(--white-2);
+    font-weight: 400;
+    font-size: small;
+    margin-top: 10px;
+}
+.setting_room_list_name {
+    flex: 1;
+}
+.room_action {
+    display: flex;
+    align-items: center;
+    justify-self: flex-end;
+}
+.setting_room .info-menu-box {
+    background-color: inherit;
+}
+.setting_room:hover {
+    background-color: var(--black-1);
+}
+.setting_room-setting {
+    transition: .3s;
+}
+.setting_room-setting:hover {
+    transform: rotate(30deg);
+}
+@media (max-width: 600px) {
+    .setting_full_nav_list_icon {
+        font-size: large;
+    }
+    .setting_full_nav_list p {
+        display: none;
+    }
+    .setting_full_nav {
+        flex: 0;
+    }
+    .setting_full_body {
+        flex: 1;
+    }
+    .setting_full_name_guild {
+        font-size: medium;
+    }
+}
+@media (max-width: 425px) {
+    .setting_full {
+        flex-direction: column-reverse;
+    }
+    .setting_full_nav {
+        padding: 0;
+    }
+    .setting_full_nav ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-left: 0;
+        max-width: 100%;
+    }
+    .setting_full_nav_list {
+        flex: 1;
+    }
+    .setting_full_profile_view {
+        padding-bottom: 0;
+    }
+    .setting_full_profile_view_header {
+        flex-direction: column;
+    }
+    .setting_full_pp_guild {
+        max-width: none;
+        max-height: 250px;
+    }
+    .setting_full_name_guild {
+        margin-top: 10px;
+        font-size: large;
+    }
+    .setting_full_nav_list {
+        justify-content: center;
+    }
+}

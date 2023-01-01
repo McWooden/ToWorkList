@@ -1,0 +1,163 @@
+.base-left {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.sidebar-left {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+.base-left-hide {
+    transform: translateX(0);
+}
+@media (max-width: 892px) {
+    .base-left {
+        height: calc(100vh - 48px);
+        position: fixed;
+        width: 255px;
+        box-shadow: var(--shadow-1-right);
+
+        background: rgba(54, 57, 63, 0.79);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+    .base-left-hide {
+        transform: translateX(-100%);
+        transition: .1s ease;
+    }
+    .base-left-show {
+        transform: translateX(0);
+        transition: .1s ease;
+    }
+}
+/* greet */
+.greeting, .jadwal {
+    background-color: var(--black-3);
+    min-height: 58px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    gap: 5px;
+    overflow: hidden;
+    padding-right: 5px;
+}
+.greeting .color {
+    flex: 1;
+    border-radius: 3px;
+    background-color: var(--black-2);
+    display: grid;
+    place-items: center;
+    font-size: large;
+}
+.greeting-context, .jadwal .open-jadwal {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.greeting-context .date {
+    color: var(--white-3);
+    font-size: small;
+}
+/* jadwal */
+.jadwal {
+    position: relative;
+    padding-right: 0;
+    background-color: var(--black-5);
+    gap: 0;
+    min-height: 38px;
+}
+.jadwal .preview {
+    flex: 1;
+}
+.jadwal .preview:hover .setting-btn {
+    opacity: 1;
+}
+.jadwal .preview:hover .setting {
+    opacity: 0;
+    background-color: var(--black-2);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.jadwal .preview:hover .setting, .jadwal .preview:hover .setting-btn {
+    opacity: 1;
+    transition: .5s;
+}
+.jadwal .preview:hover .setting-btn {
+    transform: rotate(22deg);
+}
+.jadwal .setting-btn {
+    opacity: 0;
+}
+.jadwal .open-jadwal {
+    background-color: var(--black-3);
+    transition: .1s;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 10px;
+    align-items: center;
+    font-size: small;
+}
+.jadwal .open-jadwal:hover {
+    background-color: var(--black-1);
+}
+.jadwal-image {
+    width: 100%;
+    height: 100%;
+    background-color: var(--black-1);
+}
+.jadwal-image img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+/* menu box */
+.left-menu-box {
+    background-color: var(--black-3);
+    color: var(--white-2);
+    padding: 2px 5px;
+    font-size: small;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    width: fit-content;
+    margin: 3px;
+}
+.left-menu-box-icon {
+    min-width: 20px;
+}
+.left-menu-box-count {
+    flex: 1;
+    text-align: center;
+    min-width: 10px;
+}
+/* proggress */
+.progress {
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    width: 100%;
+}
+.progress-bar {
+    background-color: var(--black-3);
+    height: 20px;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.progress-value {
+    height: 100%;
+    transition: .3s ease;
+}
+.undone {
+    background-color: var(--ok);
+}
+.done {
+    background-color: var(--danger);
+}

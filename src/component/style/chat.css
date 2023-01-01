@@ -1,0 +1,77 @@
+.chat-card-date {
+    border-radius: 5px;
+    color: var(--white-3);
+    width: fit-content;
+    align-self: center;
+    font-size: .5em;
+    padding: .25em .5em;
+    margin: .5em 0;
+}
+.chat-card-nickname {
+    font-size: .7em;
+    color: var(--white-2);
+    margin-top: .5em;
+}
+.chat-card {
+    display: flex;
+    margin-bottom: 1px;
+    position: relative;
+}
+.chat-card.my {
+    flex-direction: row-reverse;
+    align-self: flex-end;
+}
+.chat-card-message.active {
+    background-color: var(--ok);
+}
+.chat-card-message.inactive {
+    background-color: var(--black-5);
+}
+.chat-card-message {
+    border-radius: 5px 10px 10px 0;
+    padding: 2px 5px;
+    font-size: .7em;
+    word-break: break-all;
+}
+.chat-card-message.my {
+    border-radius: 10px 5px 0 10px;
+    background-color: var(--light-blue);
+}
+.chat-card-time {
+    font-size: .5em;
+    color: var(--white-3);
+    align-self: flex-end;
+    margin-left: 2px;
+}
+.chat-card-time.my {
+    margin-left: 0;
+    margin-right: 2px;
+}
+.base-right-hide {
+    transform: translateX(0);
+}
+.chat-dropdown {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.chat-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transition: .1s ease;
+}
+.chat-dropdown.inactive {
+    opacity: 0;
+    visibility: hidden;
+    transition: .1s ease;
+}
+.chat-dropdown ul li {
+    background-color: var(--black-2);
+    list-style: none;
+    font-size: small;
+    padding: 0 5px;
+    border-radius: 5px 0 5px 5px;
+}
+.chat-dropdown ul li:hover {
+    background-color: var(--black-5);
+}
