@@ -70,6 +70,30 @@ function FormRegist({data}) {
         setTimeout(() => {
             accountToast('aowkokwao')
         }, 2500)
+        setTimeout(() => {
+            accountToast('Zǎo shang hǎo zhōng guó!')
+        }, 3500)
+        setTimeout(() => {
+            accountToast('Xiàn zài wǒ yǒu')
+        }, 4500)
+        setTimeout(() => {
+            accountToast('BING CHILLING 🍦')
+        }, 5000)
+        setTimeout(() => {
+            accountToast('Wǒ hěn xǐ huān')
+        }, 6000)
+        setTimeout(() => {
+            accountToast('BING CHILLING 🍦 🍦 🍦')
+        }, 6500)
+        setTimeout(() => {
+            accountToast('Dàn shì "sù dù yǔ')
+        }, 7000)
+        setTimeout(() => {
+            accountToast('jī qíng jiǔ" bǐ')
+        }, 7500)
+        setTimeout(() => {
+            accountToast(' 🍦 🍦 🍦 BING CHILLING 🍦 🍦 🍦 ')
+        }, 8000)
         navigate('/')
     }
     return (
