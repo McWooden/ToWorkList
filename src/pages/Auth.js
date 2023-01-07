@@ -12,7 +12,7 @@ import { faChevronLeft, faRightToBracket, faAddressCard } from '@fortawesome/fre
 
 const API_LOCAL = 'http://localhost:3001'
 const API_ONLINE = process.env.REACT_APP_API 
-const API = API_LOCAL
+const API = API_ONLINE
 
 export function Auth() {
     const navigate = useNavigate()
