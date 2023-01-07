@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client'
 import './index.css';
 import App from './pages/App'
-import Auth from './pages/Auth'
+import { Auth, Register, Login } from './pages/Auth'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
@@ -13,8 +13,12 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />}/>
-        <Route path='/auth' element={<Auth />}/>
+        <Route path='*' element={<App />}/>
+        <Route path='/auth'>
+          <Route index element={<Auth />}/>
+          <Route path='/auth/login' element={<Login />}/>
+          <Route path='/auth/register' element={<Register />}/>
+        </Route>
       </Routes>
     </BrowserRouter>
     <ToastContainer

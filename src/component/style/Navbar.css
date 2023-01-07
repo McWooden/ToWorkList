@@ -118,7 +118,6 @@ nav .nav-1 {
     width: 240px;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
 }
 .modeNavbarHeader {
     padding: 1.5px 10px 1.5px 16px;
@@ -176,6 +175,7 @@ nav .nav-1 {
 .room span.active {
     color: var(--purple-1);
 }
+/* profile */
 .profile-container {
     width: 100%;
 }
@@ -185,6 +185,12 @@ nav .nav-1 {
     padding: 5px 8px;
     background-color: var(--black-3);
     box-shadow: var(--shadow-1-reverse);
+}
+.profile:hover {
+    background-color: var(--black-4);
+}
+.profile:active {
+    background-color: var(--black-1);
 }
 .profile img {
     width: 32px;
@@ -200,4 +206,72 @@ nav .nav-1 {
 .profile-id {
     font-size: 12px;
     color: var(--white-2);
+}
+/* profile pop */
+.profile_pop {
+    background-color: var(--black-2);
+    position: fixed;
+    width: 300px;
+    left: 10px;
+    bottom: 60px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: .1s ease;
+}
+.profile_pop.active {
+    opacity: 1;
+    visibility: visible;
+}
+.profile_pop.inactive {
+    opacity: 0;
+    visibility: hidden;
+}
+.profile_pop img {
+    width: 80px;
+    border-radius: 50px;
+    margin: 0 20px;
+}
+.profile_pop-body {
+    flex: 1;
+    background-color: var(--black-0);
+    margin: 0 15px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.profile_pop-nickname {
+    font-weight: 600;
+    border-bottom: 1px solid var(--black-4);
+}
+.profile_pop-nickname span, .profile_pop-created_at span, .profile_pop-switch_account, .profile_pop-add_account  {
+    color: var(--white-3);
+}
+.profile_pop-created_at {
+    font-size: x-small;
+    margin-top: 5px;
+    border-bottom: 1px solid var(--black-4);
+    padding: 5px 0;
+    margin-bottom: 10px;
+}
+.profile_pop-created_at p {
+    font-weight: 600;
+}
+.profile_pop-switch_account, .profile_pop-add_account {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: small;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.profile_pop-switch_account:hover, .profile_pop-add_account:hover {
+    background-color: var(--black-4);
+    color: var(--white-1);
+}
+.profile_pop-switch_account:active, .profile_pop-add_account:active {
+    background-color: var(--black-3);
 }

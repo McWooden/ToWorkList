@@ -93,3 +93,20 @@ export function accountToast(text) {
         closeButton: false,
     })
 }
+
+export function loadingToast(text) {
+    const promise = toast.loading(
+        <div className="myToast">
+            <p>{text || 'Account'}</p>
+        </div>, {
+        closeButton: false,
+    })
+    return promise
+}
+export function updateToast(text) {
+    return (
+        <div className="myToast">
+            <p>{text || 'update'}</p>
+        </div>
+    )
+}

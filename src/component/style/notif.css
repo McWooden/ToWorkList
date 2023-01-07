@@ -1,11 +1,16 @@
 .Toastify__toast-container {
     width: fit-content !important;
 }
+.Toastify__toast-icon {
+    margin-inline-end: 0;
+    margin-inline-start: 5px;
+}
 .Toastify__toast {
     min-height: 0 !important;
     width: fit-content;
     font-family: var(--defaultFont) !important;
     font-size: small;
+    margin-bottom: 5px;
 }
 .Toastify__toast-theme--colored {
     background-color: var(--black-2) !important;
