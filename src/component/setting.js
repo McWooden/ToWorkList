@@ -71,7 +71,7 @@ function GuildSettingProfile() {
             </div>
             <div className="setting_full_profile_view_body">
                 <h5>Dibuat pada</h5>
-                <p className='setting_profile_date'>{convertDateToString(guild.profile.createdDate)} {guild.profile.by? `oleh ${guild.profile.by}`: null}</p>
+                <p className='setting_profile_date'>{convertDateToString(guild.profile.created_at)} {guild.profile.by? `oleh ${guild.profile.by}`: null}</p>
                 <p className='setting_keluar_btn edit_btn' onClick={() => editToast('mengedit profile')}>Edit Profil</p>
             </div>
         </div>

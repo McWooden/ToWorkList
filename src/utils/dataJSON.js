@@ -266,7 +266,7 @@ export const guildData = [
             guildName: 'Huddin guilds',
             src: 'https://source.unsplash.com/random/huddinguilds',
             by: 'Huddin',
-            createdDate: '12/15/2022',
+            created_at: '12/15/2022',
         },
         rooms: [
             {
@@ -355,7 +355,7 @@ export const guildData = [
             guildName: 'minecraft x-6',
             src: 'https://source.unsplash.com/random/minecraft',
             by: 'afif',
-            createdDate: '12/15/2022',
+            created_at: '12/15/2022',
         },
         rooms: [
             {

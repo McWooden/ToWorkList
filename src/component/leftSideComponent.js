@@ -113,7 +113,7 @@ export function JadwalRoom() {
     }
     return (
         <div className="jadwal">
-            <div className='preview' style={{background: `url(${room.jadwal})`, backgroundPosition: 'center', backgroundSize: 'contain', backgroundRepeat: 'no-repeat'}}>
+            <div className='preview' style={{background: `url(${room.jadwal})`}}>
                 <div className="setting pointer" onClick={() => setModalOpen(true)}>
                     <FontAwesomeIcon icon={faGear} className='setting-btn'/>
                 </div>
