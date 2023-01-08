@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import { convertDateToString } from '../utils/convertDateFormat'
 import { getLocalAccount } from '../utils/localstorage'
 
-
 function Navbar() {
     const {hideNavbar, navRef} = useContext(GuildContext)
     return (
@@ -125,9 +124,9 @@ function RoomList() {
     )
 }
 function Profile() {
-    const profile = getLocalAccount()
-    const date = convertDateToString(profile.created_at)
     const navigate = useNavigate()
+    const profile = getLocalAccount() || myAccount.profile
+    const date = convertDateToString(profile.created_at)
     const [userPop, setUserPop] = useState(false)
     const userPopRef = useRef()
     const profileRef = useRef()
@@ -135,6 +134,7 @@ function Profile() {
         setUserPop(!userPop)
     }
     useEffect(() => {
+        if (getLocalAccount() == null) navigate('/auth')
         let handler = (e) => {
             try {
                 if (userPopRef.current.contains(e.target) || profileRef.current.contains(e.target)) {

@@ -5,10 +5,10 @@ import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
 // import { defaultItem } from '../utils/dataJSON'
 
-
 export const GuildContext = createContext()
 export const ItemData = createContext()
 function App() {
+
   // force  update
   const [, setState] = useState(0)
   const forceUpdateHandler = () => {

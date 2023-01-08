@@ -110,10 +110,10 @@ export const myAccount = {
     profile: {
         nickname: 'McWooden',
         name: 'Sholahuddin A',
-        id: '2521',
-        pic: 'https://source.unsplash.com/random/mcwooden',
+        tag: '2521',
+        avatar: 'https://source.unsplash.com/random/mcwooden',
         email: 'example@gmail.com',
-        createdDate: '12/15/2022',
+        created_at: '12/15/2022',
     },
     rooms: [
         {
