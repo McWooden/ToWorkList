@@ -11,7 +11,7 @@ import { faChevronLeft, faRightToBracket, faAddressCard } from '@fortawesome/fre
 import { setLocalAccount } from '../utils/localstorage'
 
 
-const API = process.env.REACT_APP_LOCAL
+const API = process.env.REACT_APP_ONLINE
 
 export function Auth() {
     const navigate = useNavigate()
