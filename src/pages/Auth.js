@@ -8,11 +8,10 @@ import { loadingToast, accountToast } from '../utils/notif'
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faRightToBracket, faAddressCard } from '@fortawesome/free-solid-svg-icons'
+import { setLocalAccount } from '../utils/localstorage'
 
 
-const API_LOCAL = 'http://localhost:3001'
-const API_ONLINE = process.env.REACT_APP_API 
-const API = API_ONLINE
+const API = process.env.REACT_APP_LOCAL
 
 export function Auth() {
     const navigate = useNavigate()
@@ -79,16 +78,19 @@ export function Register() {
                                         .then(res => {
                                             handleChangeUser(data)
                                             toast.dismiss(promise)
+                                            accountToast('Melanjutkan membuat akun')
                                         })
                                         .catch(err => {
                                             setMsg(err.response.data)
                                             toast.dismiss(promise)
+                                            accountToast(err.response.data)
                                         })
                                     }}
                                     onError={() => {
                                         console.log('Login Failed')
                                     }}
                                     useOneTap
+                                    text='Sign up with Google'
                                 />
                                 <div className="navigate_to">
                                     <p>Sudah memiliki akun? <span onClick={() => navigate('/auth/login')}>login</span></p>
@@ -156,16 +158,7 @@ function FormRegist({data}) {
         axios.post(API + '/user', data)
         .then((res) => {
             navigate('/')
-            const newLocalData = {
-                name: inputLock.name,
-                nickname: nickname,
-                avatar: inputLock.avatar,
-                email: inputLock.email,
-                password: myPassword,
-                tag: res.data._doc.tag,
-                created_at: res.data._doc.created_at
-            }
-            localStorage.setItem('account', JSON.stringify(newLocalData))
+            setLocalAccount(res.data.rest)
             toast.dismiss(promise)
             accountToast(res.data.message)
         })
@@ -228,7 +221,7 @@ export function Login() {
         const promise = loadingToast('Mendapatkan data akun')
         axios.put(`${API}/user/login/google`, {credential})
         .then(res => {
-            localStorage.setItem('account', JSON.stringify(res.data))
+            setLocalAccount(res.data)
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')
@@ -249,7 +242,7 @@ export function Login() {
         const promise = loadingToast('Mendapatkan data akun')
         axios.put(`${API}/user/login/form`, data)
         .then((res) => {
-            localStorage.setItem('account', JSON.stringify(res.data))
+            setLocalAccount(res.data)
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')
@@ -291,6 +284,116 @@ export function Login() {
                     </div>
                 </form>
                 <div className="navigate_to">
+                    <p>Lupa <span onClick={() => navigate('/auth/pemulihan')}>password</span></p>
+                    <p>Belum memiliki akun? <span onClick={() => navigate('/auth/register')}>Sign up</span></p>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export function Pemulihan() {
+    const navigate = useNavigate()
+    const [msg, setMsg] = useState(null)
+    const [account, setAccount] = useState(null)
+    const [myPassword, setMyPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [errorPassword, setErrorPassword] = useState(null)
+    const [redBorderInput, setRedBorderInput] = useState(false)
+    const btn = useRef()
+    function handleSuccess(response) {
+        const credential = response.credential
+        setMsg(null)
+        const promise = loadingToast('Mencari akun')
+        axios.put(`${API}/user/pemulihan`, {credential})
+        .then((res) => {
+            setAccount(res.data)
+            toast.dismiss(promise)
+            accountToast('Berhasil menemukan akun')
+        })
+        .catch((err) => {
+            toast.dismiss(promise)
+            accountToast('Tidak menemukan akun')
+            setMsg(err.response.data || err)
+        })
+    }
+    useEffect(() => {
+        setErrorPassword(null)
+        setRedBorderInput(false)
+    }, [confirmPassword, myPassword])
+    function handleSubmit(event) {
+        event.preventDefault()
+        if (confirmPassword !== myPassword) {
+            setErrorPassword('Password dan Confirm password tidak cocok')
+            setRedBorderInput(true)
+            return
+        }
+        btn.current.style.backgroundColor = 'var(--black-1)'
+        const data = {
+            email: account.email,
+            password: myPassword
+        }
+        const promise = loadingToast('Mengganti password')
+        axios.post(API + '/user/pemulihan', data)
+        .then((res) => {
+            navigate('/')
+            setLocalAccount(res.data)
+            toast.dismiss(promise)
+            accountToast('Berhasil mengganti password dan masuk ke akun')
+        })
+        .catch((err) => {
+            toast.dismiss(promise)
+            accountToast('Gagal mengubah password')
+        }).finally(()=> {
+            btn.current.style.backgroundColor = 'royalblue'
+        })
+    }
+    return (
+        <div className="auth">
+            <div className="auth-context pemulihan">
+                <h4>Memulihkan akun</h4>
+                <p className='error_msg'>{msg}</p>
+                {
+                    account ?
+                    <>
+                        <div className="account_preview">
+                            <img src={account.avatar} alt={account.name}/>
+                            <div>
+                                <p>{account.nickname}<span>#{account.tag}</span></p>
+                                <p className='nickname_preview'>{account.name}</p>
+                            </div>
+                        </div>
+                        <form onSubmit={handleSubmit} className='auth_form'>
+                            <label>
+                            {errorPassword?
+                                <p className='error_msg'>{errorPassword}</p>
+                            :
+                                <span>Password</span>
+                            }
+                                <input type="password" value={myPassword} onChange={event => setMyPassword(event.target.value)} placeholder='Password baru' required className={`${redBorderInput?'red-border':''}`} maxLength='20' minLength='4'/>
+                            </label>
+                            <label>
+                                <span>Confirm Password</span>
+                                <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`${redBorderInput?'red-border':''}`} minLength='4'/>
+                            </label>
+                            <input type="submit" value="Ganti password" ref={btn}/>
+                        </form>
+                    </>
+                    :
+                        <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+                                <GoogleLogin
+                                    onSuccess={credentialResponse => {
+                                        handleSuccess(credentialResponse)
+                                    }}
+                                    onError={() => {
+                                        console.log('Login Failed')
+                                    }}
+                                    useOneTap
+                                />
+                        </GoogleOAuthProvider>
+                }
+                <div className="navigate_to">
+                    <p>Sudah memiliki akun <span onClick={() => navigate('/auth/login')}>Login</span></p>
                     <p>Belum memiliki akun? <span onClick={() => navigate('/auth/register')}>Sign up</span></p>
                 </div>
             </div>

@@ -150,6 +150,25 @@
 .auth_form input.green-border {
     border: 1px solid yellowgreen;
 }
+/* pemulihan */
+.pemulihan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.pemulihan .error_msg {
+    margin-top: 15px;
+}
+.pemulihan .navigate_to {
+    text-align: center;
+}
+.pemulihan .account_preview, .pemulihan .auth_form {
+    width: 100%;
+}
+.pemulihan .account_preview div p span {
+    color: var(--white-2);
+}
 @media (min-width: 400px) {
     .auth-context {
         max-width: 400px;

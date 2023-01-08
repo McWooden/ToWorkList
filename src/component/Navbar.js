@@ -7,6 +7,7 @@ import { myAccount, guildData } from '../utils/dataJSON'
 import { GuildSetting } from './setting'
 import { useNavigate } from 'react-router-dom'
 import { convertDateToString } from '../utils/convertDateFormat'
+import { getLocalAccount } from '../utils/localstorage'
 
 
 function Navbar() {
@@ -124,7 +125,7 @@ function RoomList() {
     )
 }
 function Profile() {
-    const profile = JSON.parse(localStorage.getItem('account'))
+    const profile = getLocalAccount()
     const date = convertDateToString(profile.created_at)
     const navigate = useNavigate()
     const [userPop, setUserPop] = useState(false)
