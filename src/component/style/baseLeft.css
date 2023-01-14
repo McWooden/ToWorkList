@@ -68,7 +68,6 @@
     gap: 0;
     min-height: 38px;
 }
-/* , backgroundPosition: 'center', backgroundSize: 'contain', backgroundRepeat: 'no-repeat' */
 .jadwal .preview {
     flex: 1;
     background-position: center !important;

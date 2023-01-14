@@ -1,24 +1,31 @@
 import './style/Navbar.css'
-import { GuildContext } from '../pages/App'
+import { AccountContext, PageContext } from '../pages/App'
 import { useContext, useState, useEffect, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faHouse, faCheck, faGear, faPlus, faCompass, faRepeat} from '@fortawesome/free-solid-svg-icons'
-import { myAccount, guildData } from '../utils/dataJSON'
+import {faHouse, faGear, faPlus, faCompass, faRepeat} from '@fortawesome/free-solid-svg-icons'
+import * as fontawesome from '@fortawesome/free-solid-svg-icons'
+import { myAccount } from '../utils/dataJSON'
 import { GuildSetting } from './setting'
 import { useNavigate } from 'react-router-dom'
 import { convertDateToString } from '../utils/convertDateFormat'
 import { getLocalAccount } from '../utils/localstorage'
+import axios from 'axios'
+import { useSelector, useDispatch } from 'react-redux'
+import { setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
 
+const API = process.env.REACT_APP_API
+
+// main navbar
 function Navbar() {
-    const {hideNavbar, navRef} = useContext(GuildContext)
+    const {hideNavbar, navRef} = useContext(AccountContext)
     return (
         <>
         <div className={`navigation ${hideNavbar?'hideNavbar':'showNavbar'}`} ref={navRef}>
             <nav>
                 <div className='nav-1'>
                     <HomeButton/>
-                    <GuildList/>
-                    <FindCreate/>
+                    <BookList/>
+                    <FindAndCreateBook/>
                 </div>
             </nav>
             <ModeNavbar/>
@@ -26,59 +33,69 @@ function Navbar() {
         </>
     )
 }
-function ModeNavbar() {
-    return (
-        <div className='modeNavbar'>
-            <ModeNavbarHeader/>
-            <RoomList/>
-            <Profile/>
-        </div>
-    )
-}
-
-function ModeNavbarHeader() {
-    const {guildName} = useContext(GuildContext)
-    const [settingOpen, setSettingOpen] = useState(false)
-    function handleClose() {
-        setSettingOpen(false)
-    }
-    useEffect(() => {
-        function handleKeyDown(event) {
-            if (event.key === 'Escape') {
-                setSettingOpen(false)
-            }
-        }
-
-        if (settingOpen) {
-            document.addEventListener('keydown', handleKeyDown)
-        } else {
-            document.removeEventListener('keydown', handleKeyDown)
-        }
-
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown)
-        }
-    }, [settingOpen])
-    
-    return (
-        <div className="modeNavbarHeader">
-            <h4 className='guild-name'>{guildName}</h4>
-            <FontAwesomeIcon icon={faGear} className='settingNavbar pointer' onClick={() => setSettingOpen(true)}/>
-            <GuildSetting open={settingOpen} close={handleClose}/>
-        </div>
-    )
-}
 function HomeButton() {
-    const {handleGuild, guildName} = useContext(GuildContext)
+    const { handleChangePage } = useContext(PageContext)
+    const pathBook = useSelector(state => state.fetch.pathBook)
+    const dispatch = useDispatch()
+    function handleClick() {
+        dispatch(setPathBook({path: '@me', id: '@me'}))
+        handleChangePage(myAccount)
+    }
     return (
-        <div className='home-frame'>
-            <div className={`home-profile pointer ${myAccount.profile.nickname === guildName ? 'active' : ''}`} onClick={() => handleGuild(myAccount)}>
+        <div className='home-frame' onClick={handleClick}>
+            <div className={`home-profile pointer ${pathBook==='@me' ? 'active' : ''}`}>
                 <FontAwesomeIcon icon={faHouse} className={'nav-icon'}/>
             </div>
         </div>
     )
 }
-function FindCreate() {
+function BookList() {
+    const [allBook, setAllBook] = useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let sessionBook = []
+                const response = await axios.get(API+'/book')
+                response.data.forEach((item, index) => {
+                    sessionBook.push(<BookItem key={index} data={item}/>)
+                })
+                setAllBook(sessionBook)
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        fetchData()
+    }, [])
+    return (
+        <div className="nav-guild">
+            {allBook}
+        </div>
+    )
+}
+function BookItem({data}) {
+    const pathBook = useSelector(state => state.fetch.pathBook)
+    const dispatch = useDispatch()
+    function handleClick() {
+        dispatch(setPathBook({path: data.profile.book_title, id: data._id}))
+        dispatch(setPathPageOfBook({path: data.profile.book_title, id: data.profile.book_title}))
+    }
+    return (
+        <div onClick={handleClick} className={`guild-frame ${pathBook===data.profile.book_title ? 'active' : ''}`}>
+            <img src={data.profile.avatar_url} className={`guild-photo-profile ${pathBook===data.profile.book_title ? 'active' : ''}`} alt={data.profile.book_title} title={data.profile.book_title}/>
+        </div>
+    )
+}
+function ModeNavbar() {
+    const pathBook = useSelector(state => state.fetch.pathBook)
+    return (
+        <div className='modeNavbar'>
+            {pathBook === '@me' ? <ModeNavbarAccountHeader/> : <ModeNavbarHeader/>}
+            {pathBook === '@me' ? <PageAccountList/> : <PageList/>}
+            <Profile/>
+        </div>
+    )
+}
+function FindAndCreateBook() {
     return (
         <div className='find-create-frame'>
             <div className='home-profile find-create'>
@@ -90,36 +107,122 @@ function FindCreate() {
         </div>
     )
 }
-
-function GuildList() {
-    const {guildName, handleGuild} = useContext(GuildContext)
-    const guild = []
-    guildData.forEach((item, index) => {
-        guild.push(
-            <div key={index} onClick={() => handleGuild(item)} className={`guild-frame ${item.profile.guildName === guildName ? 'active' : ''}`}>
-                <img src={item.profile.src} className={`guild-photo-profile ${item.profile.guildName === guildName ? 'active' : ''}`} alt={item.profile.guildName} title={item.profile.guildName}/>
-            </div>
-        )
-    })
+// modeNavbar component
+function ModeNavbarHeader() {
+    const pathBook = useSelector(state => state.fetch.pathBook)
+    const [settingOpen, setSettingOpen] = useState(false)
+    function handleClose() {
+        setSettingOpen(false)
+    }
+    useEffect(() => {
+        function handleKeyDown(event) {
+            if (event.key === 'Escape') {
+                setSettingOpen(false)
+            }
+        }
+        if (settingOpen) {
+            document.addEventListener('keydown', handleKeyDown)
+        } else {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [settingOpen])
     return (
-        <div className="nav-guild">
-            {guild}
+        <div className="modeNavbarHeader">
+            <h4 className='guild-name'>{pathBook}</h4>
+            <FontAwesomeIcon icon={faGear} className='settingNavbar pointer' onClick={() => setSettingOpen(true)}/>
+            <GuildSetting open={settingOpen} close={handleClose}/>
         </div>
     )
 }
-function RoomList() {
-    const {guildRooms, handleRoom, currentRoom} = useContext(GuildContext)
-    const lists = []
-    guildRooms.forEach((room, index) => {
-        lists.push(
-            <div key={index} className={`room ${currentRoom === room.roomName?'active':''}`} onClick={() => handleRoom(index)}>
-                <FontAwesomeIcon icon={faCheck} className={`room-icon ${currentRoom === room.roomName?'active':''}`}/> <span className={currentRoom === room.roomName?'active':''}>{room.roomName}</span>
-            </div>
-        )
-    })
+function ModeNavbarAccountHeader() {
+    return (
+        <div className="modeNavbarHeader">
+            <h4 className='app-name'>Toworklist</h4>
+        </div>
+    )
+}
+
+function PageList() {
+    const idBook = useSelector(state => state.fetch.idBook)
+    const [allPage, setAllPage] = useState([])
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                let sessionPage = []
+                const response = await axios.get('http://localhost:3001'+`/book/${idBook}/get/pages/details`)
+                response.data.pages.forEach((item, index) => {
+                    sessionPage.push(<PageListItem key={index} data={item}/>)
+                })
+                setAllPage(sessionPage)
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        fetchData()
+    }, [idBook])
     return(
         <div className='roomList'>
-            {lists}
+            {allPage}
+        </div>
+    )
+}
+function PageAccountList() {
+    const idBook = useSelector(state => state.fetch.idBook)
+    const [allPage, setAllPage] = useState([])
+    const pages = [
+        {
+            details: {
+                page_title: 'Ringkasan',
+                icon: 'faAddressBook',
+            }
+        },
+        {
+            details: {
+                page_title: 'Notifikasi',
+                icon: 'faBell',
+            }
+        },
+        {
+            details: {
+                page_title: 'Surat',
+                icon: 'faEnvelope',
+            }
+        },
+        {
+            details: {
+                page_title: 'Berita',
+                icon: 'faNewspaper',
+            }
+        }
+    ]
+    useEffect(() => {
+        let sessionPage = []
+        pages.forEach((item, index) => {
+            sessionPage.push(<PageListItem key={index} data={item}/>)
+        })
+        setAllPage(sessionPage)
+    }, [idBook])
+    return(
+        <div className='roomList'>
+            {allPage}
+        </div>
+    )
+}
+function PageListItem({data}) {
+    const title = data.details.page_title
+    const icon = data.details.icon
+    const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
+    const dispatch = useDispatch()
+    function handleClick() {
+        dispatch(setPathPageOfBook({path: title, id: data._id}))
+    }
+    const active = pathPageOfBook === title
+    return (
+        <div className={`room ${active?'active':''}`} onClick={handleClick}>
+            <FontAwesomeIcon icon={fontawesome[icon]} className={`room-icon ${active?'active':''}`}/> <span className={active?'active':''}>{title}</span>
         </div>
     )
 }

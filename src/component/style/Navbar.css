@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 .navigation {
     display: flex;
     flex-direction: row;
@@ -132,6 +133,13 @@ nav .nav-1 {
     margin: 0;
     color: var(--white-1);
     display: inline-block;
+}
+.app-name {
+    flex: 1;
+    padding: 3px 0;
+    margin: 0;
+    color: var(--white-1);
+    font-family: 'Comfortaa', cursive;
 }
 .settingNavbar {
     color: var(--white-1);

@@ -6,21 +6,26 @@ import { Auth, Register, Login, Pemulihan } from './pages/Auth'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
+import store from './redux/store'
+import { Provider } from 'react-redux';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <Provider store={store}>
       <Routes>
-        <Route path='*' element={<App />}/>
+          <Route path='*' element={<App />}/>
         <Route path='/auth'>
           <Route index element={<Auth />}/>
-          <Route path='/auth/login' element={<Login />}/>
-          <Route path='/auth/register' element={<Register />}/>
-          <Route path='/auth/pemulihan' element={<Pemulihan />}/>
+          <Route path='login' element={<Login />}/>
+          <Route path='register' element={<Register />}/>
+          <Route path='pemulihan' element={<Pemulihan />}/>
         </Route>
       </Routes>
+      </Provider>
     </BrowserRouter>
     <ToastContainer
               pauseOnFocusLoss={false}

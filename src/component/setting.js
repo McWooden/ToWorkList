@@ -9,10 +9,11 @@ import { GuildContext } from '../pages/App'
 import { convertDateToString } from '../utils/convertDateFormat'
 import { deleteToast, leaveToast, editToast } from '../utils/notif'
 import { myAccount } from '../utils/dataJSON'
+import { useSelector } from 'react-redux'
 
 export function GuildSetting({open, close}) {
     const [select, setSelect] = useState('profile')
-    const {guildName} = useContext(GuildContext)
+    const pathBook = useSelector(state => state.fetch.pathBook)
     if (!open) return
     function handleSelectOnChange(newSelect) {
         setSelect(newSelect)
@@ -23,7 +24,7 @@ export function GuildSetting({open, close}) {
                 <ul>
                     <li className={`setting_full_nav_list ${select === 'profile' && 'active'}`} onClick={() => handleSelectOnChange('profile')}>
                         <FontAwesomeIcon icon={faPencil} className='setting_full_nav_list_icon'/>
-                        <p>{guildName}</p>
+                        <p>{pathBook}</p>
                     </li>
                     <li className={`setting_full_nav_list ${select === 'room' && 'active'}`} onClick={() => handleSelectOnChange('room')}>
                         <FontAwesomeIcon icon={faMap} className='setting_full_nav_list_icon'/>
