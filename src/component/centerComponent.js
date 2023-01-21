@@ -1,21 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare, faImage} from '@fortawesome/free-solid-svg-icons'
+import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare, faImage, faStickyNote} from '@fortawesome/free-solid-svg-icons'
 import {convertDateToString} from '../utils/convertDateFormat'
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { FileDrop, Modal } from './Modal'
-import { ItemData } from '../pages/App';
+// import { ItemData } from '../pages/App';
 import { TodoModel } from './model';
 import { useRef } from 'react';
 import { deleteToast, editToast, imageToast, noteToast, todoToast } from '../utils/notif';
+import { useSelector } from 'react-redux';
 
 
 
 
 export function CardImages() {
-    const {item} = useContext(ItemData)
+    const todo = useSelector(state => state.source.todo)
     const [modalOpen, setModalOpen] = useState(false)
     const box = []
-    item.images.forEach((data, index) => {
+    todo.images.forEach((data, index) => {
         box.push(
             <Image key={index} data={data}/>
         )
@@ -117,9 +118,9 @@ function Image({data}) {
     )
 }
 export function Notes() {
-    const {item} = useContext(ItemData)
+    const todo = useSelector(state => state.source.todo)
     const notes = []
-    item.notes.forEach((item, index) => {
+    todo.notes.forEach((item, index) => {
         function handleDelete() {
             deleteToast('menghapus catatan')
         }
@@ -129,7 +130,7 @@ export function Notes() {
         notes.push(
                 <div className='note' key={index}>
                     <div className='note-head'>
-                        <FontAwesomeIcon icon={faNoteSticky} style={{color: item.color}} className='note-color'/>
+                        <FontAwesomeIcon icon={faNoteSticky} style={{color: todo.details.color}} className='note-color'/>
                         <div className="note-btn">
                             <FontAwesomeIcon icon={faTrash} className='pointer' onClick={handleDelete}/>
                             <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
@@ -150,12 +151,22 @@ export function Notes() {
         </div>
     )
 }
+// export function CenterActionButton({handleModalOpen}) {
+//     const {item} = useContext(ItemData)
+//     return (
+//         <div className='center-action-btn'>
+//             <div className="action-add">
+//                 <FontAwesomeIcon icon={item ? faNoteSticky : faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
+//             </div>
+//         </div>
+//     )
+// }
 export function CenterActionButton({handleModalOpen}) {
-    const {item} = useContext(ItemData)
+    const todo = useSelector(state => state.source.todo)
     return (
         <div className='center-action-btn'>
             <div className="action-add">
-                <FontAwesomeIcon icon={item ? faNoteSticky : faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
+                <FontAwesomeIcon icon={todo?faStickyNote:faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
             </div>
         </div>
     )
@@ -268,13 +279,18 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
     )
 }
 
-export function CardContainer({items}) {
-
+// export function CardContainer({items}) {
+//     let box = []
+//     items.forEach((data, index) => box.push(<TodoModel key={index} item={data} indexItem={index}/>))
+//     return (
+//         <>
+//         {box}
+//         </>
+//     )
+// }
+export function CardContainer() {
+    const source = useSelector(state => state.source.source)
     let box = []
-    items.forEach((data, index) => box.push(<TodoModel key={index} item={data} indexItem={index}/>))
-    return (
-        <>
-        {box}
-        </>
-    )
+    source.list.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
+    return box
 }

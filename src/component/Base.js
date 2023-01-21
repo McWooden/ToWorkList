@@ -2,58 +2,154 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft, faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 import './style/Modal.css'
-import { ChatModel } from './model'
-import { useContext } from 'react';
+// import { ChatModel } from './model'
+import { useContext, useEffect } from 'react';
 import { HideBase } from './TodoApp';
-import { ItemData, GuildContext } from '../pages/App';
-import { myAccount } from '../utils/dataJSON';
-import { convertDateToString } from '../utils/convertDateFormat'
-import { MoreInfoCard, DetailLeftAction, JadwalRoom } from './leftSideComponent';
-import { FormBaseRight } from './rightSideComponent'
-import { Notes, CardImages, CenterActionButton, AddTaskModal, AddNoteModal, CardContainer} from './centerComponent';
+// import { ItemData, GuildContext } from '../pages/App';
+// import { myAccount } from '../utils/dataJSON';
+// import { convertDateToString } from '../utils/convertDateFormat'
+import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
+import { SidebarRightChat } from './rightSideComponent'
+import { Notes, CardImages, CenterActionButton, AddNoteModal, CardContainer} from './centerComponent';
 import { useState } from 'react'
-import { RoomProggress } from '../utils/progress'
+import { PageProggress } from '../utils/progress'
 import { Greeting } from '../utils/greeting'
 import Calendar from 'react-calendar';
 import './style/kalender.css'
+import { useDispatch, useSelector } from 'react-redux'
+import {Welcome} from './page'
+import axios from 'axios'
+import { setSource, setTodo } from '../redux/sourceSlice'
 
 export function Base() {
+    const pageType = useSelector(state => state.source.pageType)
+    const todo = useSelector(state => state.source.todo)
     return (
         <div className='base'>
-            <BaseLeft/>
-            <BaseCenter/>
-            <BaseRight/>
+            {pageType === 'welcome' && <Welcome/>}
+            {pageType === 'faCheck' && <TodoPage/>}
+            {todo?<SidebarRightChat/>:<BaseRight/>}
         </div>
     )
 }
-function BaseLeft() {
+function TodoPage() {
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const dispatch = useDispatch()
+    const [isLoading, setIsLoading] = useState(true)
     const { hideLeftBase } = useContext(HideBase)
-    const { item } = useContext(ItemData)
-    const { room } = useContext(GuildContext)
-
-    const colors = room.items.map(item => ({
-        date: new Date(item.deadline),
-        color: item.color,
-        title: item.title,
-    }))
-
-    return (
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true)
+            try {
+                const response = await axios.get(`${'http://localhost:3001'}/source/${idPageOfBook}`)
+                dispatch(setSource(response.data))
+            } catch (err) {
+                console.error(err)
+            }
+            setIsLoading(false)
+        }
+        fetchData()
+    }, [idPageOfBook, dispatch])
+    if (isLoading) return (
         <>
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
             <div className="sidebar-left">
-                {item?
+                <div className='sidebar_left_loading loading'/>
+            </div>
+        </div>
+        <div className="base-center">
+            <div className="center">
+                <div className="loading center_loading"/>
+            </div>
+        </div>
+        </>
+    )
+    return (
+        <>
+        <BaseLeft/>
+        <BaseCenter/>
+        </>
+    )
+}
+// function BaseLeft() {
+//     const { hideLeftBase } = useContext(HideBase)
+//     const { item } = useContext(ItemData)
+//     const { room } = useContext(GuildContext)
+
+//     const colors = room.items.map(item => ({
+//         date: new Date(item.deadline),
+//         color: item.color,
+//         title: item.title,
+//     }))
+
+//     return (
+//         <>
+//         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
+//             <div className="sidebar-left">
+//                 {item?
+//                 <MoreInfoCard/>
+//                 :
+//                 <>
+//                 <Greeting/>
+//                 <JadwalRoom/>
+//                 <Calendar 
+//                     className="calendar-dark" 
+//                     locale='id-ID'
+//                     format='mm/dd/yyyy'
+//                     next2Label={null}
+//                     prev2Label={null}
+
+//                     tileContent={({ date, view }) => {
+//                         const color = colors.find((c) => c.date.getTime() === date.getTime());
+//                         if (color) {
+//                             return (
+//                                 <div className='repalace' style={{ border: `1px solid ${color.color}`, borderRadius: '50px' }} title={color.title}>
+//                                 {date.getDate()}
+//                                 </div>
+//                             )
+//                         }
+//                     }}
+//                 />
+//                 <RoomProggress/>
+//                 <div className="left-menu-box">
+//                     <FontAwesomeIcon icon={faMoneyCheck} className="left-menu-box-icon"/>
+//                     <p className="left-menu-box-count">{room.items.length}</p>
+//                 </div>
+//                 </>
+//                 }
+//             </div>
+//             {item? <DetailLeftAction/>:''}
+//         </div>
+//         </>
+//     )
+// }
+function BaseLeft() {
+    const source = useSelector(state => state.source.source)
+    const { hideLeftBase } = useContext(HideBase)
+    const todo = useSelector(state => state.source.todo)
+    if (todo) return (
+        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
+            <div className="sidebar-left">
                 <MoreInfoCard/>
-                :
-                <>
+                <DetailLeftAction/>
+            </div>
+        </div>
+    )
+    const colors = source.list.map(item => ({
+        date: new Date(item.details.deadline),
+        color: item.details.color,
+        title: item.details.item_title,
+    }))
+    return (
+        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
+            <div className="sidebar-left">
                 <Greeting/>
-                <JadwalRoom/>
                 <Calendar 
                     className="calendar-dark" 
                     locale='id-ID'
                     format='mm/dd/yyyy'
                     next2Label={null}
                     prev2Label={null}
-
                     tileContent={({ date, view }) => {
                         const color = colors.find((c) => c.date.getTime() === date.getTime());
                         if (color) {
@@ -65,22 +161,39 @@ function BaseLeft() {
                         }
                     }}
                 />
-                <RoomProggress/>
+                <PageProggress/>
                 <div className="left-menu-box">
                     <FontAwesomeIcon icon={faMoneyCheck} className="left-menu-box-icon"/>
-                    <p className="left-menu-box-count">{room.items.length}</p>
+                    <p className="left-menu-box-count">{source.list.length}</p>
                 </div>
-                </>
-                }
             </div>
-            {item? <DetailLeftAction/>:''}
         </div>
-        </>
     )
 }
+// function BaseCenter() {
+//     const { room, currentRoom } = useContext(GuildContext)
+//     const { item } = useContext(ItemData)
+//     const [modalOpen, setModalOpen] = useState(false)
+//     function handleModalOpen() {
+//         setModalOpen(true)
+//     }
+//     function handleModalClose() {
+//         setModalOpen(false)
+//     }
+//     return (
+//         <>
+//         <div className="base-center">
+//             <div className="center">
+//                 {item? <AddNoteModal modalOpen={modalOpen} title={item.title} handleModalClose={handleModalClose}/>:<AddTaskModal modalOpen={modalOpen} title={currentRoom} handleModalClose={handleModalClose}/>}
+//                 {item ? <DetailCard/>:<CardContainer items={room.items}/>}
+//                 <CenterActionButton handleModalOpen={handleModalOpen}/>
+//             </div>
+//         </div>
+//         </>
+//     )
+// }
 function BaseCenter() {
-    const { room, currentRoom } = useContext(GuildContext)
-    const { item } = useContext(ItemData)
+    const todo = useSelector(state => state.source.todo)
     const [modalOpen, setModalOpen] = useState(false)
     function handleModalOpen() {
         setModalOpen(true)
@@ -88,87 +201,159 @@ function BaseCenter() {
     function handleModalClose() {
         setModalOpen(false)
     }
-    return (
-        <>
-        <div className="base-center">
-            <div className="center">
-                {item? <AddNoteModal modalOpen={modalOpen} title={item.title} handleModalClose={handleModalClose}/>:<AddTaskModal modalOpen={modalOpen} title={currentRoom} handleModalClose={handleModalClose}/>}
-                {item ? <DetailCard/>:<CardContainer items={room.items}/>}
+    if (todo) return (
+        <div className='base-center'>
+            <div className='center'>
+                <DetailCard/>
+                <AddNoteModal modalOpen={modalOpen} title={todo.details.title} handleModalClose={handleModalClose}/>
                 <CenterActionButton handleModalOpen={handleModalOpen}/>
             </div>
         </div>
-        </>
+    )
+    return (
+        <div className="base-center">
+            <div className="center">
+                <CardContainer/>
+                <CenterActionButton handleModalOpen={handleModalOpen}/>
+            </div>
+        </div>
     )
 }
-function BaseRight() {
-    const { users } = useContext(GuildContext)
-    const { hideRightBase } = useContext(HideBase)
-    const { item } = useContext(ItemData)
-    let box = []
-    let lastDate = null
-    let lastNickname = null
-    item ? 
-        item.chat.forEach((item, index) => {
-            if (item.date !== lastDate) {
-                box.push(
-                    <div key={`${index}-${item.date}`} className='chat-card-date'>{convertDateToString(item.date)}</div>
-                )
-                lastDate = item.date
-                lastNickname = null
-            }
-            if (item.nickname !== lastNickname) {
-                item.nickname !== myAccount.profile.nickname &&
-                box.push(
-                    <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
-                )
-                lastNickname = item.nickname
-            }
-            box.push(
-                <ChatModel key={index} item={item}/>
-            )
-        })
-    :
-    Object.keys(users).forEach((propertyName) => {
-        box.push(
-            <p className='users-group' key={propertyName}>{propertyName}</p>
-        )
-        let container = []
-        users[propertyName].user.forEach((user, index) => {
-            container.push(
-                <div className='group-user pointer' key={`${user.name}-${index}`}>
-                    <img src={user.pic} alt={user.name} />
-                    <div className="user-context">
-                        <p style={{color: users[propertyName].color}} >{user.name}</p>
-                        <p className='user-status'>{user.status}</p>
-                    </div>
-                </div>
-            )
-        })
-        box.push(<div key={`${propertyName}-container`} className='group-user-container'>{container}</div>)
-    })
+// function BaseRight() {
+//     const { users } = useContext(GuildContext)
+//     const { hideRightBase } = useContext(HideBase)
+//     const { item } = useContext(ItemData)
+//     let box = []
+//     let lastDate = null
+//     let lastNickname = null
+//     item ? 
+//         item.chat.forEach((item, index) => {
+//             if (item.date !== lastDate) {
+//                 box.push(
+//                     <div key={`${index}-${item.date}`} className='chat-card-date'>{convertDateToString(item.date)}</div>
+//                 )
+//                 lastDate = item.date
+//                 lastNickname = null
+//             }
+//             if (item.nickname !== lastNickname) {
+//                 item.nickname !== myAccount.profile.nickname &&
+//                 box.push(
+//                     <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
+//                 )
+//                 lastNickname = item.nickname
+//             }
+//             box.push(
+//                 <ChatModel key={index} item={item}/>
+//             )
+//         })
+//     :
+//     Object.keys(users).forEach((propertyName) => {
+//         box.push(
+//             <p className='users-group' key={propertyName}>{propertyName}</p>
+//         )
+//         let container = []
+//         users[propertyName].user.forEach((user, index) => {
+//             container.push(
+//                 <div className='group-user pointer' key={`${user.name}-${index}`}>
+//                     <img src={user.pic} alt={user.name} />
+//                     <div className="user-context">
+//                         <p style={{color: users[propertyName].color}} >{user.name}</p>
+//                         <p className='user-status'>{user.status}</p>
+//                     </div>
+//                 </div>
+//             )
+//         })
+//         box.push(<div key={`${propertyName}-container`} className='group-user-container'>{container}</div>)
+//     })
 
+//     return (
+//         <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
+//             <div className="sidebar-right">
+//                 {box}
+//             </div>
+//             {item? <FormBaseRight/>:''}
+//         </div>
+//     )
+// }
+// <div className="base-right">
+//     <div className="sidebar-right">
+//         <div className="loading sidebar_right_loading">Empty</div>
+//     </div>
+// </div>
+function BaseRight() {
+    const [isLoading, setIsLoading] = useState(false)
+    const { hideRightBase } = useContext(HideBase)
+    const idBook = useSelector(state => state.fetch.idBook)
+    const [box, setBox] = useState([])
+    function handleEmpety() {
+        setIsLoading(false)
+        setBox('Empety')
+    }
+    useEffect(() => {
+        const fetchData = async () => {
+            setIsLoading(true)
+            try {
+                if (idBook === '@me') return handleEmpety()
+                let sessionBox = []
+                const {data} = await axios.get(`${'http://localhost:3001'}/book/${idBook}/get/users`)
+                data.users.forEach((group, index) => {
+                    sessionBox.push(
+                        <p className='users-group' key={index}>{group.details.role}</p>
+                    )
+                    let container = []
+                    group.member.forEach((user, userIndex) => {
+                        container.push(
+                            <div className='group-user pointer' key={`${user.nickname}-${userIndex}`}>
+                                <img src={user.avatar} alt={user.nickname} />
+                                <div className="user-context">
+                                    <p style={{color: group.details.role_color}} >{user.nickname}</p>
+                                    <p className='user-status'>{user.status}</p>
+                                </div>
+                            </div>
+                        )
+                    })
+                    sessionBox.push(<div key={`${group.details.role}-container`} className='group-user-container'>{container}</div>)
+                })
+                setBox(sessionBox)
+            } catch (err) {
+                console.log(err)
+            }
+            setIsLoading(false)
+        }
+        fetchData()
+    }, [idBook])
+    if (isLoading) return (
+        <div className="base-right">
+            <div className="sidebar-right">
+                <div className="loading sidebar_right_loading"/>
+            </div>
+        </div>
+    )
     return (
         <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
             <div className="sidebar-right">
                 {box}
             </div>
-            {item? <FormBaseRight/>:''}
         </div>
     )
 }
 
 function DetailCard() {
-    const {item, handleItem} = useContext(ItemData)
+    const todo = useSelector(state => state.source.todo)
+    const dispatch = useDispatch()
+    function handleClick() {
+        dispatch(setTodo(null))
+    }
     return(
         <>
-        <div className='detail-back pointer' onClick={() => handleItem()}>
+        <div className='detail-back pointer' onClick={handleClick}>
             <FontAwesomeIcon icon={faArrowLeft}/>
             <span>Back</span>
         </div>
         <div className='detail-desc'>
-            <div className="color" style={{backgroundColor: item.color}}></div>
+            <div className="color" style={{backgroundColor: todo.details.color}}></div>
             <div className='detail-desc-context'>
-                <p>{item.desc}</p>
+                <p>{todo.details.desc}</p>
                 <CardImages/>
             </div>
         </div>

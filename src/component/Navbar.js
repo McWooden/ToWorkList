@@ -1,6 +1,6 @@
 import './style/Navbar.css'
-import { AccountContext, PageContext } from '../pages/App'
-import { useContext, useState, useEffect, useRef } from 'react'
+import { AppContext, PageContext } from '../pages/App'
+import { useContext, useState, useEffect, useRef, useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faGear, faPlus, faCompass, faRepeat} from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
@@ -11,13 +11,14 @@ import { convertDateToString } from '../utils/convertDateFormat'
 import { getLocalAccount } from '../utils/localstorage'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
+import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
+import { setPageType } from '../redux/sourceSlice'
 
 const API = process.env.REACT_APP_API
 
 // main navbar
 function Navbar() {
-    const {hideNavbar, navRef} = useContext(AccountContext)
+    const {hideNavbar, navRef} = useContext(AppContext)
     return (
         <>
         <div className={`navigation ${hideNavbar?'hideNavbar':'showNavbar'}`} ref={navRef}>
@@ -38,7 +39,9 @@ function HomeButton() {
     const pathBook = useSelector(state => state.fetch.pathBook)
     const dispatch = useDispatch()
     function handleClick() {
+        dispatch(setPageType('welcome'))
         dispatch(setPathBook({path: '@me', id: '@me'}))
+        dispatch(setPathPageOfBook({path: '', id: ''}))
         handleChangePage(myAccount)
     }
     return (
@@ -51,6 +54,7 @@ function HomeButton() {
 }
 function BookList() {
     const [allBook, setAllBook] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -63,9 +67,17 @@ function BookList() {
             } catch (err) {
                 console.error(err)
             }
+            setIsLoading(false)
         }
         fetchData()
     }, [])
+    if (isLoading) return (
+        <div className="nav-guild">
+            <div className='guild-frame'>
+                <div className="loading guild-photo-profile"/>
+            </div>
+        </div>
+    )
     return (
         <div className="nav-guild">
             {allBook}
@@ -76,8 +88,8 @@ function BookItem({data}) {
     const pathBook = useSelector(state => state.fetch.pathBook)
     const dispatch = useDispatch()
     function handleClick() {
-        dispatch(setPathBook({path: data.profile.book_title, id: data._id}))
-        dispatch(setPathPageOfBook({path: data.profile.book_title, id: data.profile.book_title}))
+        dispatch(setPageType('welcome'))
+        dispatch(setFetch({path: data.profile.book_title, id: data._id}))
     }
     return (
         <div onClick={handleClick} className={`guild-frame ${pathBook===data.profile.book_title ? 'active' : ''}`}>
@@ -148,11 +160,14 @@ function ModeNavbarAccountHeader() {
 function PageList() {
     const idBook = useSelector(state => state.fetch.idBook)
     const [allPage, setAllPage] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+    const dispatch = useDispatch()
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true)
             try {
                 let sessionPage = []
-                const response = await axios.get('http://localhost:3001'+`/book/${idBook}/get/pages/details`)
+                const response = await axios.get(`${'http://localhost:3001'}/book/${idBook}/get/pages/details`)
                 response.data.pages.forEach((item, index) => {
                     sessionPage.push(<PageListItem key={index} data={item}/>)
                 })
@@ -160,9 +175,15 @@ function PageList() {
             } catch (err) {
                 console.error(err)
             }
+            setIsLoading(false)
         }
         fetchData()
-    }, [idBook])
+    }, [idBook, dispatch])
+    if (isLoading) return (
+        <div className="roomList">
+            <div className='room loading'/>
+        </div>
+    )
     return(
         <div className='roomList'>
             {allPage}
@@ -170,54 +191,57 @@ function PageList() {
     )
 }
 function PageAccountList() {
-    const idBook = useSelector(state => state.fetch.idBook)
-    const [allPage, setAllPage] = useState([])
-    const pages = [
+    const bookId = useSelector(state => state.fetch.bookId)
+    const [pageList, setPageList] = useState([])
+    const pages = useMemo(() => [
         {
             details: {
-                page_title: 'Ringkasan',
+                page_title: 'Summary',
                 icon: 'faAddressBook',
             }
         },
         {
             details: {
-                page_title: 'Notifikasi',
+                page_title: 'Notifications',
                 icon: 'faBell',
             }
         },
         {
             details: {
-                page_title: 'Surat',
+                page_title: 'Mail',
                 icon: 'faEnvelope',
             }
         },
         {
             details: {
-                page_title: 'Berita',
+                page_title: 'News',
                 icon: 'faNewspaper',
             }
         }
-    ]
+    ], [])
+
     useEffect(() => {
-        let sessionPage = []
-        pages.forEach((item, index) => {
-            sessionPage.push(<PageListItem key={index} data={item}/>)
-        })
-        setAllPage(sessionPage)
-    }, [idBook])
-    return(
-        <div className='roomList'>
-            {allPage}
+        const sessionPage = []
+        pages.forEach((item, index) => sessionPage.push(<PageListItem key={index} data={item}/>))
+        setPageList(sessionPage)
+    }, [pages, bookId])
+
+    return (
+        <div className="roomList">
+            {pageList}
         </div>
     )
 }
+
 function PageListItem({data}) {
     const title = data.details.page_title
     const icon = data.details.icon
+    const id = data._id
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
     const dispatch = useDispatch()
     function handleClick() {
-        dispatch(setPathPageOfBook({path: title, id: data._id}))
+        dispatch(setPageType(icon))
+        dispatch(setPathPageOfBook({path: title, id}))
     }
     const active = pathPageOfBook === title
     return (

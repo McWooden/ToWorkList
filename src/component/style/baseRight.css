@@ -62,6 +62,7 @@
 }
 .users-group {
     color: var(--white-3);
+    font-size: small;
 }
 .group-user-container {
     border-radius: 5px;

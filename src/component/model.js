@@ -1,24 +1,89 @@
 import {useState, useEffect, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
-import { useContext } from 'react';
+// import { useContext } from 'react';
 import { myAccount } from '../utils/dataJSON';
-import { ItemData } from '../pages/App';
+// import { ItemData } from '../pages/App';
 import { Confirm } from './Modal';
-import { GuildContext } from '../pages/App';
+// import { GuildContext } from '../pages/App';
 import { editToast, deleteToast } from '../utils/notif';
+import { useDispatch, useSelector } from 'react-redux';
+import { setChat, setTodo } from '../redux/sourceSlice';
 
 
 
-export function TodoModel({item, indexItem}) {
-    const { reverseDone } = useContext(GuildContext)
-    const myNickname = myAccount.profile.nickname
+// export function TodoModel({item, indexItem}) {
+//     const { reverseDone } = useContext(GuildContext)
+//     const myNickname = myAccount.profile.nickname
+//     const [dropDown, setDropDown] = useState(false)
+//     let menuRef = useRef()
+//     let btnRef = useRef()
+//     const {handleItem} = useContext(ItemData)
+//     const [deleteOpen, setDeleteOpen] = useState(false)
+
+//     useEffect(() => {
+//         let handler = (e) => {
+//             try {
+//                 if (menuRef.current.contains(e.target) || btnRef.current.contains(e.target)) {
+//                     return
+//                 } else {
+//                     setDropDown(false)
+//                 }
+//             } catch (error) {
+                
+//             }
+//         }
+//         document.addEventListener('mousedown', handler)
+//     })
+
+//     return (
+//         <>
+//         <div className="todo-card">
+//             <div className="todo-left">
+//             <div className="card-color" style={{backgroundColor: item.color}}></div>
+//             <div className="card-text pointer" onClick={() => handleItem(indexItem)}>
+//                 <div className="card-title">{item.title}</div>
+//                 <div className="card-description">{item.desc}</div>
+//             </div>
+//             </div>
+//             <div className="todo-right">
+//                 <div className={`card-finish pointer ${item.dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={() => reverseDone(indexItem)}>
+//                     <div className="card-finish-value"></div>
+//                 </div>
+//                 <div className="card-more" ref={btnRef}>
+//                     {dropDown? 
+//                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(false)}/>
+//                     :
+//                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(true)}/>
+//                     }
+//                 </div>
+//                 <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
+//                     <ul>
+//                         <li className='pointer' onClick={() => editToast()}>
+//                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
+//                             <span>edit</span>
+//                         </li>
+//                         <li className='pointer' onClick={() => setDeleteOpen(true)}>
+//                             <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+//                             <span>delete</span>
+//                         </li>
+//                     </ul>
+//                 </div>
+//             </div>
+//         </div>
+//         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={item.title} metode='delete' color={item.color} callback={deleteToast}/>
+//         </>
+//     )
+// }
+export function TodoModel({item}) {
+    const profile = useSelector(state => state.source.profile)
+    const dispatch = useDispatch()
+    const myNickname = profile.nickname
     const [dropDown, setDropDown] = useState(false)
     let menuRef = useRef()
     let btnRef = useRef()
-    const {handleItem} = useContext(ItemData)
     const [deleteOpen, setDeleteOpen] = useState(false)
-
+    const title = item.details.item_title
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -33,26 +98,29 @@ export function TodoModel({item, indexItem}) {
         }
         document.addEventListener('mousedown', handler)
     })
-
+    function handleTextClick() {
+        dispatch(setTodo(item))
+        dispatch(setChat(item.chat))
+    }
     return (
         <>
         <div className="todo-card">
             <div className="todo-left">
-            <div className="card-color" style={{backgroundColor: item.color}}></div>
-            <div className="card-text pointer" onClick={() => handleItem(indexItem)}>
-                <div className="card-title">{item.title}</div>
-                <div className="card-description">{item.desc}</div>
+            <div className="card-color" style={{backgroundColor: item.details.color}}></div>
+            <div className="card-text pointer" onClick={handleTextClick}>
+                <div className="card-title">{title}</div>
+                <div className="card-description">{item.details.desc}</div>
             </div>
             </div>
             <div className="todo-right">
-                <div className={`card-finish pointer ${item.dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={() => reverseDone(indexItem)}>
+                <div className={`card-finish pointer ${item.dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={() => console.log('reverse')}>
                     <div className="card-finish-value"></div>
                 </div>
                 <div className="card-more" ref={btnRef}>
                     {dropDown? 
-                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(false)}/>
-                    :
-                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(true)}/>
+                        <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(false)}/>
+                        :
+                        <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(true)}/>
                     }
                 </div>
                 <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
@@ -69,7 +137,7 @@ export function TodoModel({item, indexItem}) {
                 </div>
             </div>
         </div>
-        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={item.title} metode='delete' color={item.color} callback={deleteToast}/>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteToast}/>
         </>
     )
 }

@@ -1,0 +1,43 @@
+.loading {
+    background-color: var(--black-3);
+    animation: loading-skeleton 1s ease-in-out forwards infinite;
+    animation-direction: alternate;
+}
+.loading.guild-photo-profile {
+    width: 48px;
+    height: 48px;
+    border-radius: 50px;
+    padding: .25em;
+    margin: .25em auto;
+    animation-delay: .3s;
+}
+.loading.room {
+    height: 36px;
+    background-color: var(--black-4);
+}
+.loading.sidebar_left_loading {
+    height: 36px;
+    background-color: var(--black-5);
+}
+.loading.center_loading {
+    height: 48px;
+    background-color: var(--black-5);
+}
+.loading.sidebar_right_loading {
+    height: 42px;
+    background-color: var(--black-3);
+    display: grid;
+    place-items: center;
+    color: var(--white-3);
+}
+
+@keyframes loading-skeleton {
+    0% {
+        opacity: .2;
+        transform: translateY(6px) scale(0.98);
+    }
+    85%, 100% {
+        opacity: 1;
+        transform: translateY(0px) scale(1);
+    }
+}

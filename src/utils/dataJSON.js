@@ -1,112 +1,112 @@
 import { getLocalAccount } from "./localstorage"
 
-// import noPic from '../assets/images/noPic.png';
-const defaultChat = [{
-    nickname: 'McWooden',
-    msg: 'wait for next update',
-    time: '20.29',
-    date: '12/3/2022'
-}]
-const defaultNotes = [
-    {
-        context: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quos nostrum minus esse cum adipisci id, velit provident commodi enim quaerat eaque harum, deserunt sed unde eum impedit fugit autem?. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores suscipit modi reprehenderit incidunt laudantium! Odio, hic. Quidem error sapiente libero excepturi dolores voluptatem nihil doloremque, fugit impedit, ad asperiores molestias repellendus nam eum, perspiciatis possimus.',
-        by: 'afrizal',
-        date: '12/12/2022',
-        color: 'royalblue'
-    },
-    {
-        context: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolor commodi velit a.',
-        by: 'afrizal',
-        date: '12/20/2022',
-        color: 'greenyellow'
-    },
-    {
-        context: 'i have no note',
-        by: 'alek',
-        date: '12/19/2022',
-        color: 'tomato'
-    },
-    {
-        context: 'test',
-        by: 'Developer',
-        date: '12/22/2022',
-        color: 'goldenrod'
-    },
-]
-export const defaultImages = [
-    {
-        pic: 'https://source.unsplash.com/random/1',
-        desc: 'ini gambar centang',
-        date: '12/12/2022',
-        by: 'anak magang'
-    },
-    {
-        pic: 'https://source.unsplash.com/random/2',
-        desc: 'what color is the sky',
-        date: '12/12/2022',
-        by: 'ai amour'
-    },
-    {
-        pic: 'https://source.unsplash.com/random/3',
-        desc: 'asu kayang',
-        date: '12/19/2022',
-        by: 'alucard'
-    }
-]
-export const defaultItem = {
-    id: '7ijnyt6v',
-    title: 'Buat aplikasi',
-    desc: 'ini webapp toworklist',
-    color: 'goldenrod',
-    dones: ['McWooden', 'ketua'],
-    deadline: '12/19/2022',
-    notes: defaultNotes,
-    images: defaultImages,
-    chat: [
-        {
-            nickname: 'Developer',
-            msg: 'whatsupp its still on going',
-            time: '20.25',
-            date: '12/3/2022'
-        },
-        {
-            nickname: 'McWooden',
-            msg: 'wait for next update',
-            time: '20.25',
-            date: '12/3/2022'
-        },
-        {
-            nickname: 'Developer',
-            msg: 'almost there',
-            time: '20.25',
-            date: '12/3/2022'
-        },
-        {
-            nickname: 'Developer',
-            msg: 'buat alert',
-            time: '00.22',
-            date: '12/26/2022'
-        },
-        {
-            nickname: 'Developer',
-            msg: 'buat setting',
-            time: '00.22',
-            date: '12/26/2022'
-        },
-        {
-            nickname: 'McWooden',
-            msg: 'alert sudah tinggal pake',
-            time: '00.12',
-            date: '12/28/2022'
-        },
-        {
-            nickname: 'Developer',
-            msg: 'buat form image',
-            time: '00.24',
-            date: '12/28/2022'
-        },
-    ]
-}
+// // import noPic from '../assets/images/noPic.png';
+// const defaultChat = [{
+//     nickname: 'McWooden',
+//     msg: 'wait for next update',
+//     time: '20.29',
+//     date: '12/3/2022'
+// }]
+// const defaultNotes = [
+//     {
+//         context: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere quos nostrum minus esse cum adipisci id, velit provident commodi enim quaerat eaque harum, deserunt sed unde eum impedit fugit autem?. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores suscipit modi reprehenderit incidunt laudantium! Odio, hic. Quidem error sapiente libero excepturi dolores voluptatem nihil doloremque, fugit impedit, ad asperiores molestias repellendus nam eum, perspiciatis possimus.',
+//         by: 'afrizal',
+//         date: '12/12/2022',
+//         color: 'royalblue'
+//     },
+//     {
+//         context: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus dolor commodi velit a.',
+//         by: 'afrizal',
+//         date: '12/20/2022',
+//         color: 'greenyellow'
+//     },
+//     {
+//         context: 'i have no note',
+//         by: 'alek',
+//         date: '12/19/2022',
+//         color: 'tomato'
+//     },
+//     {
+//         context: 'test',
+//         by: 'Developer',
+//         date: '12/22/2022',
+//         color: 'goldenrod'
+//     },
+// ]
+// export const defaultImages = [
+//     {
+//         pic: 'https://source.unsplash.com/random/1',
+//         desc: 'ini gambar centang',
+//         date: '12/12/2022',
+//         by: 'anak magang'
+//     },
+//     {
+//         pic: 'https://source.unsplash.com/random/2',
+//         desc: 'what color is the sky',
+//         date: '12/12/2022',
+//         by: 'ai amour'
+//     },
+//     {
+//         pic: 'https://source.unsplash.com/random/3',
+//         desc: 'asu kayang',
+//         date: '12/19/2022',
+//         by: 'alucard'
+//     }
+// ]
+// export const defaultItem = {
+//     id: '7ijnyt6v',
+//     title: 'Buat aplikasi',
+//     desc: 'ini webapp toworklist',
+//     color: 'goldenrod',
+//     dones: ['McWooden', 'ketua'],
+//     deadline: '12/19/2022',
+//     notes: defaultNotes,
+//     images: defaultImages,
+//     chat: [
+//         {
+//             nickname: 'Developer',
+//             msg: 'whatsupp its still on going',
+//             time: '20.25',
+//             date: '12/3/2022'
+//         },
+//         {
+//             nickname: 'McWooden',
+//             msg: 'wait for next update',
+//             time: '20.25',
+//             date: '12/3/2022'
+//         },
+//         {
+//             nickname: 'Developer',
+//             msg: 'almost there',
+//             time: '20.25',
+//             date: '12/3/2022'
+//         },
+//         {
+//             nickname: 'Developer',
+//             msg: 'buat alert',
+//             time: '00.22',
+//             date: '12/26/2022'
+//         },
+//         {
+//             nickname: 'Developer',
+//             msg: 'buat setting',
+//             time: '00.22',
+//             date: '12/26/2022'
+//         },
+//         {
+//             nickname: 'McWooden',
+//             msg: 'alert sudah tinggal pake',
+//             time: '00.12',
+//             date: '12/28/2022'
+//         },
+//         {
+//             nickname: 'Developer',
+//             msg: 'buat form image',
+//             time: '00.24',
+//             date: '12/28/2022'
+//         },
+//     ]
+// }
 const myProfile = getLocalAccount()
 export const myAccount = {
     profile: {...myProfile, type: 'account'},

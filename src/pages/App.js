@@ -1,9 +1,9 @@
 import './App.css';
 import Navbar from '../component/Navbar';
 import TodoApp from '../component/TodoApp';
-import { useState, createContext, useRef, useEffect, useContext } from 'react';
+import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
 // import { defaultItem } from '../utils/dataJSON'
 
 export const GuildContext = createContext()
@@ -99,11 +99,35 @@ export const ItemData = createContext()
 export const PageContext = createContext()
 export const AccountContext = createContext()
 export const BookContext = createContext()
+export const AppContext = createContext()
 function App() {
+  // navbar
+  const navRef = useRef()
+  const navTopRef = useRef()
+  const [hideNavbar, setHideNavbar] = useState(false)
+  function handleNavbar(boolean) {
+    setHideNavbar(!boolean)
+  }
+  useEffect(() => {
+    let handler = (e) => {
+        try {
+            if (navRef.current.contains(e.target) || navTopRef.current.contains(e.target)) {
+              return
+            } else {
+              handleNavbar(false)
+            }
+        } catch (error) {
+            
+        }
+    }
+    document.addEventListener('mousedown', handler)
+  })
+  // page
   const [page, setPage] = useState(myAccount)
   function handleChangePage(newBook) {
     setPage(newBook)
   }
+  
   return (
     <PageContext.Provider value={{
       page,
@@ -111,35 +135,17 @@ function App() {
       handleChangePage
     }}>
       <div id="app">
-        {page.profile.type === 'account' && <Account/>}
-        {page.profile.type === 'book' && <Book/>}
+        <AppContext.Provider value={{
+          navTopRef,
+          navRef,
+          hideNavbar,
+          handleNavbar,
+        }}>
+          <Navbar/>
+          <TodoApp/>
+        </AppContext.Provider>
       </div>
     </PageContext.Provider>
-  )
-}
-function Account() {
-  // navbar
-  const navRef = useRef()
-  const [hideNavbar, setHideNavbar] = useState(false)
-  function handleNavbar(boolean) {
-    setHideNavbar(!boolean)
-  }
-  return (
-    <AccountContext.Provider value={{
-      navRef,
-      hideNavbar,
-      handleNavbar,
-    }}>
-      <Navbar/>
-    </AccountContext.Provider>
-  )
-}
-function Book() {
-
-  return (
-    <BookContext.Provider value={{}}>
-      <h1>book</h1>
-    </BookContext.Provider>
   )
 }
 

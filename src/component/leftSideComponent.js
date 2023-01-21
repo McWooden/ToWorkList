@@ -2,30 +2,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faNoteSticky, faImage, faMessage, faPenToSquare, faTrash, faChevronRight, faGear} from '@fortawesome/free-solid-svg-icons'
 import { useContext } from 'react';
 import {convertDateToString} from '../utils/convertDateFormat'
-import { GuildContext, ItemData } from '../pages/App';
+import { GuildContext } from '../pages/App';
 import { deleteToast, editToast } from '../utils/notif';
 import { useState, useRef } from 'react';
 import { Modal, FileDrop } from './Modal';
 import { imageToast } from '../utils/notif';
+import { useSelector } from 'react-redux';
 
 export function MoreInfoCard() {
-    const {item} = useContext(ItemData)
+    const todo = useSelector(state => state.source.todo)
     return (
         <>
         <div className='todo-card'>
             <div className="todo-left">
-                <div className="card-color" style={{backgroundColor: item.color}}></div>
+                <div className="card-color" style={{backgroundColor: todo.details.color}}></div>
                 <div className="card-text">
-                    <div className="card-title">{item.title}</div>
-                    <div className="card-deadline">{convertDateToString(item.deadline)}</div>
+                    <div className="card-title">{todo.details.item_title}</div>
+                    <div className="card-deadline">{convertDateToString(todo.details.deadline)}</div>
                 </div>
             </div>
         </div>
         <div className='info-menu'>
-            <InfoMenu icon={faCheck} count={item.chat.length}/>
-            <InfoMenu icon={faNoteSticky} count={item.notes.length}/>
-            <InfoMenu icon={faImage} count={item.images.length}/>
-            <InfoMenu icon={faMessage} count={item.chat.length}/>
+            <InfoMenu icon={faCheck} count={todo.dones.length}/>
+            <InfoMenu icon={faNoteSticky} count={todo.notes.length}/>
+            <InfoMenu icon={faImage} count={todo.images.length}/>
+            <InfoMenu icon={faMessage} count={todo.chat.length}/>
         </div>
         <Contributor/>
         </>
@@ -42,10 +43,10 @@ function InfoMenu({icon, count}) {
 }
 
 export function Contributor() {
-    const {item} = useContext(ItemData)
+    const todo = useSelector(state => state.source.todo)
     const box = []
     const nicknames = []
-    item.notes.forEach((note, index) => {
+    todo.notes.forEach((note, index) => {
         if (nicknames.includes(note.by)) return
         box.push(<p key={index}>{note.by}</p>)
         nicknames.push(note.by)
