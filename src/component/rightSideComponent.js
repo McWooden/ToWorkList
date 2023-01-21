@@ -8,8 +8,8 @@ import { convertDateToString } from '../utils/convertDateFormat'
 import { io } from 'socket.io-client'
 import { useEffect } from 'react'
 import { addChat } from '../redux/sourceSlice'
-
-const socket = io.connect('http://localhost:3001')
+const API = process.env.REACT_APP_API
+const socket = io.connect(API)
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.source.chat)

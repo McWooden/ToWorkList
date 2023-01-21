@@ -167,7 +167,7 @@ function PageList() {
             setIsLoading(true)
             try {
                 let sessionPage = []
-                const response = await axios.get(`${'http://localhost:3001'}/book/${idBook}/get/pages/details`)
+                const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
                 response.data.pages.forEach((item, index) => {
                     sessionPage.push(<PageListItem key={index} data={item}/>)
                 })

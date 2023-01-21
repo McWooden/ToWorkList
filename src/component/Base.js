@@ -21,6 +21,8 @@ import {Welcome} from './page'
 import axios from 'axios'
 import { setSource, setTodo } from '../redux/sourceSlice'
 
+const API = process.env.REACT_APP_API
+
 export function Base() {
     const pageType = useSelector(state => state.source.pageType)
     const todo = useSelector(state => state.source.todo)
@@ -41,7 +43,7 @@ function TodoPage() {
         const fetchData = async () => {
             setIsLoading(true)
             try {
-                const response = await axios.get(`${'http://localhost:3001'}/source/${idPageOfBook}`)
+                const response = await axios.get(`${API}/source/${idPageOfBook}`)
                 dispatch(setSource(response.data))
             } catch (err) {
                 console.error(err)
@@ -295,7 +297,7 @@ function BaseRight() {
             try {
                 if (idBook === '@me') return handleEmpety()
                 let sessionBox = []
-                const {data} = await axios.get(`${'http://localhost:3001'}/book/${idBook}/get/users`)
+                const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
                 data.users.forEach((group, index) => {
                     sessionBox.push(
                         <p className='users-group' key={index}>{group.details.role}</p>
