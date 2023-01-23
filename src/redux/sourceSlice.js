@@ -6,10 +6,9 @@ export const sourceSlice = createSlice({
     initialState: {
         pageType: 'welcome',
         source: null,
-        todo: null,
         profile: getLocalAccount(),
         guildProfile: null,
-        chat:null,
+        chat: null,
     },
     reducers: {
         setPageType: (state, action) => {
@@ -17,9 +16,6 @@ export const sourceSlice = createSlice({
         },
         setSource: (state, action) => {
             state.source = action.payload
-        },
-        setTodo: (state, action) => {
-            state.todo = action.payload
         },
         setProfile: (state, action) => {
             state.profile = action.payload
@@ -30,12 +26,9 @@ export const sourceSlice = createSlice({
         setChat: (state, action) => {
             state.chat = action.payload
         },
-        addChat: (state, action) => {
-            state.chat = state.chat.concat(action.payload)
-        }
     },
 })
 
-export const { setPageType, setSource, setTodo, setProfile, setGuildProfile, setChat, addChat } = sourceSlice.actions
+export const { setPageType, setSource, setProfile, setGuildProfile } = sourceSlice.actions
 
 export default sourceSlice.reducer

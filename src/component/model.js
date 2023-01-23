@@ -8,7 +8,7 @@ import { Confirm } from './Modal';
 // import { GuildContext } from '../pages/App';
 import { editToast, deleteToast } from '../utils/notif';
 import { useDispatch, useSelector } from 'react-redux';
-import { setChat, setTodo } from '../redux/sourceSlice';
+import { setTodoId } from '../redux/todo';
 
 
 
@@ -99,8 +99,7 @@ export function TodoModel({item}) {
         document.addEventListener('mousedown', handler)
     })
     function handleTextClick() {
-        dispatch(setTodo(item))
-        dispatch(setChat(item.chat))
+        dispatch(setTodoId(item._id))
     }
     return (
         <>

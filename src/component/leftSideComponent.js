@@ -10,7 +10,7 @@ import { imageToast } from '../utils/notif';
 import { useSelector } from 'react-redux';
 
 export function MoreInfoCard() {
-    const todo = useSelector(state => state.source.todo)
+    const todo = useSelector(state => state.todo)
     return (
         <>
         <div className='todo-card'>
@@ -43,7 +43,7 @@ function InfoMenu({icon, count}) {
 }
 
 export function Contributor() {
-    const todo = useSelector(state => state.source.todo)
+    const todo = useSelector(state => state.todo)
     const box = []
     const nicknames = []
     todo.notes.forEach((note, index) => {

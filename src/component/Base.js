@@ -10,7 +10,7 @@ import { HideBase } from './TodoApp';
 // import { convertDateToString } from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
 import { SidebarRightChat } from './rightSideComponent'
-import { Notes, CardImages, CenterActionButton, AddNoteModal, CardContainer} from './centerComponent';
+import { Notes, CardImages, CenterActionButton, CardContainer} from './centerComponent';
 import { useState } from 'react'
 import { PageProggress } from '../utils/progress'
 import { Greeting } from '../utils/greeting'
@@ -19,19 +19,91 @@ import './style/kalender.css'
 import { useDispatch, useSelector } from 'react-redux'
 import {Welcome} from './page'
 import axios from 'axios'
-import { setSource, setTodo } from '../redux/sourceSlice'
+import { setSource } from '../redux/sourceSlice'
+import { clearTodo, setTodo } from '../redux/todo';
 
 const API = process.env.REACT_APP_API
 
 export function Base() {
     const pageType = useSelector(state => state.source.pageType)
-    const todo = useSelector(state => state.source.todo)
+    const todoId = useSelector(state => state.todo.id)
+    if (todoId) return (
+        <div className="base">
+            <TodoDetail/>
+        </div>
+    )
     return (
         <div className='base'>
             {pageType === 'welcome' && <Welcome/>}
             {pageType === 'faCheck' && <TodoPage/>}
-            {todo?<SidebarRightChat/>:<BaseRight/>}
+            <BaseRight/>
         </div>
+    )
+}
+function TodoDetail() {
+    const todoId = useSelector(state => state.todo.id)
+    // const todoDetails = useSelector(state => state.todo.details)
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const dispatch = useDispatch()
+    const { hideLeftBase } = useContext(HideBase)
+    const [isLoading, setIsLoading] = useState(true)
+    // const [modalOpen, setModalOpen] = useState(false)
+    // function handleModalOpen() {
+    //     setModalOpen(true)
+    // }
+    // function handleModalClose() {
+    //     setModalOpen(false)
+    // }
+    useEffect(() => {
+        const fetchData = async () => {
+            const {data} = await axios.get(`${API}/source/list/${idPageOfBook}/${todoId}`)
+            dispatch(setTodo(data))
+            setIsLoading(false)
+        }
+        fetchData()
+        const interval = setInterval(fetchData, 20000)
+        return () => clearInterval(interval)
+    }, [idPageOfBook, todoId, dispatch])
+    if (isLoading) return (
+        <>
+        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
+            <div className="sidebar-left">
+                <div className='sidebar_left_loading loading'/>
+            </div>
+        </div>
+        <div className="base-center">
+            <div className="center">
+                <div className="loading center_loading"/>
+            </div>
+        </div>
+        <div className="base-right">
+            <div className="sidebar-right">
+                <div className="loading sidebar_right_loading"/>
+            </div>
+        </div>
+        </>
+    )
+    return (
+        <>
+        {/* left */}
+            <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
+                <div className="sidebar-left">
+                    <MoreInfoCard/>
+                    <DetailLeftAction/>
+                </div>
+            </div>
+        {/* center */}
+            <div className='base-center'>
+                <div className='center'>
+                    <DetailCard/>
+                    {/* <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/> */}
+                    {/* <CenterActionButton handleModalOpen={handleModalOpen}/> */}
+                    <CenterActionButton/>
+                </div>
+            </div>
+        {/* right */}
+            <SidebarRightChat/>
+        </>
     )
 }
 function TodoPage() {
@@ -43,7 +115,7 @@ function TodoPage() {
         const fetchData = async () => {
             setIsLoading(true)
             try {
-                const response = await axios.get(`${API}/source/${idPageOfBook}`)
+                const response = await axios.get(`${API}/source/page/${idPageOfBook}`)
                 dispatch(setSource(response.data))
             } catch (err) {
                 console.error(err)
@@ -128,15 +200,6 @@ function TodoPage() {
 function BaseLeft() {
     const source = useSelector(state => state.source.source)
     const { hideLeftBase } = useContext(HideBase)
-    const todo = useSelector(state => state.source.todo)
-    if (todo) return (
-        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
-            <div className="sidebar-left">
-                <MoreInfoCard/>
-                <DetailLeftAction/>
-            </div>
-        </div>
-    )
     const colors = source.list.map(item => ({
         date: new Date(item.details.deadline),
         color: item.details.color,
@@ -195,28 +258,19 @@ function BaseLeft() {
 //     )
 // }
 function BaseCenter() {
-    const todo = useSelector(state => state.source.todo)
-    const [modalOpen, setModalOpen] = useState(false)
-    function handleModalOpen() {
-        setModalOpen(true)
-    }
-    function handleModalClose() {
-        setModalOpen(false)
-    }
-    if (todo) return (
-        <div className='base-center'>
-            <div className='center'>
-                <DetailCard/>
-                <AddNoteModal modalOpen={modalOpen} title={todo.details.title} handleModalClose={handleModalClose}/>
-                <CenterActionButton handleModalOpen={handleModalOpen}/>
-            </div>
-        </div>
-    )
+    // const [modalOpen, setModalOpen] = useState(false)
+    // function handleModalOpen() {
+    //     setModalOpen(true)
+    // }
+    // function handleModalClose() {
+    //     setModalOpen(false)
+    // }
     return (
         <div className="base-center">
             <div className="center">
                 <CardContainer/>
-                <CenterActionButton handleModalOpen={handleModalOpen}/>
+                {/* <CenterActionButton handleModalOpen={handleModalOpen}/> */}
+                <CenterActionButton/>
             </div>
         </div>
     )
@@ -341,10 +395,10 @@ function BaseRight() {
 }
 
 function DetailCard() {
-    const todo = useSelector(state => state.source.todo)
+    const todo = useSelector(state => state.todo)
     const dispatch = useDispatch()
     function handleClick() {
-        dispatch(setTodo(null))
+        dispatch(clearTodo())
     }
     return(
         <>

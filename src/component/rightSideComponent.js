@@ -3,22 +3,20 @@ import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
 import { useState, useRef } from 'react'
 import { sendToast } from '../utils/notif'
 import { ChatModel } from './model'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { convertDateToString } from '../utils/convertDateFormat'
-import { io } from 'socket.io-client'
-import { useEffect } from 'react'
-import { addChat } from '../redux/sourceSlice'
+import axios from 'axios'
+
 const API = process.env.REACT_APP_API
-const socket = io.connect(API)
 
 export function SidebarRightChat() {
-    const chat = useSelector(state => state.source.chat)
+    const chat = useSelector(state => state.todo.chat)
     const profile = useSelector(state => state.source.profile)
     const myNickname = profile.nickname
-    const dispatch = useDispatch()
     let box = []
     let lastDate = null
     let lastNickname = null
+    
     chat.forEach((item, index) => {
         if (item.date !== lastDate) {
             box.push(
@@ -38,12 +36,6 @@ export function SidebarRightChat() {
             <ChatModel key={index} item={item}/>
         )
     })
-    useEffect(() => {
-        socket.on("receive_message", (data) => {
-            if (!data) return
-            dispatch(addChat(data))
-        })
-    }, [dispatch])
     return (
         <div className="base-right">
             <div className="sidebar-right">
@@ -55,27 +47,31 @@ export function SidebarRightChat() {
 }
 export function FormBaseRight() {
     const profile = useSelector(state => state.source.profile)
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const todoId = useSelector(state => state.todo.id)
+
     const myNickname = profile.nickname
-    const todo = useSelector(state => state.source.todo)
-    const id = todo._id
-    const [isConnected,] = useState(socket.connected)
     const [msg, setMsg] = useState('')
     const textarea = useRef()
-    const dispatch = useDispatch()
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         textarea.current.style.height = '15px'
         sendToast(msg)
-        const data = {
+        const dataToSend = {
             nickname: myNickname,
             msg,
         }
-        socket.emit("send_message", { data, id })
-        dispatch(addChat({
-            ...data,
-            time: `${new Date().getHours().toString().padStart(2, '0')}.${new Date().getMinutes().toString().padStart(2, '0')}`,
-            date: `${new Date().getMonth().toString().padStart(2, '0')}/${new Date().getDate().toString().padStart(2, '0')}/${new Date().getFullYear().toString().slice(-2)}`
-        }))
+        try {
+            await axios.post(`${API}/source/chat/${idPageOfBook}/${todoId}`, dataToSend)
+            .then((res) => {
+                sendToast('data berhasil dikirim')
+            })
+            .catch(err => {
+                sendToast('data gagal dikirim')
+            }) 
+        } catch(err) {
+
+        }
         setMsg('')
     }
     function handleInput(e) {
@@ -84,11 +80,6 @@ export function FormBaseRight() {
         let height = textarea.current.scrollHeight
         textarea.current.style.height = height + 'px'
     }
-    useEffect(() => {
-        if (id !== "" && isConnected) {
-            socket.emit("join_room", id)
-        }
-    }, [isConnected, id])
     return (
         <form className='base-right-form' onSubmit={handleSubmit}>
             <div className="textarea-container">

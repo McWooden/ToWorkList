@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 
 
 export function CardImages() {
-    const todo = useSelector(state => state.source.todo)
+    const todo = useSelector(state => state.todo)
     const [modalOpen, setModalOpen] = useState(false)
     const box = []
     todo.images.forEach((data, index) => {
@@ -118,9 +118,10 @@ function Image({data}) {
     )
 }
 export function Notes() {
-    const todo = useSelector(state => state.source.todo)
+    const todoDetails = useSelector(state => state.todo.details)
+    const todoNotes = useSelector(state => state.todo.notes)
     const notes = []
-    todo.notes.forEach((item, index) => {
+    todoNotes.forEach((item, index) => {
         function handleDelete() {
             deleteToast('menghapus catatan')
         }
@@ -130,7 +131,7 @@ export function Notes() {
         notes.push(
                 <div className='note' key={index}>
                     <div className='note-head'>
-                        <FontAwesomeIcon icon={faNoteSticky} style={{color: todo.details.color}} className='note-color'/>
+                        <FontAwesomeIcon icon={faNoteSticky} style={{color: todoDetails.color}} className='note-color'/>
                         <div className="note-btn">
                             <FontAwesomeIcon icon={faTrash} className='pointer' onClick={handleDelete}/>
                             <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>

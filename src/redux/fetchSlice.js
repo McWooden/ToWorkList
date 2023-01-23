@@ -22,7 +22,8 @@ export const fetchSlice = createSlice({
             state.idBook = action.payload.id
             state.pathPageOfBook = action.payload.path
             state.idPageOfBook = action.payload.id
-        }
+        },
+
     },
 })
 
