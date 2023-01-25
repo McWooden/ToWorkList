@@ -38,13 +38,24 @@ export function sendToast(text) {
         closeButton: false,
     })
 }
-export function todoToast({title:text, color}) {
+export function todoToast({text, color}) {
     toast(
     <div className="myToast">
         <div className="icon" style={{backgroundColor: color}}>
             <FontAwesomeIcon icon={faCheck}/>
         </div>
         <p>tugas baru ditambahkan! {text || 'tugas'}</p>
+    </div>, {
+        closeButton: false,
+    })
+}
+export function checkToast({title, color}) {
+    toast(
+    <div className="myToast">
+        <div className="icon" style={{backgroundColor: color}}>
+            <FontAwesomeIcon icon={faCheck}/>
+        </div>
+        <p>reverse: {title || ''}</p>
     </div>, {
         closeButton: false,
     })

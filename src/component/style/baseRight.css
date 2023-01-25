@@ -16,7 +16,7 @@
     display: flex;
     align-items: flex-end;
     gap: 3px;
-    min-height: 48px;
+    min-height: 40px;
     margin: 0 3px 8px;
     padding: 0 2px;
     background-color: transparent;
@@ -45,7 +45,7 @@
     max-height: 160px;
     overflow: scroll;
 }
-.base-right-form button {
+.base-right-form button, .base-right-form .btn-off {
     height: 35px;
     flex: 1;
     color: var(--white-1);
@@ -54,7 +54,9 @@
     font-size: 1em;
 }
 .btn-off {
-    background-color: var(--light-blue);
+    display: grid;
+    place-items: center;
+    background-color: var(--black-5);
 }
 .btn-on {
     background-color: var(--light-blue);
@@ -107,14 +109,6 @@
 
         background: rgba(41, 43, 47, .9);
         box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    }
-    .base-right-form {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        width: 314px;
-        margin: 0;
-        padding: 0 3px 8px;
     }
     .base-right-hide {
         transform: translateX(100%);

@@ -28,11 +28,19 @@ export const todoSlice = createSlice({
         },
         setTodoId: (state, action) => {
             state.id = action.payload
+        },
+        setAllTodo: (state, action) => {
+            state.details = action.payload.details
+            state.dones = action.payload.dones
+            state.notes = action.payload.notes
+            state.images = action.payload.images
+            state.chat = action.payload.chat
+            state.id = action.payload._id
         }
     }
 })
 
 // Action creators are generated for each case reducer function
-export const { setTodo, clearTodo, setTodoId } = todoSlice.actions
+export const { setTodo, clearTodo, setTodoId, setAllTodo } = todoSlice.actions
 
 export default todoSlice.reducer

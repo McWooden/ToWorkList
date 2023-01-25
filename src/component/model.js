@@ -6,11 +6,12 @@ import { myAccount } from '../utils/dataJSON';
 // import { ItemData } from '../pages/App';
 import { Confirm } from './Modal';
 // import { GuildContext } from '../pages/App';
-import { editToast, deleteToast } from '../utils/notif';
+import { editToast, deleteToast, checkToast } from '../utils/notif';
 import { useDispatch, useSelector } from 'react-redux';
-import { setTodoId } from '../redux/todo';
+import { setAllTodo } from '../redux/todo';
+import axios from 'axios';
 
-
+const API = process.env.REACT_APP_API
 
 // export function TodoModel({item, indexItem}) {
 //     const { reverseDone } = useContext(GuildContext)
@@ -77,6 +78,8 @@ import { setTodoId } from '../redux/todo';
 // }
 export function TodoModel({item}) {
     const profile = useSelector(state => state.source.profile)
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const [dones, setDones] = useState(item.dones)
     const dispatch = useDispatch()
     const myNickname = profile.nickname
     const [dropDown, setDropDown] = useState(false)
@@ -99,7 +102,26 @@ export function TodoModel({item}) {
         document.addEventListener('mousedown', handler)
     })
     function handleTextClick() {
-        dispatch(setTodoId(item._id))
+        dispatch(setAllTodo(item))
+    }
+    async function handleReverse() {
+        const method = dones.includes(myNickname) ? 'uncheck' : 'checkTodo'
+        try {
+            await axios.get(`${API}/source/${method}/${idPageOfBook}/${item._id}/${myNickname}`)
+            .then((res) => {
+                checkToast({title: item.details.item_title, color: item.details.color})
+                if (method === 'checkTodo') {
+                    setDones([...dones, myNickname])
+                } else {
+                    setDones(dones.filter((item) => item !== myNickname))
+                }
+            })
+            .catch(err => {
+                checkToast({title: item.details.item_title, color: 'var(--danger)'})
+            }) 
+        } catch(err) {
+
+        }
     }
     return (
         <>
@@ -112,7 +134,7 @@ export function TodoModel({item}) {
             </div>
             </div>
             <div className="todo-right">
-                <div className={`card-finish pointer ${item.dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={() => console.log('reverse')}>
+                <div className={`card-finish pointer ${dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={handleReverse}>
                     <div className="card-finish-value"></div>
                 </div>
                 <div className="card-more" ref={btnRef}>

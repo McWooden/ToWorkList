@@ -46,7 +46,7 @@ function TodoDetail() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const dispatch = useDispatch()
     const { hideLeftBase } = useContext(HideBase)
-    const [isLoading, setIsLoading] = useState(true)
+    // const [isLoading, setIsLoading] = useState(true)
     // const [modalOpen, setModalOpen] = useState(false)
     // function handleModalOpen() {
     //     setModalOpen(true)
@@ -58,31 +58,31 @@ function TodoDetail() {
         const fetchData = async () => {
             const {data} = await axios.get(`${API}/source/list/${idPageOfBook}/${todoId}`)
             dispatch(setTodo(data))
-            setIsLoading(false)
+            // setIsLoading(false)
         }
         fetchData()
         const interval = setInterval(fetchData, 20000)
         return () => clearInterval(interval)
     }, [idPageOfBook, todoId, dispatch])
-    if (isLoading) return (
-        <>
-        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
-            <div className="sidebar-left">
-                <div className='sidebar_left_loading loading'/>
-            </div>
-        </div>
-        <div className="base-center">
-            <div className="center">
-                <div className="loading center_loading"/>
-            </div>
-        </div>
-        <div className="base-right">
-            <div className="sidebar-right">
-                <div className="loading sidebar_right_loading"/>
-            </div>
-        </div>
-        </>
-    )
+    // if (isLoading) return (
+    //     <>
+    //     <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
+    //         <div className="sidebar-left">
+    //             <div className='sidebar_left_loading loading'/>
+    //         </div>
+    //     </div>
+    //     <div className="base-center">
+    //         <div className="center">
+    //             <div className="loading center_loading"/>
+    //         </div>
+    //     </div>
+    //     <div className="base-right">
+    //         <div className="sidebar-right">
+    //             <div className="loading sidebar_right_loading"/>
+    //         </div>
+    //     </div>
+    //     </>
+    // )
     return (
         <>
         {/* left */}

@@ -8,7 +8,6 @@ import { myAccount } from '../utils/dataJSON'
 import { GuildSetting } from './setting'
 import { useNavigate } from 'react-router-dom'
 import { convertDateToString } from '../utils/convertDateFormat'
-import { getLocalAccount } from '../utils/localstorage'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
@@ -252,8 +251,7 @@ function PageListItem({data}) {
 }
 function Profile() {
     const navigate = useNavigate()
-    const profile = getLocalAccount() || myAccount.profile
-    const date = convertDateToString(profile.created_at)
+    const profile = useSelector(state => state.source.profile)
     const [userPop, setUserPop] = useState(false)
     const userPopRef = useRef()
     const profileRef = useRef()
@@ -261,7 +259,9 @@ function Profile() {
         setUserPop(!userPop)
     }
     useEffect(() => {
-        if (getLocalAccount() == null) navigate('/auth')
+        if (!profile) {
+            navigate('/auth')
+        }
         let handler = (e) => {
             try {
                 if (userPopRef.current.contains(e.target) || profileRef.current.contains(e.target)) {
@@ -274,36 +274,45 @@ function Profile() {
             }
         }
         document.addEventListener('mousedown', handler)
-    })
+        return () => {
+            document.removeEventListener('mousedown', handler);
+        }
+    }, [profile, navigate]);
+    
     return (
         <div className="profile-container">
-            <div className={`profile_pop ${userPop?'active':'inactive'}`} ref={userPopRef}>
-            <img src={profile.avatar} alt={profile.nickname}/>
-                <div className="profile_pop-body">
-                    <div className="profile_pop-nickname">{profile.nickname}<span>#{profile.tag}</span></div>
-                    <div className="profile_pop-created_at">
-                        <p>Bergabung sejak</p>
-                        <span>{date}</span>
-                    </div>
-                    <div className="profile_pop-switch_account" onClick={() => navigate('/auth/login')}>
-                        <FontAwesomeIcon icon={faRepeat}/>
-                        <span>Ganti akun</span>
-                    </div>
-                    <div className="profile_pop-add_account" onClick={() => navigate('/auth/register')}>
-                        <FontAwesomeIcon icon={faPlus}/>
-                        <span>Tambah akun</span>
-                    </div>
-                </div>
-            </div>
-            <div className='profile pointer' ref={profileRef} onClick={handlePop}>
+            {profile && (
+                <>
+                <div className={`profile_pop ${userPop?'active':'inactive'}`} ref={userPopRef}>
                 <img src={profile.avatar} alt={profile.nickname}/>
-                <div className="profile-body">
-                    <div className="profile-nickname">{profile.nickname}</div>
-                    <div className="profile-id">#{profile.tag}</div>
+                    <div className="profile_pop-body">
+                        <div className="profile_pop-nickname">{profile.nickname}<span>#{profile.tag}</span></div>
+                        <div className="profile_pop-created_at">
+                            <p>Bergabung sejak</p>
+                            <span>{convertDateToString(profile.created_at)}</span>
+                        </div>
+                        <div className="profile_pop-switch_account" onClick={() => navigate('/auth/login')}>
+                            <FontAwesomeIcon icon={faRepeat}/>
+                            <span>Ganti akun</span>
+                        </div>
+                        <div className="profile_pop-add_account" onClick={() => navigate('/auth/register')}>
+                            <FontAwesomeIcon icon={faPlus}/>
+                            <span>Tambah akun</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div className='profile pointer' ref={profileRef} onClick={handlePop}>
+                    <img src={profile.avatar} alt={profile.nickname}/>
+                    <div className="profile-body">
+                        <div className="profile-nickname">{profile.nickname}</div>
+                        <div className="profile-id">#{profile.tag}</div>
+                    </div>
+                </div>
+                </>
+            )}
         </div>
     )
+    
 }
 
 export default Navbar

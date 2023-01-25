@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faFeather} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 import { useState, useRef } from 'react'
 import { sendToast } from '../utils/notif'
 import { ChatModel } from './model'
@@ -91,9 +91,7 @@ export function FormBaseRight() {
                         <FontAwesomeIcon icon={faPaperPlane}/>
                     </button>
                 :
-                    <button className='btn-off' title='write text first'>
-                        <FontAwesomeIcon icon={faFeather}/>
-                    </button>
+                    null
             }
         </form>
     )
