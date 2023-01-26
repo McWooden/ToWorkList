@@ -8,7 +8,9 @@ import { TodoModel } from './model';
 import { useRef } from 'react';
 import { deleteToast, editToast, imageToast, noteToast, todoToast } from '../utils/notif';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
+const API = process.env.REACT_APP_API
 
 
 
@@ -118,7 +120,6 @@ function Image({data}) {
     )
 }
 export function Notes() {
-    const todoDetails = useSelector(state => state.todo.details)
     const todoNotes = useSelector(state => state.todo.notes)
     const notes = []
     todoNotes.forEach((item, index) => {
@@ -131,7 +132,7 @@ export function Notes() {
         notes.push(
                 <div className='note' key={index}>
                     <div className='note-head'>
-                        <FontAwesomeIcon icon={faNoteSticky} style={{color: todoDetails.color}} className='note-color'/>
+                        <FontAwesomeIcon icon={faNoteSticky} style={{color: item.color}} className='note-color'/>
                         <div className="note-btn">
                             <FontAwesomeIcon icon={faTrash} className='pointer' onClick={handleDelete}/>
                             <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
@@ -174,7 +175,9 @@ export function CenterActionButton({handleModalOpen}) {
 }
 
 export function AddTaskModal({modalOpen, handleModalClose, title}) {
-    const [currentColor, setCurrentColor] = useState('grey')
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const colors = ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow']
+    const [currentColor, setCurrentColor] = useState(colors[Math.floor(Math.random() * 5)])
     const borderStyle = {border: `1px solid ${currentColor}`}
     const date = convertDateToString(new Date().toLocaleDateString())
     const formRef = useRef()
@@ -182,16 +185,26 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
         setCurrentColor(e.target.value)
     }
     function colorDefault() {
-        setCurrentColor('grey')
+        setCurrentColor(colors[Math.floor(Math.random() * 5)])
     }
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        const data = {
-            title: e.target.title.value,
-            color: e.target.color.value,
-            desc: e.target.desc.value
+        const dataToSend = {
+            item_title: e.target.title.value,
+            desc: e.target.desc.value,
+            color: e.target.color.value
         }
-        todoToast(data)
+        try {
+            await axios.post(`${API}/source/addTodo/${idPageOfBook}`, dataToSend)
+            .then((res) => {
+                todoToast(dataToSend)
+            })
+            .catch(err => {
+                todoToast('data gagal dikirim')
+            }) 
+        } catch(err) {
+
+        }
         handleModalClose()
         colorDefault()
     }
@@ -211,8 +224,8 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
                         <p className="date">{date}</p>
                     </div>
                     <div className="input-left">
-                        <input name='title' type="text" placeholder='Judul' style={borderStyle} required/>
-                        <select style={borderStyle} onChange={handleColor} name='color'>
+                        <input name='title' type="text" placeholder='Judul' style={borderStyle} required autoComplete='off'/>
+                        <select style={borderStyle} onChange={handleColor} name='color' value={currentColor}>
                             <option value="grey">grey</option>
                             <option value="tomato">tomato</option>
                             <option value="royalblue">royalblue</option>

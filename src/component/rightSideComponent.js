@@ -6,12 +6,15 @@ import { ChatModel } from './model'
 import { useSelector } from 'react-redux'
 import { convertDateToString } from '../utils/convertDateFormat'
 import axios from 'axios'
+import { useContext } from 'react'
+import { HideBase } from './TodoApp'
 
 const API = process.env.REACT_APP_API
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
     const profile = useSelector(state => state.source.profile)
+    const { hideRightBase } = useContext(HideBase)
     const myNickname = profile.nickname
     let box = []
     let lastDate = null
@@ -37,7 +40,7 @@ export function SidebarRightChat() {
         )
     })
     return (
-        <div className="base-right">
+        <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
             <div className="sidebar-right">
                 {box}
             </div>

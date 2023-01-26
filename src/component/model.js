@@ -100,6 +100,7 @@ export function TodoModel({item}) {
             }
         }
         document.addEventListener('mousedown', handler)
+        return () => document.removeEventListener("mousedown", handler)
     })
     function handleTextClick() {
         dispatch(setAllTodo(item))

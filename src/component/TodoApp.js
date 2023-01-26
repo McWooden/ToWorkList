@@ -69,10 +69,13 @@ export function TodoApp() {
 // }
 function NavTop() {
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
-    const { hideRightBase, handleRightBase } = useContext(HideBase)
+    const { hideRightBase, handleRightBase, handleLeftBase, hideLeftBase } = useContext(HideBase)
     const { navTopRef, hideNavbar, handleNavbar} = useContext(AppContext)
     function handleClickNavbar() {
         handleNavbar(hideNavbar)
+    }
+    function left() {
+        handleLeftBase(hideLeftBase)
     }
     function right() {
         handleRightBase(hideRightBase)
@@ -85,7 +88,7 @@ function NavTop() {
                 <h4 className='pageTitle'>{pathPageOfBook}</h4>
             </div>
             <div className="sidebar-button">
-                <FontAwesomeIcon icon={faCube} className={`btn-sidebar btn-sidebar-left pointer`}/>
+                <FontAwesomeIcon icon={faCube} className={`btn-sidebar btn-sidebar-left pointer ${hideLeftBase?'btn-inactive':'btn-active'}`} onClick={left}/>
                 <FontAwesomeIcon icon={faUserGroup} className={`btn-sidebar btn-sidebar-right pointer ${hideRightBase?'btn-inactive':'btn-active'}`} onClick={right}/>
             </div>
             </header> 

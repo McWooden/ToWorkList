@@ -11,7 +11,7 @@ import { convertDateToString } from '../utils/convertDateFormat'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
-import { setPageType } from '../redux/sourceSlice'
+import { setPageType, setSource } from '../redux/sourceSlice'
 
 const API = process.env.REACT_APP_API
 
@@ -239,6 +239,7 @@ function PageListItem({data}) {
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
     const dispatch = useDispatch()
     function handleClick() {
+        dispatch(setSource(null))
         dispatch(setPageType(icon))
         dispatch(setPathPageOfBook({path: title, id}))
     }

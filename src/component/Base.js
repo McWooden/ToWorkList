@@ -10,7 +10,7 @@ import { HideBase } from './TodoApp';
 // import { convertDateToString } from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
 import { SidebarRightChat } from './rightSideComponent'
-import { Notes, CardImages, CenterActionButton, CardContainer} from './centerComponent';
+import { Notes, CardImages, CenterActionButton, CardContainer, AddTaskModal} from './centerComponent';
 import { useState } from 'react'
 import { PageProggress } from '../utils/progress'
 import { Greeting } from '../utils/greeting'
@@ -108,23 +108,26 @@ function TodoDetail() {
 }
 function TodoPage() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const source = useSelector(state => state.source.source)
     const dispatch = useDispatch()
-    const [isLoading, setIsLoading] = useState(true)
     const { hideLeftBase } = useContext(HideBase)
+
     useEffect(() => {
+        let intervalId = null
         const fetchData = async () => {
-            setIsLoading(true)
             try {
                 const response = await axios.get(`${API}/source/page/${idPageOfBook}`)
                 dispatch(setSource(response.data))
             } catch (err) {
                 console.error(err)
             }
-            setIsLoading(false)
         }
         fetchData()
+        intervalId = setInterval(fetchData, 30000)
+        return () => clearInterval(intervalId)
     }, [idPageOfBook, dispatch])
-    if (isLoading) return (
+
+    if (!source) return (
         <>
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
             <div className="sidebar-left">
@@ -145,6 +148,7 @@ function TodoPage() {
         </>
     )
 }
+
 // function BaseLeft() {
 //     const { hideLeftBase } = useContext(HideBase)
 //     const { item } = useContext(ItemData)
@@ -258,19 +262,20 @@ function BaseLeft() {
 //     )
 // }
 function BaseCenter() {
-    // const [modalOpen, setModalOpen] = useState(false)
-    // function handleModalOpen() {
-    //     setModalOpen(true)
-    // }
-    // function handleModalClose() {
-    //     setModalOpen(false)
-    // }
+    const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
+    const [modalOpen, setModalOpen] = useState(false)
+    function handleModalOpen() {
+        setModalOpen(true)
+    }
+    function handleModalClose() {
+        setModalOpen(false)
+    }
     return (
         <div className="base-center">
             <div className="center">
                 <CardContainer/>
-                {/* <CenterActionButton handleModalOpen={handleModalOpen}/> */}
-                <CenterActionButton/>
+                <AddTaskModal modalOpen={modalOpen} title={pathPageOfBook} handleModalClose={handleModalClose}/>
+                <CenterActionButton handleModalOpen={handleModalOpen}/>
             </div>
         </div>
     )

@@ -69,11 +69,16 @@
     outline: none;
     background-color: var(--black-3);
     resize: none;
-    padding: 3px;
+    padding: 8px;
     border: 1px solid var(--black-4);
     border-radius: 5px;
     font-family: inherit;
     color: var(--white-1);
+    min-height: 45px;
+    transition: .3s;
+}
+.form-modal input:focus, .form-modal textarea:focus, .form-modal select:focus {
+    background-color: var(--black-1);
 }
 .form-modal textarea, .img-form textarea {
     flex: 1;

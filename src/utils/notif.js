@@ -38,13 +38,13 @@ export function sendToast(text) {
         closeButton: false,
     })
 }
-export function todoToast({text, color}) {
+export function todoToast({item_title, color}) {
     toast(
     <div className="myToast">
         <div className="icon" style={{backgroundColor: color}}>
             <FontAwesomeIcon icon={faCheck}/>
         </div>
-        <p>tugas baru ditambahkan! {text || 'tugas'}</p>
+        <p>tugas baru ditambahkan! {item_title || 'tugas'}</p>
     </div>, {
         closeButton: false,
     })
