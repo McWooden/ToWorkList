@@ -7,8 +7,9 @@ import { FileDrop, Modal } from './Modal'
 import { TodoModel } from './model';
 import { useRef } from 'react';
 import { deleteToast, editToast, imageToast, noteToast, todoToast } from '../utils/notif';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
+import { setSource } from '../redux/sourceSlice';
 
 const API = process.env.REACT_APP_API
 
@@ -187,6 +188,7 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
     function colorDefault() {
         setCurrentColor(colors[Math.floor(Math.random() * 5)])
     }
+    const dispatch = useDispatch()
     async function handleSubmit(e) {
         e.preventDefault()
         const dataToSend = {
@@ -198,6 +200,7 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
             await axios.post(`${API}/source/addTodo/${idPageOfBook}`, dataToSend)
             .then((res) => {
                 todoToast(dataToSend)
+                dispatch(setSource(res.data))
             })
             .catch(err => {
                 todoToast('data gagal dikirim')
@@ -305,6 +308,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
 export function CardContainer() {
     const source = useSelector(state => state.source.source)
     let box = []
-    source.list.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
+    const list = source.list
+    list.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
     return box
 }

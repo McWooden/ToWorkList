@@ -16,16 +16,20 @@
     display: flex;
     margin-bottom: 1px;
     position: relative;
+    width: 100%;
+    transition: .1s ease;
 }
+
 .chat-card.my {
     flex-direction: row-reverse;
     align-self: flex-end;
 }
-.chat-card-message.active {
+.chat-card.active {
     background-color: var(--ok);
 }
-.chat-card-message.inactive {
+.chat-card-message {
     background-color: var(--black-5);
+    white-space: pre;
 }
 .chat-card-message {
     border-radius: 5px 10px 10px 0;
@@ -36,6 +40,12 @@
 .chat-card-message.my {
     border-radius: 10px 5px 0 10px;
     background-color: var(--light-blue);
+    border: 1px solid var(--light-blue) !important;
+}
+.chat-card-message.disable {
+    background-color: var(--black-2);
+    color: var(--white-2);
+    border: 1px solid var(--black-5);
 }
 .chat-card-time {
     font-size: .5em;
@@ -54,11 +64,18 @@
     position: absolute;
     bottom: 0;
     right: 0;
+    width: fit-content;
+}
+.chat-dropdown.my {
+    left: 0;
 }
 .chat-dropdown.active {
     opacity: 1;
     visibility: visible;
     transition: .1s ease;
+    width: 30px;
+    display: flex;
+    justify-content: center;
 }
 .chat-dropdown.inactive {
     opacity: 0;
@@ -70,7 +87,7 @@
     list-style: none;
     font-size: small;
     padding: 0 5px;
-    border-radius: 5px 0 5px 5px;
+    border-radius: 5px;
 }
 .chat-dropdown ul li:hover {
     background-color: var(--black-5);

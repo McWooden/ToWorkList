@@ -3,6 +3,7 @@ import Navbar from '../component/Navbar';
 import TodoApp from '../component/TodoApp';
 import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
+import { useSelector } from 'react-redux';
 // import { useNavigate, useParams } from 'react-router-dom';
 // import { defaultItem } from '../utils/dataJSON'
 
@@ -102,12 +103,20 @@ export const BookContext = createContext()
 export const AppContext = createContext()
 function App() {
   // navbar
+  const mode = useSelector(state => state.source.mode)
   const navRef = useRef()
   const navTopRef = useRef()
   const [hideNavbar, setHideNavbar] = useState(false)
   function handleNavbar(boolean) {
     setHideNavbar(!boolean)
   }
+  useEffect(() => {
+    if (mode === 'dark') {
+      import('../component/style/dark.css')
+    } else {
+      import('../component/style/light.css')
+    }
+  }, [mode])
   useEffect(() => {
     let handler = (e) => {
         try {

@@ -20,6 +20,7 @@
     margin: 0 3px 8px;
     padding: 0 2px;
     background-color: transparent;
+    z-index: 1;
 }
 .base-right-form .textarea-container {
     display: flex;
@@ -62,6 +63,26 @@
     background-color: var(--light-blue);
     box-shadow: var(--shadow-2-blue);
 }
+.scrollToBottom {
+    width: 15px;
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    z-index: 1;
+    font-size: large;
+    background-color: var(--black-5);
+    color: goldenrod;
+    padding: 8px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: .1s ease;
+    box-shadow: var(--shadow-1);
+    transform: scale(0);
+}
+.scrollToBottom.active {
+    transform: scale(1);
+}
+/* outer */
 .users-group {
     color: var(--white-3);
     font-size: small;

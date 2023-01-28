@@ -8,8 +8,9 @@ import { Confirm } from './Modal';
 // import { GuildContext } from '../pages/App';
 import { editToast, deleteToast, checkToast } from '../utils/notif';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAllTodo } from '../redux/todo';
+import { setAllTodo, setTodo } from '../redux/todo';
 import axios from 'axios';
+import { setSource } from '../redux/sourceSlice';
 
 const API = process.env.REACT_APP_API
 
@@ -105,12 +106,27 @@ export function TodoModel({item}) {
     function handleTextClick() {
         dispatch(setAllTodo(item))
     }
+    async function deleteTodo() {
+        try {
+            await axios.delete(`${API}/source/addTodo/${idPageOfBook}/${item._id}`)
+            .then((res) => {
+                deleteToast('berhasil dihapus')
+                dispatch(setSource(res.data))
+            })
+            .catch(err => {
+                deleteToast('gagal terhapus')
+            })
+        } catch(err) {
+
+        }
+    }
     async function handleReverse() {
         const method = dones.includes(myNickname) ? 'uncheck' : 'checkTodo'
         try {
             await axios.get(`${API}/source/${method}/${idPageOfBook}/${item._id}/${myNickname}`)
             .then((res) => {
                 checkToast({title: item.details.item_title, color: item.details.color})
+                dispatch(setSource(res.data))
                 if (method === 'checkTodo') {
                     setDones([...dones, myNickname])
                 } else {
@@ -159,15 +175,19 @@ export function TodoModel({item}) {
                 </div>
             </div>
         </div>
-        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteToast}/>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
         </>
     )
 }
 
 export function ChatModel({item}) {
     const [dropDown, setDropDown] = useState(false)
+    const dispatch = useDispatch()
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const todoId = useSelector(state => state.todo.id)
     const itsMe = item.nickname === myAccount.profile.nickname
     let cardRef = useRef()
+    const disable = item.msg === 'Pesan ini telah dihapus'
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -180,15 +200,31 @@ export function ChatModel({item}) {
         }
         document.addEventListener('mousedown', handler)
     })
-    function handleDelete() {
+    function handleDropDown() {
+        if (disable) return
+        setDropDown(!dropDown)
+    }
+    async function handleDelete() {
         setDropDown(false)
         deleteToast('menghapus chat')
+        try {
+            await axios.put(`${API}/source/chat/${idPageOfBook}/${todoId}/${item._id}`)
+            .then((res) => {
+                deleteToast('chat berhasil dihapus')
+                dispatch(setTodo(res.data.data))
+            })
+            .catch(err => {
+                deleteToast('chat gagal dihapus')
+            }) 
+        } catch(err) {
+
+        }
     }
     return (
-        <div className={`${itsMe&&'my'} chat-card`} ref={cardRef}>
-            <div className={`${itsMe&&'my'} chat-card-message ${dropDown?'active':'inactive'}`}>{item.msg}</div>
-            <div className={`${itsMe&&'my'} chat-card-time pointer`} onClick={() => setDropDown(!dropDown)}>{item.time}</div>
-            <div className={`chat-dropdown ${dropDown?'active':'inactive'}`}>
+        <div className={`${itsMe&&'my'} chat-card ${dropDown?'active':'inactive'}`} ref={cardRef}>
+            <div className={`${itsMe&&'my'} chat-card-message ${disable&&'disable'}`}>{item.msg}</div>
+            <div className={`${itsMe&&'my'} chat-card-time pointer`} onClick={handleDropDown}>{item.time}</div>
+            <div className={`chat-dropdown ${itsMe&&'my'} ${dropDown?'active':'inactive'}`}>
                 <ul>
                     <li className='pointer' onClick={handleDelete}>
                         <FontAwesomeIcon icon={faTrash}/>
