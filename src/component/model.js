@@ -126,7 +126,7 @@ export function TodoModel({item}) {
             await axios.get(`${API}/source/${method}/${idPageOfBook}/${item._id}/${myNickname}`)
             .then((res) => {
                 checkToast({title: item.details.item_title, color: item.details.color})
-                dispatch(setSource(res.data))
+                dispatch(setSource(res.data.data))
                 if (method === 'checkTodo') {
                     setDones([...dones, myNickname])
                 } else {
