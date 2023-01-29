@@ -204,7 +204,6 @@ function TodoPage() {
 function BaseLeft() {
     const source = useSelector(state => state.source.source)
     const { hideLeftBase } = useContext(HideBase)
-    console.log(source)
     const colors = source.list.map(item => ({
         date: new Date(item.details.deadline),
         color: item.details.color,
