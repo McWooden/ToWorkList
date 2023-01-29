@@ -10,6 +10,7 @@ export const sourceSlice = createSlice({
         guildProfile: null,
         mode: 'dark',
         members: null,
+        err: null
     },
     reducers: {
         setPageType: (state, action) => {
@@ -29,10 +30,13 @@ export const sourceSlice = createSlice({
         },
         setMembers: (state, action) => {
             state.members = action.payload
+        },
+        setError: (state, action) => {
+            state.err = action.payload
         }
     },
 })
 
-export const { setPageType, setSource, setProfile, setGuildProfile, setMode, setMembers } = sourceSlice.actions
+export const { setPageType, setSource, setProfile, setGuildProfile, setMode, setMembers, setError } = sourceSlice.actions
 
 export default sourceSlice.reducer

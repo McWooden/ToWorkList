@@ -11,7 +11,7 @@ import { convertDateToString } from '../utils/convertDateFormat'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
-import { setMembers } from '../redux/sourceSlice'
+import { setError, setMembers } from '../redux/sourceSlice'
 import { setPageType, setSource } from '../redux/sourceSlice'
 
 const API = process.env.REACT_APP_API
@@ -56,6 +56,8 @@ function HomeButton() {
 function BookList() {
     const [allBook, setAllBook] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -66,12 +68,14 @@ function BookList() {
                 })
                 setAllBook(sessionBook)
             } catch (err) {
-                console.error(err)
+                const {message, name, code} = err
+                dispatch(setError({message, name, code}))
+                navigate('/error')
             }
             setIsLoading(false)
         }
         fetchData()
-    }, [])
+    }, [dispatch, navigate])
     if (isLoading) return (
         <div className="nav-guild">
             <div className='guild-frame'>

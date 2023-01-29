@@ -1,0 +1,8 @@
+.error_container {
+    min-width: 512px;
+}
+.error_count {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}

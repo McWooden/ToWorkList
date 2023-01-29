@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'
 import './index.css';
+import './component/style/dark.css'
+// import './component/style/light.css'
 import App from './pages/App'
 import { Auth, Register, Login, Pemulihan } from './pages/Auth'
 import reportWebVitals from './reportWebVitals'
@@ -8,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import store from './redux/store'
 import { Provider } from 'react-redux';
+import ErrorMessage from './utils/Error'
 
 
 
@@ -18,13 +21,14 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
       <Routes>
-          <Route path='*' element={<App />}/>
+        <Route path='*' element={<App />}/>
         <Route path='/auth'>
           <Route index element={<Auth />}/>
           <Route path='login' element={<Login />}/>
           <Route path='register' element={<Register />}/>
           <Route path='pemulihan' element={<Pemulihan />}/>
         </Route>
+        <Route path='/error' element={<ErrorMessage/>}/>
       </Routes>
       </Provider>
     </BrowserRouter>
