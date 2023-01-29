@@ -19,7 +19,7 @@ import './style/kalender.css'
 import { useDispatch, useSelector } from 'react-redux'
 import {Welcome} from './page'
 import axios from 'axios'
-import { setSource } from '../redux/sourceSlice'
+import { setMembers, setSource } from '../redux/sourceSlice'
 import { clearTodo, setTodo } from '../redux/todo';
 
 const API = process.env.REACT_APP_API
@@ -345,44 +345,58 @@ function BaseRight() {
     const [isLoading, setIsLoading] = useState(false)
     const { hideRightBase } = useContext(HideBase)
     const idBook = useSelector(state => state.fetch.idBook)
+    const members = useSelector(state => state.source.members)
+    const dispatch = useDispatch()
     const [box, setBox] = useState([])
     function handleEmpety() {
         setIsLoading(false)
         setBox('Empety')
     }
+    function dataToBox(data) {
+        let sessionBox = []
+        data.users.forEach((group, index) => {
+            sessionBox.push(
+                <p className='users-group' key={index}>{group.details.role}</p>
+            )
+            let container = []
+            group.member.forEach((user, userIndex) => {
+                container.push(
+                    <div className='group-user pointer' key={`${user.nickname}-${userIndex}`}>
+                        <img src={user.avatar} alt={user.nickname} />
+                        <div className="user-context">
+                            <p style={{color: group.details.role_color}} >{user.nickname}</p>
+                            <p className='user-status'>{user.status}</p>
+                        </div>
+                    </div>
+                )
+            })
+            sessionBox.push(<div key={`${group.details.role}-container`} className='group-user-container'>{container}</div>)
+        })
+        setBox(sessionBox)
+    }
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(true)
             try {
-                if (idBook === '@me') return handleEmpety()
-                let sessionBox = []
                 const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
-                data.users.forEach((group, index) => {
-                    sessionBox.push(
-                        <p className='users-group' key={index}>{group.details.role}</p>
-                    )
-                    let container = []
-                    group.member.forEach((user, userIndex) => {
-                        container.push(
-                            <div className='group-user pointer' key={`${user.nickname}-${userIndex}`}>
-                                <img src={user.avatar} alt={user.nickname} />
-                                <div className="user-context">
-                                    <p style={{color: group.details.role_color}} >{user.nickname}</p>
-                                    <p className='user-status'>{user.status}</p>
-                                </div>
-                            </div>
-                        )
-                    })
-                    sessionBox.push(<div key={`${group.details.role}-container`} className='group-user-container'>{container}</div>)
-                })
-                setBox(sessionBox)
+                dispatch(setMembers(data))
             } catch (err) {
-                console.log(err)
+                handleEmpety()
             }
-            setIsLoading(false)
         }
-        fetchData()
-    }, [idBook])
+        if (!members) {
+            if (idBook === '@me') return handleEmpety()
+            setIsLoading(true)
+            fetchData()
+            setIsLoading(false)
+        } else {
+            dataToBox(members)
+        }
+        const interval = setInterval(() => {
+            if (idBook === '@me') return handleEmpety()
+            fetchData()
+        }, 60000)
+        return () => clearInterval(interval)
+    }, [idBook, members, dispatch])
     if (isLoading) return (
         <div className="base-right">
             <div className="sidebar-right">

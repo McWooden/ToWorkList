@@ -9,6 +9,7 @@ export const sourceSlice = createSlice({
         profile: getLocalAccount(),
         guildProfile: null,
         mode: 'dark',
+        members: null,
     },
     reducers: {
         setPageType: (state, action) => {
@@ -26,9 +27,12 @@ export const sourceSlice = createSlice({
         setMode: (state, action) => {
             state.mode = action.payload
         },
+        setMembers: (state, action) => {
+            state.members = action.payload
+        }
     },
 })
 
-export const { setPageType, setSource, setProfile, setGuildProfile, setMode } = sourceSlice.actions
+export const { setPageType, setSource, setProfile, setGuildProfile, setMode, setMembers } = sourceSlice.actions
 
 export default sourceSlice.reducer

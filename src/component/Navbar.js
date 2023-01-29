@@ -11,6 +11,7 @@ import { convertDateToString } from '../utils/convertDateFormat'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
+import { setMembers } from '../redux/sourceSlice'
 import { setPageType, setSource } from '../redux/sourceSlice'
 
 const API = process.env.REACT_APP_API
@@ -41,6 +42,7 @@ function HomeButton() {
         dispatch(setPageType('welcome'))
         dispatch(setPathBook({path: '@me', id: '@me'}))
         dispatch(setPathPageOfBook({path: '', id: ''}))
+        dispatch(setMembers(null))
         handleChangePage(myAccount)
     }
     return (
@@ -89,6 +91,7 @@ function BookItem({data}) {
     function handleClick() {
         dispatch(setPageType('welcome'))
         dispatch(setFetch({path: data.profile.book_title, id: data._id}))
+        dispatch(setMembers(null))
     }
     return (
         <div onClick={handleClick} className={`guild-frame ${pathBook===data.profile.book_title ? 'active' : ''}`}>
