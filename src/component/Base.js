@@ -10,7 +10,7 @@ import { HideBase } from './TodoApp';
 // import { convertDateToString } from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
 import { SidebarRightChat } from './rightSideComponent'
-import { Notes, CardImages, CenterActionButton, CardContainer, AddTaskModal} from './centerComponent';
+import { Notes, CardImages, CenterActionButton, CardContainer, AddTaskModal, AddNoteModal} from './centerComponent';
 import { useState } from 'react'
 import { PageProggress } from '../utils/progress'
 import { Greeting } from '../utils/greeting'
@@ -42,18 +42,18 @@ export function Base() {
 }
 function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)
-    // const todoDetails = useSelector(state => state.todo.details)
+    const todoDetails = useSelector(state => state.todo.details)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const dispatch = useDispatch()
     const { hideLeftBase } = useContext(HideBase)
     // const [isLoading, setIsLoading] = useState(true)
-    // const [modalOpen, setModalOpen] = useState(false)
-    // function handleModalOpen() {
-    //     setModalOpen(true)
-    // }
-    // function handleModalClose() {
-    //     setModalOpen(false)
-    // }
+    const [modalOpen, setModalOpen] = useState(false)
+    function handleModalOpen() {
+        setModalOpen(true)
+    }
+    function handleModalClose() {
+        setModalOpen(false)
+    }
     useEffect(() => {
         const fetchData = async () => {
             const {data} = await axios.get(`${API}/source/list/${idPageOfBook}/${todoId}`)
@@ -96,9 +96,8 @@ function TodoDetail() {
             <div className='base-center'>
                 <div className='center'>
                     <DetailCard/>
-                    {/* <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/> */}
-                    {/* <CenterActionButton handleModalOpen={handleModalOpen}/> */}
-                    <CenterActionButton/>
+                    <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/>
+                    <CenterActionButton handleModalOpen={handleModalOpen}/>
                 </div>
             </div>
         {/* right */}

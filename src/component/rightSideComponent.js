@@ -87,7 +87,7 @@ export function FormBaseRight() {
             msg,
         }
         try {
-            await axios.post(`${API}/source/chat/${idPageOfBook}/${todoId}`, dataToSend)
+            await axios.post(`${API}/chat/${idPageOfBook}/${todoId}`, dataToSend)
             .then((res) => {
                 sendToast('data berhasil dikirim')
                 dispatch(setTodo(res.data.data))

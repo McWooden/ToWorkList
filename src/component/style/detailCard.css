@@ -175,10 +175,13 @@
     display: flex;
     background-color: var(--black-3);
 }
+.note-head:hover .note-btn {
+    display: inherit;
+}
 .note-btn {
-    display: flex;
     align-items: center;
     gap: 5px;
+    display: none;
 }
 .note-head svg {
     min-width: 15px;

@@ -9,6 +9,8 @@ import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faRightToBracket, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { setLocalAccount } from '../utils/localstorage'
+import { useDispatch } from 'react-redux'
+import { setProfile } from '../redux/sourceSlice'
 
 
 const API = process.env.REACT_APP_API
@@ -140,6 +142,7 @@ function FormRegist({data}) {
     }, [confirmPassword, myPassword])
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     function handleSubmit(event) {
         event.preventDefault()
         if (!setGreenBorderInput) return
@@ -159,6 +162,7 @@ function FormRegist({data}) {
         .then((res) => {
             navigate('/')
             setLocalAccount(res.data.rest)
+            dispatch(setProfile())
             toast.dismiss(promise)
             accountToast(res.data.message)
         })
@@ -215,6 +219,7 @@ export function Login() {
     const [password, setPassowrd] = useState('')
     const [msg, setMsg] = useState(null)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     function handleSuccess(response) {
         setMsg(null)
         const credential = response.credential
@@ -222,6 +227,7 @@ export function Login() {
         axios.put(`${API}/user/login/google`, {credential})
         .then(res => {
             setLocalAccount(res.data)
+            dispatch(setProfile())
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')
@@ -243,6 +249,7 @@ export function Login() {
         axios.put(`${API}/user/login/form`, data)
         .then((res) => {
             setLocalAccount(res.data)
+            dispatch(setProfile())
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')
@@ -301,6 +308,7 @@ export function Pemulihan() {
     const [errorPassword, setErrorPassword] = useState(null)
     const [redBorderInput, setRedBorderInput] = useState(false)
     const btn = useRef()
+    const dispatch = useDispatch()
     function handleSuccess(response) {
         const credential = response.credential
         setMsg(null)
@@ -338,6 +346,7 @@ export function Pemulihan() {
         .then((res) => {
             navigate('/')
             setLocalAccount(res.data)
+            dispatch(setProfile())
             toast.dismiss(promise)
             accountToast('Berhasil mengganti password dan masuk ke akun')
         })

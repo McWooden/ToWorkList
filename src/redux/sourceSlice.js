@@ -20,7 +20,7 @@ export const sourceSlice = createSlice({
             state.source = action.payload
         },
         setProfile: (state, action) => {
-            state.profile = action.payload
+            state.profile = getLocalAccount()
         },
         setGuildProfile: (state, action) => {
             state.guildProfile = action.payload
@@ -33,7 +33,7 @@ export const sourceSlice = createSlice({
         },
         setError: (state, action) => {
             state.err = action.payload
-        }
+        },
     },
 })
 

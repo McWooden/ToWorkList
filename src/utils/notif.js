@@ -66,7 +66,7 @@ export function noteToast({color}) {
         <div className="icon" style={{backgroundColor: color}}>
             <FontAwesomeIcon icon={faNoteSticky}/>
         </div>
-        <p>catatan baru ditambahkan!</p>
+        {color === 'var(--danger)' ? <p>catatan gagal dibuat</p> : <p>catatan baru ditambahkan!</p>}
     </div>, {
         closeButton: false,
     })

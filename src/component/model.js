@@ -208,7 +208,7 @@ export function ChatModel({item}) {
         setDropDown(false)
         deleteToast('menghapus chat')
         try {
-            await axios.put(`${API}/source/chat/${idPageOfBook}/${todoId}/${item._id}`)
+            await axios.put(`${API}/chat/${idPageOfBook}/${todoId}/${item._id}`)
             .then((res) => {
                 deleteToast('chat berhasil dihapus')
                 dispatch(setTodo(res.data.data))

@@ -10,6 +10,7 @@ import { deleteToast, editToast, imageToast, noteToast, todoToast } from '../uti
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setSource } from '../redux/sourceSlice';
+import { setTodo } from '../redux/todo';
 
 const API = process.env.REACT_APP_API
 
@@ -124,33 +125,52 @@ export function Notes() {
     const todoNotes = useSelector(state => state.todo.notes)
     const notes = []
     todoNotes.forEach((item, index) => {
-        function handleDelete() {
-            deleteToast('menghapus catatan')
-        }
-        function handleEdit() {
-            editToast('mengedit catatan')
-        }
         notes.push(
-                <div className='note' key={index}>
-                    <div className='note-head'>
-                        <FontAwesomeIcon icon={faNoteSticky} style={{color: item.color}} className='note-color'/>
-                        <div className="note-btn">
-                            <FontAwesomeIcon icon={faTrash} className='pointer' onClick={handleDelete}/>
-                            <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
-                        </div>
-                    </div>
-                    <div className='note-body'>
-                        <pre>
-                            {item.context}
-                        </pre>
-                        <span className='note-info'>{`${item.by} ${convertDateToString(item.date)}`}</span>
-                    </div>
-                </div>
+                <NoteItem key={index} data={item}/>
             )
         })
     return(
         <div className='notes-container'>
             {notes}
+        </div>
+    )
+}
+function NoteItem({data}) {
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const todoId = useSelector(state => state.todo.id)
+    const dispatch = useDispatch()
+    async function handleDelete() {
+        try {
+            await axios.delete(`${API}/notes/${idPageOfBook}/${todoId}/${data._id}`)
+            .then((res) => {
+                deleteToast('catatan berhasil dihapus')
+                dispatch(setTodo(res.data))
+            })
+            .catch(err => {
+                deleteToast('catatan gagal dihapus')
+            }) 
+        } catch(err) {
+
+        }
+    }
+    function handleEdit() {
+        editToast('mengedit catatan')
+    }
+    return (
+        <div className='note'>
+            <div className='note-head'>
+                <FontAwesomeIcon icon={faNoteSticky} style={{color: data.color}} className='note-color'/>
+                <div className="note-btn">
+                    <FontAwesomeIcon icon={faTrash} className='pointer' onClick={handleDelete}/>
+                    <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
+                </div>
+            </div>
+            <div className='note-body'>
+                <pre>
+                    {data.context}
+                </pre>
+                <span className='note-info'>{`${data.by}, ${convertDateToString(data.date)}`}</span>
+            </div>
         </div>
     )
 }
@@ -165,11 +185,11 @@ export function Notes() {
 //     )
 // }
 export function CenterActionButton({handleModalOpen}) {
-    const todo = useSelector(state => state.source.todo)
+    const todoId = useSelector(state => state.todo.id)
     return (
         <div className='center-action-btn'>
             <div className="action-add">
-                <FontAwesomeIcon icon={todo?faStickyNote:faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
+                <FontAwesomeIcon icon={todoId?faStickyNote:faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
             </div>
         </div>
     )
@@ -245,22 +265,39 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
 }
 
 export function AddNoteModal({modalOpen, handleModalClose, title}) {
-    const [currentColor, setCurrentColor] = useState('grey')
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const todoId = useSelector(state => state.todo.id)
+    const profile = useSelector(state => state.source.profile)
+    const dispatch = useDispatch()
+    const colors = ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow']
+    const [currentColor, setCurrentColor] = useState(colors[Math.floor(Math.random() * 5)])
     const borderStyle = {border: `1px solid ${currentColor}`}
     const date = convertDateToString(new Date().toLocaleDateString())
     function handleColor(e) {
         setCurrentColor(e.target.value)
     }
     function colorDefault() {
-        setCurrentColor('grey')
+        setCurrentColor(colors[Math.floor(Math.random() * 5)])
     }
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        const data = {
+        const dataToSend = {
+            by: profile.nickname,
             color: e.target.color.value,
-            desc: e.target.desc.value
+            context: e.target.desc.value
         }
-        noteToast(data)
+        try {
+            await axios.post(`${API}/notes/${idPageOfBook}/${todoId}`, dataToSend)
+            .then((res) => {
+                noteToast(dataToSend)
+                dispatch(setTodo(res.data))
+            })
+            .catch(err => {
+                noteToast({color : 'var(--danger)'})
+            }) 
+        } catch(err) {
+
+        }
         handleModalClose()
         colorDefault()
     }
@@ -280,7 +317,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
                         <p className="date">{date}</p>
                     </div>
                     <div className="input-left">
-                        <select style={borderStyle} onChange={handleColor} name='color'>
+                        <select style={borderStyle} onChange={handleColor} name='color' value={currentColor}>
                             <option value="grey">grey</option>
                             <option value="tomato">tomato</option>
                             <option value="royalblue">royalblue</option>
