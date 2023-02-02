@@ -139,6 +139,7 @@ export function Notes() {
 function NoteItem({data}) {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
+    const [confirmOpen, setConfirmOpen] = useState(false)
     const dispatch = useDispatch()
     async function handleDelete() {
         try {
@@ -151,19 +152,23 @@ function NoteItem({data}) {
                 deleteToast('catatan gagal dihapus')
             }) 
         } catch(err) {
-
+            
         }
+    }
+    function confirmToDelete() {
+        setConfirmOpen(true)
     }
     function handleEdit() {
         editToast('mengedit catatan')
         dispatch(setNoteEditor(data))
     }
     return (
+        <>
         <div className='note'>
             <div className='note-head'>
                 <FontAwesomeIcon icon={faNoteSticky} style={{color: data.color}} className='note-color'/>
                 <div className="note-btn">
-                    <FontAwesomeIcon icon={faTrash} className='pointer' onClick={handleDelete}/>
+                    <FontAwesomeIcon icon={faTrash} className='pointer' onClick={confirmToDelete}/>
                     <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
                 </div>
             </div>
@@ -174,6 +179,8 @@ function NoteItem({data}) {
                 <span className='note-info'>{`${data.by}, ${convertDateToString(data.date)}`}</span>
             </div>
         </div>
+        <Confirm open={confirmOpen} close={() => setConfirmOpen(false)} target={`${data.by}, ${convertDateToString(data.date)}`} metode='delete' color={data.color} callback={handleDelete}/>
+        </>
     )
 }
 // export function CenterActionButton({handleModalOpen}) {
@@ -191,7 +198,6 @@ export function NoteEditor() {
     const todoId = useSelector(state => state.todo.id)
     const data = useSelector(state => state.source.noteEditor)
     const [noteVal, setNoteVal] = useState(null)
-    const [errMsg, setErrMsg] = useState(null)
     const [discard, setDiscard] = useState(false)
     const dispatch = useDispatch()
     useEffect(() => {
@@ -270,7 +276,6 @@ export function NoteEditor() {
                     <button type='submit' className='note-btn-simpan'>Simpan</button>
                 </div>
                 <div className='note-body'>
-                    <span>{errMsg}</span>
                     <textarea
                         className='note_editor-textarea'
                         placeholder={data.context}
