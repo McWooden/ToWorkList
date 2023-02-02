@@ -167,6 +167,11 @@
     overflow: hidden;
     margin: 10px 5px;
 }
+.note-editor {
+    max-width: 1024px;
+    min-width: 75%;
+    margin: auto;
+}
 .note-head {
     display: flex;
     justify-content: space-between;
@@ -182,6 +187,32 @@
     align-items: center;
     gap: 5px;
     display: none;
+}
+.note-btn-simpan {
+    font-size: small;
+    font-family: var(--defaultFont);
+    background-color: var(--light-blue);
+    padding: 3px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: var(--shadow-1);
+    color: var(--white-1);
+    border: none;
+    margin: .5em;
+}
+.note_editor-textarea {
+    outline: none;
+    background-color: var(--black-3);
+    resize: vertical;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid var(--black-4);
+    border-radius: 5px;
+    font-family: inherit;
+    color: var(--white-1);
+    transition: .3s;
+    font-size: small;
+    min-height: 150px;
 }
 .note-head svg {
     min-width: 15px;

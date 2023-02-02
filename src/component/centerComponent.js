@@ -2,15 +2,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare, faImage, faStickyNote} from '@fortawesome/free-solid-svg-icons'
 import {convertDateToString} from '../utils/convertDateFormat'
 import { useState } from 'react';
-import { FileDrop, Modal } from './Modal'
+import { FileDrop, Modal, ModalNoteEditor, Confirm } from './Modal'
 // import { ItemData } from '../pages/App';
 import { TodoModel } from './model';
 import { useRef } from 'react';
-import { deleteToast, editToast, imageToast, noteToast, todoToast } from '../utils/notif';
+import { deleteToast, editToast, imageToast, noteToast, noteToastSecond, todoToast } from '../utils/notif';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
-import { setSource } from '../redux/sourceSlice';
+import { setNoteEditor, setSource } from '../redux/sourceSlice';
 import { setTodo } from '../redux/todo';
+import { useEffect } from 'react';
 
 const API = process.env.REACT_APP_API
 
@@ -155,6 +156,7 @@ function NoteItem({data}) {
     }
     function handleEdit() {
         editToast('mengedit catatan')
+        dispatch(setNoteEditor(data))
     }
     return (
         <div className='note'>
@@ -184,6 +186,105 @@ function NoteItem({data}) {
 //         </div>
 //     )
 // }
+export function NoteEditor() {
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const todoId = useSelector(state => state.todo.id)
+    const data = useSelector(state => state.source.noteEditor)
+    const [noteVal, setNoteVal] = useState(null)
+    const [discard, setDiscard] = useState(false)
+    const dispatch = useDispatch()
+    useEffect(() => {
+        if (data) {
+            setNoteVal(data.context)
+        }
+    }, [data])
+    if (!data) return null
+    function confirmToClose() {
+        if (noteVal !== data.context) {
+            setDiscard(true)
+        } else {
+            modalClose()
+        }
+    }
+    function modalClose() {
+        dispatch(setNoteEditor(null))
+    }
+    function handleChange(data) {
+        setNoteVal(data.target.value)
+    }
+    async function handleSubmit(e) {
+        e.preventDefault()
+        const dataToSend = {
+            context: noteVal
+        }
+        try {
+            await axios.put(`${'http://localhost:3001'}/notes/${idPageOfBook}/${todoId}/${data._id}`, dataToSend)
+            .then(res => {
+                noteToastSecond({text: 'catatan berhasil diperbarui', color: data.color})
+                dispatch(setTodo(res.data))
+                modalClose()
+                console.log(res)
+            })
+            .catch(err => {
+                noteToastSecond({text: 'catatan gagal diperbarui', color: 'var(--danger)'})
+                console.log(err)
+            })
+        } catch (err) {
+            
+        }
+    }
+    // async function handleSubmit(e) {
+    //     e.preventDefault()
+    //     textarea.current.style.height = '15px'
+    //     sendToast(msg)
+    //     const dataToSend = {
+    //         nickname: myNickname,
+    //         msg,
+    //     }
+    //     try {
+    //         await axios.post(`${API}/chat/${idPageOfBook}/${todoId}`, dataToSend)
+    //         .then((res) => {
+    //             sendToast('data berhasil dikirim')
+    //             dispatch(setTodo(res.data.data))
+    //             setMsg('')
+    //         })
+    //         .catch(err => {
+    //             sendToast('data gagal dikirim')
+    //             console.log(err)
+    //         }) 
+    //     } catch(err) {
+
+    //     }
+    // }
+    return (
+        <>
+        <ModalNoteEditor open={true} close={confirmToClose}>
+            <form className='note note-editor' onSubmit={handleSubmit}>
+                <div className='note-head'>
+                    <FontAwesomeIcon 
+                    icon={faNoteSticky} 
+                    style={{color: data.color}} 
+                    className='note-color'/>
+                    <button type='submit' className='note-btn-simpan'>Simpan</button>
+                </div>
+                <div className='note-body'>
+                <textarea
+                    className='note_editor-textarea'
+                    placeholder={data.context}
+                    value={noteVal || ''}
+                    onChange={handleChange}
+                />
+                    <span className='note-info'>
+                        {`${data.by}, ${convertDateToString(data.date)}`}
+                    </span>
+                </div>
+            </form>
+        </ModalNoteEditor>
+        <Confirm open={discard} close={() => setDiscard(false)} target={`${data.by}, ${convertDateToString(data.date)}`} metode='discard' color={data.color} callback={modalClose}/>
+        </>
+    )
+}
+
 export function CenterActionButton({handleModalOpen}) {
     const todoId = useSelector(state => state.todo.id)
     return (

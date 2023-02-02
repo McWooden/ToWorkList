@@ -71,6 +71,17 @@ export function noteToast({color}) {
         closeButton: false,
     })
 }
+export function noteToastSecond({ text, color }) {
+    toast(
+    <div className="myToast">
+        <div className="icon" style={{backgroundColor: color}}>
+            <FontAwesomeIcon icon={faNoteSticky}/>
+        </div>
+        {text}
+    </div>, {
+        closeButton: false,
+    })
+}
 export function imageToast(text) {
     toast(
     <div className="myToast myToast-greenyellow">

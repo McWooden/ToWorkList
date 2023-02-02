@@ -9,7 +9,7 @@
     transition: .3s ease;
     transition-delay: 1s;
 }
-.modal, .confirm {
+.modal, .confirm, .note-editor {
     position: fixed;
     top: 50%;
     left: 50%;

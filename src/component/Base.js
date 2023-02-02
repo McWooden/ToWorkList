@@ -10,7 +10,7 @@ import { HideBase } from './TodoApp';
 // import { convertDateToString } from '../utils/convertDateFormat'
 import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
 import { SidebarRightChat } from './rightSideComponent'
-import { Notes, CardImages, CenterActionButton, CardContainer, AddTaskModal, AddNoteModal} from './centerComponent';
+import { Notes, CardImages, CenterActionButton, CardContainer, AddTaskModal, AddNoteModal, NoteEditor} from './centerComponent';
 import { useState } from 'react'
 import { PageProggress } from '../utils/progress'
 import { Greeting } from '../utils/greeting'
@@ -431,6 +431,7 @@ function DetailCard() {
                 <CardImages/>
             </div>
         </div>
+        <NoteEditor/>
         <Notes/>
         </>
     )

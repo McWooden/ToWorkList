@@ -11,6 +11,7 @@
     align-items: center;
     justify-content: flex-end;
     background-color: tomato;
+    box-shadow: var(--shadow-1);
 }
 .action-add {
     min-width: 19px;
