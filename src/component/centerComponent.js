@@ -235,7 +235,6 @@ export function NoteEditor() {
             .catch(err => {
                 noteToastSecond({text: 'catatan gagal diperbarui', color: 'var(--danger)'})
                 console.log(err)
-                setErrMsg(err.message)
             })
         } catch (err) {
             
