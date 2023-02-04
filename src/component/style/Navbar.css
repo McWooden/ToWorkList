@@ -32,6 +32,19 @@ nav .nav-1 {
     display: flex;
     flex-direction: column;
 }
+.reload_btn-frame {
+    border-radius: 15px;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    background-color: var(--purple-1);
+    display: grid;
+    place-items: center;
+    margin: 5px auto;
+}
+.reload_btn {
+    font-size: large;
+}
 .home-frame {
     padding: 8px 2px;
     border-bottom: 2px solid var(--black-5);

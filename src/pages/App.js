@@ -46,9 +46,9 @@ export const ItemData = createContext()
 //   const [hideNavbar, setHideNavbar] = useState(true)
 //   function handleNavbar(boolean) {
 //     setHideNavbar(!boolean)
-//   }
-//   // ref
-//   const navRef = useRef()
+//   }qwertyuiop
+//   // refasdfghjkl
+//   const navRef = useRef() 1234567890 
 //   const navTopRef = useRef()
 //   // useEffect
 //   useEffect(() => {

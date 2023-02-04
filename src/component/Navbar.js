@@ -11,7 +11,7 @@ import { convertDateToString } from '../utils/convertDateFormat'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
-import { setError, setMembers } from '../redux/sourceSlice'
+import { setMembers } from '../redux/sourceSlice'
 import { setPageType, setSource } from '../redux/sourceSlice'
 
 const API = process.env.REACT_APP_API
@@ -56,26 +56,36 @@ function HomeButton() {
 function BookList() {
     const [allBook, setAllBook] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [isReload, setReload] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                let sessionBook = []
-                const response = await axios.get(API+'/book')
-                response.data.forEach((item, index) => {
-                    sessionBook.push(<BookItem key={index} data={item}/>)
-                })
-                setAllBook(sessionBook)
-            } catch (err) {
-                const {message, name, code} = err
-                dispatch(setError({message, name, code}))
-                navigate('/error')
-            }
-            setIsLoading(false)
+    const fetchData = async () => {
+        setIsLoading(true)
+        try {
+            let sessionBook = []
+            const response = await axios.get(API+'/book')
+            response.data.forEach((item, index) => {
+                sessionBook.push(<BookItem key={index} data={item}/>)
+            })
+            setAllBook(sessionBook)
+        } catch (err) {
+            // const {message, name, code} = err
+            // dispatch(setError({message, name, code}))
+            // navigate('/error')
+            setReload(true)
         }
+        setIsLoading(false)
+    }
+    useEffect(() => {
         fetchData()
     }, [dispatch, navigate])
+    if (isReload) return (
+        <div className="nav-guild">
+            <div className="reload_btn-frame" onClick={fetchData}>
+                <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
+            </div>
+        </div>
+    )
     if (isLoading) return (
         <div className="nav-guild">
             <div className='guild-frame'>
