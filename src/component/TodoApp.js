@@ -50,11 +50,11 @@ export function TodoApp() {
 } 
 // export function NavTop() {
 //     const {hideRightBase, handleRightBase, hideLeftBase, handleLeftBase} = useContext(HideBase)
-//     const {hideNavbar, handleNavbar, currentRoom, navTopRef} = useContext(GuildContext)
+//     const {hideNavbar, handleNavbar, currentRoom, secondNavRef} = useContext(GuildContext)
 //     const {item} = useContext(ItemData)
 //     return (
 //         <section id='navTop'>
-//             <header ref={navTopRef}>
+//             <header ref={secondNavRef}>
 //             <div className='header-left'>
 //                 <FontAwesomeIcon icon={faBars} className={`bars pointer ${hideNavbar?'btn-inactive':'btn-active'}`} onClick={() => handleNavbar(hideNavbar)}/>
 //                 <h4 className='pageTitle'>{currentRoom}</h4>
@@ -70,7 +70,7 @@ export function TodoApp() {
 function NavTop() {
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
     const { hideRightBase, handleRightBase, handleLeftBase, hideLeftBase } = useContext(HideBase)
-    const { navTopRef, hideNavbar, handleNavbar} = useContext(AppContext)
+    const { hideNavbar, handleNavbar} = useContext(AppContext)
     function handleClickNavbar() {
         handleNavbar(hideNavbar)
     }
@@ -82,7 +82,7 @@ function NavTop() {
     }
     return (
         <section id='navTop'>
-            <header ref={navTopRef}>
+            <header>
             <div className='header-left'>
                 <FontAwesomeIcon icon={faBars} className={`bars pointer ${hideNavbar?'btn-inactive':'btn-active'}`} onClick={handleClickNavbar}/>
                 <h4 className='pageTitle'>{pathPageOfBook}</h4>

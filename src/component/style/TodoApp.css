@@ -7,19 +7,20 @@
     cursor: pointer;
 }
 header {
-    background-color: var(--black-4);
+    background-color: var(--pertama);
+    filter: drop-shadow(0px 32px 64px rgba(0, 0, 0, 0.1876)) drop-shadow(0px 2px 21px rgba(0, 0, 0, 0.1474));
     display: flex;
     align-items: center;
     align-content: center;
     justify-content: space-between;
     padding: 0 8px;
-    box-shadow: var(--shadow-1);
     height: 48px;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1;
+    border-bottom:  1.25069px solid rgba(0, 0, 0, 0.0803);
 }
 .header-left {
     display: flex;
@@ -32,17 +33,20 @@ header {
     transition: .1s ease;
 }
 .btn-active {
-    color: var(--orange-2);
+    color: var(--purple-1);
+    background-color: var(--purple-1-transparent);
 }
 .btn-inactive {
-    color: var(--white-1);
+    color: var(--text-1);
 }
 .bars:hover {
-    background-color: var(--black-2);
+    background-color: var(--purple-1-transparent);
+    color: var(--purple-1);
 }
 header h4 {
     margin: 0;
     font-size: 20px;
+    color: var(--text-2);
 }
 .sidebar-button {
     display: flex;
@@ -55,8 +59,11 @@ header h4 {
     border-radius: 5px;
 }
 .btn-sidebar:hover {
-    background-color: var(--black-2);
+    background-color: var(--purple-1-transparent) !important;
 }
+/* .room:hover .room-icon,  .room:hover span {
+    color: var(--kedua) !important;
+} */
 @media (min-width: 768px) {
     .btn-sidebar-right {
         opacity: .25;

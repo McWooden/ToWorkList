@@ -4,7 +4,7 @@
     flex: 3;
     flex-direction: column;
     width: auto;
-    background-color: var(--black-0);
+    background-color: var(--pertama);
     overflow: auto;
 }
 .welcome_page {

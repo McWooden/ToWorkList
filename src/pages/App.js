@@ -49,12 +49,12 @@ export const ItemData = createContext()
 //   }qwertyuiop
 //   // refasdfghjkl
 //   const navRef = useRef() 1234567890 
-//   const navTopRef = useRef()
+//   const secondNavRef = useRef()
 //   // useEffect
 //   useEffect(() => {
 //     let handler = (e) => {
 //         try {
-//             if (navRef.current.contains(e.target) || navTopRef.current.contains(e.target)) {
+//             if (navRef.current.contains(e.target) || secondNavRef.current.contains(e.target)) {
 //               return
 //             } else {
 //               handleNavbar(false)
@@ -81,7 +81,7 @@ export const ItemData = createContext()
 //       handleGuild, 
 //       handleRoom, 
 //       navRef, 
-//       navTopRef, 
+//       secondNavRef, 
 //       users : guild.users, 
 //       reverseDone
 //     }}>
@@ -105,7 +105,7 @@ function App() {
   // navbar
   const mode = useSelector(state => state.source.mode)
   const navRef = useRef()
-  const navTopRef = useRef()
+  const secondNavRef = useRef()
   const [hideNavbar, setHideNavbar] = useState(false)
   function handleNavbar(boolean) {
     setHideNavbar(!boolean)
@@ -120,7 +120,7 @@ function App() {
   useEffect(() => {
     let handler = (e) => {
         try {
-            if (navRef.current.contains(e.target) || navTopRef.current.contains(e.target)) {
+            if (navRef.current.contains(e.target) || secondNavRef.current.contains(e.target)) {
               return
             } else {
               handleNavbar(false)
@@ -145,7 +145,7 @@ function App() {
     }}>
       <div id="app">
         <AppContext.Provider value={{
-          navTopRef,
+          secondNavRef,
           navRef,
           hideNavbar,
           handleNavbar,

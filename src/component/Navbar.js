@@ -21,8 +21,8 @@ function Navbar() {
     const {hideNavbar, navRef} = useContext(AppContext)
     return (
         <>
-        <div className={`navigation ${hideNavbar?'hideNavbar':'showNavbar'}`} ref={navRef}>
-            <nav>
+        <div className={`navigation ${hideNavbar?'hideNavbar':'showNavbar'}`}>
+            <nav ref={navRef}>
                 <div className='nav-1'>
                     <HomeButton/>
                     <BookList/>
@@ -114,9 +114,10 @@ function BookItem({data}) {
     )
 }
 function ModeNavbar() {
+    const { secondNavRef } = useContext(AppContext)
     const pathBook = useSelector(state => state.fetch.pathBook)
     return (
-        <div className='modeNavbar'>
+        <div className='modeNavbar' ref={secondNavRef}>
             {pathBook === '@me' ? <ModeNavbarAccountHeader/> : <ModeNavbarHeader/>}
             {pathBook === '@me' ? <PageAccountList/> : <PageList/>}
             <Profile/>

@@ -3,10 +3,10 @@
 .navigation {
     display: flex;
     flex-direction: row;
-    margin-top: 48px;
     position: fixed;
     z-index: 2;
     height: -webkit-fill-available;
+    /* background-color: var(--kedua); */
 }
 .hideNavbar {
     transform: translateX(-100%);
@@ -20,7 +20,6 @@
     cursor: pointer;
 }
 nav {
-    background-color: var(--black-1);
     width: 75px;
     display: flex;
     flex-wrap: wrap;
@@ -31,13 +30,17 @@ nav .nav-1 {
     width: 100%;
     display: flex;
     flex-direction: column;
+    background-color: var(--black-1);
+    border-radius: 45px;
+    padding: 1em 0;
 }
 .reload_btn-frame {
     border-radius: 15px;
     width: 48px;
     height: 48px;
     cursor: pointer;
-    background-color: var(--purple-1);
+    background-color: var(--black-4);
+    box-shadow: var(--shadow-1);
     display: grid;
     place-items: center;
     margin: 5px auto;
@@ -47,7 +50,7 @@ nav .nav-1 {
 }
 .home-frame {
     padding: 8px 2px;
-    border-bottom: 2px solid var(--black-5);
+    border-bottom: 2px solid var(--text-1);
     width: fit-content;
     margin: 0 auto;
 }
@@ -55,7 +58,7 @@ nav .nav-1 {
     background-color: var(--black-3);
 }
 .find-create-frame {
-    border-top: 2px solid var(--black-5);
+    border-top: 2px solid var(--text-1);
     display: flex;
     width: 58px;
     margin: .5em;
@@ -67,21 +70,24 @@ nav .nav-1 {
     gap: .5em;
 }
 .home-profile {
-    background-color: var(--black-3);
     border-radius: 15px;
     width: 48px;
     height: 48px;
     justify-content: center;
     align-items: center;
     display: flex;
+    background-color: var(--black-3);
 }
 .home-profile:hover {
-    background-color: var(--purple-1);
+    background-color: var(--purple-2);
 }
 .home-profile.active {
     background-color: var(--purple-1);
+    box-shadow: var(--shadow-1);
 }
 .find-create {
+    background-color: var(--black-4);
+    box-shadow: var(--shadow-1);
     cursor: pointer;
 }
 .find-create:hover, .find-create:hover > * {
@@ -123,41 +129,45 @@ nav .nav-1 {
     height: 20px;
 }
 .nav-icon-2 {
-    color: var(--orange-2);
+    color: var(--purple-1);
 }
 
 /* navbar 2 */
 .modeNavbar {
     position: relative;
-    background-color: var(--black-2);
+    background-color: var(--kedua);
     width: 240px;
     display: flex;
     flex-direction: column;
+    margin: 2em 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
 }
 .modeNavbarHeader {
     padding: 1.5px 10px 1.5px 16px;
     display: flex;
     align-items: center;
     height: 48px;
-    background-color: var(--black-3);
+    background-color: var(--kedua);
 }
 .guild-name {
     flex: 1;
     padding: 12px 0;
     margin: 0;
-    color: var(--white-1);
+    color: var(--text-2);
     display: inline-block;
 }
 .app-name {
     flex: 1;
     padding: 3px 0;
     margin: 0;
-    color: var(--white-1);
+    color: var(--text-2);
     font-family: 'Comfortaa', cursive;
     font-weight: 300;
 }
 .settingNavbar {
-    color: var(--white-1);
+    color: var(--text-1);
     padding: 5px;
     border-radius: 5px;
 }
@@ -173,18 +183,20 @@ nav .nav-1 {
     display: flex;
     align-items: center;
     cursor: pointer;
-    background-color: var(--black-2);
 }
 .room.active {
-    background-color: var(--black-3);
+    background-color: var(--purple-1-transparent);
     padding-left: .75em;
     transition: .1s ease;
 }
 .room:hover {
-    background-color: var(--black-4);
+    background-color: var(--purple-1);
+}
+.room:hover .room-icon,  .room:hover span {
+    color: var(--kedua) !important;
 }
 .room-icon {
-    color: var(--white-3);
+    color: var(--text-1);
     height: 16px;
     margin: 0 5px;
 }
@@ -192,8 +204,8 @@ nav .nav-1 {
     color: var(--purple-1);
 }
 .room span {
-    font-size: small;
-    color: var(--white-2);
+    font-size: smaller;
+    color: var(--text-2);
 }
 .room span.active {
     color: var(--purple-1);
@@ -206,29 +218,32 @@ nav .nav-1 {
     display: flex;
     align-items: center;
     padding: 5px 8px;
-    background-color: var(--black-3);
-    box-shadow: var(--shadow-1-reverse);
+    background-color: var(--black-4);
+    box-shadow: var(--shadow-1);
+    margin: 1em;
+    border-radius: 15px;
 }
 .profile:hover {
-    background-color: var(--black-4);
+    background-color: var(--black-5);
 }
 .profile:active {
-    background-color: var(--black-1);
+    background-color: var(--black-2);
 }
 .profile img {
     width: 32px;
     height: 32px;
     border-radius: 50px;
     margin-right: .5em;
+    box-shadow: var(--shadow-1);
 }
 .profile-nickname {
     font-size: 14px;
-    color: var(--white-1);
+    color: var(--pertama);
     font-weight: bold;
 }
 .profile-id {
     font-size: 12px;
-    color: var(--white-2);
+    color: var(--kedua);
 }
 /* profile pop */
 .profile_pop {

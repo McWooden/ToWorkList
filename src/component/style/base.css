@@ -3,7 +3,7 @@
 @import url(./baseRight.css);
 
 .base  {
-    background-color: var(--black-4);
+    background-color: var(--pertama);
     overflow: hidden;
     display: flex;
     padding-top: 48px;
