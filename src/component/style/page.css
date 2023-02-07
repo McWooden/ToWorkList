@@ -27,14 +27,14 @@
     align-self: flex-start;
 }
 .welcome_name {
-    color: var(--white-2);
+    color: var(--text-2);
     font-weight: 500;
     font-size: calc(1vw + 3em);
     line-height: 1;
     font-family: 'Comfortaa', cursive;
 }
 .welcome_tagline {
-    color: var(--white-3);
+    color: var(--text-1);
     animation: typing 2s steps(30, end);
     font-size: calc(1vw + .5em);
 } 
@@ -50,11 +50,12 @@
 .tapToOpenNavbar {
     flex: 1 1 auto;
     font-size: xx-small;
-    color: var(--black-5);
-    background-color: var(--black-1);
+    color: var(--text-1);
+    background-color: var(--kedua);
     padding: 2em;
     width: 100%;
     display: block;
     margin: 1em;
     border-radius: 15px;
+    filter: var(--filter-shadow);
 }

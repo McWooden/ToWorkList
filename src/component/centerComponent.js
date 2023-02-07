@@ -18,6 +18,7 @@ const API = process.env.REACT_APP_API
 
 
 export function CardImages() {
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todo = useSelector(state => state.todo)
     const [modalOpen, setModalOpen] = useState(false)
     const box = []
@@ -53,18 +54,29 @@ export function CardImages() {
     }
     // form
     const formRef = useRef()
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        const data = {
+        const dataToSend = {
             image: image,
             desc: e.target.desc.value
         }
         imageToast()
-        console.log(data)
-        setModalOpen(false)
-        formRef.current.reset()
-        setImage(null)
-        setPreviewUrl('')
+        try {
+            await axios.post(`${'http://localhost:3001'}/image/${idPageOfBook}/${todo.id}`, dataToSend)
+            .then(res => {
+                imageToast()
+                setModalOpen(false)
+                formRef.current.reset()
+                setImage(null)
+                setPreviewUrl('')
+                console.log(res.data)
+            })
+            .catch(err => {
+                imageToast('gambar gagal ditambahkan')
+            }) 
+        } catch(err) {
+            
+        }
     }
     return (
         <div className='images-container'>

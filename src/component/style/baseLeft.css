@@ -34,8 +34,13 @@
     }
 }
 /* greet */
+.greeting {
+    background-color: var(--black-1);
+    box-shadow: var(--shadow-1);
+    margin: 1em;
+    margin-bottom: 0;
+}
 .greeting, .jadwal {
-    background-color: var(--black-3);
     min-height: 58px;
     display: flex;
     flex-direction: row;
@@ -47,7 +52,7 @@
 .greeting .color {
     flex: 1;
     border-radius: 3px;
-    background-color: var(--black-2);
+    background-color: var(--black-1);
     display: grid;
     place-items: center;
     font-size: large;
@@ -58,8 +63,12 @@
     flex-direction: column;
     justify-content: center;
 }
+.greeting-context .selamat {
+    color: var(--white-1);
+    font-size: small;
+}
 .greeting-context .date {
-    color: var(--white-3);
+    color: var(--white-1);
     font-size: small;
 }
 /* jadwal */
