@@ -18,6 +18,8 @@ const API = process.env.REACT_APP_API
 
 
 export function CardImages() {
+    const nickname = useSelector(state => state.source.profile.nickname)
+    const idBook = useSelector(state => state.fetch.idBook)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todo = useSelector(state => state.todo)
     const [modalOpen, setModalOpen] = useState(false)
@@ -56,13 +58,13 @@ export function CardImages() {
     const formRef = useRef()
     async function handleSubmit(e) {
         e.preventDefault()
-        const dataToSend = {
-            image: image,
-            desc: e.target.desc.value
-        }
+        const formData = new FormData()
+        formData.append('nickname', nickname)
+        formData.append('image', image)
+        formData.append('desc', e.target.desc.value)
         imageToast()
         try {
-            await axios.post(`${'http://localhost:3001'}/image/${idPageOfBook}/${todo.id}`, dataToSend)
+            await axios.post(`${API}/image/${idBook}/${idPageOfBook}/${todo.id}`, formData)
             .then(res => {
                 imageToast()
                 setModalOpen(false)
@@ -117,13 +119,14 @@ export function CardImages() {
     )
 }
 function Image({data}) {
+    const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
     const [full, setFull] = useState(false)
     function handleFull() {
         setFull(!full)
     }
     return (
         <div className='card-img'>
-            <img alt={data.by} className={`card-img-pic ${full&&'full'}`} src={data.pic} onClick={handleFull}/>
+            <img alt={data.by} className={`card-img-pic ${full&&'full'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
             <div className='card-img-context'>
                 <div className='card-img-context-deep'>
                     <div className="card-img-by">{data.by}</div>
