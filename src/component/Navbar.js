@@ -59,7 +59,8 @@ function BookList() {
     const [isReload, setReload] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const fetchData = async () => {
+    async function fetchData () {
+        setReload(false)
         setIsLoading(true)
         try {
             let sessionBook = []
@@ -67,11 +68,9 @@ function BookList() {
             response.data.forEach((item, index) => {
                 sessionBook.push(<BookItem key={index} data={item}/>)
             })
+            console.log(response.data)
             setAllBook(sessionBook)
         } catch (err) {
-            // const {message, name, code} = err
-            // dispatch(setError({message, name, code}))
-            // navigate('/error')
             setReload(true)
         }
         setIsLoading(false)

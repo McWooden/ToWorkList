@@ -155,11 +155,7 @@ export function TodoModel({item}) {
                     <div className="card-finish-value"></div>
                 </div>
                 <div className="card-more" ref={btnRef}>
-                    {dropDown? 
-                        <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(false)}/>
-                        :
-                        <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(true)}/>
-                    }
+                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(!dropDown)}/>
                 </div>
                 <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
                     <ul>

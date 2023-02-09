@@ -148,6 +148,7 @@
 .card-img-date {
     color: var(--white-3);
     align-self: flex-end;
+    cursor: pointer;
 }
 .card-img-context p {
     margin: 0;

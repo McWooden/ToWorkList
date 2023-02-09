@@ -131,6 +131,9 @@
 .confirm-body h3 {
     color: var(--danger);
 }
+.confirm-context .msg span {
+    word-break: break-all;
+}
 .next-text {
     color: var(--white-2);
 }

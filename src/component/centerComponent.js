@@ -22,6 +22,7 @@ export function CardImages() {
     const idBook = useSelector(state => state.fetch.idBook)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todo = useSelector(state => state.todo)
+    const dispatch = useDispatch()
     const [modalOpen, setModalOpen] = useState(false)
     const box = []
     todo.images.forEach((data, index) => {
@@ -71,7 +72,7 @@ export function CardImages() {
                 formRef.current.reset()
                 setImage(null)
                 setPreviewUrl('')
-                console.log(res.data)
+                dispatch(setTodo(res.data))
             })
             .catch(err => {
                 imageToast('gambar gagal ditambahkan')
@@ -119,12 +120,32 @@ export function CardImages() {
     )
 }
 function Image({data}) {
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const todoId = useSelector(state => state.todo.id)
+    const dispatch = useDispatch()
+    const [deleteOpen, setDeleteOpen] = useState(false)
     const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
+    const pathSplit = data.pic.split('/')
     const [full, setFull] = useState(false)
     function handleFull() {
         setFull(!full)
     }
+    async function deleteImage() {
+        try {
+            await axios.delete(`${'http://localhost:3001'}/image/${idPageOfBook}/${todoId}/${data._id}`, {path: data.pic})
+            .then((res) => {
+                deleteToast('berhasil dihapus')
+                dispatch(setTodo(res.data))
+            })
+            .catch(err => {
+                deleteToast('gagal terhapus')
+            })
+        } catch(err) {
+
+        }
+    }
     return (
+        <>
         <div className='card-img'>
             <img alt={data.by} className={`card-img-pic ${full&&'full'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
             <div className='card-img-context'>
@@ -132,9 +153,11 @@ function Image({data}) {
                     <div className="card-img-by">{data.by}</div>
                     <p className="card-img-desc">{data.desc}</p>
                 </div>
-                <div className="card-img-date">{convertDateToString(data.date)}</div>
+                <div className="card-img-date" onClick={() => setDeleteOpen(true)}>{convertDateToString(data.date)}</div>
             </div>
         </div>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={pathSplit[pathSplit.length - 1]} metode='delete' color={'var(--danger)'} callback={deleteImage}/>
+        </>
     )
 }
 export function Notes() {
