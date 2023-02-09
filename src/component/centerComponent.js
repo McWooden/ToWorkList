@@ -132,7 +132,7 @@ function Image({data}) {
     }
     async function deleteImage() {
         try {
-            await axios.delete(`${'http://localhost:3001'}/image/${idPageOfBook}/${todoId}/${data._id}`, {path: data.pic})
+            await axios.delete(`${API}/image/${idPageOfBook}/${todoId}/${data._id}`, {path: data.pic})
             .then((res) => {
                 deleteToast('berhasil dihapus')
                 dispatch(setTodo(res.data))
