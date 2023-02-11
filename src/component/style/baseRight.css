@@ -27,7 +27,7 @@
     align-items: center;
     flex: 4;
     background-color: var(--kedua);
-    border-bottom: 2px solid var(--purple-1);
+    border-bottom: 2px solid var(--black-1);
     border-radius: 5px;
     padding: 5px;
     min-height: 35px;
@@ -85,7 +85,7 @@
 }
 /* outer */
 .users-group {
-    color: var(--white-3);
+    color: var(--text-2);
     font-size: small;
 }
 .group-user-container {
@@ -118,7 +118,7 @@
     font-weight: 500;
 }
 .group-user .user-status {
-    color: var(--white-2);
+    color: var(--text-1);
     font-size: xx-small;
 }
 @media (max-width: 768px) {

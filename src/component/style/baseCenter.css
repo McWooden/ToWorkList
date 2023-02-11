@@ -20,14 +20,13 @@
     bottom: 5px;
 }
 .add-btn {
-    background-color: var(--black-3);
-    color: royalblue;
+    background-color: var(--purple-1);
+    color: var(--white-1);
     padding: 16px;
     border-radius: 50px;
     font-size: large;
     transition: .1s ease;
 }
 .add-btn:hover {
-    background-color: royalblue;
-    color: var(--white-1);
+    background-color: var(--purple-2);
 }

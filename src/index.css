@@ -13,6 +13,8 @@ html {
   --defaultFont: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
+  --gelap: #31364c;
+  --kuning: #fbbb17;
   --pertama: #f3f3f3;
   --kedua: #f0f1f6;
   --ketiga: #CAD4E7;

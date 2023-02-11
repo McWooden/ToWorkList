@@ -11,7 +11,7 @@
 }
 .chat-card-nickname {
     font-size: .7em;
-    color: var(--black-1);
+    color: var(--text-2);
     margin-top: .5em;
 }
 .chat-card {
@@ -30,28 +30,30 @@
     background-color: var(--ok);
 }
 .chat-card-message {
-    background-color: var(--purple-2);
+    background-color: #eaeaea;
     white-space: pre-line;
-    color: var(--white-1);
+    color: var(--text-2);
 }
 .chat-card-message {
     border-radius: 5px 10px 10px 0;
     padding: 2px 5px;
     font-size: .7em;
     word-break: break-all;
+    color: var(--black-2);
 }
 .chat-card-message.my {
     border-radius: 10px 5px 0 10px;
-    background-color: var(--purple-1);
+    background-color: var(--black-1);
+    color: var(--white-1);
 }
 .chat-card-message.disable {
-    background-color: var(--ketiga);
-    color: var(--purple-2);
-    border: 1px solid var(--purple-2);
+    background-color: transparent;
+    color: var(--black-2);
+    border: 1px solid var(--black-1);
 }
 .chat-card-message.disable.my {
-    border: 1px solid var(--purple-1);
-    color: var(--purple-1);
+    border: 1px solid var(--black-1);
+    color: var(--black-1);
 }
 .chat-card-time {
     font-size: .5em;

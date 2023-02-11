@@ -37,7 +37,6 @@
 .greeting {
     background-color: var(--black-1);
     box-shadow: var(--shadow-1);
-    margin: 1em;
     margin-bottom: 0;
 }
 .greeting, .jadwal {

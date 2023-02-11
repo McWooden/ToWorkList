@@ -41,6 +41,9 @@
 .cursor {
     animation: blink 1s infinite;
 }
+.welcome .greeting {
+    margin: 1em;
+}
 @keyframes typing {
     from { width: 0; }
 }

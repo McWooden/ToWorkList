@@ -6,11 +6,15 @@ import { myAccount } from '../utils/dataJSON';
 // import { ItemData } from '../pages/App';
 import { Confirm } from './Modal';
 // import { GuildContext } from '../pages/App';
-import { editToast, deleteToast, checkToast } from '../utils/notif';
+import { deleteToast, checkToast } from '../utils/notif';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAllTodo, setTodo } from '../redux/todo';
 import axios from 'axios';
 import { setSource } from '../redux/sourceSlice';
+import { Modal } from './Modal';
+import { convertDateToString } from '../utils/convertDateFormat';
+import { noteToast } from '../utils/notif';
+import Calendar from 'react-calendar';
 
 const API = process.env.REACT_APP_API
 
@@ -81,6 +85,7 @@ export function TodoModel({item}) {
     const profile = useSelector(state => state.source.profile)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const [dones, setDones] = useState(item.dones)
+    const [editModal, setEditModal] = useState(false)
     const dispatch = useDispatch()
     const myNickname = profile.nickname
     const [dropDown, setDropDown] = useState(false)
@@ -88,6 +93,16 @@ export function TodoModel({item}) {
     let btnRef = useRef()
     const [deleteOpen, setDeleteOpen] = useState(false)
     const title = item.details.item_title
+
+    const colors = ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow']
+    const [currentColor, setCurrentColor] = useState(item.details.color)
+    const borderStyle = {border: `1px solid ${currentColor}`}
+    const formRef = useRef()
+
+    const [inputTitle, setInputTitle] = useState(item.details.item_title)
+    const [inputDesc, setInputDesc] = useState(item.details.desc)
+    
+
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -140,6 +155,53 @@ export function TodoModel({item}) {
 
         }
     }
+    function handleColor(e) {
+        setCurrentColor(e.target.value)
+    }
+    function handleTitleChange(e) {
+        setInputTitle(e.target.value)
+    }
+    async function handleSubmit(e) {
+        e.preventDefault()
+        const date = colorsTileSource[0].details.deadline
+        const dataToSend = {
+            color: e.target.color.value,
+            desc: e.target.desc.value,
+            deadline: (date === item.details.deadline ? date : `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`),
+            item_title: e.target.title.value
+        }
+        try {
+            await axios.put(`${API}/source/addTodo/${idPageOfBook}/${item._id}`, dataToSend)
+            .then((res) => {
+                noteToast(dataToSend)
+                dispatch(setSource(res.data))
+                setEditModal(false)
+            })
+            .catch(err => {
+                noteToast({color : 'var(--danger)'})
+            }) 
+        } catch(err) {
+
+        }
+    }
+    const [colorsTileSource, setColorsTileSource] = useState([item])
+    const colorsTile = colorsTileSource.map(item => ({
+        date: new Date(item.details.deadline),
+        color: item.details.color,
+        title: item.details.item_title,
+    }))
+    function dayTileClick(x) {
+        const date = new Date(x)
+        // const newDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
+        const newDate = {
+            details: {
+                deadline: date,
+                color: 'var(--purple-2)',
+                item_title: item.details.item_title,
+            }
+        }
+        setColorsTileSource([newDate, item])
+    }
     return (
         <>
         <div className="todo-card">
@@ -147,7 +209,7 @@ export function TodoModel({item}) {
             <div className="card-color" style={{backgroundColor: item.details.color}}></div>
             <div className="card-text pointer" onClick={handleTextClick}>
                 <div className="card-title">{title}</div>
-                <div className="card-description">{item.details.desc}</div>
+                <div className="card-description">{item.details.desc.slice(0, 103)}</div>
             </div>
             </div>
             <div className="todo-right">
@@ -159,7 +221,7 @@ export function TodoModel({item}) {
                 </div>
                 <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
                     <ul>
-                        <li className='pointer' onClick={() => editToast()}>
+                        <li className='pointer' onClick={() => setEditModal(true)}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                             <span>edit</span>
                         </li>
@@ -172,6 +234,51 @@ export function TodoModel({item}) {
             </div>
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
+        <Modal open={editModal} close={() => setEditModal(false)}>
+            <div className="edit_card_modal">
+                <div className="general-modal">
+                    <Calendar 
+                        onClickDay={dayTileClick}
+                        className="calendar-dark" 
+                        locale='id-ID'
+                        format='mm/dd/yyyy'
+                        next2Label={null}
+                        prev2Label={null}
+                        tileContent={({ date, view }) => {
+                            const color = colorsTile.find((c) => c.date.getTime() === date.getTime())
+                            if (color) {
+                                return (
+                                    <div className='repalace' style={{ border: `1px solid ${color.color}`, borderRadius: '50px' }} title={color.title}>
+                                    {date.getDate()}
+                                    </div>
+                                )
+                            }
+                        }}
+                    />
+                </div>
+                <form className="form-modal" ref={formRef} onSubmit={handleSubmit} id='addTask'>
+                    <div className="general-info" style={{borderBottom: `1px solid ${currentColor}`}}>
+                        <h3>{title}</h3>
+                        <p className="date">{convertDateToString(item.details.deadline)}</p>
+                    </div>
+                    <div className="input-left">
+                    <input name='title' type="text" placeholder='Judul' style={borderStyle} required autoComplete='off' value={inputTitle} onChange={handleTitleChange}/>
+                        <select style={borderStyle} onChange={handleColor} name='color'>
+                            <option key='default' value={item.details.color}>
+                                {item.details.color}
+                            </option>
+                            {colors.filter(c => c !== item.details.color).map((color) => (
+                                <option key={color} value={color}>
+                                    {color}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    <textarea placeholder={item.details.desc} rows="10" style={borderStyle} name='desc' value={inputDesc} onChange={x => setInputDesc(x.target.value)}/>
+                    <button type='submit' className='task-submit' form='addTask'>Simpan</button>
+                </form>
+            </div>
+        </Modal>
         </>
     )
 }

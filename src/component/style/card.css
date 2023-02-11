@@ -106,6 +106,13 @@
 .card-drop-down ul li:hover {
     background-color: var(--black-5);
 }
+.edit_card_modal {
+    display: flex;
+    height: 100%;
+}
+.general-modal {
+    
+}
 @media (max-width: 375px) {
     .card-description {
         font-size: xx-small;

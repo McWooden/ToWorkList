@@ -7,7 +7,6 @@
     z-index: 2;
     height: -webkit-fill-available;
     filter: var(--filter-shadow);
-
 }
 .hideNavbar {
     transform: translateX(-100%);
@@ -116,6 +115,8 @@ nav .nav-1 {
 .nav-guild {
     flex: 1;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
 }
 .nav-guild div {
     padding: 0 .5em;
@@ -130,7 +131,7 @@ nav .nav-1 {
     height: 20px;
 }
 .nav-icon-2 {
-    color: var(--purple-1);
+    color: var(--kuning);
 }
 
 /* navbar 2 */
@@ -312,4 +313,40 @@ nav .nav-1 {
 }
 .profile_pop-switch_account:active, .profile_pop-add_account:active {
     background-color: var(--black-3);
+}
+@media (max-width: 425px) {
+    .navigation {
+        flex-direction: column-reverse;
+        width: calc(100% - 2em);
+        margin: 1em;
+    }
+    nav {
+        display: flex;
+        width:unset;
+    }
+    nav .nav-1 {
+        padding: 0 1em;
+    }
+    nav .nav-1, .home-frame, .find-create-frame, .nav-guild {
+        align-items: center;
+        flex-direction: row;
+        border: none;
+    }
+    .guild-frame {
+        padding: 0 !important;
+    }
+    .find-create-frame {
+        width: fit-content;
+        padding: 0 2px;
+        margin: 0;
+    }
+    .modeNavbar {
+        margin: 0;
+    }
+    .hideNavbar {
+        transform: translateY(calc(100%));
+    }
+    .showNavbar {
+        transform: translateY(0);
+    }
 }

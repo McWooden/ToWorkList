@@ -68,7 +68,6 @@ function BookList() {
             response.data.forEach((item, index) => {
                 sessionBook.push(<BookItem key={index} data={item}/>)
             })
-            console.log(response.data)
             setAllBook(sessionBook)
         } catch (err) {
             setReload(true)
