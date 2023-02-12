@@ -110,8 +110,10 @@
     display: flex;
     height: 100%;
 }
-.general-modal {
-    
+@media (max-width: 524px) {
+    .edit_card_modal {
+        flex-direction: column;
+    }
 }
 @media (max-width: 375px) {
     .card-description {

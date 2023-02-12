@@ -123,10 +123,11 @@ export function TodoModel({item}) {
     }
     async function deleteTodo() {
         try {
-            await axios.delete(`${API}/source/addTodo/${idPageOfBook}/${item._id}`)
+            await axios.delete(`${API}/source/addTodo/${idPageOfBook}/${item._id}?returnPage=true`)
             .then((res) => {
                 deleteToast('berhasil dihapus')
                 dispatch(setSource(res.data))
+                console.log(res.data)
             })
             .catch(err => {
                 deleteToast('gagal terhapus')
@@ -168,7 +169,8 @@ export function TodoModel({item}) {
             color: e.target.color.value,
             desc: e.target.desc.value,
             deadline: (date === item.details.deadline ? date : `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`),
-            item_title: e.target.title.value
+            item_title: e.target.title.value,
+            returnPage: true,
         }
         try {
             await axios.put(`${API}/source/addTodo/${idPageOfBook}/${item._id}`, dataToSend)
@@ -192,7 +194,6 @@ export function TodoModel({item}) {
     }))
     function dayTileClick(x) {
         const date = new Date(x)
-        // const newDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
         const newDate = {
             details: {
                 deadline: date,

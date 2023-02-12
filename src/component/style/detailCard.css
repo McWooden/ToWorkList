@@ -6,8 +6,8 @@
     overflow: auto;
 }
 .info-menu-box {
-    border: 1px solid var(--text-1);
-    color: var(--text-1);
+    color: #8e8e8e;
+    background-color: #eaeaea;
     padding: 2px 5px;
     font-size: small;
     border-radius: 5px;
@@ -48,8 +48,7 @@
     border-radius: 5px;
     font-size: large;
     cursor: pointer;
-    background-color: var(--kedua);
-    border: 1px solid var(--text-1);
+    background-color: #ddd;
 }
 .action-trash-left {
     color: var(--danger);
