@@ -6,8 +6,8 @@
     overflow: auto;
 }
 .info-menu-box {
-    background-color: var(--black-3);
-    color: var(--white-2);
+    border: 1px solid var(--text-1);
+    color: var(--text-1);
     padding: 2px 5px;
     font-size: small;
     border-radius: 5px;
@@ -25,10 +25,10 @@
     min-width: 10px;
 }
 .contributor-container {
-    color: var(--white-2);
+    color: var(--text-2);
 }
 .contributor {
-    background-color: var(--black-3);
+    background-color: var(--kedua);
     height: 150px;
     border-radius: 5px;
     padding: 3px 5px;
@@ -48,7 +48,8 @@
     border-radius: 5px;
     font-size: large;
     cursor: pointer;
-    background-color: var(--black-3);
+    background-color: var(--kedua);
+    border: 1px solid var(--text-1);
 }
 .action-trash-left {
     color: var(--danger);
@@ -57,19 +58,6 @@
 .action-edit-left {
     color: var(--light-blue);
     flex: 3;
-}
-/* center */
-.detail-back {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    background-color: var(--black-3);
-    border-radius: 5px;
-    padding: 10px 15px;
-    margin-bottom: 10px;
-}
-.detail-back:hover {
-    background-color: var(--black-2);
 }
 /* desc */
 .detail-desc {

@@ -1,6 +1,6 @@
 import './style/Navbar.css'
 import { AppContext, PageContext } from '../pages/App'
-import { useContext, useState, useEffect, useRef, useMemo } from 'react'
+import { useContext, useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faGear, faPlus, faCompass, faRepeat} from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
@@ -21,6 +21,7 @@ function Navbar() {
     const {hideNavbar, navRef} = useContext(AppContext)
     return (
         <>
+        <div className={`navigation_block ${hideNavbar?'inactive':'active'}`}/>
         <div className={`navigation ${hideNavbar?'hideNavbar':'showNavbar'}`}>
             <nav ref={navRef}>
                 <div className='nav-1'>
@@ -59,6 +60,7 @@ function BookList() {
     const [isReload, setReload] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
     async function fetchData () {
         setReload(false)
         setIsLoading(true)
@@ -74,9 +76,11 @@ function BookList() {
         }
         setIsLoading(false)
     }
+
     useEffect(() => {
         fetchData()
     }, [dispatch, navigate])
+
     if (isReload) return (
         <div className="nav-guild">
             <div className="reload_btn-frame" onClick={fetchData}>
@@ -173,35 +177,52 @@ function ModeNavbarAccountHeader() {
 }
 
 function PageList() {
-    const idBook = useSelector(state => state.fetch.idBook)
-    const [allPage, setAllPage] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const idBook = useSelector((state) => state.fetch.idBook)
+    const [pages, setPages] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [reloading, setReloading] = useState(false)
     const dispatch = useDispatch()
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true)
-            try {
-                let sessionPage = []
-                const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
-                response.data.pages.forEach((item, index) => {
-                    sessionPage.push(<PageListItem key={index} data={item}/>)
-                })
-                setAllPage(sessionPage)
-            } catch (err) {
-                console.error(err)
-            }
-            setIsLoading(false)
+    
+    const fetchData = useCallback(async () => {
+        console.log('page fetch')
+        setReloading(false)
+        setLoading(true)
+        try {
+            const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
+            setPages(
+                response.data.pages.map((item, index) => (
+                <PageListItem key={index} data={item} />
+                ))
+            )
+        } catch (error) {
+            setReloading(true)
         }
+        setLoading(false)
+    }, [idBook])
+
+    useEffect(() => {
         fetchData()
-    }, [idBook, dispatch])
-    if (isLoading) return (
+    }, [dispatch, fetchData])
+
+    if (reloading) {
+        return (
+            <div className="nav-guild">
+                <div className="reload_btn-frame" onClick={fetchData}>
+                    <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
+                </div>
+            </div>
+        )
+    }
+    if (loading) {
+        return (
+            <div className="roomList">
+                <div className="room loading" />
+            </div>
+        )
+    }
+    return (
         <div className="roomList">
-            <div className='room loading'/>
-        </div>
-    )
-    return(
-        <div className='roomList'>
-            {allPage}
+            {pages}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare, faImage, faStickyNote} from '@fortawesome/free-solid-svg-icons'
+import {faNoteSticky, faCheck, faPlus, faTrash, faPenToSquare, faImage, faStickyNote, faArrowLeft} from '@fortawesome/free-solid-svg-icons'
 import {convertDateToString} from '../utils/convertDateFormat'
 import { useState } from 'react';
 import { FileDrop, Modal, ModalNoteEditor, Confirm } from './Modal'
@@ -10,7 +10,7 @@ import { deleteToast, editToast, imageToast, noteToast, noteToastSecond, todoToa
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setNoteEditor, setSource } from '../redux/sourceSlice';
-import { setTodo } from '../redux/todo';
+import { clearTodo, setTodo } from '../redux/todo';
 import { useEffect } from 'react';
 
 const API = process.env.REACT_APP_API
@@ -332,11 +332,21 @@ export function NoteEditor() {
 
 export function CenterActionButton({handleModalOpen}) {
     const todoId = useSelector(state => state.todo.id)
+    function handleClick() {
+        dispatch(clearTodo())
+    }
+    const dispatch = useDispatch()
     return (
         <div className='center-action-btn'>
-            <div className="action-add">
-                <FontAwesomeIcon icon={todoId?faStickyNote:faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
-            </div>
+                {todoId && (
+                <div className='detail-back pointer' onClick={handleClick}>
+                    <FontAwesomeIcon icon={faArrowLeft}/>
+                    <span>Back</span>
+                </div>
+                )}
+                <div className="action-add">
+                    <FontAwesomeIcon icon={todoId?faStickyNote:faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
+                </div>
         </div>
     )
 }

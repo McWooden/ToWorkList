@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
+import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import './style/base.css'
 import './style/Modal.css'
 // import { ChatModel } from './model'
@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {Welcome} from './page'
 import axios from 'axios'
 import { setMembers, setSource } from '../redux/sourceSlice'
-import { clearTodo, setTodo } from '../redux/todo';
+import { setTodo } from '../redux/todo';
 
 const API = process.env.REACT_APP_API
 
@@ -95,7 +95,7 @@ function TodoDetail() {
         {/* center */}
             <div className='base-center'>
                 <div className='center'>
-                    <DetailCard/>
+                    <DetailCard/>                    
                     <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/>
                     <CenterActionButton handleModalOpen={handleModalOpen}/>
                 </div>
@@ -414,16 +414,8 @@ function BaseRight() {
 
 function DetailCard() {
     const todo = useSelector(state => state.todo)
-    const dispatch = useDispatch()
-    function handleClick() {
-        dispatch(clearTodo())
-    }
     return(
         <>
-        <div className='detail-back pointer' onClick={handleClick}>
-            <FontAwesomeIcon icon={faArrowLeft}/>
-            <span>Back</span>
-        </div>
         <div className='detail-desc'>
             <div className="color" style={{backgroundColor: todo.details.color}}></div>
             <div className='detail-desc-context'>
