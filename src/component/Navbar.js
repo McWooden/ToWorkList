@@ -11,7 +11,7 @@ import { convertDateToString } from '../utils/convertDateFormat'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
-import { setMembers } from '../redux/sourceSlice'
+import { setGuildProfile, setMembers } from '../redux/sourceSlice'
 import { setPageType, setSource } from '../redux/sourceSlice'
 
 const API = process.env.REACT_APP_API
@@ -107,6 +107,7 @@ function BookItem({data}) {
     function handleClick() {
         dispatch(setPageType('welcome'))
         dispatch(setFetch({path: data.profile.book_title, id: data._id}))
+        dispatch(setGuildProfile(data.profile))
         dispatch(setMembers(null))
     }
     return (
@@ -184,7 +185,6 @@ function PageList() {
     const dispatch = useDispatch()
     
     const fetchData = useCallback(async () => {
-        console.log('page fetch')
         setReloading(false)
         setLoading(true)
         try {
@@ -269,7 +269,7 @@ function PageAccountList() {
     )
 }
 
-function PageListItem({data}) {
+export function PageListItem({data}) {
     const title = data.details.page_title
     const icon = data.details.icon
     const id = data._id

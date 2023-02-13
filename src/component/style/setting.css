@@ -18,15 +18,17 @@
     color: var(--white-2);
 }
 .setting_full_close:hover .x_mark {
-    color: var(--white-1);
+    border: 2px solid var(--purple-1);
+    background-color: var(--purple-1-transparent);
 }
 .setting_full_close p {
     font-size: xx-small;
+    color: var(--purple-1);
 }
 .x_mark {
     font-size: 1.2em;
-    border: 2px solid var(--white-2);
-    color: var(--white-2);
+    border: 2px solid var(--purple-1-transparent);
+    color: var(--purple-1);
     padding: 6px 10px;
     border-radius: 50px;
     display: grid;
@@ -35,7 +37,7 @@
 /* nav */
 .setting_full_nav {
     flex: 1;
-    background-color: var(--black-2);
+    background-color: var(--kedua);
     padding: 4em 0;
 }
 .setting_full_nav ul {
@@ -46,20 +48,21 @@
     display: flex;
     align-items: center;
     padding: .5em 1em;
-    color: var(--white-2);
+    color: var(--text-2);
     gap: .5em;
     cursor: pointer;
 }
-.setting_full_nav_list:hover {
-    background-color: var(--black-3);
-}
 .setting_full_nav_list.active {
-    color: var(--purple-2);
-    background-color: var(--black-1);
+    color: var(--purple-1);
+    background-color: var(--purple-1-transparent);
+}
+.setting_full_nav_list:hover {
+    background-color: var(--purple-2);
+    color: var(--white-1);
 }
 .setting_full_body {
     flex: 3;
-    background-color: var(--black-4);
+    background-color: var(--pertama);
     padding: 4em 1em;
     position: relative;
     overflow: auto;
@@ -71,10 +74,11 @@
 .setting_full_profile_view {
     display: flex;
     flex-direction: column;
-    background-color: var(--black-3);
+    background-color: var(--kedua);
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 30px;
+    box-shadow: var(--shadow-1);
 }
 .setting_full_profile_view_header {
     display: flex;
@@ -93,22 +97,23 @@
 .setting_full_name_guild {
     font-size: larger;
     margin-left: 20px;
+    color: var(--text-2);
 }
 .setting_full_name_guild span {
-    color: var(--white-3);
+    color: var(--text-1);
 }
 .setting_full_profile_view_body {
     margin-top: 10px;
     border-radius: 5px;
     padding: 1em;
-    color: var(--white-3);
+    color: var(--text-1);
     font-size: small;
 }
 .setting_keluar {
     padding: 10px;
 }
 .setting_keluar p {
-    color: var(--white-2);
+    color: var(--text-1);
     font-weight: bold;
     font-size: small;
     margin-bottom: 10px;
@@ -133,6 +138,7 @@
 }
 .setting_keluar_btn.keluar_btn {
     border: 1px solid #d83c3e;
+    color: #d83c3e;
 }
 .setting_keluar_btn.keluar_btn:hover {
     border-color: maroon;
@@ -149,10 +155,13 @@
 .setting_header {
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid var(--black-5);
+    border-bottom: 1px solid var(--purple-1);
+}
+.setting_header h3 {
+    color: var(--text-2);
 }
 .setting_header p {
-    color: var(--white-2);
+    color: var(--text-1);
     font-weight: 400;
     font-size: small;
     margin-top: 10px;

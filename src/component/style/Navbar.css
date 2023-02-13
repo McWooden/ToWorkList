@@ -186,7 +186,10 @@ nav .nav-1 {
     border-radius: 5px;
 }
 .settingNavbar:hover {
-    background-color: var(--black-4);
+    background-color: var(--purple-1-transparent);
+}
+.settingNavbar:active {
+    color: var(--purple-1);
 }
 .roomList {
     overflow: auto;
