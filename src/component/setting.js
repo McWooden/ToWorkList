@@ -218,7 +218,7 @@ function GuildSettingRoom() {
             {pages}
         </div>
         <div className="setting_action">
-            <span className="setting_btn blue_btn">Tambah Page</span>
+            <span className="setting_btn blue_btn">Tambah Halaman</span>
         </div>
         </>
     )

@@ -169,7 +169,7 @@
     font-size: small;
     margin-top: 10px;
 }
-.roomList {
+.setting_full .roomList {
     height: 60vh;
     box-shadow: var(--shadow-1);
     margin: 1em 0;
