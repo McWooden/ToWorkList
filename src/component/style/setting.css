@@ -12,7 +12,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    position: fixed;
     top: 1em;
     right: 1em;
     color: var(--white-2);
@@ -39,6 +39,8 @@
     flex: 1;
     background-color: var(--kedua);
     padding: 4em 0;
+    box-shadow: var(--shadow-1-right);
+    z-index: 1;
 }
 .setting_full_nav ul {
     max-width: 200px;
@@ -118,11 +120,12 @@
     font-size: small;
     margin-bottom: 10px;
 }
-.setting_keluar-action {
+.setting_action {
     display: flex;
     gap: 10px;
 }
-.setting_keluar_btn {
+/* setting action button */
+.setting_btn {
     padding: 5px 20px;
     border-radius: 3px;
     font-size: x-small;
@@ -130,21 +133,21 @@
     display: flex;
     align-items: center;
 }
-.setting_keluar_btn.delete_btn {
+.setting_btn.delete_btn {
     background-color: #d83c3e;
 }
-.setting_keluar_btn.delete_btn:hover {
+.setting_btn.delete_btn:hover {
     background-color: maroon;
 }
-.setting_keluar_btn.keluar_btn {
+.setting_btn.keluar_btn {
     border: 1px solid #d83c3e;
     color: #d83c3e;
 }
-.setting_keluar_btn.keluar_btn:hover {
+.setting_btn.keluar_btn:hover {
     border-color: maroon;
     background-color: maroon;
 }
-.setting_keluar_btn.edit_btn {
+.setting_btn.blue_btn {
     background-color: var(--light-blue);
     width: fit-content;
     color: var(--white-1);
@@ -166,6 +169,15 @@
     font-size: small;
     margin-top: 10px;
 }
+.roomList {
+    height: 60vh;
+    box-shadow: var(--shadow-1);
+    margin: 1em 0;
+}
+.roomList .room {
+    margin: 2px 0;
+    border-radius: 8px;
+}
 .setting_room_list_name {
     flex: 1;
 }
@@ -186,6 +198,7 @@
 .setting_room-setting:hover {
     transform: rotate(30deg);
 }
+/* meduia query */
 @media (max-width: 600px) {
     .setting_full_nav_list_icon {
         font-size: large;

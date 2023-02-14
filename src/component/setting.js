@@ -4,8 +4,6 @@ import { faPencil, faMap, faUserGroup, faXmark } from '@fortawesome/free-solid-s
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom'
 import { useState } from 'react'
-import { useContext } from 'react'
-import { GuildContext } from '../pages/App'
 import { convertDateToString } from '../utils/convertDateFormat'
 import { deleteToast, leaveToast, editToast } from '../utils/notif'
 import { PageListItem } from './Navbar'
@@ -14,7 +12,6 @@ import { useEffect } from 'react'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { setMembers } from '../redux/sourceSlice'
 
 const API = process.env.REACT_APP_API
 
@@ -36,7 +33,7 @@ export function GuildSetting({open, close}) {
                     </li>
                     <li className={`setting_full_nav_list ${select === 'room' && 'active'}`} onClick={() => handleSelectOnChange('room')}>
                         <FontAwesomeIcon icon={faMap} className='setting_full_nav_list_icon'/>
-                        <p>ruangan</p>
+                        <p>halaman</p>
                     </li>
                     <li className={`setting_full_nav_list ${select === 'member' && 'active'}`} onClick={() => handleSelectOnChange('member')}>
                         <FontAwesomeIcon icon={faUserGroup} className='setting_full_nav_list_icon'/>
@@ -121,15 +118,12 @@ function GuildSettingProfile() {
             <div className="setting_full_profile_view_body">
                 <h5>Dibuat pada</h5>
                 <p className='setting_profile_date'>{convertDateToString(profile.created_at)} oleh {profile.author.nickname}#{profile.author.tag}</p>
-                <p className='setting_keluar_btn edit_btn' onClick={() => editToast('mengedit profile')}>Edit Profil</p>
+                <p className='setting_btn blue_btn' onClick={() => editToast('mengedit profile')}>Edit Profil</p>
             </div>
         </div>
-        <div className="setting_keluar">
-            <p>Guild</p>
-            <div className="setting_keluar-action">
-                <span className="setting_keluar_btn delete_btn"  onClick={() => deleteToast('guild terhapus')}>hapus guild</span>
-                <span className="setting_keluar_btn keluar_btn" onClick={() => leaveToast(`bye everyone in the room ${profile.book_title}`)}>Keluar guild</span>
-            </div>
+        <div className="setting_action">
+            <span className="setting_btn delete_btn"  onClick={() => deleteToast('guild terhapus')}>hapus guild</span>
+            <span className="setting_btn keluar_btn" onClick={() => leaveToast(`bye everyone in the room ${profile.book_title}`)}>Keluar guild</span>
         </div>
         </>
     )
@@ -165,23 +159,6 @@ function GuildSettingProfile() {
 //     )
 // }
 function GuildSettingRoom() {
-    // const {guildRooms, handleRoom, currentRoom} = useContext(GuildContext)
-    // const lists = []
-    // guildRooms.forEach((room, index) => {
-    //     lists.push(
-    //         <div key={index} className={`room setting_room ${currentRoom === room.roomName?'active':''}`} onClick={() => handleRoom(index)}>
-    //             <FontAwesomeIcon icon={fontawesome.faCheck} className={`room-icon ${currentRoom === room.roomName?'active':''}`}/>
-    //             <span className={`setting_room_list_name ${currentRoom === room.roomName?'active':''}`}>{room.roomName}</span>
-    //             <div className="room_action">
-    //                 <div className="info-menu-box">
-    //                     <FontAwesomeIcon icon={fontawesome.faMoneyCheck} className='info-menu-box-icon'/>
-    //                     <div className='info-menu-box-count'>{room.items.length}</div>
-    //                 </div>
-    //                 <FontAwesomeIcon icon={fontawesome.faGear} className={`room-icon setting_room-setting ${currentRoom === room.roomName?'active':''}`}/>
-    //             </div>
-    //         </div>
-    //     )
-    // })
     const idBook = useSelector((state) => state.fetch.idBook)
     const [pages, setPages] = useState([])
     const [loading, setLoading] = useState(true)
@@ -206,14 +183,16 @@ function GuildSettingRoom() {
     useEffect(() => {
         fetchData()
     }, [dispatch, fetchData])
-
+    const headerElement = (
+        <div className="setting_header">
+            <h3>Halaman</h3>
+            <p>semua halaman dan jumlah tugas</p>
+        </div>
+    )
     if (reloading) {
         return (
             <>
-            <div className="setting_header">
-                <h3>Room</h3>
-                <p>semua ruangan dan jumlah tugas di setiap ruangan</p>
-            </div>
+            {headerElement}
             <div className="nav-guild">
                 <div className="reload_btn-frame" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
@@ -225,10 +204,7 @@ function GuildSettingRoom() {
     if (loading) {
         return (
             <>
-            <div className="setting_header">
-                <h3>Room</h3>
-                <p>semua ruangan dan jumlah tugas di setiap ruangan</p>
-            </div>
+            {headerElement}
             <div className="roomList">
                 <div className="room loading" />
             </div>
@@ -237,103 +213,45 @@ function GuildSettingRoom() {
     }
     return(
         <>
-        <div className="setting_header">
-            <h3>Room</h3>
-            <p>semua ruangan dan jumlah tugas di setiap ruangan</p>
-        </div>
+        {headerElement}
         <div className='roomList'>
             {pages}
+        </div>
+        <div className="setting_action">
+            <span className="setting_btn blue_btn">Tambah Page</span>
         </div>
         </>
     )
 }
 
-// function GuildSettingMember() {
-//     const { users } = useContext(GuildContext)
-//     let box = []
-//     Object.keys(users).forEach((propertyName) => {
-//         box.push(
-//             <p className='users-group' key={propertyName}>{propertyName}</p>
-//         )
-//         let container = []
-//         users[propertyName].user.forEach((user, index) => {
-//             container.push(
-//                 <div className='group-user pointer' key={`${user.name}-${index}`}>
-//                     <img src={user.pic} alt={user.name} />
-//                     <div className="user-context">
-//                         <p style={{color: users[propertyName].color}} >{user.name}</p>
-//                         <p className='user-status'>{user.status}</p>
-//                     </div>
-//                 </div>
-//             )
-//         })
-//         box.push(<div key={`${propertyName}-container`} className='group-user-container'>{container}</div>)
-//     })
-//     return (
-//         <>
-//         <div className="setting_header">
-//             <h3>Anggota</h3>
-//             <p>list manusia yang ada di sini</p>
-//         </div>
-//         {box}
-//         </>
-//     )
-// }
 function GuildSettingMember() {
-    const idBook = useSelector(state => state.fetch.idBook)
     const members = useSelector(state => state.source.members)
-    const dispatch = useDispatch()
-    const [isLoading, setIsLoading] = useState(false)
     const [box, setBox] = useState([])
-    function handleEmpety() {
-        setIsLoading(false)
-        setBox('Empety')
-    }
-
-    const { users } = useContext(GuildContext)
-    useEffect(() => {
-        dataToBox(members)
-        const fetchData = async () => {
-            try {
-                const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
-                dispatch(setMembers(data))
-            } catch (err) {
-                handleEmpety()
-            }
-        }
-        const interval = setInterval(() => {
-            fetchData()
-        }, 60000)
-        return () => clearInterval(interval)
-    }, [idBook, members, dispatch])
-    Object.keys(users).forEach((propertyName) => {
-        box.push(
-            <p className='users-group' key={propertyName}>{propertyName}</p>
-        )
-        let container = []
-        users[propertyName].user.forEach((user, index) => {
-            container.push(
-                <div className='group-user pointer' key={`${user.name}-${index}`}>
-                    <img src={user.pic} alt={user.name} />
-                    <div className="user-context">
-                        <p style={{color: users[propertyName].color}} >{user.name}</p>
-                        <p className='user-status'>{user.status}</p>
-                    </div>
-                </div>
-            )
-        })
-        box.push(<div key={`${propertyName}-container`} className='group-user-container'>{container}</div>)
-    })
     function dataToBox(data) {
         let sessionBox = []
-
+        data.users.forEach((group, index) => {
+            sessionBox.push(
+                <p className='users-group' key={index}>{group.details.role}</p>
+            )
+            let container = []
+            group.member.forEach((user, userIndex) => {
+                container.push(
+                    <div className='group-user pointer' key={`${user.nickname}-${userIndex}`}>
+                        <img src={user.avatar} alt={user.nickname} />
+                        <div className="user-context">
+                            <p style={{color: group.details.role_color}} >{user.nickname}</p>
+                            <p className='user-status'>{user.status}</p>
+                        </div>
+                    </div>
+                )
+            })
+            sessionBox.push(<div key={`${group.details.role}-container`} className='group-user-container'>{container}</div>)
+        })
         setBox(sessionBox)
     }
-    if (isLoading) return (
-        <div className="sidebar-right">
-            <div className="loading sidebar_right_loading"/>
-        </div>
-    )
+    useEffect(() => {
+        dataToBox(members)
+    }, [members])
     return (
         <>
         <div className="setting_header">

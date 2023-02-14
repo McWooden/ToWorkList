@@ -101,7 +101,7 @@
     margin: 4px 0;
 }
 .group-user:hover {
-    background-color: var(--black-5);
+    background-color: var(--purple-1-transparent);
     transition: .1s ease;
 }
 .user-context {
