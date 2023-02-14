@@ -12,6 +12,8 @@ import { useEffect } from 'react'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
+import { setMembers } from '../redux/sourceSlice'
+import { ModalSecond } from './Modal'
 
 const API = process.env.REACT_APP_API
 
@@ -159,6 +161,7 @@ function GuildSettingProfile() {
 //     )
 // }
 function GuildSettingRoom() {
+    const [openAdd, setOpenAdd] = useState(false)
     const idBook = useSelector((state) => state.fetch.idBook)
     const [pages, setPages] = useState([])
     const [loading, setLoading] = useState(true)
@@ -218,14 +221,26 @@ function GuildSettingRoom() {
             {pages}
         </div>
         <div className="setting_action">
-            <span className="setting_btn blue_btn">Tambah Halaman</span>
+            <span className="setting_btn blue_btn" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
         </div>
+        <ModalSecond open={openAdd} close={() => setOpenAdd(false)}>
+            <div className="addPage-container">
+                <p>ping!</p>
+            </div>
+        </ModalSecond>
         </>
     )
 }
 
 function GuildSettingMember() {
     const members = useSelector(state => state.source.members)
+    const idBook = useSelector(state => state.fetch.idBook)
+    const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useDispatch()
+    function handleEmpety() {
+        setIsLoading(false)
+        setBox('Empety')
+    }
     const [box, setBox] = useState([])
     function dataToBox(data) {
         let sessionBox = []
@@ -250,8 +265,35 @@ function GuildSettingMember() {
         setBox(sessionBox)
     }
     useEffect(() => {
-        dataToBox(members)
-    }, [members])
+        const fetchData = async () => {
+            try {
+                const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
+                dispatch(setMembers(data))
+            } catch (err) {
+                handleEmpety()
+            }
+        }
+        if (!members) {
+            if (idBook === '@me') return handleEmpety()
+            setIsLoading(true)
+            fetchData()
+            setIsLoading(false)
+        } else {
+            dataToBox(members)
+        }
+        const interval = setInterval(() => {
+            if (idBook === '@me') return handleEmpety()
+            fetchData()
+        }, 60000)
+        return () => clearInterval(interval)
+    }, [idBook, members, dispatch])
+    if (isLoading) return (
+        <div className="base-right">
+            <div className="sidebar-right">
+                <div className="loading sidebar_right_loading"/>
+            </div>
+        </div>
+    )
     return (
         <>
         <div className="setting_header">

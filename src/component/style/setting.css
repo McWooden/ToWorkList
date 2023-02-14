@@ -170,7 +170,7 @@
     margin-top: 10px;
 }
 .setting_full .roomList {
-    height: 60vh;
+    height: 50vh;
     box-shadow: var(--shadow-1);
     margin: 1em 0;
 }
@@ -180,6 +180,11 @@
 }
 .setting_room_list_name {
     flex: 1;
+}
+/* addPage */
+.addPage_container {
+    background-color: var(--kedua);
+    filter: var(-filter-shadow);
 }
 .room_action {
     display: flex;

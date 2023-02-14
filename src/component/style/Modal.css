@@ -21,7 +21,15 @@
 .modal {
     width: 90vw;
     height: 75vh;
-    border-radius: 35px;
+    border-radius: 30px;
+}
+.second_modal {
+    width: auto;
+    min-width: 40vw;
+    border-radius: 20px;
+    background-color: var(--kedua);
+    color: var(--text-2);
+    padding: 1em;
 }
 .add-modal {
     display: flex;
