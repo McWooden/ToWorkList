@@ -174,7 +174,7 @@
     box-shadow: var(--shadow-1);
     margin: 1em 0;
 }
-.roomList .room {
+.roomList .room, .addPage .room {
     margin: 2px 0;
     border-radius: 8px;
 }
@@ -182,10 +182,91 @@
     flex: 1;
 }
 /* addPage */
-.addPage_container {
-    background-color: var(--kedua);
-    filter: var(-filter-shadow);
+.addPage {
+    padding: 1em;
 }
+.addPage .heading {
+    color: var(--text-2);
+    font-size: large;
+    font-weight: bold;
+}
+.addPage .room {
+    margin: 1em;
+    border: 1px solid var(--purple-1-transparent);
+}
+.addPage .room .room_input.active {
+    background-color: var(--kedua);
+    color: var(--purple-1);
+}
+.pagePreview {
+    margin-top: 1em;
+}
+.room-grid {  
+    display: grid;
+    grid-template-columns: .2fr 1.8fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "page_icon page_type"
+        "page_icon page_desc";
+}
+
+.page_icon { grid-area: page_icon; }
+
+.page_type { grid-area: page_type; }
+
+.page_desc { 
+    grid-area: page_desc;
+}
+
+.addPage .small {
+    color: var(--text-1);
+    font-size: small;
+}
+.addPage .small.bold {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.addPage .form-modal {
+    padding: 0;
+}
+.addPage .form-modal input {
+    background-color: #eaeaea;
+    border: 1px solid #ddd;
+    color: var(--text-2);
+}
+.addPage .form-modal input:focus {
+    background-color: #ddd;
+}
+.addPage_action {
+    background-color: #ddd;
+    color: var(--white-1);
+    padding: 1em;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+.addPage_action .btn_action {
+    cursor: pointer;
+    text-align: center;
+    font-size: small;
+    border-radius: 8px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    color: var(--text-2);
+    width: 25%;
+}
+.addPage_action .btn_add {
+    width: 35%;
+    background-color: var(--purple-1-transparent);
+}
+.addPage_action .btn_add.active {
+    background-color: var(--purple-1);
+    color: var(--white-1);
+}
+/* room action */
 .room_action {
     display: flex;
     align-items: center;

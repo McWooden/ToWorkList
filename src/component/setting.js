@@ -3,9 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faMap, faUserGroup, faXmark } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { convertDateToString } from '../utils/convertDateFormat'
-import { deleteToast, leaveToast, editToast } from '../utils/notif'
+import { deleteToast, leaveToast, editToast, pageToast } from '../utils/notif'
 import { PageListItem } from './Navbar'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
@@ -172,17 +172,19 @@ function GuildSettingRoom() {
         setLoading(true)
         try {
             const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
-            setPages(
-                response.data.pages.map((item, index) => (
-                    <PageListItem key={index} data={item} />
-                ))
-            )
+            dataToElement(response.data.pages)
         } catch (error) {
             setReloading(true)
         }
         setLoading(false)
     }, [idBook])
-
+    function dataToElement(data) {
+        setPages(
+            data.map((item, index) => (
+                <PageListItem key={index} data={item} />
+            ))
+        )
+    }
     useEffect(() => {
         fetchData()
     }, [dispatch, fetchData])
@@ -224,13 +226,61 @@ function GuildSettingRoom() {
             <span className="setting_btn blue_btn" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
         </div>
         <ModalSecond open={openAdd} close={() => setOpenAdd(false)}>
-            <div className="addPage-container">
-                <p>ping!</p>
-            </div>
+            <AddPage close={() => setOpenAdd(false)} callback={dataToElement}/>
         </ModalSecond>
         </>
     )
 }
+function AddPage({close, callBack}) {
+    const active = true
+    const [value, setValue] = useState('')
+    const idBook = useSelector(state => state.fetch.idBook)
+    const formRef = useRef()
+    async function handleSubmit(e) {
+        e.preventDefault() // prevent default form submission behavior
+        try {
+            pageToast(`${value} berhasil dibuat`)
+            const response = await axios.put(`${'http://localhost:3001'}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
+            callBack(response.data.pages)
+            setValue('')
+            close()
+        } catch (err) {
+
+        }
+        console.log(value)
+    }
+    const handleClick = () => {
+        formRef.current.submit()
+    }
+    return (
+        <>
+        <div className="addPage">
+            <p className='heading'>Halaman</p>
+            <p className='small'>Membuat halaman baru</p>
+            <div className="pagePreview">
+                <p className='small bold'>Tipe halaman</p>
+                <div className={`room room-grid ${active?'active':''}`}>
+                    <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon ${active?'active':''}`}/>
+                    <span className={`page_type ${active?'active':''}`}>Todo </span>
+                    <span className={`page_desc ${active?'active':''}`}>Daftar, Pesan, Foto, Catatan</span>
+                </div>
+            </div>
+            <form className="form-modal" onSubmit={handleSubmit} ref={formRef}>
+                <p className='small bold'>Nama halaman</p>
+                <div className={`room ${value&&'active'}`}>
+                    <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
+                    <input type="text" placeholder='halaman baru' onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
+                </div>
+            </form>
+        </div>
+        <div className="addPage_action">
+            <span className='btn_action' onClick={close}>Batal</span>
+            <span className={`btn_action btn_add ${value&&'active'}`} onClick={handleClick}>Tambahkan</span>
+        </div>
+        </>
+    )
+}
+
 
 function GuildSettingMember() {
     const members = useSelector(state => state.source.members)

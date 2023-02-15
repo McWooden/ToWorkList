@@ -29,7 +29,7 @@
     border-radius: 20px;
     background-color: var(--kedua);
     color: var(--text-2);
-    padding: 1em;
+    height: fit-content;
 }
 .add-modal {
     display: flex;
