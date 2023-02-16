@@ -185,9 +185,30 @@ function GuildSettingRoom() {
             ))
         )
     }
+    function handleClose() {
+        setOpenAdd(false)
+    }
     useEffect(() => {
         fetchData()
     }, [dispatch, fetchData])
+    const [value, setValue] = useState('')
+    const [btnLoading, setBtnLoading] = useState(false)
+    const formRef = useRef()
+    async function handleSubmit(e) {
+        setBtnLoading(true)
+        e.preventDefault()
+        try {
+            const response = await axios.put(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
+            setValue('')
+            console.log(response.data)
+            pageToast(`${value} berhasil dibuat`)
+            setOpenAdd(false)
+            setBtnLoading(false)
+            dataToElement(response.data.pages)
+        } catch (err) {
+            setBtnLoading(false)
+        }
+    }
     const headerElement = (
         <div className="setting_header">
             <h3>Halaman</h3>
@@ -225,58 +246,37 @@ function GuildSettingRoom() {
         <div className="setting_action">
             <span className="setting_btn blue_btn" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
         </div>
-        <ModalSecond open={openAdd} close={() => setOpenAdd(false)}>
-            <AddPage close={() => setOpenAdd(false)} callback={dataToElement}/>
-        </ModalSecond>
-        </>
-    )
-}
-function AddPage({close, callBack}) {
-    const active = true
-    const [value, setValue] = useState('')
-    const idBook = useSelector(state => state.fetch.idBook)
-    const formRef = useRef()
-    async function handleSubmit(e) {
-        e.preventDefault() // prevent default form submission behavior
-        try {
-            pageToast(`${value} berhasil dibuat`)
-            const response = await axios.put(`${'http://localhost:3001'}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
-            callBack(response.data.pages)
-            setValue('')
-            close()
-        } catch (err) {
-
-        }
-        console.log(value)
-    }
-    const handleClick = () => {
-        formRef.current.submit()
-    }
-    return (
-        <>
+        <ModalSecond open={openAdd} close={handleClose}>
         <div className="addPage">
-            <p className='heading'>Halaman</p>
-            <p className='small'>Membuat halaman baru</p>
-            <div className="pagePreview">
-                <p className='small bold'>Tipe halaman</p>
-                <div className={`room room-grid ${active?'active':''}`}>
-                    <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon ${active?'active':''}`}/>
-                    <span className={`page_type ${active?'active':''}`}>Todo </span>
-                    <span className={`page_desc ${active?'active':''}`}>Daftar, Pesan, Foto, Catatan</span>
-                </div>
-            </div>
             <form className="form-modal" onSubmit={handleSubmit} ref={formRef}>
-                <p className='small bold'>Nama halaman</p>
-                <div className={`room ${value&&'active'}`}>
-                    <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
-                    <input type="text" placeholder='halaman baru' onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
+                <div className="addPage_body">
+                    <p className='heading'>Halaman</p>
+                    <p className='small'>Membuat halaman baru</p>
+                    <div className="pagePreview">
+                        <p className='small bold'>Tipe halaman</p>
+                        <div className={`room room-grid active`}>
+                            <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon active`}/>
+                            <span className={`page_type active`}>Todo </span>
+                            <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>
+                        </div>
+                    </div>
+                    <p className='small bold'>Nama halaman</p>
+                    <div className={`room ${value&&'active'}`}>
+                        <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
+                        <input type="text" placeholder='halaman baru' onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
+                    </div>
+                </div>
+                <div className="addPage_action">
+                    <span className='btn_action' onClick={handleClose}>Batal</span>
+                    {btnLoading?
+                    (<button className={`btn_action btn_add`}>Loading</button>)
+                    :
+                    (<button type='submit' className={`btn_action btn_add ${value&&'active'}`}>Tambahkan</button>)
+                    }
                 </div>
             </form>
         </div>
-        <div className="addPage_action">
-            <span className='btn_action' onClick={close}>Batal</span>
-            <span className={`btn_action btn_add ${value&&'active'}`} onClick={handleClick}>Tambahkan</span>
-        </div>
+        </ModalSecond>
         </>
     )
 }

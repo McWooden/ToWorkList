@@ -182,7 +182,7 @@
     flex: 1;
 }
 /* addPage */
-.addPage {
+.addPage_body {
     padding: 1em;
 }
 .addPage .heading {
@@ -261,6 +261,8 @@
 .addPage_action .btn_add {
     width: 35%;
     background-color: var(--purple-1-transparent);
+    border: none;
+    font-family: var(--default-font);
 }
 .addPage_action .btn_add.active {
     background-color: var(--purple-1);

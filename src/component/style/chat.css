@@ -11,7 +11,7 @@
 }
 .chat-card-nickname {
     font-size: .7em;
-    color: var(--text-2);
+    color: var(--black-2);
     margin-top: .5em;
 }
 .chat-card {
@@ -30,7 +30,7 @@
     background-color: var(--ok);
 }
 .chat-card-message {
-    background-color: #eaeaea;
+    background-color: var(--white-1);
     white-space: pre-line;
     color: var(--text-2);
 }
