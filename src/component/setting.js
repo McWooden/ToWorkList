@@ -261,7 +261,7 @@ function GuildSettingRoom() {
                         </div>
                     </div>
                     <p className='small bold'>Nama halaman</p>
-                    <div className={`room ${value&&'active'}`}>
+                    <div className={`room roomInput ${value&&'active'}`}>
                         <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
                         <input type="text" placeholder='halaman baru' onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
                     </div>

@@ -194,6 +194,12 @@
     margin: 1em;
     border: 1px solid var(--purple-1-transparent);
 }
+.addPage .roomInput {
+    display: flex;
+}
+.addPage .room .room_input {
+    flex: 1;
+}
 .addPage .room .room_input.active {
     background-color: var(--kedua);
     color: var(--purple-1);
