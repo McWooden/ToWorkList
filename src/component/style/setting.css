@@ -219,7 +219,6 @@
 .page_desc { 
     grid-area: page_desc;
 }
-
 .addPage .small {
     color: var(--text-1);
     font-size: small;
@@ -259,10 +258,11 @@
     width: 25%;
 }
 .addPage_action .btn_add {
-    width: 35%;
     background-color: var(--purple-1-transparent);
     border: none;
     font-family: var(--default-font);
+    min-width: fit-content;
+    padding: 0 .5em;
 }
 .addPage_action .btn_add.active {
     background-color: var(--purple-1);
