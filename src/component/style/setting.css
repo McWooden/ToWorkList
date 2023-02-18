@@ -191,7 +191,7 @@
     font-weight: bold;
 }
 .addPage .room {
-    margin: 1em;
+    margin: 1vw;
     border: 1px solid var(--purple-1-transparent);
 }
 .addPage .roomInput {
@@ -199,6 +199,7 @@
 }
 .addPage .room .room_input {
     flex: 1;
+    width: 100%;
 }
 .addPage .room .room_input.active {
     background-color: var(--kedua);
