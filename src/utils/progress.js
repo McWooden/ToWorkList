@@ -7,7 +7,7 @@ export function PageProggress() {
     const source = useSelector(state => state.source.source)
     const profile = useSelector(state => state.source.profile)
     const myNickname = profile.nickname
-    const list = source.list
+    const list = source.list || []
     const finished = list.filter(item => item.dones.indexOf(myNickname) !== -1)
     const unfinished = list.filter(item => item.dones.indexOf(myNickname) === -1)
     function widthValue(value) {

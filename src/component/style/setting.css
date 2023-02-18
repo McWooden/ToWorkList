@@ -37,7 +37,7 @@
 /* nav */
 .setting_full_nav {
     flex: 1;
-    background-color: var(--kedua);
+    background-color: #31364c46;
     padding: 4em 0;
     box-shadow: var(--shadow-1-right);
     z-index: 1;
@@ -45,6 +45,9 @@
 .setting_full_nav ul {
     max-width: 200px;
     margin-left: auto;
+    border-radius: 8px 0 0 8px;
+    overflow: hidden;
+    background-color: var(--kedua);
 }
 .setting_full_nav_list {
     display: flex;
@@ -178,6 +181,29 @@
     margin: 2px 0;
     border-radius: 8px;
 }
+.setting_full .roomList .room span {
+    flex: 1;
+}
+.setting_full .roomList .room .card-more .card-more-btn.active {
+    color: var(--purple-2);
+}
+.setting_full .roomList .room .card-more .card-more-btn:hover {
+    color: var(--white-1);
+    background-color: var(--kedua-transparent);
+}
+.setting_full .card-drop-down ul {
+    background-color: var(--kedua);
+    box-shadow: var(--shadow-1);
+}
+.setting_full .card-drop-down li, .setting_full .room .card-drop-down ul li span {
+    color: var(--text-2) !important;
+}
+.setting_full .card-drop-down li:hover {
+    background-color: var(--purple-1-transparent);
+}
+.setting_full .card-drop-down li:hover, .setting_full .card-drop-down ul li:hover span {
+    color: var(--purple-1) !important;
+}
 .setting_room_list_name {
     flex: 1;
 }
@@ -230,8 +256,10 @@
     color: var(--text-1);
     font-size: small;
 }
-.addPage .small.bold {
+.addPage .bold {
     font-weight: bold;
+}
+.addPage .uppercase {
     text-transform: uppercase;
 }
 .addPage .form-modal {

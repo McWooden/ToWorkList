@@ -502,6 +502,10 @@ export function CardContainer() {
     const source = useSelector(state => state.source.source)
     let box = []
     const list = source.list
-    list.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
+    try {
+        list.forEach((data, index) => box.push(<TodoModel key={index} item={data}/>))
+    } catch (error) {
+        
+    }
     return box
 }

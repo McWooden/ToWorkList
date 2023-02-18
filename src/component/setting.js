@@ -1,19 +1,20 @@
 import './style/setting.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil, faMap, faUserGroup, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faMap, faUserGroup, faXmark, faEllipsisVertical, faPenToSquare, faTrash, faEye } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom'
 import { useRef, useState } from 'react'
 import { convertDateToString } from '../utils/convertDateFormat'
 import { deleteToast, leaveToast, editToast, pageToast } from '../utils/notif'
-import { PageListItem } from './Navbar'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
-import { setMembers } from '../redux/sourceSlice'
+import { setMembers, setPageType, setSource } from '../redux/sourceSlice'
 import { ModalSecond } from './Modal'
+import { setPathPageOfBook } from '../redux/fetchSlice'
+import { Confirm } from './Modal'
 
 const API = process.env.REACT_APP_API
 
@@ -167,6 +168,13 @@ function GuildSettingRoom() {
     const [loading, setLoading] = useState(true)
     const [reloading, setReloading] = useState(false)
     const dispatch = useDispatch()
+    const dataToElement = useCallback((data) => {
+        setPages(
+            data.map((item, index) => (
+                <SettingPageListItem key={index} data={item} callback={dataToElement}/>
+            ))
+        )
+    }, [])
     const fetchData = useCallback(async () => {
         setReloading(false)
         setLoading(true)
@@ -177,14 +185,7 @@ function GuildSettingRoom() {
             setReloading(true)
         }
         setLoading(false)
-    }, [idBook])
-    function dataToElement(data) {
-        setPages(
-            data.map((item, index) => (
-                <PageListItem key={index} data={item} />
-            ))
-        )
-    }
+    }, [idBook, dataToElement])
     function handleClose() {
         setOpenAdd(false)
     }
@@ -198,13 +199,12 @@ function GuildSettingRoom() {
         setBtnLoading(true)
         e.preventDefault()
         try {
-            const response = await axios.put(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
-            setValue('')
-            console.log(response.data)
+            const response = await axios.post(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
             pageToast(`${value} berhasil dibuat`)
+            dataToElement(response.data.pages)
+            setValue('')
             setOpenAdd(false)
             setBtnLoading(false)
-            dataToElement(response.data.pages)
         } catch (err) {
             setBtnLoading(false)
         }
@@ -215,37 +215,7 @@ function GuildSettingRoom() {
             <p>semua halaman dan jumlah tugas</p>
         </div>
     )
-    if (reloading) {
-        return (
-            <>
-            {headerElement}
-            <div className="nav-guild">
-                <div className="reload_btn-frame" onClick={fetchData}>
-                    <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
-                </div>
-            </div>
-            </>
-        )
-    }
-    if (loading) {
-        return (
-            <>
-            {headerElement}
-            <div className="roomList">
-                <div className="room loading" />
-            </div>
-            </>
-        )
-    }
-    return(
-        <>
-        {headerElement}
-        <div className='roomList'>
-            {pages}
-        </div>
-        <div className="setting_action">
-            <span className="setting_btn blue_btn" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
-        </div>
+    const modalElement = (
         <ModalSecond open={openAdd} close={handleClose}>
         <div className="addPage">
             <form className="form-modal" onSubmit={handleSubmit} ref={formRef}>
@@ -272,6 +242,171 @@ function GuildSettingRoom() {
                     (<button className={`btn_action btn_add`}>Loading</button>)
                     :
                     (<button type='submit' className={`btn_action btn_add ${value&&'active'}`}>Tambahkan</button>)
+                    }
+                </div>
+            </form>
+        </div>
+        </ModalSecond>
+    )
+    if (reloading) {
+        return (
+            <>
+            {headerElement}
+            <div className="nav-guild">
+                <div className="reload_btn-frame" onClick={fetchData}>
+                    <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
+                </div>
+            </div>
+            {modalElement}
+            </>
+        )
+    }
+    if (loading) {
+        return (
+            <>
+            {headerElement}
+            <div className="roomList">
+                <div className="room loading" />
+            </div>
+            {modalElement}
+            </>
+        )
+    }
+    return(
+        <>
+        {headerElement}
+        <div className='roomList'>
+            {pages}
+        </div>
+        <div className="setting_action">
+            <span className="setting_btn blue_btn" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
+        </div>
+        {modalElement}
+        </>
+    )
+}
+export function SettingPageListItem({data, callback}) {
+    const idBook = useSelector((state) => state.fetch.idBook)
+    const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const [openAdd, setOpenAdd] = useState(false)
+    const [btnLoading, setBtnLoading] = useState(false)
+    const formRef = useRef()
+    const title = data.details.page_title
+    const icon = data.details.icon
+    const id = data._id
+    const [value, setValue] = useState(title)
+    const dispatch = useDispatch()
+    function handleClick() {
+        dispatch(setSource(null))
+        dispatch(setPageType(icon))
+        dispatch(setPathPageOfBook({path: title, id}))
+        setDropDown(false)
+    }
+    function handleClose() {
+        setOpenAdd(false)
+    }
+    useEffect(() => {
+        let handler = (e) => {
+            try {
+                if (menuRef.current.contains(e.target) || btnRef.current.contains(e.target)) {
+                    return
+                } else {
+                    setDropDown(false)
+                }
+            } catch (error) {
+                
+            }
+        }
+        document.addEventListener('mousedown', handler)
+        return () => document.removeEventListener("mousedown", handler)
+    })
+    const [dropDown, setDropDown] = useState(false)
+    async function handleSubmit(e) {
+        setBtnLoading(true)
+        e.preventDefault()
+        try {
+            const response = await axios.put(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
+            pageToast(`${value} berhasil dibuat`)
+            callback(response.data.pages)
+            setValue('')
+            setOpenAdd(false)
+            setBtnLoading(false)
+        } catch (err) {
+            setBtnLoading(false)
+        }
+    }
+    let menuRef = useRef()
+    let btnRef = useRef()
+    const [deleteOpen, setDeleteOpen] = useState(false)
+    const active = pathPageOfBook === title
+    async function deleteTodo() {
+        try {
+            await axios.delete(`${API}/source/addTodo/${idPageOfBook}/${data._id}?returnPage=true`)
+            .then((res) => {
+                deleteToast('berhasil dihapus')
+                dispatch(setSource(res.data))
+                console.log(res.data)
+            })
+            .catch(err => {
+                deleteToast('gagal terhapus')
+            })
+        } catch(err) {
+
+        }
+    }
+    return (
+        <>
+        <div className={`room ${active?'active':''}`}>
+            <FontAwesomeIcon icon={fontawesome[icon]} className={`room-icon ${active?'active':''}`}/>
+            <span className={active?'active':''}>{title}</span>
+            <div className="card-more" ref={btnRef}>
+                <FontAwesomeIcon icon={faEllipsisVertical} className={`card-more-btn pointer  ${active?'active':''}`} onClick={() => setDropDown(!dropDown)}/>
+            </div>
+            <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
+                <ul>
+                    <li className='pointer' onClick={handleClick}>
+                        <FontAwesomeIcon icon={faEye} className='card-dd-btn' />
+                        <span>Masuk</span>
+                    </li>
+                    <li className='pointer' onClick={() => setOpenAdd(true)}>
+                        <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
+                        <span>Ubah</span>
+                    </li>
+                    <li className='pointer' onClick={() => setDeleteOpen(true)}>
+                        <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                        <span>Hapus</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deleteTodo}/>
+        <ModalSecond open={openAdd} close={handleClose}>
+        <div className="addPage">
+            <form className="form-modal" onSubmit={handleSubmit} ref={formRef}>
+                <div className="addPage_body">
+                    <p className='heading'>Halaman</p>
+                    <p className='small'>Mengubah halaman <span className='small bold'>{title}</span></p>
+                    <div className="pagePreview">
+                        <p className='small bold uppercase'>Tipe halaman</p>
+                        <div className={`room room-grid active`}>
+                            <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon active`}/>
+                            <span className={`page_type active`}>Todo </span>
+                            <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>
+                        </div>
+                    </div>
+                    <p className='small bold uppercase'>Nama halaman</p>
+                    <div className={`room roomInput ${value&&'active'}`}>
+                        <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
+                        <input type="text" placeholder={title} onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
+                    </div>
+                </div>
+                <div className="addPage_action">
+                    <span className='btn_action' onClick={handleClose}>Batal</span>
+                    {btnLoading?
+                    (<button className={`btn_action btn_add`}>Loading</button>)
+                    :
+                    (<button type='submit' className={`btn_action btn_add ${value&&'active'}`}>Simpan</button>)
                     }
                 </div>
             </form>

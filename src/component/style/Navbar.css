@@ -20,9 +20,10 @@
     z-index: 2;
     height: -webkit-fill-available;
     filter: var(--filter-shadow);
+    margin: 1em;
 }
 .hideNavbar {
-    transform: translateX(-100%);
+    transform: translateX(calc(-100% - 2em));
     transition: .1s ease-in;
 }
 .showNavbar {
@@ -200,6 +201,7 @@ nav .nav-1 {
     display: flex;
     align-items: center;
     cursor: pointer;
+    position: relative;
 }
 .room.active {
     background-color: var(--purple-1-transparent);
@@ -209,10 +211,10 @@ nav .nav-1 {
 .room:hover {
     background-color: var(--purple-1);
 }
-.room:hover .room-icon,  .room:hover span {
+.room:hover .room-icon,  .room:hover span, .room:hover .card-more .card-more-btn {
     color: var(--kedua) !important;
 }
-.room-icon {
+.room-icon, .room .card-more .card-more-btn {
     color: var(--text-1);
     height: 16px;
     margin: 0 5px;

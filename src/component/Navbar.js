@@ -191,7 +191,7 @@ function PageList() {
             const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
             setPages(
                 response.data.pages.map((item, index) => (
-                <PageListItem key={index} data={item} />
+                    <PageListItem key={index} data={item} />
                 ))
             )
         } catch (error) {
