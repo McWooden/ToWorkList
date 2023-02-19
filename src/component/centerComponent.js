@@ -63,7 +63,6 @@ export function CardImages() {
         formData.append('nickname', nickname)
         formData.append('image', image)
         formData.append('desc', e.target.desc.value)
-        imageToast()
         try {
             await axios.post(`${API}/image/${idBook}/${idPageOfBook}/${todo.id}`, formData)
             .then(res => {
@@ -77,9 +76,7 @@ export function CardImages() {
             .catch(err => {
                 imageToast('gambar gagal ditambahkan')
             }) 
-        } catch(err) {
-            
-        }
+        } catch(err) {}
     }
     return (
         <div className='images-container'>

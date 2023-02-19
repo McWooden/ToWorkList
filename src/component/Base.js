@@ -8,7 +8,7 @@ import { HideBase } from './TodoApp';
 // import { ItemData, GuildContext } from '../pages/App';
 // import { myAccount } from '../utils/dataJSON';
 // import { convertDateToString } from '../utils/convertDateFormat'
-import { MoreInfoCard, DetailLeftAction } from './leftSideComponent';
+import { MoreInfoCard, DetailLeftAction, JadwalRoom } from './leftSideComponent';
 import { SidebarRightChat } from './rightSideComponent'
 import { Notes, CardImages, CenterActionButton, CardContainer, AddTaskModal, AddNoteModal, NoteEditor} from './centerComponent';
 import { useState } from 'react'
@@ -110,7 +110,6 @@ function TodoPage() {
     const source = useSelector(state => state.source.source)
     const dispatch = useDispatch()
     const { hideLeftBase } = useContext(HideBase)
-
     useEffect(() => {
         let intervalId = null
         const fetchData = async () => {
@@ -217,6 +216,7 @@ function BaseLeft() {
         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
             <div className="sidebar-left">
                 <Greeting/>
+                <JadwalRoom/>
                 <Calendar 
                 className="calendar-dark" 
                 locale='id-ID'

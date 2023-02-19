@@ -1,8 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faNoteSticky, faImage, faMessage, faPenToSquare, faTrash, faChevronRight, faGear} from '@fortawesome/free-solid-svg-icons'
-import { useContext } from 'react';
 import {convertDateToString} from '../utils/convertDateFormat'
-import { GuildContext } from '../pages/App';
 import { deleteToast, editToast } from '../utils/notif';
 import { useState, useRef } from 'react';
 import { Modal, FileDrop, Confirm } from './Modal';
@@ -195,11 +193,97 @@ export function DetailLeftAction() {
     )
 }
 
+// export function JadwalRoom() {
+//     const { room } = useContext(GuildContext)
+//     const [full, setFull] = useState(false)
+//     const [modalOpen, setModalOpen] = useState(false)
+//     const date = convertDateToString(new Date().toLocaleDateString())
+//     // file drop
+//     const fileInput = useRef(null)
+//     const[image, setImage] = useState(null)
+//     const[previewUrl, setPreviewUrl] = useState('')
+//     const handleFile = file => {
+//         setImage(file)
+//         setPreviewUrl(URL.createObjectURL(file))
+//     }
+//     const handleOndragOver = event => {
+//         event.preventDefault()
+//     }
+//     const handleOndrop = event => {
+//         event.preventDefault()
+//         event.stopPropagation()
+//         let imageFile = event.dataTransfer.files[0]
+//         handleFile(imageFile)
+//     }
+//     // form
+//     const formRef = useRef()
+//     function handleSubmit(e) {
+//         e.preventDefault()
+//         const data = {
+//             image: image,
+//         }
+//         imageToast('jadwal diperbarui')
+//         console.log(data)
+//         setModalOpen(false)
+//         formRef.current.reset()
+//         setImage(null)
+//         setPreviewUrl('')
+//     }
+//     return (
+//         <div className="jadwal">
+//             <div className='preview' style={{background: `url(${room.jadwal})`}}>
+//                 <div className="setting pointer" onClick={() => setModalOpen(true)}>
+//                     <FontAwesomeIcon icon={faGear} className='setting-btn'/>
+//                 </div>
+//             </div>
+//             <div className="open-jadwal pointer" onClick={() => setFull(true)}>
+//                 <p>Jadwal</p>
+//                 <FontAwesomeIcon icon={faChevronRight} className='jadwal-arrow'/>
+//             </div>
+//             <FileDrop open={modalOpen} close={() => setModalOpen(false)}>
+//                 <form ref={formRef} className='file-drop jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
+//                     <div className="img-view" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
+//                     { previewUrl ? 
+//                         <img src={previewUrl} alt={image.name} /> 
+//                     :
+//                         <div className="drop-zone">
+//                             <FontAwesomeIcon icon={faImage} className='drop-icon'/>
+//                             <p className='drop-text'>click atau drop disini</p>
+//                             <input 
+//                                 type="file" 
+//                                 accept='image/*' 
+//                                 ref={fileInput} hidden 
+//                                 onChange={e => handleFile(e.target.files[0])}
+//                             />
+//                         </div>
+//                     }
+//                     </div>
+//                     <div className="img-form">
+//                         <div className="general-info">
+//                             <h3>Memperbarui jadwal</h3>
+//                             <p className='date'>{date}</p>
+//                         </div>
+//                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
+//                         <button className='task-submit' onClick={() => formRef.current.submit}>Tambah</button>
+//                     </div>
+//                 </form>
+//             </FileDrop>
+//             <Modal open={full} close={() => setFull(false)}>
+//                 <div className="jadwal-image" onClick={() => setFull(false)}>
+//                     <img src={room.jadwal} alt="jadwal room" />
+//                 </div>
+//             </Modal>
+//         </div>
+//     )
+// }
 export function JadwalRoom() {
-    const { room } = useContext(GuildContext)
+    const idBook = useSelector(state => state.fetch.idBook)
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const pageDetails = useSelector(state => state.source.source.details)
     const [full, setFull] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const date = convertDateToString(new Date().toLocaleDateString())
+    const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
     // file drop
     const fileInput = useRef(null)
     const[image, setImage] = useState(null)
@@ -219,21 +303,28 @@ export function JadwalRoom() {
     }
     // form
     const formRef = useRef()
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
-        const data = {
-            image: image,
-        }
-        imageToast('jadwal diperbarui')
-        console.log(data)
-        setModalOpen(false)
-        formRef.current.reset()
-        setImage(null)
-        setPreviewUrl('')
+        const formData = new FormData()
+        formData.append('image', image)
+        formData.append('jadwal_url', pageDetails.jadwal_url)
+        try {
+            await axios.post(`${API}/image/jadwal/${idBook}/${idPageOfBook}`, formData)
+            .then(res => {
+                console.log(res.data)
+                imageToast('jadwal diperbarui')
+                setModalOpen(false)
+                formRef.current.reset()
+                setImage(null)
+                setPreviewUrl('')
+            }).catch(err => {
+                imageToast('jadwal gagal diperbarui')
+            })
+        } catch (error) {}
     }
     return (
         <div className="jadwal">
-            <div className='preview' style={{background: `url(${room.jadwal})`}}>
+            <div className='preview' style={{background: `url(${url}/${pageDetails.jadwal_url})`}}>
                 <div className="setting pointer" onClick={() => setModalOpen(true)}>
                     <FontAwesomeIcon icon={faGear} className='setting-btn'/>
                 </div>
@@ -266,13 +357,13 @@ export function JadwalRoom() {
                             <p className='date'>{date}</p>
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
-                        <button className='task-submit' onClick={() => formRef.current.submit}>Tambah</button>
+                        <button className='task-submit' onClick={() => formRef.current.submit}>Perbarui</button>
                     </div>
                 </form>
             </FileDrop>
             <Modal open={full} close={() => setFull(false)}>
                 <div className="jadwal-image" onClick={() => setFull(false)}>
-                    <img src={room.jadwal} alt="jadwal room" />
+                    <img src={`${url}/${pageDetails.jadwal_url}`} alt="jadwal room" />
                 </div>
             </Modal>
         </div>
