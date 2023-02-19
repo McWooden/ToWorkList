@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Calendar from 'react-calendar';
 import axios from 'axios';
 import { clearTodo, setTodo } from '../redux/todo';
+import { setSource } from '../redux/sourceSlice';
 
 const API = process.env.REACT_APP_API
 
@@ -309,9 +310,10 @@ export function JadwalRoom() {
         formData.append('image', image)
         formData.append('jadwal_url', pageDetails.jadwal_url)
         try {
+            startInterval()
             await axios.post(`${API}/image/jadwal/${idBook}/${idPageOfBook}`, formData)
             .then(res => {
-                console.log(res.data)
+                setSource(res.data)
                 imageToast('jadwal diperbarui')
                 setModalOpen(false)
                 formRef.current.reset()
@@ -320,7 +322,23 @@ export function JadwalRoom() {
             }).catch(err => {
                 imageToast('jadwal gagal diperbarui')
             })
-        } catch (error) {}
+            stopInterval()
+        } catch (error) {
+            stopInterval()
+        }
+    }
+    const [intervalId, setIntervalId] = useState(null)
+    const [count, setCount] = useState(0)
+    const startInterval = () => {
+        const intervalId = setInterval(() => {
+            setCount((count) => count + 1)
+        }, 1000)
+        setIntervalId(intervalId)
+    }
+    const stopInterval = () => {
+        clearInterval(intervalId)
+        setCount(0)
+        setIntervalId(null)
     }
     return (
         <div className="jadwal">
@@ -357,7 +375,11 @@ export function JadwalRoom() {
                             <p className='date'>{date}</p>
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
+                        {count?
+                        <button className='task-submit'>Loading...{count}</button>
+                        :
                         <button className='task-submit' onClick={() => formRef.current.submit}>Perbarui</button>
+                        }
                     </div>
                 </form>
             </FileDrop>

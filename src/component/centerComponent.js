@@ -64,6 +64,7 @@ export function CardImages() {
         formData.append('image', image)
         formData.append('desc', e.target.desc.value)
         try {
+            startInterval()
             await axios.post(`${API}/image/${idBook}/${idPageOfBook}/${todo.id}`, formData)
             .then(res => {
                 imageToast()
@@ -76,7 +77,23 @@ export function CardImages() {
             .catch(err => {
                 imageToast('gambar gagal ditambahkan')
             }) 
-        } catch(err) {}
+            stopInterval()
+        } catch(err) {
+            stopInterval()
+        }
+    }
+    const [intervalId, setIntervalId] = useState(null)
+    const [count, setCount] = useState(0)
+    const startInterval = () => {
+        const intervalId = setInterval(() => {
+            setCount((count) => count + 1)
+        }, 1000)
+        setIntervalId(intervalId)
+    }
+    const stopInterval = () => {
+        clearInterval(intervalId)
+        setCount(0)
+        setIntervalId(null)
     }
     return (
         <div className='images-container'>
@@ -109,7 +126,11 @@ export function CardImages() {
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
                         <textarea placeholder='deskripsi' rows="10"name='desc'/>
+                        {count?
+                        <button className='task-submit'>Loading...{count}</button>
+                        :
                         <button className='task-submit' onClick={() => formRef.current.submit}>Tambah</button>
+                        }
                     </div>
                 </form>
             </FileDrop>
