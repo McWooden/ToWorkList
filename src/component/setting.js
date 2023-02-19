@@ -288,7 +288,6 @@ function GuildSettingRoom() {
 export function SettingPageListItem({data, callback}) {
     const idBook = useSelector((state) => state.fetch.idBook)
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
-    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const [openAdd, setOpenAdd] = useState(false)
     const [btnLoading, setBtnLoading] = useState(false)
     const formRef = useRef()
@@ -326,10 +325,9 @@ export function SettingPageListItem({data, callback}) {
         setBtnLoading(true)
         e.preventDefault()
         try {
-            const response = await axios.put(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
-            pageToast(`${value} berhasil dibuat`)
+            const response = await axios.put(`${API}/book/${idBook}/page/${id}`, {page_title: value})
+            pageToast(`${value} perubahan berhasil disimpan`)
             callback(response.data.pages)
-            setValue('')
             setOpenAdd(false)
             setBtnLoading(false)
         } catch (err) {
@@ -342,14 +340,16 @@ export function SettingPageListItem({data, callback}) {
     const active = pathPageOfBook === title
     async function deleteTodo() {
         try {
-            await axios.delete(`${API}/source/addTodo/${idPageOfBook}/${data._id}?returnPage=true`)
+            await axios.delete(`${API}/book/${idBook}/page/${id}`)
             .then((res) => {
                 deleteToast('berhasil dihapus')
-                dispatch(setSource(res.data))
-                console.log(res.data)
+                callback(res.data.pages)
+                setOpenAdd(false)
+                setBtnLoading(false)
             })
             .catch(err => {
                 deleteToast('gagal terhapus')
+                setBtnLoading(false)
             })
         } catch(err) {
 
@@ -380,7 +380,7 @@ export function SettingPageListItem({data, callback}) {
                 </ul>
             </div>
         </div>
-        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deleteTodo}/>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deleteTodo} timeout={25} deleteText={'akan dihapus beserta isinya'}/>
         <ModalSecond open={openAdd} close={handleClose}>
         <div className="addPage">
             <form className="form-modal" onSubmit={handleSubmit} ref={formRef}>
