@@ -73,11 +73,12 @@ export function CardImages() {
                 setImage(null)
                 setPreviewUrl('')
                 dispatch(setTodo(res.data))
+                stopInterval()
             })
             .catch(err => {
                 imageToast('gambar gagal ditambahkan')
+                stopInterval()
             }) 
-            stopInterval()
         } catch(err) {
             stopInterval()
         }

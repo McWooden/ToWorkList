@@ -319,10 +319,11 @@ export function JadwalRoom() {
                 formRef.current.reset()
                 setImage(null)
                 setPreviewUrl('')
+                stopInterval()
             }).catch(err => {
                 imageToast('jadwal gagal diperbarui')
+                stopInterval()
             })
-            stopInterval()
         } catch (error) {
             stopInterval()
         }

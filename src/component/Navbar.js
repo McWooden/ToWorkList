@@ -131,9 +131,6 @@ function FindAndCreateBook() {
     return (
         <div className='find-create-frame'>
             <div className='home-profile find-create'>
-                <FontAwesomeIcon icon={faPlus} className={'nav-icon nav-icon-2'}/>
-            </div>
-            <div className='home-profile find-create'>
                 <FontAwesomeIcon icon={faCompass} className={'nav-icon nav-icon-2'}/>
             </div>
         </div>
