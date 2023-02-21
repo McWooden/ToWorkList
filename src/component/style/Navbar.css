@@ -367,4 +367,7 @@ nav .nav-1 {
     .showNavbar {
         transform: translateY(0);
     }
+    .profile_pop {
+        left: 0;
+    }
 }

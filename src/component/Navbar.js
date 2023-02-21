@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
 import { setGuildProfile, setMembers } from '../redux/sourceSlice'
 import { setPageType, setSource } from '../redux/sourceSlice'
+import { ModalSecond } from './Modal'
 
 const API = process.env.REACT_APP_API
 
@@ -128,12 +129,20 @@ function ModeNavbar() {
     )
 }
 function FindAndCreateBook() {
+    const [modalOpen, setModalOpen] = useState(false)
+    function handleModalOpen() { setModalOpen(true) }
+    function handleModalClose() { setModalOpen(false) }
     return (
+        <>
         <div className='find-create-frame'>
             <div className='home-profile find-create'>
-                <FontAwesomeIcon icon={faCompass} className={'nav-icon nav-icon-2'}/>
+                <FontAwesomeIcon icon={faCompass} className={'nav-icon nav-icon-2'} onClick={handleModalOpen}/>
             </div>
         </div>
+        <ModalSecond open={modalOpen} close={handleModalClose}>
+            <p>P!</p>
+        </ModalSecond>
+        </>
     )
 }
 // modeNavbar component
@@ -319,7 +328,9 @@ function Profile() {
             {profile && (
                 <>
                 <div className={`profile_pop ${userPop?'active':'inactive'}`} ref={userPopRef}>
-                <img src={profile.avatar} alt={profile.nickname}/>
+                <a href={profile.avatar} target='_blank' rel="noreferrer" >
+                    <img src={profile.avatar} alt={profile.nickname}/>
+                </a>
                     <div className="profile_pop-body">
                         <div className="profile_pop-nickname">{profile.nickname}<span>#{profile.tag}</span></div>
                         <div className="profile_pop-created_at">
