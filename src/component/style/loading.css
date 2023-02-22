@@ -28,7 +28,13 @@
     background-color: var(--black-3);
     display: grid;
     place-items: center;
-    color: var(--white-3);
+}
+.loading.book_card {
+    height: 10em;
+    width: 10em;
+    flex: 1;
+    background-color: var(--purple-1);
+    border-radius: 8px;
 }
 
 @keyframes loading-skeleton {

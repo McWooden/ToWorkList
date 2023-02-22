@@ -12,14 +12,11 @@ export const sourceSlice = createSlice({
         members: null,
         err: null,
         noteEditor: null,
-        pageDetails: null,
+        booksProfile: null,
     },
     reducers: {
         setPageType: (state, action) => {
             state.pageType = action.payload
-        },
-        setPageDetails: (state, action) => {
-            state.pageDetails = action.payload
         },
         setSource: (state, action) => {
             state.source = action.payload
@@ -42,9 +39,12 @@ export const sourceSlice = createSlice({
         setNoteEditor: (state, action) => {
             state.noteEditor = action.payload
         },
+        setBooksProfile: (state, action) => {
+            state.booksProfile = action.payload
+        },
     },
 })
 
-export const { setPageType, setPageDetails, setSource, setProfile, setGuildProfile, setMode, setMembers, setError, setNoteEditor } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, setProfile, setGuildProfile, setMode, setMembers, setError, setNoteEditor, setBooksProfile } = sourceSlice.actions
 
 export default sourceSlice.reducer

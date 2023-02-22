@@ -1,8 +1,9 @@
 import './style/Navbar.css'
+import './style/bookCard.css'
 import { AppContext, PageContext } from '../pages/App'
 import { useContext, useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faHouse, faGear, faPlus, faCompass, faRepeat} from '@fortawesome/free-solid-svg-icons'
+import {faHouse, faGear, faPlus, faCompass, faRepeat, faSearch} from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { myAccount } from '../utils/dataJSON'
 import { GuildSetting } from './setting'
@@ -11,9 +12,9 @@ import { convertDateToString } from '../utils/convertDateFormat'
 import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
-import { setGuildProfile, setMembers } from '../redux/sourceSlice'
+import { setBooksProfile, setGuildProfile, setMembers } from '../redux/sourceSlice'
 import { setPageType, setSource } from '../redux/sourceSlice'
-import { ModalSecond } from './Modal'
+import { ModalLight } from './Modal'
 
 const API = process.env.REACT_APP_API
 
@@ -59,7 +60,6 @@ function BookList() {
     const [allBook, setAllBook] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [isReload, setReload] = useState(false)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     async function fetchData () {
@@ -80,8 +80,7 @@ function BookList() {
 
     useEffect(() => {
         fetchData()
-    }, [dispatch, navigate])
-
+    }, [dispatch])
     if (isReload) return (
         <div className="nav-guild">
             <div className="reload_btn-frame" onClick={fetchData}>
@@ -130,19 +129,103 @@ function ModeNavbar() {
 }
 function FindAndCreateBook() {
     const [modalOpen, setModalOpen] = useState(false)
+    const [searchText, setSearchText] = useState('')
+
+    function handleInputChange(e) {
+        setSearchText(e.target.value)
+    }
+    function handleSubmit(e) {
+        e.preventDefault()
+        console.log(searchText)
+    }
     function handleModalOpen() { setModalOpen(true) }
     function handleModalClose() { setModalOpen(false) }
     return (
         <>
         <div className='find-create-frame'>
-            <div className='home-profile find-create'>
-                <FontAwesomeIcon icon={faCompass} className={'nav-icon nav-icon-2'} onClick={handleModalOpen}/>
+            <div className='home-profile find-create' onClick={handleModalOpen}>
+                <FontAwesomeIcon icon={faCompass} className={'nav-icon nav-icon-2'}/>
             </div>
         </div>
-        <ModalSecond open={modalOpen} close={handleModalClose}>
-            <p>P!</p>
-        </ModalSecond>
+        <ModalLight open={modalOpen} close={handleModalClose}>
+            <div className="search_book_container">
+                <form onSubmit={handleSubmit} className='form-modal'>
+                    <div className='search_bar'>
+                        <input type="text" value={searchText} onChange={handleInputChange} placeholder="fitur belum dibuka" />
+                        <button type="submit" className='submit_search'>
+                            <FontAwesomeIcon icon={faSearch} />
+                        </button>
+                    </div>
+                </form>
+                <AllBookList/>
+            </div>
+        </ModalLight>
         </>
+    )
+}
+function AllBookList() {
+    const booksProfile = useSelector(state => state.source.booksProfile)
+    const [loading, setLoading] = useState(false)
+    const [box, setBox] = useState([])
+    const [reload, setReload] = useState(false)
+    const dispatch = useDispatch()
+    const fetchData = useCallback(async () => {
+        setReload(false)
+        setLoading(true)
+        try {
+            const response = await axios.get(`${API}/book`)
+            console.log(response.data)
+            dispatch(setBooksProfile(response.data))
+        } catch (err) {
+            setReload(true)
+        }
+        setLoading(false)
+    }, [dispatch])
+
+    useEffect(() => {
+        if (!booksProfile) {
+            fetchData()
+        } else {
+            let sessionBook = []
+            booksProfile.forEach((data, index) => {
+                sessionBook.push(<BookCardItem data={data} key={index}/>)
+            })
+            setBox(sessionBook)
+        }
+    },[dispatch, fetchData, booksProfile])
+    if (reload) return (
+        <div className="book_card_container">
+            <div className="reload_btn-frame" onClick={fetchData}>
+                <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
+            </div>
+        </div>
+    )
+    if (loading) return (
+        <div className="book_card_container">
+            <div className="book_card loading"/>
+            <div className="book_card loading"/>
+        </div>
+    )
+    return (
+        <div className="book_card_container">
+            {box}
+        </div>
+    )
+}
+function BookCardItem({data}) {
+    const profile = data.profile
+    // const id = data._id
+    return (
+        <div className="book_card">
+            <div className="book_card-header">
+                <img src={profile.avatar_url} alt={profile.book_title} className='banner'/>
+            </div>
+            <div className="book_card-body">
+                <img src={profile.avatar_url} alt={profile.book_title} className='avatar'/>
+                <p className='title'>{profile.book_title}</p>
+                <p>{profile.desc}</p>
+            </div>
+        </div>
     )
 }
 // modeNavbar component

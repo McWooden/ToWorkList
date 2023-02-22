@@ -18,6 +18,10 @@
     background-color: var(--black-2);
     overflow: hidden;
 }
+.modal.light {
+    background-color: var(--kedua);
+    color: var(--text-2);
+}
 .modal {
     width: 90vw;
     height: 75vh;

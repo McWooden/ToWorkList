@@ -332,6 +332,43 @@ nav .nav-1 {
 .profile_pop-switch_account:active, .profile_pop-add_account:active {
     background-color: var(--black-3);
 }
+/* search */
+.search_book_container {
+    height: calc(100vh - 3em);
+    padding: 2em;
+    overflow: auto;
+}
+.search_book_container .form-modal {
+    padding: 1em;
+}
+.search_book_container .form-modal input {
+    color: var(--text-2);
+    background-color: unset;
+    border: none;
+}
+.search_book_container .form-modal input:focus {
+    background-color: transparent;
+}
+.search_book_container .search_bar {
+    display: flex;
+    background-color: #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+    border-bottom: 3px solid var(--purple-1);
+}
+.search_book_container .submit_search {
+    border: none;
+    background-color: transparent;
+    color: var(--text-1);
+    font-size: large;
+    padding: 0 1em;
+    cursor: pointer;
+}
+.search_book_container .submit_search:hover {
+    background-color: #e0e0e0;
+    color: var(--text-2);
+}
+
 @media (max-width: 425px) {
     .navigation {
         flex-direction: column-reverse;
