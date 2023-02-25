@@ -429,4 +429,14 @@ nav .nav-1 {
         padding: 1em;
         padding-bottom: 2em;
     }
+    .search_book-header {
+        flex-direction: column;
+    }
+    .search_book_container .submit_search, .search_book_container .search_bar, .sb_action_btn .action_btn {
+        font-size: small;
+    }
+    .sb_action_btn {
+        width: 45px;
+        align-self: flex-end;
+    }
 }
