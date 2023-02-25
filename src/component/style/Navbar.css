@@ -350,6 +350,7 @@ nav .nav-1 {
     color: var(--text-2);
     background-color: unset;
     border: none;
+    width: auto;
 }
 .search_book_container .form-modal input:focus {
     background-color: transparent;
@@ -434,6 +435,12 @@ nav .nav-1 {
     }
     .search_book_container .submit_search, .search_book_container .search_bar, .sb_action_btn .action_btn {
         font-size: small;
+    }
+    .search_book_container .tiang {
+        display: none;
+    }
+    .search_book_container .search_bar {
+        margin: 0;
     }
     .sb_action_btn {
         width: 45px;
