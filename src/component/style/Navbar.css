@@ -436,10 +436,13 @@ nav .nav-1 {
     .search_book_container .submit_search, .search_book_container .search_bar, .sb_action_btn .action_btn {
         font-size: small;
     }
+    .search_book_container .form-modal input {
+        width: calc(100% - 39px);
+    }
     .search_book_container .tiang {
         display: none;
     }
-    .search_book_container .search_bar {
+    .search_book_container .submit_search {
         margin: 0;
     }
     .sb_action_btn {
