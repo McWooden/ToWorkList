@@ -361,23 +361,16 @@ function BaseRight() {
     }
     function dataToBox(data) {
         let sessionBox = []
-        data.users.forEach((group, index) => {
+        data.forEach((user, index) => {
             sessionBox.push(
-                <p className='users-group' key={index}>{group.details.role}</p>
-            )
-            let container = []
-            group.member.forEach((user, userIndex) => {
-                container.push(
-                    <div className='group-user pointer' key={`${user.nickname}-${userIndex}`}>
-                        <img src={user.avatar} alt={user.nickname} />
-                        <div className="user-context">
-                            <p style={{color: group.details.role_color}} >{user.nickname}</p>
-                            <p className='user-status'>{user.status}</p>
-                        </div>
+                <div className='group-user pointer' key={`${user.nickname}-${index}`}>
+                    <img src={user.avatar} alt={user.nickname} />
+                    <div className="user-context">
+                        <p>{user.nickname}</p>
+                        <p className='user-status'>{user.status}</p>
                     </div>
-                )
-            })
-            sessionBox.push(<div key={`${group.details.role}-container`} className='group-user-container'>{container}</div>)
+                </div>
+            )
         })
         setBox(sessionBox)
     }
@@ -385,7 +378,7 @@ function BaseRight() {
         const fetchData = async () => {
             try {
                 const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
-                dispatch(setMembers(data))
+                dispatch(setMembers(data.users))
             } catch (err) {
                 handleEmpety()
             }
@@ -396,7 +389,12 @@ function BaseRight() {
             fetchData()
             setIsLoading(false)
         } else {
-            dataToBox(members)
+            try {
+                dataToBox(members)
+            } catch (error) {
+                console.log(members)
+                console.log(error)
+            }
         }
         const interval = setInterval(() => {
             if (idBook === '@me') return handleEmpety()
@@ -419,6 +417,77 @@ function BaseRight() {
         </div>
     )
 }
+// function BaseRight() {
+//     const [isLoading, setIsLoading] = useState(false)
+//     const { hideRightBase } = useContext(HideBase)
+//     const idBook = useSelector(state => state.fetch.idBook)
+//     const members = useSelector(state => state.source.members)
+//     const dispatch = useDispatch()
+//     const [box, setBox] = useState([])
+//     function handleEmpety() {
+//         setIsLoading(false)
+//         setBox('Empety')
+//     }
+//     function dataToBox(data) {
+//         let sessionBox = []
+//         data.users.forEach((group, index) => {
+//             sessionBox.push(
+//                 <p className='users-group' key={index}>{group.details.role}</p>
+//             )
+//             let container = []
+//             group.member.forEach((user, userIndex) => {
+//                 container.push(
+//                     <div className='group-user pointer' key={`${user.nickname}-${userIndex}`}>
+//                         <img src={user.avatar} alt={user.nickname} />
+//                         <div className="user-context">
+//                             <p style={{color: group.details.role_color}} >{user.nickname}</p>
+//                             <p className='user-status'>{user.status}</p>
+//                         </div>
+//                     </div>
+//                 )
+//             })
+//             sessionBox.push(<div key={`${group.details.role}-container`} className='group-user-container'>{container}</div>)
+//         })
+//         setBox(sessionBox)
+//     }
+//     useEffect(() => {
+//         const fetchData = async () => {
+//             try {
+//                 const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
+//                 dispatch(setMembers(data))
+//             } catch (err) {
+//                 handleEmpety()
+//             }
+//         }
+//         if (!members) {
+//             if (idBook === '@me') return handleEmpety()
+//             setIsLoading(true)
+//             fetchData()
+//             setIsLoading(false)
+//         } else {
+//             dataToBox(members)
+//         }
+//         const interval = setInterval(() => {
+//             if (idBook === '@me') return handleEmpety()
+//             fetchData()
+//         }, 60000)
+//         return () => clearInterval(interval)
+//     }, [idBook, members, dispatch])
+//     if (isLoading) return (
+//         <div className="base-right">
+//             <div className="sidebar-right">
+//                 <div className="loading sidebar_right_loading"/>
+//             </div>
+//         </div>
+//     )
+//     return (
+//         <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
+//             <div className="sidebar-right">
+//                 {box}
+//             </div>
+//         </div>
+//     )
+// }
 
 function DetailCard() {
     const todo = useSelector(state => state.todo)

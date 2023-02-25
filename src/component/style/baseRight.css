@@ -116,6 +116,7 @@
 .group-user p {
     font-size: small;
     font-weight: 500;
+    color: var(--text-2);
 }
 .group-user .user-status {
     color: var(--text-1);

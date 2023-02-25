@@ -429,23 +429,16 @@ function GuildSettingMember() {
     const [box, setBox] = useState([])
     function dataToBox(data) {
         let sessionBox = []
-        data.users.forEach((group, index) => {
+        data.forEach((user, index) => {
             sessionBox.push(
-                <p className='users-group' key={index}>{group.details.role}</p>
-            )
-            let container = []
-            group.member.forEach((user, userIndex) => {
-                container.push(
-                    <div className='group-user pointer' key={`${user.nickname}-${userIndex}`}>
-                        <img src={user.avatar} alt={user.nickname} />
-                        <div className="user-context">
-                            <p style={{color: group.details.role_color}} >{user.nickname}</p>
-                            <p className='user-status'>{user.status}</p>
-                        </div>
+                <div className='group-user pointer' key={`${user.nickname}-${index}`}>
+                    <img src={user.avatar} alt={user.nickname} />
+                    <div className="user-context">
+                        <p>{user.nickname}</p>
+                        <p className='user-status'>{user.status}</p>
                     </div>
-                )
-            })
-            sessionBox.push(<div key={`${group.details.role}-container`} className='group-user-container'>{container}</div>)
+                </div>
+            )
         })
         setBox(sessionBox)
     }
@@ -453,7 +446,7 @@ function GuildSettingMember() {
         const fetchData = async () => {
             try {
                 const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
-                dispatch(setMembers(data))
+                dispatch(setMembers(data.users))
             } catch (err) {
                 handleEmpety()
             }

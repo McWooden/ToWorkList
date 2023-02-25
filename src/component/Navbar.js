@@ -149,14 +149,20 @@ function FindAndCreateBook() {
         </div>
         <ModalLight open={modalOpen} close={handleModalClose}>
             <div className="search_book_container">
-                <form onSubmit={handleSubmit} className='form-modal'>
-                    <div className='search_bar'>
-                        <input type="text" value={searchText} onChange={handleInputChange} placeholder="fitur belum dibuka" />
-                        <button type="submit" className='submit_search'>
-                            <FontAwesomeIcon icon={faSearch} />
-                        </button>
+                <div className="search_book-header">
+                    <form onSubmit={handleSubmit} className='form-modal'>
+                        <div className='search_bar'>
+                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Fitur belum dibuka" />
+                            <div className="tiang"/>
+                            <button type="submit" className='submit_search'>
+                                <FontAwesomeIcon icon={faSearch} />
+                            </button>
+                        </div>
+                    </form>
+                    <div className="sb_action_btn">
+                            <FontAwesomeIcon icon={faPlus} className='action_btn'/>
                     </div>
-                </form>
+                </div>
                 <AllBookList/>
             </div>
         </ModalLight>
@@ -174,7 +180,6 @@ function AllBookList() {
         setLoading(true)
         try {
             const response = await axios.get(`${API}/book`)
-            console.log(response.data)
             dispatch(setBooksProfile(response.data))
         } catch (err) {
             setReload(true)
@@ -224,6 +229,7 @@ function BookCardItem({data}) {
                 <img src={profile.avatar_url} alt={profile.book_title} className='avatar'/>
                 <p className='title'>{profile.book_title}</p>
                 <p>{profile.desc}</p>
+                <p className='panjang_anggota'>{data.users_length} Anggota</p>
             </div>
         </div>
     )

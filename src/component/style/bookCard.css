@@ -4,10 +4,10 @@
     justify-content: center;
     flex-wrap: wrap;
     overflow: auto;
+    padding: 5px;
 }
 .book_card {
     box-shadow: var(--shadow-1);
-    /* flex: 1; */
     min-width: 15em;
     width: 20em;
     background-color: var(--kedua);
@@ -23,7 +23,7 @@
 }
 .book_card-header .banner {
     width: 100%;
-    height: 5em;
+    height: 7em;
     object-fit: cover;
 }
 .book_card .avatar {
@@ -49,4 +49,9 @@
 .book_card-body {
     padding: 0 1em 1em;
     position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.book_card .panjang_anggota {
+    align-self: flex-end;
 }

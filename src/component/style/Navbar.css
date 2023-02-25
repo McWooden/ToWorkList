@@ -338,8 +338,13 @@ nav .nav-1 {
     padding: 2em;
     overflow: auto;
 }
+.search_book-header {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 1em;
+}
 .search_book_container .form-modal {
-    padding: 1em;
+    padding: 0;
 }
 .search_book_container .form-modal input {
     color: var(--text-2);
@@ -351,22 +356,35 @@ nav .nav-1 {
 }
 .search_book_container .search_bar {
     display: flex;
-    background-color: #ddd;
     border-radius: 3px;
     overflow: hidden;
-    border-bottom: 3px solid var(--purple-1);
+    border: 2px solid var(--purple-1);
+    border-radius: 45px;
+    padding: 0 1em;
+}
+.search_book_container .tiang {
+    border: 1px solid var(--text-1);
+    margin: 10px 0;
 }
 .search_book_container .submit_search {
     border: none;
     background-color: transparent;
-    color: var(--text-1);
+    color: var(--text-2);
     font-size: large;
     padding: 0 1em;
     cursor: pointer;
+    margin-left: 1em;
 }
-.search_book_container .submit_search:hover {
-    background-color: #e0e0e0;
-    color: var(--text-2);
+.sb_action_btn {
+    min-width: 45px;
+    min-height: 45px;
+    display: grid;
+    place-items: center;
+}
+.sb_action_btn .action_btn {
+    padding: 8px;
+    cursor: pointer;
+    font-size: large;
 }
 
 @media (max-width: 425px) {
@@ -406,5 +424,9 @@ nav .nav-1 {
     }
     .profile_pop {
         left: 0;
+    }
+    .search_book_container {
+        padding: 1em;
+        padding-bottom: 2em;
     }
 }
