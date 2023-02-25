@@ -114,11 +114,16 @@ function GuildSettingProfile() {
             <h3>Profil</h3>
         </div>
         <div className="setting_full_profile_view">
-            <div className="setting_full_profile_view_header">
-                <img src={profile.avatar_url} alt={profile.book_title} className='setting_full_pp_guild'/>
-                <p className='setting_full_name_guild'>{profile.book_title}</p>
+            <div className='setting_full_profile_view_banner'>
+                <img className='setting_banner' src={profile.avatar_url} alt={profile.book_title}/>
             </div>
             <div className="setting_full_profile_view_body">
+                <div className="setting_full_profile_view_float">
+                    <img src={profile.avatar_url} alt={profile.book_title} className='setting_full_pp_guild'/>
+                </div>
+                <p className='setting_full_name_guild'>{profile.book_title}</p>
+                <h5>Deskripsi</h5>
+                <p>{profile.desc}</p>
                 <h5>Dibuat pada</h5>
                 <p className='setting_profile_date'>{convertDateToString(profile.created_at)} oleh {profile.author.nickname}#{profile.author.tag}</p>
                 <p className='setting_btn blue_btn' onClick={() => editToast('mengedit profile')}>Edit Profil</p>
