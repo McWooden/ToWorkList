@@ -73,12 +73,12 @@ export function CardImages() {
                 setImage(null)
                 setPreviewUrl('')
                 dispatch(setTodo(res.data))
-                stopInterval()
             })
             .catch(err => {
                 imageToast('gambar gagal ditambahkan')
+            }).finally(() => {
                 stopInterval()
-            }) 
+            })
         } catch(err) {
             stopInterval()
         }
@@ -92,6 +92,7 @@ export function CardImages() {
         setIntervalId(intervalId)
     }
     const stopInterval = () => {
+        console.log(intervalId)
         clearInterval(intervalId)
         setCount(0)
         setIntervalId(null)

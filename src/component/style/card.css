@@ -97,6 +97,10 @@
     border-radius: 5px 0 5px 5px;
     overflow: hidden;
 }
+.card-drop-down ul.reverse {
+    right: 0;
+    top: 60px;
+}
 .card-drop-down ul li {
     display: flex;
     gap: 3px;

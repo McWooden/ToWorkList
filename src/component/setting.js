@@ -1,11 +1,11 @@
 import './style/setting.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil, faMap, faUserGroup, faXmark, faEllipsisVertical, faPenToSquare, faTrash, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faMap, faUserGroup, faXmark, faEllipsisVertical, faPenToSquare, faTrash, faEye, faImage } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom'
 import { useRef, useState } from 'react'
 import { convertDateToString } from '../utils/convertDateFormat'
-import { deleteToast, leaveToast, editToast, pageToast } from '../utils/notif'
+import { deleteToast, leaveToast, editToast, pageToast, imageToast } from '../utils/notif'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useCallback } from 'react'
@@ -15,6 +15,8 @@ import { setMembers, setPageType, setSource } from '../redux/sourceSlice'
 import { ModalSecond } from './Modal'
 import { setPathPageOfBook } from '../redux/fetchSlice'
 import { Confirm } from './Modal'
+import { setGuildProfile } from '../redux/sourceSlice'
+import { FileDrop } from './Modal'
 
 const API = process.env.REACT_APP_API
 
@@ -107,7 +109,104 @@ function GuildSettingClose({callback}) {
 //     )
 // }
 function GuildSettingProfile() {
+    const idBook = useSelector(state => state.fetch.idBook)
     const profile = useSelector(state => state.source.guildProfile)
+    const dispatch = useDispatch()
+    const [dropDown, setDropDown] = useState(false)
+    const [openUnggah, setOpenUnggah] = useState(false)
+    const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
+    let menuRef = useRef()
+    let btnRef = useRef()
+    const [deleteOpen, setDeleteOpen] = useState(false)
+    // file drop
+    const fileInput = useRef(null)
+    const[image, setImage] = useState(null)
+    const[previewUrl, setPreviewUrl] = useState('')
+    const handleFile = file => {
+        setImage(file)
+        setPreviewUrl(URL.createObjectURL(file))
+    }
+    const handleOndragOver = event => {
+        event.preventDefault()
+    }
+    const handleOndrop = event => {
+        event.preventDefault()
+        event.stopPropagation()
+        let imageFile = event.dataTransfer.files[0]
+        handleFile(imageFile)
+    }
+    // form
+    const formRef = useRef()
+    async function handleSubmit(e) {
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append('image', image)
+        if (profile.avatar_url === 'default') {
+            formData.append('avatar_url', null)
+        } else {
+            formData.append('avatar_url', profile.avatar_url)
+        }
+        try {
+            startInterval()
+            await axios.put(`${API}/image/${idBook}/pp`, formData)
+            .then(res => {
+                dispatch(setGuildProfile(res.data.profile))
+                imageToast('pp diunggah')
+                setOpenUnggah(false)
+                formRef.current.reset()
+                setImage(null)
+                setPreviewUrl('')
+            }).catch(err => {
+                imageToast('pp gagal diunggah')
+            }).finally(() => {
+                stopInterval()
+            })
+        } catch (error) {
+            stopInterval()
+        }
+    }
+    const [intervalId, setIntervalId] = useState(null)
+    const [count, setCount] = useState(0)
+    const startInterval = () => {
+        const intervalId = setInterval(() => {
+            setCount((count) => count + 1)
+        }, 1000)
+        setIntervalId(intervalId)
+    }
+    const stopInterval = () => {
+        clearInterval(intervalId)
+        setCount(0)
+        setIntervalId(null)
+    }
+    useEffect(() => {
+        let handler = (e) => {
+            try {
+                if (menuRef.current.contains(e.target) || btnRef.current.contains(e.target)) {
+                    return
+                } else {
+                    setDropDown(false)
+                }
+            } catch (error) {
+                
+            }
+        }
+        document.addEventListener('mousedown', handler)
+        return () => document.removeEventListener("mousedown", handler)
+    })
+    async function deletePp() {
+        try {
+            await axios.delete(`${API}/image/${idBook}/pp?avatar_url=${profile.avatar_url !== 'default' && profile.avatar_url}`)
+            .then((res) => {
+                deleteToast('pp berhasil dihapus')
+                dispatch(setGuildProfile(res.data.profile))
+            })
+            .catch(err => {
+                deleteToast('pp gagal terhapus')
+            })
+        } catch(err) {
+
+        }
+    }
     return (
         <>
         <div className="setting_header">
@@ -115,12 +214,25 @@ function GuildSettingProfile() {
         </div>
         <div className="setting_full_profile_view">
             <div className='setting_full_profile_view_banner'>
-                <img className='setting_banner' src={profile.avatar_url} alt={profile.book_title}/>
+                <img className='setting_banner' src={`${url}/${profile.avatar_url}`} alt={profile.book_title}/>
             </div>
             <div className="setting_full_profile_view_body">
                 <div className="setting_full_profile_view_float">
-                    <img src={profile.avatar_url} alt={profile.book_title} className='setting_full_pp_guild'/>
+                    <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='setting_full_pp_guild' onClick={() => setDropDown(!dropDown)} ref={btnRef}/>
+                    <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
+                        <ul className='reverse'>
+                            <li className='pointer' onClick={() => setOpenUnggah(true)}>
+                                <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
+                                <span>Unggah</span>
+                            </li>
+                            <li className='pointer' onClick={() => setDeleteOpen(true)}>
+                                <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                                <span>Hapus</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+                <h5>Nama Buku</h5>
                 <p className='setting_full_name_guild'>{profile.book_title}</p>
                 <h5>Deskripsi</h5>
                 <p>{profile.desc}</p>
@@ -133,6 +245,38 @@ function GuildSettingProfile() {
             <span className="setting_btn delete_btn"  onClick={() => deleteToast('guild terhapus')}>hapus guild</span>
             <span className="setting_btn keluar_btn" onClick={() => leaveToast(`bye everyone in the room ${profile.book_title}`)}>Keluar guild</span>
         </div>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={'PP Buku'} metode='delete' color='var(--purple-1)' callback={deletePp} deleteText={'pp nya nanti ilang, diganti gambar udin'}/>
+        <FileDrop open={openUnggah} close={() => setOpenUnggah(false)}>
+                <form ref={formRef} className='file-drop jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
+                    <div className="img-view" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
+                    { previewUrl ? 
+                        <img src={previewUrl} alt={image.name} /> 
+                    :
+                        <div className="drop-zone">
+                            <FontAwesomeIcon icon={faImage} className='drop-icon'/>
+                            <p className='drop-text'>click atau drop disini</p>
+                            <input 
+                                type="file" 
+                                accept='image/*' 
+                                ref={fileInput} hidden 
+                                onChange={e => handleFile(e.target.files[0])}
+                            />
+                        </div>
+                    }
+                    </div>
+                    <div className="img-form">
+                        <div className="general-info">
+                            <h3>Mengubah pp</h3>
+                        </div>
+                        <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
+                        {count?
+                        <button className='task-submit'>Loading...{count}</button>
+                        :
+                        <button className='task-submit' onClick={() => formRef.current.submit}>Unggah</button>
+                        }
+                    </div>
+                </form>
+            </FileDrop>
         </>
     )
 }

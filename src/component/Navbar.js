@@ -104,6 +104,7 @@ function BookList() {
 function BookItem({data}) {
     const pathBook = useSelector(state => state.fetch.pathBook)
     const dispatch = useDispatch()
+    const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
     function handleClick() {
         dispatch(setPageType('welcome'))
         dispatch(setFetch({path: data.profile.book_title, id: data._id}))
@@ -112,7 +113,7 @@ function BookItem({data}) {
     }
     return (
         <div onClick={handleClick} className={`guild-frame ${pathBook===data.profile.book_title ? 'active' : ''}`}>
-            <img src={data.profile.avatar_url} className={`guild-photo-profile ${pathBook===data.profile.book_title ? 'active' : ''}`} alt={data.profile.book_title} title={data.profile.book_title}/>
+            <img src={`${url}/${data.profile.avatar_url}`} className={`guild-photo-profile ${pathBook===data.profile.book_title ? 'active' : ''}`} alt={data.profile.book_title} title={data.profile.book_title}/>
         </div>
     )
 }
@@ -219,14 +220,15 @@ function AllBookList() {
 }
 function BookCardItem({data}) {
     const profile = data.profile
+    const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
     // const id = data._id
     return (
         <div className="book_card">
             <div className="book_card-header">
-                <img src={profile.avatar_url} alt={profile.book_title} className='banner'/>
+                <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='banner'/>
             </div>
             <div className="book_card-body">
-                <img src={profile.avatar_url} alt={profile.book_title} className='avatar'/>
+                <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='avatar'/>
                 <p className='title'>{profile.book_title}</p>
                 <p>{profile.desc}</p>
                 <p className='panjang_anggota'>{data.users_length} Anggota</p>
