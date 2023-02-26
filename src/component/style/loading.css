@@ -36,6 +36,14 @@
     background-color: var(--purple-1);
     border-radius: 8px;
 }
+.spinner {
+    animation: loading-spinners 1s ease-in-out infinite;
+}
+@keyframes loading-spinners {
+    to {
+        transform: rotate(360deg);
+    }
+}
 
 @keyframes loading-skeleton {
     0% {

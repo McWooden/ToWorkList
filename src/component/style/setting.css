@@ -90,6 +90,7 @@
     height: 8em;
     object-fit: cover;
     border-radius: 8px;
+    cursor: pointer;
 }
 .setting_full_profile_view_float {
     display: flex;
@@ -107,8 +108,66 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.setting_full_profile_view_banner img.full {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    object-fit: contain;
+    background-color: #20222557;
+    transition: .3s ease;
+}
 .setting_full_pp_guild:hover {
     border-radius: 5px;
+}
+.guild_editor {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.guild_editor .form-modal {
+    flex-direction: row;
+}
+.guild_editor .sb_action_btn {
+    display: flex;
+    gap: 4px;
+}
+.guild_editor .sb_action_btn button {
+    border: none;
+    color: var(--text-1);
+}
+.guild_editor .sb_action_btn .action_btn {
+    width: 1em;
+}
+.guild_editor .action_btn {
+    width: 1em;
+    height: 1em;
+    padding: 5px;
+    cursor: pointer;
+}
+.guild_editor .sb_action_btn .action_btn:hover, .guild_editor .action_btn:hover{
+    background-color: #ddd;
+    border-radius: 3px;
+}
+.guild_editor .form-modal {
+    width: fit-content;
+    padding: 0;
+    flex: 0;
+}
+.guild_editor .form-modal.flex-one {
+    flex: 1;
+    flex-direction: column;
+    height: 15em;
+}
+.guild_editor .form-modal.flex-one textarea {
+    flex: 1;
+}
+.guild_editor .form-modal.flex-one .sb_action_btn {
+    align-self: flex-end;
 }
 .setting_full_name_guild {
     font-size: larger;
@@ -237,11 +296,11 @@
 .addPage .roomInput {
     display: flex;
 }
-.addPage .room .room_input {
+.addPage .room .room_input{
     flex: 1;
     width: 100%;
 }
-.addPage .room .room_input.active {
+.addPage .room .room_input.active{
     background-color: var(--kedua);
     color: var(--purple-1);
 }
@@ -279,12 +338,12 @@
 .addPage .form-modal {
     padding: 0;
 }
-.addPage .form-modal input {
+.addPage .form-modal input, .guild_editor .form-modal input, .guild_editor .form-modal textarea {
     background-color: #eaeaea;
     border: 1px solid #ddd;
     color: var(--text-2);
 }
-.addPage .form-modal input:focus {
+.addPage .form-modal input:focus, .guild_editor .form-modal input:focus, .guild_editor .form-modal textarea:focus {
     background-color: #ddd;
 }
 .addPage_action {

@@ -1,11 +1,11 @@
 import './style/setting.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil, faMap, faUserGroup, faXmark, faEllipsisVertical, faPenToSquare, faTrash, faEye, faImage } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faMap, faUserGroup, faXmark, faEllipsisVertical, faPenToSquare, faTrash, faEye, faImage, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom'
 import { useRef, useState } from 'react'
 import { convertDateToString } from '../utils/convertDateFormat'
-import { deleteToast, leaveToast, editToast, pageToast, imageToast } from '../utils/notif'
+import { deleteToast, leaveToast, pageToast, imageToast, saveToast } from '../utils/notif'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useCallback } from 'react'
@@ -117,7 +117,9 @@ function GuildSettingProfile() {
     const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
     let menuRef = useRef()
     let btnRef = useRef()
+    const [full, setFull] = useState(false)
     const [deleteOpen, setDeleteOpen] = useState(false)
+    
     // file drop
     const fileInput = useRef(null)
     const[image, setImage] = useState(null)
@@ -165,6 +167,47 @@ function GuildSettingProfile() {
             stopInterval()
         }
     }
+    const [editJudul, setEditJudul] = useState(false)
+    const [valueJudul, setValueJudul] = useState(profile.book_title)
+    async function handleSubmitJudul(e) {
+        e.preventDefault()
+        setSaveLoading(true)
+        try {
+            await axios.put(`${API}/book/${idBook}/judul`, {book_title: valueJudul})
+            .then(res => {
+                saveToast('berhasil disimpan')
+                dispatch(setGuildProfile(res.data.profile))
+            })
+            .catch(() => {
+                saveToast('gagal disimpan')
+            })
+        } catch (error) {
+            
+        }
+        setSaveLoading(false)
+        setEditJudul(false)
+    }
+    
+    const [editDesc, setEditDesc] = useState(false)
+    const [valueDesc, setValueDesc] = useState(profile.desc)
+    async function handleSubmitDesc(e) {
+        e.preventDefault()
+        setSaveLoading(true)
+        try {
+            await axios.put(`${API}/book/${idBook}/desc`, {desc: valueDesc})
+            .then(res => {
+                saveToast('berhasil disimpan')
+                dispatch(setGuildProfile(res.data.profile))
+            })
+            .catch(() => {
+                saveToast('gagal disimpan')
+            })
+        } catch (error) {
+            
+        }
+        setSaveLoading(false)
+        setEditDesc(false)
+    }
     const [intervalId, setIntervalId] = useState(null)
     const [count, setCount] = useState(0)
     const startInterval = () => {
@@ -207,6 +250,7 @@ function GuildSettingProfile() {
 
         }
     }
+    const [saveLoading, setSaveLoading] = useState(false)
     return (
         <>
         <div className="setting_header">
@@ -214,7 +258,7 @@ function GuildSettingProfile() {
         </div>
         <div className="setting_full_profile_view">
             <div className='setting_full_profile_view_banner'>
-                <img className='setting_banner' src={`${url}/${profile.avatar_url}`} alt={profile.book_title}/>
+                <img className={`setting_banner ${full?'full':''}`} src={`${url}/${profile.avatar_url}`} alt={profile.book_title} onClick={() => setFull(!full)}/>
             </div>
             <div className="setting_full_profile_view_body">
                 <div className="setting_full_profile_view_float">
@@ -233,12 +277,54 @@ function GuildSettingProfile() {
                     </div>
                 </div>
                 <h5>Nama Buku</h5>
-                <p className='setting_full_name_guild'>{profile.book_title}</p>
+                <div className='guild_editor'>
+                {editJudul?
+                        <>
+                        <form className="form-modal" onSubmit={handleSubmitJudul}>
+                            <input type="text" placeholder={profile.book_title} value={valueJudul}  onChange={(e) => setValueJudul(e.target.value)}/>
+                            <div className="sb_action_btn">
+                                <FontAwesomeIcon icon={faXmark} onClick={() => setEditJudul(false)} className='action_btn'/>
+                                {saveLoading?
+                                    <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn spinner'/>
+                                :
+                                    <button type='submit'>
+                                        <FontAwesomeIcon icon={faFloppyDisk} className='action_btn'/>
+                                    </button>
+                                }
+                            </div>
+                        </form>
+                        </>
+                    :
+                        <>
+                        <p className='setting_full_name_guild'>{profile.book_title}</p>
+                        <FontAwesomeIcon icon={faPencil} onClick={() => setEditJudul(true)} className='action_btn'/>
+                        </>
+                }
+                </div>
                 <h5>Deskripsi</h5>
-                <p>{profile.desc}</p>
+                <div className="guild_editor">
+                    {editDesc?
+                            <>
+                            <form className="form-modal flex-one" onSubmit={handleSubmitDesc}>
+                                <textarea value={valueDesc} placeholder={profile.desc} onChange={(e) => setValueDesc(e.target.value)}/>
+                                <div className="sb_action_btn">
+                                    <FontAwesomeIcon icon={faXmark} onClick={() => setEditDesc(false)} className='action_btn'/>
+                                    {saveLoading?
+                                        <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn spinner'/>
+                                    :
+                                        <button type='submit'>
+                                            <FontAwesomeIcon icon={faFloppyDisk} className='action_btn'/>
+                                        </button>
+                                    }
+                                </div>
+                            </form>
+                            </>
+                        :
+                            <p onClick={() => setEditDesc(true)}>{profile.desc}</p>
+                    }
+                </div>
                 <h5>Dibuat pada</h5>
                 <p className='setting_profile_date'>{convertDateToString(profile.created_at)} oleh {profile.author.nickname}#{profile.author.tag}</p>
-                <p className='setting_btn blue_btn' onClick={() => editToast('mengedit profile')}>Edit Profil</p>
             </div>
         </div>
         <div className="setting_action">
@@ -276,7 +362,7 @@ function GuildSettingProfile() {
                         }
                     </div>
                 </form>
-            </FileDrop>
+        </FileDrop>
         </>
     )
 }
