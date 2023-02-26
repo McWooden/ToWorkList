@@ -192,7 +192,7 @@ function GuildSettingProfile() {
     const [valueDesc, setValueDesc] = useState(profile.desc)
     async function handleSubmitDesc(e) {
         e.preventDefault()
-        setSaveLoading(true)
+        setSaveLoadingDesc(true)
         try {
             await axios.put(`${API}/book/${idBook}/desc`, {desc: valueDesc})
             .then(res => {
@@ -205,7 +205,7 @@ function GuildSettingProfile() {
         } catch (error) {
             
         }
-        setSaveLoading(false)
+        setSaveLoadingDesc(false)
         setEditDesc(false)
     }
     const [intervalId, setIntervalId] = useState(null)
@@ -251,6 +251,7 @@ function GuildSettingProfile() {
         }
     }
     const [saveLoading, setSaveLoading] = useState(false)
+    const [saveLoadingDesc, setSaveLoadingDesc] = useState(false)
     return (
         <>
         <div className="setting_header">
@@ -309,7 +310,7 @@ function GuildSettingProfile() {
                                 <textarea value={valueDesc} placeholder={profile.desc} onChange={(e) => setValueDesc(e.target.value)}/>
                                 <div className="sb_action_btn">
                                     <FontAwesomeIcon icon={faXmark} onClick={() => setEditDesc(false)} className='action_btn'/>
-                                    {saveLoading?
+                                    {saveLoadingDesc?
                                         <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn spinner'/>
                                     :
                                         <button type='submit'>
