@@ -338,12 +338,18 @@
 .addPage .form-modal {
     padding: 0;
 }
-.addPage .form-modal input, .guild_editor .form-modal input, .guild_editor .form-modal textarea {
+.addPage .form-modal input,
+.guild_editor .form-modal input,
+.guild_editor .form-modal textarea,
+.add_server_container.form-modal input {
     background-color: #eaeaea;
     border: 1px solid #ddd;
     color: var(--text-2);
 }
-.addPage .form-modal input:focus, .guild_editor .form-modal input:focus, .guild_editor .form-modal textarea:focus {
+.addPage .form-modal input:focus,
+.guild_editor .form-modal input:focus,
+.guild_editor .form-modal textarea:focus,
+.add_server_container.form-modal input:focus {
     background-color: #ddd;
 }
 .addPage_action {
