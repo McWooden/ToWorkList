@@ -102,7 +102,7 @@ function BookList() {
     )
 }
 function BookItem({data}) {
-    const pathBook = useSelector(state => state.fetch.pathBook)
+    const idBook = useSelector(state => state.fetch.idBook)
     const dispatch = useDispatch()
     const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
     function handleClick() {
@@ -112,8 +112,8 @@ function BookItem({data}) {
         dispatch(setMembers(null))
     }
     return (
-        <div onClick={handleClick} className={`guild-frame ${pathBook===data.profile.book_title ? 'active' : ''}`}>
-            <img src={`${url}/${data.profile.avatar_url}`} className={`guild-photo-profile ${pathBook===data.profile.book_title ? 'active' : ''}`} alt={data.profile.book_title} title={data.profile.book_title}/>
+        <div onClick={handleClick} className={`guild-frame ${idBook===data._id ? 'active' : ''}`}>
+            <img src={`${url}/${data.profile.avatar_url}`} className={`guild-photo-profile ${idBook===data._id ? 'active' : ''}`} alt={data.profile.book_title} title={data.profile.book_title}/>
         </div>
     )
 }
@@ -172,16 +172,25 @@ function FindAndCreateBook() {
         e.preventDefault()
         const formData = new FormData()
         formData.append('image', image)
-        formData.append('data', {})
+        formData.append('data', JSON.stringify({
+            book_title: valueJudul,
+            author_avatar: myAccount.avatar,
+            author: {
+                nickname: myAccount.nickname,
+                tag: myAccount.tag
+            },
+        }))
         try {
             startInterval()
             setBtnLoading(true)
-            await axios.post(`${API}/image/book`, formData)
+            await axios.post(`${API}/image/addBook`, formData)
             .then(res => {
                 setModalOpen(false)
                 formRef.current.reset()
                 setImage(null)
                 setPreviewUrl('')
+                setAddServerModal(false)
+                valueJudul(`Buku ${myAccount.nickname}`)
             })
             .catch(err => {
 
@@ -203,7 +212,6 @@ function FindAndCreateBook() {
         setIntervalId(intervalId)
     }
     const stopInterval = () => {
-        console.log(intervalId)
         clearInterval(intervalId)
         setCount(0)
         setIntervalId(null)

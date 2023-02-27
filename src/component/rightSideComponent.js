@@ -38,7 +38,6 @@ export function SidebarRightChat() {
             setScrollToBottom(true)
         }
     }
-
     
     chat.forEach((item, index) => {
         if (item.date !== lastDate) {

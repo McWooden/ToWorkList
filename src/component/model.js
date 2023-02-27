@@ -292,6 +292,7 @@ export function ChatModel({item}) {
     const itsMe = item.nickname === myAccount.profile.nickname
     let cardRef = useRef()
     const disable = item.msg === 'Pesan ini telah dihapus'
+    const time = item.time || new Date(Number(item.date)).toLocaleTimeString('id-ID', {hour24: true, hour: '2-digit', minute: '2-digit'}).replace(':', '.')
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -327,7 +328,7 @@ export function ChatModel({item}) {
     return (
         <div className={`${itsMe&&'my'} chat-card ${dropDown?'active':'inactive'}`} ref={cardRef}>
             <div className={`${itsMe&&'my'} chat-card-message ${disable&&'disable'}`}>{item.msg}</div>
-            <div className={`${itsMe&&'my'} chat-card-time pointer`} onClick={handleDropDown}>{item.time}</div>
+            <div className={`${itsMe&&'my'} chat-card-time pointer`} onClick={handleDropDown}>{time}</div>
             <div className={`chat-dropdown ${itsMe&&'my'} ${dropDown?'active':'inactive'}`}>
                 <ul>
                     <li className='pointer' onClick={handleDelete}>
