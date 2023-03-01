@@ -130,6 +130,8 @@ function ModeNavbar() {
 }
 function FindAndCreateBook() {
     const myAccount = useSelector(state => state.source.profile)
+    const navigate = useNavigate()
+    useEffect(() => !myAccount && navigate('/auth'), [navigate, myAccount])
     const [addServerModal, setAddServerModal] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [searchText, setSearchText] = useState('')
@@ -217,7 +219,7 @@ function FindAndCreateBook() {
         setIntervalId(null)
     }
     const [btnLoading, setBtnLoading] = useState(false)
-    const [valueJudul, setValueJudul] = useState(`Buku ${myAccount.nickname}`)
+    const [valueJudul, setValueJudul] = useState(`Buku ${myAccount?.nickname}`)
     return (
         <>
         <div className='find-create-frame'>
