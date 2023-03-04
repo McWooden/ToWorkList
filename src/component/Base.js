@@ -64,25 +64,6 @@ function TodoDetail() {
         const interval = setInterval(fetchData, 20000)
         return () => clearInterval(interval)
     }, [idPageOfBook, todoId, dispatch])
-    // if (isLoading) return (
-    //     <>
-    //     <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
-    //         <div className="sidebar-left">
-    //             <div className='sidebar_left_loading loading'/>
-    //         </div>
-    //     </div>
-    //     <div className="base-center">
-    //         <div className="center">
-    //             <div className="loading center_loading"/>
-    //         </div>
-    //     </div>
-    //     <div className="base-right">
-    //         <div className="sidebar-right">
-    //             <div className="loading sidebar_right_loading"/>
-    //         </div>
-    //     </div>
-    //     </>
-    // )
     return (
         <>
         {/* left */}
