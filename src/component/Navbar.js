@@ -1,11 +1,10 @@
 import './style/Navbar.css'
 import './style/bookCard.css'
-import { AppContext, PageContext } from '../pages/App'
+import { AppContext } from '../pages/App'
 import { useContext, useState, useEffect, useRef, useMemo, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faHouse, faGear, faPlus, faCompass, faRepeat, faSearch, faImage, faXmark} from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
-import { myAccount } from '../utils/dataJSON'
 import { GuildSetting } from './setting'
 import { useNavigate } from 'react-router-dom'
 import { convertDateToString } from '../utils/convertDateFormat'
@@ -38,7 +37,6 @@ function Navbar() {
     )
 }
 function HomeButton() {
-    const { handleChangePage } = useContext(PageContext)
     const pathBook = useSelector(state => state.fetch.pathBook)
     const dispatch = useDispatch()
     function handleClick() {
@@ -46,7 +44,6 @@ function HomeButton() {
         dispatch(setPathBook({path: '@me', id: '@me'}))
         dispatch(setPathPageOfBook({path: '', id: ''}))
         dispatch(setMembers(null))
-        handleChangePage(myAccount)
     }
     return (
         <div className='home-frame' onClick={handleClick}>
@@ -131,7 +128,9 @@ function ModeNavbar() {
 function FindAndCreateBook() {
     const myAccount = useSelector(state => state.source.profile)
     const navigate = useNavigate()
-    useEffect(() => !myAccount && navigate('/auth'), [navigate, myAccount])
+    useEffect(() => {
+        !myAccount && navigate('/auth')
+    }, [navigate, myAccount])
     const [addServerModal, setAddServerModal] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [searchText, setSearchText] = useState('')
@@ -185,7 +184,7 @@ function FindAndCreateBook() {
         try {
             startInterval()
             setBtnLoading(true)
-            await axios.post(`${API}/image/addBook`, formData)
+            await axios.post(`${API}/book/addBook`, formData)
             .then(res => {
                 setModalOpen(false)
                 formRef.current.reset()

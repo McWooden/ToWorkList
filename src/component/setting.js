@@ -17,6 +17,8 @@ import { setPathPageOfBook } from '../redux/fetchSlice'
 import { Confirm } from './Modal'
 import { setGuildProfile } from '../redux/sourceSlice'
 import { FileDrop } from './Modal'
+import { DeleteBookModal } from './Modal'
+import { setPathBook } from '../redux/fetchSlice'
 
 const API = process.env.REACT_APP_API
 
@@ -109,6 +111,7 @@ function GuildSettingClose({callback}) {
 //     )
 // }
 function GuildSettingProfile() {
+    const myAccount = useSelector(state => state.source.profile)
     const idBook = useSelector(state => state.fetch.idBook)
     const profile = useSelector(state => state.source.guildProfile)
     const dispatch = useDispatch()
@@ -119,7 +122,7 @@ function GuildSettingProfile() {
     let btnRef = useRef()
     const [full, setFull] = useState(false)
     const [deleteOpen, setDeleteOpen] = useState(false)
-    
+    const [deleteGuildOpen, setDeleteGuildOpen] = useState(false)
     // file drop
     const fileInput = useRef(null)
     const[image, setImage] = useState(null)
@@ -250,6 +253,31 @@ function GuildSettingProfile() {
 
         }
     }
+    async function deleteBook() {
+        try {
+            await axios.delete(`${'http://localhost:3001'}/book/${idBook}`, {
+                data: {
+                    profile: profile,
+                    userClientProfile: {
+                        nickname: myAccount.nickname,
+                        tag: myAccount.tag
+                    }
+                }
+            })
+            .then(res => {
+                deleteToast('Buku berhasil di hapus')
+                dispatch(setPageType('welcome'))
+                dispatch(setPathBook({path: '@me', id: '@me'}))
+                dispatch(setPathPageOfBook({path: '', id: ''}))
+                dispatch(setMembers(null))
+            })
+            .catch(err => {
+                deleteToast('buku gagal dihapus')
+            })
+        } catch(err) {
+
+        }
+    }
     const [saveLoading, setSaveLoading] = useState(false)
     const [saveLoadingDesc, setSaveLoadingDesc] = useState(false)
     return (
@@ -329,9 +357,10 @@ function GuildSettingProfile() {
             </div>
         </div>
         <div className="setting_action">
-            <span className="setting_btn delete_btn"  onClick={() => deleteToast('guild terhapus')}>hapus guild</span>
+            <span className="setting_btn delete_btn"  onClick={() => setDeleteGuildOpen(true)}>hapus guild</span>
             <span className="setting_btn keluar_btn" onClick={() => leaveToast(`bye everyone in the room ${profile.book_title}`)}>Keluar guild</span>
         </div>
+        <DeleteBookModal open={deleteGuildOpen} close={() => setDeleteGuildOpen(false)} data={profile} callback={deleteBook}/>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={'PP Buku'} metode='delete' color='var(--purple-1)' callback={deletePp} deleteText={'pp nya nanti ilang, diganti gambar udin'}/>
         <FileDrop open={openUnggah} close={() => setOpenUnggah(false)}>
                 <form ref={formRef} className='file-drop jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>

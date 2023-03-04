@@ -95,6 +95,14 @@
 .form-modal textarea, .img-form textarea {
     flex: 1;
 }
+.form-modal.light input {
+    background-color: #eaeaea;
+    border: 1px solid #ddd;
+    color: var(--text-2);
+}
+.form-modal.light input:focus {
+    background-color: #ddd;
+}
 .task-submit {
     font-size: small;
     text-align: center;
@@ -121,11 +129,40 @@
     display: flex;
     flex-direction: row;
 }
+.confirm.light {
+    background-color: var(--kedua);
+    color: var(--text-1);
+    padding: 1em;
+}
+.confirm.light .next-text {
+    color: var(--text-1);
+    margin: 1em 0;
+}
+.confirm img {
+    border-radius: 8px;
+    width: 4em;
+    margin-right: 1em;
+}
+.confirm.guild_delete {
+    flex-direction: column;
+}
+.confirm .form-modal {
+    margin-top: 1em;
+    padding: 0;
+}
+.confirm .bold {
+    font-weight: bold;
+    color: var(--white-3);
+}
+.confirm-profile {
+    display: flex;
+    color: var(--text-2);
+    margin-bottom: 1em;
+}
 .confirm-header, .confirm-body, .confirm-button {
     padding: 5px 10px;
 }
 .confirm-header {
-    background-color: var(--black-3);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -142,6 +179,9 @@
 }
 .confirm-body h3 {
     color: var(--danger);
+}
+.confirm.light h3 {
+    color: #a44a4a;
 }
 .confirm-context .msg span {
     word-break: break-all;
@@ -163,10 +203,14 @@
     cursor: pointer;
 }
 .confirm-no {
-    color: var(--danger);
+    color: #a44a4a;
 }
 .confirm-yes {
     background-color: royalblue;
+}
+.confirm.light .confirm-yes {
+    background-color: #008ec5;
+    color: var(--white-1);
 }
 /* filedrop */
 .file-drop {

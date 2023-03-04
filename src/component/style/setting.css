@@ -222,6 +222,7 @@
 .setting_btn.keluar_btn:hover {
     border-color: maroon;
     background-color: maroon;
+    color: var(--white-1);
 }
 .setting_btn.blue_btn {
     background-color: var(--light-blue);
