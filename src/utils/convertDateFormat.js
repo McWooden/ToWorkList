@@ -17,7 +17,6 @@ export function convertDateToString(string) {
     return date.toLocaleDateString('id-ID', options)
     
   } catch (err) {
-    console.error(err)
     return 'Invalid Date'
   }
 }
