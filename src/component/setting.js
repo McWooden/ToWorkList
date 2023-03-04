@@ -255,7 +255,7 @@ function GuildSettingProfile() {
     }
     async function deleteBook() {
         try {
-            await axios.delete(`${'http://localhost:3001'}/book/${idBook}`, {
+            await axios.delete(`${API}/book/${idBook}`, {
                 data: {
                     profile: profile,
                     userClientProfile: {
