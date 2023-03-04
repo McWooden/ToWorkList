@@ -3,7 +3,6 @@
     gap: 8px;
     justify-content: center;
     flex-wrap: wrap;
-    overflow: auto;
     padding: 5px;
 }
 .book_card {

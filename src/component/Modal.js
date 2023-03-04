@@ -153,6 +153,7 @@ export function DeleteBookModal({open, close, data, callback}) {
     function acceptCallback() {
         close()
         callback()
+        setValue('')
     }
 
     return ReactDOM.createPortal(

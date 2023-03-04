@@ -4,9 +4,10 @@ import {convertDateToString} from '../utils/convertDateFormat'
 import { useState } from 'react';
 import { FileDrop, Modal, ModalNoteEditor, Confirm } from './Modal'
 // import { ItemData } from '../pages/App';
+import { toast } from 'react-toastify'
 import { TodoModel } from './model';
 import { useRef } from 'react';
-import { deleteToast, editToast, imageToast, noteToast, noteToastSecond, todoToast } from '../utils/notif';
+import { deleteToast, editToast, imageToast, noteToast, noteToastSecond, todoToast, loadingToast } from '../utils/notif';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setNoteEditor, setSource } from '../redux/sourceSlice';
@@ -63,8 +64,9 @@ export function CardImages() {
         formData.append('nickname', nickname)
         formData.append('image', image)
         formData.append('desc', e.target.desc.value)
+        const promise = loadingToast('Mengunggah gambar')
+        setIsFetching(true)
         try {
-            startInterval()
             await axios.post(`${API}/image/${idBook}/${idPageOfBook}/${todo.id}`, formData)
             .then(res => {
                 imageToast()
@@ -77,26 +79,15 @@ export function CardImages() {
             .catch(err => {
                 imageToast('gambar gagal ditambahkan')
             }).finally(() => {
-                stopInterval()
+                toast.dismiss(promise)
+                setIsFetching(false)
             })
         } catch(err) {
-            stopInterval()
+            toast.dismiss(promise)
+            setIsFetching(false)
         }
     }
-    const [intervalId, setIntervalId] = useState(null)
-    const [count, setCount] = useState(0)
-    const startInterval = () => {
-        const intervalId = setInterval(() => {
-            setCount((count) => count + 1)
-        }, 1000)
-        setIntervalId(intervalId)
-    }
-    const stopInterval = () => {
-        console.log(intervalId)
-        clearInterval(intervalId)
-        setCount(0)
-        setIntervalId(null)
-    }
+    const [isFetching, setIsFetching] = useState(false)
     return (
         <div className='images-container'>
             <div className='images-list'>
@@ -128,10 +119,10 @@ export function CardImages() {
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
                         <textarea placeholder='deskripsi' rows="10"name='desc'/>
-                        {count?
-                        <button className='task-submit'>Loading...{count}</button>
-                        :
-                        <button className='task-submit' onClick={() => formRef.current.submit}>Tambah</button>
+                        {isFetching?
+                            <button className='task-submit'>Loading...</button>
+                            :
+                            <button className='task-submit' onClick={() => formRef.current.submit}>Tambah</button>
                         }
                     </div>
                 </form>
@@ -241,16 +232,6 @@ function NoteItem({data}) {
         </>
     )
 }
-// export function CenterActionButton({handleModalOpen}) {
-//     const {item} = useContext(ItemData)
-//     return (
-//         <div className='center-action-btn'>
-//             <div className="action-add">
-//                 <FontAwesomeIcon icon={item ? faNoteSticky : faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
-//             </div>
-//         </div>
-//     )
-// }
 export function NoteEditor() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
@@ -298,29 +279,6 @@ export function NoteEditor() {
             
         }
     }
-    // async function handleSubmit(e) {
-    //     e.preventDefault()
-    //     textarea.current.style.height = '15px'
-    //     sendToast(msg)
-    //     const dataToSend = {
-    //         nickname: myNickname,
-    //         msg,
-    //     }
-    //     try {
-    //         await axios.post(`${API}/chat/${idPageOfBook}/${todoId}`, dataToSend)
-    //         .then((res) => {
-    //             sendToast('data berhasil dikirim')
-    //             dispatch(setTodo(res.data.data))
-    //             setMsg('')
-    //         })
-    //         .catch(err => {
-    //             sendToast('data gagal dikirim')
-    //             console.log(err)
-    //         }) 
-    //     } catch(err) {
-
-    //     }
-    // }
     return (
         <>
         <ModalNoteEditor open={true} close={confirmToClose}>
@@ -509,15 +467,6 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
     )
 }
 
-// export function CardContainer({items}) {
-//     let box = []
-//     items.forEach((data, index) => box.push(<TodoModel key={index} item={data} indexItem={index}/>))
-//     return (
-//         <>
-//         {box}
-//         </>
-//     )
-// }
 export function CardContainer() {
     const source = useSelector(state => state.source.source)
     let box = []

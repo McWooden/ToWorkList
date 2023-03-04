@@ -10,7 +10,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import store from './redux/store'
 import { Provider } from 'react-redux';
-import ErrorMessage from './utils/Error'
 
 
 
@@ -28,7 +27,6 @@ root.render(
           <Route path='register' element={<Register />}/>
           <Route path='pemulihan' element={<Pemulihan />}/>
         </Route>
-        <Route path='/error' element={<ErrorMessage/>}/>
       </Routes>
       </Provider>
     </BrowserRouter>
@@ -36,7 +34,7 @@ root.render(
               pauseOnFocusLoss={false}
               theme="colored"
               autoClose={1000}
-              position="top-left"
+              position="top-center"
     />
   {/* </React.StrictMode> */}
   </>

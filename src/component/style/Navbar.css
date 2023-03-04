@@ -336,7 +336,6 @@ nav .nav-1 {
 .search_book_container {
     height: calc(100vh - 3em);
     padding: 2em;
-    overflow: auto;
 }
 .search_book-header {
     display: flex;

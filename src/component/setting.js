@@ -5,7 +5,7 @@ import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom'
 import { useRef, useState } from 'react'
 import { convertDateToString } from '../utils/convertDateFormat'
-import { deleteToast, leaveToast, pageToast, imageToast, saveToast } from '../utils/notif'
+import { deleteToast, leaveToast, pageToast, imageToast, saveToast, alertToast } from '../utils/notif'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { useCallback } from 'react'
@@ -19,6 +19,8 @@ import { setGuildProfile } from '../redux/sourceSlice'
 import { FileDrop } from './Modal'
 import { DeleteBookModal } from './Modal'
 import { setPathBook } from '../redux/fetchSlice'
+import { toast } from 'react-toastify'
+import { loadingToast } from '../utils/notif';
 
 const API = process.env.REACT_APP_API
 
@@ -69,47 +71,6 @@ function GuildSettingClose({callback}) {
     )
 }
 
-// function GuildSettingProfile() {
-//     const { guild } = useContext(GuildContext)
-//     return (
-//         <>
-//         <div className="setting_header">
-//             <h3>Profil</h3>
-//         </div>
-//         <div className="setting_full_profile_view">
-//             <div className="setting_full_profile_view_header">
-//                 <img src={guild.profile.pic || guild.profile.src} alt={guild.profile.name} className='setting_full_pp_guild'/>
-//                 <p className='setting_full_name_guild'>{guild.profile.name || guild.profile.guildName}{guild.profile.nickname? <span>#{guild.profile.id || '0000'}</span> : null}</p>
-
-//             </div>
-//             <div className="setting_full_profile_view_body">
-//                 <h5>Dibuat pada</h5>
-//                 <p className='setting_profile_date'>{convertDateToString(guild.profile.created_at)} {guild.profile.by? `oleh ${guild.profile.by}`: null}</p>
-//                 <p className='setting_keluar_btn edit_btn' onClick={() => editToast('mengedit profile')}>Edit Profil</p>
-//             </div>
-//         </div>
-//         <div className="setting_keluar">
-//             {guild.profile.nickname? 
-//             <>
-//             <p>Akun</p>
-//             <div className="setting_keluar-action">
-//                 <span className="setting_keluar_btn delete_btn" onClick={() => deleteToast('akun terhapus')}>hapus akun</span>
-//                 <span className="setting_keluar_btn keluar_btn" onClick={() => leaveToast(`bye ${myAccount.profile.nickname}`)}>Keluar</span>
-//             </div>
-//             </>
-//             :
-//             <>
-//             <p>Guild</p>
-//             <div className="setting_keluar-action">
-//                 <span className="setting_keluar_btn delete_btn"  onClick={() => deleteToast('guild terhapus')}>hapus guild</span>
-//                 <span className="setting_keluar_btn keluar_btn" onClick={() => leaveToast(`bye everyone in the room ${guild.profile.guildName}`)}>Keluar guild</span>
-//             </div>
-//             </>
-//             }
-//         </div>
-//         </>
-//     )
-// }
 function GuildSettingProfile() {
     const myAccount = useSelector(state => state.source.profile)
     const idBook = useSelector(state => state.fetch.idBook)
@@ -151,8 +112,9 @@ function GuildSettingProfile() {
         } else {
             formData.append('avatar_url', profile.avatar_url)
         }
+        const promise = loadingToast('Mengunggah gambar')
         try {
-            startInterval()
+            setIsFetching(true)
             await axios.put(`${API}/image/${idBook}/pp`, formData)
             .then(res => {
                 dispatch(setGuildProfile(res.data.profile))
@@ -163,11 +125,13 @@ function GuildSettingProfile() {
                 setPreviewUrl('')
             }).catch(err => {
                 imageToast('pp gagal diunggah')
+                toast.dismiss(promise)
             }).finally(() => {
-                stopInterval()
+                setIsFetching(false)
+                toast.dismiss(promise)
             })
         } catch (error) {
-            stopInterval()
+            setIsFetching(false)
         }
     }
     const [editJudul, setEditJudul] = useState(false)
@@ -211,19 +175,7 @@ function GuildSettingProfile() {
         setSaveLoadingDesc(false)
         setEditDesc(false)
     }
-    const [intervalId, setIntervalId] = useState(null)
-    const [count, setCount] = useState(0)
-    const startInterval = () => {
-        const intervalId = setInterval(() => {
-            setCount((count) => count + 1)
-        }, 1000)
-        setIntervalId(intervalId)
-    }
-    const stopInterval = () => {
-        clearInterval(intervalId)
-        setCount(0)
-        setIntervalId(null)
-    }
+    const [isFetching, setIsFetching] = useState(false)
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -255,7 +207,7 @@ function GuildSettingProfile() {
     }
     async function deleteBook() {
         try {
-            await axios.delete(`${API}/book/${idBook}`, {
+            await axios.delete(`${'http://localhost:3001'}/book/${idBook}`, {
                 data: {
                     profile: profile,
                     userClientProfile: {
@@ -272,7 +224,7 @@ function GuildSettingProfile() {
                 dispatch(setMembers(null))
             })
             .catch(err => {
-                deleteToast('buku gagal dihapus')
+                alertToast(err.response.data)
             })
         } catch(err) {
 
@@ -385,8 +337,8 @@ function GuildSettingProfile() {
                             <h3>Mengubah pp</h3>
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
-                        {count?
-                        <button className='task-submit'>Loading...{count}</button>
+                        {isFetching?
+                        <button className='task-submit'>Loading...</button>
                         :
                         <button className='task-submit' onClick={() => formRef.current.submit}>Unggah</button>
                         }
@@ -396,36 +348,6 @@ function GuildSettingProfile() {
         </>
     )
 }
-// function GuildSettingRoom() {
-//     const {guildRooms, handleRoom, currentRoom} = useContext(GuildContext)
-//     const lists = []
-//     guildRooms.forEach((room, index) => {
-//         lists.push(
-//             <div key={index} className={`room setting_room ${currentRoom === room.roomName?'active':''}`} onClick={() => handleRoom(index)}>
-//                 <FontAwesomeIcon icon={fontawesome.faCheck} className={`room-icon ${currentRoom === room.roomName?'active':''}`}/>
-//                 <span className={`setting_room_list_name ${currentRoom === room.roomName?'active':''}`}>{room.roomName}</span>
-//                 <div className="room_action">
-//                     <div className="info-menu-box">
-//                         <FontAwesomeIcon icon={fontawesome.faMoneyCheck} className='info-menu-box-icon'/>
-//                         <div className='info-menu-box-count'>{room.items.length}</div>
-//                     </div>
-//                     <FontAwesomeIcon icon={fontawesome.faGear} className={`room-icon setting_room-setting ${currentRoom === room.roomName?'active':''}`}/>
-//                 </div>
-//             </div>
-//         )
-//     })
-//     return(
-//         <>
-//         <div className="setting_header">
-//             <h3>Room</h3>
-//             <p>semua ruangan dan jumlah tugas di setiap ruangan</p>
-//         </div>
-//         <div className='roomList'>
-//             {lists}
-//         </div>
-//         </>
-//     )
-// }
 function GuildSettingRoom() {
     const [openAdd, setOpenAdd] = useState(false)
     const idBook = useSelector((state) => state.fetch.idBook)

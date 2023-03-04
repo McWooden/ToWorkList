@@ -14,6 +14,8 @@ import { setFetch, setPathBook, setPathPageOfBook } from '../redux/fetchSlice'
 import { setBooksProfile, setGuildProfile, setMembers } from '../redux/sourceSlice'
 import { setPageType, setSource } from '../redux/sourceSlice'
 import { ModalLight, ModalSecond } from './Modal'
+import { toast } from 'react-toastify'
+import { loadingToast } from '../utils/notif';
 
 const API = process.env.REACT_APP_API
 
@@ -181,8 +183,8 @@ function FindAndCreateBook() {
                 tag: myAccount.tag
             },
         }))
+        const promise = loadingToast('Mengunggah gambar')
         try {
-            startInterval()
             setBtnLoading(true)
             await axios.post(`${API}/image/addBook`, formData)
             .then(res => {
@@ -196,26 +198,13 @@ function FindAndCreateBook() {
             .catch(err => {
 
             }).finally(() => {
-                stopInterval()
+                toast.dismiss(promise)
                 setBtnLoading(false)
             })
         } catch(err) {
             setBtnLoading(false)
-            stopInterval()
+            toast.dismiss(promise)
         }
-    }
-    const [intervalId, setIntervalId] = useState(null)
-    const [count, setCount] = useState(0)
-    const startInterval = () => {
-        const intervalId = setInterval(() => {
-            setCount((count) => count + 1)
-        }, 1000)
-        setIntervalId(intervalId)
-    }
-    const stopInterval = () => {
-        clearInterval(intervalId)
-        setCount(0)
-        setIntervalId(null)
     }
     const [btnLoading, setBtnLoading] = useState(false)
     const [valueJudul, setValueJudul] = useState(`Buku ${myAccount?.nickname}`)
@@ -276,7 +265,7 @@ function FindAndCreateBook() {
                 <div className="add_server-footer addPage_action">
                     <span className='btn_action' onClick={() => setAddServerModal(false)}>Batal</span>
                     {btnLoading?
-                    (<button className={`btn_action btn_add`}>Loading...{count}</button>)
+                    (<button className={`btn_action btn_add`}>Loading...</button>)
                     :
                     (<button type='submit' className={`btn_action btn_add ${valueJudul&&'active'}`}>Buat</button>)
                     }

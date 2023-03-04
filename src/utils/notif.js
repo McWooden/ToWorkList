@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import '../component/style/notif.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage, faRightFromBracket, faUser, faMap, faFloppyDisk} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage, faRightFromBracket, faUser, faMap, faFloppyDisk, faExclamation} from '@fortawesome/free-solid-svg-icons'
 
 export function editToast(text) {
     toast(
@@ -34,6 +34,17 @@ export function deleteToast(text) {
             <FontAwesomeIcon icon={faTrash}/>
         </div>
         <p>{text || 'terhapus'}</p>
+    </div>, {
+        closeButton: false,
+    })
+}
+export function alertToast(text) {
+    toast(
+    <div className="myToast myToast-delete" key={+new Date()}>
+        <div className="icon">
+            <FontAwesomeIcon icon={faExclamation}/>
+        </div>
+        <p>{text || 'alert'}</p>
     </div>, {
         closeButton: false,
     })

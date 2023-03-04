@@ -10,6 +10,8 @@ import Calendar from 'react-calendar';
 import axios from 'axios';
 import { clearTodo, setTodo } from '../redux/todo';
 import { setSource } from '../redux/sourceSlice';
+import { toast } from 'react-toastify'
+import { loadingToast } from '../utils/notif';
 
 const API = process.env.REACT_APP_API
 
@@ -309,8 +311,8 @@ export function JadwalRoom() {
         const formData = new FormData()
         formData.append('image', image)
         formData.append('jadwal_url', pageDetails.jadwal_url)
+        const promise = loadingToast('Mengunggah gambar')
         try {
-            startInterval()
             await axios.post(`${API}/image/jadwal/${idBook}/${idPageOfBook}`, formData)
             .then(res => {
                 setSource(res.data)
@@ -322,25 +324,15 @@ export function JadwalRoom() {
             }).catch(err => {
                 imageToast('jadwal gagal diperbarui')
             }).finally(() => {
-                stopInterval()
+                toast.dismiss(promise)
+                setIsFetching(false)
             })
         } catch (error) {
-            stopInterval()
+            toast.dismiss(promise)
+            setIsFetching(false)
         }
     }
-    const [intervalId, setIntervalId] = useState(null)
-    const [count, setCount] = useState(0)
-    const startInterval = () => {
-        const intervalId = setInterval(() => {
-            setCount((count) => count + 1)
-        }, 1000)
-        setIntervalId(intervalId)
-    }
-    const stopInterval = () => {
-        clearInterval(intervalId)
-        setCount(0)
-        setIntervalId(null)
-    }
+    const [isFetching, setIsFetching] = useState(false)
     return (
         <div className="jadwal">
             <div className='preview' style={{background: `url(${url}/${pageDetails.jadwal_url})`}}>
@@ -376,8 +368,8 @@ export function JadwalRoom() {
                             <p className='date'>{date}</p>
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
-                        {count?
-                        <button className='task-submit'>Loading...{count}</button>
+                        {isFetching?
+                        <button className='task-submit'>Loading...</button>
                         :
                         <button className='task-submit' onClick={() => formRef.current.submit}>Perbarui</button>
                         }

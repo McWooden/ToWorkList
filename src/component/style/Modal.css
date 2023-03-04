@@ -25,7 +25,8 @@
 .modal {
     width: 90vw;
     height: 75vh;
-    border-radius: 30px;
+    border-radius: 8px;
+    overflow: auto;
 }
 .second_modal {
     border-radius: 20px;
