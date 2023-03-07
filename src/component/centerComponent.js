@@ -13,6 +13,7 @@ import axios from 'axios';
 import { setNoteEditor, setSource } from '../redux/sourceSlice';
 import { clearTodo, setTodo } from '../redux/todo';
 import { useEffect } from 'react';
+import Calendar from 'react-calendar';
 
 const API = process.env.REACT_APP_API
 
@@ -348,32 +349,71 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
         const dataToSend = {
             item_title: e.target.title.value,
             desc: e.target.desc.value,
-            color: e.target.color.value
+            color: e.target.color.value,
+            deadline: +new Date(deadlineValue[0].details.deadline)
         }
+        const promise = loadingToast('Membuat daftar baru')
         try {
-            await axios.post(`${API}/source/addTodo/${idPageOfBook}`, dataToSend)
+            await axios.post(`${'http://localhost:3001'}/source/addTodo/${idPageOfBook}`, dataToSend)
             .then((res) => {
                 todoToast(dataToSend)
                 dispatch(setSource(res.data))
             })
             .catch(err => {
                 todoToast('data gagal dikirim')
-            }) 
+            }).finally(() => {
+                toast.dismiss(promise)
+            })
         } catch(err) {
-
+            toast.dismiss(promise)
         }
         handleModalClose()
+        setDeadlineValue([])
         colorDefault()
     }
     function modalClose() {
         handleModalClose()
         colorDefault()
     }
+    const [deadlineValue, setDeadlineValue] = useState([])
+    const colorsTile = deadlineValue.map(item => ({
+        date: new Date(item.details.deadline),
+        color: item.details.color,
+        title: item.details.item_title,
+    }))
+    function dayTileClick(x) {
+        const date = new Date(x)
+        const newDate = {
+            details: {
+                deadline: date,
+                color: 'var(--purple-2)',
+                item_title: formRef.current.title.value,
+            }
+        }
+        setDeadlineValue([newDate])
+    }
     return (
         <Modal open={modalOpen} close={modalClose}>
             <div className="add-modal">
                 <div className="general-modal">
-                    <FontAwesomeIcon icon={faCheck} className="icon-modal" style={{color: currentColor}}/>
+                <Calendar 
+                    onClickDay={dayTileClick}
+                    className="calendar-dark" 
+                    locale='id-ID'
+                    format='mm/dd/yyyy'
+                    next2Label={null}
+                    prev2Label={null}
+                    tileContent={({ date, view }) => {
+                        const color = colorsTile.find((c) => c.date.getTime() === date.getTime())
+                        if (color) {
+                            return (
+                                <div className='repalace' style={{ border: `1px solid ${color.color}`, borderRadius: '50px' }} title={color.title}>
+                                {date.getDate()}
+                                </div>
+                            )
+                        }
+                    }}
+                />
                 </div>
                 <form className="form-modal" ref={formRef} onSubmit={handleSubmit} id='addTask'>
                     <div className="general-info" style={{borderBottom: `1px solid ${currentColor}`}}>

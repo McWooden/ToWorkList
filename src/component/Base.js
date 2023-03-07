@@ -46,7 +46,6 @@ function TodoDetail() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const dispatch = useDispatch()
     const { hideLeftBase } = useContext(HideBase)
-    // const [isLoading, setIsLoading] = useState(true)
     const [modalOpen, setModalOpen] = useState(false)
     function handleModalOpen() {
         setModalOpen(true)
@@ -58,7 +57,6 @@ function TodoDetail() {
         const fetchData = async () => {
             const {data} = await axios.get(`${API}/source/list/${idPageOfBook}/${todoId}`)
             dispatch(setTodo(data))
-            // setIsLoading(false)
         }
         fetchData()
         const interval = setInterval(fetchData, 20000)
@@ -128,68 +126,20 @@ function TodoPage() {
     )
 }
 
-// function BaseLeft() {
-//     const { hideLeftBase } = useContext(HideBase)
-//     const { item } = useContext(ItemData)
-//     const { room } = useContext(GuildContext)
-
-//     const colors = room.items.map(item => ({
-//         date: new Date(item.deadline),
-//         color: item.color,
-//         title: item.title,
-//     }))
-
-//     return (
-//         <>
-//         <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
-//             <div className="sidebar-left">
-//                 {item?
-//                 <MoreInfoCard/>
-//                 :
-//                 <>
-//                 <Greeting/>
-//                 <JadwalRoom/>
-//                 <Calendar 
-//                     className="calendar-dark" 
-//                     locale='id-ID'
-//                     format='mm/dd/yyyy'
-//                     next2Label={null}
-//                     prev2Label={null}
-
-//                     tileContent={({ date, view }) => {
-//                         const color = colors.find((c) => c.date.getTime() === date.getTime());
-//                         if (color) {
-//                             return (
-//                                 <div className='repalace' style={{ border: `1px solid ${color.color}`, borderRadius: '50px' }} title={color.title}>
-//                                 {date.getDate()}
-//                                 </div>
-//                             )
-//                         }
-//                     }}
-//                 />
-//                 <RoomProggress/>
-//                 <div className="left-menu-box">
-//                     <FontAwesomeIcon icon={faMoneyCheck} className="left-menu-box-icon"/>
-//                     <p className="left-menu-box-count">{room.items.length}</p>
-//                 </div>
-//                 </>
-//                 }
-//             </div>
-//             {item? <DetailLeftAction/>:''}
-//         </div>
-//         </>
-//     )
-// }
 function BaseLeft() {
     const source = useSelector(state => state.source.source)
     const { hideLeftBase } = useContext(HideBase)
     let colors = null
     try {
-        colors = source.list.map(item => ({
-            date: new Date(item.details.deadline),
-            color: item.details.color,
-            title: item.details.item_title,
-        }))
+        colors = source.list.map(item => {
+            const date = new Date(item.details.deadline)
+            return {
+                date: isNaN(date) ? new Date(Number(item.details.deadline)) : date,
+                color: item.details.color,
+                title: item.details.item_title,
+            }
+        })
+
     } catch (error) {
         console.log(source)
     }
@@ -201,20 +151,19 @@ function BaseLeft() {
                 <Calendar 
                 className="calendar-dark" 
                 locale='id-ID'
-                format='mm/dd/yyyy'
                 next2Label={null}
                 prev2Label={null}
                 tileContent={({ date, view }) => {
                     if (!colors) {
-                    return null;
+                        return null
                     }
-                    const color = colors.find((c) => c.date.getTime() === date.getTime());
+                    const color = colors.find((c) => c.date.getTime() === date.getTime())
                     if (color) {
                     return (
                         <div className='repalace' style={{ border: `1px solid ${color.color}`, borderRadius: '50px' }} title={color.title}>
                         {date.getDate()}
                         </div>
-                    );
+                    )
                     }
                 }}
                 />
@@ -227,28 +176,6 @@ function BaseLeft() {
         </div>
     )
 }
-// function BaseCenter() {
-//     const { room, currentRoom } = useContext(GuildContext)
-//     const { item } = useContext(ItemData)
-//     const [modalOpen, setModalOpen] = useState(false)
-//     function handleModalOpen() {
-//         setModalOpen(true)
-//     }
-//     function handleModalClose() {
-//         setModalOpen(false)
-//     }
-//     return (
-//         <>
-//         <div className="base-center">
-//             <div className="center">
-//                 {item? <AddNoteModal modalOpen={modalOpen} title={item.title} handleModalClose={handleModalClose}/>:<AddTaskModal modalOpen={modalOpen} title={currentRoom} handleModalClose={handleModalClose}/>}
-//                 {item ? <DetailCard/>:<CardContainer items={room.items}/>}
-//                 <CenterActionButton handleModalOpen={handleModalOpen}/>
-//             </div>
-//         </div>
-//         </>
-//     )
-// }
 function BaseCenter() {
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
     const [modalOpen, setModalOpen] = useState(false)
@@ -268,67 +195,6 @@ function BaseCenter() {
         </div>
     )
 }
-// function BaseRight() {
-//     const { users } = useContext(GuildContext)
-//     const { hideRightBase } = useContext(HideBase)
-//     const { item } = useContext(ItemData)
-//     let box = []
-//     let lastDate = null
-//     let lastNickname = null
-//     item ? 
-//         item.chat.forEach((item, index) => {
-//             if (item.date !== lastDate) {
-//                 box.push(
-//                     <div key={`${index}-${item.date}`} className='chat-card-date'>{convertDateToString(item.date)}</div>
-//                 )
-//                 lastDate = item.date
-//                 lastNickname = null
-//             }
-//             if (item.nickname !== lastNickname) {
-//                 item.nickname !== myAccount.profile.nickname &&
-//                 box.push(
-//                     <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
-//                 )
-//                 lastNickname = item.nickname
-//             }
-//             box.push(
-//                 <ChatModel key={index} item={item}/>
-//             )
-//         })
-//     :
-//     Object.keys(users).forEach((propertyName) => {
-//         box.push(
-//             <p className='users-group' key={propertyName}>{propertyName}</p>
-//         )
-//         let container = []
-//         users[propertyName].user.forEach((user, index) => {
-//             container.push(
-//                 <div className='group-user pointer' key={`${user.name}-${index}`}>
-//                     <img src={user.pic} alt={user.name} />
-//                     <div className="user-context">
-//                         <p style={{color: users[propertyName].color}} >{user.name}</p>
-//                         <p className='user-status'>{user.status}</p>
-//                     </div>
-//                 </div>
-//             )
-//         })
-//         box.push(<div key={`${propertyName}-container`} className='group-user-container'>{container}</div>)
-//     })
-
-//     return (
-//         <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
-//             <div className="sidebar-right">
-//                 {box}
-//             </div>
-//             {item? <FormBaseRight/>:''}
-//         </div>
-//     )
-// }
-// <div className="base-right">
-//     <div className="sidebar-right">
-//         <div className="loading sidebar_right_loading">Empty</div>
-//     </div>
-// </div>
 function BaseRight() {
     const [isLoading, setIsLoading] = useState(false)
     const { hideRightBase } = useContext(HideBase)
@@ -398,78 +264,6 @@ function BaseRight() {
         </div>
     )
 }
-// function BaseRight() {
-//     const [isLoading, setIsLoading] = useState(false)
-//     const { hideRightBase } = useContext(HideBase)
-//     const idBook = useSelector(state => state.fetch.idBook)
-//     const members = useSelector(state => state.source.members)
-//     const dispatch = useDispatch()
-//     const [box, setBox] = useState([])
-//     function handleEmpety() {
-//         setIsLoading(false)
-//         setBox('Empety')
-//     }
-//     function dataToBox(data) {
-//         let sessionBox = []
-//         data.users.forEach((group, index) => {
-//             sessionBox.push(
-//                 <p className='users-group' key={index}>{group.details.role}</p>
-//             )
-//             let container = []
-//             group.member.forEach((user, userIndex) => {
-//                 container.push(
-//                     <div className='group-user pointer' key={`${user.nickname}-${userIndex}`}>
-//                         <img src={user.avatar} alt={user.nickname} />
-//                         <div className="user-context">
-//                             <p style={{color: group.details.role_color}} >{user.nickname}</p>
-//                             <p className='user-status'>{user.status}</p>
-//                         </div>
-//                     </div>
-//                 )
-//             })
-//             sessionBox.push(<div key={`${group.details.role}-container`} className='group-user-container'>{container}</div>)
-//         })
-//         setBox(sessionBox)
-//     }
-//     useEffect(() => {
-//         const fetchData = async () => {
-//             try {
-//                 const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
-//                 dispatch(setMembers(data))
-//             } catch (err) {
-//                 handleEmpety()
-//             }
-//         }
-//         if (!members) {
-//             if (idBook === '@me') return handleEmpety()
-//             setIsLoading(true)
-//             fetchData()
-//             setIsLoading(false)
-//         } else {
-//             dataToBox(members)
-//         }
-//         const interval = setInterval(() => {
-//             if (idBook === '@me') return handleEmpety()
-//             fetchData()
-//         }, 60000)
-//         return () => clearInterval(interval)
-//     }, [idBook, members, dispatch])
-//     if (isLoading) return (
-//         <div className="base-right">
-//             <div className="sidebar-right">
-//                 <div className="loading sidebar_right_loading"/>
-//             </div>
-//         </div>
-//     )
-//     return (
-//         <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
-//             <div className="sidebar-right">
-//                 {box}
-//             </div>
-//         </div>
-//     )
-// }
-
 function DetailCard() {
     const todo = useSelector(state => state.todo)
     return(

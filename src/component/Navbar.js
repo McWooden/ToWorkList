@@ -15,7 +15,7 @@ import { setBooksProfile, setGuildProfile, setMembers } from '../redux/sourceSli
 import { setPageType, setSource } from '../redux/sourceSlice'
 import { ModalLight, ModalSecond } from './Modal'
 import { toast } from 'react-toastify'
-import { loadingToast } from '../utils/notif';
+import { imageToast, loadingToast } from '../utils/notif';
 
 const API = process.env.REACT_APP_API
 
@@ -183,7 +183,7 @@ function FindAndCreateBook() {
                 tag: myAccount.tag
             },
         }))
-        const promise = loadingToast('Mengunggah gambar')
+        const promise = loadingToast('Membuat buku')
         try {
             setBtnLoading(true)
             await axios.post(`${API}/image/addBook`, formData)
@@ -193,10 +193,11 @@ function FindAndCreateBook() {
                 setImage(null)
                 setPreviewUrl('')
                 setAddServerModal(false)
-                valueJudul(`Buku ${myAccount.nickname}`)
+                setValueJudul(`Buku ${myAccount.nickname}`)
+                imageToast('buku baru dibuat!')
             })
             .catch(err => {
-
+                console.log(err)
             }).finally(() => {
                 toast.dismiss(promise)
                 setBtnLoading(false)

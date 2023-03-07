@@ -102,11 +102,10 @@ export function DetailLeftAction() {
     }
     async function handleSubmit(e) {
         e.preventDefault()
-        const date = colorsTileSource[0].details.deadline
         const dataToSend = {
             color: e.target.color.value,
             desc: e.target.desc.value,
-            deadline: (date === item.details.deadline ? date : `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`),
+            deadline: +new Date(colorsTileSource[0].details.deadline),
             item_title: e.target.title.value,
         }
         try {
@@ -124,13 +123,17 @@ export function DetailLeftAction() {
         }
     }
     const [colorsTileSource, setColorsTileSource] = useState([item])
-    const colorsTile = colorsTileSource.map(item => ({
-        date: new Date(item.details.deadline),
-        color: item.details.color,
-        title: item.details.item_title,
-    }))
+    const colorsTile = colorsTileSource.map(item => {
+        const date = new Date(item.details.deadline)
+        return {
+            date: isNaN(date) ? new Date(Number(item.details.deadline)) : date,
+            color: item.details.color,
+            title: item.details.item_title,
+        }
+    })
     function dayTileClick(x) {
-        const date = new Date(x)
+        const date = +new Date(x)
+        console.log(date)
         const newDate = {
             details: {
                 deadline: date,
@@ -154,7 +157,6 @@ export function DetailLeftAction() {
                         onClickDay={dayTileClick}
                         className="calendar-dark" 
                         locale='id-ID'
-                        format='mm/dd/yyyy'
                         next2Label={null}
                         prev2Label={null}
                         tileContent={({ date, view }) => {
