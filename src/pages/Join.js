@@ -10,7 +10,7 @@ import { alertToast, loadingToast } from '../utils/notif'
 import { setFetch } from '../redux/fetchSlice'
 import { useDispatch } from 'react-redux'
 import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../redux/sourceSlice'
-
+const API = process.env.REACT_APP_API
 export default function Join(){
     const [data, setData] = useState(null)
     const [isReload, setIsReload] = useState(false)
