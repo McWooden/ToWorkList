@@ -2,6 +2,7 @@
     background-color: var(--black-3);
     animation: loading-skeleton 1s ease-in-out forwards infinite;
     animation-direction: alternate;
+    border-radius: 5px;
 }
 .loading.guild-photo-profile {
     width: 48px;

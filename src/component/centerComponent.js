@@ -354,7 +354,7 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
         }
         const promise = loadingToast('Membuat daftar baru')
         try {
-            await axios.post(`${'http://localhost:3001'}/source/addTodo/${idPageOfBook}`, dataToSend)
+            await axios.post(`${API}/source/addTodo/${idPageOfBook}`, dataToSend)
             .then((res) => {
                 todoToast(dataToSend)
                 dispatch(setSource(res.data))

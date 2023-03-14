@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify';
 import store from './redux/store'
 import { Provider } from 'react-redux';
+import Join from './pages/Join'
 
 
 
@@ -27,6 +28,7 @@ root.render(
           <Route path='register' element={<Register />}/>
           <Route path='pemulihan' element={<Pemulihan />}/>
         </Route>
+        <Route path='/join' element={<Join />}/>
       </Routes>
       </Provider>
     </BrowserRouter>

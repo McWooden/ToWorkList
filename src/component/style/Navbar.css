@@ -172,6 +172,10 @@ nav .nav-1 {
     margin: 0;
     color: var(--text-2);
     display: inline-block;
+    flex: 1 0 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .app-name {
     flex: 1;
@@ -374,6 +378,10 @@ nav .nav-1 {
     padding: 0 1em;
     cursor: pointer;
     margin-left: 1em;
+}
+.container-sb_action_btn {
+    display: flex;
+    justify-content: flex-end;
 }
 .sb_action_btn {
     min-width: 45px;

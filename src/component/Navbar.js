@@ -60,26 +60,31 @@ function BookList() {
     const [isLoading, setIsLoading] = useState(true)
     const [isReload, setReload] = useState(false)
     const dispatch = useDispatch()
-
-    async function fetchData () {
+    const booksProfile = useSelector(state => state.source.booksProfile)
+    const myAccount = useSelector(state => state.source.profile)
+    const fetchData = useCallback(async () => {
         setReload(false)
         setIsLoading(true)
         try {
-            let sessionBook = []
-            const response = await axios.get(API+'/book')
-            response.data.forEach((item, index) => {
-                sessionBook.push(<BookItem key={index} data={item}/>)
-            })
-            setAllBook(sessionBook)
+            const response = await axios.get(`${API}/book/${myAccount._id}`)
+            dispatch(setBooksProfile(response.data))
         } catch (err) {
             setReload(true)
         }
         setIsLoading(false)
-    }
+    }, [dispatch, myAccount])
 
     useEffect(() => {
-        fetchData()
-    }, [dispatch])
+        if (!booksProfile) {
+            fetchData()
+        } else {
+            let sessionBook = []
+            booksProfile.forEach((item, index) => {
+                sessionBook.push(<BookItem key={index} data={item}/>)
+            })
+            setAllBook(sessionBook)
+        }
+    }, [dispatch, booksProfile, fetchData])
     if (isReload) return (
         <div className="nav-guild">
             <div className="reload_btn-frame" onClick={fetchData}>
@@ -136,6 +141,7 @@ function FindAndCreateBook() {
     const [addServerModal, setAddServerModal] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [searchText, setSearchText] = useState('')
+    const dispatch = useDispatch()
 
     function handleInputChange(e) {
         setSearchText(e.target.value)
@@ -169,6 +175,7 @@ function FindAndCreateBook() {
         setImage(null)
         setPreviewUrl('')
     }
+    
     // form
     const formRef = useRef()
     async function handleSubmit(e) {
@@ -180,7 +187,8 @@ function FindAndCreateBook() {
             author_avatar: myAccount.avatar,
             author: {
                 nickname: myAccount.nickname,
-                tag: myAccount.tag
+                tag: myAccount.tag,
+                _id: myAccount._id
             },
         }))
         const promise = loadingToast('Membuat buku')
@@ -194,6 +202,11 @@ function FindAndCreateBook() {
                 setPreviewUrl('')
                 setAddServerModal(false)
                 setValueJudul(`Buku ${myAccount.nickname}`)
+                dispatch(setPageType('welcome'))
+                dispatch(setFetch({path: res.data.profile.book_title, id: res.data._id}))
+                dispatch(setGuildProfile(res.data.profile))
+                dispatch(setMembers(null))
+                dispatch(setBooksProfile(null))
                 imageToast('buku baru dibuat!')
             })
             .catch(err => {
@@ -228,8 +241,13 @@ function FindAndCreateBook() {
                             </button>
                         </div>
                     </form>
-                    <div className="sb_action_btn">
-                        <FontAwesomeIcon icon={faPlus} className='action_btn' onClick={() => setAddServerModal(true)}/>
+                    <div className="container-sb_action_btn">
+                        <div className="sb_action_btn">
+                            <FontAwesomeIcon icon={fontawesome.faRotateBack} className='action_btn' onClick={() => ''}/>
+                        </div>
+                        <div className="sb_action_btn">
+                            <FontAwesomeIcon icon={faPlus} className='action_btn' onClick={() => setAddServerModal(true)}/>
+                        </div>
                     </div>
                 </div>
                 <AllBookList/>
@@ -277,7 +295,7 @@ function FindAndCreateBook() {
     )
 }
 function AllBookList() {
-    const booksProfile = useSelector(state => state.source.booksProfile)
+    const [globalBook, setGlobalBook] = useState(null)
     const [loading, setLoading] = useState(false)
     const [box, setBox] = useState([])
     const [reload, setReload] = useState(false)
@@ -287,24 +305,23 @@ function AllBookList() {
         setLoading(true)
         try {
             const response = await axios.get(`${API}/book`)
-            dispatch(setBooksProfile(response.data))
+            setGlobalBook(response.data)
         } catch (err) {
             setReload(true)
         }
         setLoading(false)
-    }, [dispatch])
-
+    }, [])
     useEffect(() => {
-        if (!booksProfile) {
+        if (!globalBook) {
             fetchData()
         } else {
             let sessionBook = []
-            booksProfile.forEach((data, index) => {
+            globalBook.forEach((data, index) => {
                 sessionBook.push(<BookCardItem data={data} key={index}/>)
             })
             setBox(sessionBook)
         }
-    },[dispatch, fetchData, booksProfile])
+    },[dispatch, fetchData, globalBook])
     if (reload) return (
         <div className="book_card_container">
             <div className="reload_btn-frame" onClick={fetchData}>
@@ -327,9 +344,10 @@ function AllBookList() {
 function BookCardItem({data}) {
     const profile = data.profile
     const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
-    // const id = data._id
+    const navigate = useNavigate()
+    const id = data._id
     return (
-        <div className="book_card">
+        <div className="book_card" onClick={() => navigate(`/join?invite=${id}`)}>
             <div className="book_card-header">
                 <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='banner'/>
             </div>

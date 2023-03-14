@@ -5,6 +5,10 @@
     flex-wrap: wrap;
     padding: 5px;
 }
+.book_card_container .book_card:hover {
+    background-color: #eaeaea;
+    cursor: pointer;
+}
 .book_card {
     box-shadow: var(--shadow-1);
     min-width: 15em;
