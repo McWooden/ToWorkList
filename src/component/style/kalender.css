@@ -72,7 +72,7 @@
     padding: 3px 5px;
 }
 .react-calendar__tile--now > * {
-    color: royalblue;
+    color: #009dcf;
 }
 .react-calendar__tile--now abbr {
     border-radius: 50px;
