@@ -1,86 +1,17 @@
-import {useState, useEffect, useRef} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
-// import { useContext } from 'react';
-import { myAccount } from '../utils/dataJSON';
-// import { ItemData } from '../pages/App';
-import { Confirm } from './Modal';
-// import { GuildContext } from '../pages/App';
-import { deleteToast, checkToast } from '../utils/notif';
-import { useDispatch, useSelector } from 'react-redux';
-import { setAllTodo, setTodo } from '../redux/todo';
-import axios from 'axios';
-import { setSource } from '../redux/sourceSlice';
-import { Modal } from './Modal';
-import { convertDateToString } from '../utils/convertDateFormat';
-import { noteToast } from '../utils/notif';
-import Calendar from 'react-calendar';
+import { useSelector, useDispatch } from "react-redux"
+import { Modal } from "../Modal/Modal"
+import { Confirm } from "../Modal/Confirm"
+import { setAllTodo } from "../../redux/todo"
+import { checkToast, noteToast, deleteToast } from "../../utils/notif"
+import { setSource } from "../../redux/sourceSlice"
+import { convertDateToString } from "../../utils/convertDateFormat"
+import Calendar from "react-calendar"
+import { useState, useEffect, useRef } from 'react'
+import axios from 'axios'
+import { API } from '../../utils/variableGlobal'
 
-const API = process.env.REACT_APP_API
-
-// export function TodoModel({item, indexItem}) {
-//     const { reverseDone } = useContext(GuildContext)
-//     const myNickname = myAccount.profile.nickname
-//     const [dropDown, setDropDown] = useState(false)
-//     let menuRef = useRef()
-//     let btnRef = useRef()
-//     const {handleItem} = useContext(ItemData)
-//     const [deleteOpen, setDeleteOpen] = useState(false)
-
-//     useEffect(() => {
-//         let handler = (e) => {
-//             try {
-//                 if (menuRef.current.contains(e.target) || btnRef.current.contains(e.target)) {
-//                     return
-//                 } else {
-//                     setDropDown(false)
-//                 }
-//             } catch (error) {
-                
-//             }
-//         }
-//         document.addEventListener('mousedown', handler)
-//     })
-
-//     return (
-//         <>
-//         <div className="todo-card">
-//             <div className="todo-left">
-//             <div className="card-color" style={{backgroundColor: item.color}}></div>
-//             <div className="card-text pointer" onClick={() => handleItem(indexItem)}>
-//                 <div className="card-title">{item.title}</div>
-//                 <div className="card-description">{item.desc}</div>
-//             </div>
-//             </div>
-//             <div className="todo-right">
-//                 <div className={`card-finish pointer ${item.dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={() => reverseDone(indexItem)}>
-//                     <div className="card-finish-value"></div>
-//                 </div>
-//                 <div className="card-more" ref={btnRef}>
-//                     {dropDown? 
-//                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(false)}/>
-//                     :
-//                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(true)}/>
-//                     }
-//                 </div>
-//                 <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
-//                     <ul>
-//                         <li className='pointer' onClick={() => editToast()}>
-//                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
-//                             <span>edit</span>
-//                         </li>
-//                         <li className='pointer' onClick={() => setDeleteOpen(true)}>
-//                             <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
-//                             <span>delete</span>
-//                         </li>
-//                     </ul>
-//                 </div>
-//             </div>
-//         </div>
-//         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={item.title} metode='delete' color={item.color} callback={deleteToast}/>
-//         </>
-//     )
-// }
 export function TodoModel({item}) {
     const profile = useSelector(state => state.source.profile)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
@@ -281,61 +212,5 @@ export function TodoModel({item}) {
             </div>
         </Modal>
         </>
-    )
-}
-
-export function ChatModel({item}) {
-    const [dropDown, setDropDown] = useState(false)
-    const dispatch = useDispatch()
-    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
-    const todoId = useSelector(state => state.todo.id)
-    const itsMe = item.nickname === myAccount.profile.nickname
-    let cardRef = useRef()
-    const disable = item.msg === 'Pesan ini telah dihapus'
-    const time = item.time || new Date(Number(item.date)).toLocaleTimeString('id-ID', {hour24: true, hour: '2-digit', minute: '2-digit'}).replace(':', '.')
-    useEffect(() => {
-        let handler = (e) => {
-            try {
-                if (!cardRef.current.contains(e.target)) {
-                    setDropDown(false)
-                }
-            } catch (error) {
-                
-            }
-        }
-        document.addEventListener('mousedown', handler)
-    })
-    function handleDropDown() {
-        if (disable) return
-        setDropDown(!dropDown)
-    }
-    async function handleDelete() {
-        setDropDown(false)
-        deleteToast('menghapus chat')
-        try {
-            await axios.put(`${API}/chat/${idPageOfBook}/${todoId}/${item._id}`)
-            .then((res) => {
-                deleteToast('chat berhasil dihapus')
-                dispatch(setTodo(res.data.data))
-            })
-            .catch(err => {
-                deleteToast('chat gagal dihapus')
-            }) 
-        } catch(err) {
-
-        }
-    }
-    return (
-        <div className={`${itsMe&&'my'} chat-card ${dropDown?'active':'inactive'}`} ref={cardRef}>
-            <div className={`${itsMe&&'my'} chat-card-message ${disable&&'disable'}`}>{item.msg}</div>
-            <div className={`${itsMe&&'my'} chat-card-time pointer`} onClick={handleDropDown}>{time}</div>
-            <div className={`chat-dropdown ${itsMe&&'my'} ${dropDown?'active':'inactive'}`}>
-                <ul>
-                    <li className='pointer' onClick={handleDelete}>
-                        <FontAwesomeIcon icon={faTrash}/>
-                    </li>
-                </ul>
-            </div>
-        </div>
     )
 }

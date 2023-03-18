@@ -10,7 +10,7 @@ import { alertToast, loadingToast } from '../utils/notif'
 import { setFetch } from '../redux/fetchSlice'
 import { useDispatch } from 'react-redux'
 import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../redux/sourceSlice'
-const API = process.env.REACT_APP_API
+import {url, API} from '../utils/variableGlobal'
 export default function Join(){
     const [data, setData] = useState(null)
     const [isReload, setIsReload] = useState(false)
@@ -18,7 +18,7 @@ export default function Join(){
     const myAccount = useSelector(state => state.source.profile)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
+    
     const fetchData = useCallback(async () => {
         setIsReload(false)
         try {

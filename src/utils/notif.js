@@ -12,9 +12,7 @@ export function editToast(text) {
             <FontAwesomeIcon icon={faPenToSquare}/>
         </div>
         <p>{text || 'edit'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function saveToast(text) {
     toast(
@@ -23,9 +21,7 @@ export function saveToast(text) {
             <FontAwesomeIcon icon={faFloppyDisk}/>
         </div>
         <p>{text || 'save'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function deleteToast(text) {
     toast(
@@ -34,9 +30,7 @@ export function deleteToast(text) {
             <FontAwesomeIcon icon={faTrash}/>
         </div>
         <p>{text || 'terhapus'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function alertToast(text) {
     toast(
@@ -45,9 +39,7 @@ export function alertToast(text) {
             <FontAwesomeIcon icon={faExclamation}/>
         </div>
         <p>{text || 'alert'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function sendToast(text) {
     toast(
@@ -56,9 +48,7 @@ export function sendToast(text) {
             <FontAwesomeIcon icon={faPaperPlane}/>
         </div>
         <p>{text || 'terkirim'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function todoToast({item_title, color}) {
     toast(
@@ -67,9 +57,7 @@ export function todoToast({item_title, color}) {
             <FontAwesomeIcon icon={faCheck}/>
         </div>
         <p>tugas baru ditambahkan! {item_title || 'tugas'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function checkToast({title, color}) {
     toast(
@@ -78,9 +66,7 @@ export function checkToast({title, color}) {
             <FontAwesomeIcon icon={faCheck}/>
         </div>
         <p>reverse: {title || ''}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function noteToast({color}) {
     toast(
@@ -89,9 +75,7 @@ export function noteToast({color}) {
             <FontAwesomeIcon icon={faNoteSticky}/>
         </div>
         {color === 'var(--danger)' ? <p>catatan gagal dibuat</p> : <p>catatan baru ditambahkan!</p>}
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function noteToastSecond({ text, color }) {
     toast(
@@ -100,9 +84,7 @@ export function noteToastSecond({ text, color }) {
             <FontAwesomeIcon icon={faNoteSticky}/>
         </div>
         {text}
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function imageToast(text) {
     toast(
@@ -111,9 +93,7 @@ export function imageToast(text) {
             <FontAwesomeIcon icon={faImage}/>
         </div>
         <p>{text || 'foto baru ditambahkan!'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function leaveToast(text) {
     toast(
@@ -122,9 +102,7 @@ export function leaveToast(text) {
             <FontAwesomeIcon icon={faRightFromBracket}/>
         </div>
         <p>{text || 'keluar'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function accountToast(text) {
     toast(
@@ -133,9 +111,7 @@ export function accountToast(text) {
             <FontAwesomeIcon icon={faUser}/>
         </div>
         <p>{text || 'Account'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 export function pageToast(text) {
     toast(
@@ -144,18 +120,14 @@ export function pageToast(text) {
             <FontAwesomeIcon icon={faMap}/>
         </div>
         <p>{text || 'halaman'}</p>
-    </div>, {
-        closeButton: false,
-    })
+    </div>)
 }
 
 export function loadingToast(text) {
     const promise = toast.loading(
         <div className="myToast">
             <p>{text || 'Account'}</p>
-        </div>, {
-        closeButton: false,
-    })
+        </div>)
     return promise
 }
 export function updateToast(text) {

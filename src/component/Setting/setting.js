@@ -1,28 +1,23 @@
-import './style/setting.css'
+import '../style/setting.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil, faMap, faUserGroup, faXmark, faEllipsisVertical, faPenToSquare, faTrash, faEye, faImage, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import ReactDOM from 'react-dom'
-import { useRef, useState } from 'react'
-import { convertDateToString } from '../utils/convertDateFormat'
-import { deleteToast, leaveToast, pageToast, imageToast, saveToast, alertToast } from '../utils/notif'
-import { useSelector } from 'react-redux'
-import { useEffect } from 'react'
-import { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import { useRef, useState, useEffect, useCallback } from 'react'
+import { convertDateToString } from '../../utils/convertDateFormat'
+import { deleteToast, leaveToast, pageToast, imageToast, saveToast, alertToast, loadingToast } from '../../utils/notif'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { setMembers, setPageType, setSource } from '../redux/sourceSlice'
-import { ModalSecond } from './Modal'
-import { setPathPageOfBook } from '../redux/fetchSlice'
-import { Confirm } from './Modal'
-import { setGuildProfile } from '../redux/sourceSlice'
-import { FileDrop } from './Modal'
-import { DeleteBookModal } from './Modal'
-import { setPathBook } from '../redux/fetchSlice'
+import { setMembers, setPageType, setSource, setGuildProfile } from '../../redux/sourceSlice'
+import { setPathPageOfBook, setPathBook } from '../../redux/fetchSlice'
+import { DeleteBookModal } from '../Modal/DeleteBookModal'
+import { FileDrop } from '../Modal/FileDrop'
 import { toast } from 'react-toastify'
-import { loadingToast } from '../utils/notif';
+import { Confirm } from '../Modal/Confirm'
+import { ModalSecond } from '../Modal/ModalSecond'
 
-const API = process.env.REACT_APP_API
+
+import {url, API} from '../../utils/variableGlobal'
 
 
 export function GuildSetting({open, close}) {
@@ -78,7 +73,7 @@ function GuildSettingProfile() {
     const dispatch = useDispatch()
     const [dropDown, setDropDown] = useState(false)
     const [openUnggah, setOpenUnggah] = useState(false)
-    const url = 'https://zjzkllljdilfnsjxjrxa.supabase.co/storage/v1/object/public/book'
+    
     let menuRef = useRef()
     let btnRef = useRef()
     const [full, setFull] = useState(false)

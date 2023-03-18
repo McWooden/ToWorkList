@@ -1,108 +1,17 @@
 import './App.css';
-import Navbar from '../component/Navbar';
-import TodoApp from '../component/TodoApp';
+import Navbar from '../component/Navbar/Navbar';
 import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
 import { useSelector } from 'react-redux';
-// import { useNavigate, useParams } from 'react-router-dom';
-// import { defaultItem } from '../utils/dataJSON'
+import TodoApp from '../component/TodoApp/TodoApp';
 
 export const GuildContext = createContext()
 export const ItemData = createContext()
-// function App() {
-//   // force  update
-//   const [, setState] = useState(0)
-//   const forceUpdateHandler = () => {
-//     setState(prevState => prevState + 1)
-//   }
-//   // guild data
-//   const [guild, setGuild] = useState(myAccount)
-//   function handleGuild(guild) {
-//     setGuild(guild)
-//     setRoom(guild.rooms[0])
-//   }
-//   // rooms
-//   const [room, setRoom] = useState(guild.rooms[0] || null)
-//   const [indexRoom, SetIndexRoom] = useState(0)
-//   function handleRoom(indexRoom) {
-//     setRoom(guild.rooms[indexRoom])
-//     SetIndexRoom(indexRoom)
-//   }
-//   // item
-//   const [item, setItem] = useState()
-//   function handleItem(itemIndex) {
-//     setItem(guild.rooms[indexRoom].items[itemIndex])
-//   }
-//   function reverseDone(itemIndex) {
-//     const newGuild = guild
-//     if (newGuild.rooms[indexRoom].items[itemIndex].dones.indexOf(myAccount.profile.nickname) === -1) {
-//       newGuild.rooms[indexRoom].items[itemIndex].dones = [...newGuild.rooms[indexRoom].items[itemIndex].dones, myAccount.profile.nickname]
-//     } else {
-//       newGuild.rooms[indexRoom].items[itemIndex].dones = newGuild.rooms[indexRoom].items[itemIndex].dones.filter(nickname => nickname !== myAccount.profile.nickname)
-//     }
-//     forceUpdateHandler()
-//   }
-//   // navbar
-//   const [hideNavbar, setHideNavbar] = useState(true)
-//   function handleNavbar(boolean) {
-//     setHideNavbar(!boolean)
-//   }qwertyuiop
-//   // refasdfghjkl
-//   const navRef = useRef() 1234567890 
-//   const secondNavRef = useRef()
-//   // useEffect
-//   useEffect(() => {
-//     let handler = (e) => {
-//         try {
-//             if (navRef.current.contains(e.target) || secondNavRef.current.contains(e.target)) {
-//               return
-//             } else {
-//               handleNavbar(false)
-//             }
-//         } catch (error) {
-            
-//         }
-//     }
-//     document.querySelector('title').innerText = guild.profile.nickname || guild.profile.guildName
-//     document.addEventListener('mousedown', handler)
-//   })
-//   // tracker
-
-  
-//   return (
-//     <GuildContext.Provider value={{
-//       guild,
-//       room: guild.rooms[indexRoom], 
-//       currentRoom: room.roomName || null, 
-//       hideNavbar, 
-//       handleNavbar, 
-//       guildRooms : guild.rooms, 
-//       guildName : guild.profile.guildName || guild.profile.nickname, 
-//       handleGuild, 
-//       handleRoom, 
-//       navRef, 
-//       secondNavRef, 
-//       users : guild.users, 
-//       reverseDone
-//     }}>
-//       <ItemData.Provider value={{
-//         item, 
-//         handleItem
-//       }}>
-//         <div id='app'>
-//           <Navbar/>
-//           <TodoApp/>
-//         </div>
-//       </ItemData.Provider>
-//     </GuildContext.Provider>
-//   )
-// }
 export const PageContext = createContext()
 export const AccountContext = createContext()
 export const BookContext = createContext()
 export const AppContext = createContext()
 function App() {
-  // navbar
   const mode = useSelector(state => state.source.mode)
   const navRef = useRef()
   const secondNavRef = useRef()
@@ -131,7 +40,6 @@ function App() {
     }
     document.addEventListener('mousedown', handler)
   })
-  // page
   const [page, setPage] = useState(myAccount)
   function handleChangePage(newBook) {
     setPage(newBook)

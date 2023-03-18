@@ -1,6 +1,3 @@
-// import { useContext } from "react"
-// import { GuildContext } from "../pages/App"
-// import { myAccount } from "./dataJSON"
 import { useSelector } from "react-redux"
 
 export function PageProggress() {

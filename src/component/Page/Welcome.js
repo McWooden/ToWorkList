@@ -1,7 +1,7 @@
-import { Greeting } from "../utils/greeting"
-import './style/page.css'
+import { Greeting } from "../../utils/greeting"
+import '../style/page.css'
 import { useState, useEffect } from "react"
-import { AppContext } from "../pages/App"
+import { AppContext } from "../../pages/App"
 import { useContext } from "react"
 
 export function Welcome() {

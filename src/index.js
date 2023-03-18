@@ -37,6 +37,7 @@ root.render(
               theme="colored"
               autoClose={1000}
               position="top-center"
+              closeButton={false}
     />
   {/* </React.StrictMode> */}
   </>
