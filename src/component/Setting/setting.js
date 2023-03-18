@@ -8,7 +8,7 @@ import { SettingProfile } from './SettingProfile'
 import { SettingRoom } from './SettingRoom'
 import { SettingMember } from './SettingMember'
 
-export function Setting({open, close}) {
+export default function Setting({open, close}) {
     const [select, setSelect] = useState('profile')
     const pathBook = useSelector(state => state.fetch.pathBook)
     if (!open) return
