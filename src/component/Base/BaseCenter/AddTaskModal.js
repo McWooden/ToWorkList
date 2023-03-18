@@ -57,13 +57,13 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
     }
     const [deadlineValue, setDeadlineValue] = useState([{
         details: {
-            deadline: new Date(),
+            deadline: new Date().setHours(0,0,0,0),
             color: 'var(--purple-1)',
             item_title: 'Hari ini',
         }
     }])
     const colorsTile = deadlineValue.map(item => ({
-        date: new Date(item.details.deadline.toLocaleDateString()),
+        date: new Date(item.details.deadline),
         color: item.details.color,
         title: item.details.item_title,
     }))
