@@ -3,7 +3,7 @@ import { faPencil, faMap, faUserGroup } from '@fortawesome/free-solid-svg-icons'
 import { SettingClose } from "./SettingClose"
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
-import ReactDOM from 'react'
+import ReactDOM from 'react-dom'
 import { SettingProfile } from './SettingProfile'
 import { SettingRoom } from './SettingRoom'
 import { SettingMember } from './SettingMember'
