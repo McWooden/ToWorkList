@@ -1,7 +1,7 @@
 import { AppContext } from '../../pages/App'
 import { useContext } from 'react'
 
-import { HomeButton } from './SecondNavbar/HomeButton'
+import { HomeButton } from './HomeButton'
 import { BookList } from './Book/BookList'
 import { ModeNavbar } from './SecondNavbar/ModeNavbar'
 import { FindAndCreateBook } from './FindAndCreate/FindAndCreateBook'

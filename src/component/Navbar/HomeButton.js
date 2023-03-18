@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { setPageType, setMembers } from '../../../redux/sourceSlice'
-import { setPathBook, setPathPageOfBook } from '../../../redux/fetchSlice'
+import { setPageType, setMembers } from '../../redux/sourceSlice'
+import { setPathBook, setPathPageOfBook } from '../../redux/fetchSlice'
 
 export function HomeButton() {
     const pathBook = useSelector(state => state.fetch.pathBook)

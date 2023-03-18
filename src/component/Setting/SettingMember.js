@@ -18,7 +18,7 @@ export function SettingMember() {
         let sessionBox = []
         data.forEach((user, index) => {
             sessionBox.push(
-                <div className='group-user pointer' key={`${user.nickname}-${index}`}>
+                <div className='group-user pointer d-flex ai-center' key={`${user.nickname}-${index}`}>
                     <img src={user.avatar} alt={user.nickname} />
                     <div className="user-context">
                         <p>{user.nickname}</p>
