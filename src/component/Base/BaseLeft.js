@@ -26,8 +26,8 @@ export function BaseLeft() {
         console.log(source)
     }
     return (
-        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
-            <div className="sidebar-left">
+        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'} fd-column d-flex`}>
+            <div className="sidebar-left fd-column d-flex">
                 <Greeting/>
                 <JadwalRoom/>
                 <Calendar 
@@ -50,7 +50,7 @@ export function BaseLeft() {
                 }}
                 />
                 <PageProggress/>
-                <div className="left-menu-box">
+                <div className="left-menu-box d-flex ai-center jc-center">
                     <FontAwesomeIcon icon={faMoneyCheck} className="left-menu-box-icon"/>
                     <p className="left-menu-box-count">{source.list ? source.list.length : ''}</p>
                 </div>

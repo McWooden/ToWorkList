@@ -8,9 +8,9 @@ import { useRef, useState } from 'react';
 import { convertDateToString } from '../../../utils/convertDateFormat';
 import axios from 'axios';
 import { FileDrop } from '../../Modal/FileDrop';
-import { Modal } from '../../Modal/Modal';
 import { imageToast } from '../../../utils/notif';
 import { loadingToast } from '../../../utils/notif';
+import { ModalSecond } from '../../Modal/ModalSecond';
 
 
 export function JadwalRoom() {
@@ -68,13 +68,13 @@ export function JadwalRoom() {
     }
     const [isFetching, setIsFetching] = useState(false)
     return (
-        <div className="jadwal">
+        <div className="jadwal d-flex fd-row of-hidden p-relative">
             <div className='preview' style={{background: `url(${url}/${pageDetails.jadwal_url})`}}>
-                <div className="setting pointer" onClick={() => setModalOpen(true)}>
+                <div className="setting pointer d-flex jc-center ai-center" onClick={() => setModalOpen(true)}>
                     <FontAwesomeIcon icon={faGear} className='setting-btn'/>
                 </div>
             </div>
-            <div className="open-jadwal pointer" onClick={() => setFull(true)}>
+            <div className="open-jadwal pointer d-flex jc-space-between ai-center" onClick={() => setFull(true)}>
                 <p>Jadwal</p>
                 <FontAwesomeIcon icon={faChevronRight} className='jadwal-arrow'/>
             </div>
@@ -110,11 +110,11 @@ export function JadwalRoom() {
                     </div>
                 </form>
             </FileDrop>
-            <Modal open={full} close={() => setFull(false)}>
+            <ModalSecond open={full} close={() => setFull(false)}>
                 <div className="jadwal-image" onClick={() => setFull(false)}>
                     <img src={`${url}/${pageDetails.jadwal_url}`} alt="jadwal room" />
                 </div>
-            </Modal>
+            </ModalSecond>
         </div>
     )
 }

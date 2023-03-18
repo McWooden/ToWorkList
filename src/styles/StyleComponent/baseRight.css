@@ -1,16 +1,11 @@
 @import url(./chat.css);
 .base-right {
-    display: flex;
-    flex-direction: column;
     flex: 1;
     background-color: var(--ketiga);
 }
 .sidebar-right {
-    display: flex;
-    flex-direction: column;
     gap: 1px;
     flex: 1;
-    overflow: auto;
 }
 .base-right-form {
     display: flex;
@@ -23,19 +18,14 @@
     z-index: 1;
 }
 .base-right-form .textarea-container {
-    display: flex;
-    align-items: center;
     flex: 4;
     background-color: var(--kedua);
     border-bottom: 2px solid var(--black-1);
     border-radius: 5px;
     padding: 5px;
     min-height: 35px;
-    overflow: auto;
 }
 .base-right-form textarea {
-    display: flex;
-    align-items: center;
     width: 100%;
     outline: none;
     border: none;
@@ -45,7 +35,6 @@
     font-family: inherit;
     font-size: x-small;
     max-height: 160px;
-    overflow: scroll;
 }
 .base-right-form button, .base-right-form .btn-off {
     height: 35px;
@@ -55,18 +44,12 @@
     border-radius: 10px;
     font-size: 1em;
 }
-.btn-off {
-    display: grid;
-    place-items: center;
-    background-color: var(--black-5);
-}
 .btn-on {
     background-color: var(--light-blue);
-    box-shadow: var(--shadow-2-blue);
+    box-shadow: var(--shadow-1);
 }
 .scrollToBottom {
     width: 15px;
-    position: fixed;
     bottom: 50px;
     right: 10px;
     z-index: 1;
@@ -93,8 +76,6 @@
     margin-bottom: 10px;
 }
 .group-user {
-    display: flex;
-    align-items: center;
     padding: 5px;
     gap: 5px;
     border-radius: 5px;
@@ -103,10 +84,6 @@
 .group-user:hover {
     background-color: var(--purple-1-transparent);
     transition: .1s ease;
-}
-.user-context {
-    display: flex;
-    flex-direction: column;
 }
 .group-user img {
     width: 38px;

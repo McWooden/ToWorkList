@@ -32,11 +32,11 @@ export function Greeting() {
         }
 
     return (
-        <div className='greeting'>
-            <div className="color" style={{color: color}}>
+        <div className='greeting d-flex fd-row of-hidden'>
+            <div className="color d-grid pi-center" style={{color: color}}>
                 {greetingIcon}
             </div>
-            <div className="greeting-context">
+            <div className="greeting-context d-flex fd-column jc-center">
                 <p className='selamat'>Selamat {time}!</p>
                 <p className='date'>{day}, {new Date().getDate()} {bulan[new Date().getMonth()]} {new Date().getFullYear()}</p>
             </div>

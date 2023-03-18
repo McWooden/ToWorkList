@@ -11,9 +11,9 @@ export function CenterActionButton({handleModalOpen}) {
     }
     const dispatch = useDispatch()
     return (
-        <div className='center-action-btn'>
+        <div className='center-action-btn d-flex p-fixed ai-center jc-flex-end as-flex-end'>
                 {todoId && (
-                <div className='detail-back pointer' onClick={handleClick}>
+                <div className='detail-back pointer d-flex ai-center' onClick={handleClick}>
                     <FontAwesomeIcon icon={faArrowLeft}/>
                     <span>Back</span>
                 </div>

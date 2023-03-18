@@ -14,7 +14,7 @@ export function BaseCenter() {
     }
     return (
         <div className="base-center">
-            <div className="center">
+            <div className="center d-flex p-relative fd-column">
                 <CardContainer/>
                 <AddTaskModal modalOpen={modalOpen} title={pathPageOfBook} handleModalClose={handleModalClose}/>
                 <CenterActionButton handleModalOpen={handleModalOpen}/>

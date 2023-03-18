@@ -36,7 +36,7 @@ export function TodoPage() {
             </div>
         </div>
         <div className="base-center">
-            <div className="center">
+            <div className="center d-flex p-relative fd-column">
                 <div className="loading center_loading"/>
             </div>
         </div>
@@ -44,8 +44,8 @@ export function TodoPage() {
     )
     return (
         <>
-        <BaseLeft/>
-        <BaseCenter/>
+            <BaseLeft/>
+            <BaseCenter/>
         </>
     )
 }

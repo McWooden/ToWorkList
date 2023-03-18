@@ -20,9 +20,9 @@ export function BaseRight() {
         let sessionBox = []
         data.forEach((user, index) => {
             sessionBox.push(
-                <div className='group-user pointer' key={`${user.nickname}-${index}`}>
+                <div className='group-user pointer d-flex ai-center' key={`${user.nickname}-${index}`}>
                     <img src={user.avatar} alt={user.nickname} />
-                    <div className="user-context">
+                    <div className="d-flex fd-column">
                         <p>{user.nickname}</p>
                         <p className='user-status'>{user.status}</p>
                     </div>
@@ -60,15 +60,15 @@ export function BaseRight() {
         return () => clearInterval(interval)
     }, [idBook, members, dispatch])
     if (isLoading) return (
-        <div className="base-right">
-            <div className="sidebar-right">
+        <div className="base-right d-flex f-column">
+            <div className="sidebar-right d-flex fd-column">
                 <div className="loading sidebar_right_loading"/>
             </div>
         </div>
     )
     return (
-        <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'}`}>
-            <div className="sidebar-right">
+        <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
+            <div className="sidebar-right d-flex fd-column of-auto">
                 {box}
             </div>
         </div>

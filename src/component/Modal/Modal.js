@@ -1,6 +1,4 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
-
 
 export function Modal({children, open, close}) {
     if (!open) return null

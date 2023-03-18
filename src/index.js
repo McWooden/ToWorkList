@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'
-import './index.css';
-import './component/style/dark.css'
 // import './component/style/light.css'
 import App from './pages/App'
 import { Auth, Register, Login, Pemulihan } from './pages/Auth'
@@ -14,20 +12,22 @@ import Join from './pages/Join'
 
 // import all css
 import 'react-toastify/dist/ReactToastify.css';
-import './component/style/base.css'
-import './component/style/Modal.css'
-import './component/style/kalender.css'
-import './component/style/Modal.css'
-import './component/style/Navbar.css'
-import './component/style/bookCard.css'
-import './component/style/page.css'
-import './component/style/setting.css'
-import './component/style/TodoApp.css'
-import './component/style/notif.css'
-import './pages/Auth.css'
-import './pages/Join.css'
-import './pages/App.css';
-
+import './styles/StyleComponent/dark.css'
+import './styles/StyleComponent/base.css'
+import './styles/StyleComponent/Modal.css'
+import './styles/StyleComponent/kalender.css'
+import './styles/StyleComponent/Modal.css'
+import './styles/StyleComponent/Navbar.css'
+import './styles/StyleComponent/bookCard.css'
+import './styles/StyleComponent/page.css'
+import './styles/StyleComponent/setting.css'
+import './styles/StyleComponent/TodoApp.css'
+import './styles/StyleComponent/notif.css'
+import './styles/index.css'
+import './styles/utils.css'
+import './styles/StylePages/Auth.css'
+import './styles/StylePages/Join.css'
+import './styles/StylePages/App.css'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -6,12 +6,10 @@ import { API } from "../../utils/variableGlobal"
 import { setTodo } from "../../redux/todo"
 import { MoreInfoCard } from "./BaseLeft/MoreInfoCard"
 import { DetailLeftAction } from "./BaseLeft/DetailLeftAction"
-import { CardImages } from "./Image/CardImages"
-import { Notes } from "./Note/Notes"
-import { NoteEditor } from "./Note/NoteEditor"
 import { CenterActionButton } from "./BaseCenter/CenterActionButton"
 import { AddNoteModal } from "./Note/AddNoteModal"
 import { SidebarRightChat } from "./BaseRight/SidebarRightChat"
+import { DetailCard } from "./BaseCenter/DetailCard"
 
 
 export function TodoDetail() {
@@ -39,15 +37,15 @@ export function TodoDetail() {
     return (
         <>
         {/* left */}
-            <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
-                <div className="sidebar-left">
+            <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'} fd-column d-flex`}>
+                <div className="sidebar-left fd-column d-flex">
                     <MoreInfoCard/>
                     <DetailLeftAction/>
                 </div>
             </div>
         {/* center */}
             <div className='base-center'>
-                <div className='center'>
+                <div className='center d-flex p-relative fd-column'>
                     <DetailCard/>                    
                     <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/>
                     <CenterActionButton handleModalOpen={handleModalOpen}/>
@@ -55,22 +53,6 @@ export function TodoDetail() {
             </div>
         {/* right */}
             <SidebarRightChat/>
-        </>
-    )
-}
-function DetailCard() {
-    const todo = useSelector(state => state.todo)
-    return(
-        <>
-        <div className='detail-desc'>
-            <div className="color" style={{backgroundColor: todo.details.color}}></div>
-            <div className='detail-desc-context'>
-                <p>{todo.details.desc}</p>
-                <CardImages/>
-            </div>
-        </div>
-        <NoteEditor/>
-        <Notes/>
         </>
     )
 }

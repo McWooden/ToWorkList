@@ -1,11 +1,7 @@
 .base-left {
-    display: flex;
-    flex-direction: column;
     flex: 1;
 }
 .sidebar-left {
-    display: flex;
-    flex-direction: column;
     gap: 5px;
     flex: 1;
 }
@@ -14,7 +10,6 @@
 }
 @media (max-width: 892px) {
     .base-left {
-        /* height: calc(100vh - 48px); */
         position: fixed;
         width: 255px;
         box-shadow: var(--shadow-1-right);
@@ -40,26 +35,18 @@
 }
 .greeting, .jadwal {
     min-height: 58px;
-    display: flex;
-    flex-direction: row;
     border-radius: 5px;
     gap: 5px;
-    overflow: hidden;
     padding-right: 5px;
 }
 .greeting .color {
     flex: 1;
     border-radius: 3px;
     background-color: var(--black-1);
-    display: grid;
-    place-items: center;
     font-size: large;
 }
 .greeting-context, .jadwal .open-jadwal {
     flex: 5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 .greeting-context .selamat {
     color: var(--white-1);
@@ -71,7 +58,6 @@
 }
 /* jadwal */
 .jadwal {
-    position: relative;
     padding-right: 0;
     gap: 0;
     min-height: 38px;
@@ -91,9 +77,6 @@
     background-color: var(--black-2);
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 .jadwal .preview:hover .setting, .jadwal .preview:hover .setting-btn {
     opacity: 1;
@@ -109,10 +92,7 @@
     background-color: #ddd;
     color: var(--text-1);
     transition: .1s;
-    flex-direction: row;
-    justify-content: space-between;
     padding: 0 10px;
-    align-items: center;
     font-size: small;
 }
 .jadwal .open-jadwal:hover {
@@ -135,9 +115,6 @@
     padding: 2px 5px;
     font-size: small;
     border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     min-width: 45px;
     width: fit-content;
     margin: 3px;
@@ -152,8 +129,6 @@
 }
 /* proggress */
 .progress {
-    display: flex;
-    flex-direction: column;
     gap: .5em;
     width: 100%;
 }
@@ -162,7 +137,6 @@
     height: 20px;
     width: 100%;
     border-radius: 5px;
-    overflow: hidden;
 }
 .progress-value {
     height: 100%;

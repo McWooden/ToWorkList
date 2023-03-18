@@ -11,11 +11,11 @@ export function PageProggress() {
         return Math.round((value.length / list.length)*100) + '%'
     }
     return (
-        <div className="progress">
-            <div className="progress-bar">
+        <div className="progress d-flex fd-column">
+            <div className="progress-bar of-hidden">
                 <div className="progress-value undone" style={{width: widthValue(finished)}}/>
             </div>
-            <div className="progress-bar">
+            <div className="progress-bar of-hidden">
                 <div className="progress-value done" style={{width: widthValue(unfinished)}}/>
             </div>
         </div>

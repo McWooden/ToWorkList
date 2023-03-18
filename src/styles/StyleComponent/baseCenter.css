@@ -1,24 +1,14 @@
 @import url(./card.css);
 @import url(./detailCard.css);
 .center {
-    display: flex;
     gap: 5px;
-    flex-direction: column;
-    position: relative;
 }
 .center-action-btn {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    position: fixed;
     bottom: 5px;
-    align-self: flex-end;
     gap: .5em;
 }
 .detail-back {
-    display: flex;
     gap: 10px;
-    align-items: center;
     background-color: var(--purple-2);
     border-radius: 5px;
     padding: 10px 15px;
