@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
-import { Setting } from '../../Setting/Setting'
+import { Setting } from "../../Setting/Setting"
 
 export function ModeNavbarHeader() {
     const pathBook = useSelector(state => state.fetch.pathBook)
