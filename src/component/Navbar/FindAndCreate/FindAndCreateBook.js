@@ -2,17 +2,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faCompass, faSearch, faImage, faXmark } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux'
-import { setFetch } from '../../redux/fetchSlice'
-import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../../redux/sourceSlice'
+import { setFetch } from '../../../redux/fetchSlice'
+import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../../../redux/sourceSlice'
 import { toast } from 'react-toastify'
-import { imageToast, loadingToast } from '../../utils/notif';
-import { ModalSecond } from '../Modal/ModalSecond'
-import { ModalLight } from '../Modal/ModalLight'
+import { imageToast, loadingToast } from '../../../utils/notif';
+import { ModalSecond } from '../../Modal/ModalSecond'
+import { ModalLight } from '../../Modal/ModalLight'
 import { useRef } from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { API } from '../../utils/variableGlobal'
+import { API } from '../../../utils/variableGlobal'
 import { AllBookList } from './AllBookList'
 
 

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { url } from '../../utils/variableGlobal'
+import { url } from '../../../utils/variableGlobal'
 
 
 export function BookCardItem({data}) {

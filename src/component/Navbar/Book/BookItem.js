@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setPageType, setMembers, setGuildProfile } from "../../redux/sourceSlice"
-import { setFetch } from "../../redux/fetchSlice"
-import { url } from "../../utils/variableGlobal"
+import { setPageType, setMembers, setGuildProfile } from "../../../redux/sourceSlice"
+import { setFetch } from "../../../redux/fetchSlice"
+import { url } from "../../../utils/variableGlobal"
 
 export function BookItem({data}) {
     const idBook = useSelector(state => state.fetch.idBook)

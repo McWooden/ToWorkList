@@ -1,4 +1,3 @@
-import './App.css';
 import Navbar from '../component/Navbar/Navbar';
 import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';

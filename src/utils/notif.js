@@ -1,6 +1,4 @@
 import { toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import '../component/style/notif.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage, faRightFromBracket, faUser, faMap, faFloppyDisk, faExclamation} from '@fortawesome/free-solid-svg-icons'

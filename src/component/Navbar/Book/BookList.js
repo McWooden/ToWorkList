@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector, useDispatch } from 'react-redux'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
-import { setBooksProfile } from '../../redux/sourceSlice'
+import { setBooksProfile } from '../../../redux/sourceSlice'
 import axios from 'axios'
 import { useState, useEffect, useCallback } from 'react'
-import { API } from '../../utils/variableGlobal'
+import { API } from '../../../utils/variableGlobal'
 import { BookItem } from './BookItem'
 
 export function BookList() {

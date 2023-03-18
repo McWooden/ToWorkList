@@ -1,4 +1,3 @@
-import './Auth.css'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import jwt_decode from 'jwt-decode'
 import { useEffect, useRef, useState } from 'react'

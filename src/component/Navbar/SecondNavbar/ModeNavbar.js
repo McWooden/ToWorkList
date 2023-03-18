@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { useSelector } from "react-redux"
-import { AppContext } from "../../pages/App"
+import { AppContext } from "../../../pages/App"
 import { ModeNavbarHeader } from "./ModeNavbarHeader"
 import { Profile } from "./Profile"
 import { PageAccountList } from "./PageAccountList"

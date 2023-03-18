@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector, useDispatch } from "react-redux"
-import { setSource, setPageType } from "../../redux/sourceSlice"
-import { setPathPageOfBook } from "../../redux/fetchSlice"
+import { setSource, setPageType } from "../../../redux/sourceSlice"
+import { setPathPageOfBook } from "../../../redux/fetchSlice"
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 
 export function PageListItem({data}) {

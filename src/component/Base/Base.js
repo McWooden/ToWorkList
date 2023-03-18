@@ -1,6 +1,4 @@
-import '../style/base.css'
-import '../style/Modal.css'
-import '../style/kalender.css'
+
 import { useSelector } from 'react-redux'
 import { Welcome } from '../Page/Welcome'
 import { TodoDetail } from './TodoDetail';

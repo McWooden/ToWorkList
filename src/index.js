@@ -12,6 +12,22 @@ import store from './redux/store'
 import { Provider } from 'react-redux';
 import Join from './pages/Join'
 
+// import all css
+import 'react-toastify/dist/ReactToastify.css';
+import './component/style/base.css'
+import './component/style/Modal.css'
+import './component/style/kalender.css'
+import './component/style/Modal.css'
+import './component/style/Navbar.css'
+import './component/style/bookCard.css'
+import './component/style/page.css'
+import './component/style/setting.css'
+import './component/style/TodoApp.css'
+import './component/style/notif.css'
+import './pages/Auth.css'
+import './pages/Join.css'
+import './pages/App.css';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -1,4 +1,3 @@
-import './Join.css'
 import { useState, useEffect, useCallback } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

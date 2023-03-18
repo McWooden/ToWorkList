@@ -3,7 +3,7 @@ import { faPlus, faRepeat } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useState, useEffect, useRef } from "react"
-import { convertDateToString } from "../../utils/convertDateFormat"
+import { convertDateToString } from "../../../utils/convertDateFormat"
 
 export function Profile() {
     const navigate = useNavigate()

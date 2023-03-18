@@ -1,11 +1,10 @@
-import '../style/Navbar.css'
-import '../style/bookCard.css'
 import { AppContext } from '../../pages/App'
 import { useContext } from 'react'
-import { HomeButton } from './HomeButton'
-import { BookList } from './BookList'
-import { ModeNavbar } from './ModeNavbar'
-import { FindAndCreateBook } from './FindAndCreateBook'
+
+import { HomeButton } from './SecondNavbar/HomeButton'
+import { BookList } from './Book/BookList'
+import { ModeNavbar } from './SecondNavbar/ModeNavbar'
+import { FindAndCreateBook } from './FindAndCreate/FindAndCreateBook'
 
 function Navbar() {
     const {hideNavbar, navRef} = useContext(AppContext)

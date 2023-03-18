@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
-import { API } from "../../utils/variableGlobal"
+import { API } from "../../../utils/variableGlobal"
 import { useState, useCallback, useEffect } from 'react'
 import { PageListItem } from './PageListItem'
 

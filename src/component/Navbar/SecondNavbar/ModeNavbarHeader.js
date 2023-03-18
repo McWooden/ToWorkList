@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
-import { GuildSetting } from '../Setting/setting'
+import { Setting } from '../../Setting/Setting'
 
 export function ModeNavbarHeader() {
     const pathBook = useSelector(state => state.fetch.pathBook)
@@ -29,7 +29,7 @@ export function ModeNavbarHeader() {
         <div className="modeNavbarHeader">
             <h4 className='guild-name'>{pathBook}</h4>
             <FontAwesomeIcon icon={faGear} className='settingNavbar pointer' onClick={() => setSettingOpen(true)}/>
-            <GuildSetting open={settingOpen} close={handleClose}/>
+            <Setting open={settingOpen} close={handleClose}/>
         </div>
     )
 }
