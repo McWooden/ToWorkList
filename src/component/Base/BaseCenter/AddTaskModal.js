@@ -80,7 +80,7 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
     }
     return (
         <Modal open={modalOpen} close={modalClose}>
-            <div className="add-modal d-flex fd-row">
+            <div className="add-modal d-flex">
                 <div className="general-modal d-flex fd-column ai-center jc-center">
                 <Calendar 
                     onClickDay={dayTileClick}

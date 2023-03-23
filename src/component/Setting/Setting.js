@@ -17,7 +17,7 @@ export default function Setting({open, close}) {
     }
     return ReactDOM.createPortal(
         <div className="setting_full p-fixed d-flex">
-            <div className="setting_full_nav of-hidden">
+            <div className="setting_full_nav">
                 <ul>
                     <li className={`setting_full_nav_list ${select === 'profile' && 'active'}`} onClick={() => handleSelectOnChange('profile')}>
                         <FontAwesomeIcon icon={faPencil} className='setting_full_nav_list_icon'/>

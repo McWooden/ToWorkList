@@ -406,15 +406,31 @@ nav .nav-1 {
         flex-direction: column-reverse;
         width: calc(100% - 2em);
         margin: 1em;
+        margin-top: 10em;
     }
     nav {
         display: flex;
         width:unset;
     }
     nav .nav-1 {
+        align-items: center;
+        border: none;
+        flex-direction: row;
         padding: 0 1em;
     }
-    nav .nav-1, .home-frame, .find-create-frame, .nav-guild {
+    .find-create-frame {
+        border-top: none;
+        border-left: 2px solid var(--text-1);
+        padding: 0 0 0 8px;
+        margin: .5em;
+    }
+    .home-frame {
+        border-bottom: none;
+        border-right: 2px solid var(--text-1);
+        padding: 0 8px 0 0;
+        margin: .5em;
+    }
+    .nav-guild {
         align-items: center;
         flex-direction: row;
         border: none;
@@ -422,19 +438,8 @@ nav .nav-1 {
     .guild-frame {
         padding: 0 !important;
     }
-    .find-create-frame {
-        width: fit-content;
-        padding: 0 2px;
-        margin: 0;
-    }
     .modeNavbar {
         margin: 0;
-    }
-    .hideNavbar {
-        transform: translateY(calc(100%));
-    }
-    .showNavbar {
-        transform: translateY(0);
     }
     .profile_pop {
         left: 0;

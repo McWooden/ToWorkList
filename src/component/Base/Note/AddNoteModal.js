@@ -53,7 +53,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
     }
     return (
         <Modal open={modalOpen} close={modalClose}>
-            <div className='add-modal d-flex fd-row'>
+            <div className='add-modal d-flex'>
                 <div className="general-modal d-flex fd-column ai-center jc-center">
                     <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/>
                 </div>

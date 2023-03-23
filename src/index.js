@@ -12,14 +12,14 @@ import Join from './pages/Join'
 
 // import all css
 import 'react-toastify/dist/ReactToastify.css';
+import './styles/index.css'
+import './styles/utils.css'
 import './styles/base/base.css'
 import './styles/modal/Modal.css'
 import './styles/model/card.css'
 import './styles/other/loading.css'
 import './styles/pages/App.css'
 import './styles/theme/dark.css'
-import './styles/index.css'
-import './styles/utils.css'
 import './styles/welcome.css'
 
 

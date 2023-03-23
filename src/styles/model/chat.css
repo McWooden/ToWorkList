@@ -60,9 +60,6 @@
     margin-left: 0;
     margin-right: 2px;
 }
-.base-right-hide {
-    transform: translateX(0);
-}
 .chat-dropdown {
     bottom: 0;
     right: 0;
