@@ -48,12 +48,12 @@ export function Welcome() {
         setRandomTagline(taglines[newRandomIndex])
     }
     return (
-        <div className="welcome" onClick={handleClick}>
+        <div className="welcome d-flex fd-column of-auto" onClick={handleClick}>
             <Greeting/>
-            <div className='welcome_page'>
-                <p className='welcome_name'>Toworklist</p>
-                <span className={`welcome_tagline ${typing ? 'typing': ''}`}>{displayText}<span className="cursor">|</span></span>
-                <span className="tapToOpenNavbar" onClick={() => handleNavbar(hideNavbar)}>Ketuk untuk membuka navbar</span>
+            <div className='welcome_page d-flex fd-column ai-center jc-flex-start'>
+                <p className='welcome_name as-flex-start'>Toworklist</p>
+                <span className={`welcome_tagline as-flex-start ${typing ? 'typing': ''}`}>{displayText}<span className="cursor">|</span></span>
+                <span className="tapToOpenNavbar as-flex-start d-block" onClick={() => handleNavbar(hideNavbar)}>Ketuk untuk membuka navbar</span>
             </div>
         </div>
     )

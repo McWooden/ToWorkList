@@ -53,8 +53,8 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
     }
     return (
         <Modal open={modalOpen} close={modalClose}>
-            <div className='add-modal'>
-                <div className="general-modal">
+            <div className='add-modal d-flex fd-row'>
+                <div className="general-modal d-flex fd-column ai-center jc-center">
                     <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/>
                 </div>
                 <form className="form-modal" onSubmit={handleSubmit}>
@@ -62,7 +62,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
                         <h3>{title}</h3>
                         <p className="date">{date}</p>
                     </div>
-                    <div className="input-left">
+                    <div className="input-left d-flex fd-row">
                         <select style={borderStyle} onChange={handleColor} name='color' value={currentColor}>
                             <option value="grey">grey</option>
                             <option value="tomato">tomato</option>

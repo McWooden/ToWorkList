@@ -20,9 +20,9 @@ function App() {
   }
   useEffect(() => {
     if (mode === 'dark') {
-      import('../styles/StyleComponent/dark.css')
+      import('../styles/theme/dark.css')
     } else {
-      import('../styles/StyleComponent/light.css')
+      import('../styles/theme/light.css')
     }
   }, [mode])
   useEffect(() => {

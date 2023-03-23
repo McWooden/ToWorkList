@@ -1,9 +1,6 @@
 .auth {
     height: 100vh;
     margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .auth-context {
     background-color: var(--black-2);
@@ -63,11 +60,7 @@
 }
 /* register */
 .register {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100%;
-    flex-direction: column;
 }
 .msg_email_exist {
     margin: 10px 0;
@@ -77,8 +70,6 @@
     margin-top: 15px;
 }
 .account_preview {
-    display: flex;
-    align-items: center;
     padding: 10px 15px;
     gap: 10px;
     background-color: var(--black-1);
@@ -94,8 +85,6 @@
     border-radius: 50px;
 }
 .auth_form {
-    display: flex;
-    flex-direction: column;
     gap: 10px;
     margin-top: 10px;
 }
@@ -131,10 +120,7 @@
     filter: brightness(110%);
 }
 .login_btn_container {
-    display: flex;
-    align-items: center;
     gap: 10px;
-    align-items: center;
 }
 .login_btn_container > * {
     height: 40px !important;
@@ -151,12 +137,6 @@
     border: 1px solid yellowgreen;
 }
 /* pemulihan */
-.pemulihan {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 .pemulihan .error_msg {
     margin-top: 15px;
 }

@@ -5,9 +5,17 @@
 .d-grid {
     display: grid;
 }
+.d-inline-block {
+    display: inline-block;
+}
+.d-block {
+    display: block;
+}
+/* grid property */
 .pi-center {
     place-items: center;
 }
+/* flex property */
 .fd-row {
     flex-direction: row;
 }
@@ -29,8 +37,20 @@
 .ai-flex-end {
     align-items: flex-end;
 }
+.ac-center {
+    align-content: center;
+}
 .as-flex-end {
     align-self: flex-end;
+}
+.as-flex-start {
+    align-self: start;
+}
+.as-center {
+    align-self: center;
+}
+.fw-wrap {
+    flex-wrap: wrap;
 }
 /* overflow */
 .of-hidden {
@@ -48,4 +68,7 @@
 }
 .p-fixed {
     position: fixed;
+}
+.p-absolute {
+    position: absolute;
 }

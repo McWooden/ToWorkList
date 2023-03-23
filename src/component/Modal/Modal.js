@@ -7,8 +7,8 @@ export function Modal({children, open, close}) {
     }
     return ReactDOM.createPortal(
         <>
-        <div className='overlay' onClick={setClose}/>
-        <div className='modal'>
+        <div className='overlay p-fixed' onClick={setClose}/>
+        <div className='modal of-auto'>
             {children}
         </div>
         </>,

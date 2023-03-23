@@ -39,7 +39,7 @@ export function Profile() {
         <div className="profile-container">
             {profile && (
                 <>
-                <div className={`profile_pop ${userPop?'active':'inactive'}`} ref={userPopRef}>
+                <div className={`profile_pop d-flex fd-column p-fixed ${userPop?'active':'inactive'}`} ref={userPopRef}>
                 <a href={profile.avatar} target='_blank' rel="noreferrer" >
                     <img src={profile.avatar} alt={profile.nickname}/>
                 </a>
@@ -59,7 +59,7 @@ export function Profile() {
                         </div>
                     </div>
                 </div>
-                <div className='profile pointer' ref={profileRef} onClick={handlePop}>
+                <div className='profile d-flex ai-center pointer' ref={profileRef} onClick={handlePop}>
                     <img src={profile.avatar} alt={profile.nickname}/>
                     <div className="profile-body">
                         <div className="profile-nickname">{profile.nickname}</div>

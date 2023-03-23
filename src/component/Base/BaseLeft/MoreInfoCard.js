@@ -9,16 +9,16 @@ export function MoreInfoCard() {
     const todo = useSelector(state => state.todo)
     return (
         <>
-        <div className='todo-card'>
-            <div className="todo-left">
+        <div className='todo-card d-flex fd-row  jc-space-between'>
+            <div className="todo-left d-flex fd-row p-relative">
                 <div className="card-color" style={{backgroundColor: todo.details.color}}></div>
-                <div className="card-text">
+                <div className="card-text d-flex fd-column jc-center">
                     <div className="card-title">{todo.details.item_title}</div>
                     <div className="card-deadline">{convertDateToString(todo.details.deadline)}</div>
                 </div>
             </div>
         </div>
-        <div className='info-menu'>
+        <div className='info-menu d-flex of-auto'>
             <InfoMenu icon={faCheck} count={todo.dones.length}/>
             <InfoMenu icon={faNoteSticky} count={todo.notes.length}/>
             <InfoMenu icon={faImage} count={todo.images.length}/>

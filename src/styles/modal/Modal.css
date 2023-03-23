@@ -1,5 +1,6 @@
+@import url(./Navbar.css);
+@import url(./setting.css);
 .overlay {
-    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
@@ -26,7 +27,6 @@
     width: 90vw;
     height: 75vh;
     border-radius: 8px;
-    overflow: auto;
 }
 .second_modal {
     border-radius: 20px;
@@ -37,18 +37,13 @@
     max-width: 512px;
 }
 .add-modal {
-    display: flex;
-    flex-direction: row;
     height: 100%;
 }
 .general-modal {
     background-color: var(--black-3);
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
+
 .icon-modal {
     font-size: 5em;
     color: royalblue;
@@ -67,8 +62,6 @@
     color: var(--white-2);
 }
 .input-left {
-    display: flex;
-    flex-direction: row;
     gap: 5px;
 }
 .form-modal select {
@@ -127,8 +120,6 @@
     width: calc(100% - 30px);
     max-width: 650px;
     border-radius: 5px;
-    display: flex;
-    flex-direction: row;
 }
 .confirm.light {
     background-color: var(--kedua);
@@ -144,9 +135,6 @@
     width: 4em;
     margin-right: 1em;
 }
-.confirm.guild_delete {
-    flex-direction: column;
-}
 .confirm .form-modal {
     margin-top: 1em;
     padding: 0;
@@ -156,7 +144,6 @@
     color: var(--white-3);
 }
 .confirm-profile {
-    display: flex;
     color: var(--text-2);
     margin-bottom: 1em;
 }
@@ -164,10 +151,6 @@
     padding: 5px 10px;
 }
 .confirm-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     font-size: 1.5em;
     padding: 25px 30px;
 }
@@ -191,9 +174,6 @@
     color: var(--white-2);
 }
 .confirm-button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
     gap: 20px;
     font-size: small;
     margin: 10px 0 5px;
@@ -215,16 +195,11 @@
 }
 /* filedrop */
 .file-drop {
-    display: flex;
     height: 100%;
-    overflow: scroll;
 }
 .img-view {
     flex: 1;
     background-color: var(--black-3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .img-view img {
     height: 100%;
@@ -234,17 +209,11 @@
 .drop-zone {
     width: 90%;
     height: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     border: 10px solid var(--black-4);
     border-style:dashed;
-    cursor: pointer;
     transition: .3s;
-    position: relative;
     border-radius: 5px;
-}
+} 
 .drop-icon {
     font-size: 5em;
     color: var(--black-3);
@@ -252,7 +221,6 @@
 }
 .drop-text {
     font-size: small;
-    position: absolute;
     transition: .3s;
 }
 .drop-zone:hover {

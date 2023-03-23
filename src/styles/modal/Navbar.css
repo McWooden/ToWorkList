@@ -1,9 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
-@import './loading.css';
 .navigation_block {
     width: 100%;
     height: 100%;
-    position: fixed;
     z-index: 2;
 }
 .navigation_block.active {
@@ -14,9 +11,6 @@
     visibility: hidden;
 }
 .navigation {
-    display: flex;
-    flex-direction: row;
-    position: fixed;
     z-index: 2;
     height: -webkit-fill-available;
     filter: var(--filter-shadow);
@@ -35,15 +29,10 @@
 }
 nav {
     width: 75px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+} 
 nav .nav-1 {
     max-height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: column;
     background-color: var(--black-1);
     border-radius: 45px;
     padding: 1em 0;
@@ -73,23 +62,16 @@ nav .nav-1 {
 }
 .find-create-frame {
     border-top: 2px solid var(--text-1);
-    display: flex;
     width: 58px;
     margin: .5em;
     margin-top: 0;
     padding-top: 8px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: .5em;
 }
 .home-profile {
     border-radius: 15px;
     width: 48px;
     height: 48px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
     background-color: var(--black-3);
 }
 .home-profile:hover {
@@ -102,7 +84,6 @@ nav .nav-1 {
 .find-create {
     background-color: var(--black-4);
     box-shadow: var(--shadow-1);
-    cursor: pointer;
 }
 .find-create:hover, .find-create:hover > * {
     background-color: var(--orange-2);
@@ -111,9 +92,6 @@ nav .nav-1 {
 .guild-photo-profile {
     width: 48px;
     height: 48px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 50px;
     padding: .25em;
     margin: 0 auto;
@@ -129,9 +107,7 @@ nav .nav-1 {
 .nav-guild {
     flex: 1;
     overflow: auto;
-    display: flex;
-    flex-direction: column;
-}
+} 
 .nav-guild div {
     padding: 0 .5em;
     cursor: pointer;
@@ -150,33 +126,24 @@ nav .nav-1 {
 
 /* navbar 2 */
 .modeNavbar {
-    position: relative;
     background-color: var(--kedua);
     width: 240px;
-    display: flex;
-    flex-direction: column;
     margin: 2em 0;
     border-radius: 15px;
-    overflow: hidden;
-}
+} 
 .modeNavbarHeader {
     padding: 1.5px 10px 1.5px 16px;
-    display: flex;
-    align-items: center;
     height: 48px;
     background-color: var(--kedua);
 }
 .guild-name {
-    flex: 1;
     padding: 12px 0;
     margin: 0;
     color: var(--text-2);
-    display: inline-block;
     flex: 1 0 0;
     white-space: nowrap;
     text-overflow: ellipsis;
-    overflow: hidden;
-}
+} 
 .app-name {
     flex: 1;
     padding: 3px 0;
@@ -238,14 +205,12 @@ nav .nav-1 {
     width: 100%;
 }
 .profile {
-    display: flex;
-    align-items: center;
     padding: 5px 8px;
     background-color: var(--black-4);
     box-shadow: var(--shadow-1);
     margin: 1em;
     border-radius: 15px;
-}
+} 
 .profile:hover {
     background-color: var(--black-5);
 }
@@ -271,18 +236,15 @@ nav .nav-1 {
 /* profile pop */
 .profile_pop {
     background-color: var(--black-2);
-    position: fixed;
     width: 300px;
     left: 10px;
     bottom: 60px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
     padding: 15px 0;
-    display: flex;
-    flex-direction: column;
     gap: 10px;
     transition: .1s ease;
-}
+} 
 .profile_pop.active {
     opacity: 1;
     visibility: visible;
@@ -342,7 +304,6 @@ nav .nav-1 {
     padding: 2em;
 }
 .search_book-header {
-    display: flex;
     gap: 3px;
     margin-bottom: 1em;
 }
@@ -359,13 +320,11 @@ nav .nav-1 {
     background-color: transparent;
 }
 .search_book_container .search_bar {
-    display: flex;
     border-radius: 3px;
-    overflow: hidden;
     border: 2px solid var(--purple-1);
     border-radius: 45px;
     padding: 0 1em;
-}
+} 
 .search_book_container .tiang {
     border: 1px solid var(--text-1);
     margin: 10px 0;
@@ -376,12 +335,7 @@ nav .nav-1 {
     color: var(--text-2);
     font-size: large;
     padding: 0 1em;
-    cursor: pointer;
     margin-left: 1em;
-}
-.container-sb_action_btn {
-    display: flex;
-    justify-content: flex-end;
 }
 .sb_action_btn {
     min-width: 45px;
@@ -395,10 +349,6 @@ nav .nav-1 {
     font-size: large;
 }
 /* add server */
-.add_server_container {
-    display: flex;
-    flex-direction: column;
-}
 .add_server_container.form-modal {
     padding: 0;
 }
@@ -409,11 +359,8 @@ nav .nav-1 {
     width: 100%;
 }
 .add_server-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 2em;
-}
+} 
 .add_server_container h4 {
     margin-top: 1em;
 }
@@ -424,7 +371,6 @@ nav .nav-1 {
 }
 .add_server_container .img-view {
     background-color: unset;
-    position: relative;
     width: 80px;
     height: 80px;
 }
@@ -441,10 +387,8 @@ nav .nav-1 {
     border-radius: 50px;
     padding: 5px;
     color: var(--white-1);
-    position: absolute;
     top: 0;
     right: 0;
-    cursor: pointer;
 }
 .add_server_container .img-view .drop-zone {
     background-color: #ddd;

@@ -78,7 +78,7 @@ export function SettingRoom() {
                         </div>
                     </div>
                     <p className='small bold'>Nama halaman</p>
-                    <div className={`room roomInput ${value&&'active'}`}>
+                    <div className={`room d-flex ${value&&'active'}`}>
                         <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
                         <input type="text" placeholder='halaman baru' onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
                     </div>
@@ -99,7 +99,7 @@ export function SettingRoom() {
         return (
             <>
             {headerElement}
-            <div className="nav-guild">
+            <div className="nav-guild d-flex fd-column">
                 <div className="reload_btn-frame" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
                 </div>

@@ -83,20 +83,20 @@ export function CardImages() {
     }
     const [isFetching, setIsFetching] = useState(false)
     return (
-        <div className='images-container'>
-            <div className='images-list'>
+        <div className='images-container d-flex fd-column'>
+            <div className='images-list d-flex fw-wrap'>
                 {box}
             </div>
             <FontAwesomeIcon icon={faPlus} className='add-image' onClick={handleModalOpen}/>
             <FileDrop open={modalOpen} close={handleModalClose}>
-                <form ref={formRef} className='file-drop' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
-                    <div className="img-view" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
+                <form ref={formRef} className='file-drop d-flex of-scroll' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
+                    <div className="img-view d-flex ai-center jc-center" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
                     { previewUrl ? 
                         <img src={previewUrl} alt={image.name} /> 
                     :
-                        <div className="drop-zone">
+                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
                             <FontAwesomeIcon icon={faImage} className='drop-icon'/>
-                            <p className='drop-text'>click atau drop disini</p>
+                            <p className='drop-text p-absolute'>click atau drop disini</p>
                             <input 
                                 type="file" 
                                 accept='image/*' 

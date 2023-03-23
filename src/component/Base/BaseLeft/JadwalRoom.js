@@ -79,14 +79,14 @@ export function JadwalRoom() {
                 <FontAwesomeIcon icon={faChevronRight} className='jadwal-arrow'/>
             </div>
             <FileDrop open={modalOpen} close={() => setModalOpen(false)}>
-                <form ref={formRef} className='file-drop jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
-                    <div className="img-view" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
+                <form ref={formRef} className='file-drop d-flex of-scroll jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
+                    <div className="img-view d-flex ai-center jc-center" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
                     { previewUrl ? 
                         <img src={previewUrl} alt={image.name} /> 
                     :
-                        <div className="drop-zone">
+                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
                             <FontAwesomeIcon icon={faImage} className='drop-icon'/>
-                            <p className='drop-text'>click atau drop disini</p>
+                            <p className='drop-text p-absolute'>click atau drop disini</p>
                             <input 
                                 type="file" 
                                 accept='image/*' 

@@ -35,7 +35,7 @@ export function PageList() {
 
     if (reloading) {
         return (
-            <div className="nav-guild">
+            <div className="nav-guild d-flex fd-column">
                 <div className="reload_btn-frame" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
                 </div>

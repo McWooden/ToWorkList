@@ -181,20 +181,20 @@ export function SettingProfile() {
         <div className="setting_header">
             <h3>Profil</h3>
         </div>
-        <div className="setting_full_profile_view">
+        <div className="setting_full_profile_view d-flex fd-column">
             <div className='setting_full_profile_view_banner'>
-                <img className={`setting_banner ${full?'full':''}`} src={`${url}/${profile.avatar_url}`} alt={profile.book_title} onClick={() => setFull(!full)}/>
+                <img className={`setting_banner pointer ${full?'full':''}`} src={`${url}/${profile.avatar_url}`} alt={profile.book_title} onClick={() => setFull(!full)}/>
             </div>
-            <div className="setting_full_profile_view_body">
-                <div className="setting_full_profile_view_float">
-                    <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='setting_full_pp_guild' onClick={() => setDropDown(!dropDown)} ref={btnRef}/>
+            <div className="setting_full_profile_view_body p-relative">
+                <div className="setting_full_profile_view_float d-fle ai-center p-absolute">
+                    <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='setting_full_pp_guild pointer' onClick={() => setDropDown(!dropDown)} ref={btnRef}/>
                     <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                        <ul className='reverse'>
-                            <li className='pointer' onClick={() => setOpenUnggah(true)}>
+                        <ul className='reverse d-flex fd-column of-hidden p-absolute pointer'>
+                            <li className='d-flex ai-center' onClick={() => setOpenUnggah(true)}>
                                 <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                                 <span>Unggah</span>
                             </li>
-                            <li className='pointer' onClick={() => setDeleteOpen(true)}>
+                            <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
                                 <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
                                 <span>Hapus</span>
                             </li>
@@ -202,12 +202,12 @@ export function SettingProfile() {
                     </div>
                 </div>
                 <h5>Nama Buku</h5>
-                <div className='guild_editor'>
+                <div className='guild_editor d-flex ai-center'>
                 {editJudul?
                         <>
-                        <form className="form-modal" onSubmit={handleSubmitJudul}>
+                        <form className="form-modal fd-row" onSubmit={handleSubmitJudul}>
                             <input type="text" placeholder={profile.book_title} value={valueJudul}  onChange={(e) => setValueJudul(e.target.value)}/>
-                            <div className="sb_action_btn">
+                            <div className="sb_action_btn d-flex">
                                 <FontAwesomeIcon icon={faXmark} onClick={() => setEditJudul(false)} className='action_btn'/>
                                 {saveLoading?
                                     <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn spinner'/>
@@ -232,7 +232,7 @@ export function SettingProfile() {
                             <>
                             <form className="form-modal flex-one" onSubmit={handleSubmitDesc}>
                                 <textarea value={valueDesc} placeholder={profile.desc} onChange={(e) => setValueDesc(e.target.value)}/>
-                                <div className="sb_action_btn">
+                                <div className="sb_action_btn as-flex-end">
                                     <FontAwesomeIcon icon={faXmark} onClick={() => setEditDesc(false)} className='action_btn'/>
                                     {saveLoadingDesc?
                                         <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn spinner'/>
@@ -259,14 +259,14 @@ export function SettingProfile() {
         <DeleteBookModal open={deleteGuildOpen} close={() => setDeleteGuildOpen(false)} data={profile} callback={deleteBook}/>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={'PP Buku'} metode='delete' color='var(--purple-1)' callback={deletePp} deleteText={'pp nya nanti ilang, diganti gambar udin'}/>
         <FileDrop open={openUnggah} close={() => setOpenUnggah(false)}>
-                <form ref={formRef} className='file-drop jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
-                    <div className="img-view" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
+                <form ref={formRef} className='file-drop d-flex of-scroll jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
+                    <div className="img-view d-flex ai-center jc-center" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
                     { previewUrl ? 
                         <img src={previewUrl} alt={image.name} /> 
                     :
-                        <div className="drop-zone">
+                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
                             <FontAwesomeIcon icon={faImage} className='drop-icon'/>
-                            <p className='drop-text'>click atau drop disini</p>
+                            <p className='drop-text p-absolute'>click atau drop disini</p>
                             <input 
                                 type="file" 
                                 accept='image/*' 

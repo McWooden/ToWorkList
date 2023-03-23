@@ -17,7 +17,7 @@ const API = process.env.REACT_APP_API
 export function Auth() {
     const navigate = useNavigate()
     return (
-        <div className="auth">
+        <div className="auth d-flex ai-center jc-center">
             <div className="auth-context">
                 <h3>Autentikasi</h3>
                 <div className="navigate_to">
@@ -54,7 +54,7 @@ export function Register() {
     }
     return (
         <>
-            <div className="auth">
+            <div className="auth d-flex ai-center jc-center">
                 <div className="auth-context">
                 {
                     user ?
@@ -62,7 +62,7 @@ export function Register() {
                     :
                         <>
                         <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
-                            <div className="register">
+                            <div className="register d-flex jc-center ai-center fd-column">
                                 <h4>Registrasi</h4>
                                 <p className='msg_email_exist'>{msg}</p>
                                 <GoogleLogin
@@ -176,14 +176,14 @@ function FormRegist({data}) {
     return (
         <>
             <h4>Sign up</h4>
-            <div className="account_preview">
+            <div className="account_preview d-flex ai-center">
                 <img src={inputLock.avatar} alt={inputLock.name}/>
                 <div>
                     <p>{inputLock.name}</p>
                     <p className='nickname_preview'>{nickname}</p>
                 </div>
             </div>
-            <form className='auth_form' onSubmit={handleSubmit}>
+            <form className='auth_form d-flex fd-column' onSubmit={handleSubmit}>
                 <label>
                 {errorNickname?
                 <p className='error_msg'>{errorNickname}</p>
@@ -260,7 +260,7 @@ export function Login() {
         })
     }
     return (
-        <div className="auth">
+        <div className="auth d-flex ai-center jc-center">
             <div className="auth-context">
                 <h4>Login</h4>
                 <form className='auth_form' onSubmit={handleSubmit}>
@@ -273,7 +273,7 @@ export function Login() {
                         <span>Password</span>
                         <input type="password" value={password} onChange={event => setPassowrd(event.target.value)} placeholder='password'/>
                     </label>
-                    <div className="login_btn_container">
+                    <div className="login_btn_container d-flex ai-center">
                         <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
                         <GoogleLogin
                             onSuccess={credentialResponse => {
@@ -357,8 +357,8 @@ export function Pemulihan() {
         })
     }
     return (
-        <div className="auth">
-            <div className="auth-context pemulihan">
+        <div className="auth d-flex ai-center jc-center">
+            <div className="auth-context pemulihan d-flex fd-column ai-center jc-center">
                 <h4>Memulihkan akun</h4>
                 <p className='error_msg'>{msg}</p>
                 {

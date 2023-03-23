@@ -1,4 +1,3 @@
-@import url(./chat.css);
 .base-right {
     flex: 1;
     background-color: var(--ketiga);
@@ -82,7 +81,7 @@
     margin: 4px 0;
 }
 .group-user:hover {
-    background-color: var(--purple-1-transparent);
+    background-color: var(--kedua);
     transition: .1s ease;
 }
 .group-user img {

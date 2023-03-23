@@ -20,12 +20,12 @@ export function NavTop() {
     }
     return (
         <section id='navTop'>
-            <header>
-            <div className='header-left'>
+            <header className='d-flex ai-center ac-center jc-space-between p-fixed'>
+            <div className='header-left d-flex'>
                 <FontAwesomeIcon icon={faBars} className={`bars pointer ${hideNavbar?'btn-inactive':'btn-active'}`} onClick={handleClickNavbar}/>
-                <h4 className='pageTitle'>{pathPageOfBook}</h4>
+                <h4 className='of-hidden'>{pathPageOfBook}</h4>
             </div>
-            <div className="sidebar-button">
+            <div className="sidebar-button d-flex ai-center">
                 <FontAwesomeIcon icon={faCube} className={`btn-sidebar btn-sidebar-left pointer ${hideLeftBase?'btn-inactive':'btn-active'}`} onClick={left}/>
                 <FontAwesomeIcon icon={faUserGroup} className={`btn-sidebar btn-sidebar-right pointer ${hideRightBase?'btn-inactive':'btn-active'}`} onClick={right}/>
             </div>

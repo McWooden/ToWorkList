@@ -15,7 +15,7 @@ export function HomeButton() {
     }
     return (
         <div className='home-frame' onClick={handleClick}>
-            <div className={`home-profile pointer ${pathBook==='@me' ? 'active' : ''}`}>
+            <div className={`home-profile jc-center ai-center d-flex pointer ${pathBook==='@me' ? 'active' : ''}`}>
                 <FontAwesomeIcon icon={faHouse} className={'nav-icon'}/>
             </div>
         </div>

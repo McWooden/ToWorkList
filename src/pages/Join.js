@@ -88,14 +88,14 @@ export default function Join(){
         <div className="modal_container">
             <div className="modal_context modal_context-transparent">
                 <div className="book_card">
-                    <div className="book_card-header">
+                    <div className="book_card-header d-flex fd-column">
                         <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='banner'/>
                     </div>
-                    <div className="book_card-body">
-                        <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='avatar'/>
+                    <div className="book_card-body p-relative d-flex fd-column">
+                        <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='avatar p-absolute'/>
                         <p className='title'>{data.profile.book_title}</p>
                         <p>{data.profile.desc}</p>
-                        <p className='panjang_anggota'>{data.users_length} Anggota</p>
+                        <p className='as-flex-end'>{data.users_length} Anggota</p>
                     </div>
                     <div className='join_btn' onClick={gabung}>
                         <img src={myAccount.avatar} alt={myAccount.nickname} />

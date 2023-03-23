@@ -1,12 +1,14 @@
 @import url(./baseLeft.css);
 @import url(./baseCenter.css);
 @import url(./baseRight.css);
+@import url(./detailCard.css);
+@import url(./TodoApp.css);
 
 .base  {
     background-color: var(--pertama);
     overflow: hidden;
     padding-top: 48px;
-    height: -webkit-fill-available;;
+    height: -webkit-fill-available;
 }
 .base-left, .base-center, .base-right {
     overflow: auto;

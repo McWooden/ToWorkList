@@ -86,20 +86,20 @@ export function SettingPageListItem({data, callback}) {
         <div className={`room ${active?'active':''}`}>
             <FontAwesomeIcon icon={fontawesome[icon]} className={`room-icon ${active?'active':''}`}/>
             <span className={active?'active':''}>{title}</span>
-            <div className="card-more" ref={btnRef}>
-                <FontAwesomeIcon icon={faEllipsisVertical} className={`card-more-btn pointer  ${active?'active':''}`} onClick={() => setDropDown(!dropDown)}/>
+            <div className="card-more d-flex ai-center" ref={btnRef}>
+                <FontAwesomeIcon icon={faEllipsisVertical} className={`card-more d-flex ai-center-btn pointer  ${active?'active':''}`} onClick={() => setDropDown(!dropDown)}/>
             </div>
             <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                <ul>
-                    <li className='pointer' onClick={handleClick}>
+                <ul className='d-flex fd-column of-hidden p-absolute pointer'>
+                    <li className='d-flex ai-center' onClick={handleClick}>
                         <FontAwesomeIcon icon={faEye} className='card-dd-btn' />
                         <span>Masuk</span>
                     </li>
-                    <li className='pointer' onClick={() => setOpenAdd(true)}>
+                    <li className='d-flex ai-center' onClick={() => setOpenAdd(true)}>
                         <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                         <span>Ubah</span>
                     </li>
-                    <li className='pointer' onClick={() => setDeleteOpen(true)}>
+                    <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
                         <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
                         <span>Hapus</span>
                     </li>
@@ -122,7 +122,7 @@ export function SettingPageListItem({data, callback}) {
                         </div>
                     </div>
                     <p className='small bold uppercase'>Nama halaman</p>
-                    <div className={`room roomInput ${value&&'active'}`}>
+                    <div className={`room d-flex ${value&&'active'}`}>
                         <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
                         <input type="text" placeholder={title} onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
                     </div>

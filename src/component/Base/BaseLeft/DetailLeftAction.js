@@ -90,14 +90,14 @@ export function DetailLeftAction() {
     }
     return (
         <>
-        <div className='detail-Left-action'>
+        <div className='detail-Left-action d-flex'>
             <FontAwesomeIcon icon={faTrash} className='action-left action-trash-left' onClick={() => setDeleteOpen(true)}/>
             <FontAwesomeIcon icon={faPenToSquare} className='action-left action-edit-left' onClick={() => setEditModal(true)}/>
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
         <Modal open={editModal} close={() => setEditModal(false)}>
-            <div className="edit_card_modal">
-                <div className="general-modal">
+            <div className="edit_card_modal d-flex">
+                <div className="general-modal d-flex fd-column ai-center jc-center">
                     <Calendar 
                         onClickDay={dayTileClick}
                         className="calendar-dark" 
@@ -121,7 +121,7 @@ export function DetailLeftAction() {
                         <h3>{title}</h3>
                         <p className="date">{convertDateToString(item.details.deadline)}</p>
                     </div>
-                    <div className="input-left">
+                    <div className="input-left d-flex fd-row">
                     <input name='title' type="text" placeholder='Judul' style={borderStyle} required autoComplete='off' value={inputTitle} onChange={handleTitleChange}/>
                         <select style={borderStyle} onChange={handleColor} name='color'>
                             <option key='default' value={item.details.color}>

@@ -19,10 +19,10 @@ export function DeleteBookModal({open, close, data, callback}) {
 
     return ReactDOM.createPortal(
         <>
-        <div className="overlay" onClick={closeModal} />
-        <div className="confirm guild_delete light">
+        <div className="overlay p-fixed" onClick={closeModal} />
+        <div className="confirm fd-column light">
             <div className="confirm-body">
-                <div className="confirm-profile">
+                <div className="confirm-profile d-flex">
                     <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} />
                     <div className="confirm-context">
                     <h3>Hapus</h3>
@@ -35,7 +35,7 @@ export function DeleteBookModal({open, close, data, callback}) {
                 <form className='form-modal light'>
                     <p>ketik <span className="bold">{profile.book_title}</span> untuk melanjutkan menghapus</p>
                     <input type="text" placeholder='masukkan judul buku' value={value} onChange={(e) => setValue(e.target.value)}/>
-                    <div className="confirm-button">
+                    <div className="confirm-button d-flex ai-center jc-flex-end">
                         <div className="confirm-btn confirm-no" onClick={closeModal}>Batal</div>
                         {value === profile.book_title  ? (
                             <div className="confirm-btn confirm-yes" onClick={acceptCallback}>

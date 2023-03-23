@@ -12,7 +12,7 @@ export function Contributor() {
     return (
         <div className="contributor-container">
             <p>Contributor</p>
-            <div className="contributor">
+            <div className="contributor of-auto">
                 {box}
             </div>
         </div>

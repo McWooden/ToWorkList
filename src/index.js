@@ -12,22 +12,15 @@ import Join from './pages/Join'
 
 // import all css
 import 'react-toastify/dist/ReactToastify.css';
-import './styles/StyleComponent/dark.css'
-import './styles/StyleComponent/base.css'
-import './styles/StyleComponent/Modal.css'
-import './styles/StyleComponent/kalender.css'
-import './styles/StyleComponent/Modal.css'
-import './styles/StyleComponent/Navbar.css'
-import './styles/StyleComponent/bookCard.css'
-import './styles/StyleComponent/page.css'
-import './styles/StyleComponent/setting.css'
-import './styles/StyleComponent/TodoApp.css'
-import './styles/StyleComponent/notif.css'
+import './styles/base/base.css'
+import './styles/modal/Modal.css'
+import './styles/model/card.css'
+import './styles/other/loading.css'
+import './styles/pages/App.css'
+import './styles/theme/dark.css'
 import './styles/index.css'
 import './styles/utils.css'
-import './styles/StylePages/Auth.css'
-import './styles/StylePages/Join.css'
-import './styles/StylePages/App.css'
+import './styles/welcome.css'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

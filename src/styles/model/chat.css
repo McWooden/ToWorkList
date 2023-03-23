@@ -4,7 +4,6 @@
     background-color: var(--kedua);
     box-shadow: var(--shadow-1);
     width: fit-content;
-    align-self: center;
     font-size: .5em;
     padding: .25em .5em;
     margin: .5em 0;
@@ -15,13 +14,10 @@
     margin-top: .5em;
 }
 .chat-card {
-    display: flex;
     margin-bottom: 1px;
-    position: relative;
     width: 100%;
     transition: .1s ease;
 }
-
 .chat-card.my {
     flex-direction: row-reverse;
     align-self: flex-end;
@@ -58,7 +54,6 @@
 .chat-card-time {
     font-size: .5em;
     color: var(--text-2);
-    align-self: flex-end;
     margin-left: 2px;
 }
 .chat-card-time.my {
@@ -69,7 +64,6 @@
     transform: translateX(0);
 }
 .chat-dropdown {
-    position: absolute;
     bottom: 0;
     right: 0;
     width: fit-content;
@@ -82,8 +76,6 @@
     visibility: visible;
     transition: .1s ease;
     width: 30px;
-    display: flex;
-    justify-content: center;
 }
 .chat-dropdown.inactive {
     opacity: 0;

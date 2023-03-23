@@ -67,7 +67,7 @@
     background-position: center !important;
     background-size: contain !important;
     background-repeat: no-repeat !important;
-    background-color: var(--black-1) !important;
+    background-color: #ddd !important;
 }
 .jadwal .preview:hover .setting-btn {
     opacity: 1;

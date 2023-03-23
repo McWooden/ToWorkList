@@ -39,16 +39,16 @@ export function NoteItem({data}) {
     }
     return (
         <>
-        <div className='note'>
-            <div className='note-head'>
+        <div className='note of-hidden'>
+            <div className='note-head d-flex jc-space-between ai-center'>
                 <FontAwesomeIcon icon={faNoteSticky} style={{color: data.color}} className='note-color'/>
-                <div className="note-btn">
+                <div className="note-btn ai-center">
                     <FontAwesomeIcon icon={faTrash} className='pointer' onClick={confirmToDelete}/>
                     <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
                 </div>
             </div>
-            <div className='note-body'>
-                <pre>
+            <div className='note-body d-flex fd-column'>
+                <pre className='of-auto'>
                     {data.context}
                 </pre>
                 <span className='note-info'>{`${data.by}, ${convertDateToString(data.date)}`}</span>

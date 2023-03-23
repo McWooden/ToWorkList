@@ -1,8 +1,5 @@
 .book_card_container {
-    display: flex;
     gap: 8px;
-    justify-content: center;
-    flex-wrap: wrap;
     padding: 5px;
 }
 .book_card_container .book_card:hover {
@@ -14,15 +11,7 @@
     min-width: 15em;
     width: 20em;
     background-color: var(--kedua);
-    flex-direction: column;
-    display: flex;
     border-radius: 8px;
-    overflow: hidden;
-    position: relative;
-}
-.book_card-header {
-    display: flex;
-    flex-direction: column;
 }
 .book_card-header .banner {
     width: 100%;
@@ -33,7 +22,6 @@
     width: 3em;
     height: 3em;
     object-fit: cover;
-    position: absolute;
     top: -25px;
     margin-left: 5px;
     padding: 5px;
@@ -54,7 +42,4 @@
     position: relative;
     display: flex;
     flex-direction: column;
-}
-.book_card .panjang_anggota {
-    align-self: flex-end;
 }

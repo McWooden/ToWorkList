@@ -1,9 +1,7 @@
 /* left */
 .info-menu {
-    display: flex;
     gap: 4px;
     padding: 3px;
-    overflow: auto;
 }
 .info-menu-box {
     color: #8e8e8e;
@@ -11,9 +9,6 @@
     padding: 2px 5px;
     font-size: small;
     border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     min-width: 45px;
 }
 .info-menu-box-icon {
@@ -32,14 +27,12 @@
     height: 150px;
     border-radius: 5px;
     padding: 3px 5px;
-    overflow: auto;
 }
 .contributor p {
     margin: 3px 0;
     font-size: small;
 }
 .detail-Left-action {
-    display: flex;
     padding: 4px 5px 8px;
     gap: 8px;
 }
@@ -60,7 +53,6 @@
 }
 /* desc */
 .detail-desc {
-    display: flex;
     gap: 5px;
     background-color: var(--black-2);
     border-radius: 5px;
@@ -81,24 +73,18 @@
     white-space: pre-line;
 }
 .images-container {
-    display: flex;
-    flex-direction: column;
     min-height: 50px;
     padding: 5px;
     border-radius: 3px;
     background-color: var(--black-3);
 }
 .images-list {
-    display: flex;
-    flex-wrap: wrap;
     gap: 5px;
 }
 /* card image */
 .card-img {
     background-color: var(--black-4);
-    display: flex;
     border-radius: 3px;
-    overflow: hidden;
     flex-grow: 1;
 }
 .card-img-pic {
@@ -120,8 +106,6 @@
     transition: .3s ease;
 }
 .card-img-context {
-    display: flex;
-    flex-direction: column;
     flex: 1;
     padding: 5px;
     font-size: xx-small;
@@ -135,7 +119,6 @@
 }
 .card-img-date {
     color: var(--white-3);
-    align-self: flex-end;
     cursor: pointer;
 }
 .card-img-context p {
@@ -153,7 +136,6 @@
 .note {
     background-color: var(--black-2);
     border-radius: 5px;
-    overflow: hidden;
     margin: 10px 5px;
 }
 .note-editor {
@@ -161,19 +143,15 @@
     min-width: 75%;
     margin: auto;
 }
+
 .note-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 5px;
-    display: flex;
     background-color: var(--black-3);
 }
 .note-head:hover .note-btn {
     display: inherit;
 }
 .note-btn {
-    align-items: center;
     gap: 5px;
     display: none;
 }
@@ -221,10 +199,6 @@
 .note-color:hover {
     background-color: unset !important;
 }
-.note-body {
-    display: flex;
-    flex-direction: column;
-}
 .note-info {
     font-size: x-small;
     color: var(--white-2);
@@ -236,7 +210,6 @@
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     font-size: small;
-    overflow: auto;
     padding: 5px 10px 0;
     min-height: 100px;
     white-space: pre-wrap;

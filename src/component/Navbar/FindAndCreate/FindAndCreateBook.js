@@ -108,24 +108,24 @@ export function FindAndCreateBook() {
     const [valueJudul, setValueJudul] = useState(`Buku ${myAccount?.nickname}`)
     return (
         <>
-        <div className='find-create-frame'>
-            <div className='home-profile find-create' onClick={handleModalOpen}>
+        <div className='find-create-frame d-flex fd-column jc-center ai-center'>
+            <div className='home-profile jc-center ai-center d-flex pointer find-create' onClick={handleModalOpen}>
                 <FontAwesomeIcon icon={faCompass} className={'nav-icon nav-icon-2'}/>
             </div>
         </div>
         <ModalLight open={modalOpen} close={handleModalClose}>
             <div className="search_book_container">
-                <div className="search_book-header">
+                <div className="search_book-header d-flex">
                     <form onSubmit={handleSearch} className='form-modal'>
-                        <div className='search_bar'>
+                        <div className='search_bar d-flex of-hidden'>
                             <input type="text" value={searchText} onChange={handleInputChange} placeholder="Fitur belum dibuka" />
                             <div className="tiang"/>
-                            <button type="submit" className='submit_search'>
+                            <button type="submit" className='submit_search pointer'>
                                 <FontAwesomeIcon icon={faSearch} />
                             </button>
                         </div>
                     </form>
-                    <div className="container-sb_action_btn">
+                    <div className="d-flex jc-flex-end">
                         <div className="sb_action_btn">
                             <FontAwesomeIcon icon={fontawesome.faRotateBack} className='action_btn' onClick={() => ''}/>
                         </div>
@@ -138,19 +138,19 @@ export function FindAndCreateBook() {
             </div>
         </ModalLight>
         <ModalSecond open={addServerModal} close={() => setAddServerModal(false)}>
-            <form className="add_server_container form-modal" ref={formRef} onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
-                <div className="add_server-body">
+            <form className="add_server_container d-flex fd-column form-modal" ref={formRef} onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
+                <div className="add_server-body d-flex fd-column ai-center">
                     <h3>Membuat Buku</h3>
                     <p>Beri buku baru anda nama dan pp. Anda juga bisa menggantinya kapan saja nanti</p>
                     <div className="pp_buku">
-                        <div className="img-view" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
+                        <div className="img-view d-flex ai-center jc-center p-relative" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
                             { previewUrl ? 
                                 <>
                                 <img src={previewUrl} alt={image.name} /> 
-                                <FontAwesomeIcon icon={faXmark} className='remove-icon' onClick={handleRemove}/>
+                                <FontAwesomeIcon icon={faXmark} className='remove-icon pointer p-absolute' onClick={handleRemove}/>
                                 </>
                             :
-                                <div className="drop-zone">
+                                <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
                                     <FontAwesomeIcon icon={faImage} className='drop-icon'/>
                                     <input 
                                         type="file" 
@@ -162,7 +162,7 @@ export function FindAndCreateBook() {
                             }
                         </div>
                     </div>
-                    <h4>Judul Buku</h4>
+                    <h4 className='as-flex-start'>Judul Buku</h4>
                     <input type="text" value={valueJudul} placeholder='Judul' onChange={(e) => setValueJudul(e.target.value)}/>
                 </div>
                 <div className="add_server-footer addPage_action">

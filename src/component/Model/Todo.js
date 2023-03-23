@@ -136,28 +136,28 @@ export function TodoModel({item}) {
     }
     return (
         <>
-        <div className="todo-card">
-            <div className="todo-left">
+        <div className="todo-card d-flex fd-row  jc-space-between">
+            <div className="todo-left d-flex fd-row p-relative">
             <div className="card-color" style={{backgroundColor: item.details.color}}></div>
-            <div className="card-text pointer" onClick={handleTextClick}>
+            <div className="card-text d-flex fd-column jc-center pointer" onClick={handleTextClick}>
                 <div className="card-title">{title}</div>
                 <div className="card-description">{item.details.desc.slice(0, 103)}</div>
             </div>
             </div>
-            <div className="todo-right">
+            <div className="todo-right d-flex fd-row p-relative">
                 <div className={`card-finish pointer ${dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={handleReverse}>
                     <div className="card-finish-value"></div>
                 </div>
-                <div className="card-more" ref={btnRef}>
-                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn pointer' onClick={() => setDropDown(!dropDown)}/>
+                <div className="card-more d-flex ai-center" ref={btnRef}>
+                    <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
                 </div>
                 <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                    <ul>
-                        <li className='pointer' onClick={() => setEditModal(true)}>
+                    <ul className='d-flex fd-column of-hidden p-absolute pointer'>
+                        <li className='d-flex ai-center' onClick={() => setEditModal(true)}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                             <span>edit</span>
                         </li>
-                        <li className='pointer' onClick={() => setDeleteOpen(true)}>
+                        <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
                             <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
                             <span>delete</span>
                         </li>
@@ -167,8 +167,8 @@ export function TodoModel({item}) {
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
         <Modal open={editModal} close={() => setEditModal(false)}>
-            <div className="edit_card_modal">
-                <div className="general-modal">
+            <div className="edit_card_modal d-flex">
+                <div className="general-modal d-flex fd-column ai-center jc-center">
                     <Calendar 
                         onClickDay={dayTileClick}
                         className="calendar-dark" 
@@ -193,7 +193,7 @@ export function TodoModel({item}) {
                         <h3>{title}</h3>
                         <p className="date">{convertDateToString(item.details.deadline)}</p>
                     </div>
-                    <div className="input-left">
+                    <div className="input-left d-flex fd-row">
                     <input name='title' type="text" placeholder='Judul' style={borderStyle} required autoComplete='off' value={inputTitle} onChange={handleTitleChange}/>
                         <select style={borderStyle} onChange={handleColor} name='color'>
                             <option key='default' value={item.details.color}>

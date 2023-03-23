@@ -7,7 +7,7 @@ export function ModalNoteEditor({children, open, close}) {
     }
     return ReactDOM.createPortal(
         <>
-        <div className='overlay' onClick={setClose}/>
+        <div className='overlay p-fixed' onClick={setClose}/>
         {children}
         </>,
         document.getElementById('portal')

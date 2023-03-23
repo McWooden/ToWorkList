@@ -1,18 +1,11 @@
 .setting_full {
-    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 2;
-    display: flex;
 }
 .setting_full_close {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
     top: 1em;
     right: 1em;
     color: var(--white-2);
@@ -31,8 +24,6 @@
     color: var(--purple-1);
     padding: 6px 10px;
     border-radius: 50px;
-    display: grid;
-    place-items: center;
 }
 /* nav */
 .setting_full_nav {
@@ -46,7 +37,6 @@
     max-width: 200px;
     margin-left: auto;
     border-radius: 8px 0 0 8px;
-    overflow: hidden;
     background-color: var(--kedua);
 }
 .setting_full_nav_list {
@@ -69,16 +59,12 @@
     flex: 3;
     background-color: var(--pertama);
     padding: 4em 1em;
-    position: relative;
-    overflow: auto;
 }
 .setting_full_body section {
     max-width: 670px;
 }
 /* profile */
 .setting_full_profile_view {
-    display: flex;
-    flex-direction: column;
     background-color: var(--kedua);
     padding: 10px;
     border-radius: 5px;
@@ -90,12 +76,8 @@
     height: 8em;
     object-fit: cover;
     border-radius: 8px;
-    cursor: pointer;
 }
 .setting_full_profile_view_float {
-    display: flex;
-    align-items: center;
-    position: absolute;
     top: -45px;
     margin-left: 5px;
     padding: 5px;
@@ -106,7 +88,6 @@
     width: 4em;
     height: 4em;
     border-radius: 5px;
-    cursor: pointer;
 }
 .setting_full_profile_view_banner img.full {
     position: fixed;
@@ -125,15 +106,9 @@
     border-radius: 5px;
 }
 .guild_editor {
-    display: flex;
-    align-items: center;
     gap: 4px;
 }
-.guild_editor .form-modal {
-    flex-direction: row;
-}
 .guild_editor .sb_action_btn {
-    display: flex;
     gap: 4px;
 }
 .guild_editor .sb_action_btn button {
@@ -166,9 +141,6 @@
 .guild_editor .form-modal.flex-one textarea {
     flex: 1;
 }
-.guild_editor .form-modal.flex-one .sb_action_btn {
-    align-self: flex-end;
-}
 .setting_full_name_guild {
     font-size: larger;
     color: var(--text-2);
@@ -177,7 +149,6 @@
     color: var(--text-1);
 }
 .setting_full_profile_view_body {
-    position: relative;
     margin-top: 10px;
     border-radius: 5px;
     padding: 1em;
@@ -294,9 +265,6 @@
     margin: 1vw;
     border: 1px solid var(--purple-1-transparent);
 }
-.addPage .roomInput {
-    display: flex;
-}
 .addPage .room .room_input{
     flex: 1;
     width: 100%;
@@ -384,11 +352,6 @@
     color: var(--white-1);
 }
 /* room action */
-.room_action {
-    display: flex;
-    align-items: center;
-    justify-self: flex-end;
-}
 .setting_room .info-menu-box {
     background-color: inherit;
 }

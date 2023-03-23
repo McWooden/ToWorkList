@@ -1,16 +1,10 @@
+@import url(./chat.css);
+@import url(./bookCard.css);
 .todo-card {
-    display: flex;
-    flex-direction: row;
     width: 100%;
     min-height: 58px;
     border-radius: 5px;
     background-color: var(--black-3);
-    justify-content: space-between;
-}
-.todo-left, .todo-right {
-    display: flex;
-    flex-direction: row;
-    position: relative;
 }
 .todo-left {
     flex: 1;
@@ -22,9 +16,6 @@
     border-radius: 3px;
 }
 .card-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     padding: 8px 0;
     word-break: break-all;
     flex: 1;
@@ -58,10 +49,6 @@
     transition: .3s ease-out;
     background-color: var(--black-2);
 }
-.card-more {
-    display: flex;
-    align-items: center;
-}
 .card-more-btn {
     margin: .5em;
     padding: .5em;
@@ -88,30 +75,22 @@
     background-color: var(--black-2);
     list-style: none;
     font-size: small;
-    position: absolute;
     right: 25px;
     top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
     border-radius: 5px 0 5px 5px;
-    overflow: hidden;
 }
 .card-drop-down ul.reverse {
     right: 0;
     top: 60px;
 }
 .card-drop-down ul li {
-    display: flex;
     gap: 3px;
-    align-items: center;
     padding: 5px 15px;
 }
 .card-drop-down ul li:hover {
     background-color: var(--black-5);
 }
 .edit_card_modal {
-    display: flex;
     height: 100%;
 }
 @media (max-width: 524px) {
