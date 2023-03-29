@@ -106,7 +106,7 @@ export function SettingPageListItem({data, callback}) {
                 </ul>
             </div>
         </div>
-        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deleteTodo} timeout={25} deleteText={'akan dihapus beserta isinya'}/>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deleteTodo} timeout={10} deleteText={'akan dihapus beserta isinya'}/>
         <ModalSecond open={openAdd} close={handleClose}>
         <div className="addPage">
             <form className="form-modal" onSubmit={handleSubmit} ref={formRef}>
