@@ -5,7 +5,7 @@
 @import url(./TodoApp.css);
 
 .base  {
-    background-color: var(--pertama);
+    background-color: var(--primary);
     overflow: hidden;
     padding-top: 48px;
     height: -webkit-fill-available;

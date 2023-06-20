@@ -29,13 +29,8 @@
 }
 nav {
     width: 75px;
-} 
-nav .nav-1 {
     max-height: 100%;
-    width: 100%;
-    background-color: var(--black-1);
-    border-radius: 45px;
-    padding: 1em 0;
+    border-radius: 8px;
 }
 .reload_btn-frame {
     border-radius: 15px;
@@ -53,15 +48,16 @@ nav .nav-1 {
 }
 .home-frame {
     padding: 8px 2px;
-    border-bottom: 2px solid var(--text-1);
+    border-bottom: 2px solid var(--text-secondary);
     width: fit-content;
     margin: 0 auto;
 }
 .guild-frame.active {
-    background-color: var(--black-3);
+    border-radius: 8px;
+    background-color: var(--purple-1-transparent) !important;
 }
 .find-create-frame {
-    border-top: 2px solid var(--text-1);
+    border-top: 2px solid var(--text-secondary);
     width: 58px;
     margin: .5em;
     margin-top: 0;
@@ -72,7 +68,7 @@ nav .nav-1 {
     border-radius: 15px;
     width: 48px;
     height: 48px;
-    background-color: var(--black-3);
+    background-color: var(--purple-1-transparent);
 }
 .home-profile:hover {
     background-color: var(--purple-2);
@@ -81,24 +77,20 @@ nav .nav-1 {
     background-color: var(--purple-1);
     box-shadow: var(--shadow-1);
 }
-.find-create {
-    background-color: var(--black-4);
-    box-shadow: var(--shadow-1);
-}
 .find-create:hover, .find-create:hover > * {
+    box-shadow: var(--shadow-1);
     background-color: var(--orange-2);
     color: var(--black-2);
 }
 .guild-photo-profile {
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
     border-radius: 50px;
-    padding: .25em;
-    margin: 0 auto;
+    margin: .25em auto;
 }
 .guild-photo-profile.active {
     border-radius: 15px;
-    border-left: 5px solid var(--purple-1);
+    border: 1px solid var(--purple-1);
     transition: .1s ease;
 }
 .guild-photo-profile:hover {
@@ -121,25 +113,23 @@ nav .nav-1 {
     height: 20px;
 }
 .nav-icon-2 {
-    color: var(--kuning);
+    color: var(--purple-2);
 }
 
 /* navbar 2 */
 .modeNavbar {
-    background-color: var(--kedua);
     width: 240px;
     margin: 2em 0;
-    border-radius: 15px;
+    border-radius: 8px;
 } 
 .modeNavbarHeader {
     padding: 1.5px 10px 1.5px 16px;
     height: 48px;
-    background-color: var(--kedua);
 }
 .guild-name {
     padding: 12px 0;
     margin: 0;
-    color: var(--text-2);
+    color: var(--text-primary);
     flex: 1 0 0;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -155,7 +145,7 @@ nav .nav-1 {
 .settingNavbar {
     color: var(--text-1);
     padding: 5px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 .settingNavbar:hover {
     background-color: var(--purple-1-transparent);
@@ -175,12 +165,12 @@ nav .nav-1 {
     position: relative;
 }
 .room.active {
-    background-color: var(--purple-1-transparent);
+    background-color: var(--purple-1-transparent) !important;
     padding-left: .75em;
     transition: .1s ease;
 }
 .room:hover {
-    background-color: var(--purple-1);
+    background-color: var(--secondary-transparent);
 }
 .room:hover .room-icon,  .room:hover span, .room:hover .card-more .card-more-btn {
     color: var(--kedua) !important;
@@ -195,7 +185,7 @@ nav .nav-1 {
 }
 .room span {
     font-size: smaller;
-    color: var(--text-2);
+    color: var(--text-secondary);
 }
 .room span.active {
     color: var(--purple-1);
@@ -206,13 +196,12 @@ nav .nav-1 {
 }
 .profile {
     padding: 5px 8px;
-    background-color: var(--black-4);
     box-shadow: var(--shadow-1);
     margin: 1em;
     border-radius: 15px;
 } 
 .profile:hover {
-    background-color: var(--black-5);
+    background-color: var(--secondary);
 }
 .profile:active {
     background-color: var(--black-2);
@@ -411,12 +400,9 @@ nav .nav-1 {
     nav {
         display: flex;
         width:unset;
-    }
-    nav .nav-1 {
         align-items: center;
         border: none;
-        flex-direction: row;
-        padding: 0 1em;
+        flex-direction: row !important;
     }
     .find-create-frame {
         border-top: none;
@@ -437,6 +423,9 @@ nav .nav-1 {
     }
     .guild-frame {
         padding: 0 !important;
+    }
+    .guild-photo-profile {
+        margin: .25em;
     }
     .modeNavbar {
         margin: 0;

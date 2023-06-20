@@ -1,0 +1,22 @@
+:root {
+    --primary: #010001;
+    --primary-transparent: #01000187;
+    --text-primary: #ecedee;
+    --secondary: #111;
+    --secondary-transparent: #1111117c;
+    --text-secondary: #787f85;
+    --thirdary: #fbbb17;
+    --thirdary-transparent: #fbba1782;
+}
+.bg-primary {
+    background-color: var(--primary);
+}
+.bg-secondary {
+    background-color: var(--secondary);
+}
+.text-primary {
+    color: #ecedee;
+}
+.text-secondary {
+    color: #787f85;
+}

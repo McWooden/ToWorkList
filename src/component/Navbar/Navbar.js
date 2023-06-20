@@ -12,12 +12,10 @@ function Navbar() {
         <>
         <div className={`navigation_block p-fixed ${hideNavbar?'inactive':'active'}`}/>
         <div className={`navigation d-flex fd-row p-fixed ${hideNavbar?'hideNavbar':'showNavbar'}`}>
-            <nav className='d-flex fw-wrap jc-center' ref={navRef}>
-                <div className='nav-1 d-flex fd-column'>
-                    <HomeButton/>
-                    <BookList/>
-                    <FindAndCreateBook/>
-                </div>
+            <nav className='d-flex fw-wrap jc-center d-flex fd-column bg-secondary' ref={navRef}>
+                <HomeButton/>
+                <BookList/>
+                <FindAndCreateBook/>
             </nav>
             <ModeNavbar/>
         </div>

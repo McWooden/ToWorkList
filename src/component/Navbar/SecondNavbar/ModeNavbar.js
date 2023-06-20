@@ -10,7 +10,7 @@ export function ModeNavbar() {
     const { secondNavRef } = useContext(AppContext)
     const pathBook = useSelector(state => state.fetch.pathBook)
     return (
-        <div className='modeNavbar d-flex fd-column of-hidden p-relative' ref={secondNavRef}>
+        <div className='modeNavbar bg-primary d-flex fd-column of-hidden p-relative' ref={secondNavRef}>
             {pathBook === '@me' ? (
                 <div className="modeNavbarHeader d-flex ai-center">
                     <h4 className='app-name'>Toworklist</h4>
