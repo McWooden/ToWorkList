@@ -67,7 +67,7 @@
     background-position: center !important;
     background-size: contain !important;
     background-repeat: no-repeat !important;
-    background-color: #ddd !important;
+    background-color: var(--secondary) !important;
 }
 .jadwal .preview:hover .setting-btn {
     opacity: 1;
@@ -89,7 +89,7 @@
     opacity: 0;
 }
 .jadwal .open-jadwal {
-    background-color: #ddd;
+    background-color: var(--secondary);
     color: var(--text-1);
     transition: .1s;
     padding: 0 10px;
@@ -109,8 +109,8 @@
     height: 100%;
 }
 /* menu box */
-.left-menu-box {
-    background-color: #ddd;
+.menu-box {
+    background-color: var(--secondary);
     color: var(--text-1);
     padding: 2px 5px;
     font-size: small;
@@ -119,10 +119,10 @@
     width: fit-content;
     margin: 3px;
 }
-.left-menu-box-icon {
+.menu-box-icon {
     min-width: 20px;
 }
-.left-menu-box-count {
+.menu-box-count {
     flex: 1;
     text-align: center;
     min-width: 10px;
@@ -133,7 +133,7 @@
     width: 100%;
 }
 .progress-bar {
-    background-color: #ddd;
+    background-color: var(--secondary);
     height: 20px;
     width: 100%;
     border-radius: 5px;

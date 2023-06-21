@@ -1,5 +1,5 @@
 .react-calendar {
-    background-color: var(--black-3);
+    background-color: var(--secondary);
     padding: 8px;
     border-radius: 5px;
 }
@@ -12,7 +12,7 @@
     border: none;
     padding: 2px 4px;
     color: var(--white-2);
-    background-color: var(--black-3);
+    background-color: var(--secondary);
     cursor: pointer;
     font-family: var(--defaultFont);
     font-size: large;
@@ -24,7 +24,7 @@
     background-color: var(--black-4);
 }
 .react-calendar__navigation__label {
-    background-color: var(--black-3);
+    background-color: var(--secondary);
     border: none;
     color: var(--white-1);
     font-weight: 600;
@@ -50,7 +50,7 @@
     color: brown;
 }
 .react-calendar__tile  {
-    background-color: var(--black-3);
+    background-color: var(--secondary);
     border: none;
     padding: 3px;
     color: var(--white-1);

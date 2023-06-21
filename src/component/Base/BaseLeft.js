@@ -50,9 +50,9 @@ export function BaseLeft() {
                 }}
                 />
                 <PageProggress/>
-                <div className="left-menu-box d-flex ai-center jc-center">
-                    <FontAwesomeIcon icon={faMoneyCheck} className="left-menu-box-icon"/>
-                    <p className="left-menu-box-count">{source.list ? source.list.length : ''}</p>
+                <div className="menu-box d-flex ai-center jc-center">
+                    <FontAwesomeIcon icon={faMoneyCheck} className="menu-box-icon"/>
+                    <p className="menu-box-count">{source.list ? source.list.length : ''}</p>
                 </div>
             </div>
         </div>

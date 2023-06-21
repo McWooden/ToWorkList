@@ -3,27 +3,11 @@
     gap: 4px;
     padding: 3px;
 }
-.info-menu-box {
-    color: #8e8e8e;
-    background-color: #eaeaea;
-    padding: 2px 5px;
-    font-size: small;
-    border-radius: 5px;
-    min-width: 45px;
-}
-.info-menu-box-icon {
-    min-width: 20px;
-}
-.info-menu-box-count {
-    flex: 1;
-    text-align: center;
-    min-width: 10px;
-}
 .contributor-container {
     color: var(--text-2);
 }
 .contributor {
-    background-color: var(--kedua);
+    background-color: var(--secondary);
     height: 150px;
     border-radius: 5px;
     padding: 3px 5px;
@@ -41,7 +25,7 @@
     border-radius: 5px;
     font-size: large;
     cursor: pointer;
-    background-color: #ddd;
+    background-color: var(--secondary);
 }
 .action-trash-left {
     color: var(--danger);

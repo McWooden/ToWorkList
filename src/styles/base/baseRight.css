@@ -81,7 +81,7 @@
     margin: 4px 0;
 }
 .group-user:hover {
-    background-color: var(--kedua);
+    background-color: var(--secondary);
     transition: .1s ease;
 }
 .group-user img {

@@ -15,14 +15,17 @@
     height: -webkit-fill-available;
     filter: var(--filter-shadow);
     margin: 1em;
+    margin-top: 54px;
 }
 .hideNavbar {
-    transform: translateX(calc(-100% - 2em));
-    transition: .1s ease-in;
+    opacity: 0;
+    visibility: hidden;
+    transition: .1s ease;
 }
 .showNavbar {
-    transform: translateX(0);
-    transition: .1s ease-out;
+    opacity: 1;
+    visibility: visible;
+    transition: .1s ease;
 }
 .pointer {
     cursor: pointer;
