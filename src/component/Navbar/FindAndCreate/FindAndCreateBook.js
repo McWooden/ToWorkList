@@ -110,7 +110,7 @@ export function FindAndCreateBook() {
         <>
         <div className='find-create-frame d-flex fd-column jc-center ai-center'>
             <div className='home-profile jc-center ai-center d-flex pointer find-create' onClick={handleModalOpen}>
-                <FontAwesomeIcon icon={faCompass} className={'nav-icon nav-icon-2'}/>
+                <FontAwesomeIcon icon={faCompass} className={'nav-icon'}/>
             </div>
         </div>
         <ModalLight open={modalOpen} close={handleModalClose}>

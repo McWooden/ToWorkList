@@ -68,16 +68,19 @@ nav {
     border-radius: 15px;
     width: 48px;
     height: 48px;
-    background-color: var(--purple-1-transparent);
-}
-.home-profile:hover {
-    background-color: var(--purple-2);
+    background-color: var(--secondary-bright);
 }
 .home-profile.active {
     background-color: var(--purple-1);
     box-shadow: var(--shadow-1);
 }
-.find-create:hover, .find-create:hover > * {
+.home-profile.active:hover {
+    background-color: var(--purple-1);
+}
+.home-profile.active .nav-icon {
+    color: var(--text-primary);
+}
+.find-create:hover, .find-create:hover > *, .home-profile:hover {
     box-shadow: var(--shadow-1);
     background-color: var(--orange-2);
     color: var(--black-2);
@@ -109,11 +112,8 @@ nav {
     padding: 0 .5em;
 }
 .nav-icon {
-    color: var(--white-1);
-    height: 20px;
-}
-.nav-icon-2 {
     color: var(--purple-2);
+    height: 20px;
 }
 
 /* navbar 2 */
@@ -121,6 +121,8 @@ nav {
     width: 240px;
     margin: 2em 0;
     border-radius: 8px;
+    border: 1px solid var(--secondary);
+    margin-left: .25em;
 } 
 .modeNavbarHeader {
     padding: 1.5px 10px 1.5px 16px;
@@ -224,7 +226,8 @@ nav {
 }
 /* profile pop */
 .profile_pop {
-    background-color: var(--black-2);
+    background-color: var(--primary);
+    border: 1px solid var(--secondary);
     width: 300px;
     left: 10px;
     bottom: 60px;
@@ -249,7 +252,7 @@ nav {
 }
 .profile_pop-body {
     flex: 1;
-    background-color: var(--black-0);
+    background-color: var(--secondary);
     margin: 0 15px;
     padding: 10px;
     border-radius: 10px;
@@ -391,45 +394,6 @@ nav {
     font-size: 3em;
 }
 @media (max-width: 425px) {
-    .navigation {
-        flex-direction: column-reverse;
-        width: calc(100% - 2em);
-        margin: 1em;
-        margin-top: 10em;
-    }
-    nav {
-        display: flex;
-        width:unset;
-        align-items: center;
-        border: none;
-        flex-direction: row !important;
-    }
-    .find-create-frame {
-        border-top: none;
-        border-left: 2px solid var(--text-1);
-        padding: 0 0 0 8px;
-        margin: .5em;
-    }
-    .home-frame {
-        border-bottom: none;
-        border-right: 2px solid var(--text-1);
-        padding: 0 8px 0 0;
-        margin: .5em;
-    }
-    .nav-guild {
-        align-items: center;
-        flex-direction: row;
-        border: none;
-    }
-    .guild-frame {
-        padding: 0 !important;
-    }
-    .guild-photo-profile {
-        margin: .25em;
-    }
-    .modeNavbar {
-        margin: 0;
-    }
     .profile_pop {
         left: 0;
     }

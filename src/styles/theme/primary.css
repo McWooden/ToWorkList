@@ -1,12 +1,13 @@
 :root {
     --primary: #010001;
     --primary-transparent: #01000187;
-    --text-primary: #ecedee;
     --secondary: #111;
     --secondary-transparent: #1111117c;
-    --text-secondary: #787f85;
+    --secondary-bright: #2827277c;
     --thirdary: #fbbb17;
     --thirdary-transparent: #fbba1782;
+    --text-primary: #ecedee;
+    --text-secondary: #787f85;
 }
 .bg-primary {
     background-color: var(--primary);

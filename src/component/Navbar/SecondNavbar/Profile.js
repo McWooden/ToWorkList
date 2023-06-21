@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faRepeat } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faRepeat, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useState, useEffect, useRef } from "react"
@@ -31,16 +31,19 @@ export function Profile() {
         }
         document.addEventListener('mousedown', handler)
         return () => {
-            document.removeEventListener('mousedown', handler);
+            document.removeEventListener('mousedown', handler)
         }
     }, [profile, navigate]);
-    
+    function handleLogout() {
+        localStorage.removeItem('account')        
+        window.location.reload()
+    }
     return (
         <div className="profile-container">
             {profile && (
                 <>
                 <div className={`profile_pop d-flex fd-column p-fixed ${userPop?'active':'inactive'}`} ref={userPopRef}>
-                <a href={profile.avatar} target='_blank' rel="noreferrer" >
+                <a href={profile.avatar} target='_blank' rel="noreferrer" style={{width:'120px'}}>
                     <img src={profile.avatar} alt={profile.nickname}/>
                 </a>
                     <div className="profile_pop-body">
@@ -56,6 +59,10 @@ export function Profile() {
                         <div className="profile_pop-add_account" onClick={() => navigate('/auth/register')}>
                             <FontAwesomeIcon icon={faPlus}/>
                             <span>Tambah akun</span>
+                        </div>
+                        <div className="profile_pop-add_account" onClick={handleLogout}>
+                            <FontAwesomeIcon icon={faRightFromBracket}/>
+                            <span>Keluar</span>
                         </div>
                     </div>
                 </div>
