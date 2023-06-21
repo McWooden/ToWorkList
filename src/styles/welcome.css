@@ -2,7 +2,7 @@
 .welcome {
     flex: 3;
     width: auto;
-    background-color: var(--pertama);
+    background-color: var(--primary);
 }
 .welcome_page {
     flex: 1;
@@ -38,7 +38,7 @@
     flex: 1 1 auto;
     font-size: xx-small;
     color: var(--text-1);
-    background-color: var(--kedua);
+    background-color: var(--secondary);
     padding: 2em;
     width: 100%;
     margin: 1em;
