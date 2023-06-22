@@ -15,8 +15,8 @@
         box-shadow: var(--shadow-1-right);
         margin: 1em;
         border-radius: 15px;
-        background: var(--kedua);
-        filter: var(--filter-shadow);
+        background: var(--primary);
+        border: 1px solid var(--secondary);
     }
     .base-left-hide {
         transform: translateX(calc(-100% - 1em));

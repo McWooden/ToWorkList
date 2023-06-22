@@ -51,7 +51,7 @@ html {
   height: 1px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--black-5);
+  background-color: var(--purple-1-transparent);
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;

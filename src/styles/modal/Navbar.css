@@ -13,7 +13,6 @@
 .navigation {
     z-index: 2;
     height: -webkit-fill-available;
-    filter: var(--filter-shadow);
     margin: 1em;
     margin-top: 54px;
 }
@@ -171,7 +170,6 @@ nav {
 }
 .room.active {
     background-color: var(--purple-1-transparent) !important;
-    padding-left: .75em;
     transition: .1s ease;
 }
 .room:hover {

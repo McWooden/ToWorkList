@@ -10,7 +10,7 @@
 }
 .chat-card-nickname {
     font-size: .7em;
-    color: var(--black-2);
+    color: var(--text-secondary);
     margin-top: .5em;
 }
 .chat-card {
@@ -44,8 +44,8 @@
 }
 .chat-card-message.disable {
     background-color: transparent;
-    color: var(--black-2);
-    border: 1px solid var(--black-1);
+    color: var(--text-secondary);
+    border: 1px solid var(--text-secondary);
 }
 .chat-card-message.disable.my {
     border: 1px solid var(--black-1);

@@ -1,6 +1,6 @@
 .base-right {
     flex: 1;
-    background-color: var(--primary);
+    background-color: var(--secondary);
 }
 .sidebar-right {
     gap: 1px;
@@ -18,7 +18,7 @@
 }
 .base-right-form .textarea-container {
     flex: 4;
-    background-color: var(--kedua);
+    background-color: var(--secondary);
     border-bottom: 2px solid var(--black-1);
     border-radius: 5px;
     padding: 5px;
@@ -28,7 +28,7 @@
     width: 100%;
     outline: none;
     border: none;
-    color: var(--black-2);
+    color: var(--text-primary);
     background-color: inherit;
     resize: none;
     font-family: inherit;
@@ -104,12 +104,8 @@
         position: fixed;
         right: 0;
         width: 314px;
-        box-shadow: var(--shadow-1-left);
         margin: 1em;
         border-radius: 8px;
-        background: var(--ketiga);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        filter: var(--filter-shadow);
     }
     .base-right-hide {
         transform: translateX(calc(100% + 1em));
