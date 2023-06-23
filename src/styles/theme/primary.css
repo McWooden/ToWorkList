@@ -16,7 +16,7 @@
     background-color: var(--secondary);
 }
 .text-primary {
-    color: #ecedee;
+    color: #ecedee !important;
 }
 .text-secondary {
     color: #787f85;

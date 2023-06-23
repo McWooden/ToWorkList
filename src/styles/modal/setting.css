@@ -37,6 +37,7 @@
     margin-left: auto;
     border-radius: 8px 0 0 8px;
     background-color: var(--primary);
+    overflow: hidden;
 }
 .setting_full_nav_list {
     display: flex;
