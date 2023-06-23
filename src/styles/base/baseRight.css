@@ -1,6 +1,6 @@
 .base-right {
     flex: 1;
-    background-color: var(--secondary);
+    background-color: var(--primary);
 }
 .sidebar-right {
     gap: 1px;

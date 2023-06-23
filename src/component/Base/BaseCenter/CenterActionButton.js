@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faStickyNote, faArrowLeft  } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faAdd  } from '@fortawesome/free-solid-svg-icons'
 import { clearTodo } from '../../../redux/todo';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,7 +19,7 @@ export function CenterActionButton({handleModalOpen}) {
                 </div>
                 )}
                 <div className="action-add">
-                    <FontAwesomeIcon icon={todoId?faStickyNote:faCheck} className='add-btn pointer' onClick={handleModalOpen}/>
+                    <FontAwesomeIcon icon={faAdd} className='add-btn pointer' onClick={handleModalOpen}/>
                 </div>
         </div>
     )

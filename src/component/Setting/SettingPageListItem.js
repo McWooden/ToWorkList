@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisVertical, faPenToSquare, faTrash, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faTrash, faEye } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState, useEffect } from 'react'
 import { deleteToast, pageToast } from '../../utils/notif'
@@ -83,17 +83,14 @@ export function SettingPageListItem({data, callback}) {
     }
     return (
         <>
-        <div className={`room ${active?'active':''}`}>
+        <div className={`room ${active?'active':''}`}  onClick={() => setDropDown(!dropDown)} ref={btnRef}>
             <FontAwesomeIcon icon={fontawesome[icon]} className={`room-icon ${active?'active':''}`}/>
             <span className={active?'active':''}>{title}</span>
-            <div className="card-more d-flex ai-center" ref={btnRef}>
-                <FontAwesomeIcon icon={faEllipsisVertical} className={`card-more d-flex ai-center-btn pointer  ${active?'active':''}`} onClick={() => setDropDown(!dropDown)}/>
-            </div>
             <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
                 <ul className='d-flex fd-column of-hidden p-absolute pointer'>
                     <li className='d-flex ai-center' onClick={handleClick}>
                         <FontAwesomeIcon icon={faEye} className='card-dd-btn' />
-                        <span>Masuk</span>
+                        <span>Pergi</span>
                     </li>
                     <li className='d-flex ai-center' onClick={() => setOpenAdd(true)}>
                         <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
