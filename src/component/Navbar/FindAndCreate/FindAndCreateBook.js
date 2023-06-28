@@ -7,13 +7,13 @@ import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../..
 import { toast } from 'react-toastify'
 import { imageToast, loadingToast } from '../../../utils/notif';
 import { ModalSecond } from '../../Modal/ModalSecond'
-import { ModalLight } from '../../Modal/ModalLight'
 import { useRef } from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { API } from '../../../utils/variableGlobal'
 import { AllBookList } from './AllBookList'
+import { Modal } from '../../Modal/Modal'
 
 
 export function FindAndCreateBook() {
@@ -113,7 +113,7 @@ export function FindAndCreateBook() {
                 <FontAwesomeIcon icon={faCompass} className={'nav-icon'}/>
             </div>
         </div>
-        <ModalLight open={modalOpen} close={handleModalClose}>
+        <Modal open={modalOpen} close={handleModalClose}>
             <div className="search_book_container">
                 <div className="search_book-header d-flex">
                     <form onSubmit={handleSearch} className='form-modal'>
@@ -136,7 +136,7 @@ export function FindAndCreateBook() {
                 </div>
                 <AllBookList/>
             </div>
-        </ModalLight>
+        </Modal>
         <ModalSecond open={addServerModal} close={() => setAddServerModal(false)}>
             <form className="add_server_container d-flex fd-column form-modal" ref={formRef} onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
                 <div className="add_server-body d-flex fd-column ai-center">

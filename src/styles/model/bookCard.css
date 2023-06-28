@@ -3,14 +3,14 @@
     padding: 5px;
 }
 .book_card_container .book_card:hover {
-    background-color: #eaeaea;
+    background-color: var(--secondary);
     cursor: pointer;
 }
 .book_card {
     box-shadow: var(--shadow-1);
     min-width: 15em;
     width: 20em;
-    background-color: var(--kedua);
+    background-color: var(--primary);
     border-radius: 8px;
 }
 .book_card-header .banner {
@@ -26,10 +26,10 @@
     margin-left: 5px;
     padding: 5px;
     border-radius: 5px;
-    background-color: var(--kedua);
+    background-color: var(--primary);
 }
 .book_card p.title {
-    color: var(--text-2);
+    color: var(--text-primary);
     font-size: small;
     margin-top: 2em;
 }

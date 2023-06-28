@@ -304,20 +304,24 @@ nav {
     padding: 0;
 }
 .search_book_container .form-modal input {
-    color: var(--text-2);
     background-color: unset;
     border: none;
     width: auto;
+    color: var(--text-primary);
 }
 .search_book_container .form-modal input:focus {
     background-color: transparent;
+}
+.search_bar:focus-within {
+    background-color: var(--secondary) !important;
 }
 .search_book_container .search_bar {
     border-radius: 3px;
     border: 2px solid var(--purple-1);
     border-radius: 45px;
     padding: 0 1em;
-} 
+    background-color: var(--primary);
+}
 .search_book_container .tiang {
     border: 1px solid var(--text-1);
     margin: 10px 0;
