@@ -33,6 +33,7 @@ nav {
     width: 75px;
     max-height: 100%;
     border-radius: 8px;
+    border: 1px solid var(--secondary-bright);
 }
 .reload_btn-frame {
     border-radius: 15px;
@@ -48,17 +49,39 @@ nav {
 .reload_btn {
     font-size: large;
 }
-.home-frame {
+.nav-icon-frame {
+    width: 48px;
+    height: 48px;
+    background-color: var(--black-2);
+    margin: .5em;
+    border-radius: 15px;
+    overflow: hidden;
+}
+.nav-icon {
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    color: var(--purple-2);
+}
+.nav-icon:hover {
+    background-color: goldenrod;
+    color: var(--black-2);
+}
+.nav-icon.active {
+    background-color: var(--purple-1);
+    color: var(--text-primary);
+}
+/* .home-frame {
     padding: 8px 2px;
     border-bottom: 2px solid var(--text-secondary);
     width: fit-content;
     margin: 0 auto;
-}
+} */
 .guild-frame.active {
     border-radius: 8px;
     background-color: var(--purple-1-transparent) !important;
 }
-.find-create-frame {
+/* .find-create-frame {
     border-top: 2px solid var(--text-secondary);
     width: 58px;
     margin: .5em;
@@ -66,7 +89,7 @@ nav {
     padding-top: 8px;
     gap: .5em;
 }
-.home-profile {
+   .home-profile {
     border-radius: 15px;
     width: 48px;
     height: 48px;
@@ -74,7 +97,6 @@ nav {
 }
 .home-profile.active {
     background-color: var(--purple-1);
-    box-shadow: var(--shadow-1);
 }
 .home-profile.active:hover {
     background-color: var(--purple-1);
@@ -82,11 +104,10 @@ nav {
 .home-profile.active .nav-icon {
     color: var(--text-primary);
 }
-.find-create:hover, .find-create:hover > *, .home-profile:hover {
-    box-shadow: var(--shadow-1);
+.find-create:hover, .find-create:hover > *, .home-profile:hover, .home-profile:hover > * {
     background-color: var(--orange-2);
     color: var(--black-2);
-}
+} */
 .guild-photo-profile {
     width: 45px;
     height: 45px;
@@ -112,10 +133,6 @@ nav {
 .nav-guild div:hover {
     background-color: var(--black-2);
     padding: 0 .5em;
-}
-.nav-icon {
-    color: var(--purple-2);
-    height: 20px;
 }
 
 /* navbar 2 */

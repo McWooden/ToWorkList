@@ -1,9 +1,10 @@
 :root {
     --primary: #010001;
+    --primary-bright: #23002387;
     --primary-transparent: #01000187;
     --secondary: #111;
     --secondary-transparent: #1111117c;
-    --secondary-bright: #2827277c;
+    --secondary-bright: #3b3a3a7c;
     --thirdary: #fbbb17;
     --thirdary-transparent: #fbba1782;
     --text-primary: #ecedee;

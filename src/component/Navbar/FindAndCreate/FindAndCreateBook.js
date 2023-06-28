@@ -108,9 +108,9 @@ export function FindAndCreateBook() {
     const [valueJudul, setValueJudul] = useState(`Buku ${myAccount?.nickname}`)
     return (
         <>
-        <div className='find-create-frame d-flex fd-column jc-center ai-center'>
-            <div className='home-profile jc-center ai-center d-flex pointer find-create' onClick={handleModalOpen}>
-                <FontAwesomeIcon icon={faCompass} className={'nav-icon'}/>
+        <div className='nav-icon-frame d-flex jc-center'>
+            <div className='nav-icon jc-center ai-center d-flex pointer find-create' onClick={handleModalOpen}>
+                <FontAwesomeIcon icon={faCompass}/>
             </div>
         </div>
         <Modal open={modalOpen} close={handleModalClose}>

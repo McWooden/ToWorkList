@@ -12,6 +12,7 @@
     width: 20em;
     background-color: var(--primary);
     border-radius: 8px;
+    overflow: hidden;
 }
 .book_card-header .banner {
     width: 100%;
