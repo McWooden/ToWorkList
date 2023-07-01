@@ -149,7 +149,6 @@
     box-shadow: var(--shadow-1);
     color: var(--white-1);
     border: none;
-    margin: .5em;
 }
 .note_editor-textarea {
     outline: none;
@@ -157,13 +156,13 @@
     resize: vertical;
     margin: 5px;
     padding: 5px;
-    border: 1px solid var(--black-4);
     border-radius: 5px;
     font-family: inherit;
     color: var(--white-1);
     transition: .3s;
     font-size: small;
     min-height: 150px;
+    width: auto;
 }
 .note-head svg {
     min-width: 15px;

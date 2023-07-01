@@ -17,8 +17,8 @@ export function PageListItem({data}) {
     }
     const active = pathPageOfBook === title
     return (
-        <div className={`room ${active?'active':''}`} onClick={handleClick}>
-            <FontAwesomeIcon icon={fontawesome[icon]} className={`room-icon ${active?'active':''}`}/> <span className={active?'active':''}>{title}</span>
+        <div className={`room d-flex ai-center p-relative pointer ${active?'active':''}`} onClick={handleClick}>
+            <FontAwesomeIcon icon={fontawesome[icon]} className={`room d-flex ai-center p-relative pointer-icon ${active?'active':''}`}/> <span className={active?'active':''}>{title}</span>
         </div>
     )
 }

@@ -106,7 +106,7 @@ export function CardImages() {
                         </div>
                     }
                     </div>
-                    <div className="img-form">
+                    <div className="img-form d-flex fd-column">
                         <div className="general-info">
                             <h3>Menambah foto</h3>
                             <p className='date'>{date}</p>

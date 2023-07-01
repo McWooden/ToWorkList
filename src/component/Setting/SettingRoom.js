@@ -71,19 +71,19 @@ export function SettingRoom() {
                     <p className='small'>Membuat halaman baru</p>
                     <div className="pagePreview">
                         <p className='small bold'>Tipe halaman</p>
-                        <div className={`room room-grid active`}>
+                        <div className={`room d-flex ai-center p-relative pointer room-grid active`}>
                             <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon active`}/>
                             <span className={`page_type active`}>Todo </span>
                             <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>
                         </div>
                     </div>
                     <p className='small bold'>Nama halaman</p>
-                    <div className={`room d-flex ${value&&'active'}`}>
+                    <div className={`room d-flex ai-center p-relative pointer d-flex ${value&&'active'}`}>
                         <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
                         <input type="text" placeholder='halaman baru' onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
                     </div>
                 </div>
-                <div className="addPage_action">
+                <div className="addPage_action d-flex jc-flex-end">
                     <span className='btn_action' onClick={handleClose}>Batal</span>
                     {btnLoading?
                     (<button className={`btn_action btn_add`}>Loading</button>)
@@ -113,7 +113,7 @@ export function SettingRoom() {
             <>
             {headerElement}
             <div className="roomList">
-                <div className="room loading" />
+                <div className="room d-flex ai-center p-relative pointer loading" />
             </div>
             {modalElement}
             </>
@@ -125,8 +125,8 @@ export function SettingRoom() {
         <div className='roomList'>
             {pages}
         </div>
-        <div className="setting_action">
-            <span className="setting_btn blue_btn" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
+        <div className="setting_action d-flex">
+            <span className="setting_btn d-flex ai-center pointer blue_btn" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
         </div>
         {modalElement}
         </>

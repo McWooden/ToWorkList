@@ -18,16 +18,16 @@ export default function Setting({open, close}) {
     return ReactDOM.createPortal(
         <div className="setting_full p-fixed d-flex">
             <div className="setting_full_nav">
-                <ul>
-                    <li className={`setting_full_nav_list ${select === 'profile' && 'active'}`} onClick={() => handleSelectOnChange('profile')}>
+                <ul className='of-hidden'>
+                    <li className={`setting_full_nav_list d-flex ai-center pointer ${select === 'profile' && 'active'}`} onClick={() => handleSelectOnChange('profile')}>
                         <FontAwesomeIcon icon={faPencil} className='setting_full_nav_list_icon'/>
                         <p>{pathBook}</p>
                     </li>
-                    <li className={`setting_full_nav_list ${select === 'room' && 'active'}`} onClick={() => handleSelectOnChange('room')}>
+                    <li className={`setting_full_nav_list d-flex ai-center pointer ${select === 'room' && 'active'}`} onClick={() => handleSelectOnChange('room')}>
                         <FontAwesomeIcon icon={faMap} className='setting_full_nav_list_icon'/>
                         <p>halaman</p>
                     </li>
-                    <li className={`setting_full_nav_list ${select === 'member' && 'active'}`} onClick={() => handleSelectOnChange('member')}>
+                    <li className={`setting_full_nav_list d-flex ai-center pointer ${select === 'member' && 'active'}`} onClick={() => handleSelectOnChange('member')}>
                         <FontAwesomeIcon icon={faUserGroup} className='setting_full_nav_list_icon'/>
                         <p>orang</p>
                     </li>

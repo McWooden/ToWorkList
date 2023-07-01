@@ -40,7 +40,4 @@
 }
 .book_card-body {
     padding: 0 1em 1em;
-    position: relative;
-    display: flex;
-    flex-direction: column;
 }

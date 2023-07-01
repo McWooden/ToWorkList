@@ -37,15 +37,11 @@
     margin-left: auto;
     border-radius: 8px 0 0 8px;
     background-color: var(--primary);
-    overflow: hidden;
 }
 .setting_full_nav_list {
-    display: flex;
-    align-items: center;
     padding: .5em 1em;
     color: var(--text-2);
     gap: .5em;
-    cursor: pointer;
 }
 .setting_full_nav_list.active {
     color: var(--purple-1);
@@ -167,7 +163,6 @@
     margin-bottom: 10px;
 }
 .setting_action {
-    display: flex;
     gap: 10px;
 }
 /* setting action button */
@@ -175,9 +170,6 @@
     padding: 5px 20px;
     border-radius: 3px;
     font-size: x-small;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
 }
 .setting_btn.delete_btn {
     background-color: #d83c3e;
@@ -269,8 +261,7 @@
     width: 100%;
 }
 .addPage .room .room_input.active{
-    background-color: var(--kedua);
-    color: var(--purple-1);
+    color: var(--text-primary);
 }
 .pagePreview {
     margin-top: 1em;
@@ -310,22 +301,20 @@
 .guild_editor .form-modal input,
 .guild_editor .form-modal textarea,
 .add_server_container.form-modal input {
-    background-color: #eaeaea;
-    border: 1px solid #ddd;
+    background-color: var(--secondary-transparent);
+    border: 1px solid var(--secondary-transparent);
     color: var(--text-2);
 }
 .addPage .form-modal input:focus,
 .guild_editor .form-modal input:focus,
 .guild_editor .form-modal textarea:focus,
 .add_server_container.form-modal input:focus {
-    background-color: #ddd;
+    background-color: var(--secondary);
 }
 .addPage_action {
-    background-color: #ddd;
+    background-color: transparent;
     color: var(--white-1);
     padding: 1em;
-    display: flex;
-    justify-content: flex-end;
     gap: 1em;
 }
 .addPage_action .btn_action {

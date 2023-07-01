@@ -7,8 +7,6 @@
     flex: 1;
 }
 .base-right-form {
-    display: flex;
-    align-items: flex-end;
     gap: 3px;
     min-height: 40px;
     margin: 0 3px 8px;

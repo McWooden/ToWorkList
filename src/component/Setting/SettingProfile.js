@@ -252,9 +252,9 @@ export function SettingProfile() {
                 <p className='setting_profile_date'>{convertDateToString(profile.created_at)} oleh {profile.author.nickname}#{profile.author.tag}</p>
             </div>
         </div>
-        <div className="setting_action">
-            <span className="setting_btn delete_btn"  onClick={() => setDeleteGuildOpen(true)}>hapus guild</span>
-            <span className="setting_btn keluar_btn" onClick={() => leaveToast(`bye everyone in the room ${profile.book_title}`)}>Keluar guild</span>
+        <div className="setting_action d-flex">
+            <span className="setting_btn d-flex ai-center pointer delete_btn"  onClick={() => setDeleteGuildOpen(true)}>hapus guild</span>
+            <span className="setting_btn d-flex ai-center pointer keluar_btn" onClick={() => leaveToast(`bye everyone in the room ${profile.book_title}`)}>Keluar guild</span>
         </div>
         <DeleteBookModal open={deleteGuildOpen} close={() => setDeleteGuildOpen(false)} data={profile} callback={deleteBook}/>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={'PP Buku'} metode='delete' color='var(--purple-1)' callback={deletePp} deleteText={'pp nya nanti ilang, diganti gambar udin'}/>
@@ -276,7 +276,7 @@ export function SettingProfile() {
                         </div>
                     }
                     </div>
-                    <div className="img-form">
+                    <div className="img-form d-flex fd-column">
                         <div className="general-info">
                             <h3>Mengubah pp</h3>
                         </div>

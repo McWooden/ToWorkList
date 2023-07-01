@@ -180,10 +180,6 @@ nav {
 }
 .room {
     padding: .5em;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    position: relative;
 }
 .room.active {
     background-color: var(--purple-1-transparent) !important;
@@ -292,14 +288,11 @@ nav {
 .profile_pop-created_at p {
     font-weight: 600;
 }
-.profile_pop-switch_account, .profile_pop-add_account {
-    display: flex;
-    align-items: center;
+.profile_pop-btn {
     gap: 10px;
     font-size: small;
     padding: 5px 10px;
     border-radius: 5px;
-    cursor: pointer;
 }
 .profile_pop-switch_account:hover, .profile_pop-add_account:hover {
     background-color: var(--black-4);

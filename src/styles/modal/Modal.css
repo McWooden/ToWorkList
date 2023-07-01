@@ -29,7 +29,7 @@
 }
 .second_modal {
     border-radius: 20px;
-    background-color: var(--kedua);
+    background-color: transparent;
     color: var(--text-2);
     height: fit-content;
     width: calc(100% - 1em);
@@ -47,14 +47,12 @@
     color: royalblue;
     padding: 5px;
 }
-.form-modal, .img-form {
+.form-modal, .img-form d-flex fd-column {
     flex: 1;
-    display: flex;
-    flex-direction: column;
     padding: 2em;
     gap: 5px;
 }
-.form-modal .date, .img-form .date {
+.form-modal .date, .img-form d-flex fd-column .date {
     font-size: x-small;
     margin-bottom: 3px;
     color: var(--white-2);
@@ -69,7 +67,7 @@
 .form-modal input {
     flex: 3;
 }
-.form-modal input, .form-modal textarea, .form-modal select, .img-form textarea {
+.form-modal input, .form-modal textarea, .form-modal select, .img-form d-flex fd-column textarea {
     outline: none;
     background-color: var(--black-3);
     resize: none;
@@ -84,7 +82,7 @@
 .form-modal input:focus, .form-modal textarea:focus, .form-modal select:focus {
     background-color: var(--black-1);
 }
-.form-modal textarea, .img-form textarea {
+.form-modal textarea, .img-form d-flex fd-column textarea {
     flex: 1;
 }
 .form-modal.light input {
@@ -230,7 +228,7 @@
 .drop-zone:hover .drop-text {
     opacity: 0;
 }
-.img-form {
+.img-form d-flex fd-column {
     flex: 1;
     justify-content: center;
 }
@@ -261,7 +259,7 @@
         padding: .5em 1em 1em;
         overflow: auto;
     }
-    .img-form {
+    .img-form d-flex fd-column {
         padding: .5em .5em 1em;
         flex: 2;
     }
@@ -274,7 +272,7 @@
     .file-drop.jadwal-form .img-view {
         flex: 3;
     }
-    .file-drop.jadwal-form .img-form {
+    .file-drop.jadwal-form .img-form d-flex fd-column {
         flex: 1;
     }
 }

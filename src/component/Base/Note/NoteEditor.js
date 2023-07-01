@@ -63,14 +63,14 @@ export function NoteEditor() {
         <>
         <ModalNoteEditor open={true} close={confirmToClose}>
             <form className='note note-editor' onSubmit={handleSubmit}>
-                <div className='note-head'>
+                <div className='note-head d-flex ai-center jc-space-between'>
                     <FontAwesomeIcon 
                     icon={faNoteSticky} 
                     style={{color: data.color}} 
                     className='note-color'/>
-                    <button type='submit' className='note-btn-simpan'>Simpan</button>
+                    <button type='submit' className='note-btn-simpan d-flex as-flex-end'>Simpan</button>
                 </div>
-                <div className='note-body'>
+                <div className='note-body fd-column d-flex'>
                     <textarea
                         className='note_editor-textarea'
                         placeholder={data.context}

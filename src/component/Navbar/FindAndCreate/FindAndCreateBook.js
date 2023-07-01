@@ -165,7 +165,7 @@ export function FindAndCreateBook() {
                     <h4 className='as-flex-start'>Judul Buku</h4>
                     <input type="text" value={valueJudul} placeholder='Judul' onChange={(e) => setValueJudul(e.target.value)}/>
                 </div>
-                <div className="add_server-footer addPage_action">
+                <div className="add_server-footer addPage_action d-flex jc-flex-end">
                     <span className='btn_action' onClick={() => setAddServerModal(false)}>Batal</span>
                     {btnLoading?
                     (<button className={`btn_action btn_add`}>Loading...</button>)

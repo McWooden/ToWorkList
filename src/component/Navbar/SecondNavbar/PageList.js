@@ -45,7 +45,7 @@ export function PageList() {
     if (loading) {
         return (
             <div className="roomList">
-                <div className="room loading" />
+                <div className="room d-flex ai-center p-relative pointer loading" />
             </div>
         )
     }

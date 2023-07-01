@@ -28,11 +28,8 @@
     color: var(--white-2);
     padding: 5px 10px;
     border-radius: 5px;
-    cursor: pointer;
     min-height: 48px;
     font-size: large;
-    display: flex;
-    align-items: center;
 }
 .auth_btn:hover {
     background-color: var(--black-5);
@@ -110,11 +107,7 @@
     background-color: royalblue;
     color: var(--white-1);
     border: none;
-    cursor: pointer;
     height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 .auth_form input[type="submit"]:hover {
     filter: brightness(110%);

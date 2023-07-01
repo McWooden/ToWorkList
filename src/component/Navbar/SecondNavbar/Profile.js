@@ -52,15 +52,15 @@ export function Profile() {
                             <p>Bergabung sejak</p>
                             <span>{convertDateToString(profile.created_at)}</span>
                         </div>
-                        <div className="profile_pop-switch_account" onClick={() => navigate('/auth/login')}>
+                        <div className="profile_pop-btn d-flex ai-center pointer" onClick={() => navigate('/auth/login')}>
                             <FontAwesomeIcon icon={faRepeat}/>
                             <span>Ganti akun</span>
                         </div>
-                        <div className="profile_pop-add_account" onClick={() => navigate('/auth/register')}>
+                        <div className="profile_pop-btn d-flex ai-center pointer" onClick={() => navigate('/auth/register')}>
                             <FontAwesomeIcon icon={faPlus}/>
                             <span>Tambah akun</span>
                         </div>
-                        <div className="profile_pop-add_account" onClick={handleLogout}>
+                        <div className="profile_pop-btn d-flex ai-center pointer" onClick={handleLogout}>
                             <FontAwesomeIcon icon={faRightFromBracket}/>
                             <span>Keluar</span>
                         </div>

@@ -12,7 +12,7 @@ export function BookCardItem({data}) {
             <div className="book_card-header d-flex fd-column">
                 <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='banner'/>
             </div>
-            <div className="book_card-body p-relative d-flex fd-column">
+            <div className="book_card-body p-relative d-flex fd-column p-relative d-flex fd-column">
                 <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='avatar p-absolute'/>
                 <p className='title'>{profile.book_title}</p>
                 <p>{profile.desc}</p>

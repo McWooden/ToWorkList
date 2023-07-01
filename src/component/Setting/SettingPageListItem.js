@@ -83,8 +83,8 @@ export function SettingPageListItem({data, callback}) {
     }
     return (
         <>
-        <div className={`room ${active?'active':''}`}  onClick={() => setDropDown(!dropDown)} ref={btnRef}>
-            <FontAwesomeIcon icon={fontawesome[icon]} className={`room-icon ${active?'active':''} ${dropDown?'text-primary':''}`}/>
+        <div className={`room d-flex ai-center p-relative pointer ${active?'active':''}`}  onClick={() => setDropDown(!dropDown)} ref={btnRef}>
+            <FontAwesomeIcon icon={fontawesome[icon]} className={`room d-flex ai-center p-relative pointer-icon ${active?'active':''} ${dropDown?'text-primary':''}`}/>
             <span className={`${active?'active':''} ${dropDown?'text-primary':''}`}>{title}</span>
             <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
                 <ul className='d-flex fd-column of-hidden p-absolute pointer'>
@@ -112,19 +112,19 @@ export function SettingPageListItem({data, callback}) {
                     <p className='small'>Mengubah halaman <span className='small bold'>{title}</span></p>
                     <div className="pagePreview">
                         <p className='small bold uppercase'>Tipe halaman</p>
-                        <div className={`room room-grid active`}>
+                        <div className={`room d-flex ai-center p-relative pointer room-grid active`}>
                             <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon active`}/>
                             <span className={`page_type active`}>Todo </span>
                             <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>
                         </div>
                     </div>
                     <p className='small bold uppercase'>Nama halaman</p>
-                    <div className={`room d-flex ${value&&'active'}`}>
+                    <div className={`room d-flex ai-center p-relative pointer d-flex ${value&&'active'}`}>
                         <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
                         <input type="text" placeholder={title} onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
                     </div>
                 </div>
-                <div className="addPage_action">
+                <div className="addPage_action d-flex jc-flex-end">
                     <span className='btn_action' onClick={handleClose}>Batal</span>
                     {btnLoading?
                     (<button className={`btn_action btn_add`}>Loading</button>)

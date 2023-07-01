@@ -31,15 +31,15 @@ export default function Join(){
         fetchData()
     }, [searchParams, fetchData])
     if (isReload) return (
-        <div className="modal_container">
-            <div className="modal_context">
+        <div className="modal_container d-flex fc-column ai-center jc-center">
+            <div className="modal_context d-flex fd-column">
                 <h3>Bergabung</h3>
                 <div className="reload_btn-frame" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
                 </div>
             </div>
             <div className="navigate_to">
-                    <div className="auth_btn" onClick={() => navigate('/')}>
+                    <div className="auth_btn d-flex ai-center pointer" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={fontawesome.faChevronLeft}/>
                         <span>Kembali</span>
                     </div>
@@ -70,13 +70,13 @@ export default function Join(){
     }
     if (!data) {
         return (
-            <div className="modal_container">
-                <div className="modal_context">
+            <div className="modal_container d-flex fc-column ai-center jc-center">
+                <div className="modal_context d-flex fd-column">
                     <h3>Bergabung</h3>
                     <div className='loading book_card'/>
                 </div>
                 <div className="navigate_to">
-                    <div className="auth_btn" onClick={() => navigate('/')}>
+                    <div className="auth_btn d-flex ai-center pointer" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={fontawesome.faChevronLeft}/>
                         <span>Kembali</span>
                     </div>
@@ -85,28 +85,28 @@ export default function Join(){
         )
     }
     return (
-        <div className="modal_container">
-            <div className="modal_context modal_context-transparent">
+        <div className="modal_container d-flex fc-column ai-center jc-center">
+            <div className="modal_context d-flex fd-column modal_context-transparent">
                 <div className="book_card">
                     <div className="book_card-header d-flex fd-column">
                         <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='banner'/>
                     </div>
-                    <div className="book_card-body p-relative d-flex fd-column">
+                    <div className="book_card-body p-relative d-flex fd-column p-relative d-flex fd-column">
                         <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='avatar p-absolute'/>
                         <p className='title'>{data.profile.book_title}</p>
                         <p>{data.profile.desc}</p>
                         <p className='as-flex-end'>{data.users_length} Anggota</p>
                     </div>
-                    <div className='join_btn' onClick={gabung}>
+                    <div className='join_btn d-flex jc-center ai-center pointer' onClick={gabung}>
                         <img src={myAccount.avatar} alt={myAccount.nickname} />
-                        <span>
+                        <span className='d-flex ai-center jc-flex-end'>
                             Bergabung
                             <FontAwesomeIcon icon={fontawesome.faChevronRight}/>
                         </span>
                     </div>
                 </div>
                 <div className="navigate_to">
-                    <div className="auth_btn" onClick={() => navigate('/')}>
+                    <div className="auth_btn d-flex ai-center pointer" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={fontawesome.faChevronLeft}/>
                         <span>Kembali</span>
                     </div>

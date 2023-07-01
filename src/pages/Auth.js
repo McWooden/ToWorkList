@@ -22,20 +22,20 @@ export function Auth() {
                 <h3>Autentikasi</h3>
                 <div className="navigate_to">
                     <p>Masuk ke akun</p>
-                    <div className="auth_btn navigate_login" onClick={() => navigate('/auth/login')}>
+                    <div className="auth_btn d-flex ai-center pointer navigate_login" onClick={() => navigate('/auth/login')}>
                         <FontAwesomeIcon icon={faRightToBracket}/>
                         <span>Login</span>
                     </div>
                 </div>
                 <div className="navigate_to">
                     <p>Tidak memiliki akun?</p>
-                    <div className="auth_btn navigate_register" onClick={() => navigate('/auth/register')}>
+                    <div className="auth_btn d-flex ai-center pointer navigate_register" onClick={() => navigate('/auth/register')}>
                         <FontAwesomeIcon icon={faAddressCard}/>
                         <span>Register</span>
                     </div>
                 </div>
                 <div className="navigate_to">
-                    <div className="auth_btn navigate_back" onClick={() => navigate('/')}>
+                    <div className="auth_btn d-flex ai-center pointer navigate_back" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={faChevronLeft}/>
                         <span>Kembali</span>
                     </div>
@@ -204,7 +204,7 @@ function FormRegist({data}) {
                 <span>Confirm Password</span>
                     <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`${redBorderInput?'red-border':''}`} minLength='4'/>
                 </label>
-                <input type="submit" value="Sign up" ref={btn}/>
+                <input type="submit" classname="d-flex ai-center jc-center pointer" value="Sign up" ref={btn}/>
             </form>
             <div className="navigate_to">
                 <p>Sudah memiliki akun? <span onClick={() => navigate('/auth/login')}>login</span></p>
@@ -286,7 +286,7 @@ export function Login() {
                             type='icon'
                         />
                         </GoogleOAuthProvider>
-                        <input type="submit" value="Login"/>
+                        <input type="submit" classname="d-flex ai-center jc-center pointer" value="Login"/>
                     </div>
                 </form>
                 <div className="navigate_to">
@@ -384,7 +384,7 @@ export function Pemulihan() {
                                 <span>Confirm Password</span>
                                 <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`${redBorderInput?'red-border':''}`} minLength='4'/>
                             </label>
-                            <input type="submit" value="Ganti password" ref={btn}/>
+                            <input type="submit" classname="d-flex ai-center jc-center pointer" value="Ganti password" ref={btn}/>
                         </form>
                     </>
                     :
