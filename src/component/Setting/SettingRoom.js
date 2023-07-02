@@ -71,7 +71,7 @@ export function SettingRoom() {
                     <p className='small'>Membuat halaman baru</p>
                     <div className="pagePreview">
                         <p className='small bold'>Tipe halaman</p>
-                        <div className={`room d-flex ai-center p-relative pointer room-grid active`}>
+                        <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row active`}>
                             <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon active`}/>
                             <span className={`page_type active`}>Todo </span>
                             <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>
@@ -99,8 +99,8 @@ export function SettingRoom() {
         return (
             <>
             {headerElement}
-            <div className="nav-guild d-flex fd-column">
-                <div className="reload_btn-frame" onClick={fetchData}>
+            <div className="nav-guild of-auto d-flex fd-column">
+                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
                 </div>
             </div>
@@ -112,7 +112,7 @@ export function SettingRoom() {
         return (
             <>
             {headerElement}
-            <div className="roomList">
+            <div className="roomList of-auto">
                 <div className="room d-flex ai-center p-relative pointer loading" />
             </div>
             {modalElement}
@@ -122,7 +122,7 @@ export function SettingRoom() {
     return(
         <>
         {headerElement}
-        <div className='roomList'>
+        <div className='roomList of-auto'>
             {pages}
         </div>
         <div className="setting_action d-flex">

@@ -20,21 +20,21 @@ export function Auth() {
         <div className="auth d-flex ai-center jc-center">
             <div className="auth-context">
                 <h3>Autentikasi</h3>
-                <div className="navigate_to">
+                <div className="navigate_to pointer">
                     <p>Masuk ke akun</p>
                     <div className="auth_btn d-flex ai-center pointer navigate_login" onClick={() => navigate('/auth/login')}>
                         <FontAwesomeIcon icon={faRightToBracket}/>
                         <span>Login</span>
                     </div>
                 </div>
-                <div className="navigate_to">
+                <div className="navigate_to pointer">
                     <p>Tidak memiliki akun?</p>
                     <div className="auth_btn d-flex ai-center pointer navigate_register" onClick={() => navigate('/auth/register')}>
                         <FontAwesomeIcon icon={faAddressCard}/>
                         <span>Register</span>
                     </div>
                 </div>
-                <div className="navigate_to">
+                <div className="navigate_to pointer">
                     <div className="auth_btn d-flex ai-center pointer navigate_back" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={faChevronLeft}/>
                         <span>Kembali</span>
@@ -93,7 +93,7 @@ export function Register() {
                                     useOneTap
                                     text='Sign up with Google'
                                 />
-                                <div className="navigate_to">
+                                <div className="navigate_to pointer">
                                     <p>Sudah memiliki akun? <span onClick={() => navigate('/auth/login')}>login</span></p>
                                 </div>
                             </div>
@@ -186,27 +186,27 @@ function FormRegist({data}) {
             <form className='auth_form d-flex fd-column' onSubmit={handleSubmit}>
                 <label>
                 {errorNickname?
-                <p className='error_msg'>{errorNickname}</p>
-                :
-                <span>{msgNickname || 'Nickname'}</span>
+                    <p className='error_msg'>{errorNickname}</p>
+                    :
+                    <span>{msgNickname || 'Nickname'}</span>
                 }
-                <input type="text" value={nickname} onChange={event => setNickname(event.target.value) + handleNicknameChange(event.target.value)} placeholder='Nama panggilan' required maxLength='18' className={`${greenBorderInput?'green-border':''}`} minLength='4' />
+                <input type="text" value={nickname} onChange={event => setNickname(event.target.value) + handleNicknameChange(event.target.value)} placeholder='Nama panggilan' required maxLength='18' className={`d-block ${greenBorderInput?'green-border':''}`} minLength='4' />
                 </label>
                 <label>
                 {errorPassword?
-                <p className='error_msg'>{errorPassword}</p>
-                :
-                <span>Password</span>
+                    <p className='error_msg'>{errorPassword}</p>
+                    :
+                    <span>Password</span>
                 }
-                    <input type="password" value={myPassword} onChange={event => setMyPassword(event.target.value)} placeholder='Password' required className={`${redBorderInput?'red-border':''}`} maxLength='20' minLength='4'/>
+                    <input type="password" value={myPassword} onChange={event => setMyPassword(event.target.value)} placeholder='Password' required className={`d-block ${redBorderInput?'red-border':''}`} maxLength='20' minLength='4'/>
                 </label>
                 <label>
                 <span>Confirm Password</span>
-                    <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`${redBorderInput?'red-border':''}`} minLength='4'/>
+                    <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`d-block ${redBorderInput?'red-border':''}`} minLength='4'/>
                 </label>
                 <input type="submit" classname="d-flex ai-center jc-center pointer" value="Sign up" ref={btn}/>
             </form>
-            <div className="navigate_to">
+            <div className="navigate_to pointer">
                 <p>Sudah memiliki akun? <span onClick={() => navigate('/auth/login')}>login</span></p>
             </div>
         </>
@@ -267,11 +267,11 @@ export function Login() {
                     <p className='error_msg'>{msg}</p>
                     <label>
                         <span>Nickname</span>
-                        <input type="text" value={nickname} onChange={event => setNickname(event.target.value)} placeholder='nickname'/>
+                        <input className='d-block' type="text" value={nickname} onChange={event => setNickname(event.target.value)} placeholder='nickname'/>
                     </label>
                     <label>
                         <span>Password</span>
-                        <input type="password" value={password} onChange={event => setPassowrd(event.target.value)} placeholder='password'/>
+                        <input className='d-block' type="password" value={password} onChange={event => setPassowrd(event.target.value)} placeholder='password'/>
                     </label>
                     <div className="login_btn_container d-flex ai-center">
                         <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
@@ -289,7 +289,7 @@ export function Login() {
                         <input type="submit" classname="d-flex ai-center jc-center pointer" value="Login"/>
                     </div>
                 </form>
-                <div className="navigate_to">
+                <div className="navigate_to pointer">
                     <p>Lupa <span onClick={() => navigate('/auth/pemulihan')}>password</span></p>
                     <p>Belum memiliki akun? <span onClick={() => navigate('/auth/register')}>Sign up</span></p>
                 </div>
@@ -378,11 +378,11 @@ export function Pemulihan() {
                             :
                                 <span>Password</span>
                             }
-                                <input type="password" value={myPassword} onChange={event => setMyPassword(event.target.value)} placeholder='Password baru' required className={`${redBorderInput?'red-border':''}`} maxLength='20' minLength='4'/>
+                                <input type="password" value={myPassword} onChange={event => setMyPassword(event.target.value)} placeholder='Password baru' required className={`d-block ${redBorderInput?'red-border':''}`} maxLength='20' minLength='4'/>
                             </label>
                             <label>
                                 <span>Confirm Password</span>
-                                <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`${redBorderInput?'red-border':''}`} minLength='4'/>
+                                <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`d-block ${redBorderInput?'red-border':''}`} minLength='4'/>
                             </label>
                             <input type="submit" classname="d-flex ai-center jc-center pointer" value="Ganti password" ref={btn}/>
                         </form>
@@ -400,7 +400,7 @@ export function Pemulihan() {
                                 />
                         </GoogleOAuthProvider>
                 }
-                <div className="navigate_to">
+                <div className="navigate_to pointer">
                     <p>Sudah memiliki akun <span onClick={() => navigate('/auth/login')}>Login</span></p>
                     <p>Belum memiliki akun? <span onClick={() => navigate('/auth/register')}>Sign up</span></p>
                 </div>

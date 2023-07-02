@@ -36,15 +36,15 @@ export function AllBookList() {
     },[dispatch, fetchData, globalBook])
     if (reload) return (
         <div className="book_card_container d-flex jc-center fw-wrap">
-            <div className="reload_btn-frame" onClick={fetchData}>
+            <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                 <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
             </div>
         </div>
     )
     if (loading) return (
         <div className="book_card_container d-flex jc-center fw-wrap">
-            <div className="book_card fd-column d -flex of-hidden p-relativeloading"/>
-            <div className="book_card fd-column d -flex of-hidden p-relativeloading"/>
+            <div className="book_card of-hidden pointerfd-column d -flex of-hidden p-relativeloading"/>
+            <div className="book_card of-hidden pointerfd-column d -flex of-hidden p-relativeloading"/>
         </div>
     )
     return (

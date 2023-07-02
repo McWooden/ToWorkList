@@ -50,10 +50,10 @@ export function ChatModel({item}) {
         }
     }
     return (
-        <div className={`${itsMe&&'my'} chat-card d-flex p-relative ${dropDown?'active':'inactive'}`} ref={cardRef}>
-            <div className={`${itsMe&&'my'} chat-card-message ${disable&&'disable'}`}>{item.msg}</div>
-            <div className={`${itsMe&&'my'} chat-card-time pointer as-flex-end`} onClick={handleDropDown}>{time}</div>
-            <div className={`chat-dropdown p-absolute jc-center d-flex ${itsMe&&'my'} ${dropDown?'active':'inactive'}`}>
+        <div className={`${itsMe&&'fd-row-reverse as-flex-end'} chat-card d-flex p-relative ${dropDown?'active':'inactive'}`} ref={cardRef}>
+            <div className={`${itsMe&&'fd-row-reverse as-flex-end'} chat-card-message ${disable&&'disable'}`}>{item.msg}</div>
+            <div className={`${itsMe&&'fd-row-reverse as-flex-end'} chat-card-time pointer as-flex-end`} onClick={handleDropDown}>{time}</div>
+            <div className={`chat-dropdown p-absolute jc-center d-flex ${itsMe&&'fd-row-reverse as-flex-end'} ${dropDown?'active':'inactive'}`}>
                 <ul>
                     <li className='pointer' onClick={handleDelete}>
                         <FontAwesomeIcon icon={faTrash}/>

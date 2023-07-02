@@ -54,9 +54,9 @@ export function SidebarRightChat() {
         )
     })
     return (
-        <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
+        <div className={`base-right of-auto ${hideRightBase?'base-right of-auto-hide':'base-right of-auto-show'} d-flex fd-column`}>
             <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>
-            <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom ${scrollToBottom?'':'active'} p-fixed`}/>
+            <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom pointer ${scrollToBottom?'':'active'} p-fixed`}/>
                 {box}
             </div>
             <FormBaseRight/>

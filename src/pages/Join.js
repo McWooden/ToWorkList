@@ -34,11 +34,11 @@ export default function Join(){
         <div className="modal_container d-flex fc-column ai-center jc-center">
             <div className="modal_context d-flex fd-column">
                 <h3>Bergabung</h3>
-                <div className="reload_btn-frame" onClick={fetchData}>
+                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
                 </div>
             </div>
-            <div className="navigate_to">
+            <div className="navigate_to pointer">
                     <div className="auth_btn d-flex ai-center pointer" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={fontawesome.faChevronLeft}/>
                         <span>Kembali</span>
@@ -73,9 +73,9 @@ export default function Join(){
             <div className="modal_container d-flex fc-column ai-center jc-center">
                 <div className="modal_context d-flex fd-column">
                     <h3>Bergabung</h3>
-                    <div className='loading book_card'/>
+                    <div className='loading book_card of-hidden'/>
                 </div>
-                <div className="navigate_to">
+                <div className="navigate_to pointer">
                     <div className="auth_btn d-flex ai-center pointer" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={fontawesome.faChevronLeft}/>
                         <span>Kembali</span>
@@ -87,11 +87,11 @@ export default function Join(){
     return (
         <div className="modal_container d-flex fc-column ai-center jc-center">
             <div className="modal_context d-flex fd-column modal_context-transparent">
-                <div className="book_card">
-                    <div className="book_card-header d-flex fd-column">
+                <div className="book_card of-hidden">
+                    <div className="book_card of-hidden-header d-flex fd-column">
                         <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='banner'/>
                     </div>
-                    <div className="book_card-body p-relative d-flex fd-column p-relative d-flex fd-column">
+                    <div className="book_card of-hidden-body p-relative d-flex fd-column p-relative d-flex fd-column">
                         <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='avatar p-absolute'/>
                         <p className='title'>{data.profile.book_title}</p>
                         <p>{data.profile.desc}</p>
@@ -105,7 +105,7 @@ export default function Join(){
                         </span>
                     </div>
                 </div>
-                <div className="navigate_to">
+                <div className="navigate_to pointer">
                     <div className="auth_btn d-flex ai-center pointer" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={fontawesome.faChevronLeft}/>
                         <span>Kembali</span>

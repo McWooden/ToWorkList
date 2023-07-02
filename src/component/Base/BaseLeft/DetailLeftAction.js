@@ -91,8 +91,8 @@ export function DetailLeftAction() {
     return (
         <>
         <div className='detail-Left-action d-flex'>
-            <FontAwesomeIcon icon={faTrash} className='action-left action-trash-left' onClick={() => setDeleteOpen(true)}/>
-            <FontAwesomeIcon icon={faPenToSquare} className='action-left action-edit-left' onClick={() => setEditModal(true)}/>
+            <FontAwesomeIcon icon={faTrash} className='action-left pointer action-trash-left' onClick={() => setDeleteOpen(true)}/>
+            <FontAwesomeIcon icon={faPenToSquare} className='action-left pointer action-edit-left' onClick={() => setEditModal(true)}/>
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
         <Modal open={editModal} close={() => setEditModal(false)}>
@@ -135,7 +135,7 @@ export function DetailLeftAction() {
                         </select>
                     </div>
                     <textarea placeholder={item.details.desc} rows="10" style={borderStyle} name='desc' value={inputDesc} onChange={x => setInputDesc(x.target.value)}/>
-                    <button type='submit' className='task-submit' form='addTask'>Simpan</button>
+                    <button type='submit' className='task-submit pointer' form='addTask'>Simpan</button>
                 </form>
             </div>
         </Modal>

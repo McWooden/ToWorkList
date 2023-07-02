@@ -87,7 +87,7 @@ export function CardImages() {
             <div className='images-list d-flex fw-wrap'>
                 {box}
             </div>
-            <FontAwesomeIcon icon={faPlus} className='add-image' onClick={handleModalOpen}/>
+            <FontAwesomeIcon icon={faPlus} className='add-image pointer' onClick={handleModalOpen}/>
             <FileDrop open={modalOpen} close={handleModalClose}>
                 <form ref={formRef} className='file-drop d-flex of-scroll' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
                     <div className="img-view d-flex ai-center jc-center" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
@@ -106,7 +106,7 @@ export function CardImages() {
                         </div>
                     }
                     </div>
-                    <div className="img-form d-flex fd-column">
+                    <div className="img-form jc-center d-flex fd-column">
                         <div className="general-info">
                             <h3>Menambah foto</h3>
                             <p className='date'>{date}</p>
@@ -114,9 +114,9 @@ export function CardImages() {
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
                         <textarea placeholder='deskripsi' rows="10"name='desc'/>
                         {isFetching?
-                            <button className='task-submit'>Loading...</button>
+                            <button className='task-submit pointer'>Loading...</button>
                             :
-                            <button className='task-submit' onClick={() => formRef.current.submit}>Tambah</button>
+                            <button className='task-submit pointer' onClick={() => formRef.current.submit}>Tambah</button>
                         }
                     </div>
                 </form>

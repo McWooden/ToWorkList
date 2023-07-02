@@ -60,14 +60,14 @@ export function BaseRight() {
         return () => clearInterval(interval)
     }, [idBook, members, dispatch])
     if (isLoading) return (
-        <div className="base-right d-flex f-column">
+        <div className="base-right of-auto d-flex f-column">
             <div className="sidebar-right d-flex fd-column">
-                <div className="loading sidebar_right_loading"/>
+                <div className="loading sidebar_right_loading d-grid pi-center"/>
             </div>
         </div>
     )
     return (
-        <div className={`base-right ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
+        <div className={`base-right of-auto ${hideRightBase?'base-right of-auto-hide':'base-right of-auto-show'} d-flex fd-column`}>
             <div className="sidebar-right d-flex fd-column of-auto">
                 {box}
             </div>

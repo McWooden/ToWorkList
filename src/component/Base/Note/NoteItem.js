@@ -51,7 +51,7 @@ export function NoteItem({data}) {
                 <pre className='of-auto'>
                     {data.context}
                 </pre>
-                <span className='note-info'>{`${data.by}, ${convertDateToString(data.date)}`}</span>
+                <span className='note-info ai-flex-end'>{`${data.by}, ${convertDateToString(data.date)}`}</span>
             </div>
         </div>
         <Confirm open={confirmOpen} close={() => setConfirmOpen(false)} target={`${data.by}, ${convertDateToString(data.date)}`} metode='delete' color={data.color} callback={handleDelete}/>

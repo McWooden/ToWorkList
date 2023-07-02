@@ -68,7 +68,7 @@ export function NoteEditor() {
                     icon={faNoteSticky} 
                     style={{color: data.color}} 
                     className='note-color'/>
-                    <button type='submit' className='note-btn-simpan d-flex as-flex-end'>Simpan</button>
+                    <button type='submit' className='note-btn-simpan pointer d-flex as-flex-end'>Simpan</button>
                 </div>
                 <div className='note-body fd-column d-flex'>
                     <textarea
@@ -77,7 +77,7 @@ export function NoteEditor() {
                         value={noteVal || ''}
                         onChange={handleChange}
                     />
-                    <span className='note-info'>
+                    <span className='note-info ai-flex-end'>
                         {`${data.by}, ${convertDateToString(data.date)}`}
                     </span>
                 </div>

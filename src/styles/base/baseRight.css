@@ -55,7 +55,6 @@
     color: var(--purple-1);
     padding: 8px;
     border-radius: 50px;
-    cursor: pointer;
     transition: .1s ease;
     box-shadow: var(--shadow-1);
     transform: scale(0);

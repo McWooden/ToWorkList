@@ -183,7 +183,7 @@ export function SettingProfile() {
         </div>
         <div className="setting_full_profile_view d-flex fd-column">
             <div className='setting_full_profile_view_banner'>
-                <img className={`setting_banner pointer ${full?'full':''}`} src={`${url}/${profile.avatar_url}`} alt={profile.book_title} onClick={() => setFull(!full)}/>
+                <img className={`setting_banner pointer ${full?'full p-fixed':''}`} src={`${url}/${profile.avatar_url}`} alt={profile.book_title} onClick={() => setFull(!full)}/>
             </div>
             <div className="setting_full_profile_view_body p-relative">
                 <div className="setting_full_profile_view_float d-fle ai-center p-absolute">
@@ -207,13 +207,13 @@ export function SettingProfile() {
                         <>
                         <form className="form-modal fd-row" onSubmit={handleSubmitJudul}>
                             <input type="text" placeholder={profile.book_title} value={valueJudul}  onChange={(e) => setValueJudul(e.target.value)}/>
-                            <div className="sb_action_btn d-flex">
-                                <FontAwesomeIcon icon={faXmark} onClick={() => setEditJudul(false)} className='action_btn'/>
+                            <div className="sb_action_btn d-grid pi-center d-flex">
+                                <FontAwesomeIcon icon={faXmark} onClick={() => setEditJudul(false)} className='action_btn pointer'/>
                                 {saveLoading?
-                                    <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn spinner'/>
+                                    <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn pointer spinner'/>
                                 :
                                     <button type='submit'>
-                                        <FontAwesomeIcon icon={faFloppyDisk} className='action_btn'/>
+                                        <FontAwesomeIcon icon={faFloppyDisk} className='action_btn pointer pointer'/>
                                     </button>
                                 }
                             </div>
@@ -222,7 +222,7 @@ export function SettingProfile() {
                     :
                         <>
                         <p className='setting_full_name_guild'>{profile.book_title}</p>
-                        <FontAwesomeIcon icon={faPencil} onClick={() => setEditJudul(true)} className='action_btn'/>
+                        <FontAwesomeIcon icon={faPencil} onClick={() => setEditJudul(true)} className='action_btn pointer'/>
                         </>
                 }
                 </div>
@@ -230,15 +230,15 @@ export function SettingProfile() {
                 <div className="guild_editor">
                     {editDesc?
                             <>
-                            <form className="form-modal flex-one" onSubmit={handleSubmitDesc}>
+                            <form className="form-modal flex-one fd-column" onSubmit={handleSubmitDesc}>
                                 <textarea value={valueDesc} placeholder={profile.desc} onChange={(e) => setValueDesc(e.target.value)}/>
-                                <div className="sb_action_btn as-flex-end">
-                                    <FontAwesomeIcon icon={faXmark} onClick={() => setEditDesc(false)} className='action_btn'/>
+                                <div className="sb_action_btn d-grid pi-center as-flex-end">
+                                    <FontAwesomeIcon icon={faXmark} onClick={() => setEditDesc(false)} className='action_btn pointer'/>
                                     {saveLoadingDesc?
-                                        <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn spinner'/>
+                                        <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn pointer spinner'/>
                                     :
                                         <button type='submit'>
-                                            <FontAwesomeIcon icon={faFloppyDisk} className='action_btn'/>
+                                            <FontAwesomeIcon icon={faFloppyDisk} className='action_btn pointer'/>
                                         </button>
                                     }
                                 </div>
@@ -276,15 +276,15 @@ export function SettingProfile() {
                         </div>
                     }
                     </div>
-                    <div className="img-form d-flex fd-column">
+                    <div className="img-form jc-center d-flex fd-column">
                         <div className="general-info">
                             <h3>Mengubah pp</h3>
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
                         {isFetching?
-                        <button className='task-submit'>Loading...</button>
+                        <button className='task-submit pointer'>Loading...</button>
                         :
-                        <button className='task-submit' onClick={() => formRef.current.submit}>Unggah</button>
+                        <button className='task-submit pointer' onClick={() => formRef.current.submit}>Unggah</button>
                         }
                     </div>
                 </form>

@@ -62,13 +62,13 @@ export function Confirm({ metode, open, close, target, color, callback, timeout 
                 <div className="confirm-body">
                     {context}
                     <div className="confirm-button d-flex ai-center jc-flex-end">
-                        <div className="confirm-btn confirm-no" onClick={close}>
+                        <div className="confirm-btn pointer confirm-no" onClick={close}>
                             Batal
                         </div>
                         {remainingTime > 0 ? (
-                            <div className="confirm-btn confirm-yes transparent">Yakin ({remainingTime})</div>
+                            <div className="confirm-btn pointer confirm-yes transparent">Yakin ({remainingTime})</div>
                         ) : (
-                            <div className="confirm-btn confirm-yes" onClick={acceptCallback}>
+                            <div className="confirm-btn pointer confirm-yes" onClick={acceptCallback}>
                                 Yakin
                             </div>
                         )}

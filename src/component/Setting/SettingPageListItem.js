@@ -112,7 +112,7 @@ export function SettingPageListItem({data, callback}) {
                     <p className='small'>Mengubah halaman <span className='small bold'>{title}</span></p>
                     <div className="pagePreview">
                         <p className='small bold uppercase'>Tipe halaman</p>
-                        <div className={`room d-flex ai-center p-relative pointer room-grid active`}>
+                        <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row active`}>
                             <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon active`}/>
                             <span className={`page_type active`}>Todo </span>
                             <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>

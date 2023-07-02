@@ -117,7 +117,7 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
                         </select>
                     </div>
                     <textarea placeholder='deskripsi' rows="10" style={borderStyle} name='desc'/>
-                    <button type='submit' className='task-submit' form='addTask'>Tambah</button>
+                    <button type='submit' className='task-submit pointer' form='addTask'>Tambah</button>
                 </form>
             </div>
         </Modal>

@@ -96,16 +96,16 @@ export function JadwalRoom() {
                         </div>
                     }
                     </div>
-                    <div className="img-form d-flex fd-column">
+                    <div className="img-form jc-center d-flex fd-column">
                         <div className="general-info">
                             <h3>Memperbarui jadwal</h3>
                             <p className='date'>{date}</p>
                         </div>
                         <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
                         {isFetching?
-                        <button className='task-submit'>Loading...</button>
+                        <button className='task-submit pointer'>Loading...</button>
                         :
-                        <button className='task-submit' onClick={() => formRef.current.submit}>Perbarui</button>
+                        <button className='task-submit pointer' onClick={() => formRef.current.submit}>Perbarui</button>
                         }
                     </div>
                 </form>

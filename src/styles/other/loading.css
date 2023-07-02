@@ -29,8 +29,6 @@
 .loading.sidebar_right_loading {
     height: 42px;
     background-color: var(--black-3);
-    display: grid;
-    place-items: center;
 }
 .loading.book_card {
     height: 10em;

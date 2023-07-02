@@ -26,7 +26,7 @@ export function BaseLeft() {
         console.log(source)
     }
     return (
-        <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'} fd-column d-flex`}>
+        <div className={`base-left of-auto ${hideLeftBase?'base-left of-auto-hide':'base-left of-auto-show'} fd-column d-flex`}>
             <div className="sidebar-left fd-column d-flex">
                 <Greeting/>
                 <JadwalRoom/>

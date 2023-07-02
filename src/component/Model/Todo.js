@@ -207,7 +207,7 @@ export function TodoModel({item}) {
                         </select>
                     </div>
                     <textarea placeholder={item.details.desc} rows="10" style={borderStyle} name='desc' value={inputDesc} onChange={x => setInputDesc(x.target.value)}/>
-                    <button type='submit' className='task-submit' form='addTask'>Simpan</button>
+                    <button type='submit' className='task-submit pointer' form='addTask'>Simpan</button>
                 </form>
             </div>
         </Modal>

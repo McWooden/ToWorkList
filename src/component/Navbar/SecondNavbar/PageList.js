@@ -35,8 +35,8 @@ export function PageList() {
 
     if (reloading) {
         return (
-            <div className="nav-guild d-flex fd-column">
-                <div className="reload_btn-frame" onClick={fetchData}>
+            <div className="nav-guild of-auto d-flex fd-column">
+                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
                 </div>
             </div>
@@ -44,13 +44,13 @@ export function PageList() {
     }
     if (loading) {
         return (
-            <div className="roomList">
+            <div className="roomList of-auto">
                 <div className="room d-flex ai-center p-relative pointer loading" />
             </div>
         )
     }
     return (
-        <div className="roomList">
+        <div className="roomList of-auto">
             {pages}
         </div>
     )

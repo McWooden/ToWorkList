@@ -9,7 +9,6 @@
 html {
   scroll-behavior: smooth;
   height: -webkit-fill-available;
-  overflow: hidden;
 }
 :root {
   --defaultFont: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -79,4 +78,7 @@ code {
   box-shadow: none;
   height: 1px;
   background-color: var(--purple-1);
+}
+.pointer {
+  cursor: pointer;
 }

@@ -6,15 +6,8 @@
 
 .base  {
     background-color: var(--primary);
-    overflow: hidden;
     padding-top: 48px;
     height: -webkit-fill-available;
-}
-.base-left, .base-center, .base-right {
-    overflow: auto;
-}
-.base-center {
-    position: relative;
 }
 .base-left {
     flex: 1;

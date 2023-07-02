@@ -38,21 +38,21 @@ export function BookList() {
         }
     }, [dispatch, booksProfile, fetchData])
     if (isReload) return (
-        <div className="nav-guild d-flex fd-column">
-            <div className="reload_btn-frame" onClick={fetchData}>
+        <div className="nav-guild of-auto d-flex fd-column">
+            <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                 <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
             </div>
         </div>
     )
     if (isLoading) return (
-        <div className="nav-guild d-flex fd-column">
+        <div className="nav-guild of-auto d-flex fd-column">
             <div className='guild-frame'>
                 <div className="loading guild-photo-profile d-flex jc-center ai-center"/>
             </div>
         </div>
     )
     return (
-        <div className="nav-guild d-flex fd-column">
+        <div className="nav-guild of-auto d-flex fd-column">
             {allBook}
         </div>
     )

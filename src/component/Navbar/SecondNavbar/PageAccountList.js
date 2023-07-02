@@ -39,7 +39,7 @@ export function PageAccountList() {
     }, [pages, bookId])
 
     return (
-        <div className="roomList">
+        <div className="roomList of-auto">
             {pageList}
         </div>
     )

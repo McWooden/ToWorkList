@@ -15,12 +15,18 @@
 .pi-center {
     place-items: center;
 }
+.gaf-row {
+    grid-auto-flow: row;
+}
 /* flex property */
 .fd-row {
     flex-direction: row;
 }
 .fd-column {
     flex-direction: column;
+}
+.fd-row-reverse {
+    flex-direction: row-reverse;
 }
 .jc-flex-end {
     justify-content: flex-end;

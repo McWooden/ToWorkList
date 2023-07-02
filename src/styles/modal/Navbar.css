@@ -26,9 +26,6 @@
     visibility: visible;
     transition: .1s ease;
 }
-.pointer {
-    cursor: pointer;
-}
 nav {
     width: 75px;
     max-height: 100%;
@@ -39,11 +36,8 @@ nav {
     border-radius: 15px;
     width: 48px;
     height: 48px;
-    cursor: pointer;
     background-color: var(--black-4);
     box-shadow: var(--shadow-1);
-    display: grid;
-    place-items: center;
     margin: 5px auto;
 }
 .reload_btn {
@@ -55,7 +49,6 @@ nav {
     background-color: var(--black-2);
     margin: .5em;
     border-radius: 15px;
-    overflow: hidden;
 }
 .nav-icon {
     width: 100%;
@@ -124,11 +117,9 @@ nav {
 }
 .nav-guild {
     flex: 1;
-    overflow: auto;
 } 
 .nav-guild div {
     padding: 0 .5em;
-    cursor: pointer;
 }
 .nav-guild div:hover {
     background-color: var(--black-2);
@@ -175,7 +166,6 @@ nav {
     color: var(--purple-1);
 }
 .roomList {
-    overflow: auto;
     flex: 1;
 }
 .room {
@@ -347,12 +337,9 @@ nav {
 .sb_action_btn {
     min-width: 45px;
     min-height: 45px;
-    display: grid;
-    place-items: center;
 }
 .sb_action_btn .action_btn {
     padding: 8px;
-    cursor: pointer;
     font-size: large;
 }
 /* add server */

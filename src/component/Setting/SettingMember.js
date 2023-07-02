@@ -53,9 +53,9 @@ export function SettingMember() {
         return () => clearInterval(interval)
     }, [idBook, members, dispatch])
     if (isLoading) return (
-        <div className="base-right">
+        <div className="base-right of-auto">
             <div className="sidebar-right">
-                <div className="loading sidebar_right_loading"/>
+                <div className="loading sidebar_right_loading d-grid pi-center"/>
             </div>
         </div>
     )

@@ -37,14 +37,14 @@ export function TodoDetail() {
     return (
         <>
         {/* left */}
-            <div className={`base-left ${hideLeftBase?'base-left-hide':'base-left-show'} fd-column d-flex`}>
+            <div className={`base-left of-auto ${hideLeftBase?'base-left of-auto-hide':'base-left of-auto-show'} fd-column d-flex`}>
                 <div className="sidebar-left fd-column d-flex">
                     <MoreInfoCard/>
                     <DetailLeftAction/>
                 </div>
             </div>
         {/* center */}
-            <div className='base-center'>
+            <div className='base-center p-relative of-auto'>
                 <div className='center d-flex p-relative fd-column'>
                     <DetailCard/>                    
                     <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/>

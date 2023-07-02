@@ -8,7 +8,7 @@ export function FileDrop({children, open, close}) {
     return ReactDOM.createPortal(
         <>
         <div className='overlay p-fixed' onClick={setClose}/>
-        <div className='modal of-auto'>
+        <div className='modal p-fixedof-auto'>
             {children}
         </div>
         </>,

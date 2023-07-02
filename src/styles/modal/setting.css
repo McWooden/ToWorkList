@@ -85,7 +85,6 @@
     border-radius: 5px;
 }
 .setting_full_profile_view_banner img.full {
-    position: fixed;
     top: 0;
     left: 0;
     bottom: 0;
@@ -117,7 +116,6 @@
     width: 1em;
     height: 1em;
     padding: 5px;
-    cursor: pointer;
 }
 .guild_editor .sb_action_btn .action_btn:hover, .guild_editor .action_btn:hover{
     background-color: #ddd;
@@ -130,7 +128,6 @@
 }
 .guild_editor .form-modal.flex-one {
     flex: 1;
-    flex-direction: column;
     height: 15em;
 }
 .guild_editor .form-modal.flex-one textarea {
@@ -267,11 +264,9 @@
     margin-top: 1em;
 }
 .room-grid {  
-    display: grid;
     grid-template-columns: .2fr 1.8fr;
     grid-template-rows: 1fr 1fr;
     gap: 0px 0px;
-    grid-auto-flow: row;
     grid-template-areas:
         "page_icon page_type"
         "page_icon page_desc";
@@ -318,13 +313,10 @@
     gap: 1em;
 }
 .addPage_action .btn_action {
-    cursor: pointer;
     text-align: center;
     font-size: small;
     border-radius: 8px;
     height: 35px;
-    display: grid;
-    place-items: center;
     color: var(--text-2);
     width: 25%;
 }

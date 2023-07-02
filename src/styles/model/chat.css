@@ -18,10 +18,6 @@
     width: 100%;
     transition: .1s ease;
 }
-.chat-card.my {
-    flex-direction: row-reverse;
-    align-self: flex-end;
-}
 .chat-card.active {
     background-color: var(--ok);
 }

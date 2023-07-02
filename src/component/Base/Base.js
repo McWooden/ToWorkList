@@ -10,7 +10,7 @@ export function Base() {
     const todoId = useSelector(state => state.todo.id)
 
     return (
-        <div className='base d-flex'>
+        <div className='base of-hidden d-flex'>
             {todoId? <TodoDetail/> :
                 (<>
                     {pageType === 'welcome' && <Welcome/>}

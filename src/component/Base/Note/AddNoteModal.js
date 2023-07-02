@@ -72,7 +72,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
                         </select>
                     </div>
                     <textarea placeholder='deskripsi' rows="10" style={borderStyle} name='desc'/>
-                    <button className='task-submit'>Tambah</button>
+                    <button className='task-submit pointer'>Tambah</button>
                 </form>
             </div>
         </Modal>

@@ -108,7 +108,7 @@ export function FindAndCreateBook() {
     const [valueJudul, setValueJudul] = useState(`Buku ${myAccount?.nickname}`)
     return (
         <>
-        <div className='nav-icon-frame d-flex jc-center'>
+        <div className='nav-icon-frame of-hidden d-flex jc-center'>
             <div className='nav-icon jc-center ai-center d-flex pointer find-create' onClick={handleModalOpen}>
                 <FontAwesomeIcon icon={faCompass}/>
             </div>
@@ -126,11 +126,11 @@ export function FindAndCreateBook() {
                         </div>
                     </form>
                     <div className="d-flex jc-flex-end">
-                        <div className="sb_action_btn">
-                            <FontAwesomeIcon icon={fontawesome.faRotateBack} className='action_btn' onClick={() => ''}/>
+                        <div className="sb_action_btn d-grid pi-center">
+                            <FontAwesomeIcon icon={fontawesome.faRotateBack} className='action_btn pointer' onClick={() => ''}/>
                         </div>
-                        <div className="sb_action_btn">
-                            <FontAwesomeIcon icon={faPlus} className='action_btn' onClick={() => setAddServerModal(true)}/>
+                        <div className="sb_action_btn d-grid pi-center">
+                            <FontAwesomeIcon icon={faPlus} className='action_btn pointer' onClick={() => setAddServerModal(true)}/>
                         </div>
                     </div>
                 </div>
@@ -166,11 +166,11 @@ export function FindAndCreateBook() {
                     <input type="text" value={valueJudul} placeholder='Judul' onChange={(e) => setValueJudul(e.target.value)}/>
                 </div>
                 <div className="add_server-footer addPage_action d-flex jc-flex-end">
-                    <span className='btn_action' onClick={() => setAddServerModal(false)}>Batal</span>
+                    <span className='btn_action d-grid pi-center' onClick={() => setAddServerModal(false)}>Batal</span>
                     {btnLoading?
-                    (<button className={`btn_action btn_add`}>Loading...</button>)
+                    (<button className={`btn_action d-grid pi-center btn_add`}>Loading...</button>)
                     :
-                    (<button type='submit' className={`btn_action btn_add ${valueJudul&&'active'}`}>Buat</button>)
+                    (<button type='submit' className={`btn_action d-grid pi-center btn_add ${valueJudul&&'active'}`}>Buat</button>)
                     }
                 </div>
             </form>

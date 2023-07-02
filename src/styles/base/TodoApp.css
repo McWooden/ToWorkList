@@ -2,9 +2,6 @@
     background-color: var(--black-4);
     height: 100vh;
 }
-.pointer {
-    cursor: pointer;
-}
 header {
     background-color: var(--primary);
     filter: var(--filter-shadow);
