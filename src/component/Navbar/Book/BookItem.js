@@ -14,7 +14,7 @@ export function BookItem({data}) {
         dispatch(setMembers(null))
     }
     return (
-        <div onClick={handleClick} className={`guild-frame ${idBook===data._id ? 'active' : ''}`}>
+        <div onClick={handleClick} className={`guild-frame pointer ${idBook===data._id ? 'active' : ''}`}>
             <img src={`${url}/${data.profile.avatar_url}`} className={`guild-photo-profile d-flex jc-center ai-center ${idBook===data._id ? 'active' : ''}`} alt={data.profile.book_title} title={data.profile.book_title}/>
         </div>
     )

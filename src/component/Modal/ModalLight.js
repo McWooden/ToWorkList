@@ -7,8 +7,8 @@ export function ModalLight({children, open, close}) {
     }
     return ReactDOM.createPortal(
         <>
-        <div className='overlay p-fixed' onClick={setClose}/>
-        <div className='modal p-fixedof-auto light'>
+        <div className='overlay zi-3 p-fixed' onClick={setClose}/>
+        <div className='modal zi-3p-fixedof-auto light'>
             {children}
         </div>
         </>,

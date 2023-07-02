@@ -151,7 +151,7 @@ export function TodoModel({item}) {
                 <div className="card-more d-flex ai-center" ref={btnRef}>
                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
                 </div>
-                <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
+                <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                     <ul className='d-flex fd-column of-hidden p-absolute pointer'>
                         <li className='d-flex ai-center' onClick={() => setEditModal(true)}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />

@@ -35,7 +35,7 @@ export function Image({data}) {
     return (
         <>
         <div className='card-img d-flex of-hidden'>
-            <img alt={data.by} className={`card-img-pic pointer ${full&&'full p-fixed'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
+            <img alt={data.by} className={`card-img-pic pointer ${full&&'full p-fixed zi-3'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
             <div className='card-img-context d-flex fd-column'>
                 <div className='card-img-context-deep'>
                     <div className="card-img-by">{data.by}</div>

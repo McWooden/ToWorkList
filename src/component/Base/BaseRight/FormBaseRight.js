@@ -46,7 +46,7 @@ export function FormBaseRight() {
         textarea.current.style.height = height + 'px'
     }
     return (
-        <form className='base-right of-auto-form d-flex ai-flex-end' onSubmit={handleSubmit}>
+        <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
             <div className="textarea-container d-flex ai-center of-auto">
                 <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{height: '15px'}} className='d-flex ai-center of-auto'/>
             </div>

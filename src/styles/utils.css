@@ -58,6 +58,9 @@
 .fw-wrap {
     flex-wrap: wrap;
 }
+.flex-1 {
+    flex: 1;
+}
 /* overflow */
 .of-hidden {
     overflow: hidden;
@@ -77,4 +80,14 @@
 }
 .p-absolute {
     position: absolute;
+}
+/* zindex */
+.zi-1 {
+    z-index: 1;
+}
+.zi-2 {
+    z-index: 2;
+}
+.zi-3 {
+    z-index: 3;
 }

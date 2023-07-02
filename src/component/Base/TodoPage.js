@@ -30,7 +30,7 @@ export function TodoPage() {
 
     if (!source) return (
         <>
-        <div className={`base-left of-auto ${hideLeftBase?'base-left of-auto-hide':'base-left of-auto-show'}`}>
+        <div className={`base-left zi-1 flex-1 of-auto ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
             <div className="sidebar-left">
                 <div className='sidebar_left_loading loading'/>
             </div>

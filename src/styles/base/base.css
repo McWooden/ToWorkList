@@ -9,10 +9,6 @@
     padding-top: 48px;
     height: -webkit-fill-available;
 }
-.base-left {
-    flex: 1;
-    z-index: 1;
-}
 .base-center {
     flex: 2;
 }

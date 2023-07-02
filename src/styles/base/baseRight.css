@@ -12,7 +12,6 @@
     margin: 0 3px 8px;
     padding: 0 2px;
     background-color: transparent;
-    z-index: 1;
 }
 .base-right-form .textarea-container {
     flex: 4;
@@ -49,7 +48,6 @@
     width: 15px;
     bottom: 50px;
     right: 10px;
-    z-index: 1;
     font-size: large;
     background-color: var(--purple-1-transparent);
     color: var(--purple-1);
@@ -103,6 +101,7 @@
         width: 314px;
         margin: 1em;
         border-radius: 8px;
+        border: 1px solid var(--secondary);
     }
     .base-right-hide {
         transform: translateX(calc(100% + 1em));

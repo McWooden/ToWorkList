@@ -1,7 +1,6 @@
 .navigation_block {
     width: 100%;
     height: 100%;
-    z-index: 2;
 }
 .navigation_block.active {
     background-color: #31364c46;
@@ -11,7 +10,6 @@
     visibility: hidden;
 }
 .navigation {
-    z-index: 2;
     height: -webkit-fill-available;
     margin: 1em;
     margin-top: 54px;
@@ -64,56 +62,24 @@ nav {
     background-color: var(--purple-1);
     color: var(--text-primary);
 }
-/* .home-frame {
-    padding: 8px 2px;
-    border-bottom: 2px solid var(--text-secondary);
-    width: fit-content;
-    margin: 0 auto;
-} */
 .guild-frame.active {
     border-radius: 8px;
     background-color: var(--purple-1-transparent) !important;
 }
-/* .find-create-frame {
-    border-top: 2px solid var(--text-secondary);
-    width: 58px;
-    margin: .5em;
-    margin-top: 0;
-    padding-top: 8px;
-    gap: .5em;
-}
-   .home-profile {
-    border-radius: 15px;
-    width: 48px;
-    height: 48px;
-    background-color: var(--secondary-bright);
-}
-.home-profile.active {
-    background-color: var(--purple-1);
-}
-.home-profile.active:hover {
-    background-color: var(--purple-1);
-}
-.home-profile.active .nav-icon {
-    color: var(--text-primary);
-}
-.find-create:hover, .find-create:hover > *, .home-profile:hover, .home-profile:hover > * {
-    background-color: var(--orange-2);
-    color: var(--black-2);
-} */
 .guild-photo-profile {
     width: 45px;
     height: 45px;
     border-radius: 50px;
     margin: .25em auto;
+    transition: .1s ease;
 }
 .guild-photo-profile.active {
     border-radius: 15px;
     border: 1px solid var(--purple-1);
-    transition: .1s ease;
 }
 .guild-photo-profile:hover {
-    border-radius: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--purple-1);
 }
 .nav-guild {
     flex: 1;
@@ -169,11 +135,14 @@ nav {
     flex: 1;
 }
 .room {
-    padding: .5em;
+    padding: .35em;
+    gap: 3px;
+    color: var(--text-secondary);
 }
 .room.active {
     background-color: var(--purple-1-transparent) !important;
     transition: .1s ease;
+    color: var(--text-primary);
 }
 .room:hover {
     background-color: var(--secondary-transparent);

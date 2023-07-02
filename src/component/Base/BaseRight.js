@@ -67,7 +67,7 @@ export function BaseRight() {
         </div>
     )
     return (
-        <div className={`base-right of-auto ${hideRightBase?'base-right of-auto-hide':'base-right of-auto-show'} d-flex fd-column`}>
+        <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
             <div className="sidebar-right d-flex fd-column of-auto">
                 {box}
             </div>

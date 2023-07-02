@@ -56,8 +56,8 @@ export function Confirm({ metode, open, close, target, color, callback, timeout 
 
     return ReactDOM.createPortal(
         <>
-            <div className="overlay p-fixed" onClick={close} />
-            <div className="confirm d-flex fd-row">
+            <div className="overlay zi-3 p-fixed" onClick={close} />
+            <div className="confirm zi-3d-flex fd-row">
                 <div className="confirm-header d-flex fd-column jc-center ai-center">{icon}</div>
                 <div className="confirm-body">
                     {context}

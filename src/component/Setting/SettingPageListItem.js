@@ -86,7 +86,7 @@ export function SettingPageListItem({data, callback}) {
         <div className={`room d-flex ai-center p-relative pointer ${active?'active':''}`}  onClick={() => setDropDown(!dropDown)} ref={btnRef}>
             <FontAwesomeIcon icon={fontawesome[icon]} className={`room d-flex ai-center p-relative pointer-icon ${active?'active':''} ${dropDown?'text-primary':''}`}/>
             <span className={`${active?'active':''} ${dropDown?'text-primary':''}`}>{title}</span>
-            <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
+            <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                 <ul className='d-flex fd-column of-hidden p-absolute pointer'>
                     <li className='d-flex ai-center' onClick={handleClick}>
                         <FontAwesomeIcon icon={faEye} className='card-dd-btn' />

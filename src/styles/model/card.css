@@ -58,9 +58,6 @@
 .card-more-btn:hover {
     background-color: var(--black-2);
 }
-.card-drop-down {
-    z-index: 1;
-}
 .card-drop-down.active {
     opacity: 1;
     visibility: visible;

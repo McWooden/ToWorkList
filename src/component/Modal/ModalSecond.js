@@ -7,8 +7,8 @@ export function ModalSecond({children, open, close}) {
     }
     return ReactDOM.createPortal(
         <>
-        <div className='overlay p-fixed' onClick={setClose}/>
-        <div className='modal p-fixedof-auto second_modal'>
+        <div className='overlay zi-3 p-fixed' onClick={setClose}/>
+        <div className='modal zi-3p-fixedof-auto second_modal'>
             {children}
         </div>
         </>,

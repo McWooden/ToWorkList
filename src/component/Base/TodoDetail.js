@@ -37,7 +37,7 @@ export function TodoDetail() {
     return (
         <>
         {/* left */}
-            <div className={`base-left of-auto ${hideLeftBase?'base-left of-auto-hide':'base-left of-auto-show'} fd-column d-flex`}>
+            <div className={`base-left of-auto zi-1 flex-1 ${hideLeftBase?'base-left-hide':'base-left-show'} fd-column d-flex`}>
                 <div className="sidebar-left fd-column d-flex">
                     <MoreInfoCard/>
                     <DetailLeftAction/>

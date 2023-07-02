@@ -20,7 +20,7 @@ export function NavTop() {
     }
     return (
         <section id='navTop'>
-            <header className='d-flex ai-center ac-center jc-space-between p-fixed'>
+            <header className='zi-1 d-flex ai-center ac-center jc-space-between p-fixed'>
             <div className='header-left d-flex'>
                 <FontAwesomeIcon icon={faBars} className={`bars pointer ${hideNavbar?'btn-inactive':'btn-active'}`} onClick={handleClickNavbar}/>
                 <h4 className='of-hidden'>{pathPageOfBook}</h4>

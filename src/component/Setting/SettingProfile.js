@@ -183,12 +183,12 @@ export function SettingProfile() {
         </div>
         <div className="setting_full_profile_view d-flex fd-column">
             <div className='setting_full_profile_view_banner'>
-                <img className={`setting_banner pointer ${full?'full p-fixed':''}`} src={`${url}/${profile.avatar_url}`} alt={profile.book_title} onClick={() => setFull(!full)}/>
+                <img className={`setting_banner pointer ${full?'full zi-3 p-fixed':''}`} src={`${url}/${profile.avatar_url}`} alt={profile.book_title} onClick={() => setFull(!full)}/>
             </div>
             <div className="setting_full_profile_view_body p-relative">
                 <div className="setting_full_profile_view_float d-fle ai-center p-absolute">
                     <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='setting_full_pp_guild pointer' onClick={() => setDropDown(!dropDown)} ref={btnRef}/>
-                    <div className={`card-drop-down ${dropDown?'active':'inactive'}`} ref={menuRef}>
+                    <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                         <ul className='reverse d-flex fd-column of-hidden p-absolute pointer'>
                             <li className='d-flex ai-center' onClick={() => setOpenUnggah(true)}>
                                 <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
