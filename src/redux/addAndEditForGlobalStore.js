@@ -3,13 +3,23 @@ import { createSlice } from '@reduxjs/toolkit'
 export const addAndEdit = createSlice({
     name: 'addAndEdit',
     initialState: {
-        one: '',
-        two: '',
+        visibility: 'hidden',
+        type: '',
+        title: '',
+        subTitle: '',
+        inputTitle: '',
+        inputColor: '',
+        inputTextarea: '',
     },
     reducers: {
-        example: (state, action) => {
-            state.one = action.payload.one
-            state.two = action.payload.two
+        resetAddAndEdit: (state, action) => {
+            state.visibility = 'hidden',
+            state.type = ''
+            state.title = ''
+            state.subTitle = ''
+            state.inputTitle = ''
+            state.inputColor = ''
+            state.inputTextarea = ''
         },
     },
 })

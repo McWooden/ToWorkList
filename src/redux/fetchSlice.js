@@ -26,7 +26,6 @@ export const fetchSlice = createSlice({
     },
 })
 
-// Action creators are generated for each case reducer function
 export const { setPathBook, setPathPageOfBook, setFetch } = fetchSlice.actions
 
 export default fetchSlice.reducer
