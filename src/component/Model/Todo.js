@@ -188,7 +188,7 @@ export function TodoModel({item}) {
                         }}
                     />
                 </div>
-                <form className="form-modal" ref={formRef} onSubmit={handleSubmit} id='addTask'>
+                <form className="form-modal d-flex fd-column" ref={formRef} onSubmit={handleSubmit} id='addTask'>
                     <div className="general-info" style={{borderBottom: `1px solid ${currentColor}`}}>
                         <h3>{title}</h3>
                         <p className="date">{convertDateToString(item.details.deadline)}</p>

@@ -101,7 +101,7 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
                     }}
                 />
                 </div>
-                <form className="form-modal" ref={formRef} onSubmit={handleSubmit} id='addTask'>
+                <form className="form-modal d-flex fd-column" ref={formRef} onSubmit={handleSubmit} id='addTask'>
                     <div className="general-info" style={{borderBottom: `1px solid ${currentColor}`}}>
                         <h3>{title}</h3>
                         <p className="date">{date}</p>
@@ -117,7 +117,7 @@ export function AddTaskModal({modalOpen, handleModalClose, title}) {
                         </select>
                     </div>
                     <textarea placeholder='deskripsi' rows="10" style={borderStyle} name='desc'/>
-                    <button type='submit' className='task-submit pointer' form='addTask'>Tambah</button>
+                    <button type='submit' className='task-submit d-grid pi-center pointer' form='addTask'>Tambah</button>
                 </form>
             </div>
         </Modal>

@@ -20,7 +20,7 @@ export function DeleteBookModal({open, close, data, callback}) {
     return ReactDOM.createPortal(
         <>
         <div className="overlay zi-3 p-fixed" onClick={closeModal} />
-        <div className="confirm zi-3fd-column light">
+        <div className="confirm zi-3 p-fixed fd-column light">
             <div className="confirm-body">
                 <div className="confirm-profile d-flex">
                     <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} />

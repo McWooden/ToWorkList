@@ -57,7 +57,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
                 <div className="general-modal d-flex fd-column ai-center jc-center">
                     <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/>
                 </div>
-                <form className="form-modal" onSubmit={handleSubmit}>
+                <form className="form-modal d-flex fd-column" onSubmit={handleSubmit}>
                     <div className="general-info" style={{borderBottom: `1px solid ${currentColor}`}}>
                         <h3>{title}</h3>
                         <p className="date">{date}</p>
@@ -72,7 +72,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
                         </select>
                     </div>
                     <textarea placeholder='deskripsi' rows="10" style={borderStyle} name='desc'/>
-                    <button className='task-submit pointer'>Tambah</button>
+                    <button className='task-submit d-grid pi-center pointer'>Tambah</button>
                 </form>
             </div>
         </Modal>
