@@ -3,27 +3,21 @@ import { createSlice } from '@reduxjs/toolkit'
 export const addAndEdit = createSlice({
     name: 'addAndEdit',
     initialState: {
-        visibility: 'hidden',
-        type: '',
-        title: '',
-        subTitle: '',
-        inputTitle: '',
-        inputColor: '',
-        inputTextarea: '',
+        type: null,
+        item: null
     },
     reducers: {
-        resetAddAndEdit: (state, action) => {
-            state.visibility = 'hidden',
-            state.type = ''
-            state.title = ''
-            state.subTitle = ''
-            state.inputTitle = ''
-            state.inputColor = ''
-            state.inputTextarea = ''
+        resetAddAndEdit: (state) => {
+            state.type = null
+            state.item = null
         },
+        setAddAndEdit: (state, action) => {
+            state.type = action.payload.type
+            state.item = action.payload.item
+        }
     },
 })
 
-export const { example } = addAndEdit.actions
+export const { resetAddAndEdit, setAddAndEdit } = addAndEdit.actions
 
 export default addAndEdit.reducer

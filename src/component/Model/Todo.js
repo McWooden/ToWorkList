@@ -1,16 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
-import { Modal } from "../Modal/Modal"
+// import { Modal } from "../Modal/Modal"
 import { Confirm } from "../Modal/Confirm"
 import { setAllTodo } from "../../redux/todo"
 import { checkToast, noteToast, deleteToast } from "../../utils/notif"
 import { setSource } from "../../redux/sourceSlice"
-import { convertDateToString } from "../../utils/convertDateFormat"
-import Calendar from "react-calendar"
+// import { convertDateToString } from "../../utils/convertDateFormat"
+// import Calendar from "react-calendar"
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { API } from '../../utils/variableGlobal'
+import { setAddAndEdit } from '../../redux/addAndEditForGlobalStore'
 
 export function TodoModel({item}) {
     const profile = useSelector(state => state.source.profile)
@@ -25,13 +26,13 @@ export function TodoModel({item}) {
     const [deleteOpen, setDeleteOpen] = useState(false)
     const title = item.details.item_title
 
-    const colors = ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow']
-    const [currentColor, setCurrentColor] = useState(item.details.color)
-    const borderStyle = {border: `1px solid ${currentColor}`}
-    const formRef = useRef()
+    // const colors = ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow']
+    // const [currentColor, setCurrentColor] = useState(item.details.color)
+    // const borderStyle = {border: `1px solid ${currentColor}`}
+    // const formRef = useRef()
 
-    const [inputTitle, setInputTitle] = useState(item.details.item_title)
-    const [inputDesc, setInputDesc] = useState(item.details.desc)
+    // const [inputTitle, setInputTitle] = useState(item.details.item_title)
+    // const [inputDesc, setInputDesc] = useState(item.details.desc)
     
 
     useEffect(() => {
@@ -87,53 +88,53 @@ export function TodoModel({item}) {
 
         }
     }
-    function handleColor(e) {
-        setCurrentColor(e.target.value)
-    }
-    function handleTitleChange(e) {
-        setInputTitle(e.target.value)
-    }
-    async function handleSubmit(e) {
-        e.preventDefault()
-        const date = colorsTileSource[0].details.deadline
-        const dataToSend = {
-            color: e.target.color.value,
-            desc: e.target.desc.value,
-            deadline: (date === item.details.deadline ? date : `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`),
-            item_title: e.target.title.value,
-            returnPage: true,
-        }
-        try {
-            await axios.put(`${API}/source/addTodo/${idPageOfBook}/${item._id}`, dataToSend)
-            .then((res) => {
-                noteToast(dataToSend)
-                dispatch(setSource(res.data))
-                setEditModal(false)
-            })
-            .catch(err => {
-                noteToast({color : 'var(--danger)'})
-            }) 
-        } catch(err) {
+    // function handleColor(e) {
+    //     setCurrentColor(e.target.value)
+    // }
+    // function handleTitleChange(e) {
+    //     setInputTitle(e.target.value)
+    // }
+    // async function handleSubmit(e) {
+    //     e.preventDefault()
+    //     const date = colorsTileSource[0].details.deadline
+    //     const dataToSend = {
+    //         color: e.target.color.value,
+    //         desc: e.target.desc.value,
+    //         deadline: (date === item.details.deadline ? date : `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`),
+    //         item_title: e.target.title.value,
+    //         returnPage: true,
+    //     }
+    //     try {
+    //         await axios.put(`${API}/source/addTodo/${idPageOfBook}/${item._id}`, dataToSend)
+    //         .then((res) => {
+    //             noteToast(dataToSend)
+    //             dispatch(setSource(res.data))
+    //             setEditModal(false)
+    //         })
+    //         .catch(err => {
+    //             noteToast({color : 'var(--danger)'})
+    //         }) 
+    //     } catch(err) {
 
-        }
-    }
-    const [colorsTileSource, setColorsTileSource] = useState([item])
-    const colorsTile = colorsTileSource.map(item => ({
-        date: new Date(item.details.deadline),
-        color: item.details.color,
-        title: item.details.item_title,
-    }))
-    function dayTileClick(x) {
-        const date = new Date(x)
-        const newDate = {
-            details: {
-                deadline: date,
-                color: 'var(--purple-2)',
-                item_title: item.details.item_title,
-            }
-        }
-        setColorsTileSource([newDate, item])
-    }
+    //     }
+    // }
+    // const [colorsTileSource, setColorsTileSource] = useState([item])
+    // const colorsTile = colorsTileSource.map(item => ({
+    //     date: new Date(item.details.deadline),
+    //     color: item.details.color,
+    //     title: item.details.item_title,
+    // }))
+    // function dayTileClick(x) {
+    //     const date = new Date(x)
+    //     const newDate = {
+    //         details: {
+    //             deadline: date,
+    //             color: 'var(--purple-2)',
+    //             item_title: item.details.item_title,
+    //         }
+    //     }
+    //     setColorsTileSource([newDate, item])
+    // }
     return (
         <>
         <div className="todo-card d-flex fd-row  jc-space-between">
@@ -153,7 +154,7 @@ export function TodoModel({item}) {
                 </div>
                 <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                     <ul className='d-flex fd-column of-hidden p-absolute pointer'>
-                        <li className='d-flex ai-center' onClick={() => setEditModal(true)}>
+                        <li className='d-flex ai-center' onClick={() => dispatch(setAddAndEdit({type: 'todo', item: {...item}}))}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                             <span>edit</span>
                         </li>
@@ -162,11 +163,21 @@ export function TodoModel({item}) {
                             <span>delete</span>
                         </li>
                     </ul>
+                    {/* <ul className='d-flex fd-column of-hidden p-absolute pointer'>
+                        <li className='d-flex ai-center' onClick={() => setEditModal(true)}>
+                            <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
+                            <span>edit</span>
+                        </li>
+                        <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
+                            <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                            <span>delete</span>
+                        </li>
+                    </ul> */}
                 </div>
             </div>
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
-        <Modal open={editModal} close={() => setEditModal(false)}>
+        {/* <Modal open={editModal} close={() => setEditModal(false)}>
             <div className="edit_card_modal d-flex">
                 <div className="general-modal d-flex fd-column ai-center jc-center">
                     <Calendar 
@@ -210,7 +221,7 @@ export function TodoModel({item}) {
                     <button type='submit' className='task-submit pointer' form='addTask'>Simpan</button>
                 </form>
             </div>
-        </Modal>
+        </Modal> */}
         </>
     )
 }
