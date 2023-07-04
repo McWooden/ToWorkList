@@ -9,6 +9,8 @@ import { ToastContainer } from 'react-toastify';
 import store from './redux/store'
 import { Provider } from 'react-redux';
 import Join from './pages/Join'
+import { AddAndEditForGlobal } from './component/Modal/addAndEditForGlobal';
+
 
 // import all css
 import 'react-toastify/dist/ReactToastify.css';
@@ -28,8 +30,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <>
   {/* <React.StrictMode> */}
+  <Provider store={store}>
     <BrowserRouter>
-      <Provider store={store}>
       <Routes>
         <Route path='*' element={<App />}/>
         <Route path='/auth'>
@@ -40,7 +42,7 @@ root.render(
         </Route>
         <Route path='/join' element={<Join />}/>
       </Routes>
-      </Provider>
+      <AddAndEditForGlobal/>
     </BrowserRouter>
     <ToastContainer
               pauseOnFocusLoss={false}
@@ -48,7 +50,8 @@ root.render(
               autoClose={1000}
               position="top-center"
               closeButton={false}
-    />
+              />
+  </Provider>
   {/* </React.StrictMode> */}
   </>
 )

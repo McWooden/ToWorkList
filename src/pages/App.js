@@ -4,7 +4,6 @@ import { myAccount } from '../utils/dataJSON';
 import { useSelector } from 'react-redux';
 import TodoApp from '../component/TodoApp/TodoApp';
 
-import { AddAndEditForGlobal } from '../component/Modal/addAndEditForGlobal';
 
 export const GuildContext = createContext()
 export const ItemData = createContext()
@@ -62,7 +61,6 @@ function App() {
         }}>
           <Navbar/>
           <TodoApp/>
-          <AddAndEditForGlobal/>
         </AppContext.Provider>
       </div>
     </PageContext.Provider>

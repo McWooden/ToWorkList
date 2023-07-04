@@ -49,7 +49,7 @@ export function TodoModel({item}) {
         }
         document.addEventListener('mousedown', handler)
         return () => document.removeEventListener("mousedown", handler)
-    })
+    }, [])
     function handleTextClick() {
         dispatch(setAllTodo(item))
     }
@@ -154,7 +154,7 @@ export function TodoModel({item}) {
                 </div>
                 <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                     <ul className='d-flex fd-column of-hidden p-absolute pointer'>
-                        <li className='d-flex ai-center' onClick={() => dispatch(setAddAndEdit({type: 'todo', item: {...item}}))}>
+                        <li className='d-flex ai-center' onClick={() => dispatch(setAddAndEdit({type: 'todo', ...item}))}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                             <span>edit</span>
                         </li>
