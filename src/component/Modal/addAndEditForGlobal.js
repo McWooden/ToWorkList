@@ -53,7 +53,12 @@ export function AddAndEditForGlobal() {
             await axios.put(`${API}/source/addTodo/${idPageOfBook}/${_id}`, dataToSend)
             .then((res) => {
                 saveToast(dataToSend.item_title)
-                dispatch(setSource(res.data))
+                if (type === 'ADD_TODO') {
+                } else if (type === 'EDIT_TODO_OUTSIDE') {
+                    dispatch(setSource(res.data))
+                } else if (type === 'EDIT_TODO_INSIDE') {
+                    dispatch(setSource(res.data))
+                }
                 dispatch(resetAddAndEdit())
             })
             .catch(err => {

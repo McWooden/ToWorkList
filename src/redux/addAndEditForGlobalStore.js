@@ -28,7 +28,7 @@ export const addAndEdit = createSlice({
             state.color = action.payload.details.color
             state.date = action.payload.date
             state.deadline = action.payload.details.deadline
-            state._id = action.payload._id
+            state._id = action.payload._id || action.payload.id
         }
     },
 })
