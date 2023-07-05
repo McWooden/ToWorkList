@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setAddAndEdit } from '../../../redux/addAndEditForGlobalStore';
 
 
-export function CenterActionButton({handleModalOpen}) {
+export function CenterActionButton() {
     const todoId = useSelector(state => state.todo.id)
     function handleClick() {
         dispatch(clearTodo())
@@ -19,9 +19,6 @@ export function CenterActionButton({handleModalOpen}) {
                     <span>Back</span>
                 </div>
                 )}
-                {/* <div className="action-add">
-                    <FontAwesomeIcon icon={faAdd} className='add-btn pointer' onClick={handleModalOpen}/>
-                </div> */}
                 <div className="action-add">
                     <FontAwesomeIcon icon={faAdd} className='add-btn pointer' onClick={() => dispatch(setAddAndEdit({type: 'ADD_TODO'}))}/>
                 </div>
