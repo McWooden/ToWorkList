@@ -22,14 +22,15 @@ export const addAndEdit = createSlice({
             state._id = ''
         },
         setAddAndEdit: (state, action) => {
-            state.type = action.payload.type
-            state.item_title = action.payload.details.item_title
-            state.desc = action.payload.details.desc
-            state.color = action.payload.details.color
-            state.date = action.payload.date
-            state.deadline = action.payload.details.deadline
-            state._id = action.payload._id || action.payload.id
-        }
+            const { type, details = {}, date, _id, id } = action.payload
+            state.type = type || ''
+            state.item_title = details.item_title || ''
+            state.desc = details.desc || ''
+            state.color = details.color || ''
+            state.date = date || ''
+            state.deadline = details.deadline || ''
+            state._id = _id || id || ''
+        }        
     },
 })
 
