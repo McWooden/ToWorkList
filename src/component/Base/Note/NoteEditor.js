@@ -9,7 +9,7 @@ import { convertDateToString } from '../../../utils/convertDateFormat'
 import { setTodo } from '../../../redux/todo'
 import { noteToastSecond } from '../../../utils/notif'
 import { setNoteEditor } from '../../../redux/sourceSlice'
-import { ModalNoteEditor } from '../../Modal/ModalNoteEditor'
+import { Modal } from '../../Modal/Modal'
 
 
 export function NoteEditor() {
@@ -61,7 +61,7 @@ export function NoteEditor() {
     }
     return (
         <>
-        <ModalNoteEditor open={true} close={confirmToClose}>
+        <Modal open={true} close={confirmToClose} costum={true}>
             <form className='note p-fixed note-editor zi-3' onSubmit={handleSubmit}>
                 <div className='note-head d-flex ai-center jc-space-between'>
                     <FontAwesomeIcon 
@@ -82,7 +82,7 @@ export function NoteEditor() {
                     </span>
                 </div>
             </form>
-        </ModalNoteEditor>
+        </Modal>
         <Confirm open={discard} close={() => setDiscard(false)} target={`${data.by}, ${convertDateToString(data.date)}`} metode='discard' color={data.color} callback={modalClose}/>
         </>
     )

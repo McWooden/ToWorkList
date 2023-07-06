@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Modal } from "./Modal"
 import Calendar from "react-calendar"
 import { resetAddAndEdit } from "../../redux/addAndEditForGlobalStore"
-import { useState, useRef } from "react"
+import { useState, useRef, useMemo } from "react"
 import axios from "axios"
 import { API } from "../../utils/variableGlobal"
 import { loadingToast, noteToast, saveToast, todoToast } from "../../utils/notif"
@@ -16,11 +16,15 @@ import { setTodo } from '../../redux/todo'
 
 export function AddAndEditForGlobal() {
     const addAndEdit = useSelector((state) => state.addAndEdit)
-    const todoId = useSelector(state => state.todo.id)
     const { type, item_title, desc, color, date, deadline, _id } = addAndEdit
-  
+    const profileNickname = useSelector(state => state.source.profile.nickname)
+
     const dispatch = useDispatch()
+    const formRef = useRef()
+
   
+    const colors = useMemo(() => ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow'], [])
+
     const [colorsTileSource, setColorsTileSource] = useState([
       { color, deadline: new Date(deadline) }
     ])
@@ -28,7 +32,14 @@ export function AddAndEditForGlobal() {
     const idPageOfBook = useSelector((state) => state.fetch.idPageOfBook)
     const pathPageOfBook = useSelector((state) => state.fetch.pathPageOfBook)
   
-    const [currentColor, setCurrentColor] = useState(color)
+    const [currentColor, setCurrentColor] = useState(() => {
+      if (type === 'ADD_TODO') {
+        return colors[Math.floor(Math.random() * colors.length)]
+      } else {
+        return color
+      }
+    })
+    
     const [inputTitle, setInputTitle] = useState(item_title)
     const [inputDesc, setInputDesc] = useState(desc)
   
@@ -37,21 +48,19 @@ export function AddAndEditForGlobal() {
     useEffect(() => {
       setInputTitle(item_title)
       setInputDesc(desc)
-      setCurrentColor(color)
-      if (type === 'ADD_TODO') {
-        setColorsTileSource([{ color: 'goldenrod', deadline: new Date().toLocaleDateString('en-US', { 
-            month: 'numeric', 
+      if (type === 'ADD_TODO' || type === 'ADD_NOTE') {
+        if (!currentColor) setCurrentColor(colors[Math.floor(Math.random() * colors.length)])
+        setColorsTileSource([{ color: currentColor, deadline: new Date().toLocaleDateString('en-US', { 
+          month: 'numeric', 
             day: 'numeric', 
             year: 'numeric' 
-        })}])
+          })}])
       } else {
+        setCurrentColor(color)
         setColorsTileSource([{ color, deadline: new Date(deadline) }])
       }
-    }, [item_title, desc, color, deadline, type])
-  
-    const colors = ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow']
-    const formRef = useRef()
-  
+    }, [item_title, desc, color, deadline, type, colors, currentColor])
+    
     function handleColor(e) {
       setCurrentColor(e.target.value)
     }
@@ -68,12 +77,12 @@ export function AddAndEditForGlobal() {
             deadline: colorsTileSource[0].deadline,
             item_title: e.target.title.value,
             returnPage: type === 'EDIT_TODO_INSIDE' ? false : true,
+            by: profileNickname
         }
       try {
           if (type === 'ADD_TODO') {
-        const promise = loadingToast('Membuat daftar baru')
-          await axios
-            .post(`${API}/source/addTodo/${idPageOfBook}`, dataToSend)
+          const promise = loadingToast('Membuat daftar baru')
+          await axios.post(`${API}/source/addTodo/${idPageOfBook}`, dataToSend)
             .then((res) => {
               todoToast({item_title: dataToSend.item_title, color: dataToSend.color})
               dispatch(setSource(res.data))
@@ -85,9 +94,18 @@ export function AddAndEditForGlobal() {
             .finally(() => {
               toast.dismiss(promise)
             })
+        } else if (type === 'ADD_NOTE') {
+          await axios.post(`${API}/notes/${idPageOfBook}/${_id}`, dataToSend)
+            .then((res) => {
+                noteToast(dataToSend)
+                dispatch(setTodo(res.data))
+                dispatch(resetAddAndEdit())
+            })
+            .catch(err => {
+                noteToast({color : 'var(--danger)'})
+            }) 
         } else {
-          await axios
-            .put(`${API}/source/addTodo/${idPageOfBook}/${_id}`, dataToSend)
+          await axios.put(`${API}/source/addTodo/${idPageOfBook}/${_id}`, dataToSend)
             .then((res) => {
               saveToast(dataToSend.item_title)
                 if (type === 'EDIT_TODO_INSIDE') {
@@ -192,8 +210,8 @@ export function AddAndEditForGlobal() {
                     />
                 }
               <select style={borderStyle} onChange={handleColor} name="color">
-                <option key="default" value={color || 'grey'}>
-                  {color || 'Warna'}
+                <option key="default" value={currentColor}>
+                  {currentColor}
                 </option>
                 {colors
                   .filter((c) => c !== color)

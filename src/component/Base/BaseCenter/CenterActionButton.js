@@ -4,7 +4,6 @@ import { clearTodo } from '../../../redux/todo';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAddAndEdit } from '../../../redux/addAndEditForGlobalStore';
 
-
 export function CenterActionButton() {
     const todoId = useSelector(state => state.todo.id)
     function handleClick() {
@@ -20,7 +19,7 @@ export function CenterActionButton() {
                 </div>
                 )}
                 <div className="action-add">
-                    <FontAwesomeIcon icon={faAdd} className='add-btn pointer' onClick={() => dispatch(setAddAndEdit({type: todoId ? 'ADD_NOTE' : 'ADD_TODO'}))}/>
+                    <FontAwesomeIcon icon={faAdd} className='add-btn pointer' onClick={() => dispatch(setAddAndEdit({type: todoId ? 'ADD_NOTE' : 'ADD_TODO', id: todoId && todoId}))}/>
                 </div>
         </div>
     )
