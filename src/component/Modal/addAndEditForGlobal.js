@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faNoteSticky } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from "react-redux"
 import { Modal } from "./Modal"
 import Calendar from "react-calendar"
@@ -10,9 +12,11 @@ import { setSource } from "../../redux/sourceSlice"
 import { convertDateToString } from "../../utils/convertDateFormat"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
+import { setTodo } from '../../redux/todo'
 
 export function AddAndEditForGlobal() {
     const addAndEdit = useSelector((state) => state.addAndEdit)
+    const todoId = useSelector(state => state.todo.id)
     const { type, item_title, desc, color, date, deadline, _id } = addAndEdit
   
     const dispatch = useDispatch()
@@ -63,7 +67,7 @@ export function AddAndEditForGlobal() {
             desc: e.target.desc.value,
             deadline: colorsTileSource[0].deadline,
             item_title: e.target.title.value,
-            returnPage: true,
+            returnPage: type === !'EDIT_TODO_INSIDE' ? true : false,
         }
       try {
           if (type === 'ADD_TODO') {
@@ -86,9 +90,12 @@ export function AddAndEditForGlobal() {
             .put(`${API}/source/addTodo/${idPageOfBook}/${_id}`, dataToSend)
             .then((res) => {
               saveToast(dataToSend.item_title)
-              if (type === 'EDIT_TODO_OUTSIDE' || type === 'EDIT_TODO_INSIDE') {
-                dispatch(setSource(res.data))
-              }
+                if (type === 'EDIT_TODO_INSIDE') {
+                    dispatch(setTodo(res.data))
+                }
+                if (type === 'EDIT_TODO_OUTSIDE') {
+                    dispatch(setSource(res.data))
+                }
               dispatch(resetAddAndEdit())
             })
             .catch((err) => {
@@ -125,36 +132,39 @@ export function AddAndEditForGlobal() {
     return (
       <Modal open={type} close={() => dispatch(resetAddAndEdit())}>
         <div className="d-flex ai-center height-100">
-          <div className="AE_main flex-1-1">
-            <Calendar
-              onClickDay={dayTileClick}
-              className="calendar-dark"
-              locale="id-ID"
-              format="mm/dd/yyyy"
-              next2Label={null}
-              prev2Label={null}
-              tileContent={({ date, view }) => {
-                const color = colorsTile.find((c) => {
-                  const tileDate = new Date(c.date)
-                  return tileDate.getTime() === date.getTime()
-                })
-                if (color) {
-                  return (
-                    <div
-                      className="repalace"
-                      style={{
-                        border: `1px solid ${color.color}`,
-                        borderRadius: '50px',
-                      }}
-                      title={color.title}
-                    >
-                      {date.getDate()}
-                    </div>
-                  )
-                }
-              }}
-            />
-          </div>
+          <div className="AE_main flex-1-1 d-grid pi-center">
+            {
+                type === 'ADD_NOTE' || type === 'EDIT_NOTE' ? <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/> :
+                <Calendar
+                onClickDay={dayTileClick}
+                className="calendar-dark"
+                locale="id-ID"
+                format="mm/dd/yyyy"
+                next2Label={null}
+                prev2Label={null}
+                tileContent={({ date, view }) => {
+                    const color = colorsTile.find((c) => {
+                    const tileDate = new Date(c.date)
+                    return tileDate.getTime() === date.getTime()
+                    })
+                    if (color) {
+                        return (
+                            <div
+                            className="repalace"
+                            style={{
+                                border: `1px solid ${color.color}`,
+                                borderRadius: '50px',
+                            }}
+                            title={color.title}
+                            >
+                            {date.getDate()}
+                            </div>
+                        )
+                    }
+                }}
+                />
+            }
+            </div>
           <form
             className="AE_second d-flex fd-column flex-1-1 p-1 form-modal"
             ref={formRef}
@@ -164,20 +174,22 @@ export function AddAndEditForGlobal() {
             <div className="general-info" style={{ borderBottom: `1px solid ${currentColor}` }}>
               <h3>{item_title || pathPageOfBook}</h3>
               <p className="date">
-                {deadline ? convertDateToString(deadline) : 'Menambah tugas baru...'}
+                {deadline ? convertDateToString(deadline) : type === 'ADD_NOTE' ? 'Menambah catatan baru...' : 'Menambah tugas baru...'}
               </p>
             </div>
             <div className="input-left d-flex fd-row m-1">
-              <input
-                name="title"
-                type="text"
-                placeholder={item_title || 'Judul'}
-                style={borderStyle}
-                required
-                autoComplete="off"
-                value={inputTitle}
-                onChange={handleTitleChange}
-              />
+                {type === 'ADD_NOTE' || type === 'EDIT_NOTE' ? null : 
+                    <input
+                        name="title"
+                        type="text"
+                        placeholder={item_title || 'Judul'}
+                        style={borderStyle}
+                        required
+                        autoComplete="off"
+                        value={inputTitle}
+                        onChange={handleTitleChange}
+                    />
+                }
               <select style={borderStyle} onChange={handleColor} name="color">
                 <option key="default" value={color || 'grey'}>
                   {color || 'Warna'}
@@ -201,7 +213,7 @@ export function AddAndEditForGlobal() {
               className="flex-1-1 m-1"
             />
             <button type="submit" className="task-submit pointer" form="addAndEditForm">
-              Simpan
+              {type==='EDIT_TODO_INSIDE' || type==='EDIT_TODO_OUTSIDE' || type==='EDIT_NOTE' ? 'Simpan' : 'Tambah'}
             </button>
           </form>
         </div>

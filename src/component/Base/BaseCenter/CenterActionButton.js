@@ -20,7 +20,7 @@ export function CenterActionButton() {
                 </div>
                 )}
                 <div className="action-add">
-                    <FontAwesomeIcon icon={faAdd} className='add-btn pointer' onClick={() => dispatch(setAddAndEdit({type: 'ADD_TODO'}))}/>
+                    <FontAwesomeIcon icon={faAdd} className='add-btn pointer' onClick={() => dispatch(setAddAndEdit({type: todoId ? 'ADD_NOTE' : 'ADD_TODO'}))}/>
                 </div>
         </div>
     )
