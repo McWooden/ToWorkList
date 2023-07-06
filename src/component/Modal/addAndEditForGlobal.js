@@ -67,7 +67,7 @@ export function AddAndEditForGlobal() {
             desc: e.target.desc.value,
             deadline: colorsTileSource[0].deadline,
             item_title: e.target.title.value,
-            returnPage: type === !'EDIT_TODO_INSIDE' ? true : false,
+            returnPage: type === 'EDIT_TODO_INSIDE' ? false : true,
         }
       try {
           if (type === 'ADD_TODO') {
@@ -96,6 +96,7 @@ export function AddAndEditForGlobal() {
                 if (type === 'EDIT_TODO_OUTSIDE') {
                     dispatch(setSource(res.data))
                 }
+                console.log(res.data)
               dispatch(resetAddAndEdit())
             })
             .catch((err) => {
