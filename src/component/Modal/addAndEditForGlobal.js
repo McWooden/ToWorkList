@@ -17,7 +17,7 @@ import { setTodo } from '../../redux/todo'
 export function AddAndEditForGlobal() {
     const addAndEdit = useSelector((state) => state.addAndEdit)
     const { type, item_title, desc, color, deadline, _id } = addAndEdit
-    const profileNickname = useSelector(state => state.source.profile.nickname)
+    const profileNickname = useSelector(state => state.source?.profile?.nickname || null)
 
     const dispatch = useDispatch()
     const formRef = useRef()
