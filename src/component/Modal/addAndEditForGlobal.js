@@ -150,7 +150,6 @@ export function AddAndEditForGlobal() {
   
     return (
       <Modal open={type} close={() => dispatch(resetAddAndEdit())}>
-        <div className="d-flex ai-center height-100">
           <div className="AE_main flex-1-1 d-grid pi-center">
             {
                 type === 'ADD_NOTE' || type === 'EDIT_NOTE' ? <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/> :
@@ -235,7 +234,6 @@ export function AddAndEditForGlobal() {
               {type==='EDIT_TODO_INSIDE' || type==='EDIT_TODO_OUTSIDE' || type==='EDIT_NOTE' ? 'Simpan' : 'Tambah'}
             </button>
           </form>
-        </div>
       </Modal>
     )
   }  

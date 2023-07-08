@@ -23,6 +23,7 @@
     width: 90vw;
     height: 75vh;
     border-radius: 8px;
+    flex-direction: row;
 }
 .second_modal {
     border-radius: 20px;
@@ -242,6 +243,7 @@
 @media (max-width: 524px) {
     .modal {
         height: 90vh;
+        flex-direction: column;
     }
     .second_modal {
         height: fit-content;
