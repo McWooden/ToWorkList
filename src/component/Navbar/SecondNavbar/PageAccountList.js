@@ -8,25 +8,25 @@ export function PageAccountList() {
     const pages = useMemo(() => [
         {
             details: {
-                page_title: 'Summary',
+                page_title: 'Ringkasan',
                 icon: 'faAddressBook',
             }
         },
         {
             details: {
-                page_title: 'Notifications',
+                page_title: 'Notifikasi',
                 icon: 'faBell',
             }
         },
         {
             details: {
-                page_title: 'Mail',
+                page_title: 'Surat',
                 icon: 'faEnvelope',
             }
         },
         {
             details: {
-                page_title: 'News',
+                page_title: 'Berita',
                 icon: 'faNewspaper',
             }
         }

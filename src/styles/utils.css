@@ -61,6 +61,12 @@
 .flex-1 {
     flex: 1;
 }
+.flex-2 {
+    flex: 2;
+}
+.flex-3 {
+    flex: 3;
+}
 .flex-1-1 {
     flex: 1 1;
 }
@@ -107,4 +113,8 @@
 }
 .m-1 {
     margin: .5em;
+}
+/* cursor */
+.pointer {
+    cursor: pointer;
 }

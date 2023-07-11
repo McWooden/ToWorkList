@@ -79,6 +79,7 @@ code {
   height: 1px;
   background-color: var(--purple-1);
 }
-.pointer {
-  cursor: pointer;
-}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
