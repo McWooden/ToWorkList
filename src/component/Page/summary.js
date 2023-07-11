@@ -9,11 +9,14 @@ import { loadingToast, saveToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
 import { setProfile } from '../../redux/sourceSlice'
 import { setLocalAccount } from '../../utils/localstorage'
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+import remarkGfm from 'remark-gfm'
 
 
 export default function Summary() {
     const myProfile = useSelector((state) => state.source.profile)
     const [modalProfileEditForm, setModalProfileEditForm] = useState(false)
+    const [modalLabelForm, setModalLabelForm] = useState(false)
 
     const [inputNickname, setInputNickname] = useState('')
     const [inputPanggilan, setInputPanggilan] = useState('')
@@ -36,6 +39,33 @@ export default function Summary() {
         setInputId(myProfile?._id || '')
     }, [myProfile])
 
+    function handleLabelForm(e) {
+        e.preventDefault()
+        const dataToSend = {
+            nickname: inputNickname,
+            panggilan: inputPanggilan,
+            tempat: inputTempat,
+            posisi: inputPosisi,
+            kota:inputKota,
+            negara: inputNegara,
+            bio: inputBio,
+            _id: inputId
+        }
+        try {
+            const promise = loadingToast('Memperbarui info pengguna')
+            axios.put(`${API}/user`, dataToSend)
+                .then(res => {
+                    console.log(res.data._doc)
+                    setLocalAccount(res.data._doc)
+                    dispatch(setProfile(res.data._doc))
+                    setModalProfileEditForm(false)
+                }).catch(err => {
+                    saveToast('Gagal memperbarui pengguna')
+                }).finally(() => {
+                    toast.dismiss(promise)
+                })
+        } catch (error) {}
+    }
     function handleSubmitProfileForm(e) {
         e.preventDefault()
         const dataToSend = {
@@ -80,15 +110,19 @@ export default function Summary() {
                 <p>{myProfile?.posisi || <span className='text-zinc-600'>Posisi</span>} di {myProfile?.tempat || <span className='text-zinc-600'>Tempat</span>}</p>
                 <p className='text-sm'>{myProfile?.kota || <span className='text-zinc-600'>Kota</span>}, {myProfile?.negara || <span className='text-zinc-600'>Wilayah/Negara</span>}</p>
                 <p className='text-zinc-600 text-xs'><span className='font-bold'>{myProfile?.pengikut?.length || '0'}</span> pengikut</p>
-                <p className='text-sm mt-3'>{myProfile?.bio}</p>
             </div>
             <div className="h-fit bg-zinc-800 p-6 flex flex-col rounded-sm relative mt-2.5">
-                <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm'><FontAwesomeIcon icon={faPen}/></div>
-                <p className='font-bold text-xl'>Skill</p>
+                <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm' onClick={() => setModalLabelForm(true)}><FontAwesomeIcon icon={faPen}/></div>
+                <p className='font-bold text-xl'>Label</p>
+            </div>
+            <div className="mt-2.5 bg-zinc-800 whitespace-pre rounded h-fit p-1 max-w-full">
+                <div className='overflow-y-auto text-sm'>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{myProfile?.bio}</ReactMarkdown>
+                </div>
             </div>
         </div>
         <ModalSecond open={modalProfileEditForm} close={() => setModalProfileEditForm(false)}>
-            <form onSubmit={handleSubmitProfileForm} className="m-auto max-h-[90vh] p-10 max-w-xl h-screen of-auto" id="profileEditForm">
+            <form onSubmit={handleSubmitProfileForm} className="m-auto max-h-[90vh] text-xs p-5 sm:p-10 max-w-xl h-screen of-auto" id="profileEditForm">
             <label htmlFor="nickname" className="block text-sm font-semibold leading-6 text-stone-100">Nama</label>
             <input onChange={(e) => setInputNickname(e.target.value)}  value={inputNickname} id='nickname' type="text" placeholder='Nama' className='outline-none block w-full rounded-md border-0 px-3.5 py-2 text-zinc-200 shadow-sm ring-1 ring-inset ring-zinc-600 bg-zinc-700 placeholder:text-stone-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'/>
             <label htmlFor="panggilan" className="block mt-2.5 text-sm font-semibold leading-6 text-stone-100">Panggilan</label>
@@ -160,10 +194,15 @@ export default function Summary() {
             <div className="sm:col-span-2">
                 <div className="mt-2.5">
                 <label htmlFor="bio" className="block text-sm font-semibold leading-6 text-stone-100">Bio</label>
-                <textarea onChange={(e) => setInputBio(e.target.value)}  value={inputBio} name="bio" id="bio" rows="4" placeholder='Bio' className="outline-none block w-full rounded-md border-0 px-3.5 py-2 text-zinc-200 bg-zinc-700 shadow-sm ring-1 ring-inset ring-zinc-600 placeholder:text-stone-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                <textarea onChange={(e) => setInputBio(e.target.value)}  value={inputBio} name="bio" id="bio" rows="4" placeholder='Bio' className="overflow-y-auto whitespace-pre outline-none block w-full rounded-md border-0 px-3.5 py-2 text-zinc-200 bg-zinc-700 shadow-sm ring-1 ring-inset ring-zinc-600 placeholder:text-stone-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                 </div>
             </div>
             <button type="submit" form="profileEditForm" className="mt-2.5 block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan</button>
+            </form>
+        </ModalSecond>
+        <ModalSecond open={modalLabelForm} close={() => setModalLabelForm(false)}>
+            <form id='labelForm' onSubmit={handleLabelForm} className="m-auto max-h-[90vh] text-xs p-5 sm:p-10 max-w-xl h-screen of-auto">
+                <button type="submit" form="labelForm" className="mt-2.5 block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan</button>
             </form>
         </ModalSecond>
         </>
