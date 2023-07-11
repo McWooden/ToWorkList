@@ -26,7 +26,6 @@ export default function Summary() {
 
     const dispatch = useDispatch()
     useEffect(() => {
-        console.log(myProfile)
         setInputNickname(myProfile?.nickname || '')
         setInputPanggilan(myProfile?.panggilan || '')
         setInputPosisi(myProfile?.posisi || '')
@@ -72,18 +71,18 @@ export default function Summary() {
                     <img src={myProfile.avatar} alt={myProfile.nickname} className="rounded-full" />
                 </div>
                 <div>
-                    <p className="text-3xl font-bold">{myProfile.nickname}<sup className='ordinal text-sm font-normal text-zinc-600'>{myProfile?.panggilan || ''}</sup></p>
-                    <p className="text-center sm:text-left">#{myProfile.tag}</p>
+                    <p className="text-xl font-bold">{myProfile.nickname}<sup className='ordinal text-xs font-normal text-zinc-600'>{myProfile?.panggilan || ''}</sup></p>
+                    <p className="text-center text-sm sm:text-left">#{myProfile.tag}</p>
                 </div>
             </div>
-            <div className="h-fit bg-zinc-800 p-8 flex flex-col rounded-sm relative">
+            <div className="h-fit bg-zinc-800 p-6 flex flex-col rounded-sm relative">
                 <div onClick={() => setModalProfileEditForm(true)} className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm'><FontAwesomeIcon icon={faPen}/></div>
                 <p>{myProfile?.posisi || <span className='text-zinc-600'>Posisi</span>} di {myProfile?.tempat || <span className='text-zinc-600'>Tempat</span>}</p>
                 <p className='text-sm'>{myProfile?.kota || <span className='text-zinc-600'>Kota</span>}, {myProfile?.negara || <span className='text-zinc-600'>Wilayah/Negara</span>}</p>
                 <p className='text-zinc-600 text-xs'><span className='font-bold'>{myProfile?.pengikut?.length || '0'}</span> pengikut</p>
-                <p className='text-sm whitespace-pre mt-3'>{myProfile?.bio}</p>
+                <p className='text-sm mt-3'>{myProfile?.bio}</p>
             </div>
-            <div className="h-fit bg-zinc-800 p-8 flex flex-col rounded-sm relative mt-2.5">
+            <div className="h-fit bg-zinc-800 p-6 flex flex-col rounded-sm relative mt-2.5">
                 <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm'><FontAwesomeIcon icon={faPen}/></div>
                 <p className='font-bold text-xl'>Skill</p>
             </div>
