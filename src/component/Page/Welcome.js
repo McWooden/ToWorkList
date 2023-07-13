@@ -7,7 +7,7 @@ import { useContext } from "react"
 import supabase from "../../utils/supabase"
 import { useSelector } from 'react-redux'
 import { HideBase } from '../TodoApp/TodoApp'
-import { convertDateToString, isoToString } from '../../utils/convertDateFormat'
+import { isoToString } from '../../utils/convertDateFormat'
 import { ChatModel } from '../Model/Chat'
 import { sendToast } from '../../utils/notif'
 import { setChat } from '../../redux/todo'
