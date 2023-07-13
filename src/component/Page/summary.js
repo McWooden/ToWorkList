@@ -192,10 +192,10 @@ export default function Summary() {
                     </div>
                 </div>
             </div>
-            <div>
-                <div className="my-2.5 flex-1">
+            <div className='flex-1 flex'>
+                <div className="my-2.5 flex flex-1 flex-col">
                     <label htmlFor="bio" className="block text-sm font-semibold leading-6 text-stone-100">Bio</label>
-                    <textarea onChange={(e) => setInputBio(e.target.value)}  value={inputBio} name="bio" id="bio" rows="4" placeholder='Bio' className="overflow-y-auto mb-2.5 h-full whitespace-pre outline-none block w-full rounded-md border-0 px-3.5 py-2 text-zinc-200 bg-zinc-700 shadow-sm ring-1 ring-inset ring-zinc-600 placeholder:text-stone-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
+                    <textarea onChange={(e) => setInputBio(e.target.value)}  value={inputBio} name="bio" id="bio" rows="4" placeholder='Bio' className="overflow-y-auto flex-1 h-full whitespace-pre outline-none block w-full rounded-md border-0 px-3.5 py-2 text-zinc-200 bg-zinc-700 shadow-sm ring-1 ring-inset ring-zinc-600 placeholder:text-stone-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"></textarea>
                 </div>
             </div>
             <button type="submit" form="profileEditForm" className="mt-2.5 block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Simpan</button>

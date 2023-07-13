@@ -44,8 +44,7 @@ export function Base() {
                 (<>
                     {pageType === 'welcome' && <Welcome/>}
                     {pageType === 'faAddressBook' && <Summary/>}
-                    {pageType === 'faCheck' && <TodoPage/>}
-                    <BaseRight/>
+                    {pageType === 'faCheck' && <><TodoPage/><BaseRight/></>}
                 </>)
             }
         </div>

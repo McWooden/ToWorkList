@@ -79,7 +79,13 @@ code {
   height: 1px;
   background-color: var(--purple-1);
 }
-
+button {
+  border: none;
+  font-family: inherit
+}
+input, select, textarea {
+  font-family: inherit
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
