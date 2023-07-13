@@ -34,7 +34,7 @@ export function SidebarRightChat() {
         }
     }
     
-    chat.forEach((item, index) => {
+    chat?.forEach((item, index) => {
         if (convertDateToString(item.date) !== lastDate) {
             box.push(
                 <div key={`${index}-${item.date}`} className='chat-card-date as-center'>{convertDateToString(item.date)}</div>

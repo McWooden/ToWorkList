@@ -20,3 +20,7 @@ export function convertDateToString(string) {
     return 'Invalid Date'
   }
 }
+export function isoToString(iso) {
+  const options = { day: 'numeric', month: 'long', year: 'numeric' }
+  return new Date(parseInt(iso)).toLocaleDateString('id-ID', options)
+}
