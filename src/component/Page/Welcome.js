@@ -53,21 +53,17 @@ export function Welcome() {
       channel.unsubscribe('postgres_changes')
     }
   }, [channel])
+
   useEffect(() =>{
     async function fetchData() {
-      const { data, error } = await supabase.from('broadcast').select();
+      const { data } = await supabase.from('broadcast').select();
       if (data) setChats(data.map(x => ({ nickname: x.data.nickname, msg: x.data.msg, date: x.data.date })))
-      console.log(data, error)
+      chatRef.current.scrollTop = chatRef.current.scrollHeight
+      console.log(chatRef.current.scrollTop, chatRef.current.scrollHeight)
     }
     fetchData()
   },[])
 
-
-  useEffect(() => {
-    if (scrollToBottom) {
-      chatRef.current.scrollTop = chatRef.current.scrollHeight
-    }
-  }, [scrollToBottom])
 
   const handleScroll = () => {
     if (chatRef.current.scrollTop + chatRef.current.clientHeight !== chatRef.current.scrollHeight) {
@@ -78,13 +74,13 @@ export function Welcome() {
   }
 
     chats?.forEach((item, index) => {
-      if (isoToString(item.date) !== lastDate) {
+      if (!item) return
+      if (isoToString(item?.date) !== lastDate) {
         box.push(
           <div key={`${index}-${item.date}`} className='chat-card-date as-center'>{isoToString(item.date)}</div>
         )
         lastDate = isoToString(item.date)
         lastNickname = null
-        console.log(item.date, lastDate)
       }
       if (item.nickname !== lastNickname) {
         item.nickname !== myNickname &&
@@ -113,11 +109,8 @@ export function Welcome() {
       const { data } = await supabase.from('broadcast').insert({ data: dataToSend })
       if (data) {
         setChat((prev)=>[prev, data])
-        console.log('here is you send', data);
       }
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
     setMsg('')
   }
   function handleInput(e) {
@@ -144,26 +137,27 @@ export function Welcome() {
           </span>
         </div>
       </div>
-      <div className="flex-1">
-        <div className={`base-right of-auto ${hideRightBase ? 'base-right-hide' : 'base-right-show'} d-flex fd-column`}>
-          <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>
-            <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
-            {box}
-          </div>
-          <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
-            <div className="textarea-container d-flex ai-center of-auto">
-              <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{ height: '15px' }} className='d-flex ai-center of-auto' />
-            </div>
-            {
-              msg ?
-                <button className='pointer btn-on' title='send'>
-                  <FontAwesomeIcon icon={faPaperPlane} />
-                </button>
-                :
-                null
-            }
-          </form>
+      <div className={`base-right of-auto ${hideRightBase ? 'base-right-hide' : 'base-right-show'} d-flex fd-column h-full flex-1`}>
+        <div className='p-2 pb-0 bg-zinc-800'>
+          <p className='inline bg-zinc-950 px-2 pt-1 rounded text-sm'>Obrolan Global</p>
         </div>
+        <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>
+          <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
+          {box}
+        </div>
+        <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
+          <div className="textarea-container d-flex ai-center of-auto">
+            <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{ height: '15px' }} className='d-flex ai-center of-auto' />
+          </div>
+          {
+            msg ?
+              <button className='pointer btn-on' title='send'>
+                <FontAwesomeIcon icon={faPaperPlane} />
+              </button>
+              :
+              null
+          }
+        </form>
       </div>
     </div>
   )

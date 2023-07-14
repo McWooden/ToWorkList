@@ -99,7 +99,6 @@
         position: fixed;
         right: 0;
         width: 314px;
-        margin: 1em;
         border-radius: 8px;
         border: 1px solid var(--secondary);
     }
