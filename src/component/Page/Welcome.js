@@ -119,7 +119,12 @@ export function Welcome() {
     let height = textarea.current.scrollHeight
     textarea.current.style.height = height + 'px'
   }
-
+  function clickToBottom() {
+    const chatContainer = chatRef.current;
+    const lastChat = chatContainer.lastElementChild;
+    // lastChat.scrollIntoView({ behavior: 'smooth' });
+    setScrollToBottom(true);
+  }  
   return (
     <div className="flex w-full sm:flex-row flex-col">
       <div className="welcome flex flex-col overflow-auto flex-3">
@@ -142,8 +147,8 @@ export function Welcome() {
         <div className='p-2 pb-0 bg-zinc-800'>
           <p className='inline bg-zinc-950 px-2 pt-1 rounded text-sm'>Obrolan Global</p>
         </div>
-        <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>
-          <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
+        <div className="sidebar-right d-flex fd-column of-auto scroll-smooth" ref={chatRef} onScroll={handleScroll}>
+          <FontAwesomeIcon icon={faChevronDown} onClick={clickToBottom} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
           {box}
         </div>
         <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
