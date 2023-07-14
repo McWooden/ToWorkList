@@ -71,7 +71,6 @@ export function Welcome() {
       if (data) setChats(data.map(x => ({ nickname: x.data.nickname, msg: x.data.msg, date: x.data.date })))
     }
     fetchData()
-    clickToBottom()
   },[])
 
     chats?.forEach((item, index) => {
