@@ -22,9 +22,29 @@ export function Welcome() {
   const { handleNavbar, hideNavbar } = useContext(AppContext)
   const [displayText, setDisplayText] = useState('')
   const [chats, setChats] = useState([])
+  const [scrollToBottom, setScrollToBottom] = useState(true)
+  const chatRef = useRef(null)
 
-  const channel = supabase.channel('costum-all-channel')
+  const profile = useSelector(state => state.source.profile)
+  const { hideRightBase } = useContext(HideBase)
+  const myNickname = profile.nickname
+  let box = []
+  let lastDate = null
+  let lastNickname = null
   
+  const handleScroll = () => {
+    if (chatRef.current.scrollTop + chatRef.current.clientHeight !== chatRef.current.scrollHeight) {
+      setScrollToBottom(false);
+    } else {
+      setScrollToBottom(true);
+    }
+  }
+  useEffect(() => {
+    if (scrollToBottom) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, [chats, scrollToBottom])    
+
   const taglines = [
     "Simplify your tasks",
     "Efficiently organize your life",
@@ -33,45 +53,26 @@ export function Welcome() {
     "Next level task management"
   ]
 
-  const profile = useSelector(state => state.source.profile)
-  const { hideRightBase } = useContext(HideBase)
-  const myNickname = profile.nickname
-  let box = []
-  let lastDate = null
-  let lastNickname = null
-
-  const chatRef = useRef(null)
-  const [scrollToBottom, setScrollToBottom] = useState(true)
-
   const randomTags = () => setDisplayText(taglines[Math.floor(Math.random() * taglines.length)])
   useEffect(() => {
+    const channel = supabase.channel('costum-all-channel')
     channel.on('postgres_changes', { event: '*', schema: 'public', table: 'broadcast' }, payload => {
       setChats((prev) => [...prev, payload.new.data])
-    }).subscribe()
+    }).subscribe(state => console.log(state))
 
     return () => {
       channel.unsubscribe('postgres_changes')
     }
-  }, [channel])
+  }, [])
 
   useEffect(() =>{
     async function fetchData() {
       const { data } = await supabase.from('broadcast').select();
       if (data) setChats(data.map(x => ({ nickname: x.data.nickname, msg: x.data.msg, date: x.data.date })))
-      chatRef.current.scrollTop = chatRef.current.scrollHeight
-      console.log(chatRef.current.scrollTop, chatRef.current.scrollHeight)
     }
     fetchData()
+    clickToBottom()
   },[])
-
-
-  const handleScroll = () => {
-    if (chatRef.current.scrollTop + chatRef.current.clientHeight !== chatRef.current.scrollHeight) {
-      setScrollToBottom(false)
-    } else {
-      setScrollToBottom(true)
-    }
-  }
 
     chats?.forEach((item, index) => {
       if (!item) return
@@ -119,6 +120,7 @@ export function Welcome() {
     let height = textarea.current.scrollHeight
     textarea.current.style.height = height + 'px'
   }
+
   return (
     <div className="flex w-full sm:flex-row flex-col">
       <div className="welcome flex flex-col overflow-auto flex-3">
