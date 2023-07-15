@@ -204,7 +204,7 @@ function FormRegist({data}) {
                 <span>Confirm Password</span>
                     <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`d-block ${redBorderInput?'red-border':''}`} minLength='4'/>
                 </label>
-                <input type="submit" classname="d-flex ai-center jc-center pointer" value="Sign up" ref={btn}/>
+                <input type="submit" className="d-flex ai-center jc-center pointer" value="Sign up" ref={btn}/>
             </form>
             <div className="navigate_to pointer">
                 <p>Sudah memiliki akun? <span onClick={() => navigate('/auth/login')}>login</span></p>
@@ -286,7 +286,7 @@ export function Login() {
                             type='icon'
                         />
                         </GoogleOAuthProvider>
-                        <input type="submit" classname="d-flex ai-center jc-center pointer" value="Login"/>
+                        <input type="submit" className="d-flex ai-center jc-center pointer" value="Login"/>
                     </div>
                 </form>
                 <div className="navigate_to pointer">
@@ -384,7 +384,7 @@ export function Pemulihan() {
                                 <span>Confirm Password</span>
                                 <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`d-block ${redBorderInput?'red-border':''}`} minLength='4'/>
                             </label>
-                            <input type="submit" classname="d-flex ai-center jc-center pointer" value="Ganti password" ref={btn}/>
+                            <input type="submit" className="d-flex ai-center jc-center pointer" value="Ganti password" ref={btn}/>
                         </form>
                     </>
                     :

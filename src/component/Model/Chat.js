@@ -7,7 +7,7 @@ import { API } from '../../utils/variableGlobal'
 import { deleteToast } from '../../utils/notif'
 import { useEffect, useRef, useState } from 'react'
 
-export function ChatModel({item}) {
+export function ChatModel({item, global}) {
     const [dropDown, setDropDown] = useState(false)
     const dispatch = useDispatch()
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
@@ -30,10 +30,11 @@ export function ChatModel({item}) {
         document.addEventListener('mousedown', handler)
     })
     function handleDropDown() {
-        if (disable) return
+        if (disable || global) return
         setDropDown(!dropDown)
     }
     async function handleDelete() {
+        if (global) return
         setDropDown(false)
         deleteToast('menghapus chat')
         try {

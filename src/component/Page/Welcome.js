@@ -12,12 +12,6 @@ import { ChatModel } from '../Model/Chat'
 import { sendToast } from '../../utils/notif'
 import { setChat } from '../../redux/todo'
 
-// {
-//   nickname: req.body.nickname,
-//   msg: req.body.msg,
-//   date: +new Date()
-// }
-
 export function Welcome() {
   const { handleNavbar, hideNavbar } = useContext(AppContext)
   const [displayText, setDisplayText] = useState('')
@@ -27,7 +21,7 @@ export function Welcome() {
 
   const profile = useSelector(state => state.source.profile)
   const { hideRightBase } = useContext(HideBase)
-  const myNickname = profile.nickname
+  const myNickname = profile?.nickname || 'Anon'
   let box = []
   let lastDate = null
   let lastNickname = null
@@ -58,7 +52,7 @@ export function Welcome() {
     const channel = supabase.channel('costum-all-channel')
     channel.on('postgres_changes', { event: '*', schema: 'public', table: 'broadcast' }, payload => {
       setChats((prev) => [...prev, payload.new.data])
-    }).subscribe(state => console.log(state))
+    }).subscribe()
 
     return () => {
       channel.unsubscribe('postgres_changes')
@@ -90,7 +84,7 @@ export function Welcome() {
         lastNickname = item.nickname
       }
       box.push(
-        <ChatModel key={index} item={item} />
+        <ChatModel key={index} item={item} global={true} />
       )
     })
 
@@ -122,7 +116,7 @@ export function Welcome() {
   function clickToBottom() {
     const chatContainer = chatRef.current;
     const lastChat = chatContainer.lastElementChild;
-    // lastChat.scrollIntoView({ behavior: 'smooth' });
+    lastChat.scrollIntoView({ behavior: 'smooth' });
     setScrollToBottom(true);
   }  
   return (
