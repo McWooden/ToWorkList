@@ -138,16 +138,13 @@ export function Welcome() {
         </div>
       </div>
       <div className={`base-right of-auto ${hideRightBase ? 'base-right-hide' : 'base-right-show'} d-flex fd-column h-full flex-1`}>
-        <div className='p-2 pb-0 bg-zinc-800'>
-          <p className='inline bg-zinc-950 px-2 pt-1 rounded text-sm'>Obrolan Global</p>
-        </div>
         <div className="sidebar-right d-flex fd-column of-auto scroll-smooth" ref={chatRef} onScroll={handleScroll}>
           <FontAwesomeIcon icon={faChevronDown} onClick={clickToBottom} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
           {box}
         </div>
         <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
           <div className="textarea-container d-flex ai-center of-auto">
-            <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{ height: '15px' }} className='d-flex ai-center of-auto' />
+            <textarea id="myTextarea" rows="1" placeholder={`Obrolan global (${myNickname})`} name='msg' onChange={handleInput} value={msg} ref={textarea} style={{ height: '15px' }} className='d-flex ai-center of-auto' />
           </div>
           {
             msg ?
@@ -158,6 +155,9 @@ export function Welcome() {
               null
           }
         </form>
+        <p className='p-2 pt-0 text-stone-400 rounded text-[6px] text-center'>
+          Perhatikan privasi Anda! Jangan memposting informasi pribadi di pesan global.
+        </p>
       </div>
     </div>
   )

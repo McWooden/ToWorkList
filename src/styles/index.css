@@ -46,11 +46,12 @@ html {
   color: tomato;
 }
 ::-webkit-scrollbar {
-  width: 1px;
-  height: 1px;
+  width: 2px;
+  height: 2px;
 }
 ::-webkit-scrollbar-thumb {
   background-color: var(--purple-1-transparent);
+  border-radius: 8px;
 }
 ::-webkit-scrollbar-track {
   background-color: transparent;
@@ -85,6 +86,14 @@ button {
 }
 input, select, textarea {
   font-family: inherit
+}
+.glassmorph {
+background: rgba(255, 255, 255, 0.1);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(8.5px);
+-webkit-backdrop-filter: blur(8.5px);
+border: 1px solid rgba(255, 255, 255, 0.16);
 }
 @tailwind base;
 @tailwind components;
