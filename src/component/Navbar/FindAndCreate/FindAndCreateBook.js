@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import { API } from '../../../utils/variableGlobal'
-import { AllBookList } from './AllBookList'
+import { DisplaySearchKey } from './DisplaySearchList'
 import { Modal } from '../../Modal/Modal'
 
 
@@ -26,14 +26,21 @@ export function FindAndCreateBook() {
     const [modalOpen, setModalOpen] = useState(false)
     const [searchText, setSearchText] = useState('')
     const dispatch = useDispatch()
+    const [dataSearch, setDataSearch] = useState([])
+    
+    async function handleSearch(e) {
+        e.preventDefault()
+        try {
+            if (!searchText) return
+            const response = await axios.get(`${API}/search/key?value=${searchText}`)
+            setDataSearch(response.data)
+        } catch (err) {}
+    }
 
     function handleInputChange(e) {
         setSearchText(e.target.value)
     }
-    function handleSearch(e) {
-        e.preventDefault()
-        console.log(searchText)
-    }
+
     function handleModalOpen() { setModalOpen(true) }
     function handleModalClose() { setModalOpen(false) }
     // file drop
@@ -114,27 +121,27 @@ export function FindAndCreateBook() {
             </div>
         </div>
         <Modal open={modalOpen} close={handleModalClose}>
-            <div className="search_book_container">
-                <div className="search_book-header d-flex">
-                    <form onSubmit={handleSearch} className='form-modal'>
-                        <div className='search_bar d-flex of-hidden'>
-                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Fitur belum dibuka" />
+            <div className="search_book_container w-full">
+                <div className="search_book-header d-flex gap-x-2">
+                    <form onSubmit={handleSearch} className='flex-1'>
+                        <div className='px-5 d-flex of-hidden focus-within:ring-violet-600 ring-transparent ring-2 bg-zinc-900 rounded-3xl h-full'>
+                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Cari seseorang atau buku" className='flex-1 text-white border-none outline-none bg-transparent h-full caret-violet-600' />
                             <div className="tiang"/>
-                            <button type="submit" className='submit_search pointer'>
+                            <button type="submit" className='submit_search pointer hover:bg-sky-500'>
                                 <FontAwesomeIcon icon={faSearch} />
                             </button>
                         </div>
                     </form>
                     <div className="d-flex jc-flex-end">
                         <div className="sb_action_btn d-grid pi-center">
-                            <FontAwesomeIcon icon={fontawesome.faRotateBack} className='action_btn pointer' onClick={() => ''}/>
-                        </div>
-                        <div className="sb_action_btn d-grid pi-center">
-                            <FontAwesomeIcon icon={faPlus} className='action_btn pointer' onClick={() => setAddServerModal(true)}/>
+                            <div className='pointer action_btn h-full text-stone-400 bg-zinc-900 rounded-full w-[48px] text-center relative' onClick={() => setAddServerModal(true)}>
+                                <FontAwesomeIcon icon={fontawesome.faBook}/>
+                                <FontAwesomeIcon icon={faPlus} className='absolute bottom-2 right-2 text-xs rounded bg-zinc-900 py-[2px] px-[3px]'/>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <AllBookList/>
+                <DisplaySearchKey dataSearch={dataSearch}/>
             </div>
         </Modal>
         <ModalSecond open={addServerModal} close={() => setAddServerModal(false)}>
@@ -150,7 +157,7 @@ export function FindAndCreateBook() {
                                 <FontAwesomeIcon icon={faXmark} className='remove-icon pointer p-absolute' onClick={handleRemove}/>
                                 </>
                             :
-                                <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
+                                <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer text-violet-600">
                                     <FontAwesomeIcon icon={faImage} className='drop-icon'/>
                                     <input 
                                         type="file" 

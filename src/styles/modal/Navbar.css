@@ -262,11 +262,9 @@ nav {
 }
 /* search */
 .search_book_container {
-    height: calc(100vh - 3em);
     padding: 2em;
 }
 .search_book-header {
-    gap: 3px;
     margin-bottom: 1em;
 }
 .search_book_container .form-modal {
@@ -281,15 +279,13 @@ nav {
 .search_book_container .form-modal input:focus {
     background-color: transparent;
 }
-.search_bar:focus-within {
-    background-color: var(--secondary) !important;
+.search_bar {
+    background-color: var(--secondary) !important;   
 }
 .search_book_container .search_bar {
     border-radius: 3px;
-    border: 2px solid var(--purple-1);
     border-radius: 45px;
     padding: 0 1em;
-    background-color: var(--primary);
 }
 .search_book_container .tiang {
     border: 1px solid var(--text-1);
@@ -300,8 +296,8 @@ nav {
     background-color: transparent;
     color: var(--text-2);
     font-size: large;
-    padding: 0 1em;
-    margin-left: 1em;
+    padding-right: 1em;
+    padding-left: 2em;
 }
 .sb_action_btn {
     min-width: 45px;
@@ -354,7 +350,6 @@ nav {
     right: 0;
 }
 .add_server_container .img-view .drop-zone {
-    background-color: #ddd;
     border: 3px dashed var(--purple-1);
     padding: 1em;
     width: unset;

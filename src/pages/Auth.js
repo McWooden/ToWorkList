@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faRightToBracket, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { setLocalAccount } from '../utils/localstorage'
 import { useDispatch } from 'react-redux'
-import { setProfile } from '../redux/sourceSlice'
+import { setBooksProfile, setProfile } from '../redux/sourceSlice'
 
 
 const API = process.env.REACT_APP_API
@@ -227,6 +227,7 @@ export function Login() {
         .then(res => {
             setLocalAccount(res.data)
             dispatch(setProfile())
+            dispatch(setBooksProfile(null))
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')
