@@ -10,6 +10,7 @@ import { setFetch } from '../redux/fetchSlice'
 import { useDispatch } from 'react-redux'
 import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../redux/sourceSlice'
 import {url, API} from '../utils/variableGlobal'
+import { convertDateToString } from '../utils/convertDateFormat'
 export default function Join(){
     const [data, setData] = useState(null)
     const [isReload, setIsReload] = useState(false)
@@ -22,6 +23,7 @@ export default function Join(){
         setIsReload(false)
         try {
             const response = await axios.get(`${API}/book/join/${searchParams.get('invite')}`)
+            console.log(response.data)
             setData(response.data)
         } catch (err) {
             setIsReload(true)
@@ -87,22 +89,29 @@ export default function Join(){
     return (
         <div className="modal_container d-flex fc-column ai-center jc-center">
             <div className="modal_context d-flex fd-column modal_context-transparent">
-                <div className="book_card of-hidden">
+                <div className="book_card of-hidden w-1/4">
                     <div className="book_card of-hidden-header d-flex fd-column">
-                        <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='banner'/>
+                        <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='banner h-32 object-cover'/>
                     </div>
-                    <div className="book_card of-hidden-body p-relative d-flex fd-column p-relative d-flex fd-column">
+                    <div className="book_card of-hidden-body p-relative d-flex fd-column p-relative d-flex fd-column p-5">
                         <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='avatar p-absolute'/>
                         <p className='title'>{data.profile.book_title}</p>
-                        <p>{data.profile.desc}</p>
-                        <p className='as-flex-end'>{data.users_length} Anggota</p>
-                    </div>
-                    <div className='join_btn d-flex jc-center ai-center pointer' onClick={gabung}>
-                        <img src={myAccount.avatar} alt={myAccount.nickname} />
-                        <span className='d-flex ai-center jc-flex-end'>
-                            Bergabung
-                            <FontAwesomeIcon icon={fontawesome.faChevronRight}/>
-                        </span>
+                        <div className='flex gap-4'>
+                            <div className='flex-1 flex flex-col gap-2'>
+                                <p className='as-flex-end'>Dibuat sejak {convertDateToString(data.profile.created_at)} oleh {data.profile.author.nickname}#{data.profile.author.tag}</p>
+                                <p className='as-flex-end'>{data.users_length} Anggota</p>
+                            </div>
+                            <div className='flex-2'>
+                                <p>{data.profile.desc}</p>
+                                <div className='join_btn d-flex jc-center ai-center mt-2 w-full pointer' onClick={gabung}>
+                                    <img src={myAccount.avatar} alt={myAccount.nickname} />
+                                    <span className='d-flex ai-center jc-flex-end'>
+                                        Bergabung
+                                        <FontAwesomeIcon icon={fontawesome.faChevronRight}/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="navigate_to pointer">

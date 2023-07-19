@@ -15,11 +15,9 @@
 }
 .modal_context .book_card {
     width: 100%;
-    max-width: 20em;
+    max-width: 30em;
 }
 .join_btn {
-    width: calc(100% - 1em);
-    margin: .5em;
     background-color: var(--light-blue);
     color: var(--white-1);
     padding: .5em;

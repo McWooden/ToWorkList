@@ -25,12 +25,12 @@
     margin-left: 5px;
     padding: 5px;
     border-radius: 5px;
-    background-color: var(--primary);
+    background-color: var(--secondary);
 }
 .book_card p.title {
     color: var(--text-primary);
     font-size: small;
-    margin-top: 2em;
+    margin-top: 1em;
 }
 .book_card p {
     color: var(--text-1);
