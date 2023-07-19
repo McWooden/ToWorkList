@@ -124,12 +124,12 @@ export function FindAndCreateBook() {
             <div className="search_book_container w-full">
                 <div className="search_book-header d-flex gap-2 flex-col sm:flex-row">
                     <form onSubmit={handleSearch} className='flex-1'>
-                        <div className='h-[45px] sm:px-5 ox-2 d-flex overflow-auto focus-within:ring-violet-600 ring-transparent ring-2 bg-zinc-900 rounded-3xl'>
-                            <button type="submit" className='submit_search px-2 sm:pr-5 pointer hover:bg-sky-500'>
+                        <div className='h-[45px] sm:px-5 ox-2 d-flex overflow-auto focus-within:ring-violet-600 ring-transparent ring-2 bg-zinc-900 rounded-3xl flex-1'>
+                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Cari seseorang atau buku" className='px-2 w-full text-white border-none outline-none bg-transparent h-full caret-violet-600' />
+                            <div className="tiang"/>
+                            <button type="submit" className='submit_search px-2 sm:pl-5 pointer hover:bg-sky-500'>
                                 <FontAwesomeIcon icon={faSearch} />
                             </button>
-                            <div className="tiang"/>
-                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Cari seseorang atau buku" className='pl-2 flex-1 text-white border-none outline-none bg-transparent h-full caret-violet-600' />
                         </div>
                     </form>
                     <div className="d-flex jc-flex-end">
