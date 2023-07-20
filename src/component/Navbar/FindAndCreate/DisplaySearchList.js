@@ -1,6 +1,9 @@
 // import { useEffect } from "react"
+import { useDispatch } from "react-redux";
 import { url } from "../../../utils/variableGlobal";
 import { useNavigate } from "react-router-dom";
+import { setSummary } from "../../../redux/summaryStore";
+import { setPageType } from "../../../redux/sourceSlice";
 
 export function DisplaySearchKey({dataSearch}) {
     // useEffect(() => {
@@ -17,11 +20,13 @@ export function DisplaySearchKey({dataSearch}) {
 
 function CardList({item}) {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     function toInviteBook() {
         navigate(`/join?invite=${item._id}`)
     }
     function seeUserProfile() {
-
+        dispatch(setPageType('faAddressBook'))
+        dispatch(setSummary(item._id))
     }
     if (item.type === 'book') {
         return (

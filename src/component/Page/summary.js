@@ -12,10 +12,17 @@ import { setLocalAccount } from '../../utils/localstorage'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import remarkGfm from 'remark-gfm'
 import emoji from 'remark-emoji'
-
+import { setSummary } from '../../redux/summaryStore'
+import { useCallback } from 'react'
 
 export default function Summary() {
-    const myProfile = useSelector((state) => state.source.profile)
+    const mySummary = useSelector(state => state.source.profile)
+    const otherSummaryUserId = useSelector(state => state.summary.userId)
+    const [summaryData, setSummaryData] = useState({})
+
+    const [isMe, setIsMe] = useState(true)
+
+
     const [modalProfileEditForm, setModalProfileEditForm] = useState(false)
     const [modalLabelForm, setModalLabelForm] = useState(false)
     const [modalBioForm, setModalBioForm] = useState(false)
@@ -32,35 +39,52 @@ export default function Summary() {
     const [inputLabel, setInputLabel] = useState('')
     const [listLabel, setListLabel] = useState([])
 
+    const dispatch = useDispatch()
+    
+    const fetchOtherSummary = useCallback(async () => {
+        const { data } = await axios.get(`${API}/user/summary/${otherSummaryUserId}`)
+        setSummaryData(data)
+        setIsMe(false)
+    }, [otherSummaryUserId])
+
+    useEffect(() => {
+        console.log('ok');
+        if (otherSummaryUserId) {
+            fetchOtherSummary()
+        } else {
+            setSummaryData(mySummary)
+        }
+    }, [dispatch, fetchOtherSummary, mySummary, otherSummaryUserId])
+
+    useEffect(() => {
+        setInputNickname(summaryData?.nickname || '')
+        setInputPanggilan(summaryData?.panggilan || '')
+        setInputPosisi(summaryData?.posisi || '')
+        setInputTempat(summaryData?.tempat || '')
+        setInputKota(summaryData?.kota || '')
+        setInputNegara(summaryData?.negara || '')
+        setInputBio(summaryData?.bio || '')
+        setListLabel([...(summaryData?.label ?? [])]);
+        setInputId(summaryData?._id || '')
+    }, [summaryData])
+    useEffect(() => {
+        return () => {
+            dispatch(setSummary(''))
+            setIsMe(true)
+        }
+    }, [dispatch])
+
     const removeLabel = (index) => {
         const updatedList = [...listLabel]
         updatedList.splice(index, 1)
         setListLabel(updatedList)
     }    
 
-    const dispatch = useDispatch()
-    useEffect(() => {
-        setInputNickname(myProfile?.nickname || '')
-        setInputPanggilan(myProfile?.panggilan || '')
-        setInputPosisi(myProfile?.posisi || '')
-        setInputTempat(myProfile?.tempat || '')
-        setInputKota(myProfile?.kota || '')
-        setInputNegara(myProfile?.negara || '')
-        setInputBio(myProfile?.bio || '')
-        setListLabel([...myProfile?.label] || [])
-        setInputId(myProfile?._id || '')
-    }, [myProfile])
-
     function addLabel() {
         if (!inputLabel) return
         setListLabel(prev => [...prev, inputLabel])
         setInputLabel('')
     }
-
-    useEffect(() => {
-      console.log(listLabel)
-    }, [listLabel])
-    
 
     function handleBioForm(e) {
         e.preventDefault()
@@ -132,22 +156,22 @@ export default function Summary() {
         <div className="flex flex-3 fd-column of-auto p-4 overflow-auto">
             <div className="min-h-48 bg-zinc-900 p-8 flex items-center gap-4 flex-col sm:flex-row rounded-sm">
                 <div>
-                    <img src={myProfile.avatar} alt={myProfile.nickname} className="rounded-full" />
+                    <img src={summaryData.avatar} alt={summaryData.nickname} className="rounded-full" />
                 </div>
                 <div>
-                    <p className="text-xl font-bold">{myProfile.nickname}<sup className='ordinal text-xs font-normal text-zinc-600'>{myProfile?.panggilan || ''}</sup></p>
-                    <p className="text-center text-sm sm:text-left">#{myProfile.tag}</p>
+                    <p className="text-xl font-bold">{summaryData.nickname}<sup className='ordinal text-xs font-normal text-zinc-600'>{summaryData?.panggilan || ''}</sup></p>
+                    <p className="text-center text-sm sm:text-left">#{summaryData.tag}</p>
                 </div>
             </div>
             <div className="h-fit bg-zinc-800 p-6 flex flex-col rounded-sm flex-col sm:flex-row">
                 <div className='flex-2 border-solid border-0 sm:border-r sm:border-b-0 border-b border-zinc-500 pb-1.5 sm:pb-0 relative'>
-                    <div onClick={() => setModalProfileEditForm(true)} className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2'><FontAwesomeIcon icon={faPen}/></div>
-                    <p>{myProfile?.posisi || <span className='text-zinc-600'>Posisi</span>} di {myProfile?.tempat || <span className='text-zinc-600'>Tempat</span>}</p>
-                    <p className='text-sm'>{myProfile?.kota || <span className='text-zinc-600'>Kota</span>}, {myProfile?.negara || <span className='text-zinc-600'>Wilayah/Negara</span>}</p>
-                    <p className='text-zinc-600 text-xs'><span className='font-bold'>{myProfile?.pengikut?.length || '0'}</span> pengikut</p>
+                    {isMe && <div onClick={() => setModalProfileEditForm(true)} className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2'><FontAwesomeIcon icon={faPen}/></div>}
+                    <p>{summaryData?.posisi || <span className='text-zinc-600'>Posisi</span>} di {summaryData?.tempat || <span className='text-zinc-600'>Tempat</span>}</p>
+                    <p className='text-sm'>{summaryData?.kota || <span className='text-zinc-600'>Kota</span>}, {summaryData?.negara || <span className='text-zinc-600'>Wilayah/Negara</span>}</p>
+                    <p className='text-zinc-600 text-xs'><span className='font-bold'>{summaryData?.pengikut?.length || '0'}</span> pengikut</p>
                 </div>
                 <div className='flex-1 pt-1.5 sm:pt-0 sm:pl-1.5 relative'>
-                    <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2' onClick={() => setModalLabelForm(true)}><FontAwesomeIcon icon={faPen}/></div>
+                    {isMe && <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2' onClick={() => setModalLabelForm(true)}><FontAwesomeIcon icon={faPen}/></div>}
                     <div className='flex flex-wrap gap-1'>
                         {listLabel?.map((x, i) => (
                             <span
@@ -161,9 +185,9 @@ export default function Summary() {
                 </div>
             </div>
             <div className="mt-2.5 bg-zinc-800 relative whitespace-pre rounded h-fit p-1 max-w-full">
-                <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2' onClick={() => setModalBioForm(true)}><FontAwesomeIcon icon={faPen}/></div>
+                {isMe && <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2' onClick={() => setModalBioForm(true)}><FontAwesomeIcon icon={faPen}/></div>}
                 <div className='overflow-y-auto text-sm'>
-                    <ReactMarkdown remarkPlugins={[remarkGfm, emoji]}>{myProfile?.bio}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm, emoji]}>{summaryData?.bio}</ReactMarkdown>
                 </div>
             </div>
         </div>
