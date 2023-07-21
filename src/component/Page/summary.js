@@ -22,7 +22,6 @@ export default function Summary() {
 
     const [isMe, setIsMe] = useState(true)
 
-
     const [modalProfileEditForm, setModalProfileEditForm] = useState(false)
     const [modalLabelForm, setModalLabelForm] = useState(false)
     const [modalBioForm, setModalBioForm] = useState(false)
@@ -48,7 +47,6 @@ export default function Summary() {
     }, [otherSummaryUserId])
 
     useEffect(() => {
-        console.log('ok');
         if (otherSummaryUserId) {
             fetchOtherSummary()
         } else {

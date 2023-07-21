@@ -5,12 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { setSummary } from "../../../redux/summaryStore";
 import { setPageType } from "../../../redux/sourceSlice";
 
-export function DisplaySearchKey({dataSearch}) {
-    // useEffect(() => {
-    //     console.log(dataSearch);
-    // }, [dataSearch])
+export function DisplaySearchKey({dataSearch, closeModalCallback}) {
     let box = []
-    box = dataSearch?.map((x,i) => <CardList item={x} key={i}/>)
+    box = dataSearch?.map((x,i) => <CardList item={x} key={i} closeModalCallback={closeModalCallback}/>)
     return (
         <div className="book_card_container d-flex flex-col jc-center">
             {box}
@@ -18,7 +15,7 @@ export function DisplaySearchKey({dataSearch}) {
     )
 }
 
-function CardList({item}) {
+function CardList({item, closeModalCallback}) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     function toInviteBook() {
@@ -27,6 +24,7 @@ function CardList({item}) {
     function seeUserProfile() {
         dispatch(setPageType('faAddressBook'))
         dispatch(setSummary(item._id))
+        closeModalCallback()
     }
     if (item.type === 'book') {
         return (
@@ -54,51 +52,3 @@ function CardList({item}) {
         )
     }
 }
-
-// export function DisplaySearchKey({searchKey}) {
-//     const [globalBook, setGlobalBook] = useState(null)
-//     const [loading, setLoading] = useState(false)
-//     const [box, setBox] = useState([])
-//     const [reload, setReload] = useState(false)
-//     const dispatch = useDispatch()
-//     const fetchData = useCallback(async () => {
-//         setReload(false)
-//         setLoading(true)
-//         try {
-//             const response = await axios.get(`${API}/book`)
-//             setGlobalBook(response.data)
-//         } catch (err) {
-//             setReload(true)
-//         }
-//         setLoading(false)
-//     }, [])
-//     useEffect(() => {
-//         if (!globalBook) {
-//             fetchData()
-//         } else {
-//             let sessionBook = []
-//             globalBook.forEach((data, index) => {
-//                 sessionBook.push(<BookCardItem data={data} key={index}/>)
-//             })
-//             setBox(sessionBook)
-//         }
-//     },[dispatch, fetchData, globalBook])
-//     if (reload) return (
-//         <div className="book_card_container d-flex jc-center fw-wrap">
-//             <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
-//                 <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
-//             </div>
-//         </div>
-//     )
-//     if (loading) return (
-//         <div className="book_card_container d-flex jc-center fw-wrap">
-//             <div className="book_card of-hidden pointerfd-column d -flex of-hidden p-relativeloading"/>
-//             <div className="book_card of-hidden pointerfd-column d -flex of-hidden p-relativeloading"/>
-//         </div>
-//     )
-//     return (
-//         <div className="book_card_container d-flex jc-center fw-wrap">
-//             {box}
-//         </div>
-//     )
-// }

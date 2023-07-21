@@ -8,7 +8,6 @@ export const summaryStore = createSlice({
     reducers: {
         setSummary: (state, action) => {
             state.userId = action.payload
-            console.log('SetSummary Triggerd: ', action.payload)
         }
     },
 })

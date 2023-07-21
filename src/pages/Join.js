@@ -23,7 +23,6 @@ export default function Join(){
         setIsReload(false)
         try {
             const response = await axios.get(`${API}/book/join/${searchParams.get('invite')}`)
-            console.log(response.data)
             setData(response.data)
         } catch (err) {
             setIsReload(true)

@@ -35,24 +35,28 @@ export function BookList() {
                 sessionBook.push(<BookItem key={index} data={item}/>)
             })
             setAllBook(sessionBook)
+            setIsLoading(false)
         }
     }, [dispatch, booksProfile, fetchData])
-    if (isReload) return (
-        <div className="nav-guild of-auto d-flex fd-column">
-            <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
-                <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
-            </div>
-        </div>
-    )
-    if (isLoading) return (
-        <div className="nav-guild of-auto d-flex fd-column">
-            <div className='guild-frame'>
-                <div className="loading guild-photo-profile d-flex jc-center ai-center"/>
-            </div>
-        </div>
-    )
+    useEffect(() => {
+      
+    
+      return () => {
+        setBooksProfile(null)
+      }
+    }, [])
     return (
         <div className="nav-guild of-auto d-flex fd-column">
+            {isReload && (
+                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
+                    <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>
+                </div>
+            )}
+            {isLoading && (
+                <div className='guild-frame'>
+                    <div className="loading guild-photo-profile d-flex jc-center ai-center"/>
+                </div>
+            )}
             {allBook}
         </div>
     )

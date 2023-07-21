@@ -27,14 +27,19 @@ export function FindAndCreateBook() {
     const [searchText, setSearchText] = useState('')
     const dispatch = useDispatch()
     const [dataSearch, setDataSearch] = useState([])
+
+    const [loading, setLoading] = useState(false)
     
     async function handleSearch(e) {
         e.preventDefault()
+        if (!searchText) return
+        setLoading(true)
         try {
             if (!searchText) return
             const response = await axios.get(`${API}/search/key?value=${searchText}`)
             setDataSearch(response.data)
         } catch (err) {}
+        setLoading(false)
     }
 
     function handleInputChange(e) {
@@ -125,7 +130,7 @@ export function FindAndCreateBook() {
                 <div className="search_book-header d-flex gap-2 flex-col sm:flex-row">
                     <form onSubmit={handleSearch} className='flex-1'>
                         <div className='h-[45px] sm:px-5 ox-2 d-flex overflow-auto focus-within:ring-violet-600 ring-transparent ring-2 bg-zinc-900 rounded-3xl flex-1'>
-                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Cari seseorang atau buku" className='px-2 w-full text-white border-none outline-none bg-transparent h-full caret-violet-600' />
+                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Cari seseorang atau buku" className='px-2 w-full text-white border-none outline-none bg-transparent h-full caret-violet-600' required />
                             <div className="tiang"/>
                             <button type="submit" className='submit_search px-2 sm:pl-5 pointer hover:bg-sky-500'>
                                 <FontAwesomeIcon icon={faSearch} />
@@ -141,7 +146,8 @@ export function FindAndCreateBook() {
                         </div>
                     </div>
                 </div>
-                <DisplaySearchKey dataSearch={dataSearch}/>
+                {loading && <div className="loading my-2 h-[64px]"></div>}
+                <DisplaySearchKey dataSearch={dataSearch} closeModalCallback={handleModalClose}/>
             </div>
         </Modal>
         <ModalSecond open={addServerModal} close={() => setAddServerModal(false)}>
