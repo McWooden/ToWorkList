@@ -20,7 +20,7 @@ export function FormBaseRight() {
 
     const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
     useEffect(() => {
-      channel.on('broadcast', {event: 'online'}, payload => chatToast(payload))
+      channel.on('broadcast', {event: 'online'}, payload => chatToast(payload.payload))
       channel.subscribe((status) => {
         if (status === 'SUBSCRIBED') {
           channel.send({
