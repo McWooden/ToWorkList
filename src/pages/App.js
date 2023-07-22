@@ -3,8 +3,6 @@ import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
 import { useSelector } from 'react-redux';
 import TodoApp from '../component/TodoApp/TodoApp';
-import supabase from '../utils/supabase';
-import { chatToast } from '../utils/notif';
 
 
 export const GuildContext = createContext()
