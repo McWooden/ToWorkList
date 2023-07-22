@@ -13,6 +13,7 @@ import { AddNoteModal } from "./Note/AddNoteModal"
 import { SidebarRightChat } from "./BaseRight/SidebarRightChat"
 import { DetailCard } from "./BaseCenter/DetailCard"
 import supabase from "../../utils/supabase"
+import { setChannelTodoDetail } from '../../redux/channelReducer'
 
 export function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)
@@ -42,6 +43,11 @@ export function TodoDetail() {
     }, [fetchData])
 
     useEffect(() => {
+        dispatch(setChannelTodoDetail(supabase.channel(`${idPageOfBook}/${todoId}`)))
+        return () => dispatch(setChannelTodoDetail(null))
+    },[dispatch, idPageOfBook, todoId])
+
+    useEffect(() => {
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
         channel.on('broadcast', {event: 'shouldUpdate'}, (cb) => {
             setShouldUpdate(cb.payload)
@@ -66,9 +72,12 @@ export function TodoDetail() {
             <div className='base-center p-relative of-auto'>
                 <div className='center d-flex p-relative fd-column'>
                     {shouldUpdate && 
-                        <div className="h-[45px] bg-sky-500 flex justify-center items-center text-zinc-900 rounded m-2 gap-2 pointer sticky top-1" onClick={fetchData}>
-                            <FontAwesomeIcon icon={faRotateRight}/>
-                            <p>Ada yang baru ({shouldUpdate})</p>
+                        <div className="h-[45px] bg-sky-500 flex justify-center items-center flex-col text-zinc-900 rounded m-2 gap-2 pointer sticky top-1" onClick={fetchData}>
+                            <div className="flex justify-center items-center">
+                                <FontAwesomeIcon icon={faRotateRight}/>
+                                <p>perbarui</p>
+                            </div>
+                            <p className='text-xm'>({shouldUpdate})</p>
                         </div>
                     }
                     <DetailCard/>                    

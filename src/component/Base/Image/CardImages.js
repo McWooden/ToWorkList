@@ -17,6 +17,7 @@ export function CardImages() {
     const idBook = useSelector(state => state.fetch.idBook)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todo = useSelector(state => state.todo)
+    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
     const dispatch = useDispatch()
     const [modalOpen, setModalOpen] = useState(false)
     const box = []
@@ -69,6 +70,11 @@ export function CardImages() {
                 setImage(null)
                 setPreviewUrl('')
                 dispatch(setTodo(res.data))
+                channelTodoDetail.send({
+                    type: 'broadcast',
+                    event: 'shouldUpdate',
+                    payload: nickname,
+                })
             })
             .catch(err => {
                 imageToast('gambar gagal ditambahkan')

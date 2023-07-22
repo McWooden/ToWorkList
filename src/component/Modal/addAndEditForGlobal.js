@@ -13,18 +13,17 @@ import { convertDateToString } from "../../utils/convertDateFormat"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
 import { setTodo } from '../../redux/todo'
-import supabase from '../../utils/supabase'
 
 export function AddAndEditForGlobal() {
     const addAndEdit = useSelector((state) => state.addAndEdit)
     const { type, item_title, desc, color, deadline, _id } = addAndEdit
     const profileNickname = useSelector(state => state.source?.profile?.nickname || null)
 
+    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+
     const dispatch = useDispatch()
     const formRef = useRef()
 
-    const channelRef = useRef(null)
-  
     const colors = useMemo(() => ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow'], [])
 
     const [colorsTileSource, setColorsTileSource] = useState([
@@ -112,22 +111,15 @@ export function AddAndEditForGlobal() {
               saveToast(dataToSend.item_title)
                 if (type === 'EDIT_TODO_INSIDE') {
                     dispatch(setTodo(res.data))
-                    channelRef.current = supabase.channel(`${idPageOfBook}/${_id}`)
-                    channelRef.current.subscribe((cb) => {
-                      if (cb === 'SUBSCRIBED') {
-                        channelRef.current.send({
-                          type: 'broadcast',
-                          event: 'shouldUpdate',
-                          payload: profileNickname,
-                        })
-                      }
+                    channelTodoDetail.send({
+                      type: 'broadcast',
+                      event: 'shouldUpdate',
+                      payload: `${profileNickname} memperbarui detail tugas`,
                     })
-                    console.log('channelRef.current:', channelRef.current);
                 }
                 if (type === 'EDIT_TODO_OUTSIDE') {
                     dispatch(setSource(res.data))
                 }
-                console.log(res.data)
               dispatch(resetAddAndEdit())
             })
             .catch((err) => {
