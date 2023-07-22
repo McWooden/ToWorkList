@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage, faRightFromBracket, faUser, faMap, faFloppyDisk, faExclamation} from '@fortawesome/free-solid-svg-icons'
+import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage, faRightFromBracket, faUser, faMap, faFloppyDisk, faExclamation, faCommentDots} from '@fortawesome/free-solid-svg-icons'
 
 export function editToast(text) {
     toast(
@@ -52,7 +52,7 @@ export function chatToast(text) {
     toast(
     <div className="myToast myToast-info">
         <div className="icon">
-            <FontAwesomeIcon icon={"comment-dots"}/>
+            <FontAwesomeIcon icon={faCommentDots}/>
         </div>
         <p>{text}</p>
     </div>)
