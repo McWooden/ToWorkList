@@ -24,8 +24,8 @@ export function TodoPage() {
             }
         }
         fetchData()
-        intervalId = setInterval(fetchData, 30000)
-        return () => clearInterval(intervalId)
+        // intervalId = setInterval(fetchData, 30000)
+        // return () => clearInterval(intervalId)
     }, [idPageOfBook, dispatch])
 
     if (!source) return (

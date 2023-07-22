@@ -31,8 +31,8 @@ export function TodoDetail() {
             dispatch(setTodo(data))
         }
         fetchData()
-        const interval = setInterval(fetchData, 20000)
-        return () => clearInterval(interval)
+        // const interval = setInterval(fetchData, 20000)
+        // return () => clearInterval(interval)
     }, [idPageOfBook, todoId, dispatch])
     return (
         <>

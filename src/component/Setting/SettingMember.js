@@ -46,11 +46,11 @@ export function SettingMember() {
         } else {
             dataToBox(members)
         }
-        const interval = setInterval(() => {
-            if (idBook === '@me') return handleEmpety()
-            fetchData()
-        }, 60000)
-        return () => clearInterval(interval)
+        // const interval = setInterval(() => {
+        //     if (idBook === '@me') return handleEmpety()
+        //     fetchData()
+        // }, 60000)
+        // return () => clearInterval(interval)
     }, [idBook, members, dispatch])
     if (isLoading) return (
         <div className="base-right of-auto">
