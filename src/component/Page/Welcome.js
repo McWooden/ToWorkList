@@ -10,7 +10,6 @@ import { HideBase } from '../TodoApp/TodoApp'
 import { isoToString } from '../../utils/convertDateFormat'
 import { ChatModel } from '../Model/Chat'
 import { sendToast } from '../../utils/notif'
-import { setChat } from '../../redux/todo'
 
 export function Welcome() {
   const { handleNavbar, hideNavbar } = useContext(AppContext)
@@ -49,8 +48,8 @@ export function Welcome() {
 
   const randomTags = () => setDisplayText(taglines[Math.floor(Math.random() * taglines.length)])
   useEffect(() => {
-    const channel = supabase.channel('costum-all-channel')
-    channel.on('postgres_changes', { event: '*', schema: 'public', table: 'broadcast' }, payload => {
+    const channel = supabase.channel('udin')
+    channel.on('postgres_changes', { event: '*', table: 'broadcast' }, payload => {
       setChats((prev) => [...prev, payload.new.data])
     }).subscribe()
 
@@ -61,7 +60,7 @@ export function Welcome() {
 
   useEffect(() =>{
     async function fetchData() {
-      const { data } = await supabase.from('broadcast').select();
+      const { data } = await supabase.from('broadcast').select()
       if (data) setChats(data.map(x => ({ nickname: x.data.nickname, msg: x.data.msg, date: x.data.date })))
     }
     fetchData()
@@ -90,6 +89,7 @@ export function Welcome() {
 
   const [msg, setMsg] = useState('')
   const textarea = useRef()
+  
   async function handleSubmit(e) {
     e.preventDefault()
     textarea.current.style.height = '15px'
@@ -100,10 +100,7 @@ export function Welcome() {
       date: +new Date()
     }
     try {
-      const { data } = await supabase.from('broadcast').insert({ data: dataToSend })
-      if (data) {
-        setChat((prev)=>[prev, data])
-      }
+      await supabase.from('broadcast').insert({ data: dataToSend })
     } catch (error) {}
     setMsg('')
   }
@@ -119,6 +116,17 @@ export function Welcome() {
     lastChat.scrollIntoView({ behavior: 'smooth' });
     setScrollToBottom(true);
   }  
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="flex w-full sm:flex-row flex-col">
       <div className="welcome flex flex-col overflow-auto flex-3">

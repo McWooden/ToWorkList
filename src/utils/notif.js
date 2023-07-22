@@ -48,6 +48,15 @@ export function sendToast(text) {
         <p>{text || 'terkirim'}</p>
     </div>)
 }
+export function chatToast(text) {
+    toast(
+    <div className="myToast myToast-info">
+        <div className="icon">
+            <FontAwesomeIcon icon={"comment-dots"}/>
+        </div>
+        <p>{text}</p>
+    </div>)
+}
 export function todoToast({item_title, color}) {
     toast(
     <div className="myToast">

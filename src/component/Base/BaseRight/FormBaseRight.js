@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane} from '@fortawesome/free-solid-svg-icons'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { API } from '../../../utils/variableGlobal'
-import { sendToast } from '../../../utils/notif'
+import { chatToast, sendToast } from '../../../utils/notif'
 import { setTodo } from '../../../redux/todo'
+import supabase from '../../../utils/supabase'
 
 export function FormBaseRight() {
     const profile = useSelector(state => state.source.profile)
@@ -16,6 +17,26 @@ export function FormBaseRight() {
     const myNickname = profile.nickname
     const [msg, setMsg] = useState('')
     const textarea = useRef()
+
+    const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
+    useEffect(() => {
+      channel.on('broadcast', {event: 'online'}, payload => chatToast(payload))
+      channel.subscribe((status) => {
+        if (status === 'SUBSCRIBED') {
+          channel.send({
+            type: 'broadcast',
+            event: 'online',
+            payload: `${myNickname} online`
+          })
+        }
+      })    
+    
+      return () => {
+        channel.unsubscribe()
+      }
+    }, [channel, myNickname])
+    
+
     async function handleSubmit(e) {
         e.preventDefault()
         textarea.current.style.height = '15px'
