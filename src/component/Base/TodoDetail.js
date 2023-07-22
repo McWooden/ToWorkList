@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useCallback } from "react"
 import { HideBase } from '../TodoApp/TodoApp'
 import axios from "axios"
 import { API } from "../../utils/variableGlobal"
@@ -10,7 +12,7 @@ import { CenterActionButton } from "./BaseCenter/CenterActionButton"
 import { AddNoteModal } from "./Note/AddNoteModal"
 import { SidebarRightChat } from "./BaseRight/SidebarRightChat"
 import { DetailCard } from "./BaseCenter/DetailCard"
-
+import supabase from "../../utils/supabase"
 
 export function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)
@@ -19,21 +21,38 @@ export function TodoDetail() {
     const dispatch = useDispatch()
     const { hideLeftBase } = useContext(HideBase)
     const [modalOpen, setModalOpen] = useState(false)
+    const myNickname = useSelector(state => state.source.profile.nicname)
+    const [shouldUpdate, setShouldUpdate] = useState(false)
+
     function handleModalOpen() {
         setModalOpen(true)
     }
     function handleModalClose() {
         setModalOpen(false)
     }
+    const fetchData = useCallback(async() => {
+        const {data} = await axios.get(`${API}/source/list/${idPageOfBook}/${todoId}`)
+        dispatch(setTodo(data))
+        setShouldUpdate(false)
+      },
+      [dispatch, idPageOfBook, todoId],
+    )
     useEffect(() => {
-        const fetchData = async () => {
-            const {data} = await axios.get(`${API}/source/list/${idPageOfBook}/${todoId}`)
-            dispatch(setTodo(data))
-        }
         fetchData()
-        // const interval = setInterval(fetchData, 20000)
-        // return () => clearInterval(interval)
-    }, [idPageOfBook, todoId, dispatch])
+    }, [fetchData])
+
+    useEffect(() => {
+        const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
+        channel.on('broadcast', {event: 'shouldUpdate'}, (cb) => {
+            setShouldUpdate(cb.payload)
+        })
+        channel.subscribe()
+      
+        return () => {
+          channel.unsubscribe()
+        }
+      }, [idPageOfBook, myNickname, shouldUpdate, todoId])
+    
     return (
         <>
         {/* left */}
@@ -46,6 +65,12 @@ export function TodoDetail() {
         {/* center */}
             <div className='base-center p-relative of-auto'>
                 <div className='center d-flex p-relative fd-column'>
+                    {shouldUpdate && 
+                        <div className="h-[45px] bg-sky-500 flex justify-center items-center text-zinc-900 rounded m-2 gap-2 pointer sticky top-1" onClick={fetchData}>
+                            <FontAwesomeIcon icon={faRotateRight}/>
+                            <p>Ada yang baru ({shouldUpdate})</p>
+                        </div>
+                    }
                     <DetailCard/>                    
                     <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/>
                     <CenterActionButton handleModalOpen={handleModalOpen}/>

@@ -13,6 +13,7 @@ import { convertDateToString } from "../../utils/convertDateFormat"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
 import { setTodo } from '../../redux/todo'
+import supabase from '../../utils/supabase'
 
 export function AddAndEditForGlobal() {
     const addAndEdit = useSelector((state) => state.addAndEdit)
@@ -22,6 +23,7 @@ export function AddAndEditForGlobal() {
     const dispatch = useDispatch()
     const formRef = useRef()
 
+    const channelRef = useRef(null)
   
     const colors = useMemo(() => ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow'], [])
 
@@ -110,6 +112,16 @@ export function AddAndEditForGlobal() {
               saveToast(dataToSend.item_title)
                 if (type === 'EDIT_TODO_INSIDE') {
                     dispatch(setTodo(res.data))
+                    channelRef.current = supabase.channel(`${idPageOfBook}/${_id}`)
+                    channelRef.current.subscribe((cb) => {
+                      if (cb === 'SUBSCRIBED') {
+                        channelRef.send({
+                          type: 'broadcast',
+                          event: 'shouldUpdate',
+                          payload: profileNickname,
+                        })
+                      }
+                    })
                 }
                 if (type === 'EDIT_TODO_OUTSIDE') {
                     dispatch(setSource(res.data))
@@ -237,3 +249,26 @@ export function AddAndEditForGlobal() {
       </Modal>
     )
   }  
+
+
+  // const RandomComponent = () => {
+  //   const [randomState, setRandomState] = useState(false)
+  //   useEffect(() => {
+  //     const channel = supabase.channel('randomChannel')
+  //     channel.subscribe()
+  //   })
+  //   function randomFunction () {
+  //     channel.send({
+  //       type: 'broadcast',
+  //       event: 'test',
+  //       payload: {
+  //         message: 'hello, world'
+  //       },
+  //     })
+  //   }
+  //   return (
+  //     <div onClick={randomFunction}>
+  //       <p>randomText</p>
+  //     </div>
+  //   )
+  // }
