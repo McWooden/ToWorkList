@@ -3,6 +3,8 @@ import { useState, createContext, useRef, useEffect } from 'react';
 import { myAccount } from '../utils/dataJSON';
 import { useSelector } from 'react-redux';
 import TodoApp from '../component/TodoApp/TodoApp';
+import supabase from '../utils/supabase';
+import { chatToast } from '../utils/notif';
 
 
 export const GuildContext = createContext()
@@ -20,6 +22,22 @@ function App() {
   function handleNavbar(boolean) {
     setHideNavbar(!boolean)
   }
+  const number = Math.floor(Math.random() * 10)
+  const channel = supabase.channel(`online`)
+    useEffect(() => {
+      channel.on('broadcast', {event: 'online'}, payload => chatToast(payload.payload))
+      channel.subscribe(() => {
+          channel.send({
+              type: 'broadcast',
+              event: 'online',
+              payload: `${number} online`
+            })
+      },[])
+    
+      return () => {
+        channel.unsubscribe()
+      }
+    }, [channel, number])
   useEffect(() => {
     if (mode === 'dark') {
       import('../styles/theme/dark.css')
