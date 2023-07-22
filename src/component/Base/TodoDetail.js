@@ -25,6 +25,8 @@ export function TodoDetail() {
     const myNickname = useSelector(state => state.source.profile.nicname)
     const [shouldUpdate, setShouldUpdate] = useState(false)
 
+    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+
     function handleModalOpen() {
         setModalOpen(true)
     }
@@ -44,8 +46,9 @@ export function TodoDetail() {
 
     useEffect(() => {
         dispatch(setChannelTodoDetail(supabase.channel(`${idPageOfBook}/${todoId}`)))
+        channelTodoDetail.on({ event: 'shouldUpdate' }, payload => setShouldUpdate(payload.payload))
         return () => dispatch(setChannelTodoDetail(null))
-    },[dispatch, idPageOfBook, todoId])
+    },[channelTodoDetail, dispatch, idPageOfBook, todoId])
 
     useEffect(() => {
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
