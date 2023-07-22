@@ -22,8 +22,8 @@ export function SidebarRightChat() {
     const chatRef = useRef(null)
     const [scrollToBottom, setScrollToBottom] = useState(true)
 
-    const channel = supabase.channel(`online`)
-      useEffect(() => {
+    useEffect(() => {
+        const channel = supabase.channel(`online`)
         channel.on('broadcast', {event: 'online'}, payload => chatToast(payload.payload))
         channel.subscribe(() => {
             channel.send({
@@ -36,7 +36,7 @@ export function SidebarRightChat() {
         return () => {
           channel.unsubscribe()
         }
-      }, [channel, myNickname])
+      }, [myNickname])
 
     useEffect(() => {
         if (scrollToBottom) {
