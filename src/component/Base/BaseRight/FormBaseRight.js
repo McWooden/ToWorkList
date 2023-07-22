@@ -21,20 +21,24 @@ export function FormBaseRight() {
     const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
     useEffect(() => {
       channel.on('broadcast', {event: 'online'}, payload => chatToast(payload.payload))
-      channel.subscribe((status) => {
-        if (status === 'SUBSCRIBED') {
-          channel.send({
-            type: 'broadcast',
-            event: 'online',
-            payload: `${myNickname} online`
-          })
-        }
-      })    
+      channel.subscribe()
     
       return () => {
         channel.unsubscribe()
       }
     }, [channel, myNickname])
+    function sayOnline() {
+        channel.send({
+            type: 'broadcast',
+            event: 'online',
+            payload: `${myNickname} online`
+          })
+    }
+
+    useEffect(() => {
+        console.log('first render')
+        return () => console.log('unmount');
+    }, [])
     
 
     async function handleSubmit(e) {
@@ -69,6 +73,7 @@ export function FormBaseRight() {
     return (
         <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
             <div className="textarea-container d-flex ai-center of-auto">
+                <div className='bg-sky-500' onClick={sayOnline}>say online</div>
                 <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{height: '15px'}} className='d-flex ai-center of-auto'/>
             </div>
             {
