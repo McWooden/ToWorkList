@@ -42,13 +42,13 @@ export function TodoDetail() {
     )
     useEffect(() => {
         fetchData()
-    }, [fetchData])
+        dispatch(setChannelTodoDetail(supabase.channel(`${idPageOfBook}/${todoId}`)))
+        return () => dispatch(setChannelTodoDetail(null))
+    }, [dispatch, fetchData, idPageOfBook, todoId])
 
     useEffect(() => {
-        dispatch(setChannelTodoDetail(supabase.channel(`${idPageOfBook}/${todoId}`)))
         channelTodoDetail.on({ event: 'shouldUpdate' }, payload => setShouldUpdate(payload.payload)).subscribe()
-        return () => dispatch(setChannelTodoDetail(null))
-    },[channelTodoDetail, dispatch, idPageOfBook, todoId])
+    },[channelTodoDetail])
 
     useEffect(() => {
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
