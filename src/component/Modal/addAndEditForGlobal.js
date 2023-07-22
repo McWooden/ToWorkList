@@ -115,13 +115,14 @@ export function AddAndEditForGlobal() {
                     channelRef.current = supabase.channel(`${idPageOfBook}/${_id}`)
                     channelRef.current.subscribe((cb) => {
                       if (cb === 'SUBSCRIBED') {
-                        channelRef.send({
+                        channelRef.current.send({
                           type: 'broadcast',
                           event: 'shouldUpdate',
                           payload: profileNickname,
                         })
                       }
                     })
+                    console.log('channelRef.current:', channelRef.current);
                 }
                 if (type === 'EDIT_TODO_OUTSIDE') {
                     dispatch(setSource(res.data))
