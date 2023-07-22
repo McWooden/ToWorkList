@@ -22,22 +22,6 @@ function App() {
   function handleNavbar(boolean) {
     setHideNavbar(!boolean)
   }
-  const number = Math.floor(Math.random() * 10)
-  const channel = supabase.channel(`online`)
-    useEffect(() => {
-      channel.on('broadcast', {event: 'online'}, payload => chatToast(payload.payload))
-      channel.subscribe(() => {
-          channel.send({
-              type: 'broadcast',
-              event: 'online',
-              payload: `${number} online`
-            })
-      },[])
-    
-      return () => {
-        channel.unsubscribe()
-      }
-    }, [channel, number])
   useEffect(() => {
     if (mode === 'dark') {
       import('../styles/theme/dark.css')

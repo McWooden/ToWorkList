@@ -7,6 +7,8 @@ import { HideBase } from '../../TodoApp/TodoApp'
 import { useState, useEffect } from 'react'
 import { FormBaseRight } from './FormBaseRight'
 import { ChatModel } from '../../Model/Chat'
+import supabase from '../../../utils/supabase'
+import { chatToast } from '../../../utils/notif'
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
@@ -19,6 +21,22 @@ export function SidebarRightChat() {
 
     const chatRef = useRef(null)
     const [scrollToBottom, setScrollToBottom] = useState(true)
+
+    const channel = supabase.channel(`online`)
+      useEffect(() => {
+        channel.on('broadcast', {event: 'online'}, payload => chatToast(payload.payload))
+        channel.subscribe(() => {
+            channel.send({
+                type: 'broadcast',
+                event: 'online',
+                payload: `${myNickname} online`
+              })
+        },[])
+      
+        return () => {
+          channel.unsubscribe()
+        }
+      }, [channel, myNickname])
 
     useEffect(() => {
         if (scrollToBottom) {
