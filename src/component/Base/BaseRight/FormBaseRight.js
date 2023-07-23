@@ -31,6 +31,7 @@ export function FormBaseRight() {
             .then((res) => {
                 sendToast('data berhasil dikirim')
                 dispatch(setChat(res.data.chat))
+                console.log('chat akan dipindahkan ke sidebar', res.data.chat)
                 channelTodoDetail.send({
                     type: 'broadcast',
                     event: 'new_message',

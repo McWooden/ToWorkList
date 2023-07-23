@@ -8,7 +8,8 @@ import { useState, useEffect } from 'react'
 import { FormBaseRight } from './FormBaseRight'
 import { ChatModel } from '../../Model/Chat'
 import supabase from '../../../utils/supabase'
-import { setChat } from '../../../redux/todo'
+// import { setChat } from '../../../redux/todo'
+import { chatToast } from '../../../utils/notif'
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
@@ -62,7 +63,7 @@ export function SidebarRightChat() {
     useEffect(() => {
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
         channel.on('broadcast', { event: 'new_message' }, cb => {
-            setChat(cb.payload)
+            chatToast(String(cb))
         }).subscribe()
     }, [idPageOfBook, myNickname, todoId])
     
