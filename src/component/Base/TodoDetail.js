@@ -41,8 +41,7 @@ export function TodoDetail() {
         fetchData()
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
         channel.on('broadcast', { event: 'shouldUpdate' }, payload => {
-            console.log(payload);
-            setShouldUpdate(payload.payload)
+            if (payload.event === 'shouldUpdate') setShouldUpdate(payload.payload)
         }).subscribe()
         dispatch(setChannelTodoDetail(channel))
         return () => dispatch(setChannelTodoDetail(null))

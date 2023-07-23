@@ -31,6 +31,7 @@ export function FormBaseRight() {
             .then((res) => {
                 sendToast('data berhasil dikirim')
                 dispatch(setTodo(res.data.data))
+                console.log('send', res.data.new);
                 channelTodoDetail.send({
                     type: 'broadcast',
                     event: 'new_message',
