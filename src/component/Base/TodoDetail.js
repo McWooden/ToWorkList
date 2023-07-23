@@ -13,7 +13,7 @@ import { AddNoteModal } from "./Note/AddNoteModal"
 import { SidebarRightChat } from "./BaseRight/SidebarRightChat"
 import { DetailCard } from "./BaseCenter/DetailCard"
 import supabase from "../../utils/supabase"
-import { useRef } from 'react'
+import { setChannelTodoDetail } from '../../redux/channelReducer'
 
 export function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)
@@ -22,10 +22,7 @@ export function TodoDetail() {
     const dispatch = useDispatch()
     const { hideLeftBase } = useContext(HideBase)
     const [modalOpen, setModalOpen] = useState(false)
-    const myNickname = useSelector(state => state.source.profile.nicname)
     const [shouldUpdate, setShouldUpdate] = useState(false)
-
-    const channelRef = useRef(null)
 
     function handleModalOpen() {
         setModalOpen(true)
@@ -42,22 +39,23 @@ export function TodoDetail() {
     )
     useEffect(() => {
         fetchData()
-        channelRef.current = supabase.channel(`${idPageOfBook}/${todoId}`)
-        channelRef.current.on({ event: 'shouldUpdate' }, payload => setShouldUpdate(payload.payload)).subscribe(state =>console.log(state))
-        return () => dispatch(channelRef.current.unsubscribe())
+        const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
+        channel.on('broadcast', { event: 'shouldUpdate' }, payload => setShouldUpdate(payload.payload)).subscribe()
+        dispatch(setChannelTodoDetail(channel))
+        return () => dispatch(setChannelTodoDetail(null))
     }, [dispatch, fetchData, idPageOfBook, todoId])
 
-    useEffect(() => {
-        const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
-        channel.on('broadcast', {event: 'shouldUpdate'}, (cb) => {
-            setShouldUpdate(cb.payload)
-        })
-        channel.subscribe()
+    // useEffect(() => {
+    //     const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
+    //     channel.on('broadcast', {event: 'shouldUpdate'}, (cb) => {
+    //         setShouldUpdate(cb.payload)
+    //     })
+    //     channel.subscribe()
       
-        return () => {
-          channel.unsubscribe()
-        }
-      }, [idPageOfBook, myNickname, shouldUpdate, todoId])
+    //     return () => {
+    //       channel.unsubscribe()
+    //     }
+    //   }, [idPageOfBook, myNickname, shouldUpdate, todoId])
     
     return (
         <>
