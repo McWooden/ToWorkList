@@ -28,12 +28,12 @@ export function FormBaseRight() {
         }
         try {
             await axios.post(`${API}/chat/${idPageOfBook}/${todoId}`, dataToSend)
-            .then((res) => {
+            .then(async (res) => {
                 sendToast('data berhasil dikirim')
                 dispatch(setChat(res.data.chat))
                 channelTodoDetailChat.send({
                     type: 'broadcast',
-                    event: 'new_message',
+                    event: 'newMessage',
                     payload: res.data.chat,
                 })
                 setMsg('')

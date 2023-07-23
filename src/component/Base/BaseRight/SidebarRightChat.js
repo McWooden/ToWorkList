@@ -63,9 +63,9 @@ export function SidebarRightChat() {
 
     useEffect(() => {
         const channel = supabase.channel(`${idPageOfBook}/${todoId}/chat`)
-        channel.on('broadcast', { event: 'new_message' }, cb => {
+        channel.on('broadcast', { event: 'newMessage' }, cb => {
             setChat(cb.payload)
-        }).subscribe()
+        }).subscribe(st => console.log(st))
         dispatch(setChannelTodoDetailChat(channel))
         return () => {
             channel.unsubscribe()
