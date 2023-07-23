@@ -19,6 +19,8 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
     const [currentColor, setCurrentColor] = useState(colors[Math.floor(Math.random() * 5)])
     const borderStyle = {border: `1px solid ${currentColor}`}
     const date = convertDateToString(new Date().toLocaleDateString())
+    const nickname = useSelector(state => state.source.profile.nickname)
+    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
     function handleColor(e) {
         setCurrentColor(e.target.value)
     }
@@ -37,6 +39,11 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
             .then((res) => {
                 noteToast(dataToSend)
                 dispatch(setTodo(res.data))
+                channelTodoDetail.send({
+                    type: 'broadcast',
+                    event: 'shouldUpdate',
+                    payload: `${nickname} menambah catatan`,
+                })
             })
             .catch(err => {
                 noteToast({color : 'var(--danger)'})

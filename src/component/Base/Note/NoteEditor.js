@@ -16,6 +16,8 @@ export function NoteEditor() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
     const data = useSelector(state => state.source.noteEditor)
+    const nickname = useSelector(state => state.source.profile.nickname)
+    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
     const [noteVal, setNoteVal] = useState(null)
     const [discard, setDiscard] = useState(false)
     const dispatch = useDispatch()
@@ -50,6 +52,11 @@ export function NoteEditor() {
                 dispatch(setTodo(res.data))
                 modalClose()
                 console.log(res)
+                channelTodoDetail.send({
+                    type: 'broadcast',
+                    event: 'shouldUpdate',
+                    payload: `${nickname} memperbarui catatan`,
+                })
             })
             .catch(err => {
                 noteToastSecond({text: 'catatan gagal diperbarui', color: 'var(--danger)'})

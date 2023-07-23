@@ -7,16 +7,18 @@ import { HideBase } from '../../TodoApp/TodoApp'
 import { useState, useEffect } from 'react'
 import { FormBaseRight } from './FormBaseRight'
 import { ChatModel } from '../../Model/Chat'
-
+import supabase from '../../../utils/supabase'
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
     const profile = useSelector(state => state.source.profile)
     const { hideRightBase } = useContext(HideBase)
     const myNickname = profile.nickname
-    let box = []
-    let lastDate = null
-    let lastNickname = null
+    const [boxJson, setBoxJson] = useState([...chat])
+    const [box, setBox] = useState([])
+
+    const todoId = useSelector(state => state.todo.id)
+    const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
 
     const chatRef = useRef(null)
     const [scrollToBottom, setScrollToBottom] = useState(true)
@@ -35,25 +37,34 @@ export function SidebarRightChat() {
         }
     }
     
-    chat?.forEach((item, index) => {
-        if (convertDateToString(item.date) !== lastDate) {
-            box.push(
-                <div key={`${index}-${item.date}`} className='chat-card-date as-center'>{convertDateToString(item.date)}</div>
-            )
-            lastDate = convertDateToString(item.date)
-            lastNickname = null
-        }
-        if (item.nickname !== lastNickname) {
-            item.nickname !== myNickname &&
-            box.push(
-                <div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>
-            )
-            lastNickname = item.nickname
-        }
-        box.push(
-            <ChatModel key={index} item={item}/>
-        )
-    })
+    useEffect(() => {
+        let lastDate = null
+        let lastNickname = null
+        const newBox = []
+    
+        boxJson?.forEach((item, index) => {
+            if (convertDateToString(item.date) !== lastDate) {
+                newBox.push(<div key={`${index}-${item.date}`} className='chat-card-date as-center'>{convertDateToString(item.date)}</div>)
+                lastDate = convertDateToString(item.date)
+                lastNickname = null
+            }
+            if (item.nickname !== lastNickname) {
+                item.nickname !== myNickname &&
+                    newBox.push(<div key={`${index}-${item.nickname}`} className='chat-card-nickname'>{item.nickname}</div>)
+                    lastNickname = item.nickname
+            }
+            newBox.push(<ChatModel key={index} item={item} />)
+        })
+        setBox(newBox)
+    }, [boxJson, chat, myNickname])
+
+    useEffect(() => {
+        const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
+        channel.on('broadcast', { event: 'new_message' }, cb => {
+            setBoxJson(prev => [...prev, cb.payload])
+        }).subscribe()
+    }, [idPageOfBook, myNickname, todoId])
+    
     return (
         <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
             <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>

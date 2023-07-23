@@ -57,12 +57,12 @@ export function TodoDetail() {
         {/* center */}
             <div className='base-center p-relative of-auto'>
                 <div className='center d-flex p-relative fd-column'>
-                    {/* {shouldUpdate &&  */}
+                    {shouldUpdate && 
                         <div className="h-[45px] bg-sky-500 flex justify-center items-center gap-x-2 text-xs text-zinc-900 rounded m-2 pointer sticky top-1" onClick={fetchData}>
                             <FontAwesomeIcon icon={faRotateRight}/>
-                            <p>Udin merubah info tugas{shouldUpdate}</p>
+                            <p>{shouldUpdate}</p>
                         </div>
-                    {/* } */}
+                    }
                     <DetailCard/>                    
                     <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/>
                     <CenterActionButton handleModalOpen={handleModalOpen}/>

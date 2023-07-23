@@ -101,6 +101,11 @@ export function AddAndEditForGlobal() {
                 noteToast(dataToSend)
                 dispatch(setTodo(res.data))
                 dispatch(resetAddAndEdit())
+                channelTodoDetail.send({
+                  type: 'broadcast',
+                  event: 'shouldUpdate',
+                  payload: `${profileNickname} menambah catatan`,
+              })
             })
             .catch(err => {
                 noteToast({color : 'var(--danger)'})
@@ -111,13 +116,11 @@ export function AddAndEditForGlobal() {
               saveToast(dataToSend.item_title)
                 if (type === 'EDIT_TODO_INSIDE') {
                     dispatch(setTodo(res.data))
-                    // channelTodoDetail.subscribe(state => console.log(state))
                     channelTodoDetail.send({
                       type: 'broadcast',
                       event: 'shouldUpdate',
                       payload: `${profileNickname} memperbarui detail tugas`,
                     })
-                    // channelTodoDetail.unsubscribe()
                 }
                 if (type === 'EDIT_TODO_OUTSIDE') {
                     dispatch(setSource(res.data))

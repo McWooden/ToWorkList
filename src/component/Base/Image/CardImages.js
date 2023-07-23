@@ -14,10 +14,10 @@ import { useSelector, useDispatch } from 'react-redux'
 
 export function CardImages() {
     const nickname = useSelector(state => state.source.profile.nickname)
+    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
     const idBook = useSelector(state => state.fetch.idBook)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todo = useSelector(state => state.todo)
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
     const dispatch = useDispatch()
     const [modalOpen, setModalOpen] = useState(false)
     const box = []
@@ -73,7 +73,7 @@ export function CardImages() {
                 channelTodoDetail.send({
                     type: 'broadcast',
                     event: 'shouldUpdate',
-                    payload: nickname,
+                    payload: `${nickname} menambahkan foto`,
                 })
             })
             .catch(err => {

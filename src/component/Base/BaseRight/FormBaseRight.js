@@ -8,6 +8,7 @@ import { sendToast } from '../../../utils/notif'
 import { setTodo } from '../../../redux/todo'
 
 export function FormBaseRight() {
+    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
     const profile = useSelector(state => state.source.profile)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
@@ -30,6 +31,11 @@ export function FormBaseRight() {
             .then((res) => {
                 sendToast('data berhasil dikirim')
                 dispatch(setTodo(res.data.data))
+                channelTodoDetail.send({
+                    type: 'broadcast',
+                    event: 'shouldUpdate',
+                    payload: res.data.new,
+                })
                 setMsg('')
             })
             .catch(err => {
