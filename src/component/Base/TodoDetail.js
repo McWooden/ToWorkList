@@ -40,7 +40,10 @@ export function TodoDetail() {
     useEffect(() => {
         fetchData()
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
-        channel.on('broadcast', { event: 'shouldUpdate' }, payload => setShouldUpdate(payload.payload)).subscribe()
+        channel.on('broadcast', { event: 'shouldUpdate' }, payload => {
+            console.log(payload);
+            setShouldUpdate(payload.payload)
+        }).subscribe()
         dispatch(setChannelTodoDetail(channel))
         return () => dispatch(setChannelTodoDetail(null))
     }, [dispatch, fetchData, idPageOfBook, todoId])

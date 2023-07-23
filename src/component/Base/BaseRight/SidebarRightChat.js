@@ -61,7 +61,8 @@ export function SidebarRightChat() {
     useEffect(() => {
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
         channel.on('broadcast', { event: 'new_message' }, cb => {
-            setBoxJson(prev => [...prev, cb.new])
+            console.log(cb);
+            // setBoxJson(prev => [...prev, cb.new])
         }).subscribe()
     }, [idPageOfBook, myNickname, todoId])
     
@@ -69,7 +70,7 @@ export function SidebarRightChat() {
         <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
             <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>
             <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom zi-1 pointer ${scrollToBottom?'':'active'} p-fixed`}/>
-                {box || ''}
+                {/* {box || ''} */}
             </div>
             <FormBaseRight/>
         </div>
