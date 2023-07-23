@@ -13,7 +13,7 @@ import { AddNoteModal } from "./Note/AddNoteModal"
 import { SidebarRightChat } from "./BaseRight/SidebarRightChat"
 import { DetailCard } from "./BaseCenter/DetailCard"
 import supabase from "../../utils/supabase"
-import { setChannelTodoDetail } from '../../redux/channelReducer'
+import { useRef } from 'react'
 
 export function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)
@@ -25,7 +25,7 @@ export function TodoDetail() {
     const myNickname = useSelector(state => state.source.profile.nicname)
     const [shouldUpdate, setShouldUpdate] = useState(false)
 
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+    const channelRef = useRef(null)
 
     function handleModalOpen() {
         setModalOpen(true)
@@ -42,13 +42,10 @@ export function TodoDetail() {
     )
     useEffect(() => {
         fetchData()
-        dispatch(setChannelTodoDetail(supabase.channel(`${idPageOfBook}/${todoId}`)))
-        return () => dispatch(setChannelTodoDetail(null))
+        channelRef.current = supabase.channel(`${idPageOfBook}/${todoId}`)
+        channelRef.current.on({ event: 'shouldUpdate' }, payload => setShouldUpdate(payload.payload)).subscribe(state =>console.log(state))
+        return () => dispatch(channelRef.current.unsubscribe())
     }, [dispatch, fetchData, idPageOfBook, todoId])
-
-    useEffect(() => {
-        channelTodoDetail.on({ event: 'shouldUpdate' }, payload => setShouldUpdate(payload.payload)).subscribe()
-    },[channelTodoDetail])
 
     useEffect(() => {
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)

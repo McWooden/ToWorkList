@@ -13,13 +13,12 @@ import { convertDateToString } from "../../utils/convertDateFormat"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
 import { setTodo } from '../../redux/todo'
+import supabase from '../../utils/supabase'
 
 export function AddAndEditForGlobal() {
     const addAndEdit = useSelector((state) => state.addAndEdit)
     const { type, item_title, desc, color, deadline, _id } = addAndEdit
     const profileNickname = useSelector(state => state.source?.profile?.nickname || null)
-
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
 
     const dispatch = useDispatch()
     const formRef = useRef()
@@ -111,13 +110,11 @@ export function AddAndEditForGlobal() {
               saveToast(dataToSend.item_title)
                 if (type === 'EDIT_TODO_INSIDE') {
                     dispatch(setTodo(res.data))
-                    // channelTodoDetail.subscribe(state => console.log(state))
-                    channelTodoDetail.send({
+                    supabase.channel(`${idPageOfBook}/${_id}`).channel.send({
                       type: 'broadcast',
                       event: 'shouldUpdate',
                       payload: `${profileNickname} memperbarui detail tugas`,
                     })
-                    // channelTodoDetail.unsubscribe()
                 }
                 if (type === 'EDIT_TODO_OUTSIDE') {
                     dispatch(setSource(res.data))

@@ -11,13 +11,13 @@ import { useRef } from 'react'
 import { toast } from 'react-toastify'
 import { Image } from './Image'
 import { useSelector, useDispatch } from 'react-redux'
+import supabase from '../../../utils/supabase'
 
 export function CardImages() {
     const nickname = useSelector(state => state.source.profile.nickname)
     const idBook = useSelector(state => state.fetch.idBook)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todo = useSelector(state => state.todo)
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
     const dispatch = useDispatch()
     const [modalOpen, setModalOpen] = useState(false)
     const box = []
@@ -70,7 +70,7 @@ export function CardImages() {
                 setImage(null)
                 setPreviewUrl('')
                 dispatch(setTodo(res.data))
-                channelTodoDetail.send({
+                supabase.channel(`${idPageOfBook}/${todo.id}`).send({
                     type: 'broadcast',
                     event: 'shouldUpdate',
                     payload: nickname,
