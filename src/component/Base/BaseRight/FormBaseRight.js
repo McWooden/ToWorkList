@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { API } from '../../../utils/variableGlobal'
-import { sendToast } from '../../../utils/notif'
+import { chatToast, sendToast } from '../../../utils/notif'
 import { setChat } from '../../../redux/todo'
 
 export function FormBaseRight() {
@@ -35,8 +35,11 @@ export function FormBaseRight() {
                     type: 'broadcast',
                     event: 'newMessage',
                     payload: res.data.chat,
-                })
-                setMsg('')
+                });
+                chatToast(`Mengirim event newMessage: ${String(res.data.chat)}`)
+                console.log("Mengirim event newMessage:", res.data.chat); // Tambahkan log ini
+                setMsg('');
+        
             })
             .catch(err => {
                 sendToast('data gagal dikirim')

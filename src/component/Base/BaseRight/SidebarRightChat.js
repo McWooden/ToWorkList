@@ -62,16 +62,17 @@ export function SidebarRightChat() {
 
 
     useEffect(() => {
-        const channel = supabase.channel(`${idPageOfBook}/${todoId}/chat`)
+        const channel = supabase.channel(`${idPageOfBook}/${todoId}/chat`);
         channel.on('broadcast', { event: 'newMessage' }, payload => {
-            setChat(payload.payload)
-        }).subscribe()
-        dispatch(setChannelTodoDetailChat(channel))
+            console.log("Menerima event newMessage:", payload.payload); // Tambahkan log ini
+            setChat(payload.payload);
+        }).subscribe();
+        dispatch(setChannelTodoDetailChat(channel));
         return () => {
-            channel.unsubscribe()
-            dispatch(setChannelTodoDetailChat(null))
-        }
-    }, [dispatch, idPageOfBook, todoId])
+            channel.unsubscribe();
+            dispatch(setChannelTodoDetailChat(null));
+        };
+    }, [dispatch, idPageOfBook, todoId]);    
     
     return (
         <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
