@@ -44,18 +44,6 @@ export function TodoDetail() {
         dispatch(setChannelTodoDetail(channel))
         return () => dispatch(setChannelTodoDetail(null))
     }, [dispatch, fetchData, idPageOfBook, todoId])
-
-    // useEffect(() => {
-    //     const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
-    //     channel.on('broadcast', {event: 'shouldUpdate'}, (cb) => {
-    //         setShouldUpdate(cb.payload)
-    //     })
-    //     channel.subscribe()
-      
-    //     return () => {
-    //       channel.unsubscribe()
-    //     }
-    //   }, [idPageOfBook, myNickname, shouldUpdate, todoId])
     
     return (
         <>
@@ -69,15 +57,12 @@ export function TodoDetail() {
         {/* center */}
             <div className='base-center p-relative of-auto'>
                 <div className='center d-flex p-relative fd-column'>
-                    {shouldUpdate && 
-                        <div className="h-[45px] bg-sky-500 flex justify-center items-center flex-col text-zinc-900 rounded m-2 gap-2 pointer sticky top-1" onClick={fetchData}>
-                            <div className="flex justify-center items-center">
-                                <FontAwesomeIcon icon={faRotateRight}/>
-                                <p>perbarui</p>
-                            </div>
-                            <p className='text-xm'>({shouldUpdate})</p>
+                    {/* {shouldUpdate &&  */}
+                        <div className="h-[45px] bg-sky-500 flex justify-center items-center gap-x-2 text-xs text-zinc-900 rounded m-2 pointer sticky top-1" onClick={fetchData}>
+                            <FontAwesomeIcon icon={faRotateRight}/>
+                            <p>Udin merubah info tugas{shouldUpdate}</p>
                         </div>
-                    }
+                    {/* } */}
                     <DetailCard/>                    
                     <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/>
                     <CenterActionButton handleModalOpen={handleModalOpen}/>

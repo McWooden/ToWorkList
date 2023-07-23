@@ -58,10 +58,21 @@
     font-family: var(--defaultFont);
     padding: 5px;
     overflow: visible;
+    position: relative;
 }
-.react-calendar abbr:has(+ div) {
+.react-calendar__tile:has(> div) abbr {
     display: none;
 }
+/* .react-calendar abbr:has(+ div) {
+    display: none;
+}
+.react-calendar__tile div {
+    position: absolute;
+    top: 4px;
+    right: 0;
+    left: 0;
+    bottom: 4px;
+} */
 .react-calendar__month-view__days__day--neighboringMonth {
     color: var(--white-3);
 }
