@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { API } from '../../../utils/variableGlobal'
 import { sendToast } from '../../../utils/notif'
-import { setTodo } from '../../../redux/todo'
+import { setChat } from '../../../redux/todo'
 
 export function FormBaseRight() {
     const channelTodoDetail = useSelector(state => state.channel.todoDetail)
@@ -30,12 +30,11 @@ export function FormBaseRight() {
             await axios.post(`${API}/chat/${idPageOfBook}/${todoId}`, dataToSend)
             .then((res) => {
                 sendToast('data berhasil dikirim')
-                dispatch(setTodo(res.data.data))
-                console.log('send', res.data.new);
+                dispatch(setChat(res.data.chat))
                 channelTodoDetail.send({
                     type: 'broadcast',
                     event: 'new_message',
-                    payload: res.data.new,
+                    payload: res.data.chat,
                 })
                 setMsg('')
             })

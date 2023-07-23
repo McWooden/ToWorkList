@@ -8,13 +8,13 @@ import { useState, useEffect } from 'react'
 import { FormBaseRight } from './FormBaseRight'
 import { ChatModel } from '../../Model/Chat'
 import supabase from '../../../utils/supabase'
+import { setChat } from '../../../redux/todo'
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
     const profile = useSelector(state => state.source.profile)
     const { hideRightBase } = useContext(HideBase)
     const myNickname = profile.nickname
-    const [boxJson, setBoxJson] = useState([...chat])
     const [box, setBox] = useState([])
 
     const todoId = useSelector(state => state.todo.id)
@@ -42,7 +42,7 @@ export function SidebarRightChat() {
         let lastNickname = null
         const newBox = []
     
-            boxJson?.forEach((item, index) => {
+            chat?.forEach((item, index) => {
                 if (convertDateToString(item.date) !== lastDate) {
                     newBox.push(<div key={`${index}-${item.date}`} className='chat-card-date as-center'>{convertDateToString(item.date)}</div>)
                     lastDate = convertDateToString(item.date)
@@ -56,12 +56,13 @@ export function SidebarRightChat() {
                 newBox.push(<ChatModel key={index} item={item} />)
             })
         setBox(newBox)
-    }, [boxJson, chat, myNickname])
+    }, [chat, myNickname])
+
 
     useEffect(() => {
         const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
         channel.on('broadcast', { event: 'new_message' }, cb => {
-            if (cb.event === 'new_message') setBoxJson(prev => [...prev, cb.new])
+            setChat(cb.payload)
         }).subscribe()
     }, [idPageOfBook, myNickname, todoId])
     
