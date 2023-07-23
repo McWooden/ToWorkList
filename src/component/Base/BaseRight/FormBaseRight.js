@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { API } from '../../../utils/variableGlobal'
-import { chatToast, sendToast } from '../../../utils/notif'
+import { sendToast } from '../../../utils/notif'
 import { setChat } from '../../../redux/todo'
 
 export function FormBaseRight() {
@@ -29,15 +29,12 @@ export function FormBaseRight() {
         try {
             await axios.post(`${API}/chat/${idPageOfBook}/${todoId}`, dataToSend)
             .then(async (res) => {
-                sendToast('data berhasil dikirim')
                 dispatch(setChat(res.data.chat))
                 channelTodoDetailChat.send({
                     type: 'broadcast',
                     event: 'newMessage',
                     payload: res.data.chat,
                 });
-                chatToast(`Mengirim event newMessage: ${String(res.data.chat)}`)
-                console.log("Mengirim event newMessage:", res.data.chat); // Tambahkan log ini
                 setMsg('');
         
             })
