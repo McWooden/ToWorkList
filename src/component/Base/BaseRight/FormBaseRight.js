@@ -33,7 +33,7 @@ export function FormBaseRight() {
                 dispatch(setTodo(res.data.data))
                 channelTodoDetail.send({
                     type: 'broadcast',
-                    event: 'shouldUpdate',
+                    event: 'new_message',
                     payload: res.data.new,
                 })
                 setMsg('')
