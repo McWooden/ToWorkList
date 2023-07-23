@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useContext, useRef } from 'react'
 import { convertDateToString } from '../../../utils/convertDateFormat'
 import { HideBase } from '../../TodoApp/TodoApp'
@@ -8,8 +8,8 @@ import { useState, useEffect } from 'react'
 import { FormBaseRight } from './FormBaseRight'
 import { ChatModel } from '../../Model/Chat'
 import supabase from '../../../utils/supabase'
-// import { setChat } from '../../../redux/todo'
-import { chatToast } from '../../../utils/notif'
+import { setChat } from '../../../redux/todo'
+import { setChannelTodoDetailChat } from '../../../redux/channelReducer'
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
@@ -20,6 +20,7 @@ export function SidebarRightChat() {
 
     const todoId = useSelector(state => state.todo.id)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const dispatch = useDispatch()
 
     const chatRef = useRef(null)
     const [scrollToBottom, setScrollToBottom] = useState(true)
@@ -61,11 +62,16 @@ export function SidebarRightChat() {
 
 
     useEffect(() => {
-        const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
+        const channel = supabase.channel(`${idPageOfBook}/${todoId}/chat`)
         channel.on('broadcast', { event: 'new_message' }, cb => {
-            chatToast(String(cb))
+            setChat(cb.payload)
         }).subscribe()
-    }, [idPageOfBook, myNickname, todoId])
+        dispatch(setChannelTodoDetailChat(channel))
+        return () => {
+            channel.unsubscribe()
+            dispatch(setChannelTodoDetailChat(null))
+        }
+    }, [dispatch, idPageOfBook, todoId])
     
     return (
         <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>

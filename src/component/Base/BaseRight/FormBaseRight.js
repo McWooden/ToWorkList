@@ -8,7 +8,7 @@ import { sendToast } from '../../../utils/notif'
 import { setChat } from '../../../redux/todo'
 
 export function FormBaseRight() {
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+    const channelTodoDetailChat = useSelector(state => state.channel.todoDetailChat)
     const profile = useSelector(state => state.source.profile)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
@@ -31,8 +31,7 @@ export function FormBaseRight() {
             .then((res) => {
                 sendToast('data berhasil dikirim')
                 dispatch(setChat(res.data.chat))
-                console.log('chat akan dipindahkan ke sidebar', res.data.chat)
-                channelTodoDetail.send({
+                channelTodoDetailChat.send({
                     type: 'broadcast',
                     event: 'new_message',
                     payload: res.data.chat,

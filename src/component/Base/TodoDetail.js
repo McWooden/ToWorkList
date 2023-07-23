@@ -44,7 +44,10 @@ export function TodoDetail() {
             if (payload.event === 'shouldUpdate') setShouldUpdate(payload.payload)
         }).subscribe()
         dispatch(setChannelTodoDetail(channel))
-        return () => dispatch(setChannelTodoDetail(null))
+        return () => {
+            channel.unsubscribe()
+            dispatch(setChannelTodoDetail(null))
+        }
     }, [dispatch, fetchData, idPageOfBook, todoId])
     
     return (
