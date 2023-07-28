@@ -11,6 +11,8 @@ import { API } from '../../../utils/variableGlobal'
 import { setAddAndEdit } from '../../../redux/addAndEditForGlobalStore';
 
 export function DetailLeftAction() {
+    const nickname = useSelector(state => state.source.profile.nickname)
+    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
     const [deleteOpen, setDeleteOpen] = useState(false)
     const item = useSelector(state => state.todo)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
@@ -21,6 +23,11 @@ export function DetailLeftAction() {
             await axios.delete(`${API}/source/addTodo/${idPageOfBook}/${item.id}`)
             .then((res) => {
                 deleteToast('berhasil dihapus')
+                channelTodoDetail.send({
+                    type: 'broadcast',
+                    event: 'shouldUpdate',
+                    payload: `${nickname} menghapus tugas ini`,
+                })
                 dispatch(clearTodo())
             })
             .catch(err => {

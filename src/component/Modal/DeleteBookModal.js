@@ -20,7 +20,7 @@ export function DeleteBookModal({open, close, data, callback}) {
     return ReactDOM.createPortal(
         <>
         <div className="overlay zi-3 p-fixed" onClick={closeModal} />
-        <div className="confirm zi-3 p-fixed fd-column light">
+        <div className="confirm zi-3 p-fixed fd-column">
             <div className="confirm-body">
                 <div className="confirm-profile d-flex">
                     <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} />
@@ -32,9 +32,9 @@ export function DeleteBookModal({open, close, data, callback}) {
                     </div>
                 </div>
                 <p className="next-text">Tindakan ini akan menghapus gambar, pesan, tugas, catatan dan apapun yang ada didalamnya</p>
-                <form className='form-modal light'>
+                <form className='form-modal'>
                     <p>ketik <span className="bold">{profile.book_title}</span> untuk melanjutkan menghapus</p>
-                    <input type="text" placeholder='masukkan judul buku' value={value} onChange={(e) => setValue(e.target.value)}/>
+                    <input type="text" placeholder='masukkan judul buku' value={value} onChange={(e) => setValue(e.target.value)} className='w-full'/>
                     <div className="confirm-button d-flex ai-center jc-flex-end">
                         <div className="confirm-btn pointer confirm-no" onClick={closeModal}>Batal</div>
                         {value === profile.book_title  ? (

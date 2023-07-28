@@ -20,6 +20,7 @@ export const sourceSlice = createSlice({
         },
         setSource: (state, action) => {
             state.source = action.payload
+            console.log('source', action.payload);
         },
         setProfile: (state, action) => {
             state.profile = getLocalAccount()

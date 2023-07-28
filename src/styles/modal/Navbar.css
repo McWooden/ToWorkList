@@ -66,20 +66,18 @@ nav {
     border-radius: 8px;
     background-color: var(--purple-1-transparent) !important;
 }
-.guild-photo-profile {
+.guild-frame.active > img {
+    border: 1px solid var(--purple-1);
+}
+.guild-frame:hover > img {
+    border: 1px solid var(--purple-1);
+}
+.guild-frame > img {
     width: 45px;
     height: 45px;
     border-radius: 50px;
     margin: .25em auto;
     transition: .1s ease;
-}
-.guild-photo-profile.active {
-    border-radius: 15px;
-    border: 1px solid var(--purple-1);
-}
-.guild-photo-profile:hover {
-    border-radius: 5px;
-    border: 1px solid var(--purple-1);
 }
 .nav-guild {
     flex: 1;
@@ -89,6 +87,7 @@ nav {
 }
 .nav-guild div:hover {
     background-color: var(--black-2);
+    border-radius: 8px;
     padding: 0 .5em;
 }
 

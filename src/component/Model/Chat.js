@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { setTodo } from '../../redux/todo'
+import { setChat } from '../../redux/todo'
 import axios from 'axios'
 import { API } from '../../utils/variableGlobal'
 import { deleteToast } from '../../utils/notif'
@@ -41,7 +41,7 @@ export function ChatModel({item, global}) {
             await axios.put(`${API}/chat/${idPageOfBook}/${todoId}/${item._id}`)
             .then((res) => {
                 deleteToast('chat berhasil dihapus')
-                dispatch(setTodo(res.data.data))
+                dispatch(setChat(res.data.chat))
             })
             .catch(err => {
                 deleteToast('chat gagal dihapus')

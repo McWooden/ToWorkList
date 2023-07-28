@@ -17,7 +17,7 @@ export function BookItem({data}) {
     }
     return (
         <div onClick={handleClick} className={`guild-frame pointer ${idBook===data._id ? 'active' : ''}`}>
-            <img src={`${url}/${data.profile.avatar_url}`} className={`guild-photo-profile d-flex jc-center ai-center ${idBook===data._id ? 'active' : ''}`} alt={data.profile.book_title} title={data.profile.book_title}/>
+            <img src={`${url}/${data.profile.avatar_url}`} className='guild-photo-profile d-flex jc-center ai-center' alt={data.profile.book_title} title={data.profile.book_title}/>
         </div>
     )
 }

@@ -6,7 +6,7 @@ import { DeleteBookModal } from '../Modal/DeleteBookModal'
 import { FileDrop } from '../Modal/FileDrop'
 import { toast } from 'react-toastify'
 import { deleteToast, leaveToast, imageToast, saveToast, alertToast, loadingToast } from '../../utils/notif'
-import { setMembers, setPageType, setGuildProfile } from '../../redux/sourceSlice'
+import { setMembers, setPageType, setGuildProfile, setBooksProfile } from '../../redux/sourceSlice'
 import { setPathPageOfBook, setPathBook } from '../../redux/fetchSlice'
 import {url, API} from '../../utils/variableGlobal'
 import axios from 'axios'
@@ -59,7 +59,7 @@ export function SettingProfile() {
         const promise = loadingToast('Mengunggah gambar')
         try {
             setIsFetching(true)
-            await axios.put(`${API}/image/${idBook}/pp`, formData)
+            await axios.put(`${API}/image/${idBook}/pp`, formData, {duplex: 'half'})
             .then(res => {
                 dispatch(setGuildProfile(res.data.profile))
                 imageToast('pp diunggah')
@@ -166,6 +166,7 @@ export function SettingProfile() {
                 dispatch(setPathBook({path: '@me', id: '@me'}))
                 dispatch(setPathPageOfBook({path: '', id: ''}))
                 dispatch(setMembers(null))
+                dispatch(setBooksProfile(null))
             })
             .catch(err => {
                 alertToast(err.response.data)

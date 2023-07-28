@@ -18,6 +18,7 @@ export function TodoPage() {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${API}/source/page/${idPageOfBook}`)
+                console.log(response.data)
                 dispatch(setSource(response.data))
             } catch (err) {
                 console.error(err)
