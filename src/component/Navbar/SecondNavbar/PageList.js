@@ -14,6 +14,7 @@ export function PageList() {
     const [pages, setPages] = useState([])
     const [loading, setLoading] = useState(true)
     const [reloading, setReloading] = useState(false)
+    const [shouldUpdate, setShouldUpdate] = useState(null)
     const dispatch = useDispatch()
 
     const fetchData = useCallback(async () => {
@@ -37,11 +38,11 @@ export function PageList() {
     }, [dispatch, fetchData])
     useEffect(() => {
         const channel = supabase.channel(idBook)
-        channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
+        channel.on('broadcast', payload => {
             if (payload.event === 'pageShouldUpdate') {
-                fetchData()
+                setShouldUpdate(payload.payload)
                 pageToast(payload.payload)
-                console.log(payload)
+                console.log('ga manuk akal', payload.payload);
             }
         })
         dispatch(setChannel(channel))
@@ -57,6 +58,12 @@ export function PageList() {
             {loading && 
                 <div className="room d-flex ai-center p-relative pointer loading" />
             }
+            {shouldUpdate && 
+                        <div className="h-[45px] bg-sky-500 flex justify-center items-center gap-x-2 text-xs text-zinc-900 rounded m-2 pointer sticky top-1" onClick={fetchData}>
+                            <FontAwesomeIcon icon={fontawesome.faRotateRight}/>
+                            <p>{shouldUpdate}</p>
+                        </div>
+                }
             {pages}
         </div>
     )
