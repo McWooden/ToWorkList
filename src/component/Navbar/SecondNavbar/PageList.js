@@ -49,7 +49,7 @@ export function PageList() {
         })
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
-    })
+    },[])
     return (
         <div className="roomList of-auto">
             {reloading &&
