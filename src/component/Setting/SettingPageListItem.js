@@ -64,6 +64,7 @@ export function SettingPageListItem({data, callback}) {
             setOpenAdd(false)
             setBtnLoading(false)
         } catch (err) {
+            console.log(err)
             setBtnLoading(false)
         }
     }

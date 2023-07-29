@@ -42,7 +42,6 @@ export function SettingRoom() {
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
             fetchData()
         })
-        return () => channel.unsubscribe()
     })
     useEffect(() => {
         fetchData()
@@ -67,6 +66,7 @@ export function SettingRoom() {
             setOpenAdd(false)
             setBtnLoading(false)
         } catch (err) {
+            console.log(err)
             setBtnLoading(false)
         }
     }
