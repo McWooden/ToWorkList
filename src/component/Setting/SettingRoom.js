@@ -42,7 +42,7 @@ export function SettingRoom() {
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
             fetchData()
         })
-    })
+    },[channel, fetchData])
     useEffect(() => {
         fetchData()
     }, [dispatch, fetchData])
@@ -56,7 +56,6 @@ export function SettingRoom() {
             const response = await axios.post(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
             pageToast(`${value} berhasil dibuat`)
             dataToElement(response.data.pages)
-            console.log(channel);
             channel.send({
                 type: 'broadcast',
                 event: 'pageShouldUpdate',
