@@ -42,11 +42,7 @@ export function PageList() {
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
             setShouldUpdate(payload.payload)
             pageToast(payload.payload)
-            console.log('ga manuk akal', payload.payload);
-        }).subscribe(cb => {
-            channel.send({type: 'broadcast', event: 'pageShouldUpdate', payload: `${nickname}`})
-            console.log(cb)
-        })
+        }).subscribe()
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
     },[dispatch, idBook, nickname])

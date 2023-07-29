@@ -82,6 +82,7 @@ export function SettingPageListItem({data, callback}) {
                 setBtnLoading(false)
                 channel.send({
                     type: 'broadcast',
+                    event: 'pageShouldUpdate',
                     payload: `${nickname} menghapus halaman ${title}`,
                 })
             })
