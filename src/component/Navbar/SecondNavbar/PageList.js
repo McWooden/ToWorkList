@@ -41,7 +41,6 @@ export function PageList() {
             fetchData()
             pageToast(payload.payload)
         })
-        channel.subscribe()
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
     })
