@@ -23,11 +23,9 @@ export function SettingRoom() {
             ))
         )
     }, [])
-    const [shouldUpdate, setShouldUpdate] = useState(null)
     const channel = useSelector(state => state.channel.book)
     const fetchData = useCallback(async () => {
         setReloading(false)
-        setShouldUpdate(null)
         setLoading(true)
         try {
             const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
@@ -40,11 +38,6 @@ export function SettingRoom() {
     function handleClose() {
         setOpenAdd(false)
     }
-    useEffect(() => {
-        channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
-            setShouldUpdate(payload.payload)
-        })
-    },[channel, fetchData])
     useEffect(() => {
         fetchData()
     }, [dispatch, fetchData])
@@ -121,12 +114,6 @@ export function SettingRoom() {
                 </div>
             }
             {loading && <div className="room d-flex ai-center p-relative pointer loading" />}
-            {shouldUpdate && 
-                <div className="h-[45px] bg-sky-500 flex justify-center items-center gap-x-2 text-xs text-zinc-900 rounded m-2 pointer sticky top-1" onClick={fetchData}>
-                    <FontAwesomeIcon icon={fontawesome.faRotateRight}/>
-                    <p>{shouldUpdate}</p>
-                </div>
-            }
             {pages}
         </div>
         <div className="setting_action d-flex">

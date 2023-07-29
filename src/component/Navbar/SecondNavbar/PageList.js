@@ -40,7 +40,7 @@ export function PageList() {
     }, [dispatch, fetchData])
     useEffect(() => {
         const channel = supabase.channel(idBook)
-        channel.on('broadcast', payload => {
+        channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
             setShouldUpdate(payload.payload)
             console.log(payload.event);
             pageToast(payload.payload)
