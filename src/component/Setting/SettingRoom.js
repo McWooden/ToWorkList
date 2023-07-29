@@ -15,6 +15,7 @@ export function SettingRoom() {
     const [loading, setLoading] = useState(true)
     const [reloading, setReloading] = useState(false)
     const dispatch = useDispatch()
+    const nickname = useSelector(state => state.source.profile.nickname)
     const dataToElement = useCallback((data) => {
         setPages(
             data.map((item, index) => (
@@ -56,6 +57,11 @@ export function SettingRoom() {
             const response = await axios.post(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
             pageToast(`${value} berhasil dibuat`)
             dataToElement(response.data.pages)
+            channel.send({
+                type: 'broadcast',
+                event: 'pageShouldUpdate',
+                payload: `${nickname} menambah halaman ${value}`,
+            })
             setValue('')
             setOpenAdd(false)
             setBtnLoading(false)

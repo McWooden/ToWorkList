@@ -54,7 +54,7 @@ export function SettingPageListItem({data, callback}) {
         e.preventDefault()
         try {
             const response = await axios.put(`${API}/book/${idBook}/page/${id}`, {page_title: value})
-            pageToast(`${value} perubahan berhasil disimpan`)
+            pageToast(`mengganti nama halaman ${title} menjadi ${value}`)
             channel.send({
                 type: 'broadcast',
                 event: 'pageShouldUpdate',

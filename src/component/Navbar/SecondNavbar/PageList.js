@@ -38,8 +38,11 @@ export function PageList() {
     useEffect(() => {
         const channel = supabase.channel(idBook)
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
-            fetchData()
-            pageToast(payload.payload)
+            if (payload.event === 'pageShouldUpdate') {
+                fetchData()
+                pageToast(payload.payload)
+                console.log(payload)
+            }
         })
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
