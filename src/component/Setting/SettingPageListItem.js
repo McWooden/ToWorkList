@@ -22,6 +22,8 @@ export function SettingPageListItem({data, callback}) {
     const id = data._id
     const [value, setValue] = useState(title)
     const dispatch = useDispatch()
+    const channel = useSelector(state => state.channel.book)
+    const nickname = useSelector(state => state.source.profile.nickname)
     function handleClick() {
         dispatch(setSource(null))
         dispatch(setPageType(icon))
@@ -53,6 +55,11 @@ export function SettingPageListItem({data, callback}) {
         try {
             const response = await axios.put(`${API}/book/${idBook}/page/${id}`, {page_title: value})
             pageToast(`${value} perubahan berhasil disimpan`)
+            channel.send({
+                type: 'broadcast',
+                event: 'pageShouldUpdate',
+                payload: `${nickname} mengganti nama halaman ${title} menjadi ${value}`,
+            })
             callback(response.data.pages)
             setOpenAdd(false)
             setBtnLoading(false)
@@ -72,6 +79,11 @@ export function SettingPageListItem({data, callback}) {
                 callback(res.data.pages)
                 setOpenAdd(false)
                 setBtnLoading(false)
+                channel.send({
+                    type: 'broadcast',
+                    event: 'pageShouldUpdate',
+                    payload: `${nickname} menghapus halaman ${title}`,
+                })
             })
             .catch(err => {
                 deleteToast('gagal terhapus')

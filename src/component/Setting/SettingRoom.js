@@ -22,6 +22,7 @@ export function SettingRoom() {
             ))
         )
     }, [])
+    const channel = useSelector(state => state.channel.book)
     const fetchData = useCallback(async () => {
         setReloading(false)
         setLoading(true)
@@ -36,6 +37,13 @@ export function SettingRoom() {
     function handleClose() {
         setOpenAdd(false)
     }
+    useEffect(() => {
+        channel.subscribe()
+        channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
+            fetchData()
+        })
+        return () => channel.unsubscribe()
+    })
     useEffect(() => {
         fetchData()
     }, [dispatch, fetchData])
@@ -95,34 +103,17 @@ export function SettingRoom() {
         </div>
         </ModalSecond>
     )
-    if (reloading) {
-        return (
-            <>
-            {headerElement}
-            <div className="nav-guild of-auto d-flex fd-column">
-                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
-                    <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
-                </div>
-            </div>
-            {modalElement}
-            </>
-        )
-    }
-    if (loading) {
-        return (
-            <>
-            {headerElement}
-            <div className="roomList of-auto">
-                <div className="room d-flex ai-center p-relative pointer loading" />
-            </div>
-            {modalElement}
-            </>
-        )
-    }
+
     return(
         <>
         {headerElement}
         <div className='roomList of-auto'>
+            {reloading &&
+                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
+                    <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
+                </div>
+            }
+            {loading && <div className="room d-flex ai-center p-relative pointer loading" />}
             {pages}
         </div>
         <div className="setting_action d-flex">

@@ -37,6 +37,7 @@ import Summary from '../Page/summary';
 export function Base() {
     const pageType = useSelector(state => state.source.pageType)
     const todoId = useSelector(state => state.todo.id)
+    
 
     return (
         <div className='base of-hidden d-flex'>

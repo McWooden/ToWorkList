@@ -4,10 +4,14 @@ export const channelStore = createSlice({
     name: 'channel',
     initialState: {
         page: null,
+        book: null,
         todoDetail: null,
         todoDetailChat: null,
     },
     reducers: {
+        setChannel: (state, action) => {
+            state.book = action.payload
+        },
         setChannelPage: (state, action) => {
             state.page = action.payload
         },
@@ -20,6 +24,6 @@ export const channelStore = createSlice({
     },
 })
 
-export const { setChannelPage, setChannelTodoDetail, setChannelTodoDetailChat } = channelStore.actions
+export const { setChannelPage, setChannelTodoDetail, setChannelTodoDetailChat, setChannel } = channelStore.actions
 
 export default channelStore.reducer

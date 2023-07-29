@@ -5,6 +5,9 @@ import axios from "axios"
 import { API } from "../../../utils/variableGlobal"
 import { useState, useCallback, useEffect } from 'react'
 import { PageListItem } from './PageListItem'
+import supabase from '../../../utils/supabase'
+import { pageToast } from '../../../utils/notif'
+import { setChannel } from '../../../redux/channelReducer'
 
 export function PageList() {
     const idBook = useSelector((state) => state.fetch.idBook)
@@ -12,7 +15,7 @@ export function PageList() {
     const [loading, setLoading] = useState(true)
     const [reloading, setReloading] = useState(false)
     const dispatch = useDispatch()
-    
+
     const fetchData = useCallback(async () => {
         setReloading(false)
         setLoading(true)
@@ -32,25 +35,26 @@ export function PageList() {
     useEffect(() => {
         fetchData()
     }, [dispatch, fetchData])
-
-    if (reloading) {
-        return (
-            <div className="nav-guild of-auto d-flex fd-column">
+    useEffect(() => {
+        const channel = supabase.channel(idBook)
+        channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
+            fetchData()
+            pageToast(payload.payload)
+        })
+        channel.subscribe()
+        dispatch(setChannel(channel))
+        return () => channel.unsubscribe()
+    })
+    return (
+        <div className="roomList of-auto">
+            {reloading &&
                 <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
                 </div>
-            </div>
-        )
-    }
-    if (loading) {
-        return (
-            <div className="roomList of-auto">
+            }
+            {loading && 
                 <div className="room d-flex ai-center p-relative pointer loading" />
-            </div>
-        )
-    }
-    return (
-        <div className="roomList of-auto">
+            }
             {pages}
         </div>
     )
