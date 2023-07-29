@@ -39,12 +39,11 @@ export function PageList() {
     useEffect(() => {
         const channel = supabase.channel(idBook)
         channel.on('broadcast', payload => {
-            if (payload.event === 'pageShouldUpdate') {
                 setShouldUpdate(payload.payload)
                 pageToast(payload.payload)
                 console.log('ga manuk akal', payload.payload);
-            }
         })
+        channel.subscribe()
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
     })
