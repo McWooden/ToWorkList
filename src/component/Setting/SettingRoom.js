@@ -38,7 +38,6 @@ export function SettingRoom() {
         setOpenAdd(false)
     }
     useEffect(() => {
-        channel.subscribe()
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
             fetchData()
         })
