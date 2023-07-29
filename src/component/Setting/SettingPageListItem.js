@@ -57,6 +57,7 @@ export function SettingPageListItem({data, callback}) {
             pageToast(`mengganti nama halaman ${title} menjadi ${value}`)
             channel.send({
                 type: 'broadcast',
+                event: 'pageShouldUpdate',
                 payload: `${nickname} mengganti nama halaman ${title} menjadi ${value}`,
             })
             callback(response.data.pages)

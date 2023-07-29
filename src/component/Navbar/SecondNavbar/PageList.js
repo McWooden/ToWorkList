@@ -16,6 +16,7 @@ export function PageList() {
     const [reloading, setReloading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(null)
     const dispatch = useDispatch()
+    const nickname = useSelector(state => state.source.profile.nickname)
 
     const fetchData = useCallback(async () => {
         setReloading(false)
@@ -38,12 +39,14 @@ export function PageList() {
     }, [dispatch, fetchData])
     useEffect(() => {
         const channel = supabase.channel(idBook)
-        channel.on('broadcast', payload => {
-                setShouldUpdate(payload.payload)
-                pageToast(payload.payload)
-                console.log('ga manuk akal', payload.payload);
+        channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
+            setShouldUpdate(payload.payload)
+            pageToast(payload.payload)
+            console.log('ga manuk akal', payload.payload);
+        }).subscribe(cb => {
+            channel.send({type: 'broadcast', event: 'pageShouldUpdate', payload: `${nickname}`})
+            console.log(cb)
         })
-        channel.subscribe()
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
     })

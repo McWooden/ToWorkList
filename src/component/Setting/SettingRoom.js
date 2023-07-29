@@ -59,6 +59,7 @@ export function SettingRoom() {
             dataToElement(response.data.pages)
             channel.send({
                 type: 'broadcast',
+                event: 'pageShouldUpdate',
                 payload: `${nickname} menambah halaman ${value}`,
             })
             setValue('')
