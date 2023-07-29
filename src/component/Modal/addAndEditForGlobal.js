@@ -20,6 +20,7 @@ export function AddAndEditForGlobal() {
     const profileNickname = useSelector(state => state.source?.profile?.nickname || null)
 
     const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+    const channelPage = useSelector(state => state.channel.page)
 
     const dispatch = useDispatch()
     const formRef = useRef()
@@ -82,12 +83,17 @@ export function AddAndEditForGlobal() {
         }
       try {
           if (type === 'ADD_TODO') {
-          const promise = loadingToast('Membuat daftar baru')
+          const promise = loadingToast('Membuat tugas baru')
           await axios.post(`${API}/source/addTodo/${idPageOfBook}`, dataToSend)
             .then((res) => {
               todoToast({item_title: dataToSend.item_title, color: dataToSend.color})
               dispatch(setSource(res.data))
               dispatch(resetAddAndEdit())
+              channelPage.send({
+                type: 'broadcast',
+                event: 'shouldUpdate',
+                payload: `${profileNickname} membuat tugas baru (${dataToSend.item_title})`
+              })
             })
             .catch((err) => {
               todoToast('data gagal dikirim')
@@ -119,11 +125,16 @@ export function AddAndEditForGlobal() {
                     channelTodoDetail.send({
                       type: 'broadcast',
                       event: 'shouldUpdate',
-                      payload: `${profileNickname} memperbarui detail tugas`,
+                      payload: `${profileNickname} memperbarui detail`,
                     })
                 }
                 if (type === 'EDIT_TODO_OUTSIDE') {
                     dispatch(setSource(res.data))
+                    channelPage.send({
+                      type: 'broadcast',
+                      event: 'shouldUpdate',
+                      payload: `${profileNickname} mengedit ${dataToSend.item_title}`
+                    })
                 }
               dispatch(resetAddAndEdit())
             })
