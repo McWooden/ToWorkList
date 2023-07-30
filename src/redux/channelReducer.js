@@ -11,6 +11,9 @@ export const channelStore = createSlice({
         setChannel: (state, action) => {
             state.book = action.payload
         },
+        setChannelPage: (state, action) => {
+            state.page = action.payload
+        },
         setChannelTodoDetail: (state, action) => {
             state.todoDetail = action.payload
         },
