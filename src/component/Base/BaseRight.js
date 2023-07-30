@@ -1,9 +1,10 @@
-import { useState, useContext, useEffect } from "react"
+import { useState, useContext, useEffect, useCallback } from "react"
 import { HideBase } from '../TodoApp/TodoApp'
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
 import { API } from "../../utils/variableGlobal"
 import { setMembers } from "../../redux/sourceSlice"
+import { memberToast } from "../../utils/notif"
 
 export function BaseRight() {
     const [isLoading, setIsLoading] = useState(false)
@@ -12,6 +13,7 @@ export function BaseRight() {
     const members = useSelector(state => state.source.members)
     const dispatch = useDispatch()
     const [box, setBox] = useState([])
+    const channel = useSelector(state => state.channel.book)
     function handleEmpety() {
         setIsLoading(false)
         setBox('Empety')
@@ -31,15 +33,15 @@ export function BaseRight() {
         })
         setBox(sessionBox)
     }
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
-                dispatch(setMembers(data.users))
-            } catch (err) {
-                handleEmpety()
-            }
+    const fetchData = useCallback(async () => {
+        try {
+            const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
+            dispatch(setMembers(data.users))
+        } catch (err) {
+            handleEmpety()
         }
+    } ,[dispatch, idBook])
+    useEffect(() => {
         if (!members) {
             if (idBook === '@me') return handleEmpety()
             setIsLoading(true)
@@ -58,17 +60,17 @@ export function BaseRight() {
             fetchData()
         }, 60000)
         return () => clearInterval(interval)
-    }, [idBook, members, dispatch])
-    if (isLoading) return (
-        <div className="base-right of-auto d-flex f-column">
-            <div className="sidebar-right d-flex fd-column">
-                <div className="loading sidebar_right_loading d-grid pi-center"/>
-            </div>
-        </div>
-    )
+    }, [idBook, members, dispatch, fetchData])
+    useEffect(() => {
+        channel.on('broadcast', {event: 'memberShouldUpdate'}, payload => {
+            fetchData()
+            memberToast(payload.payload)
+        })
+    }, [channel, fetchData])
     return (
         <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
             <div className="sidebar-right d-flex fd-column of-auto">
+                {isLoading && <div className="loading sidebar_right_loading d-grid pi-center"/>}
                 {box}
             </div>
         </div>

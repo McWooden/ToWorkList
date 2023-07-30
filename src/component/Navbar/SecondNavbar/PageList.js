@@ -19,7 +19,6 @@ export function PageList() {
 
     const fetchData = useCallback(async () => {
         setReloading(false)
-        setLoading(true)
         try {
             const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
             setPages(
@@ -30,11 +29,12 @@ export function PageList() {
         } catch (error) {
             setReloading(true)
         }
-        setLoading(false)
     }, [idBook])
 
     useEffect(() => {
+        setLoading(true)
         fetchData()
+        setLoading(false)
     }, [dispatch, fetchData])
     useEffect(() => {
         const channel = supabase.channel(idBook)

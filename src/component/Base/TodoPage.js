@@ -14,7 +14,6 @@ export function TodoPage() {
     const dispatch = useDispatch()
     const { hideLeftBase } = useContext(HideBase)
     useEffect(() => {
-        let intervalId = null
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${API}/source/page/${idPageOfBook}`)
@@ -24,8 +23,6 @@ export function TodoPage() {
             }
         }
         fetchData()
-        intervalId = setInterval(fetchData, 30000)
-        return () => clearInterval(intervalId)
     }, [idPageOfBook, dispatch])
 
     if (!source) return (

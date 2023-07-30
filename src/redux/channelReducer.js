@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 export const channelStore = createSlice({
     name: 'channel',
     initialState: {
-        page: null,
         book: null,
         todoDetail: null,
         todoDetailChat: null,
@@ -11,9 +10,6 @@ export const channelStore = createSlice({
     reducers: {
         setChannel: (state, action) => {
             state.book = action.payload
-        },
-        setChannelPage: (state, action) => {
-            state.page = action.payload
         },
         setChannelTodoDetail: (state, action) => {
             state.todoDetail = action.payload

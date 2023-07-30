@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../redux/sourceSlice'
 import {url, API} from '../utils/variableGlobal'
 import { convertDateToString } from '../utils/convertDateFormat'
+import supabase from '../utils/supabase'
 export default function Join(){
     const [data, setData] = useState(null)
     const [isReload, setIsReload] = useState(false)
@@ -18,6 +19,15 @@ export default function Join(){
     const myAccount = useSelector(state => state.source.profile)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const channelRef = useRef(null)
+    useEffect(() => {
+        const channel = supabase.channel(searchParams.get('invite'))
+        channel.subscribe(cb => console.log(cb))
+        channelRef.current = channel
+        return () => {
+            channel.unsubscribe()
+        }
+    },[searchParams])
     
     const fetchData = useCallback(async () => {
         setIsReload(false)
@@ -57,6 +67,11 @@ export default function Join(){
         const promise = loadingToast('Bergabung...')
         try {
             const response = await axios.post(`${API}/book/join/${searchParams.get('invite')}`, data)
+            channelRef.current.send({
+                type: 'broadcast',
+                event: 'memberShouldUpdate',
+                payload: `${myAccount.nickname} bergabung`
+            })
             dispatch(setPageType('welcome'))
             dispatch(setFetch({path: response.data.profile.book_title, id: response.data._id}))
             dispatch(setGuildProfile(response.data.profile))
@@ -69,6 +84,7 @@ export default function Join(){
             alertToast('Gagal bergabung')
         }
     }
+
     if (!data) {
         return (
             <div className="modal_container d-flex fc-column ai-center jc-center">
