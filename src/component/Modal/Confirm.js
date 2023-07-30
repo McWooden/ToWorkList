@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faTextSlash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faTextSlash, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 export function Confirm({ metode, open, close, target, color, callback, timeout = 0, deleteText = 'akan terhapus secara permanen' }) {
     const [remainingTime, setRemainingTime] = useState(timeout)
@@ -49,6 +49,16 @@ export function Confirm({ metode, open, close, target, color, callback, timeout 
             </div>
         )
     }
+    if (metode === 'leave') {
+        icon = <FontAwesomeIcon icon={faRightFromBracket} />
+        msg = <p className="msg">Yakin keluar buku?</p>
+        context = (
+            <div className="confirm-context">
+                <h3>Keluar</h3>
+                {msg}
+            </div>
+        )
+    }
     function acceptCallback() {
         close()
         callback()
@@ -69,7 +79,7 @@ export function Confirm({ metode, open, close, target, color, callback, timeout 
                             <div className="confirm-btn pointer confirm-yes transparent">Yakin ({remainingTime})</div>
                         ) : (
                             <div className="confirm-btn pointer confirm-yes" onClick={acceptCallback}>
-                                Yakin
+                                Ya
                             </div>
                         )}
                     </div>

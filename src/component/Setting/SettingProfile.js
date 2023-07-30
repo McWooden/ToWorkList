@@ -19,6 +19,7 @@ export function SettingProfile() {
     const myAccount = useSelector(state => state.source.profile)
     const idBook = useSelector(state => state.fetch.idBook)
     const profile = useSelector(state => state.source.guildProfile)
+    const userId = useSelector(state => state.source.profile._id)
     const dispatch = useDispatch()
     const [dropDown, setDropDown] = useState(false)
     const [openUnggah, setOpenUnggah] = useState(false)
@@ -27,6 +28,7 @@ export function SettingProfile() {
     let btnRef = useRef()
     const [full, setFull] = useState(false)
     const [deleteOpen, setDeleteOpen] = useState(false)
+    const [leaveOpen, setLeaveOpen] = useState(false)
     const [deleteGuildOpen, setDeleteGuildOpen] = useState(false)
     // file drop
     const fileInput = useRef(null)
@@ -149,6 +151,21 @@ export function SettingProfile() {
 
         }
     }
+    async function leaveBook() {
+        try {
+            await axios.put(`${API}/book/leave/${idBook}?userId=${userId}`).then(res => {
+                if (res.msg !== 'ok') return
+                leaveToast(`berhasil keluar dari ${profile.book_title}`)
+                dispatch(setPageType('welcome'))
+                dispatch(setPathBook({path: '@me', id: '@me'}))
+                dispatch(setPathPageOfBook({path: '', id: ''}))
+                dispatch(setMembers(null))
+                dispatch(setBooksProfile(null))
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
     async function deleteBook() {
         try {
             await axios.delete(`${API}/book/${idBook}`, {
@@ -171,9 +188,7 @@ export function SettingProfile() {
             .catch(err => {
                 alertToast(err.response.data)
             })
-        } catch(err) {
-
-        }
+        } catch(err) {}
     }
     const [saveLoading, setSaveLoading] = useState(false)
     const [saveLoadingDesc, setSaveLoadingDesc] = useState(false)
@@ -255,10 +270,11 @@ export function SettingProfile() {
         </div>
         <div className="setting_action d-flex">
             <span className="setting_btn d-flex ai-center pointer delete_btn"  onClick={() => setDeleteGuildOpen(true)}>hapus guild</span>
-            <span className="setting_btn d-flex ai-center pointer keluar_btn" onClick={() => leaveToast(`bye everyone in the room ${profile.book_title}`)}>Keluar guild</span>
+            <span className="setting_btn d-flex ai-center pointer keluar_btn" onClick={() => setLeaveOpen(true)}>Keluar guild</span>
         </div>
         <DeleteBookModal open={deleteGuildOpen} close={() => setDeleteGuildOpen(false)} data={profile} callback={deleteBook}/>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={'PP Buku'} metode='delete' color='var(--purple-1)' callback={deletePp} deleteText={'pp nya nanti ilang, diganti gambar udin'}/>
+        <Confirm open={leaveOpen} close={() => setLeaveOpen(false)} target={'PP Buku'} metode='leave' color='var(--purple-1)' callback={leaveBook} deleteText={'Keluar dari buku'}/>
         <FileDrop open={openUnggah} close={() => setOpenUnggah(false)}>
                 <form ref={formRef} className='file-drop d-flex of-scroll jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
                     <div className="img-view d-flex ai-center jc-center" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
