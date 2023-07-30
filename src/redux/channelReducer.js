@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const channelStore = createSlice({
     name: 'channel',
     initialState: {
+        page: null,
         book: null,
         todoDetail: null,
         todoDetailChat: null,
