@@ -14,13 +14,11 @@ export function PageList() {
     const [pages, setPages] = useState([])
     const [loading, setLoading] = useState(true)
     const [reloading, setReloading] = useState(false)
-    const [shouldUpdate, setShouldUpdate] = useState(null)
     const dispatch = useDispatch()
     const nickname = useSelector(state => state.source.profile.nickname)
 
     const fetchData = useCallback(async () => {
         setReloading(false)
-        setShouldUpdate(null)
         setLoading(true)
         try {
             const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
@@ -41,13 +39,12 @@ export function PageList() {
     useEffect(() => {
         const channel = supabase.channel(idBook)
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
-            setShouldUpdate(payload.payload)
-            console.log(payload.event);
+            fetchData()
             pageToast(payload.payload)
         }).subscribe()
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
-    },[dispatch, idBook, nickname])
+    },[dispatch, fetchData, idBook, nickname])
     return (
         <div className="roomList of-auto">
             {reloading &&
@@ -57,12 +54,6 @@ export function PageList() {
             }
             {loading && 
                 <div className="room d-flex ai-center p-relative pointer loading" />
-            }
-            {shouldUpdate && 
-                <div className="h-[45px] bg-sky-500 flex justify-center items-center gap-x-2 text-xs text-zinc-900 rounded m-2 pointer sticky top-1" onClick={fetchData}>
-                    <FontAwesomeIcon icon={fontawesome.faRotateRight}/>
-                    <p>{shouldUpdate}</p>
-                </div>
             }
             {pages}
         </div>
