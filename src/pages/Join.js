@@ -22,7 +22,6 @@ export default function Join(){
     const channelRef = useRef(null)
     useEffect(() => {
         const channel = supabase.channel(searchParams.get('invite'))
-        channel.subscribe(cb => console.log(cb))
         channelRef.current = channel
         return () => {
             channel.unsubscribe()

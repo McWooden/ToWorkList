@@ -155,7 +155,8 @@ export function SettingProfile() {
     async function leaveBook() {
         try {
             await axios.put(`${API}/book/leave/${idBook}?userId=${userId}`).then(res => {
-                if (res.msg !== 'ok') return
+                console.log(res);
+                if (res.data.msg !== 'ok') return
                 leaveToast(`berhasil keluar dari ${profile.book_title}`)
                 channel.send({
                     type: 'broadcast',
