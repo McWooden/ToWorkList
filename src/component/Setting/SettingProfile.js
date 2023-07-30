@@ -151,11 +151,17 @@ export function SettingProfile() {
 
         }
     }
+    const channel = useSelector(state => state.channel.book)
     async function leaveBook() {
         try {
             await axios.put(`${API}/book/leave/${idBook}?userId=${userId}`).then(res => {
                 if (res.msg !== 'ok') return
                 leaveToast(`berhasil keluar dari ${profile.book_title}`)
+                channel.send({
+                    type: 'broadcast',
+                    event: 'memberShouldUpdate',
+                    payload: `${myAccount.nickname} keluar`
+                })
                 dispatch(setPageType('welcome'))
                 dispatch(setPathBook({path: '@me', id: '@me'}))
                 dispatch(setPathPageOfBook({path: '', id: ''}))
