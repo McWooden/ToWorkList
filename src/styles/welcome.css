@@ -2,23 +2,21 @@
 .welcome {
     flex: 3;
     width: auto;
-    background-color: var(--primary);
 }
 .welcome_page {
     flex: 1;
     width: 100%;
     max-width: 512px;
     padding: 2em 1.5em;
+    color: whitesmoke;
 } 
 .welcome_name {
-    color: var(--text-2);
     font-weight: 500;
     font-size: calc(1vw + 3em);
     line-height: 1;
     font-family: 'Comfortaa', cursive;
 }
 .welcome_tagline {
-    color: var(--text-1);
     animation: typing 2s steps(30, end);
     font-size: calc(1vw + .5em);
 } 
@@ -37,11 +35,8 @@
 .tapToOpenNavbar {
     flex: 1 1 auto;
     font-size: xx-small;
-    color: var(--text-1);
-    background-color: var(--secondary);
     padding: 2em;
     width: 100%;
-    margin: 1em;
+    margin-top: 5em;
     border-radius: 15px;
-    filter: var(--filter-shadow);
 } 

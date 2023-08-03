@@ -12,11 +12,11 @@ export function PageProggress() {
     }
     return (
         <div className="progress d-flex fd-column">
-            <div className="progress-bar of-hidden">
-                <div className="progress-value undone" style={{width: widthValue(finished)}}/>
+            <div className="progress-bar of-hidden shadow-lg bg-zinc-900">
+                <div className="progress-value bg-ok" style={{width: widthValue(finished)}}/>
             </div>
-            <div className="progress-bar of-hidden">
-                <div className="progress-value done" style={{width: widthValue(unfinished)}}/>
+            <div className="progress-bar of-hidden shadow-lg bg-zinc-900">
+                <div className="progress-value bg-no" style={{width: widthValue(unfinished)}}/>
             </div>
         </div>
     )

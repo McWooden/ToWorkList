@@ -67,7 +67,7 @@ export function SettingRoom() {
     const headerElement = (
         <div className="setting_header">
             <h3>Halaman</h3>
-            <p>semua halaman dan jumlah tugas</p>
+            <p>semua halaman</p>
         </div>
     )
     const modalElement = (

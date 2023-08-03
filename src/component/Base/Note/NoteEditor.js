@@ -69,7 +69,7 @@ export function NoteEditor() {
     return (
         <>
         <Modal open={true} close={confirmToClose} costum={true}>
-            <form className='note p-fixed note-editor zi-3' onSubmit={handleSubmit}>
+            <form className='note p-fixed note-editor zi-3 bg-zinc-900 text-whitesmoke' onSubmit={handleSubmit}>
                 <div className='note-head d-flex ai-center jc-space-between'>
                     <FontAwesomeIcon 
                     icon={faNoteSticky} 

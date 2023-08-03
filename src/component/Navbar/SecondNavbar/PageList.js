@@ -46,7 +46,7 @@ export function PageList() {
         return () => channel.unsubscribe()
     },[dispatch, fetchData, idBook, nickname])
     return (
-        <div className="roomList of-auto">
+        <div className="roomList of-auto px-1">
             {reloading &&
                 <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />

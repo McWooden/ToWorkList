@@ -54,8 +54,8 @@ export function FormBaseRight() {
     }
     return (
         <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
-            <div className="textarea-container d-flex ai-center of-auto">
-                <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{height: '15px'}} className='d-flex ai-center of-auto'/>
+            <div className="textarea-container d-flex ai-center of-auto bg-primary shadow-lg">
+                <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{height: '15px'}} className='d-flex bg-inherit ai-center of-auto text-white placeholder:text-zinc-400'/>
             </div>
             {
                 msg ? 

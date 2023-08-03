@@ -52,7 +52,7 @@ export function ChatModel({item, global}) {
     }
     return (
         <div className={`${itsMe&&'fd-row-reverse as-flex-end'} chat-card d-flex p-relative ${dropDown?'active':'inactive'}`} ref={cardRef}>
-            <div className={`${itsMe&&'my fd-row-reverse as-flex-end'} chat-card-message ${disable&&'disable'}`}>{item.msg}</div>
+            <div className={`${itsMe&&'my fd-row-reverse as-flex-end'} chat-card-message ${disable&&'disable'} shadow`}>{item.msg}</div>
             <div className={`${itsMe&&'my fd-row-reverse as-flex-end'} chat-card-time pointer as-flex-end`} onClick={handleDropDown}>{time}</div>
             <div className={`chat-dropdown p-absolute jc-center d-flex ${itsMe&&'fd-row-reverse as-flex-end'} ${dropDown?'active':'inactive'}`}>
                 <ul>

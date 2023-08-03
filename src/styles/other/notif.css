@@ -13,7 +13,6 @@
     margin-bottom: 5px;
 }
 .Toastify__toast-theme--colored {
-    background-color: var(--black-2) !important;
     padding: 0 !important;
     margin-bottom: 0;
 }
@@ -22,29 +21,23 @@
     padding: 0 !important;
 }
 .Toastify__progress-bar {
-    background-color: transparent;
 }
 /* my toast */
 .myToast {
     display: flex;
     align-items: center;
-    color: var(--white-1);
 }
 .myToast .icon {
-    background-color: var(--black-3);
     padding: 5px;
 }
 .myToast p {
     padding: 5px;
 }
 .myToast-edit .icon {
-    color: var(--light-blue);
 }
 .myToast-delete .icon {
-    color: var(--danger);
 }
 .myToast-info .icon {
-    color: var(--light-blue);
 }
 .myToast-greenyellow {
     color: greenyellow;

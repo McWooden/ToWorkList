@@ -208,7 +208,7 @@ export function SettingProfile() {
                 <img className={`setting_banner pointer ${full?'full zi-3 p-fixed':''}`} src={`${url}/${profile.avatar_url}`} alt={profile.book_title} onClick={() => setFull(!full)}/>
             </div>
             <div className="setting_full_profile_view_body p-relative">
-                <div className="setting_full_profile_view_float d-fle ai-center p-absolute">
+                <div className="setting_full_profile_view_float d-fle ai-center p-absolute bg-zinc-900">
                     <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='setting_full_pp_guild pointer' onClick={() => setDropDown(!dropDown)} ref={btnRef}/>
                     <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                         <ul className='reverse d-flex fd-column of-hidden p-absolute pointer'>
@@ -227,15 +227,15 @@ export function SettingProfile() {
                 <div className='guild_editor d-flex ai-center'>
                 {editJudul?
                         <>
-                        <form className="form-modal fd-row" onSubmit={handleSubmitJudul}>
-                            <input type="text" placeholder={profile.book_title} value={valueJudul}  onChange={(e) => setValueJudul(e.target.value)}/>
-                            <div className="sb_action_btn d-grid pi-center d-flex">
-                                <FontAwesomeIcon icon={faXmark} onClick={() => setEditJudul(false)} className='action_btn pointer'/>
+                        <form className="form-modal flex flex-row" onSubmit={handleSubmitJudul}>
+                            <input type="text" placeholder={profile.book_title} value={valueJudul}  onChange={(e) => setValueJudul(e.target.value)} className='border-0'/>
+                            <div className="sb_action_btn pi-center d-flex flex-row">
+                                <FontAwesomeIcon icon={faXmark} onClick={() => setEditJudul(false)} className='action_btn pointer bg-no rounded'/>
                                 {saveLoading?
-                                    <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn pointer spinner'/>
+                                    <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn pointer rounded spinner'/>
                                 :
-                                    <button type='submit'>
-                                        <FontAwesomeIcon icon={faFloppyDisk} className='action_btn pointer pointer'/>
+                                    <button type='submit' className='h-[28px] pointer'>
+                                        <FontAwesomeIcon icon={faFloppyDisk} className='action_btn'/>
                                     </button>
                                 }
                             </div>
@@ -287,7 +287,7 @@ export function SettingProfile() {
                     { previewUrl ? 
                         <img src={previewUrl} alt={image.name} /> 
                     :
-                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
+                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer border-8 border-zinc-600 border-dashed">
                             <FontAwesomeIcon icon={faImage} className='drop-icon'/>
                             <p className='drop-text p-absolute'>click atau drop disini</p>
                             <input 

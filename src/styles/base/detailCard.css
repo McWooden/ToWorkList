@@ -3,11 +3,7 @@
     gap: 4px;
     padding: 3px;
 }
-.contributor-container {
-    color: var(--text-2);
-}
 .contributor {
-    background-color: var(--secondary);
     height: 150px;
     border-radius: 5px;
     padding: 3px 5px;
@@ -24,20 +20,16 @@
     padding: 8px 5px;
     border-radius: 5px;
     font-size: large;
-    background-color: var(--secondary);
 }
 .action-trash-left {
-    color: var(--danger);
     flex: 1;
 }
 .action-edit-left {
-    color: var(--light-blue);
     flex: 3;
 }
 /* desc */
 .detail-desc {
     gap: 5px;
-    background-color: var(--black-2);
     border-radius: 5px;
     padding: .5em;
 }
@@ -59,14 +51,12 @@
     min-height: 50px;
     padding: 5px;
     border-radius: 3px;
-    background-color: var(--black-3);
 }
 .images-list {
     gap: 5px;
 }
 /* card image */
 .card-img {
-    background-color: var(--black-4);
     border-radius: 3px;
     flex-grow: 1;
 }
@@ -82,23 +72,19 @@
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background-color: #20222557;
     transition: .3s ease;
 }
 .card-img-context {
     flex: 1;
     padding: 5px;
     font-size: xx-small;
-    color: var(--white-2);
 }
 .card-img-context-deep {
     flex: 1;
 }
 .card-img-by {
-    color: var(--white-1);
 }
 .card-img-date {
-    color: var(--white-3);
 }
 .card-img-context p {
     margin: 0;
@@ -106,13 +92,11 @@
 }
 .add-image {
     margin-top: 10px;
-    background-color: var(--light-blue);
     padding: 5px;
     border-radius: 5px;
 }
 /* note */
 .note {
-    background-color: var(--black-2);
     border-radius: 5px;
     margin: 10px 5px;
 }
@@ -124,7 +108,6 @@
 
 .note-head {
     padding: 5px;
-    background-color: var(--black-3);
 }
 .note-head:hover .note-btn {
     display: inherit;
@@ -136,22 +119,17 @@
 .note-btn-simpan {
     font-size: small;
     font-family: var(--defaultFont);
-    background-color: var(--light-blue);
     padding: 3px 8px;
     border-radius: 5px;
-    box-shadow: var(--shadow-1);
-    color: var(--white-1);
     border: none;
 }
 .note_editor-textarea {
     outline: none;
-    background-color: var(--black-3);
     resize: vertical;
     margin: 5px;
     padding: 5px;
     border-radius: 5px;
     font-family: inherit;
-    color: var(--white-1);
     transition: .3s;
     font-size: small;
     min-height: 150px;
@@ -162,22 +140,15 @@
     border-radius: 50px;
     font-size: small;
     padding: 5px;
-    color: var(--white-3);
 }
 .note-head svg:hover {
-    background-color: var(--black-4);
-    color: var(--white-2);
 }
 .note-color {
     min-width: 45px;
     height: 15px;
 }
-.note-color:hover {
-    background-color: unset !important;
-}
 .note-info {
     font-size: x-small;
-    color: var(--white-2);
     padding: 5px 20px;
 }
 .note-body pre {

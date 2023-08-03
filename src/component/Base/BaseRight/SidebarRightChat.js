@@ -46,7 +46,7 @@ export function SidebarRightChat() {
     
             chat?.forEach((item, index) => {
                 if (convertDateToString(item.date) !== lastDate) {
-                    newBox.push(<div key={`${index}-${item.date}`} className='chat-card-date as-center'>{convertDateToString(item.date)}</div>)
+                    newBox.push(<div key={`${index}-${item.date}`} className='chat-card-date shadow as-center'>{convertDateToString(item.date)}</div>)
                     lastDate = convertDateToString(item.date)
                     lastNickname = null
                 }
@@ -74,7 +74,7 @@ export function SidebarRightChat() {
     }, [dispatch, idPageOfBook, todoId]);    
     
     return (
-        <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
+        <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column bg-indianred`}>
             <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>
             <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom zi-1 pointer ${scrollToBottom?'':'active'} p-fixed`}/>
                 {box || ''}

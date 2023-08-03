@@ -11,8 +11,8 @@ function Navbar() {
     return (
         <>
         <div className={`navigation_block zi-2 p-fixed ${hideNavbar?'inactive':'active'}`}/>
-        <div className={`navigation zi-2 d-flex fd-row p-fixed ${hideNavbar?'hideNavbar':'showNavbar'}`}>
-            <nav className='d-flex fw-wrap jc-center d-flex fd-column bg-secondary ai-center' ref={navRef}>
+        <div className={`navigation zi-2 d-flex fd-row p-fixed rounded ${hideNavbar?'hideNavbar':'showNavbar'}`}>
+            <nav className='d-flex fw-wrap jc-center d-flex fd-column ai-center bg-primary border-burlywood text-primary shadow-lg' ref={navRef}>
                 <HomeButton/>
                 <hr className='hr-w-75'/>
                 <BookList/>

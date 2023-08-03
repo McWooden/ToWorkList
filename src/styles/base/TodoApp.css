@@ -1,10 +1,7 @@
 #todoApp {
-    background-color: var(--black-4);
     height: 100vh;
 }
 header {
-    background-color: var(--primary);
-    filter: var(--filter-shadow);
     padding: 0 8px;
     height: 48px;
     top: 0;
@@ -23,20 +20,14 @@ header {
     transition: .1s ease;
 }
 .btn-active {
-    color: var(--purple-1);
-    background-color: var(--purple-1-transparent);
 }
 .btn-inactive {
-    color: var(--text-1);
 }
 .bars:hover {
-    background-color: var(--purple-1-transparent);
-    color: var(--purple-1);
 }
 header h4 {
     margin: 0;
     font-size: 20px;
-    color: var(--text-2);
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 150px;
@@ -49,9 +40,6 @@ header h4 {
     height: 20px;
     padding: 5px 7px;
     border-radius: 5px;
-}
-.btn-sidebar:hover {
-    background-color: var(--purple-1-transparent) !important;
 }
 @media (min-width: 768px) {
     .btn-sidebar-right {

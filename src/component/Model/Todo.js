@@ -83,7 +83,7 @@ export function TodoModel({item}) {
     }
     return (
         <>
-        <div className="todo-card d-flex fd-row  jc-space-between">
+        <div className="todo-card d-flex fd-row  jc-space-between bg-zinc-900 shadow">
             <div className="todo-left d-flex fd-row p-relative">
             <div className="card-color" style={{backgroundColor: item.details.color}}></div>
             <div className="card-text d-flex fd-column jc-center pointer" onClick={handleTextClick}>
@@ -92,14 +92,14 @@ export function TodoModel({item}) {
             </div>
             </div>
             <div className="todo-right d-flex fd-row p-relative">
-                <div className={`card-finish pointer ${dones.includes(myNickname)?'finish-on':'finish-off'}`} onClick={handleReverse}>
-                    <div className="card-finish-value"></div>
+                <div className={`card-finish bg-zinc-800 pointer ${dones.includes(myNickname)?'finish-on':'finish-off'} shadow-inner`} onClick={handleReverse}>
+                    <div className="card-finish-value bg-zinc-300"></div>
                 </div>
                 <div className="card-more d-flex ai-center" ref={btnRef}>
                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
                 </div>
                 <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                    <ul className='d-flex fd-column of-hidden p-absolute pointer'>
+                    <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300'>
                         <li className='d-flex ai-center' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_OUTSIDE', ...item}))}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                             <span>edit</span>

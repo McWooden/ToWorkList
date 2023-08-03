@@ -1,10 +1,10 @@
 @import url(./kalender.css);
 @import url(./notif.css);
 .loading {
-    background-color: var(--black-3);
     animation: loading-skeleton 1s ease-in-out forwards infinite;
     animation-direction: alternate;
     border-radius: 5px;
+    background-color: rgb(39, 39, 42);
 }
 .loading.guild-photo-profile {
     width: 48px;
@@ -16,25 +16,20 @@
 }
 .loading.room {
     height: 36px;
-    background-color: var(--black-4);
 }
 .loading.sidebar_left_loading {
     height: 36px;
-    background-color: var(--black-5);
 }
 .loading.center_loading {
     height: 48px;
-    background-color: var(--black-5);
 }
 .loading.sidebar_right_loading {
     height: 42px;
-    background-color: var(--black-3);
 }
 .loading.book_card {
     height: 10em;
     width: 10em;
     flex: 1;
-    background-color: var(--purple-1);
     border-radius: 8px;
 }
 .spinner {

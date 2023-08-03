@@ -1,0 +1,45 @@
+:root {
+    --primary: #2A394E;
+}
+.bg-indianred {
+    background-color: indianred;
+}
+.bg-burlywood {
+    background-color: burlywood;
+}
+.bg-primary {
+    background-color: #2A394E;
+}
+.text-primary {
+    color: #2A394E;
+}
+.bg-secondary {
+    background-color: #7253ee;
+}
+.text-azure {
+    color: #2A394E;
+}
+.text-whitesmoke {
+    color: whitesmoke;
+}
+.text-burlywood {
+    color: burlywood;
+}
+.border-burlywood {
+    border: 1px solid burlywood;
+}
+.bg-ok {
+    background-color: #0d7377;
+}
+.bg-no {
+    background-color: #774360;
+}
+.text-no {
+    color: #774360;
+}
+.bg-info {
+    background-color: #277bc0;
+}
+.text-info {
+    color: #277bc0;
+}

@@ -18,18 +18,18 @@ export function Auth() {
     const navigate = useNavigate()
     return (
         <div className="auth d-flex ai-center jc-center">
-            <div className="auth-context">
+            <div className="auth-context bg-burlywood text-primary">
                 <h3>Autentikasi</h3>
                 <div className="navigate_to pointer">
                     <p>Masuk ke akun</p>
-                    <div className="auth_btn d-flex ai-center pointer navigate_login" onClick={() => navigate('/auth/login')}>
+                    <div className="auth_btn d-flex ai-center pointer navigate_login bg-primary text-burlywood" onClick={() => navigate('/auth/login')}>
                         <FontAwesomeIcon icon={faRightToBracket}/>
                         <span>Login</span>
                     </div>
                 </div>
                 <div className="navigate_to pointer">
                     <p>Tidak memiliki akun?</p>
-                    <div className="auth_btn d-flex ai-center pointer navigate_register" onClick={() => navigate('/auth/register')}>
+                    <div className="auth_btn d-flex ai-center pointer navigate_register bg-primary text-burlywood" onClick={() => navigate('/auth/register')}>
                         <FontAwesomeIcon icon={faAddressCard}/>
                         <span>Register</span>
                     </div>
@@ -55,7 +55,7 @@ export function Register() {
     return (
         <>
             <div className="auth d-flex ai-center jc-center">
-                <div className="auth-context">
+                <div className="auth-context bg-burlywood text-primary">
                 {
                     user ?
                         <FormRegist data={user}/>
@@ -164,6 +164,7 @@ function FormRegist({data}) {
             dispatch(setProfile())
             toast.dismiss(promise)
             accountToast(res.data.message)
+            dispatch(setBooksProfile(null))
         })
         .catch((err) => {
             console.log(err)
@@ -194,7 +195,7 @@ function FormRegist({data}) {
                 </label>
                 <label>
                 {errorPassword?
-                    <p className='error_msg'>{errorPassword}</p>
+                    <p className='error_msg text-no'>{errorPassword}</p>
                     :
                     <span>Password</span>
                 }
@@ -204,7 +205,7 @@ function FormRegist({data}) {
                 <span>Confirm Password</span>
                     <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`d-block ${redBorderInput?'red-border':''}`} minLength='4'/>
                 </label>
-                <input type="submit" className="d-flex ai-center jc-center pointer" value="Sign up" ref={btn}/>
+                <button type="submit" className="d-flex ai-center jc-center pointer bg-info text-whitesmoke min-h-[40px] rounded" ref={btn}>Sign up</button>
             </form>
             <div className="navigate_to pointer">
                 <p>Sudah memiliki akun? <span onClick={() => navigate('/auth/login')}>login</span></p>
@@ -262,7 +263,7 @@ export function Login() {
     }
     return (
         <div className="auth d-flex ai-center jc-center">
-            <div className="auth-context">
+            <div className="auth-context bg-burlywood text-primary">
                 <h4>Login</h4>
                 <form className='auth_form' onSubmit={handleSubmit}>
                     <p className='error_msg'>{msg}</p>
@@ -274,7 +275,7 @@ export function Login() {
                         <span>Password</span>
                         <input className='d-block' type="password" value={password} onChange={event => setPassowrd(event.target.value)} placeholder='password'/>
                     </label>
-                    <div className="login_btn_container d-flex ai-center">
+                    <div className="login_btn_container mt-2 d-flex ai-center">
                         <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
                         <GoogleLogin
                             onSuccess={credentialResponse => {
@@ -287,7 +288,7 @@ export function Login() {
                             type='icon'
                         />
                         </GoogleOAuthProvider>
-                        <input type="submit" className="d-flex ai-center jc-center pointer" value="Login"/>
+                        <input type="submit" className="bg-info d-flex ai-center jc-center pointer" value="Login"/>
                     </div>
                 </form>
                 <div className="navigate_to pointer">
@@ -359,7 +360,7 @@ export function Pemulihan() {
     }
     return (
         <div className="auth d-flex ai-center jc-center">
-            <div className="auth-context pemulihan d-flex fd-column ai-center jc-center">
+            <div className="auth-context bg-burlywood text-primary pemulihan d-flex fd-column ai-center jc-center">
                 <h4>Memulihkan akun</h4>
                 <p className='error_msg'>{msg}</p>
                 {

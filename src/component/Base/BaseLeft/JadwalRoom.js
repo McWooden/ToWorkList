@@ -68,7 +68,7 @@ export function JadwalRoom() {
     }
     const [isFetching, setIsFetching] = useState(false)
     return (
-        <div className="jadwal d-flex fd-row of-hidden p-relative">
+        <div className="jadwal d-flex fd-row of-hidden p-relative shadow bg-zinc-900">
             <div className='preview' style={{background: `url(${url}/${pageDetails.jadwal_url})`}}>
                 <div className="setting pointer d-flex jc-center ai-center" onClick={() => setModalOpen(true)}>
                     <FontAwesomeIcon icon={faGear} className='setting-btn'/>
@@ -84,7 +84,7 @@ export function JadwalRoom() {
                     { previewUrl ? 
                         <img src={previewUrl} alt={image.name} /> 
                     :
-                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
+                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer border-8 border-zinc-600 border-dashed">
                             <FontAwesomeIcon icon={faImage} className='drop-icon'/>
                             <p className='drop-text p-absolute'>click atau drop disini</p>
                             <input 
@@ -96,7 +96,7 @@ export function JadwalRoom() {
                         </div>
                     }
                     </div>
-                    <div className="img-form jc-center d-flex fd-column">
+                    <div className="img-form jc-center d-flex fd-column p-2">
                         <div className="general-info">
                             <h3>Memperbarui jadwal</h3>
                             <p className='date'>{date}</p>

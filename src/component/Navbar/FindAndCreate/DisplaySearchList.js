@@ -28,25 +28,25 @@ function CardList({item, closeModalCallback}) {
     }
     if (item.type === 'book') {
         return (
-            <div className="bg-zinc-900 rounded flex items-center p-2 gap-x-3" onClick={toInviteBook}>
+            <div className="rounded flex items-center p-2 gap-x-3 bg-zinc-800" onClick={toInviteBook}>
                 <div className="grid place-content-center">
                     <img className="w-[48px] rounded-full" src={`${url}/${item.avatar_url}`} alt={item.book_title} />
                 </div>
                 <div>
                     <p className="text-sm">{item.book_title}</p>
-                    <p className="text-xs text-zinc-500">{`${item.author_nickname}#${item.author_tag}`}</p>
+                    <p className="text-xs">{`${item.author_nickname}#${item.author_tag}`}</p>
                 </div>
             </div>
         )
     } else {
         return (
-            <div className="bg-zinc-900 rounded flex items-center p-2 gap-x-3" onClick={seeUserProfile}>
+            <div className="rounded flex items-center p-2 gap-x-3 bg-zinc-800" onClick={seeUserProfile}>
                 <div className="grid place-content-center">
                     <img className="w-[48px] rounded-full" src={item.avatar} alt={item.nickname} />
                 </div>
                 <div>
                     <p className="text-sm">{item.nickname}</p>
-                    <p className="text-xs text-zinc-500">{item.tag}</p>
+                    <p className="text-xs">{item.tag}</p>
                 </div>
             </div>
         )

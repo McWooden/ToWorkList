@@ -7,7 +7,7 @@ export function DetailCard() {
     const todo = useSelector(state => state.todo)
     return(
         <>
-        <div className='detail-desc d-flex'>
+        <div className='detail-desc d-flex bg-zinc-900 text-zinc-300'>
             <div className="color" style={{backgroundColor: todo.details.color}}></div>
             <div className='detail-desc-context'>
                 <p>{todo.details.desc}</p>

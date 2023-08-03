@@ -1,9 +1,9 @@
 .navigation_block {
     width: 100%;
     height: 100%;
+    background-color: #2a394e85;
 }
 .navigation_block.active {
-    background-color: #31364c46;
     visibility: visible;
 }
 .navigation_block.inactive {
@@ -11,8 +11,7 @@
 }
 .navigation {
     height: -webkit-fill-available;
-    margin: 1em;
-    margin-top: 54px;
+    margin-top: 48px;
 }
 .hideNavbar {
     opacity: 0;
@@ -28,15 +27,15 @@ nav {
     width: 75px;
     max-height: 100%;
     border-radius: 8px;
-    border: 1px solid var(--secondary-bright);
 }
 .reload_btn-frame {
     border-radius: 15px;
     width: 48px;
     height: 48px;
-    background-color: var(--black-4);
-    box-shadow: var(--shadow-1);
     margin: 5px auto;
+    background-color: var(--primary);
+    border: 1px solid burlywood;
+    color: burlywood;
 }
 .reload_btn {
     font-size: large;
@@ -44,7 +43,6 @@ nav {
 .nav-icon-frame {
     width: 48px;
     height: 48px;
-    background-color: var(--black-2);
     margin: .5em;
     border-radius: 15px;
 }
@@ -52,25 +50,22 @@ nav {
     width: 100%;
     height: 100%;
     font-size: 18px;
-    color: var(--purple-2);
 }
 .nav-icon:hover {
-    background-color: goldenrod;
-    color: var(--black-2);
 }
 .nav-icon.active {
-    background-color: var(--purple-1);
-    color: var(--text-primary);
 }
 .guild-frame.active {
     border-radius: 8px;
-    background-color: var(--purple-1-transparent) !important;
+    background-color: indianred;
 }
 .guild-frame.active > img {
-    border: 1px solid var(--purple-1);
+}
+.guild-frame > img {
+    border: 1px solid var(--primary);
 }
 .guild-frame:hover > img {
-    border: 1px solid var(--purple-1);
+    border: 1px solid indianred;
 }
 .guild-frame > img {
     width: 45px;
@@ -86,7 +81,6 @@ nav {
     padding: 0 .5em;
 }
 .nav-guild div:hover {
-    background-color: var(--black-2);
     border-radius: 8px;
     padding: 0 .5em;
 }
@@ -96,8 +90,8 @@ nav {
     width: 240px;
     margin: 2em 0;
     border-radius: 8px;
-    border: 1px solid var(--secondary);
     margin-left: .25em;
+    color: whitesmoke;
 } 
 .modeNavbarHeader {
     padding: 1.5px 10px 1.5px 16px;
@@ -106,7 +100,6 @@ nav {
 .guild-name {
     padding: 12px 0;
     margin: 0;
-    color: var(--text-primary);
     flex: 1 0 0;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -115,20 +108,18 @@ nav {
     flex: 1;
     padding: 3px 0;
     margin: 0;
-    color: var(--text-2);
     font-family: 'Comfortaa', cursive;
     font-weight: 300;
 }
 .settingNavbar {
-    color: var(--text-1);
     padding: 5px;
     border-radius: 8px;
 }
 .settingNavbar:hover {
-    background-color: var(--purple-1-transparent);
+    background-color: burlywood;
+    color: var(--primary);
 }
 .settingNavbar:active {
-    color: var(--purple-1);
 }
 .roomList {
     flex: 1;
@@ -136,33 +127,29 @@ nav {
 .room {
     padding: .35em;
     gap: 3px;
-    color: var(--text-secondary);
-}
-.room.active {
-    background-color: var(--purple-1-transparent) !important;
-    transition: .1s ease;
-    color: var(--text-primary);
+    border: 1px solid var(--primary);
 }
 .room:hover {
-    background-color: var(--secondary-transparent);
+    border: 1px solid indianred;
+    color: indianred;
+}
+.room.active {
+    transition: .1s ease;
+    color: var(--primary);
+    background-color: indianred;
 }
 .room:hover .room-icon,  .room:hover span, .room:hover .card-more .card-more-btn {
-    color: var(--kedua) !important;
 }
 .room-icon, .room .card-more .card-more-btn {
-    color: var(--text-1);
     height: 16px;
     margin: 0 5px;
 }
 .room-icon.active {
-    color: var(--purple-1);
 }
 .room span {
     font-size: smaller;
-    color: var(--text-secondary);
 }
 .room span.active {
-    color: var(--purple-1);
 }
 /* profile */
 .profile-container {
@@ -170,41 +157,34 @@ nav {
 }
 .profile {
     padding: 5px 8px;
-    box-shadow: var(--shadow-1);
     margin: 1em;
     border-radius: 15px;
 } 
 .profile:hover {
-    background-color: var(--secondary);
 }
 .profile:active {
-    background-color: var(--black-2);
 }
 .profile img {
     width: 32px;
     height: 32px;
     border-radius: 50px;
     margin-right: .5em;
-    box-shadow: var(--shadow-1);
 }
 .profile-nickname {
     font-size: 14px;
-    color: var(--pertama);
     font-weight: bold;
 }
 .profile-id {
     font-size: 12px;
-    color: var(--kedua);
 }
 /* profile pop */
 .profile_pop {
-    background-color: var(--primary);
-    border: 1px solid var(--secondary);
     width: 300px;
     left: 10px;
     bottom: 60px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
+    background-color: var(--primary);
+    border: 1px solid burlywood;
     padding: 15px 0;
     gap: 10px;
     transition: .1s ease;
@@ -224,22 +204,20 @@ nav {
 }
 .profile_pop-body {
     flex: 1;
-    background-color: var(--secondary);
     margin: 0 15px;
     padding: 10px;
     border-radius: 10px;
+    background-color: indianred;
+    color: var(--primary);
 }
 .profile_pop-nickname {
     font-weight: 600;
-    border-bottom: 1px solid var(--black-4);
 }
 .profile_pop-nickname span, .profile_pop-created_at span, .profile_pop-switch_account, .profile_pop-add_account  {
-    color: var(--white-3);
 }
 .profile_pop-created_at {
-    font-size: x-small;
+    font-size: small;
     margin-top: 5px;
-    border-bottom: 1px solid var(--black-4);
     padding: 5px 0;
     margin-bottom: 10px;
 }
@@ -251,13 +229,11 @@ nav {
     font-size: small;
     padding: 5px 10px;
     border-radius: 5px;
+    border: 1px solid var(--primary);
 }
 .profile_pop-switch_account:hover, .profile_pop-add_account:hover {
-    background-color: var(--black-4);
-    color: var(--white-1);
 }
 .profile_pop-switch_account:active, .profile_pop-add_account:active {
-    background-color: var(--black-3);
 }
 /* search */
 .search_book_container {
@@ -270,16 +246,12 @@ nav {
     padding: 0;
 }
 .search_book_container .form-modal input {
-    background-color: unset;
     border: none;
     width: auto;
-    color: var(--text-primary);
 }
 .search_book_container .form-modal input:focus {
-    background-color: transparent;
 }
 .search_bar {
-    background-color: var(--secondary) !important;   
 }
 .search_book_container .search_bar {
     border-radius: 3px;
@@ -287,13 +259,10 @@ nav {
     padding: 0 1em;
 }
 .search_book_container .tiang {
-    border: 1px solid var(--text-1);
     margin: 10px 0;
 }
 .search_book_container .submit_search {
     border: none;
-    background-color: transparent;
-    color: var(--text-2);
     font-size: large;
 }
 .sb_action_btn {
@@ -326,7 +295,6 @@ nav {
     text-align: center;
 }
 .add_server_container .img-view {
-    background-color: unset;
     width: 80px;
     height: 80px;
 }
@@ -339,15 +307,12 @@ nav {
 .add_server_container .img-view .remove-icon {
     height: 15px;
     width: 15px;
-    background-color: var(--purple-1);
     border-radius: 50px;
     padding: 5px;
-    color: var(--white-1);
     top: 0;
     right: 0;
 }
 .add_server_container .img-view .drop-zone {
-    border: 3px dashed var(--purple-1);
     padding: 1em;
     width: unset;
     height: unset;
@@ -357,9 +322,6 @@ nav {
     font-size: 3em;
 }
 @media (max-width: 425px) {
-    .profile_pop {
-        left: 0;
-    }
     .search_book_container {
         padding: 1em;
         padding-bottom: 2em;

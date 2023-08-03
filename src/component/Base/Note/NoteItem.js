@@ -46,10 +46,10 @@ export function NoteItem({data}) {
     }
     return (
         <>
-        <div className='note of-hidden'>
-            <div className='note-head d-flex jc-space-between ai-center'>
+        <div className='note of-hidden bg-zinc-900 text-whitesmoke shadow'>
+            <div className='note-head d-flex jc-space-between ai-center bg-zinc-800 shadow'>
                 <FontAwesomeIcon icon={faNoteSticky} style={{color: data.color}} className='note-color'/>
-                <div className="note-btn ai-center">
+                <div className="note-btn ai-center text-zinc-400">
                     <FontAwesomeIcon icon={faTrash} className='pointer' onClick={confirmToDelete}/>
                     <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
                 </div>
@@ -58,7 +58,7 @@ export function NoteItem({data}) {
                 <pre className='of-auto'>
                     {data.context}
                 </pre>
-                <span className='note-info ai-flex-end'>{`${data.by}, ${convertDateToString(data.date)}`}</span>
+                <span className='note-info as-flex-end'>{`${data.by}, ${convertDateToString(data.date)}`}</span>
             </div>
         </div>
         <Confirm open={confirmOpen} close={() => setConfirmOpen(false)} target={`${data.by}, ${convertDateToString(data.date)}`} metode='delete' color={data.color} callback={handleDelete}/>

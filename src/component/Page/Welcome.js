@@ -70,7 +70,7 @@ export function Welcome() {
       if (!item) return
       if (isoToString(item?.date) !== lastDate) {
         box.push(
-          <div key={`${index}-${item.date}`} className='chat-card-date as-center'>{isoToString(item.date)}</div>
+          <div key={`${index}-${item.date}`} className='chat-card-date as-center shadow'>{isoToString(item.date)}</div>
         )
         lastDate = isoToString(item.date)
         lastNickname = null
@@ -138,34 +138,36 @@ export function Welcome() {
             <span className="cursor">|</span>
           </span>
           <span
-            className="tapToOpenNavbar as-flex-start d-block"
+            className="tapToOpenNavbar as-flex-start d-block bg-burlywood text-primary shadow-lg"
             onClick={() => handleNavbar(hideNavbar)}
           >
             Ketuk untuk membuka navbar
           </span>
         </div>
       </div>
-      <div className={`base-right of-auto ${hideRightBase ? 'base-right-hide' : 'base-right-show'} d-flex fd-column h-full flex-1`}>
+      <div className={`base-right of-auto ${hideRightBase ? 'base-right-hide' : 'base-right-show'} d-flex fd-column h-full flex-1 bg-indianred`}>
         <div className="sidebar-right d-flex fd-column of-auto scroll-smooth" ref={chatRef} onScroll={handleScroll}>
           <FontAwesomeIcon icon={faChevronDown} onClick={clickToBottom} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
           {box}
         </div>
-        <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
-          <div className="textarea-container d-flex ai-center of-auto">
-            <textarea id="myTextarea" rows="1" placeholder={`Obrolan global (${myNickname})`} name='msg' onChange={handleInput} value={msg} ref={textarea} style={{ height: '15px' }} className='d-flex ai-center of-auto' />
+        <form className='base-right-form zi-1 of-auto d-flex ai-center flex-col' onSubmit={handleSubmit}>
+          <div className='flex w-full gap-x-1'>
+            <div className="textarea-container d-flex ai-center of-auto shadow-lg rounded bg-primary w-full">
+              <textarea id="myTextarea" rows="1" placeholder={`Obrolan global (${myNickname})`} name='msg' onChange={handleInput} value={msg} ref={textarea} style={{ height: '15px' }} className='d-flex bg-inherit text-white placeholder:text-zinc-400 ai-center of-auto' />
+            </div>
+            {
+              msg ?
+                <button className='pointer btn-on' title='send'>
+                  <FontAwesomeIcon icon={faPaperPlane} />
+                </button>
+                :
+                null
+            }
           </div>
-          {
-            msg ?
-              <button className='pointer btn-on' title='send'>
-                <FontAwesomeIcon icon={faPaperPlane} />
-              </button>
-              :
-              null
-          }
+          <p className='p-2 pt-0 text-stone-400 rounded text-[6px] text-center text-zinc-200'>
+            Perhatikan privasi Anda! Jangan memposting informasi pribadi di pesan global.
+          </p>
         </form>
-        <p className='p-2 pt-0 text-stone-400 rounded text-[6px] text-center'>
-          Perhatikan privasi Anda! Jangan memposting informasi pribadi di pesan global.
-        </p>
       </div>
     </div>
   )

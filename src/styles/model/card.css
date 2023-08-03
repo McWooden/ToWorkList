@@ -4,7 +4,7 @@
     width: 100%;
     min-height: 58px;
     border-radius: 5px;
-    background-color: var(--black-3);
+    color: dimgray;
 }
 .todo-left {
     flex: 1;
@@ -21,33 +21,29 @@
     flex: 1;
 }
 .card-title {
-    color: var(--white-1);
+    color: whitesmoke;
 }
 .card-description, .card-deadline {
     font-size: small;
-    color: var(--white-3);
 }
 .card-finish {
     width: 55px;
     height: 28px;
     border-radius: 50px;
     margin: auto 0 auto 1em;
+    transition: .3s ease-out;
 }
 .card-finish-value {
     width: 30px;
     height: 100%;
     border-radius: 50px;
-    background-color: var(--white-2);
 }
 .finish-on {
     padding-left: 25px;
-    background-color: var(--ok);
-    transition: .3s ease-out;
+    background-color: #0d7377;
 }
 .finish-off {
     padding-right: 25px;
-    transition: .3s ease-out;
-    background-color: var(--black-2);
 }
 .card-more-btn {
     margin: .5em;
@@ -56,7 +52,6 @@
     width: 15px;
 }
 .card-more-btn:hover {
-    background-color: var(--black-2);
 }
 .card-drop-down.active {
     opacity: 1;
@@ -69,7 +64,6 @@
     transition: .1s ease;
 }
 .card-drop-down ul {
-    background-color: var(--secondary);
     list-style: none;
     font-size: small;
     right: 25px;
@@ -85,8 +79,6 @@
     padding: 5px 15px;
 }
 .card-drop-down ul li:hover {
-    background-color: var(--purple-1-transparent);
-    color: var(--purple-2);
 }
 .edit_card_modal {
     height: 100%;

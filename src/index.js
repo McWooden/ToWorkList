@@ -21,8 +21,7 @@ import './styles/modal/Modal.css'
 import './styles/model/card.css'
 import './styles/other/loading.css'
 import './styles/pages/App.css'
-import './styles/theme/dark.css'
-import './styles/theme/primary.css'
+import './styles/theme/theme.css'
 import './styles/welcome.css'
 
 

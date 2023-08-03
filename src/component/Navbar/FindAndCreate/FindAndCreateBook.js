@@ -121,7 +121,7 @@ export function FindAndCreateBook() {
     return (
         <>
         <div className='nav-icon-frame of-hidden d-flex jc-center'>
-            <div className='nav-icon jc-center ai-center d-flex pointer find-create' onClick={handleModalOpen}>
+            <div className='nav-icon jc-center ai-center d-flex pointer find-create bg-burlywood shadow' onClick={handleModalOpen}>
                 <FontAwesomeIcon icon={faCompass}/>
             </div>
         </div>
@@ -129,19 +129,19 @@ export function FindAndCreateBook() {
             <div className="search_book_container w-full">
                 <div className="search_book-header d-flex gap-2 flex-col sm:flex-row">
                     <form onSubmit={handleSearch} className='flex-1'>
-                        <div className='h-[45px] sm:px-5 ox-2 d-flex overflow-auto focus-within:ring-violet-600 ring-transparent ring-2 bg-zinc-900 rounded-3xl flex-1'>
-                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Cari seseorang atau buku" className='px-2 w-full text-white border-none outline-none bg-transparent h-full caret-violet-600' required />
+                        <div className='h-[45px] sm:px-5 ox-2 d-flex overflow-auto focus-within:ring-violet-600 ring-transparent ring-2 rounded-3xl flex-1 bg-zinc-800 shadow-lg'>
+                            <input type="text" value={searchText} onChange={handleInputChange} placeholder="Cari seseorang atau buku" className='px-2 bg-transparent w-full border-none outline-none h-full caret-violet-600' required />
                             <div className="tiang"/>
-                            <button type="submit" className='submit_search px-2 sm:pl-5 pointer hover:bg-sky-500'>
+                            <button type="submit" className='submit_search px-2 sm:pl-5 pointer bg-transparent'>
                                 <FontAwesomeIcon icon={faSearch} />
                             </button>
                         </div>
                     </form>
                     <div className="d-flex jc-flex-end">
                         <div className="sb_action_btn d-grid pi-center">
-                            <div className='pointer action_btn h-full text-stone-400 bg-zinc-900 rounded-full w-[48px] text-center relative' onClick={() => setAddServerModal(true)}>
+                            <div className='pointer action_btn h-full rounded-full w-[48px] text-center relative shadow-lg bg-zinc-800 text-whitesmoke' onClick={() => setAddServerModal(true)}>
                                 <FontAwesomeIcon icon={fontawesome.faBook}/>
-                                <FontAwesomeIcon icon={faPlus} className='absolute bottom-2 right-2 text-xs rounded bg-zinc-900 py-[2px] px-[3px]'/>
+                                <FontAwesomeIcon icon={faPlus} className='absolute bottom-2 right-2 text-xs rounded py-[2px] px-[3px]'/>
                             </div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@ export function FindAndCreateBook() {
                                 <FontAwesomeIcon icon={faXmark} className='remove-icon pointer p-absolute' onClick={handleRemove}/>
                                 </>
                             :
-                                <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer text-violet-600">
+                                <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
                                     <FontAwesomeIcon icon={faImage} className='drop-icon'/>
                                     <input 
                                         type="file" 

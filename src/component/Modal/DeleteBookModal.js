@@ -34,11 +34,11 @@ export function DeleteBookModal({open, close, data, callback}) {
                 <p className="next-text">Tindakan ini akan menghapus gambar, pesan, tugas, catatan dan apapun yang ada didalamnya</p>
                 <form className='form-modal'>
                     <p>ketik <span className="bold">{profile.book_title}</span> untuk melanjutkan menghapus</p>
-                    <input type="text" placeholder='masukkan judul buku' value={value} onChange={(e) => setValue(e.target.value)} className='w-full'/>
+                    <input type="text" placeholder='masukkan judul buku' value={value} onChange={(e) => setValue(e.target.value)} className='w-full border-0'/>
                     <div className="confirm-button d-flex ai-center jc-flex-end">
                         <div className="confirm-btn pointer confirm-no" onClick={closeModal}>Batal</div>
                         {value === profile.book_title  ? (
-                            <div className="confirm-btn pointer confirm-yes" onClick={acceptCallback}>
+                            <div className="confirm-btn pointer confirm-yes bg-indianred" onClick={acceptCallback}>
                                 Hapus
                             </div>
                         ) : (

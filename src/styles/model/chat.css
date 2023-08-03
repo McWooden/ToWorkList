@@ -1,16 +1,13 @@
 .chat-card-date {
     border-radius: 5px;
-    color: var(--black-4);
-    background-color: var(--kedua);
-    box-shadow: var(--shadow-1);
     width: fit-content;
     font-size: .5em;
     padding: .25em .5em;
     margin: .5em 0;
+    background-color: whitesmoke;
 }
 .chat-card-nickname {
     font-size: .7em;
-    color: var(--text-secondary);
     margin-top: .5em;
 }
 .chat-card {
@@ -19,37 +16,25 @@
     transition: .1s ease;
 }
 .chat-card.active {
-    background-color: var(--ok);
 }
 .chat-card-message {
-    background-color: var(--white-1);
+    background-color: burlywood;
     white-space: pre-line;
-    color: var(--text-2);
-}
-.chat-card-message {
-    border-radius: 5px 10px 10px 0;
+    border-radius: 5px;
     padding: 2px 5px;
     font-size: .7em;
     word-break: break-all;
-    color: var(--black-2);
 }
 .chat-card-message.my {
-    border-radius: 10px 5px 0 10px;
-    background-color: var(--black-1);
-    color: var(--white-1);
+    background-color: var(--primary);
+    color: whitesmoke;
 }
 .chat-card-message.disable {
-    background-color: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--text-secondary);
 }
 .chat-card-message.disable.my {
-    border: 1px solid var(--black-1);
-    color: var(--black-1);
 }
 .chat-card-time {
     font-size: .5em;
-    color: var(--text-2);
     margin-left: 2px;
 }
 .chat-card-time.my {
@@ -76,12 +61,10 @@
     transition: .1s ease;
 }
 .chat-dropdown ul li {
-    background-color: var(--black-2);
     list-style: none;
     font-size: small;
     padding: 0 5px;
     border-radius: 5px;
 }
 .chat-dropdown ul li:hover {
-    background-color: var(--black-5);
 }

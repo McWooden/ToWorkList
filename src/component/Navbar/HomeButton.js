@@ -15,7 +15,7 @@ export function HomeButton() {
     }
     return (
         <div className='nav-icon-frame of-hidden jc-center d-flex' onClick={handleClick}>
-            <div className={`nav-icon jc-center ai-center d-flex pointer ${pathBook==='@me' ? 'active' : ''}`}>
+            <div className={`nav-icon jc-center ai-center d-flex pointer bg-burlywood ${pathBook==='@me' ? 'active' : ''}`}>
                 <FontAwesomeIcon icon={faHouse}/>
             </div>
         </div>

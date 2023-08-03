@@ -42,7 +42,7 @@ export function Profile() {
         <div className="profile-container">
             {profile && (
                 <>
-                <div className={`profile_pop d-flex fd-column p-fixed ${userPop?'active':'inactive'}`} ref={userPopRef}>
+                <div className={`profile_pop d-flex fd-column p-fixed shadow ${userPop?'active':'inactive'}`} ref={userPopRef}>
                 <a href={profile.avatar} target='_blank' rel="noreferrer" style={{width:'120px'}}>
                     <img src={profile.avatar} alt={profile.nickname}/>
                 </a>

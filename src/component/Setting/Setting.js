@@ -16,7 +16,7 @@ export default function Setting({open, close}) {
         setSelect(newSelect)
     }
     return ReactDOM.createPortal(
-        <div className="setting_full zi-2 p-fixed d-flex">
+        <div className="setting_full zi-2 p-fixed d-flex text-whitesmoke bg-zinc-900">
             <div className="setting_full_nav zi-1">
                 <ul className='of-hidden'>
                     <li className={`setting_full_nav_list d-flex ai-center pointer ${select === 'profile' && 'active'}`} onClick={() => handleSelectOnChange('profile')}>

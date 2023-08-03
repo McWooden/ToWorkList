@@ -3,27 +3,21 @@
 }
 .center-action-btn {
     bottom: 5px;
-    gap: .5em;
+    /* gap: .5em; */
+    background-color: indianred;
+    border-radius: 50px;
 }
 .detail-back {
     gap: 10px;
-    background-color: var(--purple-2);
-    border-radius: 5px;
+    border-radius: 50px;
     padding: 10px 15px;
-    box-shadow: var(--shadow-1);
 }
 .action-add {
     height: 45px !important;
 }
 .add-btn {
-    background-color: var(--purple-1);
-    color: var(--white-1);
-    padding: 16px;
-    font-size: small;
+    padding: 12px 13px;
     border-radius: 50px;
+    font-size: 21px;
     transition: .1s ease;
-    box-shadow: var(--shadow-1);
-}
-.add-btn:hover {
-    background-color: var(--purple-2);
 }

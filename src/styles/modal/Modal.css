@@ -5,20 +5,17 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, .7);
     transition: .3s ease;
     transition-delay: 1s;
+    background-color: rgba(24, 24, 27, .3);
 }
 .modal, .confirm, .note-editor {
+    color: whitesmoke;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border: 1px solid rgba(91, 91, 91, 0.477);
-    background-color: rgba(0, 0, 0, .8);
-}
-.modal.light {
-    background-color: var(--kedua);
-    color: var(--text-2);
+    background-color: rgba(24, 24, 27, .95);
 }
 .modal {
     width: 90vw;
@@ -28,7 +25,6 @@
 }
 .second_modal {
     border-radius: 20px;
-    color: var(--text-2);
     height: fit-content;
     width: calc(100% - 1em);
     max-width: 512px;
@@ -53,7 +49,6 @@
 .form-modal .date, .img-form d-flex fd-column .date {
     font-size: x-small;
     margin-bottom: 3px;
-    color: var(--white-2);
 }
 .input-left {
     gap: 5px;
@@ -67,29 +62,23 @@
 }
 .form-modal input, .form-modal textarea, .form-modal select, .img-form d-flex fd-column textarea {
     outline: none;
-    background-color: var(--black-3);
     resize: none;
     padding: 8px;
-    border: 1px solid var(--black-4);
     border-radius: 5px;
     font-family: inherit;
-    color: var(--white-1);
     min-height: 45px;
     transition: .3s;
 }
 .form-modal input:focus, .form-modal textarea:focus, .form-modal select:focus {
-    background-color: var(--black-1);
+
 }
 .form-modal textarea, .img-form d-flex fd-column textarea {
     flex: 1;
 }
 .form-modal.light input {
-    background-color: #eaeaea;
     border: 1px solid #ddd;
-    color: var(--text-2);
 }
 .form-modal.light input:focus {
-    background-color: #ddd;
 }
 .task-submit {
     font-size: small;
@@ -97,15 +86,12 @@
     padding: 10px 0;
     margin: 0 3em;
     border-radius: 5px;
-    color: var(--white-1);
-    background-color: royalblue;
     justify-self: flex-end;
     margin-top: 20px;
     border: none;
     font-family: inherit;
 }
 .task-submit:hover {
-    background-color: rgb(76, 121, 255);
     transition: .1s ease;
 }
 /* confirm */
@@ -115,12 +101,9 @@
     border-radius: 5px;
 }
 .confirm.light {
-    background-color: var(--kedua);
-    color: var(--text-1);
     padding: 1em;
 }
 .confirm.light .next-text {
-    color: var(--text-1);
     margin: 1em 0;
 }
 .confirm img {
@@ -134,10 +117,8 @@
 }
 .confirm .bold {
     font-weight: bold;
-    color: var(--white-3);
 }
 .confirm-profile {
-    color: var(--text-2);
     margin-bottom: 1em;
 }
 .confirm-header, .confirm-body, .confirm-button {
@@ -155,7 +136,6 @@
     flex: 1;
 }
 .confirm-body h3 {
-    color: var(--danger);
 }
 .confirm.light h3 {
     color: #a44a4a;
@@ -164,7 +144,6 @@
     word-break: break-all;
 }
 .next-text {
-    color: var(--white-2);
 }
 .confirm-button {
     gap: 20px;
@@ -176,14 +155,10 @@
     border-radius: 3px;
 }
 .confirm-no {
-    color: #a44a4a;
 }
 .confirm-yes {
-    background-color: royalblue;
 }
 .confirm.light .confirm-yes {
-    background-color: #008ec5;
-    color: var(--white-1);
 }
 /* filedrop */
 .file-drop {
@@ -191,7 +166,6 @@
 }
 .img-view {
     flex: 1;
-    background-color: var(--secondary);
 }
 .img-view img {
     height: 100%;
@@ -201,25 +175,21 @@
 .drop-zone {
     width: 90%;
     height: 90%;
-    border: 10px solid var(--black-4);
-    border-style:dashed;
     transition: .3s;
     border-radius: 5px;
 } 
 .drop-icon {
     font-size: 5em;
-    color: var(--black-3);
     transition: .3s;
+    color: rgba(91, 91, 91, 0.477);
 }
 .drop-text {
     font-size: small;
     transition: .3s;
 }
 .drop-zone:hover {
-    background-color: var(--black-4);
 }
 .drop-zone:hover .drop-icon {
-    color: var(--white-3);
 }
 .drop-zone:hover .drop-text {
     opacity: 0;
@@ -231,7 +201,6 @@
     border-bottom: 1px solid royalblue;
 }
 .url-image {
-    color: var(--white-2);
     font-size: xx-small;
 }
 /* media query */

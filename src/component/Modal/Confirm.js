@@ -78,7 +78,7 @@ export function Confirm({ metode, open, close, target, color, callback, timeout 
                         {remainingTime > 0 ? (
                             <div className="confirm-btn pointer confirm-yes transparent">Yakin ({remainingTime})</div>
                         ) : (
-                            <div className="confirm-btn pointer confirm-yes" onClick={acceptCallback}>
+                            <div className="confirm-btn pointer confirm-yes bg-info" onClick={acceptCallback}>
                                 Ya
                             </div>
                         )}

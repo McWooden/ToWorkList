@@ -3,7 +3,6 @@
     margin: 0 auto;
 }
 .auth-context {
-    background-color: var(--black-2);
     width: 100%;
     border-radius: 5px;
     max-width: calc(100vw - 25px);
@@ -14,45 +13,33 @@
 }
 .navigate_to p {
     font-size: x-small;
-    color: var(--white-2);
 }
 .navigate_to p span {
-    color: goldenrod;
-}
-.navigate_to p span:hover {
-    color: gold;
+    text-decoration: underline;
+    text-decoration-color: royalblue;
+    text-decoration-thickness: 2px;
 }
 .auth_btn {
-    background-color: var(--black-4);
-    color: var(--white-2);
     padding: 5px 10px;
     border-radius: 5px;
     min-height: 48px;
     font-size: large;
 }
 .auth_btn:hover {
-    background-color: var(--black-5);
-    color: var(--purple-1);
 }
 .auth_btn:active {
-    background-color: var(--black-1);
 }
 .auth_btn span {
     margin-left: 10px;
 }
 .navigate_back {
     margin-top: 50px;
-    background-color: var(--black-2)
 }
 .navigate_back:hover {
     margin-top: 50px;
-    color: var(--white-2);
-    background-color: var(--black-5);
 }
 .navigate_back:active {
     margin-top: 50px;
-    color: var(--white-2);
-    background-color: var(--black-1);
 }
 /* register */
 .register {
@@ -60,7 +47,6 @@
 }
 .msg_email_exist {
     margin: 10px 0;
-    color: var(--danger);
 }
 .register p {
     margin-top: 15px;
@@ -68,13 +54,11 @@
 .account_preview {
     padding: 10px 15px;
     gap: 10px;
-    background-color: var(--black-1);
     border-radius: 5px;
     margin: 10px 0 20px;
 }
 .nickname_preview {
     font-size: xx-small;
-    color: var(--white-2);
 }
 .account_preview img {
     max-width: 48px;
@@ -89,21 +73,16 @@
     margin-bottom: 10px;
 }
 .auth_form input {
-    background-color: var(--black-3);
     outline: none;
     border: none;
     border-radius: 5px;
     height: 40px;
     padding: 8px 10px;
-    color: var(--white-1);
     width: 100%;
     font-family: inherit;
-    color: var(--white-2);
     margin-top: 4px;
 }
 .auth_form input[type="submit"] {
-    background-color: royalblue;
-    color: var(--white-1);
     border: none;
     height: 48px;
 }
@@ -118,11 +97,9 @@
     margin-top: 0 !important;
 }
 .error_msg {
-    color: var(--danger);
     font-size: small;
 }
 .auth_form input.red-border {
-    border: 1px solid var(--danger);
 }
 .auth_form input.green-border {
     border: 1px solid yellowgreen;
@@ -138,7 +115,6 @@
     width: 100%;
 }
 .pemulihan .account_preview div p span {
-    color: var(--white-2);
 }
 @media (min-width: 400px) {
     .auth-context {

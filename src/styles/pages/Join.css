@@ -4,13 +4,10 @@
     max-width: 512px;
 }
 .modal_context {
-    background-color: var(--kedua);
-    color: var(--text-1);
     border-radius: 5px;
     max-width: calc(100vw - 25px);
 }
 .modal_context-transparent {
-    background-color: transparent;
     gap: 1em;
 }
 .modal_context .book_card {
@@ -18,11 +15,8 @@
     max-width: 30em;
 }
 .join_btn {
-    background-color: var(--light-blue);
-    color: var(--white-1);
     padding: .5em;
     border-radius: 8px;
-    box-shadow: var(--shadow-1);
     gap: 1em;
 }
 .join_btn img {

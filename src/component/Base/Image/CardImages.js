@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faImage } from '@fortawesome/free-solid-svg-icons'
+import { faImage } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { setTodo } from '../../../redux/todo'
 import { imageToast, loadingToast } from '../../../utils/notif'
@@ -93,16 +93,19 @@ export function CardImages() {
             <div className='images-list d-flex fw-wrap'>
                 {box}
             </div>
-            <FontAwesomeIcon icon={faPlus} className='add-image pointer' onClick={handleModalOpen}/>
+            <div className='add-image pointer flex justify-center gap-x-1 items-center bg-info' onClick={handleModalOpen}>
+                <FontAwesomeIcon icon={faImage}/>
+                <span>Foto baru</span>
+            </div>
             <FileDrop open={modalOpen} close={handleModalClose}>
                 <form ref={formRef} className='file-drop d-flex of-scroll' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
                     <div className="img-view d-flex ai-center jc-center" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
                     { previewUrl ? 
                         <img src={previewUrl} alt={image.name} /> 
                     :
-                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer">
+                        <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer border-8 border-zinc-600 border-dashed">
                             <FontAwesomeIcon icon={faImage} className='drop-icon'/>
-                            <p className='drop-text p-absolute'>click atau drop disini</p>
+                            <p className='drop-text p-absolute'>Click atau drop disini</p>
                             <input 
                                 type="file" 
                                 accept='image/*' 
@@ -112,13 +115,13 @@ export function CardImages() {
                         </div>
                     }
                     </div>
-                    <div className="img-form jc-center d-flex fd-column">
+                    <div className="img-form jc-center d-flex fd-column p-2">
                         <div className="general-info">
                             <h3>Menambah foto</h3>
                             <p className='date'>{date}</p>
                         </div>
-                        <span className='url-image'>{previewUrl? previewUrl : 'Url Image'}/-</span>
-                        <textarea placeholder='deskripsi' rows="10"name='desc'/>
+                        <span className='url-image mb-2'>{previewUrl? previewUrl : 'Url Image'}/-</span>
+                        <textarea placeholder='deskripsi' rows="10"name='desc' className='p-2'/>
                         {isFetching?
                             <button className='task-submit pointer'>Loading...</button>
                             :

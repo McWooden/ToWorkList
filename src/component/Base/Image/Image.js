@@ -34,14 +34,14 @@ export function Image({data}) {
     }
     return (
         <>
-        <div className='card-img d-flex of-hidden'>
+        <div className='card-img d-flex of-hidden bg-zinc-800'>
             <img alt={data.by} className={`card-img-pic pointer ${full&&'full p-fixed zi-3'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
             <div className='card-img-context d-flex fd-column'>
                 <div className='card-img-context-deep'>
                     <div className="card-img-by">{data.by}</div>
                     <p className="card-img-desc">{data.desc}</p>
                 </div>
-                <div className="card-img-date pointer as-flex-end" onClick={() => setDeleteOpen(true)}>{convertDateToString(data.date)}</div>
+                <div className="card-img-date pointer as-flex-end text-zinc-500" onClick={() => setDeleteOpen(true)}>{convertDateToString(data.date)}</div>
             </div>
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={pathSplit[pathSplit.length - 1]} metode='delete' color={'var(--danger)'} callback={deleteImage}/>

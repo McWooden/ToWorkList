@@ -22,7 +22,7 @@ export function BaseRight() {
         let sessionBox = []
         data.forEach((user, index) => {
             sessionBox.push(
-                <div className='group-user pointer d-flex ai-center' key={`${user.nickname}-${index}`}>
+                <div className='group-user bg-primary shadow pointer d-flex ai-center' key={`${user.nickname}-${index}`}>
                     <img src={user.avatar} alt={user.nickname} />
                     <div className="d-flex fd-column">
                         <p>{user.nickname}</p>
@@ -68,7 +68,7 @@ export function BaseRight() {
         })
     }, [channel, fetchData])
     return (
-        <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column`}>
+        <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column bg-indianred`}>
             <div className="sidebar-right d-flex fd-column of-auto">
                 {isLoading && <div className="loading sidebar_right_loading d-grid pi-center"/>}
                 {box}

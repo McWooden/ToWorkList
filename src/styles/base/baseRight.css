@@ -1,6 +1,5 @@
 .base-right {
     flex: 1;
-    background-color: var(--primary);
 }
 .sidebar-right {
     gap: 1px;
@@ -11,12 +10,9 @@
     min-height: 40px;
     margin: 0 3px 8px;
     padding: 0 2px;
-    background-color: transparent;
 }
 .base-right-form .textarea-container {
     flex: 4;
-    background-color: var(--secondary);
-    border-bottom: 2px solid var(--black-1);
     border-radius: 5px;
     padding: 5px;
     min-height: 35px;
@@ -25,8 +21,6 @@
     width: 100%;
     outline: none;
     border: none;
-    color: var(--text-primary);
-    background-color: inherit;
     resize: none;
     font-family: inherit;
     font-size: x-small;
@@ -35,34 +29,29 @@
 .base-right-form button, .base-right-form .btn-off {
     height: 35px;
     flex: 1;
-    color: var(--white-1);
     border: none;
     border-radius: 10px;
     font-size: 1em;
 }
 .btn-on {
-    background-color: var(--light-blue);
-    box-shadow: var(--shadow-1);
 }
 .scrollToBottom {
     width: 15px;
     bottom: 50px;
     right: 10px;
     font-size: large;
-    background-color: var(--purple-1-transparent);
-    color: var(--purple-1);
     padding: 8px;
     border-radius: 50px;
     transition: .1s ease;
-    box-shadow: var(--shadow-1);
     transform: scale(0);
+    background-color: rgba(222, 184, 135, 0.489);
+    color: var(--primary);
 }
 .scrollToBottom.active {
     transform: scale(1);
 }
 /* outer */
 .users-group {
-    color: var(--text-2);
     font-size: small;
 }
 .group-user-container {
@@ -74,9 +63,9 @@
     gap: 5px;
     border-radius: 5px;
     margin: 4px 0;
+    color: whitesmoke;
 }
 .group-user:hover {
-    background-color: var(--secondary);
     transition: .1s ease;
 }
 .group-user img {
@@ -87,11 +76,10 @@
 .group-user p {
     font-size: small;
     font-weight: 500;
-    color: var(--text-2);
 }
 .group-user .user-status {
-    color: var(--text-1);
     font-size: xx-small;
+    color: burlywood;
 }
 @media (max-width: 768px) {
     .base-right {
@@ -100,7 +88,9 @@
         right: 0;
         width: 314px;
         border-radius: 8px;
-        border: 1px solid var(--secondary);
+        margin-top: 1em;
+        border: 3px solid burlywood;
+        border-style: dashed;
     }
     .base-right-hide {
         transform: translateX(calc(100% + 1em));
