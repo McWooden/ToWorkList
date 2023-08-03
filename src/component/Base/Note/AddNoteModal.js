@@ -20,7 +20,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
     const borderStyle = {border: `1px solid ${currentColor}`}
     const date = convertDateToString(new Date().toLocaleDateString())
     const nickname = useSelector(state => state.source.profile.nickname)
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+    const channel = useSelector(state => state.channel.book)
     function handleColor(e) {
         setCurrentColor(e.target.value)
     }
@@ -39,9 +39,9 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
             .then((res) => {
                 noteToast(dataToSend)
                 dispatch(setTodo(res.data))
-                channelTodoDetail.send({
+                channel.send({
                     type: 'broadcast',
-                    event: 'shouldUpdate',
+                    event: `${idPageOfBook}/${todoId}:shouldUpdate`,
                     payload: `${nickname} menambah catatan`,
                 })
             })

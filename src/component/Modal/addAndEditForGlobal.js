@@ -19,8 +19,7 @@ export function AddAndEditForGlobal() {
     const { type, item_title, desc, color, deadline, _id } = addAndEdit
     const profileNickname = useSelector(state => state.source?.profile?.nickname || null)
 
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
-    const channelPage = useSelector(state => state.channel.page)
+    const channel = useSelector(state => state.channel.book)
 
     const dispatch = useDispatch()
     const formRef = useRef()
@@ -89,9 +88,9 @@ export function AddAndEditForGlobal() {
               todoToast({item_title: dataToSend.item_title, color: dataToSend.color})
               dispatch(setSource(res.data))
               dispatch(resetAddAndEdit())
-              channelPage.send({
+              channel.send({
                 type: 'broadcast',
-                event: 'shouldUpdate',
+                event: `${idPageOfBook}:shouldUpdate`,
                 payload: `${profileNickname} membuat tugas baru (${dataToSend.item_title})`
               })
             })
@@ -107,9 +106,9 @@ export function AddAndEditForGlobal() {
                 noteToast(dataToSend)
                 dispatch(setTodo(res.data))
                 dispatch(resetAddAndEdit())
-                channelTodoDetail.send({
+                channel.send({
                   type: 'broadcast',
-                  event: 'shouldUpdate',
+                  event: `${idPageOfBook}/${_id}:shouldUpdate`,
                   payload: `${profileNickname} menambah catatan`,
               })
             })
@@ -122,17 +121,17 @@ export function AddAndEditForGlobal() {
               saveToast(dataToSend.item_title)
                 if (type === 'EDIT_TODO_INSIDE') {
                     dispatch(setTodo(res.data))
-                    channelTodoDetail.send({
+                    channel.send({
                       type: 'broadcast',
-                      event: 'shouldUpdate',
+                      event: `${idPageOfBook}/${_id}:shouldUpdate`,
                       payload: `${profileNickname} memperbarui detail`,
                     })
                 }
                 if (type === 'EDIT_TODO_OUTSIDE') {
                     dispatch(setSource(res.data))
-                    channelPage.send({
+                    channel.send({
                       type: 'broadcast',
-                      event: 'shouldUpdate',
+                      event: `${idPageOfBook}:shouldUpdate`,
                       payload: `${profileNickname} mengedit ${dataToSend.item_title}`
                     })
                 }
@@ -258,27 +257,4 @@ export function AddAndEditForGlobal() {
           </form>
       </Modal>
     )
-  }  
-
-
-  // const RandomComponent = () => {
-  //   const [randomState, setRandomState] = useState(false)
-  //   useEffect(() => {
-  //     const channel = supabase.channel('randomChannel')
-  //     channel.subscribe()
-  //   })
-  //   function randomFunction () {
-  //     channel.send({
-  //       type: 'broadcast',
-  //       event: 'test',
-  //       payload: {
-  //         message: 'hello, world'
-  //       },
-  //     })
-  //   }
-  //   return (
-  //     <div onClick={randomFunction}>
-  //       <p>randomText</p>
-  //     </div>
-  //   )
-  // }
+  }

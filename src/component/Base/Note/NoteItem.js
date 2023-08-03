@@ -17,16 +17,16 @@ export function NoteItem({data}) {
     const [confirmOpen, setConfirmOpen] = useState(false)
     const dispatch = useDispatch()
     const nickname = useSelector(state => state.source.profile.nickname)
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+    const channel = useSelector(state => state.channel.book)
     async function handleDelete() {
         try {
             await axios.delete(`${API}/notes/${idPageOfBook}/${todoId}/${data._id}`)
             .then((res) => {
                 deleteToast('catatan berhasil dihapus')
                 dispatch(setTodo(res.data))
-                channelTodoDetail.send({
+                channel.send({
                     type: 'broadcast',
-                    event: 'shouldUpdate',
+                    event: `${idPageOfBook}/${todoId}:shouldUpdate`,
                     payload: `${nickname} menghapus catatan`,
                 })
             })

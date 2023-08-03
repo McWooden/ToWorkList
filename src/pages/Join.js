@@ -104,7 +104,7 @@ export default function Join(){
     return (
         <div className="modal_container d-flex fc-column ai-center jc-center">
             <div className="modal_context d-flex fd-column modal_context-transparent">
-                <div className="book_card of-hidden w-1/4">
+                <div className="book_card of-hidden w-1/4 bg-primary border-burlywood shadow-lg text-whitesmoke">
                     <div className="book_card of-hidden-header d-flex fd-column">
                         <img src={`${url}/${data.profile.avatar_url}`} alt={data.profile.book_title} className='banner h-32 object-cover'/>
                     </div>
@@ -118,7 +118,7 @@ export default function Join(){
                             </div>
                             <div className='flex-2'>
                                 <p>{data.profile.desc}</p>
-                                <div className='join_btn d-flex jc-center ai-center mt-2 w-full pointer' onClick={gabung}>
+                                <div className='join_btn d-flex jc-center ai-center mt-2 w-full pointer shadow-md text-primary bg-burlywood' onClick={gabung}>
                                     <img src={myAccount.avatar} alt={myAccount.nickname} />
                                     <span className='d-flex ai-center jc-flex-end'>
                                         Bergabung
@@ -130,7 +130,7 @@ export default function Join(){
                     </div>
                 </div>
                 <div className="navigate_to pointer">
-                    <div className="auth_btn d-flex ai-center pointer" onClick={() => navigate('/')}>
+                    <div className="auth_btn d-flex ai-center pointer bg-zinc-900 text-whitesmoke" onClick={() => navigate('/')}>
                         <FontAwesomeIcon icon={fontawesome.faChevronLeft}/>
                         <span>Kembali</span>
                     </div>

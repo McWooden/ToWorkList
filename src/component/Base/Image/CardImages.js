@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from 'react-redux'
 
 export function CardImages() {
     const nickname = useSelector(state => state.source.profile.nickname)
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+    const channel = useSelector(state => state.channel.book)
     const idBook = useSelector(state => state.fetch.idBook)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todo = useSelector(state => state.todo)
@@ -70,9 +70,9 @@ export function CardImages() {
                 setImage(null)
                 setPreviewUrl('')
                 dispatch(setTodo(res.data))
-                channelTodoDetail.send({
+                channel.send({
                     type: 'broadcast',
-                    event: 'shouldUpdate',
+                    event: `${idPageOfBook}/${todo.id}:shouldUpdate`,
                     payload: `${nickname} menambahkan foto`,
                 })
             })

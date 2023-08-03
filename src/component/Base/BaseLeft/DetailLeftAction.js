@@ -12,8 +12,7 @@ import { setAddAndEdit } from '../../../redux/addAndEditForGlobalStore';
 
 export function DetailLeftAction() {
     const nickname = useSelector(state => state.source.profile.nickname)
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
-    const channelPage = useSelector(state => state.channel.page)
+    const channel = useSelector(state => state.channel.book)
     const [deleteOpen, setDeleteOpen] = useState(false)
     const item = useSelector(state => state.todo)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
@@ -24,14 +23,14 @@ export function DetailLeftAction() {
             await axios.delete(`${API}/source/addTodo/${idPageOfBook}/${item.id}`)
             .then((res) => {
                 deleteToast('berhasil dihapus')
-                channelTodoDetail.send({
+                channel.send({
                     type: 'broadcast',
-                    event: 'shouldUpdate',
+                    event: `${idPageOfBook}/${item.id}:shouldUpdate`,
                     payload: `${nickname} menghapus tugas ini`,
                 })
-                channelPage.send({
+                channel.send({
                     type: 'broadcast',
-                    event: 'shouldUpdate',
+                    event: `${idPageOfBook}:shouldUpdate`,
                     payload: `${nickname} menghapus (${title})`
                 })
                 dispatch(clearTodo())

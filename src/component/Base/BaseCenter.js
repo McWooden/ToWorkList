@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSource } from '../../redux/sourceSlice';
 import { API } from '../../utils/variableGlobal';
 import axios from 'axios';
-import supabase from '../../utils/supabase';
-import { setChannelPage } from '../../redux/channelReducer';
 export function BaseCenter() {
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
@@ -20,17 +18,12 @@ export function BaseCenter() {
       },
       [dispatch, idPageOfBook],
     )
+    const channel = useSelector(state => state.channel.book)
     useEffect(() => {
-      const channel = supabase.channel(idPageOfBook)
-      channel.on('broadcast', {event: 'shouldUpdate'}, payload => {
-        if (payload.event === 'shouldUpdate') setShouldUpdate(payload.payload)
-      }).subscribe()
-      dispatch(setChannelPage(channel))
-      return () => {
-        channel.unsubscribe()
-        dispatch(setChannelPage(null))
-      }
-    }, [dispatch, idPageOfBook])
+      channel.on('broadcast', {event: `${idPageOfBook}:shouldUpdate`}, payload => {
+        setShouldUpdate(payload.payload)
+      })
+    }, [channel, dispatch, idPageOfBook])
     
     return (
         <div className="base-center p-relative of-auto">

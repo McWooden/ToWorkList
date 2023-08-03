@@ -12,8 +12,6 @@ import { CenterActionButton } from "./BaseCenter/CenterActionButton"
 import { AddNoteModal } from "./Note/AddNoteModal"
 import { SidebarRightChat } from "./BaseRight/SidebarRightChat"
 import { DetailCard } from "./BaseCenter/DetailCard"
-import supabase from "../../utils/supabase"
-import { setChannelTodoDetail } from '../../redux/channelReducer'
 
 export function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)
@@ -37,18 +35,13 @@ export function TodoDetail() {
       },
       [dispatch, idPageOfBook, todoId],
     )
+    const channel = useSelector(state => state.channel.book)
     useEffect(() => {
         fetchData()
-        const channel = supabase.channel(`${idPageOfBook}/${todoId}`)
-        channel.on('broadcast', { event: 'shouldUpdate' }, payload => {
-            if (payload.event === 'shouldUpdate') setShouldUpdate(payload.payload)
-        }).subscribe()
-        dispatch(setChannelTodoDetail(channel))
-        return () => {
-            channel.unsubscribe()
-            dispatch(setChannelTodoDetail(null))
-        }
-    }, [dispatch, fetchData, idPageOfBook, todoId])
+        channel.on('broadcast', { event: `${idPageOfBook}/${todoId}` }, payload => {
+            setShouldUpdate(payload.payload)
+        })
+    }, [channel, dispatch, fetchData, idPageOfBook, todoId])
     
     return (
         <>

@@ -8,7 +8,7 @@ import { sendToast } from '../../../utils/notif'
 import { setChat } from '../../../redux/todo'
 
 export function FormBaseRight() {
-    const channelTodoDetailChat = useSelector(state => state.channel.todoDetailChat)
+    const channel = useSelector(state => state.channel.book)
     const profile = useSelector(state => state.source.profile)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
@@ -30,9 +30,9 @@ export function FormBaseRight() {
             await axios.post(`${API}/chat/${idPageOfBook}/${todoId}`, dataToSend)
             .then(async (res) => {
                 dispatch(setChat(res.data.chat))
-                channelTodoDetailChat.send({
+                channel.send({
                     type: 'broadcast',
-                    event: 'newMessage',
+                    event: `${idPageOfBook}/${todoId}:newMessage`,
                     payload: res.data.chat,
                 });
                 setMsg('');

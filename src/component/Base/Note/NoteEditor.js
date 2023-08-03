@@ -17,7 +17,7 @@ export function NoteEditor() {
     const todoId = useSelector(state => state.todo.id)
     const data = useSelector(state => state.source.noteEditor)
     const nickname = useSelector(state => state.source.profile.nickname)
-    const channelTodoDetail = useSelector(state => state.channel.todoDetail)
+    const channel = useSelector(state => state.channel.book)
     const [noteVal, setNoteVal] = useState(null)
     const [discard, setDiscard] = useState(false)
     const dispatch = useDispatch()
@@ -52,9 +52,9 @@ export function NoteEditor() {
                 dispatch(setTodo(res.data))
                 modalClose()
                 console.log(res)
-                channelTodoDetail.send({
+                channel.send({
                     type: 'broadcast',
-                    event: 'shouldUpdate',
+                    event: `${idPageOfBook}/${todoId}:shouldUpdate`,
                     payload: `${nickname} memperbarui catatan`,
                 })
             })

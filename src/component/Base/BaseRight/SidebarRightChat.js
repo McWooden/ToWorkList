@@ -7,9 +7,7 @@ import { HideBase } from '../../TodoApp/TodoApp'
 import { useState, useEffect } from 'react'
 import { FormBaseRight } from './FormBaseRight'
 import { ChatModel } from '../../Model/Chat'
-import supabase from '../../../utils/supabase'
 import { setChat } from '../../../redux/todo'
-import { setChannelTodoDetailChat } from '../../../redux/channelReducer'
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
@@ -61,17 +59,12 @@ export function SidebarRightChat() {
     }, [chat, myNickname])
 
 
+    const channel = useSelector(state => state.channel.book)
     useEffect(() => {
-        const channel = supabase.channel(`${idPageOfBook}/${todoId}/chat`);
-        channel.on('broadcast', { event: 'newMessage' }, payload => {
+        channel.on('broadcast', { event: `${idPageOfBook}/${todoId}:newMessage` }, payload => {
             dispatch(setChat(payload.payload))
-        }).subscribe();
-        dispatch(setChannelTodoDetailChat(channel));
-        return () => {
-            channel.unsubscribe();
-            dispatch(setChannelTodoDetailChat(null));
-        };
-    }, [dispatch, idPageOfBook, todoId]);    
+        })
+    }, [channel, dispatch, idPageOfBook, todoId]);    
     
     return (
         <div className={`base-right of-auto ${hideRightBase?'base-right-hide':'base-right-show'} d-flex fd-column bg-indianred`}>

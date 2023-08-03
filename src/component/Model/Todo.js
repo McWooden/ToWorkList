@@ -22,7 +22,7 @@ export function TodoModel({item}) {
     const [deleteOpen, setDeleteOpen] = useState(false)
     const title = item.details.item_title
 
-    const channelPage = useSelector(state => state.channel.page)
+    const channel = useSelector(state => state.channel.book)
 
     useEffect(() => {
         let handler = (e) => {
@@ -48,9 +48,9 @@ export function TodoModel({item}) {
             .then((res) => {
                 deleteToast('berhasil dihapus')
                 dispatch(setSource(res.data))
-                channelPage.send({
+                channel.send({
                     type: 'broadcast',
-                    event: 'shouldUpdate',
+                    event: `${idPageOfBook}:shouldUpdate`,
                     payload: `${myNickname} menghapus (${title})`
                 })
             })
