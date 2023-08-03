@@ -41,7 +41,7 @@ export function PageList() {
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
             fetchData()
             pageToast(payload.payload)
-        }).subscribe(cb =>  console.log(cb))
+        }).subscribe()
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
     },[dispatch, fetchData, idBook, nickname])

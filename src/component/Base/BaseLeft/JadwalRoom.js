@@ -1,10 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faImage, faChevronRight, faGear} from '@fortawesome/free-solid-svg-icons'
-import { setSource } from '../../../redux/sourceSlice';
+import { setJadwalSource } from '../../../redux/sourceSlice';
 import { toast } from 'react-toastify'
 import { url, API } from '../../../utils/variableGlobal';
-import { useSelector } from 'react-redux';
-import { useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
 import { convertDateToString } from '../../../utils/convertDateFormat';
 import axios from 'axios';
 import { FileDrop } from '../../Modal/FileDrop';
@@ -16,7 +16,7 @@ import { ModalSecond } from '../../Modal/ModalSecond';
 export function JadwalRoom() {
     const idBook = useSelector(state => state.fetch.idBook)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
-    const pageDetails = useSelector(state => state.source.source.details)
+    const jadwalUrl = useSelector(state => state.source.source.details.jadwal_url)
     const [full, setFull] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const date = convertDateToString(new Date().toLocaleDateString())
@@ -38,18 +38,27 @@ export function JadwalRoom() {
         let imageFile = event.dataTransfer.files[0]
         handleFile(imageFile)
     }
+    const channel = useSelector(state => state.channel.book)
+    const dispatch = useDispatch()
+    useEffect(() => {
+      channel.on('broadcast', {event: `${idPageOfBook}:newJadwal`}, payload => {
+        dispatch(setJadwalSource(payload.payload))
+      })
+    }, [channel, dispatch, idPageOfBook])
+    
     // form
     const formRef = useRef()
     async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData()
         formData.append('image', image)
-        formData.append('jadwal_url', pageDetails.jadwal_url)
+        formData.append('jadwal_url', jadwalUrl)
         const promise = loadingToast('Mengunggah gambar')
         try {
             await axios.post(`${API}/image/jadwal/${idBook}/${idPageOfBook}`, formData)
             .then(res => {
-                setSource(res.data)
+                dispatch(setJadwalSource(res.data.jadwal_url))
+                channel.send({type: 'broadcast', event: `${idPageOfBook}:newJadwal`, payload: res.data.jadwal_url})
                 imageToast('jadwal diperbarui')
                 setModalOpen(false)
                 formRef.current.reset()
@@ -69,7 +78,7 @@ export function JadwalRoom() {
     const [isFetching, setIsFetching] = useState(false)
     return (
         <div className="jadwal d-flex fd-row of-hidden p-relative shadow bg-zinc-900">
-            <div className='preview' style={{background: `url(${url}/${pageDetails.jadwal_url})`}}>
+            <div className='preview' style={{background: `url(${url}/${jadwalUrl})`}}>
                 <div className="setting pointer d-flex jc-center ai-center" onClick={() => setModalOpen(true)}>
                     <FontAwesomeIcon icon={faGear} className='setting-btn'/>
                 </div>
@@ -112,7 +121,7 @@ export function JadwalRoom() {
             </FileDrop>
             <ModalSecond open={full} close={() => setFull(false)}>
                 <div className="jadwal-image" onClick={() => setFull(false)}>
-                    <img src={`${url}/${pageDetails.jadwal_url}`} alt="jadwal room" />
+                    <img src={`${url}/${jadwalUrl}`} alt="jadwal room" />
                 </div>
             </ModalSecond>
         </div>

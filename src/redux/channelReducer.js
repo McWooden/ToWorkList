@@ -8,7 +8,6 @@ export const channelStore = createSlice({
     reducers: {
         setChannel: (state, action) => {
             state.book = action.payload
-            console.log(action.payload)
         }
     }
 })

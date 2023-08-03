@@ -38,9 +38,12 @@ export const sourceSlice = createSlice({
         setBooksProfile: (state, action) => {
             state.booksProfile = action.payload
         },
+        setJadwalSource: (state, action) => {
+            state.source.details.jadwal_url = action.payload
+        }
     },
 })
 
-export const { setPageType, setPageDetails, setSource, setProfile, setGuildProfile, setMembers, setError, setNoteEditor, setBooksProfile } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, setProfile, setGuildProfile, setMembers, setError, setNoteEditor, setBooksProfile, setJadwalSource } = sourceSlice.actions
 
 export default sourceSlice.reducer
