@@ -72,7 +72,7 @@ export function SettingPageListItem({data, callback}) {
     let btnRef = useRef()
     const [deleteOpen, setDeleteOpen] = useState(false)
     const active = pathPageOfBook === title
-    async function deleteTodo() {
+    async function deletePage() {
         try {
             await axios.delete(`${API}/book/${idBook}/page/${id}`)
             .then((res) => {
@@ -85,6 +85,7 @@ export function SettingPageListItem({data, callback}) {
                     event: 'pageShouldUpdate',
                     payload: `${nickname} menghapus halaman ${title}`,
                 })
+                
             })
             .catch(err => {
                 deleteToast('gagal terhapus')
@@ -116,7 +117,7 @@ export function SettingPageListItem({data, callback}) {
                 </ul>
             </div>
         </div>
-        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deleteTodo} timeout={10} deleteText={'akan dihapus beserta isinya'}/>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deletePage} timeout={10} deleteText={'akan dihapus beserta isinya'}/>
         <ModalSecond open={openAdd} close={handleClose}>
         <div className="addPage">
             <form className="form-modal" onSubmit={handleSubmit} ref={formRef}>

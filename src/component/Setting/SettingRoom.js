@@ -117,7 +117,7 @@ export function SettingRoom() {
             {pages}
         </div>
         <div className="setting_action d-flex">
-            <span className="setting_btn d-flex ai-center pointer blue_btn" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
+            <span className="setting_btn d-flex ai-center pointer blue_btn text-primary bg-burlywood shadow" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
         </div>
         {modalElement}
         </>

@@ -8,34 +8,41 @@ import { PageListItem } from './PageListItem'
 import supabase from '../../../utils/supabase'
 import { pageToast } from '../../../utils/notif'
 import { setChannel } from '../../../redux/channelReducer'
+import { setPages } from '../../../redux/sourceSlice'
 
 export function PageList() {
     const idBook = useSelector((state) => state.fetch.idBook)
-    const [pages, setPages] = useState([])
+    const [pagesElement, setPagesElement] = useState([])
     const [loading, setLoading] = useState(true)
     const [reloading, setReloading] = useState(false)
     const dispatch = useDispatch()
     const nickname = useSelector(state => state.source.profile.nickname)
+    const pages = useSelector(state => state.source.pages)
 
     const fetchData = useCallback(async () => {
         setReloading(false)
         try {
             const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
-            setPages(
-                response.data.pages.map((item, index) => (
-                    <PageListItem key={index} data={item} />
-                ))
-            )
+            dispatch(setPages(response.data.pages))
+            
         } catch (error) {
             setReloading(true)
         }
-    }, [idBook])
+    }, [dispatch, idBook])
 
     useEffect(() => {
-        setLoading(true)
-        fetchData()
-        setLoading(false)
-    }, [dispatch, fetchData])
+        if (!pages) {
+            setLoading(true)
+            fetchData()
+            setLoading(false)
+        } else {
+            setPagesElement(
+                pages.map((item, index) => (
+                    <PageListItem key={index} data={item} />
+                ))
+            )
+        }
+    }, [dispatch, fetchData, pages])
     useEffect(() => {
         const channel = supabase.channel(idBook)
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
@@ -55,7 +62,7 @@ export function PageList() {
             {loading && 
                 <div className="room d-flex ai-center p-relative pointer loading" />
             }
-            {pages}
+            {pagesElement}
         </div>
     )
 }
