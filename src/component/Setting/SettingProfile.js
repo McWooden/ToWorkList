@@ -89,8 +89,13 @@ export function SettingProfile() {
         try {
             await axios.put(`${API}/book/${idBook}/judul`, {book_title: valueJudul})
             .then(res => {
-                saveToast('berhasil disimpan')
+                saveToast('Judul berhasil disimpan')
                 dispatch(setGuildProfile(res.data.profile))
+                channel.send({
+                    type: 'broadcast',
+                    event: 'guildProfileShouldUpdate',
+                    payload: res.data.profile
+                })
             })
             .catch(() => {
                 saveToast('gagal disimpan')
@@ -110,8 +115,13 @@ export function SettingProfile() {
         try {
             await axios.put(`${API}/book/${idBook}/desc`, {desc: valueDesc})
             .then(res => {
-                saveToast('berhasil disimpan')
+                saveToast('Deskripsi berhasil disimpan')
                 dispatch(setGuildProfile(res.data.profile))
+                channel.send({
+                    type: 'broadcast',
+                    event: 'guildProfileShouldUpdate',
+                    payload: res.data.profile
+                })
             })
             .catch(() => {
                 saveToast('gagal disimpan')
