@@ -105,7 +105,6 @@
 .guild_editor .form-modal {
     width: fit-content;
     padding: 0;
-    flex: 0;
 }
 .guild_editor .form-modal.flex-one {
     flex: 1;

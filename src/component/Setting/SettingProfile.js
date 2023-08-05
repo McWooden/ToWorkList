@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil, faXmark, faPenToSquare, faTrash, faImage, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+import { faXmark, faPenToSquare, faTrash, faImage, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { convertDateToString } from '../../utils/convertDateFormat'
 import { DeleteBookModal } from '../Modal/DeleteBookModal'
@@ -242,33 +242,28 @@ export function SettingProfile() {
                             </div>
                         </form>
                         </>
-                    :
-                        <>
-                        <p className='setting_full_name_guild'>{profile.book_title}</p>
-                        <FontAwesomeIcon icon={faPencil} onClick={() => setEditJudul(true)} className='action_btn pointer'/>
-                        </>
+                    :   <p className='setting_full_name_guild' onClick={() => setEditJudul(true)} >{profile.book_title}</p>
                 }
                 </div>
                 <h5>Deskripsi</h5>
-                <div className="guild_editor">
+                <div className="guild_editor flex">
                     {editDesc?
                             <>
-                            <form className="form-modal flex-one fd-column" onSubmit={handleSubmitDesc}>
-                                <textarea value={valueDesc} placeholder={profile.desc} onChange={(e) => setValueDesc(e.target.value)}/>
-                                <div className="sb_action_btn d-grid pi-center as-flex-end">
-                                    <FontAwesomeIcon icon={faXmark} onClick={() => setEditDesc(false)} className='action_btn pointer'/>
+                            <form className="form-modal flex-one flex flex-row w-full" onSubmit={handleSubmitDesc}>
+                                <textarea value={valueDesc} className='flex-1' placeholder={profile.desc} onChange={(e) => setValueDesc(e.target.value)}/>
+                                <div className="sb_action_btn d-grid pi-center self-start">
+                                    <FontAwesomeIcon icon={faXmark} onClick={() => setEditDesc(false)} className='action_btn pointer bg-no rounded'/>
                                     {saveLoadingDesc?
                                         <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn pointer spinner'/>
                                     :
-                                        <button type='submit'>
+                                        <button type='submit' className='h-[28px] content-start'>
                                             <FontAwesomeIcon icon={faFloppyDisk} className='action_btn pointer'/>
                                         </button>
                                     }
                                 </div>
                             </form>
                             </>
-                        :
-                            <p onClick={() => setEditDesc(true)}>{profile.desc}</p>
+                        :   <p onClick={() => setEditDesc(true)}>{profile.desc}</p>
                     }
                 </div>
                 <h5>Dibuat pada</h5>
