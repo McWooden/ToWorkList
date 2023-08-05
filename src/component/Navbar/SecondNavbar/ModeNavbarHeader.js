@@ -5,7 +5,7 @@ import { faGear } from '@fortawesome/free-solid-svg-icons'
 import Setting from '../../Setting/Setting'
 
 export function ModeNavbarHeader() {
-    const pathBook = useSelector(state => state.fetch.pathBook)
+    const nameBook = useSelector(state => state.source.guildProfile?.book_title)
     const [settingOpen, setSettingOpen] = useState(false)
     function handleClose() {
         setSettingOpen(false)
@@ -27,7 +27,7 @@ export function ModeNavbarHeader() {
     }, [settingOpen])
     return (
         <div className="modeNavbarHeader d-flex ai-center">
-            <h4 className='guild-name d-inline-block of-hidden'>{pathBook}</h4>
+            <h4 className='guild-name d-inline-block of-hidden'>{nameBook || ''}</h4>
             <FontAwesomeIcon icon={faGear} className='settingNavbar pointer' onClick={() => setSettingOpen(true)}/>
             <Setting open={settingOpen} close={handleClose}/>
         </div>

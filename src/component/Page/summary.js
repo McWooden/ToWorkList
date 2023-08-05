@@ -9,9 +9,9 @@ import { loadingToast, saveToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
 import { setProfile } from '../../redux/sourceSlice'
 import { setLocalAccount } from '../../utils/localstorage'
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
-import remarkGfm from 'remark-gfm'
-import emoji from 'remark-emoji'
+// import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+// import remarkGfm from 'remark-gfm'
+import Markdown from 'markdown-to-jsx'
 import { setSummary } from '../../redux/summaryStore'
 import { useCallback } from 'react'
 
@@ -185,7 +185,8 @@ export default function Summary() {
             <div className="mt-2.5 relative whitespace-pre rounded h-fit p-1 max-w-full bg-zinc-900 shadow-md">
                 {isMe && <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2' onClick={() => setModalBioForm(true)}><FontAwesomeIcon icon={faPen}/></div>}
                 <div className='overflow-y-auto text-sm'>
-                    <ReactMarkdown remarkPlugins={[remarkGfm, emoji]}>{summaryData?.bio}</ReactMarkdown>
+                    {/* <ReactMarkdown remarkPlugins={[remarkGfm]}>{summaryData?.bio}</ReactMarkdown> */}
+                    <Markdown>{summaryData?.bio}</Markdown>
                 </div>
             </div>
         </div>

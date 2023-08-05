@@ -75,7 +75,10 @@ export function NoteEditor() {
                     icon={faNoteSticky} 
                     style={{color: data.color}} 
                     className='note-color'/>
-                    <button type='submit' className='note-btn-simpan pointer d-flex as-flex-end'>Simpan</button>
+                    <div className='self-end flex'>
+                        <a className='note-btn-simpan pointer d-flex text-whitesmoke' target='_blank' href='https://dev.to/codeninjausman/markdown-a-simple-guide-1f2f' rel="noreferrer">Docs</a>
+                        <button type='submit' className='note-btn-simpan pointer d-flex'>Simpan</button>
+                    </div>
                 </div>
                 <div className='note-body fd-column d-flex'>
                     <textarea
