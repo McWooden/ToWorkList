@@ -3,6 +3,12 @@ import { toast } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaperPlane, faTrash, faPenToSquare, faCheck, faNoteSticky, faImage, faRightFromBracket, faUser, faMap, faFloppyDisk, faExclamation, faCommentDots, faPerson} from '@fortawesome/free-solid-svg-icons'
 
+export function blankToast(text) {
+    toast(
+    <div className="myToast">
+        <p>{text || 'Berhasil'}</p>
+    </div>)
+}
 export function editToast(text) {
     toast(
     <div className="myToast myToast-edit">

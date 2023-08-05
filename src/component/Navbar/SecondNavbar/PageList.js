@@ -8,7 +8,7 @@ import { PageListItem } from './PageListItem'
 import supabase from '../../../utils/supabase'
 import { pageToast } from '../../../utils/notif'
 import { setChannel } from '../../../redux/channelReducer'
-import { setPages } from '../../../redux/sourceSlice'
+import { setPages, setUpdateGuildProfile } from '../../../redux/sourceSlice'
 
 export function PageList() {
     const idBook = useSelector((state) => state.fetch.idBook)
@@ -48,7 +48,11 @@ export function PageList() {
         channel.on('broadcast', {event: 'pageShouldUpdate'}, payload => {
             fetchData()
             pageToast(payload.payload)
-        }).subscribe()
+        })
+        channel.on('broadcast', {event: 'guildProfileShouldUpdate'}, payload => {
+            dispatch(setUpdateGuildProfile(payload.payload))
+        })
+        channel.subscribe()
         dispatch(setChannel(channel))
         return () => channel.unsubscribe()
     },[dispatch, fetchData, idBook, nickname])

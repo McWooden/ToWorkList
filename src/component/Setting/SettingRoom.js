@@ -7,40 +7,29 @@ import axios from 'axios'
 import { ModalSecond } from '../Modal/ModalSecond'
 import { API } from '../../utils/variableGlobal'
 import { SettingPageListItem } from './SettingPageListItem'
+import { setPages } from '../../redux/sourceSlice'
 
 export function SettingRoom() {
     const [openAdd, setOpenAdd] = useState(false)
     const idBook = useSelector((state) => state.fetch.idBook)
-    const [pages, setPages] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [reloading, setReloading] = useState(false)
-    const dispatch = useDispatch()
+    const [pagesElement, setPagesElement] = useState([])
     const nickname = useSelector(state => state.source.profile.nickname)
+    const pages = useSelector(state => state.source.pages)
+    const dispatch = useDispatch()
     const dataToElement = useCallback((data) => {
-        setPages(
-            data.map((item, index) => (
-                <SettingPageListItem key={index} data={item} callback={dataToElement}/>
-            ))
-        )
-    }, [])
+        dispatch(setPages(data))
+    }, [dispatch])
     const channel = useSelector(state => state.channel.book)
-    const fetchData = useCallback(async () => {
-        setReloading(false)
-        setLoading(true)
-        try {
-            const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
-            dataToElement(response.data.pages)
-        } catch (error) {
-            setReloading(true)
-        }
-        setLoading(false)
-    }, [idBook, dataToElement])
     function handleClose() {
         setOpenAdd(false)
     }
     useEffect(() => {
-        fetchData()
-    }, [dispatch, fetchData])
+        setPagesElement(
+            pages.map((item, index) => (
+                <SettingPageListItem key={index} data={item} callback={dataToElement}/>
+            ))
+        )
+    }, [dataToElement, pages])
     const [value, setValue] = useState('')
     const [btnLoading, setBtnLoading] = useState(false)
     const formRef = useRef()
@@ -108,13 +97,7 @@ export function SettingRoom() {
         <>
         {headerElement}
         <div className='roomList of-auto'>
-            {reloading &&
-                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
-                    <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
-                </div>
-            }
-            {loading && <div className="room d-flex ai-center p-relative pointer loading" />}
-            {pages}
+            {pagesElement}
         </div>
         <div className="setting_action d-flex">
             <span className="setting_btn d-flex ai-center pointer blue_btn text-primary bg-burlywood shadow" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>

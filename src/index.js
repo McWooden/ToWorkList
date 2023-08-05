@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'
-// import './component/style/light.css'
 import App from './pages/App'
 import { Auth, Register, Login, Pemulihan } from './pages/Auth'
 import reportWebVitals from './reportWebVitals'
@@ -10,6 +9,7 @@ import store from './redux/store'
 import { Provider } from 'react-redux';
 import Join from './pages/Join'
 import { AddAndEditForGlobal } from './component/Modal/addAndEditForGlobal';
+import { Flip } from 'react-toastify';
 
 
 // import all css
@@ -49,6 +49,7 @@ root.render(
               autoClose={1000}
               position="top-center"
               closeButton={false}
+              transition={Flip}
               />
   </Provider>
   {/* </React.StrictMode> */}

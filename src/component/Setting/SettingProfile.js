@@ -69,6 +69,7 @@ export function SettingProfile() {
                 formRef.current.reset()
                 setImage(null)
                 setPreviewUrl('')
+                channel.send({type: 'broadcast', event: 'guildProfileShouldUpdate', payload: res.data.profile}) // lanjutin dari sini buat guild profile update realtime
             }).catch(err => {
                 imageToast('pp gagal diunggah')
                 toast.dismiss(promise)

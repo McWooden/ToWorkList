@@ -55,11 +55,6 @@ export function BaseRight() {
                 console.log(error)
             }
         }
-        const interval = setInterval(() => {
-            if (idBook === '@me') return handleEmpety()
-            fetchData()
-        }, 60000)
-        return () => clearInterval(interval)
     }, [idBook, members, dispatch, fetchData])
     useEffect(() => {
         channel.on('broadcast', {event: 'memberShouldUpdate'}, payload => {

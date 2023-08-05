@@ -30,6 +30,9 @@ export const sourceSlice = createSlice({
         setGuildProfile: (state, action) => {
             state.guildProfile = action.payload
         },
+        setUpdateGuildProfile: (state, action) => {
+            state.guildProfile = {...state.guildProfile, ...action.payload}
+        },
         setMembers: (state, action) => {
             state.members = action.payload
         },
@@ -48,6 +51,6 @@ export const sourceSlice = createSlice({
     },
 })
 
-export const { setPageType, setPageDetails, setSource, setProfile, setGuildProfile, setMembers, setError, setNoteEditor, setBooksProfile, setJadwalSource, setPages } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, setProfile, setGuildProfile, setMembers, setError, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile } = sourceSlice.actions
 
 export default sourceSlice.reducer
