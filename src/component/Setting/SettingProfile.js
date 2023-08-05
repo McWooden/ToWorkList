@@ -228,9 +228,9 @@ export function SettingProfile() {
                 <div className='guild_editor d-flex ai-center'>
                 {editJudul?
                         <>
-                        <form className="form-modal flex flex-row" onSubmit={handleSubmitJudul}>
+                        <form className="form-modal flex flex-col" onSubmit={handleSubmitJudul}>
                             <input type="text" placeholder={profile.book_title} value={valueJudul}  onChange={(e) => setValueJudul(e.target.value)} className='border-0'/>
-                            <div className="sb_action_btn pi-center d-flex flex-row">
+                            <div className="sb_action_btn d-flex flex-row">
                                 <FontAwesomeIcon icon={faXmark} onClick={() => setEditJudul(false)} className='action_btn pointer bg-no rounded'/>
                                 {saveLoading?
                                     <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn pointer rounded spinner'/>
@@ -249,9 +249,9 @@ export function SettingProfile() {
                 <div className="guild_editor flex">
                     {editDesc?
                             <>
-                            <form className="form-modal flex-one flex flex-row w-full" onSubmit={handleSubmitDesc}>
+                            <form className="form-modal flex-one flex flex-col w-full" onSubmit={handleSubmitDesc}>
                                 <textarea value={valueDesc} className='flex-1' placeholder={profile.desc} onChange={(e) => setValueDesc(e.target.value)}/>
-                                <div className="sb_action_btn d-grid pi-center self-start">
+                                <div className="sb_action_btn d-flex gap-y-2 self-start">
                                     <FontAwesomeIcon icon={faXmark} onClick={() => setEditDesc(false)} className='action_btn pointer bg-no rounded'/>
                                     {saveLoadingDesc?
                                         <FontAwesomeIcon icon={fontawesome.faSpinner} className='action_btn pointer spinner'/>
