@@ -5,6 +5,7 @@ import { TodoDetail } from './TodoDetail';
 import { TodoPage } from './TodoPage';
 import { BaseRight } from './BaseRight';
 import Summary from '../Page/summary';
+import Email from '../Page/email';
 
 // const pages = useMemo(() => [
 //     {
@@ -39,12 +40,13 @@ export function Base() {
     const todoId = useSelector(state => state.todo.id)
 
     return (
-        <div className='base of-hidden d-flex'>
+        <div className='base of-hidden d-flex text-whitesmoke'>
             {todoId? <TodoDetail/> :
                 (<>
                     {pageType === 'welcome' && <Welcome/>}
                     {pageType === 'faAddressBook' && <Summary/>}
                     {pageType === 'faCheck' && <><TodoPage/><BaseRight/></>}
+                    {pageType === 'faEnvelope' && <Email/>}
                 </>)
             }
         </div>

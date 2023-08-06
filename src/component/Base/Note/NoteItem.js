@@ -9,8 +9,6 @@ import { Confirm } from '../../Modal/Confirm';
 import axios from 'axios';
 import { useState } from 'react'
 import { convertDateToString } from '../../../utils/convertDateFormat';
-// import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
-// import remarkGfm from 'remark-gfm';
 import Markdown from 'markdown-to-jsx';
 
 
@@ -59,7 +57,7 @@ export function NoteItem({data}) {
             </div>
             <div className='note-body d-flex fd-column'>
                 <pre className='of-auto'>
-                    <Markdown>{data.context}</Markdown>
+                    <Markdown className="markdown">{data.context}</Markdown>
                 </pre>
                 <span className='note-info as-flex-end'>{`${data.by}, ${convertDateToString(data.date)}`}</span>
             </div>

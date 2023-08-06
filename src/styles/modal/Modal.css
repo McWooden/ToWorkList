@@ -25,8 +25,8 @@
 }
 .second_modal {
     border-radius: 20px;
-    height: fit-content;
     width: calc(100% - 1em);
+    height: fit-content;
     max-width: 512px;
 }
 .add-modal {
@@ -40,6 +40,9 @@
     font-size: 5em;
     color: royalblue;
     padding: 5px;
+}
+.form-modal > * {
+    outline: none;
 }
 .form-modal, .img-form d-flex fd-column {
     flex: 1;

@@ -88,7 +88,7 @@ nav {
 /* navbar 2 */
 .modeNavbar {
     width: 240px;
-    margin: 2em 0;
+    margin-bottom: 4em;
     border-radius: 8px;
     margin-left: .25em;
     color: whitesmoke;

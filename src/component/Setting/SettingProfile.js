@@ -252,7 +252,7 @@ export function SettingProfile() {
                             </div>
                         </form>
                         </>
-                    :   <p className='setting_full_name_guild' onClick={() => setEditJudul(true)} >{profile.book_title}</p>
+                    :   <p className='setting_full_name_guild' onClick={() => setEditJudul(true)} >{profile.book_title || 'Tambahkan judul'}</p>
                 }
                 </div>
                 <h5>Deskripsi</h5>
@@ -273,7 +273,7 @@ export function SettingProfile() {
                                 </div>
                             </form>
                             </>
-                        :   <p onClick={() => setEditDesc(true)}>{profile.desc}</p>
+                        :   <p onClick={() => setEditDesc(true)}>{profile.desc || 'Tambahkan Deskripsi'}</p>
                     }
                 </div>
                 <h5>Dibuat pada</h5>
