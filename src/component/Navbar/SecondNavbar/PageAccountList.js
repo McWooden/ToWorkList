@@ -14,12 +14,6 @@ export function PageAccountList() {
         },
         {
             details: {
-                page_title: 'Notifikasi',
-                icon: 'faBell',
-            }
-        },
-        {
-            details: {
                 page_title: 'Surat',
                 icon: 'faEnvelope',
             }
