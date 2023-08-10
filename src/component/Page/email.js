@@ -79,7 +79,7 @@ function MailRight() {
     setMailsElement(box)
   }, [mails])
   useEffect(() => {
-      fetchData()
+    fetchData()
   }, [fetchData])
   
   return (
@@ -110,35 +110,63 @@ function MailRight() {
     </>
   )
 }
+
 function Reading({data}) {
+  const [item, setItem] = useState(data)
   const [teruskan, setTeruskan] = useState(false)
   const [balasan, setBalasan] = useState(false)
+  const [balasanElement, setbalasanElement] = useState(null)
+  function handleBalas(item) {
+    setItem(item)
+    setBalasan(false)
+    blankToast('Balasan terkirim')
+  }
+  useEffect(() => {
+    let box = []
+    item.balasan.forEach((item, index) => {
+      box.push(
+        <div key={index} className='flex flex-col border-burlywood rounded shadow text-sm p-2'>
+          <div className='flex flex-row items-center gap-3'>
+            <img src={item.avatar} alt="avatar" className='w-[42px] rounded-full' />
+            <p>{item.nama}</p>
+          </div>
+          <p className='p-3'>{item.balas}</p>
+        </div>
+      )
+    })
+    setbalasanElement(box)
+  },[item])
   return (
-    <div className='h-full flex flex-col'>
-      <h2 className='m-5'>{data.subjek}</h2>
-      <div className='flex gap-2 items-center'>
-        <img src={data.pengirim.avatar} alt="avatar" className='rounded-full w-[48px] shadow'/>
-        <div>
-          <p>{data.pengirim.nama}</p>
-          <p>{format(parseISO(data.createdAt), 'd MMMM, HH.mm', { id })}</p>
+    <>
+      <div className='h-full flex flex-col'>
+        <h2 className='m-5'>{item.subjek}</h2>
+        <div className='flex gap-2 items-center'>
+          <img src={item.pengirim.avatar} alt="avatar" className='rounded-full w-[48px] shadow'/>
+          <div>
+            <p>{item.pengirim.nama}</p>
+            <p>{format(parseISO(item.createdAt), 'd MMMM, HH.mm', { id })}</p>
+          </div>
+        </div>
+        <div className='m-5 border-burlywood rounded p-2 shadow flex-1'>
+          <Markdown>{item.body}</Markdown>
+        </div>
+        <div className='flex gap-3'>
+          <div className='border-burlywood text-burlywood flex place-items-center px-3 py-2 rounded-3xl shadow-md my-2 gap-3 pointer' onClick={() => setBalasan(true)} >
+            <FontAwesomeIcon icon={faReply}/>
+            <p>Balas</p>
+          </div>
+          <div className='border-burlywood text-burlywood flex place-items-center px-3 py-2 rounded-3xl shadow-md my-2 gap-3 pointer' onClick={() => setTeruskan(true)}>
+            <FontAwesomeIcon icon={faShare}/>
+            <p>Teruskan</p>
+          </div>
+        </div>
+        <div className='flex flex-col m-5 pb-5'>
+          {balasanElement}
         </div>
       </div>
-      <div className='m-5 border-burlywood rounded p-2 shadow flex-1'>
-        <Markdown>{data.body}</Markdown>
-      </div>
-      <div className='flex gap-3'>
-        <div className='border-burlywood text-burlywood flex place-items-center px-3 py-2 rounded-3xl shadow-md my-2 gap-3 pointer' onClick={() => setBalasan(true)} >
-          <FontAwesomeIcon icon={faReply}/>
-          <p>Balas</p>
-        </div>
-        <div className='border-burlywood text-burlywood flex place-items-center px-3 py-2 rounded-3xl shadow-md my-2 gap-3 pointer' onClick={() => setTeruskan(true)}>
-          <FontAwesomeIcon icon={faShare}/>
-          <p>Teruskan</p>
-        </div>
-      </div>
-      <KirimSurat open={teruskan} close={() => setTeruskan(false)} type={'teruskan'} mail={data}/>
-      <Balas open={balasan} close={() => setBalasan(false)} mail={data}/>
-    </div>
+      <KirimSurat open={teruskan} close={() => setTeruskan(false)} type={'teruskan'} mail={item}/>
+      <Balas open={balasan} close={() => setBalasan(false)} mail={item} cb={handleBalas}/>
+    </>
   )
 }
 
@@ -241,11 +269,11 @@ function KirimSurat({mail, open, close, type}) {
     <Modal open={open} close={() => close(false)}>
       <form onSubmit={handleSubmit} className='form-modal p-4 flex flex-col'>
           <div className='flex justify-between'>
-          <p className='capitalize'>{type}</p>
-          <button type="submit" className='py-1 px-3 flex gap-2 place-items-center pointer'>
-            <FontAwesomeIcon icon={faPaperPlane}/>
-            <span>Kirim</span>
-          </button>
+            <p className='capitalize'>{type}</p>
+            <button type="submit" className='py-1 px-3 flex gap-2 place-items-center pointer'>
+              <FontAwesomeIcon icon={faPaperPlane}/>
+              <span>Kirim</span>
+            </button>
           </div>
           <table className='w-full h-full'>
             <tbody>
@@ -301,12 +329,38 @@ function KirimSurat({mail, open, close, type}) {
   )
 }
 
-function Balas({mail, open, close}) {
+function Balas({mail, open, close, cb}) {
   const [inputBalasan, setInputBalasan] = useState('')
+  const myProfile = useSelector(state => state.source?.profile)
+  async function handleSubmit(e) {
+    e.preventDefault()
+    if (!inputBalasan) return blankToast('Isi teks!')
+    const data = {
+      nama: `${myProfile.nickname}#${myProfile.tag}`,
+      avatar: `${myProfile.avatar}`,
+      type: 'user',
+      createdAt: new Date().toISOString(),
+      balas: inputBalasan,
+    }
+    try {
+      await axios.post(API+`/mail/balasan/${mail._id}`, data)
+      .then(res => {
+        cb(res.data.mail)
+      })
+    } catch (error) {}
+  }
+
   return (
     <Modal open={open} close={() => close()}>
-      <form>
-        <textarea value={inputBalasan} onChange={(e) => setInputBalasan(e.target.value)} className='w-full h-full mt-5' placeholder='Ketik balasan'/>
+      <form onSubmit={handleSubmit} className='form-modal flex flex-col'>
+        <div className='flex justify-between'>
+          <p className='capitalize'>Balas</p>
+          <button type="submit" className='py-1 px-3 flex gap-2 place-items-center pointer'>
+            <FontAwesomeIcon icon={faPaperPlane}/>
+            <span>Kirim</span>
+          </button>
+        </div>
+        <textarea value={inputBalasan} onChange={(e) => setInputBalasan(e.target.value)} className='mt-5 flex-1' placeholder='Ketik balasan'/>
       </form>
     </Modal>
   )
