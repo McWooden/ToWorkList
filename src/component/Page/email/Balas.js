@@ -2,21 +2,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import { blankToast } from '../../../utils/notif'
-import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { API } from '../../../utils/variableGlobal'
 import { Modal } from '../../Modal/Modal'
 
-export default function Balas({mail, open, close, cb}) {
+export default function Balas({mail, open, close, cb, thisProfile}) {
     const [inputBalasan, setInputBalasan] = useState('')
-    const myProfile = useSelector(state => state.source?.profile)
+    const profile = thisProfile
     async function handleSubmit(e) {
       e.preventDefault()
       if (!inputBalasan) return blankToast('Isi teks!')
       const data = {
-        nama: `${myProfile.nickname}#${myProfile.tag}`,
-        avatar: `${myProfile.avatar}`,
-        type: 'user',
+        nama: profile.nama,
+        avatar: profile.avatar,
         createdAt: new Date().toISOString(),
         balas: inputBalasan,
       }

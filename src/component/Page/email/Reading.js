@@ -10,7 +10,7 @@ import Balas from './Balas'
 
 
 
-export default function Reading({data}) {
+export default function Reading({data, thisProfile}) {
     const [item, setItem] = useState(data)
     const [teruskan, setTeruskan] = useState(false)
     const [balasan, setBalasan] = useState(false)
@@ -63,8 +63,8 @@ export default function Reading({data}) {
             {balasanElement}
           </div>
         </div>
-        <KirimSurat open={teruskan} close={() => setTeruskan(false)} type={'teruskan'} mail={item}/>
-        <Balas open={balasan} close={() => setBalasan(false)} mail={item} cb={handleBalas}/>
+        <KirimSurat open={teruskan} close={() => setTeruskan(false)} type={'teruskan'} mail={item} thisProfile={thisProfile}/>
+        <Balas open={balasan} close={() => setBalasan(false)} mail={item} cb={handleBalas} thisProfile={thisProfile}/>
       </>
     )
   }

@@ -9,9 +9,10 @@ export function BookItem({data}) {
     const dispatch = useDispatch()
     
     function handleClick() {
+        console.log(data);
         dispatch(setPageType('welcome'))
         dispatch(setFetch({path: data.profile.book_title, id: data._id}))
-        dispatch(setGuildProfile(data.profile))
+        dispatch(setGuildProfile({...data.profile, _id: data._id}))
         dispatch(setMembers(null))
         dispatch(clearTodo())
     }

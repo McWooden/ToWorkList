@@ -22,10 +22,13 @@ export function PageList() {
     const fetchData = useCallback(async () => {
         setReloading(false)
         try {
-            const response = await axios.get(`${API}/book/${idBook}/get/pages/details`)
+            const response = await axios.get(`${API}/book/${idBook}/get/pages/details`).catch(err => {
+                throw new Error(err)
+            })
             dispatch(setPages(response.data.pages))
             
         } catch (error) {
+            setLoading(false)
             setReloading(true)
         }
     }, [dispatch, idBook])

@@ -93,7 +93,7 @@ export function TodoModel({item}) {
             </div>
             <div className="todo-right d-flex fd-row p-relative">
                 <div className={`card-finish bg-zinc-800 pointer ${dones.includes(myNickname)?'finish-on':'finish-off'} shadow-inner`} onClick={handleReverse}>
-                    <div className="card-finish-value bg-zinc-300"></div>
+                    <div className="card-finish-value bg-zinc-300 shadow"></div>
                 </div>
                 <div className="card-more d-flex ai-center" ref={btnRef}>
                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>

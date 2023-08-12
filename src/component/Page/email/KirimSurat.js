@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { useCallback, useState } from "react"
 import { blankToast } from '../../../utils/notif'
-import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { API, url } from '../../../utils/variableGlobal'
@@ -11,8 +10,8 @@ import { format, parseISO } from 'date-fns'
 import id from 'date-fns/locale/id'
 import Markdown from 'markdown-to-jsx'
 
-export default function KirimSurat({mail, open, close, type}) {
-    const myProfile = useSelector(state => state.source?.profile)
+export default function KirimSurat({mail, open, close, type, thisProfile}) {
+    const profile = thisProfile
     const [kepadaBox, setKepadaBox] = useState([])
     const [kepadaBoxElement, setKepadaBoxElement] = useState([])
     const [search, setSearch] = useState('')
@@ -26,16 +25,15 @@ export default function KirimSurat({mail, open, close, type}) {
       if (type === 'tulis' && !bodyMail) return blankToast('Tidak ada isi')
       const data = {
         pengirim: {
-          nama: `${myProfile.nickname}#${myProfile.tag}`,
-          avatar: myProfile.avatar,
-          _id: myProfile._id
+          nama: profile.nama,
+          avatar: profile.avatar,
+          _id: profile._id
         },
         penerima: kepadaBox,
         subjek: type === 'teruskan' ? mail.subjek : subjek,
-        body: type === 'teruskan' ? `${bodyMail}\n----SURAT YANG DITERUSKAN----\nDari ${mail.pengirim.nama}\n${format(parseISO(mail.createdAt), 'EEE, d MMMM, HH.mm', { locale: id })}\nSubjek ${mail.subjek}\nPenerima ${myProfile.nickname}#${myProfile.tag}\n${mail.body}` : bodyMail
+        body: type === 'teruskan' ? `${bodyMail}\n----SURAT YANG DITERUSKAN----\nDari ${mail.pengirim.nama}\n${format(parseISO(mail.createdAt), 'EEE, d MMMM, HH.mm', { locale: id })}\nSubjek ${mail.subjek}\nPenerima ${profile.nama}\n${mail.body}` : bodyMail
       }
       try {
-        console.log(subjek)
         const response = await axios.post(API+'/mail/send', data)
         if (response.status !== 201) throw new Error()
         close()
@@ -121,7 +119,7 @@ export default function KirimSurat({mail, open, close, type}) {
               <tbody>
                 <tr>
                   <td>Dari</td>
-                  <td>{myProfile.nickname}#{myProfile.tag}</td>
+                  <td>{profile.nama}</td>
                 </tr>
                 <tr>
                   <td>Kepada</td>
@@ -159,7 +157,7 @@ export default function KirimSurat({mail, open, close, type}) {
                   <p>Dari {mail.pengirim.nama}</p>
                   <p>{format(parseISO(mail.createdAt), 'EEE, d MMMM, HH.mm', { locale: id })}</p>
                   <p>Subjek {mail.subjek}</p>
-                  <p>Penerima {myProfile.nickname}#{myProfile.tag}</p>
+                  <p>Penerima {profile.nickname}#{profile.tag}</p>
                 </div>
                 <Markdown>
                   {mail.body}
