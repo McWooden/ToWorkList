@@ -10,6 +10,9 @@
 .bg-primary {
     background-color: #2A394E;
 }
+.bg-primary-bright {
+    background-color: #2f4058;
+}
 .text-primary {
     color: #2A394E;
 }
@@ -27,6 +30,9 @@
 }
 .border-burlywood {
     border: 1px solid burlywood;
+}
+.border-b-burlywood {
+    border-bottom: 1px solid burlywood;
 }
 .bg-ok {
     background-color: #0d7377;
