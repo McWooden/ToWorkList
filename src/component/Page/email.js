@@ -23,7 +23,7 @@ export default function Email() {
   const [initialized, setInitialized] = useState(false);
   
   useEffect(() => {
-    OneSignal.init({ appId: '54a01f93-b460-49e6-8813-8428b4ef42ab' }).then(() => {
+    OneSignal.init({ appId: '54a01f93-b460-49e6-8813-8428b4ef42ab', 'Content-Type': 'application/javascript' }).then(() => {
       setInitialized(true);
       OneSignal.showSlidedownPrompt().then(() => {
         blankToast('Push ter nganu');
