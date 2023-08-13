@@ -35,6 +35,7 @@ export default function Email() {
   // }, [])
   return (
     <>
+    {initialized && <span>initialized</span>}
     <MailLeft thisProfile={thisProfile}/>
     <MailRight thisProfile={thisProfile}/>
     </>
