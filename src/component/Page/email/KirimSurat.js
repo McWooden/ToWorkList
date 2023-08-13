@@ -85,6 +85,7 @@ export default function KirimSurat({mail, open, close, type, thisProfile}) {
       })
       setSearchBoxElement(box)
     }, [searchBox])
+
     useEffect(() => {
       let box = []
       kepadaBox?.forEach((item, index) => {

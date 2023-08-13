@@ -6,18 +6,32 @@ import { Greeting } from "../../utils/greeting"
 import KirimSurat from './email/KirimSurat'
 import DisplayMail from './email/DisplayMail'
 import { useSelector } from 'react-redux'
+// import OneSignal from 'react-onesignal'
+import runOneSignal from '../../utils/runOneSignal'
 
 export default function Email() {
   const myProfile = useSelector(state => state.source.profile)
   const [thisProfile, setThisProfile] = useState({})
   useEffect(() => {
-    console.log(myProfile);
       setThisProfile({
           nama: `${myProfile.nickname}#${myProfile.tag}`,
           avatar: myProfile.avatar,
           _id: myProfile._id
       })
   },[myProfile])
+  // const [initialized, setInitialized] = useState(false);
+  
+  // useEffect(() => {
+  //   OneSignal.init({ appId: '54a01f93-b460-49e6-8813-8428b4ef42ab' }).then(() => {
+  //     setInitialized(true);
+  //     OneSignal.showSlidedownPrompt().then(() => {
+  //       console.log('anjay gaatau');
+  //     })
+  //   })
+  // },[])
+  useEffect(() => {
+    runOneSignal()
+  }, [])
   return (
     <>
     <MailLeft thisProfile={thisProfile}/>
