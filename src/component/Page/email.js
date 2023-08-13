@@ -20,11 +20,8 @@ export default function Email() {
           _id: myProfile._id
       })
   },[myProfile])
-  const [initialized, setInitialized] = useState(false);
-  
   useEffect(() => {
     OneSignal.init({ appId: '54a01f93-b460-49e6-8813-8428b4ef42ab', 'Content-Type': 'application/javascript' }).then(() => {
-      setInitialized(true);
       OneSignal.showSlidedownPrompt().then(() => {
         blankToast('Push ter nganu');
       })
@@ -35,7 +32,6 @@ export default function Email() {
   // }, [])
   return (
     <>
-    {initialized && <span>initialized</span>}
     <MailLeft thisProfile={thisProfile}/>
     <MailRight thisProfile={thisProfile}/>
     </>
