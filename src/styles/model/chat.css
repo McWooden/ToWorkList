@@ -5,6 +5,7 @@
     padding: .25em .5em;
     margin: .5em 0;
     background-color: whitesmoke;
+    color: #2A394E;
 }
 .chat-card-nickname {
     font-size: .7em;
@@ -24,6 +25,7 @@
     padding: 2px 5px;
     font-size: .7em;
     word-break: break-all;
+    color: #2A394E;
 }
 .chat-card-message.my {
     background-color: var(--primary);

@@ -1,6 +1,6 @@
 {
   "short_name": "Toworklist",
-  "name": "Create React App Sample",
+  "name": "The Multiplayer Task",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ffffff",
+  "background_color": "#2A394E"
 }
