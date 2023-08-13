@@ -16,19 +16,6 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <div id="portal"></div>
-    <div id="portal_second"></div>
-    <div id="confirm"></div>
-
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./serviceworker.js')
-          .then(reg => console.log('success', reg))
-          .catch(err => console.log('failure', err))
-        })
-      }
-    </script>
+    <h1>Silahkan nyalakan data untuk melihat data terbaru</h1>
   </body>
 </html>
