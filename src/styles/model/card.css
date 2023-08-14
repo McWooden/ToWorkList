@@ -2,9 +2,9 @@
 @import url(./bookCard.css);
 .todo-card {
     width: 100%;
-    min-height: 58px;
     border-radius: 5px;
     color: dimgray;
+    scroll-snap-align: start;
 }
 .todo-left {
     flex: 1;

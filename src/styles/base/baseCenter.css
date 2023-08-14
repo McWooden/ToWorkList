@@ -1,9 +1,12 @@
 .center {
     gap: 5px;
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 5px;
+    overflow: scroll;
+    height: 100%;
 }
 .center-action-btn {
     bottom: 5px;
-    /* gap: .5em; */
     background-color: indianred;
     border-radius: 50px;
 }
