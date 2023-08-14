@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setPageType, setMembers, setGuildProfile } from "../../../redux/sourceSlice"
+import { setPageType, setMembers, setGuildProfile, setPages } from "../../../redux/sourceSlice"
 import { setFetch } from "../../../redux/fetchSlice"
 import { url } from "../../../utils/variableGlobal"
 import { clearTodo } from "../../../redux/todo"
@@ -9,11 +9,11 @@ export function BookItem({data}) {
     const dispatch = useDispatch()
     
     function handleClick() {
-        console.log(data);
         dispatch(setPageType('welcome'))
         dispatch(setFetch({path: data.profile.book_title, id: data._id}))
         dispatch(setGuildProfile({...data.profile, _id: data._id}))
         dispatch(setMembers(null))
+        dispatch(setPages(null))
         dispatch(clearTodo())
     }
     return (
