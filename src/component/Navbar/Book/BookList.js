@@ -31,7 +31,7 @@ export function BookList() {
             fetchData()
         } else {
             let sessionBook = []
-            booksProfile.forEach((item, index) => {
+            booksProfile?.forEach((item, index) => {
                 sessionBook.push(<BookItem key={index} data={item}/>)
             })
             setAllBook(sessionBook)
