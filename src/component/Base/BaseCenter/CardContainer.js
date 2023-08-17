@@ -43,19 +43,21 @@ export function CardContainer() {
 
     useEffect(() => {
         channel.on('broadcast', {event: `${pageId}:structureUpdate`}, payload => {
-            const data = source.list
-            console.log(payload.payload);
-
-            data.map(item => {
-                const thisItem = item
-                const contain = payload.payload.newOrder.find(x => x._id === item._id)
-                if (contain) thisItem.order = contain.order
-                return thisItem
-            })
-
-            dispatch(setSource({...source, list: data}))
-
-            blankToast(payload.payload.message)
+            try {
+                const data = source.list
+                console.log(payload.payload);
+                
+                data.map(item => {
+                    const thisItem = item
+                    const contain = payload.payload.newOrder.find(x => x._id === item._id)
+                    if (contain) thisItem.order = contain.order
+                    return thisItem
+                })
+                
+                dispatch(setSource({...source, list: data}))
+                
+                blankToast(payload.payload.message)
+            } catch (err) {}
         })
     }, [channel, dispatch, handleSourceToListSorted, pageId, source])
     
