@@ -47,9 +47,10 @@ export function CardContainer() {
             console.log(payload.payload);
 
             data.map(item => {
+                const thisItem = item
                 const contain = payload.payload.newOrder.find(x => x._id === item._id)
-                if (contain) item.order = contain.order
-                return item
+                if (contain) thisItem.order = contain.order
+                return thisItem
             })
 
             dispatch(setSource({...source, list: data}))
