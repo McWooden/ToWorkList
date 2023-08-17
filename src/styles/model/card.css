@@ -4,7 +4,6 @@
     width: 100%;
     border-radius: 5px;
     color: dimgray;
-    scroll-snap-align: start;
 }
 .todo-left {
     flex: 1;

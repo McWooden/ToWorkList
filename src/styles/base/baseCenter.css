@@ -1,8 +1,6 @@
 .center {
     gap: 5px;
-    scroll-snap-type: y mandatory;
-    scroll-padding-top: 5px;
-    overflow: scroll;
+    /* overflow: scroll; */
     height: 100%;
 }
 .center-action-btn {

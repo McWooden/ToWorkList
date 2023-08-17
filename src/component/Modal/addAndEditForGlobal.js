@@ -33,34 +33,28 @@ export function AddAndEditForGlobal() {
     const idPageOfBook = useSelector((state) => state.fetch.idPageOfBook)
     const pathPageOfBook = useSelector((state) => state.fetch.pathPageOfBook)
   
-    const [currentColor, setCurrentColor] = useState(() => {
-      if (type === 'ADD_TODO') {
-        return colors[Math.floor(Math.random() * colors.length)]
-      } else {
-        return color
-      }
-    })
+    const [currentColor, setCurrentColor] = useState('')
     
-    const [inputTitle, setInputTitle] = useState(item_title)
-    const [inputDesc, setInputDesc] = useState(desc)
+    const [inputTitle, setInputTitle] = useState('')
+    const [inputDesc, setInputDesc] = useState('')
   
     const borderStyle = { border: `1px solid ${currentColor}` }
   
     useEffect(() => {
-      setInputTitle(item_title)
-      setInputDesc(desc)
       if (type === 'ADD_TODO' || type === 'ADD_NOTE') {
         if (!currentColor) setCurrentColor(colors[Math.floor(Math.random() * colors.length)])
         setColorsTileSource([{ color: currentColor, deadline: new Date().toLocaleDateString('en-US', { 
           month: 'numeric', 
-            day: 'numeric', 
-            year: 'numeric' 
-          })}])
+          day: 'numeric', 
+          year: 'numeric' 
+        })}])
       } else {
+        setInputTitle(item_title)
+        setInputDesc(desc)
         setCurrentColor(color)
         setColorsTileSource([{ color, deadline: new Date(deadline) }])
       }
-    }, [item_title, desc, color, deadline, type, colors, currentColor])
+    }, [color, colors, currentColor, deadline, desc, item_title, type])
     
     function handleColor(e) {
       setCurrentColor(e.target.value)
@@ -184,6 +178,7 @@ export function AddAndEditForGlobal() {
                 tileContent={({ date, view }) => {
                     const color = colorsTile.find((c) => {
                     const tileDate = new Date(c.date)
+                    console.log();
                     return tileDate.getTime() === date.getTime()
                     })
                     if (color) {

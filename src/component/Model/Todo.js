@@ -10,7 +10,7 @@ import axios from 'axios'
 import { API } from '../../utils/variableGlobal'
 import { setAddAndEdit } from '../../redux/addAndEditForGlobalStore'
 
-export function TodoModel({item}) {
+export function TodoModel({item, handleAreaToDrag}) {
     const profile = useSelector(state => state.source.profile)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const [dones, setDones] = useState(item.dones)
@@ -85,7 +85,7 @@ export function TodoModel({item}) {
         <>
         <div className="todo-card d-flex fd-row  jc-space-between bg-zinc-900 shadow">
             <div className="todo-left d-flex fd-row p-relative">
-            <div className="card-color" style={{backgroundColor: item.details.color}}></div>
+            <div className="card-color" style={{backgroundColor: item.details.color}} {...handleAreaToDrag}></div>
             <div className="card-text d-flex fd-column jc-center pointer" onClick={handleTextClick}>
                 <div className="card-title">{title}</div>
                 <div className="card-description">{item.details.desc.slice(0, 103)}</div>
@@ -99,7 +99,7 @@ export function TodoModel({item}) {
                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
                 </div>
                 <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                    <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300'>
+                    <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300 py-2'>
                         <li className='d-flex ai-center' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_OUTSIDE', ...item}))}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                             <span>edit</span>

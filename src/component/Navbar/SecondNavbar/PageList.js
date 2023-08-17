@@ -45,6 +45,7 @@ export function PageList() {
                 ))
             )
         }
+        setLoading(false)
     }, [dispatch, fetchData, pages])
     useEffect(() => {
         const channel = supabase.channel(idBook)
