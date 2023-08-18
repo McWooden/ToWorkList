@@ -14,38 +14,44 @@ import { toast } from 'react-toastify'
 
 export function CardContainer() {
     const pageId = useSelector(state => state.fetch.idPageOfBook)
-    const source = useSelector(state => state.source.source)
-    const [list, setList] = useState(source.list)
+    const reduxSource = useSelector(state => state.source.source)
+    const [list, setList] = useState(reduxSource.list)
     const [saveIt, setSaveIt] = useState(false)
     const channel = useSelector(state => state.channel.book)
     const myNickname = useSelector(state => state.source.profile.nickname)
     const dispatch = useDispatch()
 
     const handleSourceToListSorted = useCallback((dataToSort) => {
-        const sortedList = dataToSort ? [...source.list].sort((a, b) => a.order - b.order) : [];
+        const sortedList = dataToSort ? [...reduxSource.list].sort((a, b) => a.order - b.order) : []
         setList(sortedList)
-    }, [source])
+    }, [reduxSource])
 
     useEffect(() => {
-        handleSourceToListSorted(source.list)
-    }, [handleSourceToListSorted, source])
+        handleSourceToListSorted(reduxSource.list)
+    }, [handleSourceToListSorted, reduxSource])
 
     function handleOnDragEnd(result) {
-        const { destination, source } = result
-        setSaveIt(true)
         try {
+            const { destination, source } = result
+            if (source.index === destination.index) return
+            
             const items = Array.from(list)
             const [recordedItems] = items.splice(source.index, 1)
             items.splice(destination.index, 0, recordedItems)
             setList(items)
-        } catch (error) {}
+
+            const isOrderDifferent = !reduxSource.list.every((item, index) => item._id === items[index]._id);
+            setSaveIt(isOrderDifferent);
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {
         channel.on('broadcast', {event: `${pageId}:structureUpdate`}, payload => {
             try {
-                const data = source.list
-                console.log(payload.payload);
+                const data = reduxSource.list
+                console.log(payload.payload)
                 
                 data.map(item => {
                     const thisItem = item
@@ -54,12 +60,12 @@ export function CardContainer() {
                     return thisItem
                 })
                 
-                dispatch(setSource({...source, list: data}))
+                dispatch(setSource({...reduxSource, list: data}))
                 
                 blankToast(payload.payload.message)
             } catch (err) {}
         })
-    }, [channel, dispatch, handleSourceToListSorted, pageId, source])
+    }, [channel, dispatch, handleSourceToListSorted, pageId, reduxSource])
     
     async function handleSaveIt() {
         const dataToSend = {newOrder: list.map((data, index) => ({_id: data._id, order: index}))}
@@ -83,20 +89,20 @@ export function CardContainer() {
         }
     }
     function handleCancelSaveIt() {
-        handleSourceToListSorted(source.list)
+        handleSourceToListSorted(reduxSource.list)
         setSaveIt(false)
     }
     return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
         <div className="dragArea">
             {saveIt && (
-                <div className='flex w-full'>
-                    <div className="h-[45px] flex justify-center shadow items-center gap-x-2 text-xs rounded m-2 pointer bg-no flex-1" onClick={handleCancelSaveIt}>
-                        <FontAwesomeIcon icon={faXmark}/>
-                    </div>
-                    <div className="h-[45px] flex justify-center shadow items-center gap-x-2 text-xs rounded m-2 pointer bg-info flex-[5_5_0%]" onClick={handleSaveIt}>
+                <div className='flex bg-info shadow m-2 rounded items-center'>
+                    <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]" onClick={handleSaveIt}>
                         <FontAwesomeIcon icon={faFloppyDisk}/>
                         <p>Simpan susunan</p>
+                    </div>
+                    <div className="h-[45px] flex justify-center shadow items-center gap-x-2 text-xs rounded m-2 pointer bg-no flex-1" onClick={handleCancelSaveIt}>
+                        <FontAwesomeIcon icon={faXmark}/>
                     </div>
                 </div>
             )}

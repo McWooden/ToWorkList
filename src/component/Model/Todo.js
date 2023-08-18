@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
 import { Confirm } from "../Modal/Confirm"
 import { setAllTodo } from "../../redux/todo"
@@ -83,9 +83,9 @@ export function TodoModel({item, handleAreaToDrag}) {
     }
     return (
         <>
-        <div className="todo-card d-flex fd-row  jc-space-between bg-zinc-900 shadow">
+        <div className="todo-card d-flex fd-row  jc-space-between bg-zinc-900 shadow" {...handleAreaToDrag}>
             <div className="todo-left d-flex fd-row p-relative">
-            <div className="card-color" style={{backgroundColor: item.details.color}} {...handleAreaToDrag}></div>
+            <div className="card-color" style={{backgroundColor: item.details.color}}></div>
             <div className="card-text d-flex fd-column jc-center pointer" onClick={handleTextClick}>
                 <div className="card-title">{title}</div>
                 <div className="card-description">{item.details.desc.slice(0, 103)}</div>
@@ -93,7 +93,9 @@ export function TodoModel({item, handleAreaToDrag}) {
             </div>
             <div className="todo-right d-flex fd-row p-relative">
                 <div className={`card-finish bg-zinc-800 pointer ${dones.includes(myNickname)?'finish-on':'finish-off'} shadow-inner`} onClick={handleReverse}>
-                    <div className="card-finish-value bg-zinc-300 shadow"></div>
+                    <div className={`card-finish-value bg-zinc-300 shadow flex place-items-center`}>
+                    <FontAwesomeIcon icon={faBars} className='w-full text-gray-100'/>
+                    </div>
                 </div>
                 <div className="card-more d-flex ai-center" ref={btnRef}>
                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
