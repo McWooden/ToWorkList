@@ -1,7 +1,7 @@
 // public/service-worker.js
 
 const CACHE_NAME = "my-app-cache";
-const urlsToCache = ["/", "/index.html", "/manifest.json", /* tambahkan URL yang ingin di-cache */];
+const urlsToCache = ["/", "/index.html", "/manifest.json", "/offline.html", /* tambahkan URL yang ingin di-cache */];
 
 const self = this
 
