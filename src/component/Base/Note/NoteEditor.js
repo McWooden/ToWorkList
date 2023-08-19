@@ -51,7 +51,6 @@ export function NoteEditor() {
                 noteToastSecond({text: 'catatan berhasil diperbarui', color: data.color})
                 dispatch(setTodo(res.data))
                 modalClose()
-                console.log(res)
                 channel.send({
                     type: 'broadcast',
                     event: `${idPageOfBook}/${todoId}:shouldUpdate`,

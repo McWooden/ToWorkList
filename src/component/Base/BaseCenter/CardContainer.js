@@ -40,8 +40,9 @@ export function CardContainer() {
             items.splice(destination.index, 0, recordedItems)
             setList(items)
 
-            const isOrderDifferent = !reduxSource.list.every((item, index) => item._id === items[index]._id);
-            setSaveIt(isOrderDifferent);
+            const sortedReduxList = [...reduxSource.list].sort((a, b) => a.order - b.order)
+            const changesDetected = sortedReduxList.some((e, i) => e._id !== items[i]._id)
+            setSaveIt(changesDetected)
         } catch (error) {
             console.log(error)
         }

@@ -12,7 +12,7 @@ import { convertDateToString } from '../../../utils/convertDateFormat';
 import Markdown from 'markdown-to-jsx';
 
 
-export function NoteItem({data}) {
+export function NoteItem({data, handleAreaToDrag}) {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
     const [confirmOpen, setConfirmOpen] = useState(false)
@@ -48,7 +48,7 @@ export function NoteItem({data}) {
     return (
         <>
         <div className='note of-hidden bg-zinc-900 text-whitesmoke shadow'>
-            <div className='note-head d-flex jc-space-between ai-center bg-zinc-800 shadow'>
+            <div className='note-head d-flex jc-space-between ai-center bg-zinc-800 shadow' {...handleAreaToDrag}>
                 <FontAwesomeIcon icon={faNoteSticky} style={{color: data.color}} className='note-color'/>
                 <div className="note-btn ai-center text-zinc-400">
                     <FontAwesomeIcon icon={faTrash} className='pointer' onClick={confirmToDelete}/>
