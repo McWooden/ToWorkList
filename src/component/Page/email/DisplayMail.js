@@ -16,46 +16,45 @@ export default function DisplayMail({thisProfile}) {
     const [checkArray, setCheckArray] = useState([])
     const fetchData = useCallback(async() => {
         setIsReading(null)
-        const promise = loadingToast('Mencari surat')
         try {
-        await axios.get(API+"/mail/"+thisProfile._id)
-        .then(res => {
-            setMails(res.data.mails)
-            toast.dismiss(promise)
-        })
-        .catch(err => {throw new Error(err)})
-        } catch (error) {
-        toast.dismiss(promise)
-        }
+            const promise = loadingToast('Mencari surat')
+            await axios.get(API+"/mail/"+thisProfile._id)
+            .then(res => {
+                setMails(res.data.mails)
+                toast.dismiss(promise)
+            })
+            .catch(err => {
+                toast.dismiss(promise)
+                throw new Error(err)
+            })
+        } catch (error) {console.log(error)}
     },[thisProfile])
 
     const [checkAllElement, setCheckAllElement] = useState(<FontAwesomeIcon icon={faSquare} className='pointer hover:bg-orange-400/[.4] my-1 p-2 mx-0.5 rounded'
         onClick={() => {
-        const allId = mails.map(x => x._id)
-        setCheckArray(allId)
+            const allId = mails.map(x => x._id)
+            setCheckArray(allId)
         }}
     />)
 
     function handleDeleteInCheckArray() {
         const promise = loadingToast('Menghapus surat')
-        const data = {
-        arrayOfId: checkArray
-        }
+        const data = {arrayOfId: checkArray}
         try {
-        axios.put(API+`/mail/${thisProfile._id}`, data)
-        .then(res => {
-            if (!res.data.success) throw new Error(res.statusText)
-            toast.dismiss(promise)
-            blankToast('Surat berhasil dihapus')
-            setCheckArray([])
-            setMails(res.data.mails)
-        }).catch(err => {
-            console.log(err)
-            toast.dismiss(promise)
-        })
+            axios.put(API+`/mail/${thisProfile._id}`, data)
+            .then(res => {
+                if (!res.data.success) throw new Error(res.statusText)
+                toast.dismiss(promise)
+                blankToast('Surat berhasil dihapus')
+                setCheckArray([])
+                setMails(res.data.mails)
+            }).catch(err => {
+                console.log(err)
+                toast.dismiss(promise)
+            })
         } catch (error) {
-        console.log(error)
-        toast.dismiss(promise)
+            console.log(error)
+            toast.dismiss(promise)
         }
     }
 
@@ -72,25 +71,25 @@ export default function DisplayMail({thisProfile}) {
     useEffect(() => {
         let box = []
         try {
-        mails?.forEach((data, index) => {
-            const isContain = checkArray.includes(data._id)
-            box.push(
-                <EmailElement key={index} data={data} 
-                isCheck={isContain} 
-                handleCheck={() => {
-                    if (isContain) return setCheckArray(prev => prev.filter((x) => x !== data._id))
-                    setCheckArray(prev => [...prev, data._id])
-                }}
-                handleIsReading={() => setIsReading(data)}/>
-            )
-        })
+            mails?.forEach((data, index) => {
+                const isContain = checkArray.includes(data._id)
+                box.push(
+                    <EmailElement key={index} data={data} 
+                    isCheck={isContain} 
+                    handleCheck={() => {
+                        if (isContain) return setCheckArray(prev => prev.filter((x) => x !== data._id))
+                        setCheckArray(prev => [...prev, data._id])
+                    }}
+                    handleIsReading={() => setIsReading(data)}/>
+                )
+            })
         } catch (error) {console.log(error)}
         setMailsElement(box)
     }, [checkArray, mails])
 
     useEffect(() => {
         fetchData()
-    }, [fetchData])
+    }, [])
 
     return (
         <>
@@ -101,7 +100,7 @@ export default function DisplayMail({thisProfile}) {
                     <p>Kembali</p>
                 </div>
             }
-            <div className='bg-burlywood text-primary flex place-items-center py-2 px-6 rounded shadow-md my-2 w-fit gap-3 pointer' onClick={fetchData}>
+            <div className='bg-burlywood text-primary flex place-items-center py-2 px-6 rounded shadow-md my-2 w-fit gap-3 pointer' onClick={() => fetchData()}>
                 <FontAwesomeIcon icon={faRotate}/>
                 <span>Segarkan</span>
             </div>

@@ -34,10 +34,9 @@ export function PageList() {
     }, [dispatch, idBook])
 
     useEffect(() => {
+        setLoading(true)
         if (!pages) {
-            setLoading(true)
             fetchData()
-            setLoading(false)
         } else {
             setPagesElement(
                 pages.map((item, index) => (
