@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImage } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
-import { setTodo } from '../../../redux/todo'
-import { imageToast, loadingToast } from '../../../utils/notif'
+import { faImage, faFloppyDisk, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { useCallback, useEffect, useState } from 'react'
+import { setImages, setTodo } from '../../../redux/todo'
+import { blankToast, imageToast, loadingToast } from '../../../utils/notif'
 import { API } from '../../../utils/variableGlobal'
 import { FileDrop } from '../../Modal/FileDrop'
 import axios from 'axios'
@@ -11,21 +11,47 @@ import { useRef } from 'react'
 import { toast } from 'react-toastify'
 import { Image } from './Image'
 import { useSelector, useDispatch } from 'react-redux'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
 export function CardImages() {
     const nickname = useSelector(state => state.source.profile.nickname)
     const channel = useSelector(state => state.channel.book)
     const idBook = useSelector(state => state.fetch.idBook)
+    const todoId = useSelector(state => state.todo.id)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
-    const todo = useSelector(state => state.todo)
+    const todoImages = useSelector(state => state.todo.images)
     const dispatch = useDispatch()
     const [modalOpen, setModalOpen] = useState(false)
-    const box = []
-    todo.images.forEach((data, index) => {
-        box.push(
-            <Image key={index} data={data}/>
-        )
-    })
+    const [list, setList] = useState(todoImages)
+    const [saveIt, setSaveIt] = useState(false)
+
+    const handleSourceToListSorted = useCallback((dataToSort) => {
+        const sortedList = dataToSort ? [...todoImages].sort((a, b) => a.order - b.order) : []
+        setList(sortedList)
+    }, [todoImages])
+
+    useEffect(() => {
+        handleSourceToListSorted(todoImages)
+    }, [handleSourceToListSorted, todoImages])
+
+    function handleOnDragEnd(result) {
+        try {
+            const { destination, source } = result
+            if (source.index === destination.index) return
+            
+            const items = Array.from(list)
+            const [recordedItems] = items.splice(source.index, 1)
+            items.splice(destination.index, 0, recordedItems)
+            setList(items)
+
+            const sortedReduxList = [...todoImages].sort((a, b) => a.order - b.order)
+            const changesDetected = sortedReduxList.some((e, i) => e._id !== items[i]._id)
+            setSaveIt(changesDetected)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     const date = convertDateToString(new Date().toLocaleDateString())
     function handleModalOpen() {
         setModalOpen(true)
@@ -62,7 +88,7 @@ export function CardImages() {
         const promise = loadingToast('Mengunggah gambar')
         setIsFetching(true)
         try {
-            await axios.post(`${API}/image/${idBook}/${idPageOfBook}/${todo.id}`, formData)
+            await axios.post(`${API}/image/${idBook}/${idPageOfBook}/${todoId}`, formData)
             .then(res => {
                 imageToast()
                 setModalOpen(false)
@@ -72,7 +98,7 @@ export function CardImages() {
                 dispatch(setTodo(res.data))
                 channel.send({
                     type: 'broadcast',
-                    event: `${idPageOfBook}/${todo.id}:shouldUpdate`,
+                    event: `${idPageOfBook}/${todoId}:shouldUpdate`,
                     payload: `${nickname} menambahkan foto`,
                 })
             })
@@ -87,12 +113,81 @@ export function CardImages() {
             setIsFetching(false)
         }
     }
+    useEffect(() => {
+        channel.on('broadcast', {event: `${idPageOfBook}/${todoId}:imagesUpdate`}, payload => {
+            try {
+                const data = todoImages
+                
+                data.map(item => {
+                    const thisItem = item
+                    const contain = payload.payload.newOrder.find(x => x._id === item._id)
+                    if (contain) thisItem.order = contain.order
+                    return thisItem
+                })
+                
+                dispatch(setImages(data))
+                
+                blankToast(payload.payload.message)
+            } catch (err) {}
+        })
+    }, [channel, dispatch, handleSourceToListSorted, idPageOfBook, todoId, todoImages])
+    async function handleSaveIt() {
+        const dataToSend = {newOrder: list.map((data, index) => ({_id: data._id, order: index}))}
+        const promise = loadingToast('Menyimpan susunan')
+        try {
+            await axios.put(API+`/source/order/notes/${idPageOfBook}/${todoId}`, dataToSend)
+            .then(res => {
+                blankToast("Susunan berhasil disimpan")
+                setSaveIt(false)
+                channel.send({
+                    type: 'broadcast',
+                    event: `${idPageOfBook}/${todoId}:imagesUpdate`,
+                    payload: {...dataToSend, message: `${nickname} mengubah susunan gambar`},
+                })
+            }).catch(err => {
+                console.log(err)
+                
+            }).finally(() => toast.dismiss(promise))
+        } catch (error) {
+            toast.dismiss(promise)
+        }
+    }
+    function handleCancelSaveIt() {
+        handleSourceToListSorted(todoImages)
+        setSaveIt(false)
+    }
     const [isFetching, setIsFetching] = useState(false)
     return (
         <div className='images-container d-flex fd-column'>
-            <div className='images-list d-flex fw-wrap'>
-                {box}
-            </div>
+            {saveIt && (
+                <div className='flex bg-info shadow m-2 rounded items-center'>
+                    <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]" onClick={handleSaveIt}>
+                        <FontAwesomeIcon icon={faFloppyDisk}/>
+                        <p>Simpan susunan</p>
+                    </div>
+                    <div className="h-[45px] flex justify-center shadow items-center gap-x-2 text-xs rounded m-2 pointer bg-no flex-1" onClick={handleCancelSaveIt}>
+                        <FontAwesomeIcon icon={faXmark}/>
+                    </div>
+                </div>
+            )}
+            <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId='imageModel' direction='horizontal'>
+                {(provided) => (
+                    <ul {...provided.droppableProps} ref={provided.innerRef} className='list-none flex flex-wrap gap-1'>
+                    {list?.map((data, index) => (
+                        <Draggable key={data._id} draggableId={data._id} index={index}>
+                            {(provided) => (
+                                <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className='basis-36 grow'>
+                                    <Image data={data} />
+                                </li>
+                            )}
+                        </Draggable>
+                    ))||''}
+                    {provided.placeholder}
+                    </ul>
+                )}
+                </Droppable>
+            </DragDropContext>
             <div className='add-image pointer flex justify-center gap-x-1 items-center bg-info' onClick={handleModalOpen}>
                 <FontAwesomeIcon icon={faImage}/>
                 <span>Foto baru</span>

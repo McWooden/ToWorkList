@@ -9,7 +9,7 @@ import axios from 'axios'
 import { API } from '../../../utils/variableGlobal'
 import { blankToast, loadingToast } from '../../../utils/notif'
 import { useDispatch } from 'react-redux'
-import { setSource } from '../../../redux/sourceSlice'
+import { setNotes } from '../../../redux/todo'
 
 export function Notes() {
     const pageId = useSelector(state => state.fetch.idPageOfBook)
@@ -51,13 +51,13 @@ export function Notes() {
         const dataToSend = {newOrder: list.map((data, index) => ({_id: data._id, order: index}))}
         const promise = loadingToast('Menyimpan susunan')
         try {
-            await axios.put(API+`/source/order/${pageId}/${todoId}`, dataToSend)
+            await axios.put(API+`/source/order/notes/${pageId}/${todoId}`, dataToSend)
             .then(res => {
                 blankToast("Susunan berhasil disimpan")
                 setSaveIt(false)
                 channel.send({
                     type: 'broadcast',
-                    event: `${pageId}/${todoId}:noteUpdate`,
+                    event: `${pageId}/${todoId}:notesUpdate`,
                     payload: {...dataToSend, message: `${myNickname} mengubah susunan catatan`},
                 })
             }).catch(err => {
@@ -73,10 +73,9 @@ export function Notes() {
         setSaveIt(false)
     }
     useEffect(() => {
-        channel.on('broadcast', {event: `${pageId}/${todoId}:noteUpdate`}, payload => {
+        channel.on('broadcast', {event: `${pageId}/${todoId}:notesUpdate`}, payload => {
             try {
                 const data = todoNotes
-                console.log(payload.payload)
                 
                 data.map(item => {
                     const thisItem = item
@@ -85,7 +84,7 @@ export function Notes() {
                     return thisItem
                 })
                 
-                dispatch(setSource({...todoNotes, note: data}))
+                dispatch(setNotes(data))
                 
                 blankToast(payload.payload.message)
             } catch (err) {}

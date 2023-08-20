@@ -7,7 +7,7 @@ import { convertDateToString } from "../../../utils/convertDateFormat"
 import { setTodo } from "../../../redux/todo"
 import { Confirm } from "../../Modal/Confirm"
 
-export function Image({data}) {
+export function Image({data, handleAreaToDrag}) {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
     const dispatch = useDispatch()
@@ -34,7 +34,7 @@ export function Image({data}) {
     }
     return (
         <>
-        <div className='card-img d-flex of-hidden bg-zinc-800'>
+        <div className='card-img d-flex of-hidden bg-zinc-800' {...handleAreaToDrag}>
             <img alt={data.by} className={`card-img-pic pointer ${full&&'full p-fixed zi-3'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
             <div className='card-img-context d-flex fd-column'>
                 <div className='card-img-context-deep'>
