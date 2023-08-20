@@ -37,9 +37,9 @@ export function Image({data, handleAreaToDrag}) {
         <div className='card-img d-flex of-hidden bg-zinc-800' {...handleAreaToDrag}>
             <img alt={data.by} className={`card-img-pic pointer ${full&&'full p-fixed zi-3'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
             <div className='card-img-context d-flex fd-column'>
-                <div className='card-img-context-deep'>
+                <div className='flex-1'>
                     <div className="card-img-by">{data.by}</div>
-                    <p className="card-img-desc">{data.desc}</p>
+                    <p className="card-img-desc text-xs">{data.desc}</p>
                 </div>
                 <div className="card-img-date pointer as-flex-end text-zinc-500" onClick={() => setDeleteOpen(true)}>{convertDateToString(data.date)}</div>
             </div>

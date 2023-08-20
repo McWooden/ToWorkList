@@ -25,10 +25,6 @@
     min-height: 48px;
     font-size: large;
 }
-.auth_btn:hover {
-}
-.auth_btn:active {
-}
 .auth_btn span {
     margin-left: 10px;
 }
@@ -99,8 +95,6 @@
 .error_msg {
     font-size: small;
 }
-.auth_form input.red-border {
-}
 .auth_form input.green-border {
     border: 1px solid yellowgreen;
 }
@@ -113,8 +107,6 @@
 }
 .pemulihan .account_preview, .pemulihan .auth_form {
     width: 100%;
-}
-.pemulihan .account_preview div p span {
 }
 @media (min-width: 400px) {
     .auth-context {

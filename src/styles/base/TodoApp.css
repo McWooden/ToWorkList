@@ -19,12 +19,6 @@ header {
     border-radius: 5px;
     transition: .1s ease;
 }
-.btn-active {
-}
-.btn-inactive {
-}
-.bars:hover {
-}
 header h4 {
     margin: 0;
     font-size: 20px;

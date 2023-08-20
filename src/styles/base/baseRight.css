@@ -33,8 +33,6 @@
     border-radius: 10px;
     font-size: 1em;
 }
-.btn-on {
-}
 .scrollToBottom {
     width: 15px;
     bottom: 50px;
@@ -51,13 +49,6 @@
     transform: scale(1);
 }
 /* outer */
-.users-group {
-    font-size: small;
-}
-.group-user-container {
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
 .group-user {
     padding: 5px;
     gap: 5px;

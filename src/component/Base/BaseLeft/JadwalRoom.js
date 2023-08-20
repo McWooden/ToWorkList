@@ -120,8 +120,8 @@ export function JadwalRoom() {
                 </form>
             </FileDrop>
             <ModalSecond open={full} close={() => setFull(false)}>
-                <div className="jadwal-image" onClick={() => setFull(false)}>
-                    <img src={`${url}/${jadwalUrl}`} alt="jadwal room" />
+                <div onClick={() => setFull(false)} className='flex justify-center'>
+                    <img src={`${url}/${jadwalUrl}`} alt="jadwal room" className='h-screen' />
                 </div>
             </ModalSecond>
         </div>

@@ -61,7 +61,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
     return (
         <Modal open={modalOpen} close={modalClose}>
             <div className='add-modal d-flex'>
-                <div className="general-modal d-flex fd-column ai-center jc-center">
+                <div className="flex-1 d-flex fd-column ai-center jc-center">
                     <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/>
                 </div>
                 <form className="form-modal d-flex fd-column" onSubmit={handleSubmit}>

@@ -16,8 +16,6 @@
     width: 100%;
     transition: .1s ease;
 }
-.chat-card.active {
-}
 .chat-card-message {
     background-color: burlywood;
     white-space: pre-line;
@@ -30,10 +28,6 @@
 .chat-card-message.my {
     background-color: var(--primary);
     color: whitesmoke;
-}
-.chat-card-message.disable {
-}
-.chat-card-message.disable.my {
 }
 .chat-card-time {
     font-size: .5em;

@@ -32,14 +32,10 @@
 .add-modal {
     height: 100%;
 }
-.general-modal {
-    flex: 1;
-}
 
 .icon-modal {
     font-size: 5em;
     color: royalblue;
-    padding: 5px;
 }
 .form-modal > * {
     outline: none;
@@ -72,16 +68,8 @@
     min-height: 45px;
     transition: .3s;
 }
-.form-modal input:focus, .form-modal textarea:focus, .form-modal select:focus {
-
-}
 .form-modal textarea, .img-form d-flex fd-column textarea {
     flex: 1;
-}
-.form-modal.light input {
-    border: 1px solid #ddd;
-}
-.form-modal.light input:focus {
 }
 .task-submit {
     font-size: small;
@@ -138,15 +126,11 @@
     font-size: small;
     flex: 1;
 }
-.confirm-body h3 {
-}
 .confirm.light h3 {
     color: #a44a4a;
 }
 .confirm-context .msg span {
     word-break: break-all;
-}
-.next-text {
 }
 .confirm-button {
     gap: 20px;
@@ -156,12 +140,6 @@
 .confirm-btn {
     padding: 5px 20px;
     border-radius: 3px;
-}
-.confirm-no {
-}
-.confirm-yes {
-}
-.confirm.light .confirm-yes {
 }
 /* filedrop */
 .file-drop {
@@ -189,10 +167,6 @@
 .drop-text {
     font-size: small;
     transition: .3s;
-}
-.drop-zone:hover {
-}
-.drop-zone:hover .drop-icon {
 }
 .drop-zone:hover .drop-text {
     opacity: 0;

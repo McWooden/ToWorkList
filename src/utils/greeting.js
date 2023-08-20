@@ -36,7 +36,7 @@ export function Greeting() {
             <div className="color d-grid pi-center" style={{color: color}}>
                 {greetingIcon}
             </div>
-            <div className="greeting-context d-flex fd-column jc-center">
+            <div className="greeting-context d-flex fd-column jc-center text-sm">
                 <p className='selamat'>Selamat {time}!</p>
                 <p className='date'>{day}, {new Date().getDate()} {bulan[new Date().getMonth()]} {new Date().getFullYear()}</p>
             </div>

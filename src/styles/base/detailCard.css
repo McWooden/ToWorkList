@@ -78,17 +78,6 @@
     padding: 5px;
     font-size: xx-small;
 }
-.card-img-context-deep {
-    flex: 1;
-}
-.card-img-by {
-}
-.card-img-date {
-}
-.card-img-context p {
-    margin: 0;
-    font-size: xx-small;
-}
 .add-image {
     margin-top: 10px;
     padding: 5px;
@@ -138,8 +127,6 @@
     border-radius: 50px;
     font-size: small;
     padding: 5px;
-}
-.note-head svg:hover {
 }
 .note-color {
     min-width: 45px;

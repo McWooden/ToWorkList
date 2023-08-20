@@ -51,15 +51,9 @@ nav {
     height: 100%;
     font-size: 18px;
 }
-.nav-icon:hover {
-}
-.nav-icon.active {
-}
 .guild-frame.active {
     border-radius: 8px;
     background-color: indianred;
-}
-.guild-frame.active > img {
 }
 .guild-frame > img {
     border: 1px solid var(--primary);
@@ -119,8 +113,6 @@ nav {
     background-color: burlywood;
     color: var(--primary);
 }
-.settingNavbar:active {
-}
 .roomList {
     flex: 1;
 }
@@ -138,18 +130,12 @@ nav {
     color: var(--primary);
     background-color: indianred;
 }
-.room:hover .room-icon,  .room:hover span, .room:hover .card-more .card-more-btn {
-}
 .room-icon, .room .card-more .card-more-btn {
     height: 16px;
     margin: 0 5px;
 }
-.room-icon.active {
-}
 .room span {
     font-size: smaller;
-}
-.room span.active {
 }
 /* profile */
 .profile-container {
@@ -160,10 +146,6 @@ nav {
     margin: 1em;
     border-radius: 15px;
 } 
-.profile:hover {
-}
-.profile:active {
-}
 .profile img {
     width: 32px;
     height: 32px;
@@ -213,8 +195,6 @@ nav {
 .profile_pop-nickname {
     font-weight: 600;
 }
-.profile_pop-nickname span, .profile_pop-created_at span, .profile_pop-switch_account, .profile_pop-add_account  {
-}
 .profile_pop-created_at {
     font-size: small;
     margin-top: 5px;
@@ -231,10 +211,6 @@ nav {
     border-radius: 5px;
     border: 1px solid var(--primary);
 }
-.profile_pop-switch_account:hover, .profile_pop-add_account:hover {
-}
-.profile_pop-switch_account:active, .profile_pop-add_account:active {
-}
 /* search */
 .search_book_container {
     padding: 2em;
@@ -248,10 +224,6 @@ nav {
 .search_book_container .form-modal input {
     border: none;
     width: auto;
-}
-.search_book_container .form-modal input:focus {
-}
-.search_bar {
 }
 .search_book_container .search_bar {
     border-radius: 3px;

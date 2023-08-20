@@ -2,8 +2,6 @@
     gap: 8px;
     padding: 5px;
 }
-.book_card_container .book_card:hover {
-}
 .book_card {
     min-width: 15em;
     width: 20em;
