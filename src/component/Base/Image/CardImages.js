@@ -135,7 +135,7 @@ export function CardImages() {
         const dataToSend = {newOrder: list.map((data, index) => ({_id: data._id, order: index}))}
         const promise = loadingToast('Menyimpan susunan')
         try {
-            await axios.put(API+`/source/order/notes/${idPageOfBook}/${todoId}`, dataToSend)
+            await axios.put(API+`/source/order/images/${idPageOfBook}/${todoId}`, dataToSend)
             .then(res => {
                 blankToast("Susunan berhasil disimpan")
                 setSaveIt(false)
