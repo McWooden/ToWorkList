@@ -67,7 +67,7 @@ export function Profile() {
                     </div>
                 </div>
                 <div className='profile d-flex ai-center pointer' ref={profileRef} onClick={handlePop}>
-                    <img src={profile.avatar} alt={profile.nickname}/>
+                    <img src={profile.avatar} alt={profile.nickname} className='w-[32px] h-[32px]'/>
                     <div className="profile-body">
                         <div className="profile-nickname">{profile.nickname}</div>
                         <div className="profile-id">#{profile.tag}</div>

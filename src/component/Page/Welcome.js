@@ -13,7 +13,6 @@ import { sendToast } from '../../utils/notif'
 
 export function Welcome() {
   const { handleNavbar, hideNavbar } = useContext(AppContext)
-  const [displayText, setDisplayText] = useState('')
   const [chats, setChats] = useState([])
   const [scrollToBottom, setScrollToBottom] = useState(true)
   const chatRef = useRef(null)
@@ -46,7 +45,6 @@ export function Welcome() {
     "Next level task management"
   ]
 
-  const randomTags = () => setDisplayText(taglines[Math.floor(Math.random() * taglines.length)])
   useEffect(() => {
     const channel = supabase.channel('udin')
     channel.on('postgres_changes', { event: '*', table: 'broadcast' }, payload => {
@@ -131,11 +129,10 @@ export function Welcome() {
     <div className="flex w-full sm:flex-row flex-col">
       <div className="welcome flex flex-col overflow-auto flex-3">
         <Greeting />
-        <div className="welcome_page d-flex fd-column ai-center jc-flex-start" onClick={randomTags}>
+        <div className="welcome_page d-flex fd-column ai-center jc-flex-start">
           <p className="welcome_name as-flex-start">Toworklist</p>
           <span className="welcome_tagline as-flex-start">
-            {displayText}
-            <span className="cursor">|</span>
+            {taglines[Math.floor(Math.random() * taglines.length)]}
           </span>
           <span
             className="tapToOpenNavbar as-flex-start d-block bg-burlywood text-primary shadow-lg"
