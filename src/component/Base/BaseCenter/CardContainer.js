@@ -72,7 +72,7 @@ export function CardContainer() {
         const dataToSend = {newOrder: list.map((data, index) => ({_id: data._id, order: index}))}
         const promise = loadingToast('Menyimpan susunan')
         try {
-            await axios.put(API+`/source/order/${pageId}`, dataToSend)
+            await axios.put(API+`/order/list/${pageId}`, dataToSend)
             .then(res => {
                 blankToast("Susunan berhasil disimpan")
                 setSaveIt(false)

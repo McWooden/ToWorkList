@@ -12,12 +12,21 @@ import { setPages, setUpdateGuildProfile } from '../../../redux/sourceSlice'
 
 export function PageList() {
     const idBook = useSelector((state) => state.fetch.idBook)
-    const [pagesElement, setPagesElement] = useState([])
     const [loading, setLoading] = useState(true)
     const [reloading, setReloading] = useState(false)
     const dispatch = useDispatch()
     const nickname = useSelector(state => state.source.profile.nickname)
     const pages = useSelector(state => state.source.pages)
+    const [list, setList] = useState(pages)
+
+    const handleSourceToListSorted = useCallback((dataToSort) => {
+        const sortedList = dataToSort ? [...pages].sort((a, b) => a.order - b.order) : []
+        setList(sortedList)
+    }, [pages])
+
+    useEffect(() => {
+        handleSourceToListSorted(pages)
+    }, [handleSourceToListSorted, pages])
 
     const fetchData = useCallback(async () => {
         setReloading(false)
@@ -26,7 +35,6 @@ export function PageList() {
                 throw new Error(err)
             })
             dispatch(setPages(response.data.pages))
-            
         } catch (error) {
             setLoading(false)
             setReloading(true)
@@ -37,13 +45,13 @@ export function PageList() {
         setLoading(true)
         if (!pages) {
             fetchData()
-        } else {
-            setPagesElement(
-                pages.map((item, index) => (
-                    <PageListItem key={index} data={item} />
-                ))
-            )
-        }
+        }// else {
+        //     setPagesElement(
+        //         pages.sort((a, b) => a.order - b.order).map((item, index) => (
+        //             <PageListItem key={index} data={item} />
+        //         ))
+        //     )
+        // }
         setLoading(false)
     }, [dispatch, fetchData, pages])
     useEffect(() => {
@@ -69,7 +77,9 @@ export function PageList() {
             {loading && 
                 <div className="room d-flex ai-center p-relative pointer loading" />
             }
-            {pagesElement}
+            {list?.map((item, index) => (
+                <PageListItem key={index} data={item} />
+            ))}
         </div>
     )
 }

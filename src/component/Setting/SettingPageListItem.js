@@ -11,7 +11,7 @@ import { Confirm } from '../Modal/Confirm'
 import { ModalSecond } from '../Modal/ModalSecond'
 import { API } from '../../utils/variableGlobal'
 
-export function SettingPageListItem({data, callback}) {
+export function SettingPageListItem({data, callback, handleAreaToDrag}) {
     const idBook = useSelector((state) => state.fetch.idBook)
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
     const [openAdd, setOpenAdd] = useState(false)
@@ -97,7 +97,7 @@ export function SettingPageListItem({data, callback}) {
     }
     return (
         <>
-        <div className={`room d-flex ai-center p-relative pointer ${active?'active':''}`}  onClick={() => setDropDown(!dropDown)} ref={btnRef}>
+        <div className={`room d-flex ai-center p-relative pointer ${active?'active':''}`} {...handleAreaToDrag} onClick={() => setDropDown(!dropDown)} ref={btnRef}>
             <FontAwesomeIcon icon={fontawesome[icon]} className={`room d-flex ai-center p-relative pointer-icon ${active?'active':''} ${dropDown?'text-primary':''}`}/>
             <span className={`${active?'active':''} ${dropDown?'text-primary':''}`}>{title}</span>
             <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>

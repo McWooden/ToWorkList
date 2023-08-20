@@ -1,35 +1,89 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState, useEffect, useCallback } from 'react'
-import { pageToast } from '../../utils/notif'
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import { blankToast, loadingToast, pageToast } from '../../utils/notif'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { ModalSecond } from '../Modal/ModalSecond'
 import { API } from '../../utils/variableGlobal'
 import { SettingPageListItem } from './SettingPageListItem'
 import { setPages } from '../../redux/sourceSlice'
+import { toast } from 'react-toastify'
 
 export function SettingRoom() {
     const [openAdd, setOpenAdd] = useState(false)
     const idBook = useSelector((state) => state.fetch.idBook)
-    const [pagesElement, setPagesElement] = useState([])
     const nickname = useSelector(state => state.source.profile.nickname)
     const pages = useSelector(state => state.source.pages)
+    const [list, setList] = useState(pages)
+    const [saveIt, setSaveIt] = useState(false)
     const dispatch = useDispatch()
-    const dataToElement = useCallback((data) => {
+
+    const handleSourceToListSorted = useCallback((dataToSort) => {
+        console.log(pages)
+        const sortedList = dataToSort ? [...pages].sort((a, b) => a.order - b.order) : []
+        setList(sortedList)
+    }, [pages])
+
+    useEffect(() => {
+        handleSourceToListSorted(pages)
+    }, [handleSourceToListSorted, pages])
+
+    const dataToRedux = useCallback((data) => {
         dispatch(setPages(data))
     }, [dispatch])
+
     const channel = useSelector(state => state.channel.book)
+
     function handleClose() {
         setOpenAdd(false)
     }
-    useEffect(() => {
-        setPagesElement(
-            pages.map((item, index) => (
-                <SettingPageListItem key={index} data={item} callback={dataToElement}/>
-            ))
-        )
-    }, [dataToElement, pages])
+
+    function handleOnDragEnd(result) {
+        try {
+            const { destination, source } = result
+            if (source.index === destination.index) return
+            
+            const items = Array.from(list)
+            const [recordedItems] = items.splice(source.index, 1)
+            items.splice(destination.index, 0, recordedItems)
+            setList(items)
+
+            const sortedReduxList = [...pages].sort((a, b) => a.order - b.order)
+            const changesDetected = sortedReduxList.some((e, i) => e._id !== items[i]._id)
+            setSaveIt(changesDetected)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function handleSaveIt() {
+        const dataToSend = {newOrder: list.map((data, index) => ({_id: data._id, order: index}))}
+        const promise = loadingToast('Menyimpan susunan')
+        try {
+            await axios.put(API+`/order/pages/${idBook}`, dataToSend)
+            .then(res => {
+                blankToast("Susunan berhasil disimpan")
+                setSaveIt(false)
+                channel.send({
+                    type: 'broadcast',
+                    event: `${idBook}:pageShouldUpdate`,
+                    payload: {...dataToSend, message: `${nickname} mengubah susunan halaman`},
+                })
+            }).catch(err => {
+                console.log(err)
+                
+            }).finally(() => toast.dismiss(promise))
+        } catch (error) {
+            toast.dismiss(promise)
+        }
+    }
+    function handleCancelSaveIt() {
+        handleSourceToListSorted(pages)
+        setSaveIt(false)
+    }
+
     const [value, setValue] = useState('')
     const [btnLoading, setBtnLoading] = useState(false)
     const formRef = useRef()
@@ -39,7 +93,7 @@ export function SettingRoom() {
         try {
             const response = await axios.post(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
             pageToast(`${value} berhasil dibuat`)
-            dataToElement(response.data.pages)
+            dataToRedux(response.data.pages)
             channel.send({
                 type: 'broadcast',
                 event: 'pageShouldUpdate',
@@ -96,9 +150,35 @@ export function SettingRoom() {
     return(
         <>
         {headerElement}
-        <div className='roomList of-auto'>
-            {pagesElement}
-        </div>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+            {saveIt && (
+                <div className='flex bg-info shadow m-2 rounded items-center'>
+                    <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]" onClick={handleSaveIt}>
+                        <FontAwesomeIcon icon={fontawesome.faFloppyDisk}/>
+                        <p>Simpan susunan</p>
+                    </div>
+                    <div className="h-[45px] flex justify-center shadow items-center gap-x-2 text-xs rounded m-2 pointer bg-no flex-1" onClick={handleCancelSaveIt}>
+                        <FontAwesomeIcon icon={fontawesome.faXmark}/>
+                    </div>
+                </div>
+            )}
+            <Droppable droppableId='pageModel'>
+                {(provided) => (
+                    <div {...provided.droppableProps} ref={provided.innerRef} className='roomList'>
+                            {list?.map((item, index) => (
+                                <Draggable key={item._id} draggableId={item._id} index={index}>
+                                    {(provided) => (
+                                        <div {...provided.draggableProps} ref={provided.innerRef}>
+                                            <SettingPageListItem data={item} handleAreaToDrag={provided.dragHandleProps} callback={dataToRedux}/>
+                                        </div>
+                                    )}
+                                </Draggable>
+                            ))||''}
+                        {provided.placeholder}
+                    </div>
+                )}
+            </Droppable>
+        </DragDropContext>
         <div className="setting_action d-flex">
             <span className="setting_btn d-flex ai-center pointer blue_btn text-primary bg-burlywood shadow" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
         </div>
