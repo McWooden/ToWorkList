@@ -24,7 +24,7 @@ export function BaseCenter() {
         setShouldUpdate(payload.payload)
       })
     }, [channel, dispatch, idPageOfBook])
-    
+
     return (
         <div className="base-center p-relative of-auto">
             <div className="center d-flex p-relative fd-column">

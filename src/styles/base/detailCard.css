@@ -1,7 +1,6 @@
 /* left */
 .info-menu {
     gap: 4px;
-    padding: 3px;
 }
 .contributor {
     height: 150px;
@@ -43,7 +42,6 @@
     flex: 1;
 }
 .detail-desc p {
-    font-size: small;
     white-space: pre-line;
 }
 .images-container {

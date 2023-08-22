@@ -5,6 +5,7 @@ import todoReducer from './todo'
 import addAndEditReducer from './addAndEditForGlobalStore'
 import summaryReducer from './summaryStore'
 import channelReducer from './channelReducer'
+import showReducer from './hideAndShowSlice'
 
 export default configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export default configureStore({
         addAndEdit: addAndEditReducer,
         summary: summaryReducer,
         channel: channelReducer,
+        show: showReducer,
     },
     middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

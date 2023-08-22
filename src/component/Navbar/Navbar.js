@@ -1,18 +1,19 @@
-import { AppContext } from '../../pages/App'
-import { useContext } from 'react'
-
+import { reverseNavbar } from '../../redux/hideAndShowSlice'
 import { HomeButton } from './HomeButton'
 import { BookList } from './Book/BookList'
 import { ModeNavbar } from './SecondNavbar/ModeNavbar'
 import { FindAndCreateBook } from './FindAndCreate/FindAndCreateBook'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 function Navbar() {
-    const {hideNavbar, navRef} = useContext(AppContext)
+    const isNavbarShow = useSelector(state => state.show.navbar)
+    const dispatch = useDispatch()
     return (
         <>
-        <div className={`navigation_block zi-2 p-fixed ${hideNavbar?'inactive':'active'}`}/>
-        <div className={`navigation zi-2 d-flex fd-row p-fixed rounded ${hideNavbar?'hideNavbar':'showNavbar'}`}>
-            <nav className='d-flex fw-wrap jc-center d-flex fd-column ai-center bg-primary border-burlywood text-primary shadow-lg' ref={navRef}>
+        <div className={`navigation_block zi-2 p-fixed ${isNavbarShow?'active':'inactive'}`} onClick={() => dispatch(reverseNavbar())}/>
+        <div className={`navigation zi-2 d-flex fd-row p-fixed rounded ${isNavbarShow?'showNavbar':'hideNavbar'}`}>
+            <nav className='d-flex fw-wrap jc-center d-flex fd-column ai-center bg-primary border-burlywood text-primary shadow-lg'>
                 <HomeButton/>
                 <hr className='hr-w-75'/>
                 <BookList/>

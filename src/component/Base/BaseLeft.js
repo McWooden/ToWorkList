@@ -4,13 +4,11 @@ import Calendar from 'react-calendar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux';
-import { useContext } from 'react';
-import { HideBase } from '../TodoApp/TodoApp';
 import { JadwalRoom } from './BaseLeft/JadwalRoom';
 
 export function BaseLeft() {
     const source = useSelector(state => state.source.source)
-    const { hideLeftBase } = useContext(HideBase)
+    const isLeftSideShow = useSelector(state => state.show.leftSide)
     let colors = null
     try {
         colors = source.list.map(item => {
@@ -26,7 +24,7 @@ export function BaseLeft() {
         console.log(source)
     }
     return (
-        <div className={`base-left of-auto zi-1 flex-1 ${hideLeftBase?'base-left-hide':'base-left-show'} fd-column d-flex`}>
+        <div className={`base-left of-auto zi-1 flex-1 base-left-${isLeftSideShow?'show':'hide'} fd-column d-flex`}>
             <div className="sidebar-left fd-column d-flex">
                 <Greeting/>
                 <JadwalRoom/>

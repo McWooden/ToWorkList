@@ -171,7 +171,7 @@ export function CardImages() {
                 </div>
             )}
             <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId='imageModel' direction='horizontal'>
+            <Droppable droppableId='imageModel'>
                 {(provided) => (
                     <ul {...provided.droppableProps} ref={provided.innerRef} className='list-none flex flex-wrap gap-1'>
                     {list?.map((data, index) => (

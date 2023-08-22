@@ -1,33 +1,31 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars, faCube, faUserGroup} from '@fortawesome/free-solid-svg-icons'
-import { AppContext } from '../../pages/App'
-import { useContext } from 'react'
 import { useSelector } from 'react-redux'
-import { HideBase } from './TodoApp'
+import { useDispatch } from 'react-redux'
+import { reverseLeftSide, reverseNavbar, reverseRightSide } from '../../redux/hideAndShowSlice'
 
 export function NavTop() {
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
-    const { hideRightBase, handleRightBase, handleLeftBase, hideLeftBase } = useContext(HideBase)
-    const { hideNavbar, handleNavbar} = useContext(AppContext)
+    const dispatch = useDispatch()
     function handleClickNavbar() {
-        handleNavbar(hideNavbar)
+        dispatch(reverseNavbar())
     }
     function left() {
-        handleLeftBase(hideLeftBase)
+        dispatch(reverseLeftSide())
     }
     function right() {
-        handleRightBase(hideRightBase)
+        dispatch(reverseRightSide())
     }
     return (
         <section id='navTop'>
             <header className='zi-1 d-flex ai-center jc-space-between p-fixed bg-burlywood text-primary'>
             <div className='header-left d-flex'>
-                <FontAwesomeIcon icon={faBars} className={`bars pointer ${hideNavbar?'btn-inactive':'btn-active'}`} onClick={handleClickNavbar}/>
+                <FontAwesomeIcon icon={faBars} className='bars pointer' onClick={handleClickNavbar}/>
                 <h4 className='of-hidden'>{pathPageOfBook}</h4>
             </div>
             <div className="sidebar-button d-flex ai-center">
-                <FontAwesomeIcon icon={faCube} className={`btn-sidebar btn-sidebar-left pointer ${hideLeftBase?'btn-inactive':'btn-active'}`} onClick={left}/>
-                <FontAwesomeIcon icon={faUserGroup} className={`btn-sidebar btn-sidebar-right pointer ${hideRightBase?'btn-inactive':'btn-active'}`} onClick={right}/>
+                <FontAwesomeIcon icon={faCube} className='btn-sidebar btn-sidebar-left pointer' onClick={left}/>
+                <FontAwesomeIcon icon={faUserGroup} className='btn-sidebar btn-sidebar-right pointer' onClick={right}/>
             </div>
             </header> 
         </section>

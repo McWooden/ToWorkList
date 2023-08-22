@@ -2,27 +2,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 import { Greeting } from "../../utils/greeting"
 import { useState, useEffect, useRef } from "react"
-import { AppContext } from "../../pages/App"
-import { useContext } from "react"
 import supabase from "../../utils/supabase"
 import { useSelector } from 'react-redux'
-import { HideBase } from '../TodoApp/TodoApp'
 import { isoToString } from '../../utils/convertDateFormat'
 import { ChatModel } from '../Model/Chat'
 import { sendToast } from '../../utils/notif'
+import { useDispatch } from 'react-redux'
+import { reverseNavbar } from '../../redux/hideAndShowSlice'
 
 export function Welcome() {
-  const { handleNavbar, hideNavbar } = useContext(AppContext)
   const [chats, setChats] = useState([])
   const [scrollToBottom, setScrollToBottom] = useState(true)
   const chatRef = useRef(null)
 
   const profile = useSelector(state => state.source.profile)
-  const { hideRightBase } = useContext(HideBase)
+  const isRightSideShow = useSelector(state => state.show.rightSide)
   const myNickname = profile?.nickname || 'Anon'
   let box = []
   let lastDate = null
   let lastNickname = null
+
+  const dispatch = useDispatch()
   
   const handleScroll = () => {
     if (chatRef.current.scrollTop + chatRef.current.clientHeight !== chatRef.current.scrollHeight) {
@@ -136,13 +136,13 @@ export function Welcome() {
           </span>
           <span
             className="tapToOpenNavbar as-flex-start d-block bg-burlywood text-primary shadow-lg"
-            onClick={() => handleNavbar(hideNavbar)}
+            onClick={() => dispatch(reverseNavbar())}
           >
             Ketuk untuk membuka navbar
           </span>
         </div>
       </div>
-      <div className={`base-right of-auto ${hideRightBase ? 'base-right-hide' : 'base-right-show'} d-flex fd-column h-full flex-1 bg-indianred`}>
+      <div className={`base-right of-auto ${isRightSideShow ? 'base-right-show' : 'base-right-hide'} d-flex fd-column h-full flex-1 bg-indianred`}>
         <div className="sidebar-right d-flex fd-column of-auto scroll-smooth" ref={chatRef} onScroll={handleScroll}>
           <FontAwesomeIcon icon={faChevronDown} onClick={clickToBottom} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
           {box}
