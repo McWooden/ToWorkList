@@ -19,8 +19,8 @@ export function NavTop() {
     return (
         <section id='navTop'>
             <header className='zi-1 d-flex ai-center jc-space-between p-fixed bg-burlywood text-primary'>
-            <div className='header-left d-flex'>
-                <FontAwesomeIcon icon={faBars} className='bars pointer' onClick={handleClickNavbar}/>
+            <div className='header-left d-flex pointer' onClick={handleClickNavbar}>
+                <FontAwesomeIcon icon={faBars} className='bars'/>
                 <h4 className='of-hidden'>{pathPageOfBook}</h4>
             </div>
             <div className="sidebar-button d-flex ai-center">
