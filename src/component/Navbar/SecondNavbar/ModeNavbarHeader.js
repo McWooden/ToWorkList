@@ -28,7 +28,7 @@ export function ModeNavbarHeader() {
     return (
         <div className="modeNavbarHeader d-flex ai-center">
             <h4 className='guild-name d-inline-block of-hidden'>{nameBook || ''}</h4>
-            <FontAwesomeIcon icon={faGear} className='settingNavbar pointer' onClick={() => setSettingOpen(true)}/>
+            <FontAwesomeIcon icon={faGear} className='settingNavbar pointer bg-primary-bright' onClick={() => setSettingOpen(true)}/>
             <Setting open={settingOpen} close={handleClose}/>
         </div>
     )

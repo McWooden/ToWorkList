@@ -43,14 +43,12 @@ export function BookList() {
         }
     }, [dispatch, booksProfile, fetchData])
     useEffect(() => {
-      
-    
       return () => {
         setBooksProfile(null)
       }
     }, [])
     return (
-        <div className="nav-guild of-auto d-flex fd-column">
+        <div className="nav-guild of-auto d-flex fd-column bg-primary-bright rounded shadow">
             {isReload && (
                 <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className='reload_btn'/>

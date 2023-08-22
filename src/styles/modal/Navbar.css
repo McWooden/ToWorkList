@@ -26,7 +26,7 @@
 nav {
     width: 75px;
     max-height: 100%;
-    border-radius: 0 0 8px 0;
+    border-right: none !important;
 }
 .reload_btn-frame {
     border-radius: 15px;

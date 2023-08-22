@@ -20,7 +20,7 @@ export function ModeNavbar() {
                 {pathBook === '@me' ? <PageAccountList/> : <PageList/>}
                 <Profile/>
             </div>
-            <div className="h-16" onClick={() => dispatch(reverseNavbar())}/>
+            <div className="h-16 border-l-burlywood" onClick={() => dispatch(reverseNavbar())}/>
         </div>
     )
 }
