@@ -11,32 +11,8 @@ import { useDispatch } from 'react-redux'
 import { reverseNavbar } from '../../redux/hideAndShowSlice'
 
 export function Welcome() {
-  const [chats, setChats] = useState([])
-  const [scrollToBottom, setScrollToBottom] = useState(true)
-  const chatRef = useRef(null)
-
-  const profile = useSelector(state => state.source.profile)
-  const isRightSideShow = useSelector(state => state.show.rightSide)
-  const myNickname = profile?.nickname || 'Anon'
-  let box = []
-  let lastDate = null
-  let lastNickname = null
-
-  const dispatch = useDispatch()
   
-  const handleScroll = () => {
-    if (chatRef.current.scrollTop + chatRef.current.clientHeight !== chatRef.current.scrollHeight) {
-      setScrollToBottom(false);
-    } else {
-      setScrollToBottom(true);
-    }
-  }
-  useEffect(() => {
-    if (scrollToBottom) {
-      chatRef.current.scrollTop = chatRef.current.scrollHeight;
-    }
-  }, [chats, scrollToBottom])    
-
+  const dispatch = useDispatch()
   const taglines = [
     "Simplify your tasks",
     "Efficiently organize your life",
@@ -44,6 +20,52 @@ export function Welcome() {
     "Transform your to-do lists",
     "Next level task management"
   ]
+
+  return (
+    <div className="flex w-full sm:flex-row flex-col">
+      <div className="welcome flex flex-col overflow-auto flex-3">
+        <Greeting />
+        <div className="welcome_page d-flex fd-column ai-center jc-flex-start">
+          <p className="welcome_name as-flex-start">Toworklist</p>
+          <span className="welcome_tagline as-flex-start">
+            {taglines[Math.floor(Math.random() * taglines.length)]}
+          </span>
+          <span
+            className="tapToOpenNavbar as-flex-start d-block bg-burlywood text-primary shadow-lg"
+            onClick={() => dispatch(reverseNavbar())}
+          >
+            Ketuk untuk membuka navbar
+          </span>
+        </div>
+      </div>
+      <GlobalChat/>
+    </div>
+  )
+}
+
+function GlobalChat() {
+  const isRightSideShow = useSelector(state => state.show.rightSide)
+  const profile = useSelector(state => state.source.profile)
+
+  const [msg, setMsg] = useState('')
+  const textarea = useRef()
+  const myNickname = profile?.nickname || 'Anon'
+  let box = []
+  let lastDate = null
+  let lastNickname = null
+
+  const [chats, setChats] = useState([])
+  const chatRef = useRef(null)
+
+  const [scrollToBottom, setScrollToBottom] = useState(true)
+
+  const handleScroll = () => {
+    if (chatRef.current.scrollTop + chatRef.current.clientHeight !== chatRef.current.scrollHeight) {
+      setScrollToBottom(false)
+    } else {
+      setScrollToBottom(true)
+    }
+  }
 
   useEffect(() => {
     const channel = supabase.channel('udin')
@@ -56,6 +78,12 @@ export function Welcome() {
     }
   }, [])
 
+  useEffect(() => {
+    if (scrollToBottom) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight
+    }
+  }, [chats, scrollToBottom])    
+  
   useEffect(() =>{
     async function fetchData() {
       const { data } = await supabase.from('broadcast').select()
@@ -85,9 +113,6 @@ export function Welcome() {
       )
     })
 
-  const [msg, setMsg] = useState('')
-  const textarea = useRef()
-  
   async function handleSubmit(e) {
     e.preventDefault()
     textarea.current.style.height = '15px'
@@ -109,40 +134,14 @@ export function Welcome() {
     textarea.current.style.height = height + 'px'
   }
   function clickToBottom() {
-    const chatContainer = chatRef.current;
-    const lastChat = chatContainer.lastElementChild;
-    lastChat.scrollIntoView({ behavior: 'smooth' });
-    setScrollToBottom(true);
+    const chatContainer = chatRef.current
+    const lastChat = chatContainer.lastElementChild
+    lastChat.scrollIntoView({ behavior: 'smooth' })
+    setScrollToBottom(true)
   }  
 
-
-
-
-
-
-
-
-
-
-
   return (
-    <div className="flex w-full sm:flex-row flex-col">
-      <div className="welcome flex flex-col overflow-auto flex-3">
-        <Greeting />
-        <div className="welcome_page d-flex fd-column ai-center jc-flex-start">
-          <p className="welcome_name as-flex-start">Toworklist</p>
-          <span className="welcome_tagline as-flex-start">
-            {taglines[Math.floor(Math.random() * taglines.length)]}
-          </span>
-          <span
-            className="tapToOpenNavbar as-flex-start d-block bg-burlywood text-primary shadow-lg"
-            onClick={() => dispatch(reverseNavbar())}
-          >
-            Ketuk untuk membuka navbar
-          </span>
-        </div>
-      </div>
-      <div className={`base-right of-auto ${isRightSideShow ? 'base-right-show' : 'base-right-hide'} d-flex fd-column h-full flex-1 bg-indianred`}>
+    <div className={`base-right of-auto ${isRightSideShow ? 'base-right-show' : 'base-right-hide'} d-flex fd-column h-full flex-1 bg-indianred`}>
         <div className="sidebar-right d-flex fd-column of-auto scroll-smooth" ref={chatRef} onScroll={handleScroll}>
           <FontAwesomeIcon icon={faChevronDown} onClick={clickToBottom} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
           {box}
@@ -154,7 +153,7 @@ export function Welcome() {
             </div>
             {
               msg ?
-                <button className='pointer btn-on' title='send'>
+                <button className='pointer btn-on shadow' title='send'>
                   <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
                 :
@@ -166,6 +165,5 @@ export function Welcome() {
           </p>
         </form>
       </div>
-    </div>
   )
 }

@@ -7,7 +7,7 @@ import { loadingToast, accountToast } from '../utils/notif'
 import { toast } from 'react-toastify'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faRightToBracket, faAddressCard } from '@fortawesome/free-solid-svg-icons'
-import { setLocalAccount } from '../utils/localstorage'
+import { setLocalAccountWithoutEncrypt } from '../utils/localstorage'
 import { useDispatch } from 'react-redux'
 import { setBooksProfile, setProfile } from '../redux/sourceSlice'
 
@@ -160,7 +160,7 @@ function FormRegist({data}) {
         axios.post(API + '/user', data)
         .then((res) => {
             navigate('/')
-            setLocalAccount(res.data.rest)
+            setLocalAccountWithoutEncrypt(res.data.account)
             dispatch(setProfile())
             toast.dismiss(promise)
             accountToast(res.data.message)
@@ -226,7 +226,7 @@ export function Login() {
         const promise = loadingToast('Mendapatkan data akun')
         axios.put(`${API}/user/login/google`, {credential})
         .then(res => {
-            setLocalAccount(res.data)
+            setLocalAccountWithoutEncrypt(res.data)
             dispatch(setProfile())
             dispatch(setBooksProfile(null))
             toast.dismiss(promise)
@@ -249,7 +249,7 @@ export function Login() {
         const promise = loadingToast('Mendapatkan data akun')
         axios.put(`${API}/user/login/form`, data)
         .then((res) => {
-            setLocalAccount(res.data)
+            setLocalAccountWithoutEncrypt(res.data)
             dispatch(setProfile())
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
@@ -346,7 +346,7 @@ export function Pemulihan() {
         axios.post(API + '/user/pemulihan', data)
         .then((res) => {
             navigate('/')
-            setLocalAccount(res.data)
+            setLocalAccountWithoutEncrypt(res.data)
             dispatch(setProfile())
             toast.dismiss(promise)
             accountToast('Berhasil mengganti password dan masuk ke akun')
