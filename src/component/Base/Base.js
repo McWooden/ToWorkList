@@ -6,6 +6,7 @@ import { TodoPage } from './TodoPage';
 import { BaseRight } from './BaseRight';
 import Summary from '../Page/summary';
 import Email from '../Page/email';
+import { DailyTask } from '../Page/DailyTask';
 
 // const pages = useMemo(() => [
 //     {
@@ -44,6 +45,7 @@ export function Base() {
             {todoId? <TodoDetail/> :
                 (<>
                     {pageType === 'welcome' && <Welcome/>}
+                    {pageType === 'dailyTask' && <DailyTask/>}
                     {pageType === 'faAddressBook' && <Summary/>}
                     {pageType === 'faCheck' && <><TodoPage/><BaseRight/></>}
                     {pageType === 'faEnvelope' && <Email/>}

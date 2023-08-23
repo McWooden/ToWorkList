@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHouse } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
+import { setMembers, setPageType } from '../../redux/sourceSlice'
 import { useDispatch } from 'react-redux'
-import { setPageType, setMembers } from '../../redux/sourceSlice'
 import { setPathBook, setPathPageOfBook } from '../../redux/fetchSlice'
 
-export function HomeButton() {
+export function DailyTask() {
     const dispatch = useDispatch()
     function handleClick() {
-        dispatch(setPageType('welcome'))
+        dispatch(setPageType('dailyTask'))
         dispatch(setPathBook({path: '@me', id: '@me'}))
         dispatch(setPathPageOfBook({path: '', id: ''}))
         dispatch(setMembers(null))
@@ -15,7 +15,7 @@ export function HomeButton() {
     return (
         <div className='nav-icon-frame of-hidden jc-center d-flex' onClick={handleClick}>
             <div className={`nav-icon jc-center ai-center d-flex pointer bg-burlywood`}>
-                <FontAwesomeIcon icon={faHouse}/>
+                <FontAwesomeIcon icon={faCalendarCheck}/>
             </div>
         </div>
     )

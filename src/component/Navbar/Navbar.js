@@ -5,6 +5,7 @@ import { ModeNavbar } from './SecondNavbar/ModeNavbar'
 import { FindAndCreateBook } from './FindAndCreate/FindAndCreateBook'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { DailyTask } from './DailyTaskButton'
 
 function Navbar() {
     const isNavbarShow = useSelector(state => state.show.navbar)
@@ -15,9 +16,8 @@ function Navbar() {
         <div className={`navigation zi-2 d-flex fd-row p-fixed rounded ${isNavbarShow?'showNavbar':'hideNavbar'}`}>
             <nav className='d-flex fw-wrap jc-center d-flex fd-column ai-center bg-primary border-burlywood text-primary shadow-lg'>
                 <HomeButton/>
-                <hr className='hr-w-75'/>
                 <BookList/>
-                <hr className='hr-w-75'/>
+                <DailyTask/>
                 <FindAndCreateBook/>
             </nav>
             <ModeNavbar/>
