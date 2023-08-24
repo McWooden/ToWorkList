@@ -48,7 +48,7 @@ export function BaseLeft() {
                 }}
                 />
                 <PageProggress/>
-                <div className="menu-box d-flex ai-center jc-center shadow bg-zinc-900 text-zinc-300">
+                <div className="menu-box d-flex ai-center jc-center shadow bg-primary-bright text-zinc-300">
                     <FontAwesomeIcon icon={faMoneyCheck} className="menu-box-icon"/>
                     <p className="menu-box-count">{source.list ? source.list.length : ''}</p>
                 </div>

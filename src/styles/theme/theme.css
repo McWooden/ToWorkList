@@ -13,6 +13,12 @@
 .bg-primary-bright {
     background-color: #2f4058;
 }
+.bg-primary-dark-25 {
+    background-color: #1c2635;
+}
+.bg-primary-dark-50 {
+    background-color: #141c27;
+}
 .text-primary {
     color: #2A394E;
 }

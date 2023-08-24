@@ -83,7 +83,7 @@ export function TodoModel({item, handleAreaToDrag}) {
     }
     return (
         <>
-        <div className="todo-card d-flex fd-row  jc-space-between bg-zinc-900 shadow" {...handleAreaToDrag}>
+        <div className="todo-card d-flex fd-row  jc-space-between bg-primary-dark-50 shadow" {...handleAreaToDrag}>
             <div className="todo-left d-flex fd-row p-relative">
             <div className="card-color" style={{backgroundColor: item.details.color}}></div>
             <div className="card-text d-flex fd-column jc-center pointer" onClick={handleTextClick}>
@@ -92,7 +92,7 @@ export function TodoModel({item, handleAreaToDrag}) {
             </div>
             </div>
             <div className="todo-right d-flex fd-row p-relative">
-                <div className={`card-finish bg-zinc-800 pointer ${dones.includes(myNickname)?'finish-on':'finish-off'} shadow-inner`} onClick={handleReverse}>
+                <div className={`card-finish bg-primary-dark-25 pointer ${dones.includes(myNickname)?'finish-on':'finish-off'} shadow-inner`} onClick={handleReverse}>
                     <div className={`card-finish-value bg-zinc-300 shadow flex place-items-center`}>
                     <FontAwesomeIcon icon={faBars} className='w-full text-gray-100'/>
                     </div>

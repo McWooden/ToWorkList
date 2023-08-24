@@ -77,9 +77,9 @@ export function JadwalRoom() {
     }
     const [isFetching, setIsFetching] = useState(false)
     return (
-        <div className="jadwal d-flex fd-row of-hidden p-relative shadow bg-zinc-900">
+        <div className="jadwal d-flex fd-row of-hidden p-relative shadow bg-primary-dark-50">
             <div className='preview' style={{background: `url(${url}/${jadwalUrl})`}}>
-                <div className="setting pointer d-flex jc-center ai-center" onClick={() => setModalOpen(true)}>
+                <div className="setting pointer d-flex jc-center ai-center shadow" onClick={() => setModalOpen(true)}>
                     <FontAwesomeIcon icon={faGear} className='setting-btn'/>
                 </div>
             </div>
