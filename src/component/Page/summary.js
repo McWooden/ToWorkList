@@ -7,8 +7,8 @@ import { API } from '../../utils/variableGlobal'
 import axios from 'axios'
 import { loadingToast, saveToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
-import { setProfile } from '../../redux/sourceSlice'
-import { setLocalAccount } from '../../utils/localstorage'
+import { refreshProfile } from '../../redux/sourceSlice'
+import { setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import Markdown from 'markdown-to-jsx'
 import { setSummary } from '../../redux/summaryStore'
 import { useCallback } from 'react'
@@ -92,8 +92,8 @@ export default function Summary() {
             const promise = loadingToast('Memperbarui bio pengguna')
             axios.put(`${API}/user/bio`, dataToSend)
                 .then(res => {
-                    setLocalAccount(res.data._doc)
-                    dispatch(setProfile(res.data._doc))
+                    setLocalAccountWithoutEncrypt(res.data._doc)
+                    dispatch(refreshProfile())
                     setModalBioForm(false)
                 }).catch(err => {
                     saveToast('Gagal memperbarui bio pengguna')
@@ -112,8 +112,8 @@ export default function Summary() {
             const promise = loadingToast('Memperbarui label pengguna')
             axios.put(`${API}/user/label`, dataToSend)
                 .then(res => {
-                    setLocalAccount(res.data._doc)
-                    dispatch(setProfile(res.data._doc))
+                    setLocalAccountWithoutEncrypt(res.data._doc)
+                    dispatch(refreshProfile())
                     setModalLabelForm(false)
                 }).catch(err => {
                     saveToast('Gagal memperbarui label pengguna')
@@ -137,8 +137,8 @@ export default function Summary() {
             const promise = loadingToast('Memperbarui info pengguna')
             axios.put(`${API}/user`, dataToSend)
                 .then(res => {
-                    setLocalAccount(res.data._doc)
-                    dispatch(setProfile(res.data._doc))
+                    setLocalAccountWithoutEncrypt(res.data._doc)
+                    dispatch(refreshProfile())
                     setModalProfileEditForm(false)
                 }).catch(err => {
                     saveToast('Gagal memperbarui info pengguna')

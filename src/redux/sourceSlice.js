@@ -24,7 +24,7 @@ export const sourceSlice = createSlice({
         setSource: (state, action) => {
             state.source = action.payload
         },
-        setProfile: (state, action) => {
+        refreshProfile: (state, action) => {
             state.profile = getLocalAccount()
         },
         setGuildProfile: (state, action) => {
@@ -51,6 +51,6 @@ export const sourceSlice = createSlice({
     },
 })
 
-export const { setPageType, setPageDetails, setSource, setProfile, setGuildProfile, setMembers, setError, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setError, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile } = sourceSlice.actions
 
 export default sourceSlice.reducer

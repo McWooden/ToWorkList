@@ -43,7 +43,7 @@ export function getLocalAccountWithoutEncrypt() {
 }
 
 export function setLocalAccountWithoutEncrypt(data) {
-    localStorage.setItem('account', JSON.stringify(data))
+    localStorage.setItem('account', data)
 }
 
 // encrypt and decrypt

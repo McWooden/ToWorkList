@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft, faRightToBracket, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import { setLocalAccountWithoutEncrypt } from '../utils/localstorage'
 import { useDispatch } from 'react-redux'
-import { setBooksProfile, setProfile } from '../redux/sourceSlice'
+import { setBooksProfile, refreshProfile } from '../redux/sourceSlice'
 
 
 const API = process.env.REACT_APP_API
@@ -161,7 +161,7 @@ function FormRegist({data}) {
         .then((res) => {
             navigate('/')
             setLocalAccountWithoutEncrypt(res.data.account)
-            dispatch(setProfile())
+            dispatch(refreshProfile())
             toast.dismiss(promise)
             accountToast(res.data.message)
             dispatch(setBooksProfile(null))
@@ -227,7 +227,7 @@ export function Login() {
         axios.put(`${API}/user/login/google`, {credential})
         .then(res => {
             setLocalAccountWithoutEncrypt(res.data.account)
-            dispatch(setProfile())
+            dispatch(refreshProfile())
             dispatch(setBooksProfile(null))
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
@@ -250,7 +250,7 @@ export function Login() {
         axios.put(`${API}/user/login/form`, data)
         .then((res) => {
             setLocalAccountWithoutEncrypt(res.data)
-            dispatch(setProfile())
+            dispatch(refreshProfile())
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')
@@ -347,7 +347,7 @@ export function Pemulihan() {
         .then((res) => {
             navigate('/')
             setLocalAccountWithoutEncrypt(res.data)
-            dispatch(setProfile())
+            dispatch(refreshProfile())
             toast.dismiss(promise)
             accountToast('Berhasil mengganti password dan masuk ke akun')
         })
