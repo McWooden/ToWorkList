@@ -226,7 +226,7 @@ export function Login() {
         const promise = loadingToast('Mendapatkan data akun')
         axios.put(`${API}/user/login/google`, {credential})
         .then(res => {
-            setLocalAccountWithoutEncrypt(res.data)
+            setLocalAccountWithoutEncrypt(res.data.account)
             dispatch(setProfile())
             dispatch(setBooksProfile(null))
             toast.dismiss(promise)
