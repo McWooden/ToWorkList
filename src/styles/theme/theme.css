@@ -43,6 +43,9 @@
 .border-l-burlywood {
     border-left: 1px solid burlywood;
 }
+.text-ok {
+    color: #0d7377;
+}
 .bg-ok {
     background-color: #0d7377;
 }

@@ -47,8 +47,8 @@ export function NoteItem({data, handleAreaToDrag}) {
     }
     return (
         <>
-        <div className='note of-hidden bg-zinc-900 text-whitesmoke shadow'>
-            <div className='note-head d-flex jc-space-between ai-center bg-zinc-800 shadow' {...handleAreaToDrag}>
+        <div className='note of-hidden bg-primary-dark-50 text-whitesmoke shadow'>
+            <div className='note-head d-flex jc-space-between ai-center bg-primary-dark-25 shadow' {...handleAreaToDrag}>
                 <FontAwesomeIcon icon={faNoteSticky} style={{color: data.color}} className='note-color'/>
                 <div className="note-btn ai-center text-zinc-400">
                     <FontAwesomeIcon icon={faTrash} className='pointer' onClick={confirmToDelete}/>

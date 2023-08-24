@@ -45,8 +45,8 @@ export function DetailLeftAction() {
     return (
         <>
         <div className='detail-Left-action d-flex'>
-            <FontAwesomeIcon icon={faTrash} className='action-left pointer action-trash-left bg-zinc-900 text-no' onClick={() => setDeleteOpen(true)}/>
-            <FontAwesomeIcon icon={faPenToSquare} className='action-left pointer action-edit-left bg-zinc-900 text-info' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_INSIDE', ...item}))}/>
+            <FontAwesomeIcon icon={faTrash} className='action-left pointer action-trash-left bg-primary-dark-50 text-no' onClick={() => setDeleteOpen(true)}/>
+            <FontAwesomeIcon icon={faPenToSquare} className='action-left pointer action-edit-left bg-primary-dark-50 text-info' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_INSIDE', ...item}))}/>
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
         </>

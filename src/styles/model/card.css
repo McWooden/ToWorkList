@@ -39,7 +39,7 @@
 }
 .finish-on {
     padding-left: 25px;
-    background-color: #0d7377;
+    background-color: #0d7377 !important;
 }
 .finish-off {
     padding-right: 25px;

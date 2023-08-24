@@ -34,7 +34,7 @@ export function Image({data, handleAreaToDrag}) {
     }
     return (
         <>
-        <div className='card-img d-flex of-hidden bg-zinc-800' {...handleAreaToDrag}>
+        <div className='card-img d-flex of-hidden bg-primary-dark-25' {...handleAreaToDrag}>
             <img alt={data.by} className={`card-img-pic pointer ${full&&'full p-fixed zi-3'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
             <div className='card-img-context d-flex fd-column'>
                 <div className='flex-1'>

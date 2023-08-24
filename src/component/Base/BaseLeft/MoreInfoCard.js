@@ -9,7 +9,7 @@ export function MoreInfoCard() {
     const todo = useSelector(state => state.todo)
     return (
         <>
-        <div className='todo-card d-flex fd-row  jc-space-between bg-zinc-900'>
+        <div className='todo-card d-flex fd-row  jc-space-between bg-primary-dark-50'>
             <div className="todo-left d-flex fd-row p-relative">
                 <div className="card-color" style={{backgroundColor: todo.details.color}}></div>
                 <div className="card-text d-flex fd-column jc-center">

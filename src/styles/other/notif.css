@@ -11,11 +11,11 @@
     font-family: var(--defaultFont) !important;
     font-size: small;
     margin-bottom: 5px;
-    background-color: rgb(38, 38, 41) !important;
+    background-color: #1c2635e8 !important;
     color: whitesmoke !important;
     border-radius: 8px;
     margin: .25em;
-    border: burlywood dashed 2px;
+    border: #2f4058 solid 1px;
 }
 .Toastify__toast-theme--colored {
     padding: 0 !important;
