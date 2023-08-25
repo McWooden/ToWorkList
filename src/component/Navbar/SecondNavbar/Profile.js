@@ -42,25 +42,25 @@ export function Profile() {
         <div className="profile-container">
             {profile && (
                 <>
-                <div className={`profile_pop d-flex fd-column p-fixed shadow ${userPop?'active':'inactive'}`} ref={userPopRef}>
+                <div className={`profile_pop bg-primary-bright d-flex fd-column p-fixed shadow-lg ${userPop?'active':'inactive'}`} ref={userPopRef}>
                 <a href={profile.avatar} target='_blank' rel="noreferrer" style={{width:'120px'}}>
                     <img src={profile.avatar} alt={profile.nickname}/>
                 </a>
-                    <div className="profile_pop-body">
+                    <div className="profile_pop-body bg-primary-dark-50">
                         <div className="profile_pop-nickname">{profile.nickname}<span>#{profile.tag}</span></div>
                         <div className="profile_pop-created_at">
                             <p>Bergabung sejak</p>
                             <span>{convertDateToString(profile.created_at)}</span>
                         </div>
-                        <div className="profile_pop-btn d-flex ai-center pointer" onClick={() => navigate('/auth/login')}>
+                        <div className="profile_pop-btn d-flex ai-center pointer bg-primary-dark-25 shadow" onClick={() => navigate('/auth/login')}>
                             <FontAwesomeIcon icon={faRepeat}/>
                             <span>Ganti akun</span>
                         </div>
-                        <div className="profile_pop-btn d-flex ai-center pointer" onClick={() => navigate('/auth/register')}>
+                        <div className="profile_pop-btn d-flex ai-center pointer bg-primary-dark-25 shadow" onClick={() => navigate('/auth/register')}>
                             <FontAwesomeIcon icon={faPlus}/>
                             <span>Tambah akun</span>
                         </div>
-                        <div className="profile_pop-btn d-flex ai-center pointer" onClick={handleLogout}>
+                        <div className="profile_pop-btn d-flex ai-center pointer bg-primary-dark-25 shadow" onClick={handleLogout}>
                             <FontAwesomeIcon icon={faRightFromBracket}/>
                             <span>Keluar</span>
                         </div>

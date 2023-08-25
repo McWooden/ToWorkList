@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './pages/App'
-import { Auth, Register, Login, Pemulihan } from './pages/Auth'
+import { Auth } from './pages/Auth'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
@@ -11,8 +11,9 @@ import Join from './pages/Join'
 import { AddAndEditForGlobal } from './component/Modal/addAndEditForGlobal'
 import { Flip } from 'react-toastify'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-
-
+import Register from './pages/Auth/Register'
+import Login from './pages/Auth/Login'
+import Pemulihan from './pages/Auth/Pemulihan'
 
 // import all css
 import 'react-toastify/dist/ReactToastify.css'
@@ -25,19 +26,6 @@ import './styles/other/loading.css'
 import './styles/pages/App.css'
 import './styles/theme/theme.css'
 import './styles/welcome.css'
-
-// if ("serviceWorker" in navigator) {
-//   window.addEventListener("load", () => {
-//     navigator.serviceWorker.register("/serviceworker.js")
-//       .then((registration) => {
-//         console.log("Service Worker registered with scope:", registration.scope)
-//       })
-//       .catch((error) => {
-//         console.error("Service Worker registration failed:", error)
-//       })
-//   })
-// }
-
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

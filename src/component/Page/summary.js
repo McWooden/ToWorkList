@@ -92,7 +92,7 @@ export default function Summary() {
             const promise = loadingToast('Memperbarui bio pengguna')
             axios.put(`${API}/user/bio`, dataToSend)
                 .then(res => {
-                    setLocalAccountWithoutEncrypt(res.data._doc)
+                    setLocalAccountWithoutEncrypt(res.data.account)
                     dispatch(refreshProfile())
                     setModalBioForm(false)
                 }).catch(err => {
@@ -112,7 +112,7 @@ export default function Summary() {
             const promise = loadingToast('Memperbarui label pengguna')
             axios.put(`${API}/user/label`, dataToSend)
                 .then(res => {
-                    setLocalAccountWithoutEncrypt(res.data._doc)
+                    setLocalAccountWithoutEncrypt(res.data.account)
                     dispatch(refreshProfile())
                     setModalLabelForm(false)
                 }).catch(err => {
@@ -137,7 +137,7 @@ export default function Summary() {
             const promise = loadingToast('Memperbarui info pengguna')
             axios.put(`${API}/user`, dataToSend)
                 .then(res => {
-                    setLocalAccountWithoutEncrypt(res.data._doc)
+                    setLocalAccountWithoutEncrypt(res.data.account)
                     dispatch(refreshProfile())
                     setModalProfileEditForm(false)
                 }).catch(err => {

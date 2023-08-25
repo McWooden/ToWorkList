@@ -164,8 +164,8 @@ nav {
     left: 10px;
     bottom: 60px;
     border-radius: 10px;
-    background-color: var(--primary);
-    border: 1px solid burlywood;
+    /* background-color: var(--primary); */
+    /* border: 1px solid burlywood; */
     padding: 15px 0;
     gap: 10px;
     transition: .1s ease;
@@ -188,8 +188,6 @@ nav {
     margin: 0 15px;
     padding: 10px;
     border-radius: 10px;
-    background-color: indianred;
-    color: var(--primary);
 }
 .profile_pop-nickname {
     font-weight: 600;
@@ -208,7 +206,7 @@ nav {
     font-size: small;
     padding: 5px 10px;
     border-radius: 5px;
-    border: 1px solid var(--primary);
+    border: 1px solid var(--primary-dark-50);
 }
 /* search */
 .search_book_container {

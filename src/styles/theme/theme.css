@@ -1,5 +1,8 @@
 :root {
+    --primary-bright: #2f4058;
     --primary: #2A394E;
+    --primary-dark-25: #1c2635;
+    --primary-dark-50: #141c27;
 }
 .bg-indianred {
     background-color: indianred;
