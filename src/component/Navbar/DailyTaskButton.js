@@ -9,7 +9,7 @@ export function DailyTask() {
     function handleClick() {
         dispatch(setPageType('dailyTask'))
         dispatch(setPathBook({path: '@me', id: '@me'}))
-        dispatch(setPathPageOfBook({path: '', id: ''}))
+        dispatch(setPathPageOfBook({path: 'Harian', id: ''}))
         dispatch(setMembers(null))
     }
     return (

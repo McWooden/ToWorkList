@@ -51,6 +51,6 @@ export function encrypt(data) {
     return CryptoJS.AES.encrypt(data, secretKey).toString()
 }
 export function decrypt(data) {
-    var bytes  = CryptoJS.AES.decrypt(data, secretKey)
+    const bytes  = CryptoJS.AES.decrypt(data, secretKey)
     return bytes.toString(CryptoJS.enc.Utf8)
 }

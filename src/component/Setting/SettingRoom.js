@@ -21,7 +21,6 @@ export function SettingRoom() {
     const dispatch = useDispatch()
 
     const handleSourceToListSorted = useCallback((dataToSort) => {
-        console.log(pages)
         const sortedList = dataToSort ? [...pages].sort((a, b) => a.order - b.order) : []
         setList(sortedList)
     }, [pages])

@@ -1,9 +1,8 @@
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
-import { useEffect, useContext } from "react"
+import { useEffect } from "react"
 import { API } from "../../utils/variableGlobal"
 import { setSource } from "../../redux/sourceSlice"
-import { HideBase } from '../TodoApp/TodoApp'
 import { BaseLeft } from "./BaseLeft"
 import { BaseCenter } from "./BaseCenter"
 
@@ -12,7 +11,7 @@ export function TodoPage() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const source = useSelector(state => state.source.source)
     const dispatch = useDispatch()
-    const { hideLeftBase } = useContext(HideBase)
+    const isLeftSideShow = useSelector(state => state.show.leftSide)
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -27,7 +26,7 @@ export function TodoPage() {
 
     if (!source) return (
         <>
-        <div className={`base-left zi-1 flex-1 of-auto ${hideLeftBase?'base-left-hide':'base-left-show'}`}>
+        <div className={`base-left zi-1 flex-1 of-auto base-left-${isLeftSideShow?'show':'hide'}`}>
             <div className="sidebar-left">
                 <div className='sidebar_left_loading loading'/>
             </div>

@@ -89,8 +89,7 @@ export default function DisplayMail({thisProfile}) {
 
     useEffect(() => {
         fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [fetchData])
 
     return (
         <>
@@ -109,7 +108,7 @@ export default function DisplayMail({thisProfile}) {
         {isReading ? <Reading data={isReading} thisProfile={thisProfile}/>:
         <div className='max-w-full flex-1'>
             <table className='table-fixed w-full bg-primary-bright rounded h-full'>
-                <thead>
+                <thead className='bg-primary-dark-25'>
                     <tr>
                         <th className='flex justify-between px-[0.2rem]'>
                             <div className='flex items-center'>

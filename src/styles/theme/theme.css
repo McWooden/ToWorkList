@@ -64,3 +64,6 @@
 .text-info {
     color: #277bc0;
 }
+.transition-ease {
+    transition: ease 0.3s;
+}

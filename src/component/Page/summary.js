@@ -8,7 +8,7 @@ import axios from 'axios'
 import { loadingToast, saveToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
 import { refreshProfile } from '../../redux/sourceSlice'
-import { setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
+import { decrypt, setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import Markdown from 'markdown-to-jsx'
 import { setSummary } from '../../redux/summaryStore'
 import { useCallback } from 'react'
@@ -39,9 +39,12 @@ export default function Summary() {
     const dispatch = useDispatch()
     
     const fetchOtherSummary = useCallback(async () => {
-        const { data } = await axios.get(`${API}/user/summary/${otherSummaryUserId}`)
-        setSummaryData(data)
-        setIsMe(false)
+        await axios.get(`${API}/user/summary/${otherSummaryUserId}`).then(res => {
+            setSummaryData(JSON.parse(decrypt(res.data.account)))
+            setIsMe(false)
+        }).catch(err => {
+            console.log(err);
+        })
     }, [otherSummaryUserId])
 
     useEffect(() => {
@@ -150,7 +153,7 @@ export default function Summary() {
     return (
         <>
         <div className="flex flex-3 fd-column of-auto p-4 overflow-auto text-whitesmoke">
-            <div className="min-h-48 p-8 flex items-center gap-4 flex-col sm:flex-row rounded-sm bg-zinc-950">
+            <div className="min-h-48 p-8 flex items-center gap-4 flex-col sm:flex-row rounded-sm bg-primary-dark-50">
                 <div>
                     <img src={summaryData.avatar} alt={summaryData.nickname} className="rounded-full" />
                 </div>
@@ -159,7 +162,7 @@ export default function Summary() {
                     <p className="text-center text-sm sm:text-left">#{summaryData.tag}</p>
                 </div>
             </div>
-            <div className="h-fit p-6 flex flex-col rounded-sm flex-col sm:flex-row bg-zinc-900 shadow-md">
+            <div className="h-fit p-6 flex flex-col rounded-sm flex-col sm:flex-row bg-primary-dark-25 shadow-md">
                 <div className='flex-2 border-solid border-0 sm:border-r sm:border-b-0 border-b border-zinc-500 pb-1.5 sm:pb-0 relative'>
                     {isMe && <div onClick={() => setModalProfileEditForm(true)} className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2'><FontAwesomeIcon icon={faPen}/></div>}
                     <p>{summaryData?.posisi || <span>Posisi</span>} di {summaryData?.tempat || <span>Tempat</span>}</p>
@@ -180,7 +183,7 @@ export default function Summary() {
                     </div>
                 </div>
             </div>
-            <div className="mt-2.5 relative whitespace-pre rounded h-fit p-1 max-w-full bg-zinc-900 shadow-md">
+            <div className="mt-2.5 relative whitespace-pre rounded h-fit p-1 max-w-full bg-primary-dark-25 shadow-md">
                 {isMe && <div className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2' onClick={() => setModalBioForm(true)}><FontAwesomeIcon icon={faPen}/></div>}
                 <div className='overflow-y-auto text-sm'>
                     <Markdown className="markdown">{summaryData?.bio || ''}</Markdown>

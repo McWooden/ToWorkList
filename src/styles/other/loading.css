@@ -4,7 +4,7 @@
     animation: loading-skeleton 1s ease-in-out forwards infinite;
     animation-direction: alternate;
     border-radius: 5px;
-    background-color: rgb(39, 39, 42);
+    background-color: var(--primary-dark-50);
 }
 .loading.guild-photo-profile {
     width: 48px;
