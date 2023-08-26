@@ -67,3 +67,6 @@
 .transition-ease {
     transition: ease 0.3s;
 }
+.border-primary {
+    border-color: var(--primary);
+}

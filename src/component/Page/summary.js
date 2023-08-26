@@ -153,7 +153,7 @@ export default function Summary() {
     return (
         <>
         <div className="flex flex-3 fd-column of-auto p-4 overflow-auto text-whitesmoke">
-            <div className="min-h-48 p-8 flex items-center gap-4 flex-col sm:flex-row rounded-sm bg-primary-dark-50">
+            <div className="min-h-48 p-8 flex items-center gap-4 flex-col sm:flex-row rounded-t-[10px] bg-primary-dark-50">
                 <div>
                     <img src={summaryData.avatar} alt={summaryData.nickname} className="rounded-full" />
                 </div>
@@ -163,7 +163,7 @@ export default function Summary() {
                 </div>
             </div>
             <div className="h-fit p-6 flex flex-col rounded-sm flex-col sm:flex-row bg-primary-dark-25 shadow-md">
-                <div className='flex-2 border-solid border-0 sm:border-r sm:border-b-0 border-b border-zinc-500 pb-1.5 sm:pb-0 relative'>
+                <div className='flex-2 border-solid border-0 sm:border-r sm:border-b-0 border-b border-primary pb-1.5 sm:pb-0 relative'>
                     {isMe && <div onClick={() => setModalProfileEditForm(true)} className='absolute top-3 right-3 border-zinc-600 border-solid border rounded-full min-w-[25px] min-h-[25px] flex justify-center items-center text-sm top-2 right-2'><FontAwesomeIcon icon={faPen}/></div>}
                     <p>{summaryData?.posisi || <span>Posisi</span>} di {summaryData?.tempat || <span>Tempat</span>}</p>
                     <p className='text-sm'>{summaryData?.kota || <span>Kota</span>}, {summaryData?.negara || <span>Wilayah/Negara</span>}</p>

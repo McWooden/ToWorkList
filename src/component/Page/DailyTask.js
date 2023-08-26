@@ -10,6 +10,7 @@ import MyLoading from '../../utils/myLoading'
 import { useSelector } from 'react-redux'
 import { blankToast, loadingToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
+// import { isToday, parseISO } from 'date-fns'
 
 
 export function DailyTask() {
@@ -85,6 +86,7 @@ function TaskContainer() {
 function Task({data}) {
   const userId = useSelector(state => state.source.profile._id)
   const [thisData, setThisData] = useState(data)
+  // const today = isToday(parseISO(new Date().toISOString()))
   async function reverseList(listId) {
     const dataToSend = {
       _id: userId
