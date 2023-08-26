@@ -70,3 +70,6 @@
 .border-primary {
     border-color: var(--primary);
 }
+.overflow-unset-important {
+    overflow: unset !important;
+}
