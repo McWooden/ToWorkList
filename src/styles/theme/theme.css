@@ -40,6 +40,9 @@
 .border-burlywood {
     border: 1px solid burlywood;
 }
+.border-primary-bright {
+    border: 1px solid var(--primary-bright);
+}
 .border-b-burlywood {
     border-bottom: 1px solid burlywood;
 }

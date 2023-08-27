@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faSearch, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
 import { useCallback, useEffect, useRef } from "react"
 import axios from "axios"
 import { API } from '../../../utils/variableGlobal'
@@ -10,6 +10,7 @@ import { blankToast, loadingToast } from '../../../utils/notif'
 import { toast } from 'react-toastify'
 import DailyTaskEditor from './DailyTaskEditor'
 import { Confirm } from '../../Modal/Confirm'
+import SearchDaily from './SearchDaily'
 
 export default function TaskContainer() {
   const [list, setlist] = useState([])
@@ -48,11 +49,7 @@ export default function TaskContainer() {
     <div className='flex-1 flex flex-col pb-[38px]'>
       {isLoading && <MyLoading className='mb-2'/>}
       {list.map((item, index) => <Task data={item} key={index} cb={fetchData}/>)}
-      <div className={`center-action-btn self-end d-flex p-fixed ai-center text-primary`}>
-        <div className="action-add">
-            <FontAwesomeIcon icon={faSearch} className='add-btn pointer bg-burlywood' />
-        </div>
-      </div>
+      <SearchDaily/>
     </div>
     </>
   )
