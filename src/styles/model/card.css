@@ -50,8 +50,6 @@
     border-radius: 50px;
     width: 15px;
 }
-.card-more-btn:hover {
-}
 .card-drop-down.active {
     opacity: 1;
     visibility: visible;
@@ -76,8 +74,6 @@
 .card-drop-down ul li {
     gap: 3px;
     padding: 5px 15px;
-}
-.card-drop-down ul li:hover {
 }
 .edit_card_modal {
     height: 100%;

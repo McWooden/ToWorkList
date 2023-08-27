@@ -11,27 +11,29 @@ import { API } from '../../../utils/variableGlobal'
 
 export default function DailyTaskEditor({open, cb, close}) {
     const myProfile = useSelector(state => state.source.profile)
-    const defaultListJson = useMemo(()=>({_id: String(+new Date()), value: ''}),[])
+    const defaultListJson = useMemo(()=>({title: '', _id: String(+new Date())}),[])
     const [inputJudul, setInputJudul] = useState('')
     const [inputDesc, setInputDesc] = useState('')
-    const [list, setList] = useState([defaultListJson])
+    const [thisList, setThisList] = useState([defaultListJson])
     const [errMsg, setErrMsg] = useState('')
+
+    if (!open) return
     function handleOnDragEnd(result) {
         try {
             const { destination, source } = result
             if (source.index === destination.index) return
             
-            const items = Array.from(list)
+            const items = Array.from(thisList)
             const [recordedItems] = items.splice(source.index, 1)
             items.splice(destination.index, 0, recordedItems)
-            setList(items)
+            setThisList(items)
         } catch (error) {
             console.log(error, result)
         }
     }
     
     function resetForm() {
-        setList([defaultListJson])
+        setThisList([defaultListJson])
         setInputDesc('')
         setInputJudul('')
     }
@@ -39,66 +41,63 @@ export default function DailyTaskEditor({open, cb, close}) {
     async function handleSubmit(e) {
         e.preventDefault()
 
-        if (list.filter(x => x.value !== '').length === 0) return setErrMsg('Setidaknya memiliki 1 tugas')
-        handleDeleteEmpty()
+        if (thisList.filter(x => x.title !== '').length === 0) return setErrMsg('Setidaknya memiliki 1 tugas')
 
-        const {nickname, tag, _id, avatar} = myProfile
         const dataToSend = {
             detail: {
                 title: inputJudul,
                 desc: inputDesc,
             },
-            list: list.map(x => ({title: x.value, order: 1})),
-            author: {
-                name: `${nickname}#${tag}`,
-                _id: _id,
+            list: thisList.map((x, i) => ({title: x.title, order: i})).filter(item => item.title !== ''),
+            author : {
+                name: `${myProfile.nickname}#${myProfile.tag}`,
+                _id: myProfile._id,
             },
             followers: [{
-                name: `${nickname}#${tag}`,
-                avatar: avatar
+                name: `${myProfile.nickname}#${myProfile.tag}`,
+                avatar: myProfile.avatar
             }]
         }
         const promise = loadingToast('Menambah Tugas harian baru')
         try {
+            console.log(dataToSend);
             await axios.post(API+'/daily/task/create', dataToSend)
             .then(res => {
                 cb()
                 close()
                 resetForm()
                 blankToast('Tugas harian baru ditambahkan!')
-            }).cath(err => {
+            }).catch(err => {
                 throw new Error(err)
             })
         } catch (error) {
             blankToast('Tugas harian baru Gagal ditambahkan!')
-            console.log('asw gagal', error);
+            console.log(error)
         }
         toast.dismiss(promise)
     }
 
     function handleInput(value, _id) {
-        const updatedArray = list.map(item => {
+        const updatedArray = thisList.map(item => {
             if (item._id === _id) {
-                return { ...item, value: value }
+                return { ...item, title: value }
             }
             return item
         })
     
-        if (updatedArray.length > 0 && updatedArray[updatedArray.length - 1].value) {
-            updatedArray.push({_id: String(+new Date()), value: ''})
+        if (updatedArray.length > 0 && updatedArray[updatedArray.length - 1].title) {
+            updatedArray.push({_id: String(+new Date()), title: ''})
         }
     
-        setList(updatedArray)
+        setThisList(updatedArray)
     }
 
     function handleDeleteEmpty() {
         setErrMsg('')
-        const updatedArray = list.filter((item, index) => item.value !== '' || index === list.length - 1)
-        setList(updatedArray)
+        const updatedArray = thisList.filter((item, index) => item.title !== '' || index === thisList.length - 1)
+        setThisList(updatedArray)
     }
     
-    
-    if (!open) return
     return (
         <form onSubmit={handleSubmit} className='form-modal overflow-unset-important p-4 flex flex-col bg-primary-dark-50 rounded-md mb-2 flex-2'>
             <div className='flex flex-col'>
@@ -113,11 +112,11 @@ export default function DailyTaskEditor({open, cb, close}) {
                     <Droppable droppableId='listInputModel'>
                         {(provided) => (
                             <div {...provided.droppableProps} ref={provided.innerRef} className='bg-primary-dark-25 rounded-md p-1'>
-                                {list.map((data, index) => (
+                                {thisList.map((data, index) => (
                                     <Draggable key={data._id} draggableId={data._id} index={index}>
                                         {(provided) => (
                                             <div ref={provided.innerRef} {...provided.draggableProps} className='flex flex-row mb-2'>
-                                                <input className='flex-1' type="text" placeholder='Tambah' onChange={(e) => handleInput(e.target.value, data._id)} value={data.value} onBlur={handleDeleteEmpty} autoComplete='false'/>
+                                                <input className='flex-1' type="text" placeholder='Tambah' onChange={(e) => handleInput(e.target.value, data._id)} value={data.title} onBlur={handleDeleteEmpty} autoComplete='false'/>
                                                 <div className='w-[45px] flex place-items-center' {...provided.dragHandleProps}>
                                                     <FontAwesomeIcon icon={faBars} className='w-full'/>
                                                 </div>

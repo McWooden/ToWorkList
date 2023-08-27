@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckToSlot, faCircle, faCircleCheck, faRotate, faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
-import { useCallback, useEffect } from "react"
+import { faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faSearch, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
+import { useCallback, useEffect, useRef } from "react"
 import axios from "axios"
 import { API } from '../../../utils/variableGlobal'
 import { useState } from "react"
@@ -9,13 +9,13 @@ import { useSelector } from 'react-redux'
 import { blankToast, loadingToast } from '../../../utils/notif'
 import { toast } from 'react-toastify'
 import DailyTaskEditor from './DailyTaskEditor'
-
-
+import { Confirm } from '../../Modal/Confirm'
 
 export default function TaskContainer() {
   const [list, setlist] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isEditorOpen, setIsEditorOpen] = useState(false)
+  const divRef = useRef(null)
   const fetchData = useCallback(async() => {
     setIsLoading(true)
     const promise = loadingToast('Memuat')
@@ -34,7 +34,7 @@ export default function TaskContainer() {
 
   return (
     <>
-    <div className='flex gap-2'>
+    <div className='flex gap-2' ref={divRef}>
       <div className='bg-burlywood text-primary flex place-items-center py-2 px-6 rounded shadow-md my-2 w-fit gap-3 pointer' onClick={() => setIsEditorOpen(prev => !prev)}>
         <FontAwesomeIcon icon={faCheckToSlot}/>
         <span>{isEditorOpen?'Tutup':'Tambah'}</span>
@@ -47,7 +47,7 @@ export default function TaskContainer() {
     <DailyTaskEditor open={isEditorOpen} cb={fetchData} close={() => setIsEditorOpen(false)}/>
     <div className='flex-1 flex flex-col pb-[38px]'>
       {isLoading && <MyLoading className='mb-2'/>}
-      {list.map((item, index) => <Task data={item} key={index}/>)}
+      {list.map((item, index) => <Task data={item} key={index} cb={fetchData}/>)}
       <div className={`center-action-btn self-end d-flex p-fixed ai-center text-primary`}>
         <div className="action-add">
             <FontAwesomeIcon icon={faSearch} className='add-btn pointer bg-burlywood' />
@@ -58,9 +58,46 @@ export default function TaskContainer() {
   )
 }
   
-function Task({data}) {
+function Task({data, cb}) {
   const userId = useSelector(state => state.source.profile._id)
   const [thisData, setThisData] = useState(data)
+  const [dropDown, setDropDown] = useState(false)
+  let menuRef = useRef()
+  let btnRef = useRef()
+  useEffect(() => {
+    let handler = (e) => {
+        try {
+            if (menuRef.current.contains(e.target) || btnRef.current.contains(e.target)) {
+                return
+            } else {
+                setDropDown(false)
+            }
+        } catch (error) {
+            
+        }
+    }
+    document.addEventListener('mousedown', handler)
+    return () => document.removeEventListener("mousedown", handler)
+  }, [])
+  async function handleDelete() {
+    const promise = loadingToast('Menghapus tugas')
+    try {
+      console.log(API+'/daily/task/'+data._id);
+      await axios.delete(API+'/daily/task/'+data._id)
+      .then(res => {
+        blankToast('Tugas berhasil dihapus')
+        cb()
+      })
+      .catch(err => {
+        console.log(err);
+        blankToast('Tugas gagal dihapus')
+      })
+    } catch (error) {
+      console.log(error)
+    }
+    toast.dismiss(promise)
+  }
+  const [deleteOpen, setDeleteOpen] = useState(false)
   async function reverseList(listId) {
     const dataToSend = {
       _id: userId
@@ -84,11 +121,29 @@ function Task({data}) {
     <>
     <div className='bg-primary-dark-50 rounded-md p-4 mb-2'>
       <div className='mb-2'>
-        <p className='mb-3'>{data.detail.title}</p>
+        <div className='mb-3 relative flex items-center'>
+          <p className='flex-1'>{data.detail.title}</p>
+          {data.author._id === userId && 
+          <>
+          <div className="card-more d-flex ai-center" ref={btnRef}>
+            <FontAwesomeIcon icon={faEllipsisVertical} className='p-2 ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
+          </div>
+          <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
+                    <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300'>
+                        <li className='d-flex ai-center hover:brightness-110 py-2' onClick={() => setDeleteOpen(true)}>
+                            <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                            <span>delete</span>
+                        </li>
+                    </ul>
+                </div>
+          </>
+          }
+        </div>
         {thisData.list.map((item, index) => <TaskList data={item} key={index} cb={reverseList}/>)}
       </div>
       <p className='text-end text-xs'>by {data.author.name}</p>
     </div>
+    <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={data.detail.title} metode='delete' callback={handleDelete} color='greenyellow'/>
     </>
   )
 }

@@ -101,12 +101,12 @@ export function TodoModel({item, handleAreaToDrag}) {
                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
                 </div>
                 <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                    <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300 py-2'>
-                        <li className='d-flex ai-center' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_OUTSIDE', ...item}))}>
+                    <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300'>
+                        <li className='d-flex ai-center hover:brightness-110 pt-2' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_OUTSIDE', ...item}))}>
                             <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                             <span>edit</span>
                         </li>
-                        <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
+                        <li className='d-flex ai-center hover:brightness-110 pb-2' onClick={() => setDeleteOpen(true)}>
                             <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
                             <span>delete</span>
                         </li>
