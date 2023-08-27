@@ -4,7 +4,6 @@ import { Modal } from '../../Modal/Modal'
 import { useState } from 'react'
 import { API } from '../../../utils/variableGlobal'
 import axios from 'axios'
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { loadingToast } from '../../../utils/notif'
 import { toast } from 'react-toastify'
@@ -86,9 +85,6 @@ function CardList({item}) {
         }
         toast.dismiss(promise)
     }
-    useEffect(() => {
-        console.log(item)
-    },[item])
     return (
         <div className='bg-zinc-800 border-primary-bright p-2 rounded'>
             <div className='flex items-center gap-2 items-center'>
