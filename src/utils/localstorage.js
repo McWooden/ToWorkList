@@ -2,23 +2,15 @@ import CryptoJS from 'crypto-js'
 
 const secretKey = process.env.REACT_APP_CRYPTO_KEY
 
-// account storage
-export function getLocalAccount() {
-    const encryptedData = localStorage.getItem('account')
-    if (!encryptedData) return null
 
-    const decryptedBytes = CryptoJS.AES.decrypt(encryptedData, secretKey)
-    const decryptedData = decryptedBytes.toString(CryptoJS.enc.Utf8)
-
-    return JSON.parse(decryptedData)
+// LocalStorage vanilla
+export function getStorage(keyName) {
+    return localStorage.getItem(keyName)
 }
-
-export function setLocalAccount(data) {
-    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString()
-    localStorage.setItem('account', encryptedData)
+export function setStorage(keyName, data) {
+    return localStorage.setItem(keyName, data)
 }
-
-// costum local storage with encrypt
+// LocalStorage dengan crypto dan JSON
 export function getLocalStorage(keyName) {
     const encryptedData = localStorage.getItem(keyName)
     if (!encryptedData) return null
@@ -34,19 +26,45 @@ export function setLocalStorage(keyName, data) {
     localStorage.setItem(keyName, encryptedData)
 }
 
-// costum local storage without encrypt
+// LocalStorage tanpa crypto dengan JSON
+export function getLocalStorageWithoutEncrypt(key) {
+    const data = JSON.parse(localStorage.getItem(key))
+    if (data) return
+    return data
+}
+
+export function setLocalStorageWithoutEncrypt(key, data) {
+    localStorage.setItem(key, JSON.stringify(data))
+}
+
+// LocalStorage Account dengan crypto dan JSON
+export function getLocalAccount() {
+    const encryptedData = localStorage.getItem('account')
+    if (!encryptedData) return null
+
+    const decryptedBytes = CryptoJS.AES.decrypt(encryptedData, secretKey)
+    const decryptedData = decryptedBytes.toString(CryptoJS.enc.Utf8)
+
+    return JSON.parse(decryptedData)
+}
+
+export function setLocalAccount(data) {
+    const encryptedData = CryptoJS.AES.encrypt(JSON.stringify(data), secretKey).toString()
+    localStorage.setItem('account', encryptedData)
+}
+
+// LocalStorage dengan JSON
 export function getLocalAccountWithoutEncrypt() {
     const data = localStorage.getItem('account')
     if (!data) return null
 
-    return JSON.parse(data)
+    return data
 }
-
 export function setLocalAccountWithoutEncrypt(data) {
     localStorage.setItem('account', data)
 }
 
-// encrypt and decrypt
+// crypto
 export function encrypt(data) {
     return CryptoJS.AES.encrypt(data, secretKey).toString()
 }

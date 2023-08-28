@@ -1,9 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
+import supabase from '../utils/supabase'
+import { getLocalStorage } from '../utils/localstorage'
+
+const {id} = getLocalStorage('pathBook')
+
 
 export const channelStore = createSlice({
     name: 'channel',
     initialState: {
-        book: null,
+        book: supabase.channel(id) || null,
     },
     reducers: {
         setChannel: (state, action) => {

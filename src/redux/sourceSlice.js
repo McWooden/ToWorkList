@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getLocalAccount } from '../utils/localstorage'
+import { getLocalAccount, getLocalStorage, getStorage, setLocalStorage, setStorage } from '../utils/localstorage'
 
 export const sourceSlice = createSlice({
     name: 'source',
     initialState: {
-        pageType: 'welcome',
+        pageType: getStorage('pageType') || 'welcome',
         source: null,
         profile: getLocalAccount(),
-        guildProfile: null,
+        guildProfile: getLocalStorage('guildProfile') ||  null,
         members: null,
-        err: null,
         noteEditor: null,
         booksProfile: null,
         pages: null,
     },
     reducers: {
         setPageType: (state, action) => {
+            setStorage('pageType', action.payload)
             state.pageType = action.payload
         },
         setPages: (state, action) => {
@@ -28,6 +28,7 @@ export const sourceSlice = createSlice({
             state.profile = getLocalAccount()
         },
         setGuildProfile: (state, action) => {
+            setLocalStorage('guildProfile',action.payload)
             state.guildProfile = action.payload
         },
         setUpdateGuildProfile: (state, action) => {
@@ -35,9 +36,6 @@ export const sourceSlice = createSlice({
         },
         setMembers: (state, action) => {
             state.members = action.payload
-        },
-        setError: (state, action) => {
-            state.err = action.payload
         },
         setNoteEditor: (state, action) => {
             state.noteEditor = action.payload
@@ -51,6 +49,6 @@ export const sourceSlice = createSlice({
     },
 })
 
-export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setError, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile } = sourceSlice.actions
 
 export default sourceSlice.reducer

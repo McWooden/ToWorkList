@@ -11,7 +11,7 @@ import { setChannel } from '../../../redux/channelReducer'
 import { setPages, setUpdateGuildProfile } from '../../../redux/sourceSlice'
 
 export function PageList() {
-    const idBook = useSelector((state) => state.fetch.idBook)
+    const idBook = useSelector(state => state.fetch.idBook)
     const [loading, setLoading] = useState(true)
     const [reloading, setReloading] = useState(false)
     const dispatch = useDispatch()
@@ -45,13 +45,7 @@ export function PageList() {
         setLoading(true)
         if (!pages) {
             fetchData()
-        }// else {
-        //     setPagesElement(
-        //         pages.sort((a, b) => a.order - b.order).map((item, index) => (
-        //             <PageListItem key={index} data={item} />
-        //         ))
-        //     )
-        // }
+        }
         setLoading(false)
     }, [dispatch, fetchData, pages])
     useEffect(() => {

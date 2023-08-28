@@ -55,7 +55,7 @@ export function TodoDetail() {
             <div className='base-center p-relative of-auto'>
                 <div className='center d-flex p-relative fd-column'>
                     {shouldUpdate && 
-                        <div className="h-[45px] bg-info flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
+                        <div className="p-[15px] bg-info flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
                             <FontAwesomeIcon icon={faRotateRight}/>
                             <p>{shouldUpdate}</p>
                         </div>
