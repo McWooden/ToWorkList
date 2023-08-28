@@ -8,7 +8,7 @@ const {id} = getLocalStorage('pathBook')
 export const channelStore = createSlice({
     name: 'channel',
     initialState: {
-        book: supabase.channel(id) || '',
+        book: supabase.channel(id||'') || null,
     },
     reducers: {
         setChannel: (state, action) => {
