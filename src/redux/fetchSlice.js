@@ -6,10 +6,10 @@ const oldState = {book: getLocalStorage('pathBook'), page: getLocalStorage('path
 export const fetchSlice = createSlice({
     name: 'fetch',
     initialState: {
-        pathBook: oldState.book.path || '@me',
-        idBook: oldState.book.id || '@me',
-        pathPageOfBook: oldState.page.path || '',
-        idPageOfBook: oldState.page.id || '',
+        pathBook: oldState?.book?.path || '@me',
+        idBook: oldState?.book?.id || '@me',
+        pathPageOfBook: oldState?.page?.path || '',
+        idPageOfBook: oldState?.page?.id || '',
     },
     reducers: {
         setPathBook: (state, action) => {
