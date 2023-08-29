@@ -152,13 +152,18 @@ function Task({data, cb}) {
 function TaskList({data, cb, maxScore}) {
   const userId = useSelector(state => state.source.profile._id)
   const check = data.check.includes(userId) || false
-  const [widthBar, setWidthBar] = useState('w-0')
+  const [widthBar, setWidthBar] = useState('flex-0')
+  const [empetyBar, setEmpetyBar] = useState('flex-1')
   function reverseCheck() {
     cb(data._id)
   }
   useEffect(() => {
-    if (!data.check.length) return
-    setWidthBar(`w-${data.check.length}/${maxScore}`)
+    if (!data.check.length)  {
+      setWidthBar('flex-0')
+      setEmpetyBar('flex-1')
+    }
+    setWidthBar(`flex-${data.check.length}`)
+    setEmpetyBar(`flex-${maxScore-data.check.length}`)
   },[data, maxScore])
   return (
     <div className='flex flex-col w-full mb-2 pointer' onClick={reverseCheck}>
@@ -174,8 +179,9 @@ function TaskList({data, cb, maxScore}) {
         }
       </div>
       <div className='pl-5'>
-        <div className='bg-primary-dark-25 w-full h-[12px] rounded-lg overflow-hidden'>
-          <div className={`h-full ${widthBar} bg-ok`}/>
+        <div className='bg-primary-dark-25 w-full h-[12px] rounded-lg overflow-hidden flex'>
+          <div className={`h-full transition-ease ${widthBar} bg-ok rounded-lg`}/>
+          <div className={`h-full transition-ease ${empetyBar} bg-primary-dark-25`}/>
         </div>
       </div>
     </div>
