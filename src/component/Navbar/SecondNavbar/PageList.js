@@ -9,6 +9,7 @@ import supabase from '../../../utils/supabase'
 import { pageToast } from '../../../utils/notif'
 import { setChannel } from '../../../redux/channelReducer'
 import { setPages, setUpdateGuildProfile } from '../../../redux/sourceSlice'
+import MyLoading from '../../../utils/myLoading'
 
 export function PageList() {
     const idBook = useSelector(state => state.fetch.idBook)
@@ -29,6 +30,7 @@ export function PageList() {
     }, [handleSourceToListSorted, pages])
 
     const fetchData = useCallback(async () => {
+        setLoading(true)
         setReloading(false)
         try {
             const response = await axios.get(`${API}/book/${idBook}/get/pages/details`).catch(err => {
@@ -36,17 +38,15 @@ export function PageList() {
             })
             dispatch(setPages(response.data.pages))
         } catch (error) {
-            setLoading(false)
             setReloading(true)
         }
+        setLoading(false)
     }, [dispatch, idBook])
 
     useEffect(() => {
-        setLoading(true)
         if (!pages) {
             fetchData()
         }
-        setLoading(false)
     }, [dispatch, fetchData, pages])
     useEffect(() => {
         const channel = supabase.channel(idBook)
@@ -68,9 +68,7 @@ export function PageList() {
                     <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
                 </div>
             }
-            {loading && 
-                <div className="room d-flex ai-center p-relative pointer loading" />
-            }
+            {loading && <MyLoading/>}
             {list?.map((item, index) => (
                 <PageListItem key={index} data={item} />
             ))}
