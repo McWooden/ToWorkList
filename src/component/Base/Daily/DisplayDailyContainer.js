@@ -219,8 +219,8 @@ function Task({data, cb}) {
     async function handleDelete() {
       const promise = loadingToast('Menghapus tugas')
       try {
-        console.log(API+'/daily/task/'+data._id);
-        await axios.delete(API+'/daily/task/'+data._id)
+        console.log(API+`/source/daily/${idPageOfBook}/${data._id}`)
+        await axios.delete(API+`/source/daily/${idPageOfBook}/${data._id}`)
         .then(res => {
           blankToast('Tugas berhasil dihapus')
           cb()
