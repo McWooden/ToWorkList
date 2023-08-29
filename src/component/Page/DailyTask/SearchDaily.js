@@ -31,6 +31,12 @@ export default function SearchDaily({cb}) {
     }
     function handleModalOpen() { setIsModalOpen(true) }
     function handleModalClose() { setIsModalOpen(false) }
+    useEffect(() => {
+        return () => {
+            setDataSearch([])
+            setSearchText('')
+        }
+    })
     return (
         <div className={`center-action-btn self-end d-flex p-fixed ai-center text-primary`}>
             <div className="action-add" onClick={handleModalOpen}>

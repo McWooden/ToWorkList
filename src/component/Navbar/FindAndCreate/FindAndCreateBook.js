@@ -3,7 +3,7 @@ import { faPlus, faCompass, faSearch, faImage, faXmark } from '@fortawesome/free
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { setFetch } from '../../../redux/fetchSlice'
-import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../../../redux/sourceSlice'
+import { setBooksProfile, setGuildProfile, setMembers, setPageType, setPages } from '../../../redux/sourceSlice'
 import { toast } from 'react-toastify'
 import { imageToast, loadingToast } from '../../../utils/notif';
 import { ModalSecond } from '../../Modal/ModalSecond'
@@ -103,6 +103,7 @@ export function FindAndCreateBook() {
                 dispatch(setGuildProfile(res.data.profile))
                 dispatch(setMembers(null))
                 dispatch(setBooksProfile(null))
+                dispatch(setPages(null))
                 imageToast('buku baru dibuat!')
             })
             .catch(err => {

@@ -124,17 +124,9 @@ export function SettingPageListItem({data, callback, handleAreaToDrag}) {
                 <div className="addPage_body">
                     <p className='heading'>Halaman</p>
                     <p className='small'>Mengubah halaman <span className='small bold'>{title}</span></p>
-                    <div className="pagePreview">
-                        <p className='small bold uppercase'>Tipe halaman</p>
-                        <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row active`}>
-                            <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon active`}/>
-                            <span className={`page_type active`}>Todo </span>
-                            <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>
-                        </div>
-                    </div>
                     <p className='small bold uppercase'>Nama halaman</p>
                     <div className={`room d-flex ai-center p-relative pointer d-flex ${value&&'active'}`}>
-                        <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
+                        <FontAwesomeIcon icon={fontawesome[icon]} className={`room-icon ${value&&'active'}`}/>
                         <input type="text" placeholder={title} onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
                     </div>
                 </div>

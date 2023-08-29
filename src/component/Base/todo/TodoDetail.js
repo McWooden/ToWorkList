@@ -3,14 +3,14 @@ import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState, useCallback } from "react"
 import axios from "axios"
-import { API } from "../../utils/variableGlobal"
-import { setTodo } from "../../redux/todo"
-import { MoreInfoCard } from "./BaseLeft/MoreInfoCard"
-import { DetailLeftAction } from "./BaseLeft/DetailLeftAction"
-import { CenterActionButton } from "./BaseCenter/CenterActionButton"
-import { AddNoteModal } from "./Note/AddNoteModal"
-import { SidebarRightChat } from "./BaseRight/SidebarRightChat"
-import { DetailCard } from "./BaseCenter/DetailCard"
+import { API } from "../../../utils/variableGlobal"
+import { setTodo } from "../../../redux/todo"
+import { MoreInfoCard } from "../BaseLeft/MoreInfoCard"
+import { DetailLeftAction } from "../BaseLeft/DetailLeftAction"
+import { CenterActionButton } from "../BaseCenter/CenterActionButton"
+import { AddNoteModal } from "../Note/AddNoteModal"
+import { SidebarRightChat } from "../BaseRight/SidebarRightChat"
+import { DetailCard } from "../BaseCenter/DetailCard"
 
 export function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)

@@ -5,9 +5,9 @@ import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import ReactDOM from 'react-dom'
 import { SettingProfile } from './SettingProfile'
-import { SettingRoom } from './SettingRoom'
 import { SettingMember } from './SettingMember'
 import SettingMail from './SettingMail'
+import SettingPage from './SettingPage'
 
 export default function Setting({open, close}) {
     const [select, setSelect] = useState('profile')
@@ -41,7 +41,7 @@ export default function Setting({open, close}) {
             <div className="setting_full_body p-relative of-auto">
                 <section className='h-full'>
                     {select === 'profile' && <SettingProfile/>}
-                    {select === 'room' && <SettingRoom/>}
+                    {select === 'room' && <SettingPage/>}
                     {select === 'mail' && <SettingMail/>}
                     {select === 'member' && <SettingMember/>}
                 </section>

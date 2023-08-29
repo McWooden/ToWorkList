@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
 import { useEffect } from "react"
-import { API } from "../../utils/variableGlobal"
-import { setSource } from "../../redux/sourceSlice"
-import { BaseLeft } from "./BaseLeft"
-import { BaseCenter } from "./BaseCenter"
+import { API } from "../../../utils/variableGlobal"
+import { setSource } from "../../../redux/sourceSlice"
+import { BaseLeft } from "../BaseLeft"
+import { BaseCenter } from "../BaseCenter"
 
 
 export function TodoPage() {

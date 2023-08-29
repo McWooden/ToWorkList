@@ -11,7 +11,7 @@ import { SettingPageListItem } from './SettingPageListItem'
 import { setPages } from '../../redux/sourceSlice'
 import { toast } from 'react-toastify'
 
-export function SettingRoom() {
+export default function SettingPage() {
     const [openAdd, setOpenAdd] = useState(false)
     const idBook = useSelector((state) => state.fetch.idBook)
     const nickname = useSelector(state => state.source.profile.nickname)
@@ -19,6 +19,7 @@ export function SettingRoom() {
     const [list, setList] = useState(pages)
     const [saveIt, setSaveIt] = useState(false)
     const dispatch = useDispatch()
+    const [tipeNewRoom, setTipeNewRoom] = useState('faCheck')
 
     const handleSourceToListSorted = useCallback((dataToSort) => {
         const sortedList = dataToSort ? [...pages].sort((a, b) => a.order - b.order) : []
@@ -90,7 +91,7 @@ export function SettingRoom() {
         setBtnLoading(true)
         e.preventDefault()
         try {
-            const response = await axios.post(`${API}/book/${idBook}/page`, {page_title: value, icon: 'faCheck'})
+            const response = await axios.post(`${API}/book/${idBook}/page`, {page_title: value, icon: tipeNewRoom})
             pageToast(`${value} berhasil dibuat`)
             dataToRedux(response.data.pages)
             channel.send({
@@ -121,15 +122,20 @@ export function SettingRoom() {
                     <p className='small'>Membuat halaman baru</p>
                     <div className="pagePreview">
                         <p className='small bold'>Tipe halaman</p>
-                        <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row active`}>
-                            <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon active`}/>
+                        <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row ${tipeNewRoom === 'faCheck' && 'active'}`} onClick={() => setTipeNewRoom('faCheck')}>
+                            <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon`}/>
                             <span className={`page_type active`}>Todo </span>
                             <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>
+                        </div>
+                        <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row ${tipeNewRoom === 'faChartBar' && 'active'}`} onClick={() => setTipeNewRoom('faChartBar')}>
+                            <FontAwesomeIcon icon={fontawesome['faChartBar']} className={`room-icon page_icon`}/>
+                            <span className={`page_type active`}>Daily</span>
+                            <span className={`page_desc active`}>Voting, Daily reset</span>
                         </div>
                     </div>
                     <p className='small bold'>Nama halaman</p>
                     <div className={`room d-flex ai-center p-relative pointer d-flex ${value&&'active'}`}>
-                        <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon ${value&&'active'}`}/>
+                        <FontAwesomeIcon icon={fontawesome[tipeNewRoom]} className={`room-icon ${value&&'active'}`}/>
                         <input type="text" placeholder='halaman baru' onChange={(e) => setValue(e.target.value)} value={value} className={`room_input ${value&&'active'}`} required/>
                     </div>
                 </div>

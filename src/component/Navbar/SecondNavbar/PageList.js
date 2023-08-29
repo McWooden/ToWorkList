@@ -44,6 +44,7 @@ export function PageList() {
     }, [dispatch, idBook])
 
     useEffect(() => {
+        setLoading(false)
         if (!pages) {
             fetchData()
         }
