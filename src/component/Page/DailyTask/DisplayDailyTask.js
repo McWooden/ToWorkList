@@ -59,6 +59,7 @@ function Task({data, cb}) {
   const userId = useSelector(state => state.source.profile._id)
   const [thisData, setThisData] = useState(data)
   const [dropDown, setDropDown] = useState(false)
+  const [maxScore, setMaxScore] = useState(0)
   let menuRef = useRef()
   let btnRef = useRef()
   useEffect(() => {
@@ -76,6 +77,9 @@ function Task({data, cb}) {
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener("mousedown", handler)
   }, [])
+  useEffect(() => {
+    setMaxScore(Math.max(...data.list.map(x => x.check.length)))
+  },[data])
   async function handleDelete() {
     const promise = loadingToast('Menghapus tugas')
     try {
@@ -136,7 +140,7 @@ function Task({data, cb}) {
           </>
           }
         </div>
-        {thisData.list.map((item, index) => <TaskList data={item} key={index} cb={reverseList}/>)}
+        {thisData.list.map((item, index) => <TaskList data={item} key={index} cb={reverseList} maxScore={maxScore}/>)}
       </div>
       <p className='text-end text-xs'>by {data.author.name}</p>
     </div>
@@ -145,12 +149,17 @@ function Task({data, cb}) {
   )
 }
   
-function TaskList({data, cb}) {
+function TaskList({data, cb, maxScore}) {
   const userId = useSelector(state => state.source.profile._id)
   const check = data.check.includes(userId) || false
+  const [widthBar, setWidthBar] = useState('w-0')
   function reverseCheck() {
     cb(data._id)
   }
+  useEffect(() => {
+    if (!data.check.length) return
+    setWidthBar(`w-${data.check.length}/${maxScore}`)
+  },[data, maxScore])
   return (
     <div className='flex flex-col w-full mb-2 pointer' onClick={reverseCheck}>
       <div className='flex items-center'>
@@ -166,7 +175,7 @@ function TaskList({data, cb}) {
       </div>
       <div className='pl-5'>
         <div className='bg-primary-dark-25 w-full h-[12px] rounded-lg overflow-hidden'>
-          <div className='h-full w-5 bg-ok'/>
+          <div className={`h-full ${widthBar} bg-ok`}/>
         </div>
       </div>
     </div>
