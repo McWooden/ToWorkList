@@ -13,6 +13,7 @@ import { Confirm } from '../../Modal/Confirm'
 import SearchDaily from './SearchDaily'
 
 export default function TaskContainer() {
+  const myId = useSelector(state => state.source.profile._id)
   const [list, setlist] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [isEditorOpen, setIsEditorOpen] = useState(false)
@@ -21,13 +22,13 @@ export default function TaskContainer() {
     setIsLoading(true)
     const promise = loadingToast('Memuat')
     try {
-      await axios.get(API+'/daily/task/all').then(res => {
+      await axios.get(API+`/daily/task/${myId}`).then(res => {
         setlist(res.data.all)
       }).catch(err => console.log(err))
     } catch (error) {}
     toast.dismiss(promise)
     setIsLoading(false)
-  }, [])
+  }, [myId])
 
   useEffect(() => {
     fetchData()
@@ -49,7 +50,7 @@ export default function TaskContainer() {
     <div className='flex-1 flex flex-col pb-[38px]'>
       {isLoading && <MyLoading className='mb-2'/>}
       {list.map((item, index) => <Task data={item} key={index} cb={fetchData}/>)}
-      <SearchDaily/>
+      <SearchDaily cb={fetchData}/>
     </div>
     </>
   )

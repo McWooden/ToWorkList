@@ -7,9 +7,10 @@ import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { loadingToast } from '../../../utils/notif'
 import { toast } from 'react-toastify'
+import { useEffect } from 'react'
 
-export default function SearchDaily() {
-    const myId = useSelector(state => state.source.profile._d)
+export default function SearchDaily({cb}) {
+    const myId = useSelector(state => state.source.profile._id)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [searchText, setSearchText] = useState('')
@@ -49,35 +50,36 @@ export default function SearchDaily() {
                     </form>
                 </div>
                 {loading && <div className="loading my-2 h-[64px]"></div>}
-                <DisplaySearchKey dataSearch={dataSearch} closeModalCallback={handleModalClose}/>
+                <DisplaySearchKey dataSearch={dataSearch} closeModalCallback={handleModalClose} cb={cb}/>
             </div>
             </Modal>
         </div>
     )
 }
 
-export function DisplaySearchKey({dataSearch}) {
+export function DisplaySearchKey({dataSearch, cb}) {
     return (
         <div className="book_card_container d-flex flex-col jc-center">
-            {dataSearch?.map((x,i) => <CardList item={x} key={i}/>)}
+            {dataSearch?.map((x,i) => <CardList item={x} key={i} cb={cb}/>)}
         </div>
     )
 }
 
-function CardList({item}) {
+function CardList({item, cb}) {
     const myProfile = useSelector(state => state.source.profile)
     const [detailOpen, setDetailOpen] = useState(false)
-    const [followText, setFollowText] = useState(item.isUserInclude?'Berhenti':'Ikuti')
+    const [isFollow, setIsFollow] = useState(!item.isUserInclude)
     async function reverseIkuti() {
         const dataToSend = {
             name: `${myProfile.nickname}#${myProfile.tag}`,
             avatar: myProfile.avatar,
         }
-        const promise = loadingToast(followText)
+        const promise = loadingToast(isFollow?'Berhenti mengikuti':'Mengikuti')
         try {
             await axios.put(API+`/daily/task/follow/${item._id}/${myProfile._id}`, dataToSend)
             .then(res => {
-                setFollowText(res.data.text)
+                setIsFollow(!res.data.isFollow)
+                cb()
             })
             .catch(err => {throw new Error(err)})
         } catch (error) {
@@ -85,6 +87,9 @@ function CardList({item}) {
         }
         toast.dismiss(promise)
     }
+    useEffect(() => {
+        console.log(item.isUserInclude);
+    },[item])
     return (
         <div className='bg-zinc-800 border-primary-bright p-2 rounded'>
             <div className='flex items-center gap-2 items-center'>
@@ -92,7 +97,7 @@ function CardList({item}) {
                     <p className='flex-1'>{item.title}</p>
                     <FontAwesomeIcon icon={detailOpen?faChevronDown:faChevronRight}/>
                 </div>
-                <div className='py-0.5 px-6 bg-info shadow rounded-md pointer' onClick={reverseIkuti}>{followText}</div>
+                <div className={`py-0.5 px-6 ${isFollow?'bg-zinc-700':'bg-info'} shadow rounded-md pointer`} onClick={reverseIkuti}>{isFollow?'Berhenti':'Ikuti'}</div>
             </div>
             {detailOpen && 
                 <div className='flex text-xs gap-2 flex-col'>
