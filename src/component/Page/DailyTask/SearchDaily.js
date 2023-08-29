@@ -36,7 +36,7 @@ export default function SearchDaily({cb}) {
             setDataSearch([])
             setSearchText('')
         }
-    })
+    }, [])
     return (
         <div className={`center-action-btn self-end d-flex p-fixed ai-center text-primary`}>
             <div className="action-add" onClick={handleModalOpen}>
