@@ -214,8 +214,8 @@ function Task({data, cb}) {
       return () => document.removeEventListener("mousedown", handler)
     }, [])
     useEffect(() => {
-      setMaxScore(Math.max(...data.list.map(x => x.check.length)))
-    },[data])
+      setMaxScore(Math.max(...thisData.list.map(x => x.check.length)))
+    },[thisData])
     async function handleDelete() {
       const promise = loadingToast('Menghapus tugas')
       try {
