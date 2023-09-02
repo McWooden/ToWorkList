@@ -1,9 +1,9 @@
 import { faCheck, faNoteSticky, faImage, faMessage} from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux'
 import { InfoMenu } from './InfoMenu'
-import { convertDateToString } from '../../../utils/convertDateFormat'
 import { Contributor } from './Contributor'
-
+import format from 'date-fns/format'
+import id from 'date-fns/locale/id'
 
 export function MoreInfoCard() {
     const todo = useSelector(state => state.todo)
@@ -14,7 +14,7 @@ export function MoreInfoCard() {
                 <div className="card-color" style={{backgroundColor: todo.details.color}}></div>
                 <div className="card-text d-flex fd-column jc-center">
                     <div className="card-title">{todo.details.item_title}</div>
-                    <div className="card-deadline">{convertDateToString(todo.details.deadline)}</div>
+                    <div className="card-deadline">{format(todo.details.deadline, 'iiii, dd LLL yyyy', {locale: id})}</div>
                 </div>
             </div>
         </div>

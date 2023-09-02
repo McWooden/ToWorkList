@@ -1,47 +1,62 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
-import { useEffect } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { API } from "../../../utils/variableGlobal"
 import { setSource } from "../../../redux/sourceSlice"
 import { BaseLeft } from "../BaseLeft"
 import { BaseCenter } from "../BaseCenter"
+import MyLoading from "../../../utils/myLoading"
 
 
 export function TodoPage() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const source = useSelector(state => state.source.source)
     const dispatch = useDispatch()
-    const isLeftSideShow = useSelector(state => state.show.leftSide)
-    useEffect(() => {
-        const fetchData = async () => {
+    const [isLoading, setIsLoading] = useState(true)
+    const [isReload, setIsReload] = useState(false)
+    const fetchData = useCallback(async () => {
+        setIsReload(false)
+        setIsLoading(true)
             try {
-                const response = await axios.get(`${API}/source/page/${idPageOfBook}`)
+                const response = await axios.get(`${API}/source/page/${idPageOfBook}`).catch(err => {
+                    throw new Error(err)
+                })
                 dispatch(setSource(response.data))
+                setIsLoading(false)
             } catch (err) {
                 console.error(err)
+                setIsReload(true)
+                setIsLoading(false)
             }
-        }
+    },[dispatch, idPageOfBook])
+    useEffect(() => {
         fetchData()
-    }, [idPageOfBook, dispatch])
+    }, [fetchData])
+    useEffect(() => {
 
-    if (!source) return (
-        <>
-        <div className={`base-left zi-1 flex-1 of-auto base-left-${isLeftSideShow?'show':'hide'}`}>
-            <div className="sidebar-left">
-                <div className='sidebar_left_loading loading'/>
-            </div>
-        </div>
-        <div className="base-center p-relative of-auto">
-            <div className="center d-flex p-relative fd-column">
-                <div className="loading center_loading"/>
-            </div>
-        </div>
-        </>
-    )
+    })
     return (
-        <>
-            <BaseLeft/>
-            <BaseCenter/>
+        <>  
+            {isReload && 
+            <div className="base-center p-relative of-auto">
+                <div className="center d-flex p-relative fd-column">
+                    <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
+                        <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
+                    </div>
+                </div>
+            </div>
+            }
+            {isLoading && <div className="flex-3 p-relative of-auto">
+                <div className="center d-flex p-relative fd-column">
+                    <MyLoading/>
+                </div>
+            </div>}
+            {source && <>
+                <BaseLeft/>
+                <BaseCenter/>
+            </>}
         </>
     )
 }

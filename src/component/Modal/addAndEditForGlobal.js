@@ -9,7 +9,8 @@ import axios from "axios"
 import { API } from "../../utils/variableGlobal"
 import { loadingToast, noteToast, saveToast, todoToast } from "../../utils/notif"
 import { setSource } from "../../redux/sourceSlice"
-import { convertDateToString } from "../../utils/convertDateFormat"
+import format from 'date-fns/format'
+import id from 'date-fns/locale/id'
 import { useEffect } from "react"
 import { toast } from "react-toastify"
 import { setTodo } from '../../redux/todo'
@@ -26,9 +27,7 @@ export function AddAndEditForGlobal() {
 
     const colors = useMemo(() => ['grey', 'tomato', 'royalblue', 'goldenrod', 'greenyellow'], [])
 
-    const [colorsTileSource, setColorsTileSource] = useState([
-      { color, deadline: new Date(deadline) }
-    ])
+    const [colorsTileSource, setColorsTileSource] = useState([])
   
     const idPageOfBook = useSelector((state) => state.fetch.idPageOfBook)
     const pathPageOfBook = useSelector((state) => state.fetch.pathPageOfBook)
@@ -42,17 +41,14 @@ export function AddAndEditForGlobal() {
   
     useEffect(() => {
       if (type === 'ADD_TODO' || type === 'ADD_NOTE') {
-        if (!currentColor) setCurrentColor(colors[Math.floor(Math.random() * colors.length)])
-        setColorsTileSource([{ color: currentColor, deadline: new Date().toLocaleDateString('en-US', { 
-          month: 'numeric', 
-          day: 'numeric', 
-          year: 'numeric' 
-        })}])
+        if (!currentColor) setCurrentColor(colors[Math.floor(Math.random() * colors.length)]) // random warna
+        const currentDate = {color: currentColor, deadline: new Date().setHours(0,0,0,0)}
+        setColorsTileSource([currentDate])
       } else {
         setInputTitle(item_title)
         setInputDesc(desc)
         setCurrentColor(color)
-        setColorsTileSource([{ color, deadline: new Date(deadline) }])
+        setColorsTileSource([{ color, deadline: deadline }])
       }
     }, [color, colors, currentColor, deadline, desc, item_title, type])
     
@@ -139,28 +135,14 @@ export function AddAndEditForGlobal() {
       } catch (err) {}
     }
   
-    const colorsTile = colorsTileSource.map((x, index) => ({
-      date: x.deadline,
-      color: x.color,
-      title:
-        index === 0
-          ? 'Deadline'
-          : index === colorsTileSource.length - 1
-          ? 'Deadline (Before)'
-          : item_title || 'No Title',
-    }))
-  
     function dayTileClick(x) {
-      const date = new Date(x).toLocaleDateString('en-US', { 
-        month: 'numeric', 
-        day: 'numeric', 
-        year: 'numeric' 
-        })
+      const date = +new Date(x)
       const newDate = {
         deadline: date,
-        color: 'var(--purple-2)',
+        color: 'burlywood',
       }
-      setColorsTileSource([newDate, { color, deadline: new Date(deadline) }])
+      const colorsTileSourceNow = [newDate, colorsTileSource[1] || colorsTileSource[0]]
+      setColorsTileSource(colorsTileSourceNow)
     }
   
     return (
@@ -176,26 +158,30 @@ export function AddAndEditForGlobal() {
                 next2Label={null}
                 prev2Label={null}
                 tileContent={({ date, view }) => {
-                    const color = colorsTile.find((c) => {
-                    const tileDate = new Date(c.date)
-                    console.log();
-                    return tileDate.getTime() === date.getTime()
-                    })
-                    if (color) {
-                        return (
-                            <div
-                            className="repalace"
-                            style={{
-                                border: `1px solid ${color.color}`,
-                                borderRadius: '50px',
-                            }}
-                            title={color.title}
-                            >
-                            {date.getDate()}
-                            </div>
-                        )
-                    }
-                }}
+                  const color = colorsTileSource.map((x, index) => ({
+                    date: x.deadline,
+                    color: x.color,
+                    title:
+                      index === 0 ? 'Deadline' : index === colorsTileSource.length - 1
+                        ? 'Deadline (Before)' : item_title || 'No Title',
+                  })).find((c) => {
+                    return c.date === +new Date(date);
+                  });
+                  if (color) {
+                      return (
+                          <div
+                              className="repalace"
+                              style={{
+                                  border: `1px solid ${color.color}`,
+                                  borderRadius: '50px',
+                              }}
+                              title={color.title}
+                          >
+                              {date.getDate()}
+                          </div>
+                      );
+                  }
+                }}              
                 />
             }
             </div>
@@ -208,7 +194,7 @@ export function AddAndEditForGlobal() {
             <div className="general-info" style={{ borderBottom: `1px solid ${currentColor}` }}>
               <h3>{item_title || pathPageOfBook}</h3>
               <p className="date">
-                {deadline ? convertDateToString(deadline) : type === 'ADD_NOTE' ? 'Menambah catatan baru...' : 'Menambah tugas baru...'}
+                {deadline ? <div className="card-deadline">{format(deadline, 'iiii, dd LLL yyyy', {locale: id})}</div> : type === 'ADD_NOTE' ? 'Menambah catatan baru...' : 'Menambah tugas baru...'}
               </p>
             </div>
             <div className="input-left d-flex fd-row m-1">
