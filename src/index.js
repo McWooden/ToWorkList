@@ -14,6 +14,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import Register from './pages/Auth/Register'
 import Login from './pages/Auth/Login'
 import Pemulihan from './pages/Auth/Pemulihan'
+import MyErrorBoundary from './component/ErrorHandling/ErrorBoundary'
 
 // import all css
 import 'react-toastify/dist/ReactToastify.css'
@@ -31,6 +32,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <>
   {/* <React.StrictMode> */}
+  <MyErrorBoundary>
   <Provider store={store}>
     <BrowserRouter>
       <Routes>
@@ -54,6 +56,7 @@ root.render(
               transition={Flip}
               />
   </Provider>
+  </MyErrorBoundary>
   {/* </React.StrictMode> */}
   </>
 )
