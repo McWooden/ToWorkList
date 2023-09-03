@@ -1,11 +1,10 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSun, faCloud, faMoon, faMountainSun } from '@fortawesome/free-solid-svg-icons'
+import { format } from 'date-fns'
+import { id } from 'date-fns/locale'
 
 
 export function Greeting() {
-    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu']
-    const bulan = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember']
-    const day = days[new Date().getDay()];
     let time = null
     let color = null
     let greetingIcon = null
@@ -38,7 +37,7 @@ export function Greeting() {
             </div>
             <div className="greeting-context d-flex fd-column jc-center text-sm">
                 <p className='selamat'>Selamat {time}!</p>
-                <p className='date'>{day}, {new Date().getDate()} {bulan[new Date().getMonth()]} {new Date().getFullYear()}</p>
+                <p className='date'>{format(new Date(), 'EEEE, MMM yyyy', {locale: id})}</p>
             </div>
         </div>
     )
