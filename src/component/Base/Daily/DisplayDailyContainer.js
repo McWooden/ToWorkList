@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faTrash, faUser, faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faRotateBack, faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faTrash, faUser, faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useRef } from "react"
 import { useCallback } from "react"
 import { useState } from "react"
@@ -23,14 +23,22 @@ export default function DisplayDailyContainer() {
     const [isEditorOpen, setIsEditorOpen] = useState(false)
     const divRef = useRef(null)
     const dispatch = useDispatch()
+    const [isReload, setIsReload] = useState(false)
     const fetchData = useCallback(async() => {
         setIsLoading(true)
+        setIsReload(false)
         const promise = loadingToast('Memuat')
         try {
         await axios.get(`${API}/source/page/${idPageOfBook}`).then(res => {
             dispatch(setSource(res.data))
-        }).catch(err => console.log(err))
-        } catch (error) {}
+          }).catch(err => {
+            throw new Error(err)
+          })
+        } catch (error) {
+          setIsReload(false)
+          setIsLoading(false)
+          console.log(error)
+        }
         toast.dismiss(promise)
         setIsLoading(false)
     }, [dispatch, idPageOfBook])
@@ -38,6 +46,10 @@ export default function DisplayDailyContainer() {
     useEffect(() => {
         fetchData()
     },[fetchData])
+
+    if (isReload) return (<div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
+      <FontAwesomeIcon icon={faRotateBack} className="reload_btn" />
+    </div>)
 
     if (!list) return <MyLoading/>
 
