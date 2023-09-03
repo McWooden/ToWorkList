@@ -72,7 +72,14 @@
     font-size: xx-small;
     color: burlywood;
 }
+.base-right_block {
+    display: none;
+    z-index: 1;
+}
 @media (max-width: 768px) {
+    .base-right_block {
+        display: block;
+    }
     .base-right {
         height: calc(100vh - 96px);
         position: fixed;

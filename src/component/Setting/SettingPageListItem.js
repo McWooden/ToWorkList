@@ -102,6 +102,7 @@ export function SettingPageListItem({data, callback, handleAreaToDrag}) {
             <span className={`${active?'active':''} ${dropDown?'text-primary':''}`}>{title}</span>
             <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                 <ul className='d-flex fd-column of-hidden p-absolute pointer'>
+                    
                     <li className='d-flex ai-center' onClick={handleClick}>
                         <FontAwesomeIcon icon={faEye} className='card-dd-btn' />
                         <span>Pergi</span>

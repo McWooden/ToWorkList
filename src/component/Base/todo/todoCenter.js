@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons'
-import { CenterActionButton } from './BaseCenter/CenterActionButton';
-import { CardContainer } from './BaseCenter/CardContainer';
+import { CenterActionButton } from '../BaseCenter/CenterActionButton';
+import { CardContainer } from '../BaseCenter/CardContainer';
 import { useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSource } from '../../redux/sourceSlice';
-import { API } from '../../utils/variableGlobal';
+import { setSource } from '../../../redux/sourceSlice';
+import { API } from '../../../utils/variableGlobal';
 import axios from 'axios';
-export function BaseCenter() {
+
+export function TodoCenter() {
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const dispatch = useDispatch()
@@ -26,17 +27,17 @@ export function BaseCenter() {
     }, [channel, dispatch, idPageOfBook])
 
     return (
-        <div className="base-center p-relative of-auto">
-            <div className="center d-flex p-relative fd-column">
-                {shouldUpdate && 
-                  <div className="p-[15px] flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
-                      <FontAwesomeIcon icon={faRotateRight}/>
-                      <p>{shouldUpdate}</p>
-                  </div>
-                }
-                <CardContainer/>
-                <CenterActionButton/>
-            </div>
+      <div className="base-center p-relative of-auto">
+        <div className="center d-flex p-relative fd-column">
+            {shouldUpdate && 
+              <div className="p-[15px] flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
+                  <FontAwesomeIcon icon={faRotateRight}/>
+                  <p>{shouldUpdate}</p>
+              </div>
+            }
+            <CardContainer/>
+            <CenterActionButton/>
         </div>
+      </div>
     )
 }

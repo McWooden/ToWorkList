@@ -1,6 +1,11 @@
-import { useSelector } from "react-redux"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHistory } from '@fortawesome/free-solid-svg-icons'
 import { Greeting } from "../../../utils/greeting"
 import DisplayDailyContainer from "./DisplayDailyContainer"
+import { Left } from "../BaseComponent"
+import { useSelector } from 'react-redux'
+import HistoryDaily from './HistoryDaily'
+import { useState } from 'react'
 
 
 export default function Daily() {
@@ -13,11 +18,19 @@ export default function Daily() {
 }
 
 function DailyTaskLeft() {
-    const isLeftSideShow = useSelector(state => state.show.leftSide)
+    const history = useSelector(state => state.source?.source?.history)
+    const [historyOpen, setHistoryOpen] = useState(false)
     return (
-    <div className={`base-left of-auto zi-1 flex-1 base-left-${isLeftSideShow?'show':'hide'} fd-column d-flex p-2`}>
-        <Greeting/>
-    </div>
+    <Left>
+        <div className='p-2'>
+            <Greeting/>
+            <div className='bg-burlywood text-primary flex place-items-center py-4 px-8 rounded shadow-md my-2 w-fit gap-3 pointer' onClick={() => setHistoryOpen(true)}>
+                <FontAwesomeIcon icon={faHistory}/>
+                <span>Riwayat</span>
+            </div>
+            <HistoryDaily history={history} open={historyOpen} close={() => setHistoryOpen(false)}/>
+        </div>
+    </Left>
     )
 }
 

@@ -1,18 +1,18 @@
 import { useState, useEffect, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
-import { API } from "../../utils/variableGlobal"
-import { setMembers } from "../../redux/sourceSlice"
-import { memberToast } from "../../utils/notif"
+import { API } from "../../../utils/variableGlobal"
+import { setMembers } from "../../../redux/sourceSlice"
+import { memberToast } from "../../../utils/notif"
+import { Right } from "../BaseComponent"
 
-export function BaseRight() {
+export function TodoRight() {
     const [isLoading, setIsLoading] = useState(false)
-    const isRightSideShow = useSelector(state => state.show.rightSide)
     const idBook = useSelector(state => state.fetch.idBook)
     const members = useSelector(state => state.source.members)
-    const dispatch = useDispatch()
     const [box, setBox] = useState([])
     const channel = useSelector(state => state.channel.book)
+    const dispatch = useDispatch()
     function handleEmpety() {
         setIsLoading(false)
         setBox('Empety')
@@ -62,11 +62,11 @@ export function BaseRight() {
         })
     }, [channel, fetchData])
     return (
-        <div className={`base-right of-auto base-right-${isRightSideShow?'show':'hide'} d-flex fd-column bg-indianred`}>
+        <Right>
             <div className="sidebar-right d-flex fd-column of-auto">
                 {isLoading && <div className="loading sidebar_right_loading d-grid pi-center"/>}
                 {box}
             </div>
-        </div>
+        </Right>
     )
 }

@@ -8,7 +8,14 @@
 .base-left-hide {
     transform: translateX(0);
 }
+.base-left_block {
+    display: none;
+    z-index: 1;
+}
 @media (max-width: 892px) {
+    .base-left_block {
+        display: block;
+    }
     .base-left {
         position: fixed;
         width: 255px;

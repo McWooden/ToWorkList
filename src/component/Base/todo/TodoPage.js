@@ -5,30 +5,26 @@ import axios from "axios"
 import { useCallback, useEffect, useState } from "react"
 import { API } from "../../../utils/variableGlobal"
 import { setSource } from "../../../redux/sourceSlice"
-import { BaseLeft } from "../BaseLeft"
-import { BaseCenter } from "../BaseCenter"
+import { TodoLeft } from "./todoLeft"
 import MyLoading from "../../../utils/myLoading"
+import { TodoCenter } from './todoCenter'
 
 
 export function TodoPage() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const source = useSelector(state => state.source.source)
     const dispatch = useDispatch()
-    const [isLoading, setIsLoading] = useState(true)
     const [isReload, setIsReload] = useState(false)
     const fetchData = useCallback(async () => {
         setIsReload(false)
-        setIsLoading(true)
             try {
                 const response = await axios.get(`${API}/source/page/${idPageOfBook}`).catch(err => {
                     throw new Error(err)
                 })
                 dispatch(setSource(response.data))
-                setIsLoading(false)
             } catch (err) {
                 console.error(err)
                 setIsReload(true)
-                setIsLoading(false)
             }
     },[dispatch, idPageOfBook])
     useEffect(() => {
@@ -48,14 +44,14 @@ export function TodoPage() {
                 </div>
             </div>
             }
-            {isLoading && <div className="flex-3 p-relative of-auto">
+            {!source && <div className="flex-3 p-relative of-auto">
                 <div className="center d-flex p-relative fd-column">
                     <MyLoading/>
                 </div>
             </div>}
             {source && <>
-                <BaseLeft/>
-                <BaseCenter/>
+                <TodoLeft/>
+                <TodoCenter/>
             </>}
         </>
     )

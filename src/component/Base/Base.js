@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import { Welcome } from '../Page/Welcome'
 import { TodoDetail } from './todo/TodoDetail';
 import { TodoPage } from './todo/TodoPage';
-import { BaseRight } from './BaseRight';
+import { TodoRight } from './todo/todoRight';
 import Summary from '../Page/summary';
 import Email from '../Page/email';
 import { DailyTask } from '../Page/DailyTask';
@@ -48,7 +48,7 @@ export function Base() {
                     {pageType === 'welcome' && <Welcome/>}
                     {pageType === 'dailyTask' && <DailyTask/>}
                     {pageType === 'faAddressBook' && <Summary/>}
-                    {pageType === 'faCheck' && <><TodoPage/><BaseRight/></>}
+                    {pageType === 'faCheck' && <><TodoPage/><TodoRight/></>}
                     {pageType === 'faEnvelope' && <Email/>}
                     {pageType === 'faChartBar' && <Daily/>}
                 </>)

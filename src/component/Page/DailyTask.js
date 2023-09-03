@@ -1,6 +1,6 @@
 import { Greeting } from "../../utils/greeting"
-import { useSelector } from 'react-redux'
 import TaskContainer from './DailyTask/DisplayDailyTask'
+import { Left } from "../Base/BaseComponent"
 
 
 export function DailyTask() {
@@ -13,11 +13,12 @@ export function DailyTask() {
 }
 
 function DailyTaskLeft() {
-  const isLeftSideShow = useSelector(state => state.show.leftSide)
   return (
-    <div className={`base-left of-auto zi-1 flex-1 base-left-${isLeftSideShow?'show':'hide'} fd-column d-flex p-2`}>
-      <Greeting/>
-    </div>
+    <Left>
+      <div className="p-2">
+        <Greeting/>
+      </div>
+    </Left>
   )
 }
 

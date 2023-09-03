@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faTrash, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faTrash, faUser, faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { useRef } from "react"
 import { useCallback } from "react"
 import { useState } from "react"
@@ -254,28 +254,37 @@ function Task({data, cb}) {
       }
       toast.dismiss(promise)
     }
+    const [showDetail, setShowDetail] = useState(false)
     return (
       <>
       <div className='bg-primary-dark-50 rounded-md p-4 mb-2'>
         <div className='mb-2'>
-          <div className='mb-3 relative flex items-center'>
-            <p className='flex-1'>{data.detail.title}</p>
-            {data.author._id === userId && 
-            <>
-            <div className="card-more d-flex ai-center" ref={btnRef}>
-              <FontAwesomeIcon icon={faEllipsisVertical} className='p-2 ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
+            <div className='mb-3 relative flex items-center'>
+              <div className='flex flex-1 items-center pointer flex-col' onClick={() => setShowDetail(prev => !prev)}>
+                <div className='flex w-full items-center'>
+                  <p className='flex-1'>{data.detail.title}</p>
+                  <FontAwesomeIcon icon={showDetail?faChevronDown:faChevronRight} className='p-2 ai-center-btn pointer'/>
+                </div>
+                {showDetail && <div>
+                  <p className='text-sm'>{data.detail.desc}</p>
+                </div>}
+              </div>
+              {data.author._id === userId && 
+              <>
+              <div className="card-more d-flex ai-center" ref={btnRef}>
+                <FontAwesomeIcon icon={faEllipsisVertical} className='p-2 ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
+              </div>
+              <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
+                        <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300'>
+                            <li className='d-flex ai-center hover:brightness-110 py-2' onClick={() => setDeleteOpen(true)}>
+                                <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                                <span>delete</span>
+                            </li>
+                        </ul>
+                    </div>
+              </>
+              }
             </div>
-            <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                      <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300'>
-                          <li className='d-flex ai-center hover:brightness-110 py-2' onClick={() => setDeleteOpen(true)}>
-                              <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
-                              <span>delete</span>
-                          </li>
-                      </ul>
-                  </div>
-            </>
-            }
-          </div>
           {thisData.list.map((item, index) => <TaskList data={item} key={index} cb={reverseList} maxScore={maxScore}/>)}
         </div>
         <p className='text-end text-xs'>by {data.author.name}</p>

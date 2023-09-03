@@ -164,8 +164,6 @@ nav {
     left: 10px;
     bottom: 60px;
     border-radius: 10px;
-    /* background-color: var(--primary); */
-    /* border: 1px solid burlywood; */
     padding: 15px 0;
     gap: 10px;
     transition: .1s ease;

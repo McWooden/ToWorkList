@@ -6,13 +6,13 @@ import { FindAndCreateBook } from './FindAndCreate/FindAndCreateBook'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { DailyTask } from './DailyTaskButton'
-
+import MyBlock from '../../utils/MyBlock'
 function Navbar() {
     const isNavbarShow = useSelector(state => state.show.navbar)
     const dispatch = useDispatch()
     return (
         <>
-        <div className={`navigation_block zi-2 p-fixed ${isNavbarShow?'active':'inactive'}`} onClick={() => dispatch(reverseNavbar())}/>
+        <MyBlock active={isNavbarShow} cb={() => dispatch(reverseNavbar())}/>
         <div className={`navigation zi-2 d-flex fd-row p-fixed rounded ${isNavbarShow?'showNavbar':'hideNavbar'}`}>
             <nav className='d-flex fw-wrap jc-center d-flex fd-column ai-center bg-primary border-burlywood text-primary shadow-lg'>
                 <HomeButton/>

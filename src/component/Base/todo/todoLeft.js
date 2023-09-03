@@ -1,14 +1,14 @@
-import { PageProggress } from '../../utils/progress'
-import { Greeting } from '../../utils/greeting'
+import { PageProggress } from '../../../utils/progress'
+import { Greeting } from '../../../utils/greeting'
 import Calendar from 'react-calendar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux';
-import { JadwalRoom } from './BaseLeft/JadwalRoom';
+import { JadwalRoom } from '../BaseLeft/JadwalRoom';
+import { Left } from '../BaseComponent';
 
-export function BaseLeft() {
+export function TodoLeft() {
     const source = useSelector(state => state.source.source)
-    const isLeftSideShow = useSelector(state => state.show.leftSide)
     let colors = null
     try {
         colors = source.list.map(item => {
@@ -24,7 +24,7 @@ export function BaseLeft() {
         console.log(source)
     }
     return (
-        <div className={`base-left of-auto zi-1 flex-1 base-left-${isLeftSideShow?'show':'hide'} fd-column d-flex`}>
+        <Left>
             <div className="sidebar-left fd-column d-flex">
                 <Greeting/>
                 <JadwalRoom/>
@@ -44,15 +44,15 @@ export function BaseLeft() {
                         {date.getDate()}
                         </div>
                     )
-                    }
-                }}
-                />
+                }
+            }}
+            />
                 <PageProggress/>
                 <div className="menu-box d-flex ai-center jc-center shadow bg-primary-bright text-zinc-300">
                     <FontAwesomeIcon icon={faMoneyCheck} className="menu-box-icon"/>
                     <p className="menu-box-count">{source.list ? source.list.length : ''}</p>
                 </div>
             </div>
-        </div>
+        </Left>
     )
 }
