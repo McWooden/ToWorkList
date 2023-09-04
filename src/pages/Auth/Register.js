@@ -1,11 +1,10 @@
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
-import jwt_decode from 'jwt-decode'
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { loadingToast, accountToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
-import { setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
+import { decrypt, setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import { useDispatch } from 'react-redux'
 import { setBooksProfile, refreshProfile } from '../../redux/sourceSlice'
 
@@ -16,16 +15,14 @@ export default function Register() {
     const [user, setUser] = useState(null)
     const [msg, setMsg] = useState(null)
     const navigate = useNavigate()
-    function handleChangeUser(data) {
-        setUser(data)
-    }
+    const dispatch = useDispatch()
     return (
         <>
             <div className="auth d-flex ai-center jc-center">
                 <div className="auth-context bg-burlywood text-primary">
                 {
                     user ?
-                        <FormRegist data={user}/>
+                        <FormRegist data={user}/> // userExist
                     :
                         <>
                         <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
@@ -35,18 +32,16 @@ export default function Register() {
                                 <GoogleLogin
                                     onSuccess={credentialResponse => {
                                         setMsg(null)
-                                        const decode = jwt_decode(credentialResponse.credential)
-                                        let data = {
-                                            name: decode.name,
-                                            email: decode.email,
-                                            avatar: decode.picture
-                                        }
                                         const promise = loadingToast('mencari akun dengan email yang sama')
-                                        axios.get(`${API}/user/emailExist/${data.email}`)
+                                        axios.post(`${API}/user/quick`, {user: credentialResponse.credential})
                                         .then(res => {
-                                            handleChangeUser(data)
+                                            setLocalAccountWithoutEncrypt(res.data.account)
+                                            dispatch(refreshProfile())
+                                            dispatch(setBooksProfile(null))
                                             toast.dismiss(promise)
-                                            accountToast('Melanjutkan membuat akun')
+                                            accountToast('Berhasil membuat')
+                                            navigate('/')
+                                            toast.dismiss(promise)
                                         })
                                         .catch(err => {
                                             setMsg(err.response.data)

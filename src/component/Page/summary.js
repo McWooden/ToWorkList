@@ -140,6 +140,7 @@ export default function Summary() {
             const promise = loadingToast('Memperbarui info pengguna')
             axios.put(`${API}/user`, dataToSend)
                 .then(res => {
+                    console.log(decrypt(res.data.account))
                     setLocalAccountWithoutEncrypt(res.data.account)
                     dispatch(refreshProfile())
                     setModalProfileEditForm(false)
