@@ -1,18 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getLocalStorage, setLocalStorage } from '../utils/localstorage'
 
-const oldShowNavbarState = getLocalStorage('showNavbar')
+const oldShowNavbarState = Boolean(getLocalStorage('showNavbar')) ?? true
 
 export const fetchSlice = createSlice({
     name: 'show',
     initialState: {
-        navbar: oldShowNavbarState || true,
+        navbar: oldShowNavbarState,
         leftSide: false,
         rightSide: false,
     },
     reducers: {
         reverseNavbar: (state, action) => {
-            setLocalStorage('pathBook', !state.navbar)
+            setLocalStorage('showNavbar', !state.navbar)
             state.navbar = !state.navbar
             if (state.navbar) {
                 state.leftSide = false
