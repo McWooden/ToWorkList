@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faBars, faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
-import { Confirm } from "../Modal/Confirm"
+import Confirm from "../Modal/Confirm"
 import { setAllTodo } from "../../redux/todo"
 import { checkToast, deleteToast } from "../../utils/notif"
 import { setSource } from "../../redux/sourceSlice"

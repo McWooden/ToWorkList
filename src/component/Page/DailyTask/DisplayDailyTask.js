@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 import { blankToast, loadingToast } from '../../../utils/notif'
 import { toast } from 'react-toastify'
 import DailyTaskEditor from './DailyTaskEditor'
-import { Confirm } from '../../Modal/Confirm'
+import Confirm from '../../Modal/Confirm'
 import SearchDaily from './SearchDaily'
 
 export default function TaskContainer() {

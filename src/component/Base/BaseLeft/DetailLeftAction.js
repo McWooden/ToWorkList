@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import { clearTodo } from '../../../redux/todo';
-import { Confirm } from '../../Modal/Confirm';
+import Confirm from '../../Modal/Confirm';
 
 import { API } from '../../../utils/variableGlobal'
 import { setAddAndEdit } from '../../../redux/addAndEditForGlobalStore';

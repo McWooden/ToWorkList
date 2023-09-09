@@ -5,7 +5,7 @@ import { url, API } from "../../../utils/variableGlobal"
 import { deleteToast } from "../../../utils/notif"
 import { convertDateToString } from "../../../utils/convertDateFormat"
 import { setTodo } from "../../../redux/todo"
-import { Confirm } from "../../Modal/Confirm"
+import Confirm from "../../Modal/Confirm"
 
 export function Image({data, handleAreaToDrag}) {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)

@@ -1,13 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux";
-import { Greeting } from "../../utils/greeting";
-import DisplayMail from "../Page/email/DisplayMail";
-import { url } from "../../utils/variableGlobal";
-import KirimSurat from "../Page/email/KirimSurat";
+import { Greeting } from "../../../utils/greeting";
+import DisplayMail from "../../Page/email/DisplayMail";
+import { url } from "../../../utils/variableGlobal";
+import KirimSurat from "../../Page/email/KirimSurat";
 import { useState } from 'react';
 
-export default function SettingMail() {
+export default function BookMail() {
     const guildProfile = useSelector(state => state.source.guildProfile)
     const profile = {
         nama: guildProfile.book_title,

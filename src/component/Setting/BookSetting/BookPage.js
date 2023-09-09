@@ -2,16 +2,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState, useEffect, useCallback } from 'react'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import { blankToast, loadingToast, pageToast } from '../../utils/notif'
+import { blankToast, loadingToast, pageToast } from '../../../utils/notif'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { ModalSecond } from '../Modal/ModalSecond'
-import { API } from '../../utils/variableGlobal'
-import { SettingPageListItem } from './SettingPageListItem'
-import { setPages } from '../../redux/sourceSlice'
+import { ModalSecond } from '../../Modal/ModalSecond'
+import { API } from '../../../utils/variableGlobal'
+import BookPageListItem from './BookPageListItem'
+import { setPages } from '../../../redux/sourceSlice'
 import { toast } from 'react-toastify'
 
-export default function SettingPage() {
+export default function BookPage() {
     const [openAdd, setOpenAdd] = useState(false)
     const idBook = useSelector((state) => state.fetch.idBook)
     const nickname = useSelector(state => state.source.profile.nickname)
@@ -174,7 +174,7 @@ export default function SettingPage() {
                                 <Draggable key={item._id} draggableId={item._id} index={index}>
                                     {(provided) => (
                                         <div {...provided.draggableProps} ref={provided.innerRef}>
-                                            <SettingPageListItem data={item} handleAreaToDrag={provided.dragHandleProps} callback={dataToRedux}/>
+                                            <BookPageListItem data={item} handleAreaToDrag={provided.dragHandleProps} callback={dataToRedux}/>
                                         </div>
                                     )}
                                 </Draggable>

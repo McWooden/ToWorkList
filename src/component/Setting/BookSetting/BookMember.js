@@ -2,13 +2,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLink } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { blankToast } from '../../utils/notif'
+import { blankToast } from '../../../utils/notif'
 import { useCallback } from 'react'
 import axios from 'axios'
-import { setMembers } from '../../redux/sourceSlice'
-import { API } from '../../utils/variableGlobal'
+import { setMembers } from '../../../redux/sourceSlice'
+import { API } from '../../../utils/variableGlobal'
 
-export function SettingMember() {
+export default function BookMember() {
     const [isLoading, setIsLoading] = useState(false)
     const members = useSelector(state => state.source.members)
     const idBook = useSelector(state => state.fetch.idBook)

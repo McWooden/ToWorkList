@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNoteSticky } from '@fortawesome/free-solid-svg-icons'
-import { Confirm } from '../../Modal/Confirm'
+import Confirm from '../../Modal/Confirm'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { API } from '../../../utils/variableGlobal'

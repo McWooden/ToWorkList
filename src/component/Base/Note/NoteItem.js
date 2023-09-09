@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { API } from '../../../utils/variableGlobal';
 import { setTodo } from '../../../redux/todo';
 import { setNoteEditor } from '../../../redux/sourceSlice';
-import { Confirm } from '../../Modal/Confirm';
+import Confirm from '../../Modal/Confirm';
 import axios from 'axios';
 import { useState } from 'react'
 import { convertDateToString } from '../../../utils/convertDateFormat';

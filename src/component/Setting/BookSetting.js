@@ -4,12 +4,12 @@ import { SettingClose } from "./SettingClose"
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import ReactDOM from 'react-dom'
-import { SettingProfile } from './SettingProfile'
-import { SettingMember } from './SettingMember'
-import SettingMail from './SettingMail'
-import SettingPage from './SettingPage'
+import BookProfile from './BookSetting/BookProfile'
+import BookMember from './BookSetting/BookMember'
+import BookMail from './BookSetting/BookMail'
+import BookPage from './BookSetting/BookPage'
 
-export default function Setting({open, close}) {
+export default function BookSetting({open, close}) {
     const [select, setSelect] = useState('profile')
     const pathBook = useSelector(state => state.fetch.pathBook)
     if (!open) return
@@ -40,10 +40,10 @@ export default function Setting({open, close}) {
             </div>
             <div className="setting_full_body p-relative of-auto">
                 <section className='h-full'>
-                    {select === 'profile' && <SettingProfile/>}
-                    {select === 'room' && <SettingPage/>}
-                    {select === 'mail' && <SettingMail/>}
-                    {select === 'member' && <SettingMember/>}
+                    {select === 'profile' && <BookProfile/>}
+                    {select === 'room' && <BookPage/>}
+                    {select === 'mail' && <BookMail/>}
+                    {select === 'member' && <BookMember/>}
                 </section>
                 <SettingClose callback={close}/>
             </div>

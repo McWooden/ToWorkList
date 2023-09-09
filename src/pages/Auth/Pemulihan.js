@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { loadingToast, accountToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
-import { setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
+import { decrypt, setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import { useDispatch } from 'react-redux'
 import { refreshProfile } from '../../redux/sourceSlice'
 
@@ -26,7 +26,9 @@ export default function Pemulihan() {
         const promise = loadingToast('Mencari akun')
         axios.put(`${API}/user/pemulihan`, {credential})
         .then((res) => {
-            setAccount(res.data)
+            const decryptedData = JSON.parse(decrypt(res.data.account))
+            console.log(decryptedData);
+            setAccount(decryptedData)
             toast.dismiss(promise)
             accountToast('Berhasil menemukan akun')
         })
@@ -55,11 +57,11 @@ export default function Pemulihan() {
         const promise = loadingToast('Mengganti password')
         axios.post(API + '/user/pemulihan', data)
         .then((res) => {
-            navigate('/')
             setLocalAccountWithoutEncrypt(res.data.account)
             dispatch(refreshProfile())
             toast.dismiss(promise)
             accountToast('Berhasil mengganti password dan masuk ke akun')
+            navigate('/')
         })
         .catch((err) => {
             toast.dismiss(promise)
@@ -70,33 +72,30 @@ export default function Pemulihan() {
     }
     return (
         <div className="auth d-flex ai-center jc-center">
-            <div className="auth-context bg-burlywood text-primary pemulihan d-flex fd-column ai-center jc-center">
-                <h4>Memulihkan akun</h4>
-                <p className='error_msg'>{msg}</p>
+            <div className="auth-context bg-burlywood text-primary pemulihan d-flex fd-column jc-center items-center">
+                <h4 className='text-center'>Memulihkan akun</h4>
+                <p className='text-no'>{msg}</p>
                 {
                     account ?
                     <>
-                        <div className="account_preview">
-                            <img src={account.avatar} alt={account.name}/>
+                        <div className='flex flex-col'>
+                            <img src={account.avatar} alt={account.name} className='rounded-full h-16 w-16'/>
                             <div>
                                 <p>{account.nickname}<span>#{account.tag}</span></p>
                                 <p className='nickname_preview'>{account.name}</p>
                             </div>
                         </div>
                         <form onSubmit={handleSubmit} className='auth_form'>
+                            {errorPassword && <p className='text-whitesmoke bg-no p-2 text-xs rounded'>{errorPassword}</p>}
                             <label>
-                            {errorPassword?
-                                <p className='error_msg'>{errorPassword}</p>
-                            :
                                 <span>Password</span>
-                            }
-                                <input type="password" value={myPassword} onChange={event => setMyPassword(event.target.value)} placeholder='Password baru' required className={`d-block ${redBorderInput?'red-border':''}`} maxLength='20' minLength='4'/>
+                                <input type="password" value={myPassword} onChange={event => setMyPassword(event.target.value)} placeholder='Password baru' required className={`d-block ${redBorderInput&&'border-l-no'}`} maxLength='20' minLength='4'/>
                             </label>
                             <label>
                                 <span>Confirm Password</span>
-                                <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`d-block ${redBorderInput?'red-border':''}`} minLength='4'/>
+                                <input type="password" value={confirmPassword} onChange={event => setConfirmPassword(event.target.value)} placeholder='Ketik ulang password' className={`d-block ${redBorderInput&&'border-l-no'}`} minLength='4'/>
                             </label>
-                            <input type="submit" className="d-flex ai-center jc-center pointer" value="Ganti password" ref={btn}/>
+                            <input type="submit" className="d-flex ai-center jc-center pointer bg-info shadow" value="Ganti password" ref={btn}/>
                         </form>
                     </>
                     :

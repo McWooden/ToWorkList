@@ -36,7 +36,7 @@ export function TodoPage() {
     return (
         <>  
             {isReload && 
-            <div className="base-center p-relative of-auto">
+            <div className="flex-3 p-relative of-auto">
                 <div className="center d-flex p-relative fd-column">
                     <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                         <FontAwesomeIcon icon={fontawesome.faRotateBack} className="reload_btn" />
@@ -44,7 +44,7 @@ export function TodoPage() {
                 </div>
             </div>
             }
-            {!source && <div className="flex-3 p-relative of-auto">
+            {!source && !isReload && <div className="flex-3 p-relative of-auto">
                 <div className="center d-flex p-relative fd-column">
                     <MyLoading/>
                 </div>

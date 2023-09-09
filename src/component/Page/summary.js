@@ -24,7 +24,6 @@ export default function Summary() {
     const [modalLabelForm, setModalLabelForm] = useState(false)
     const [modalBioForm, setModalBioForm] = useState(false)
 
-    const [inputNickname, setInputNickname] = useState('')
     const [inputPanggilan, setInputPanggilan] = useState('')
     const [inputPosisi, setInputPosisi] = useState('')
     const [inputTempat, setInputTempat] = useState('')
@@ -56,7 +55,6 @@ export default function Summary() {
     }, [dispatch, fetchOtherSummary, mySummary, otherSummaryUserId])
 
     useEffect(() => {
-        setInputNickname(summaryData?.nickname || '')
         setInputPanggilan(summaryData?.panggilan || '')
         setInputPosisi(summaryData?.posisi || '')
         setInputTempat(summaryData?.tempat || '')
@@ -128,7 +126,6 @@ export default function Summary() {
     function handleSubmitProfileForm(e) {
         e.preventDefault()
         const dataToSend = {
-            nickname: inputNickname,
             panggilan: inputPanggilan,
             tempat: inputTempat,
             posisi: inputPosisi,
@@ -193,8 +190,6 @@ export default function Summary() {
         </div>
         <ModalSecond open={modalProfileEditForm} close={() => setModalProfileEditForm(false)}>
             <form onSubmit={handleSubmitProfileForm} className="m-auto max-h-[90vh] text-xs p-5 sm:p-10 d-flex flex-col max-w-xl h-screen of-auto" id="profileEditForm">
-            <label htmlFor="nickname" className="block text-sm font-semibold leading-6 text-stone-100">Nama</label>
-            <input onChange={(e) => setInputNickname(e.target.value)}  value={inputNickname} id='nickname' type="text" placeholder='Nama' className='outline-none block w-full rounded-md border-0 px-3.5 py-2 shadow-sm ring-1 ring-inset ring-zinc-600 placeholder:text-stone-500 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'/>
             <label htmlFor="panggilan" className="block mt-2.5 text-sm font-semibold leading-6 text-stone-100">Panggilan</label>
             <select onChange={(e) => setInputPanggilan(e.target.value)} value={inputPanggilan} id="panggilan" name="panggilan" className="outline-none rounded-md border-0 px-3.5 py-2 focus:ring-2 focus:ring-inset ring-1 ring-inset ring-zinc-600 focus:ring-indigo-600 sm:text-sm">
               <option>(*)</option>

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
-import Setting from '../../Setting/Setting'
+import BookSetting from '../../Setting/BookSetting'
 
 export function ModeNavbarHeader() {
     const nameBook = useSelector(state => state.source.guildProfile?.book_title)
@@ -29,7 +29,7 @@ export function ModeNavbarHeader() {
         <div className="modeNavbarHeader d-flex ai-center">
             <h4 className='guild-name d-inline-block of-hidden'>{nameBook || ''}</h4>
             <FontAwesomeIcon icon={faGear} className='settingNavbar pointer bg-primary-bright' onClick={() => setSettingOpen(true)}/>
-            <Setting open={settingOpen} close={handleClose}/>
+            <BookSetting open={settingOpen} close={handleClose}/>
         </div>
     )
 }

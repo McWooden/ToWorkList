@@ -2,16 +2,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare, faTrash, faEye } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState, useEffect } from 'react'
-import { deleteToast, pageToast } from '../../utils/notif'
+import { deleteToast, pageToast } from '../../../utils/notif'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { setPageType, setSource } from '../../redux/sourceSlice'
-import { setPathPageOfBook } from '../../redux/fetchSlice'
-import { Confirm } from '../Modal/Confirm'
-import { ModalSecond } from '../Modal/ModalSecond'
-import { API } from '../../utils/variableGlobal'
+import { setPageType, setSource } from '../../../redux/sourceSlice'
+import { setPathPageOfBook } from '../../../redux/fetchSlice'
+import Confirm from '../../Modal/Confirm'
+import { ModalSecond } from '../../Modal/ModalSecond'
+import { API } from '../../../utils/variableGlobal'
 
-export function SettingPageListItem({data, callback, handleAreaToDrag}) {
+export default function BookPageListItem({data, callback, handleAreaToDrag}) {
     const idBook = useSelector((state) => state.fetch.idBook)
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
     const [openAdd, setOpenAdd] = useState(false)

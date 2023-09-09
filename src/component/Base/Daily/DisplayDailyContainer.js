@@ -10,7 +10,7 @@ import { API } from "../../../utils/variableGlobal"
 import { toast } from "react-toastify"
 import { useEffect } from "react"
 import MyLoading from '../../../utils/myLoading'
-import { Confirm } from '../../Modal/Confirm'
+import Confirm from '../../Modal/Confirm'
 import { useMemo } from 'react'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { setSource } from '../../../redux/sourceSlice'

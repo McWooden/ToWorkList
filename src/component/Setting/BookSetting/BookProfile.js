@@ -1,21 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faPenToSquare, faTrash, faImage, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
-import { convertDateToString } from '../../utils/convertDateFormat'
-import { DeleteBookModal } from '../Modal/DeleteBookModal'
-import { FileDrop } from '../Modal/FileDrop'
+import { convertDateToString } from '../../../utils/convertDateFormat'
+import { DeleteBookModal } from '../../Modal/DeleteBookModal'
+import { FileDrop } from '../../Modal/FileDrop'
 import { toast } from 'react-toastify'
-import { deleteToast, leaveToast, imageToast, saveToast, alertToast, loadingToast } from '../../utils/notif'
-import { setMembers, setPageType, setGuildProfile, setBooksProfile } from '../../redux/sourceSlice'
-import { setPathPageOfBook, setPathBook } from '../../redux/fetchSlice'
-import {url, API} from '../../utils/variableGlobal'
+import { deleteToast, leaveToast, imageToast, saveToast, alertToast, loadingToast } from '../../../utils/notif'
+import { setMembers, setPageType, setGuildProfile, setBooksProfile } from '../../../redux/sourceSlice'
+import { setPathPageOfBook, setPathBook } from '../../../redux/fetchSlice'
+import {url, API} from '../../../utils/variableGlobal'
 import axios from 'axios'
-import { Confirm } from '../Modal/Confirm'
+import Confirm from '../../Modal/Confirm'
 import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 
-export function SettingProfile() {
+export default function BookProfile() {
     const myAccount = useSelector(state => state.source.profile)
     const idBook = useSelector(state => state.fetch.idBook)
     const profile = useSelector(state => state.source.guildProfile)
