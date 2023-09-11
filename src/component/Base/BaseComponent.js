@@ -2,11 +2,18 @@ import { useDispatch } from "react-redux"
 import MyBlock from "../../utils/MyBlock"
 import { reverseLeftSide, reverseRightSide } from "../../redux/hideAndShowSlice"
 import { useSelector } from "react-redux"
+import { useSwipeable } from "react-swipeable";
 
-export function Center({children}) {
-    <div className="base-center p-relative of-auto">
-        {children}
-    </div>
+export function Center({children, className = 'of-auto'}) {
+    const handlers = useSwipeable({
+        onSwiped: (eventData) => console.log("User Swiped!", eventData)
+      })
+      
+    return (
+        <div {...handlers} className={`base-center relative ${className}`}>
+            {children}
+        </div>
+    )
 }
 
 export function Right({children}) {

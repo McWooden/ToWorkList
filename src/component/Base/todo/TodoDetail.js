@@ -11,6 +11,7 @@ import { CenterActionButton } from "../BaseCenter/CenterActionButton"
 import { AddNoteModal } from "../Note/AddNoteModal"
 import { SidebarRightChat } from "../BaseRight/SidebarRightChat"
 import { DetailCard } from "../BaseCenter/DetailCard"
+import { Center } from '../BaseComponent'
 
 export function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)
@@ -52,7 +53,7 @@ export function TodoDetail() {
                 </div>
             </div>
         {/* center */}
-            <div className='base-center p-relative of-auto'>
+            <Center>
                 <div className='center d-flex p-relative fd-column'>
                     {shouldUpdate && 
                         <div className="p-[15px] bg-info flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
@@ -64,7 +65,7 @@ export function TodoDetail() {
                     <AddNoteModal modalOpen={modalOpen} title={todoDetails.item_title} handleModalClose={handleModalClose}/>
                     <CenterActionButton handleModalOpen={handleModalOpen}/>
                 </div>
-            </div>
+            </Center>
         {/* right */}
             <SidebarRightChat/>
         </>

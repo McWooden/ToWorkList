@@ -60,7 +60,7 @@ function BoxList({item}) {
     return (
         <div className='bg-zinc-800 rounded p-2 flex items-center px-4 flex-col pointer' onClick={() => setDetail(prev => !prev)}>
             <div className='flex items-center w-full'>
-                <p className='flex-1'>{format(parseISO(item.date), 'iiii, dd LLL yyyy', {locale: id})}</p>
+                <p className='flex-1'>{format(parseISO(item.date), 'iiii, dd LLL yyyy', { locale: id })}</p>
                 <FontAwesomeIcon icon={detail?faChevronDown:faChevronRight}/>
             </div>
             {detail && (

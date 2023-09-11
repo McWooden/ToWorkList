@@ -5,7 +5,7 @@ import { Greeting } from "../../utils/greeting"
 import KirimSurat from './email/KirimSurat'
 import DisplayMail from './email/DisplayMail'
 import { useSelector } from 'react-redux'
-import { Left } from '../Base/BaseComponent'
+import { Center, Left } from '../Base/BaseComponent'
 
 export default function Email() {
   const myProfile = useSelector(state => state.source.profile)
@@ -41,8 +41,8 @@ function MailLeft({thisProfile}) {
 function MailRight({thisProfile}) {
   
   return (
-    <div className="base-center p-relative overflow-y-auto p-2 flex flex-col">
-      <DisplayMail thisProfile={thisProfile}/>
-    </div>
+    <Center className='overflow-y-auto p-2 flex flex-col'>
+        <DisplayMail thisProfile={thisProfile}/>
+    </Center>
   )
 }

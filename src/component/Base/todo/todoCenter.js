@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSource } from '../../../redux/sourceSlice';
 import { API } from '../../../utils/variableGlobal';
 import axios from 'axios';
+import { Center } from '../BaseComponent';
 
 export function TodoCenter() {
     const [shouldUpdate, setShouldUpdate] = useState(false)
@@ -27,7 +28,7 @@ export function TodoCenter() {
     }, [channel, dispatch, idPageOfBook])
 
     return (
-      <div className="base-center p-relative of-auto">
+      <Center>
         <div className="center d-flex p-relative fd-column">
             {shouldUpdate && 
               <div className="p-[15px] flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
@@ -38,6 +39,6 @@ export function TodoCenter() {
             <CardContainer/>
             <CenterActionButton/>
         </div>
-      </div>
+      </Center>
     )
 }
