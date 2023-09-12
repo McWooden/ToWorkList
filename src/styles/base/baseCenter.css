@@ -4,13 +4,16 @@
 }
 .center-action-btn {
     bottom: 5px;
-    background-color: indianred;
     border-radius: 50px;
+    position: sticky;
+    bottom: 4px;
+    gap: 2px;
 }
 .detail-back {
     gap: 10px;
     border-radius: 50px;
     padding: 10px 15px;
+    margin-right: auto;
 }
 .action-add {
     height: 45px !important;

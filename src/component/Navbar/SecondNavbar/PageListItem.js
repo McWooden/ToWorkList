@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { setSource, setPageType } from "../../../redux/sourceSlice"
 import { setPathPageOfBook } from "../../../redux/fetchSlice"
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
+import { clearTodo } from '../../../redux/todo'
 
 export function PageListItem({data}) {
     const title = data.details.page_title
@@ -11,6 +12,7 @@ export function PageListItem({data}) {
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
     const dispatch = useDispatch()
     function handleClick() {
+        dispatch(clearTodo())
         dispatch(setSource(null))
         dispatch(setPageType(icon))
         dispatch(setPathPageOfBook({path: title, id}))
