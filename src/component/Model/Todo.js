@@ -83,7 +83,7 @@ export function TodoModel({item, handleAreaToDrag}) {
     }
     return (
         <>
-        <div className="todo-card d-flex fd-row  jc-space-between bg-primary-dark-50 shadow">
+        <div className="todo-card d-flex fd-row  jc-space-between bg-primary-dark-50 shadow" {...handleAreaToDrag}>
             <div className="todo-left d-flex fd-row p-relative">
             <div className="card-color" style={{backgroundColor: item.details.color}}></div>
             <div className="card-text d-flex fd-column jc-center pointer" onClick={handleTextClick}>
@@ -97,7 +97,7 @@ export function TodoModel({item, handleAreaToDrag}) {
                     <FontAwesomeIcon icon={faBars} className='w-full text-gray-100'/>
                     </div>
                 </div>
-                <div className="card-more d-flex ai-center" ref={btnRef} {...handleAreaToDrag}>
+                <div className="card-more d-flex ai-center" ref={btnRef}>
                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
                 </div>
                 <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
