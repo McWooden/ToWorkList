@@ -25,7 +25,7 @@ export function Right({children}) {
     })
     return (
         <>
-        <MyBlock className={'base-right_block'} cb={() => dispatch(reverseRightSide())} active={active}/>
+        <MyBlock className={'base-right_block'} cb={() => dispatch(reverseRightSide())} active={active} />
         <div {...handlers} className={`base-right of-auto zi-1 flex-1 base-right-${active?'show':'hide'} fd-column d-flex bg-indianred`}>
             {children}
         </div>
@@ -43,7 +43,7 @@ export function Left({children}) {
       
     return (
         <>
-            <MyBlock className={'base-left_block'} cb={() => dispatch(reverseLeftSide())} active={active}/>
+            <MyBlock className={'base-left_block'} cb={() => dispatch(reverseLeftSide())} active={active} spreadAtribute={handlers}/>
             <div {...handlers} className={`base-left of-auto zi-1 flex-1 base-left-${active?'show':'hide'} fd-column d-flex`}>
                 {children}
             </div>

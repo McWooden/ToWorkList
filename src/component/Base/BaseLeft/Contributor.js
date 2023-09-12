@@ -12,7 +12,7 @@ export function Contributor() {
     return (
         <div className="contributor-container text-zinc-400">
             <p className="text-whitesmoke">Contributor</p>
-            <div className="contributor of-auto bg-zinc-900">
+            <div className="contributor of-auto bg-primary-dark-50">
                 {box}
             </div>
         </div>

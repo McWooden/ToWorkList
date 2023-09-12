@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHistory } from '@fortawesome/free-solid-svg-icons'
 import { Greeting } from "../../../utils/greeting"
 import DisplayDailyContainer from "./DisplayDailyContainer"
-import { Left } from "../BaseComponent"
+import { Center, Left } from "../BaseComponent"
 import { useSelector } from 'react-redux'
 import HistoryDaily from './HistoryDaily'
 import { useState } from 'react'
@@ -36,10 +36,10 @@ function DailyTaskLeft() {
 
 function DailyTaskRight() {
     return (
-    <div className="flex flex-3 flex-col">
-        <div className="welcome flex flex-col overflow-auto flex-3 p-[.5em]">
-        <DisplayDailyContainer/>
-        </div>
-    </div>
+        <Center>
+            <div className="welcome flex flex-col overflow-auto flex-3 p-[.5em]">
+            <DisplayDailyContainer/>
+            </div>
+        </Center>
     )
 }

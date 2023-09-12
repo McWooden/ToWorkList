@@ -7,11 +7,11 @@ import { useState, useEffect } from 'react'
 import { FormBaseRight } from './FormBaseRight'
 import { ChatModel } from '../../Model/Chat'
 import { setChat } from '../../../redux/todo'
+import { Right } from '../BaseComponent'
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
     const profile = useSelector(state => state.source.profile)
-    const isRightBaseShow = useSelector(state => state.show.rightSide)
     const myNickname = profile.nickname
     const [box, setBox] = useState([])
 
@@ -66,12 +66,13 @@ export function SidebarRightChat() {
     }, [channel, dispatch, idPageOfBook, todoId]);    
     
     return (
-        <div className={`base-right of-auto base-right-${isRightBaseShow?'show':'hide'} d-flex fd-column bg-indianred`}>
+
+        <Right>
             <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>
             <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom zi-1 pointer ${scrollToBottom?'':'active'} p-fixed`}/>
                 {box || ''}
             </div>
             <FormBaseRight/>
-        </div>
+        </Right>
     )
 }

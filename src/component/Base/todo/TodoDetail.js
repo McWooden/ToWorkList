@@ -12,13 +12,13 @@ import { AddNoteModal } from "../Note/AddNoteModal"
 import { SidebarRightChat } from "../BaseRight/SidebarRightChat"
 import { DetailCard } from "../BaseCenter/DetailCard"
 import { Center } from '../BaseComponent'
+import { Left } from '../BaseComponent'
 
 export function TodoDetail() {
     const todoId = useSelector(state => state.todo.id)
     const todoDetails = useSelector(state => state.todo.details)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const dispatch = useDispatch()
-    const isLeftSideShow = useSelector(state => state.show.leftSide)
     const [modalOpen, setModalOpen] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
 
@@ -46,12 +46,12 @@ export function TodoDetail() {
     return (
         <>
         {/* left */}
-            <div className={`base-left of-auto zi-1 flex-1 base-left-${isLeftSideShow?'show':'hide'} fd-column d-flex`}>
-                <div className="sidebar-left fd-column d-flex">
-                    <MoreInfoCard/>
-                    <DetailLeftAction/>
-                </div>
+        <Left>
+            <div className="sidebar-left fd-column d-flex">
+                <MoreInfoCard/>
+                <DetailLeftAction/>
             </div>
+        </Left>
         {/* center */}
             <Center>
                 <div className='center d-flex p-relative fd-column'>

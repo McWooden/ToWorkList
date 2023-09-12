@@ -14,9 +14,6 @@
 .sidebar-left, .center, .sidebar-right {
     padding: .5em;
 }
-.center {
-    padding-bottom: 55px;
-}
 .sidebar-right {
     padding-bottom: 0;
 }

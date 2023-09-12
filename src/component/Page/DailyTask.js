@@ -1,6 +1,6 @@
 import { Greeting } from "../../utils/greeting"
 import TaskContainer from './DailyTask/DisplayDailyTask'
-import { Left } from "../Base/BaseComponent"
+import { Center, Left } from "../Base/BaseComponent"
 
 
 export function DailyTask() {
@@ -24,10 +24,10 @@ function DailyTaskLeft() {
 
 function DailyTaskRight() {
   return (
-    <div className="flex flex-3 flex-col">
-      <div className="welcome flex flex-col overflow-auto flex-3 p-[.5em]">
+    <Center>
+      <div className="welcome flex flex-col overflow-auto flex-3 p-2 h-full">
         <TaskContainer/>
       </div>
-    </div>
+    </Center>
   )
 }

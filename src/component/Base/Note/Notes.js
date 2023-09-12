@@ -107,7 +107,7 @@ export function Notes() {
             )}
             <Droppable droppableId="noteModel">
                 {(provided) => (
-                    <ul {...provided.droppableProps} ref={provided.innerRef} className='list-none pb-[55px]'>
+                    <ul {...provided.droppableProps} ref={provided.innerRef} className='list-none'>
                         {
                             list?.map((data, index) => (
                                 <Draggable key={data._id} draggableId={data._id} index={index}>

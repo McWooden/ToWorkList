@@ -47,7 +47,7 @@ export default function TaskContainer() {
       </div>
     </div>
     <DailyTaskEditor open={isEditorOpen} cb={fetchData} close={() => setIsEditorOpen(false)}/>
-    <div className='flex-1 flex flex-col pb-[38px]'>
+    <div className='flex-1 flex flex-col'>
       {isLoading && <MyLoading className='mb-2'/>}
       {list.map((item, index) => <Task data={item} key={index} cb={fetchData}/>)}
       <SearchDaily cb={fetchData}/>

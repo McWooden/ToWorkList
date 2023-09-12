@@ -21,7 +21,6 @@ export default function DisplayDailyContainer() {
     const list = useSelector(state => state.source?.source?.dailyList || null)
     const [isLoading, setIsLoading] = useState(false)
     const [isEditorOpen, setIsEditorOpen] = useState(false)
-    const divRef = useRef(null)
     const dispatch = useDispatch()
     const [isReload, setIsReload] = useState(false)
     const fetchData = useCallback(async() => {
@@ -55,7 +54,7 @@ export default function DisplayDailyContainer() {
 
     return (
         <>
-        <div className='flex gap-2' ref={divRef}>
+        <div className='flex gap-2'>
             <div className='bg-burlywood text-primary flex place-items-center py-2 px-6 rounded shadow-md my-2 w-fit gap-3 pointer' onClick={() => setIsEditorOpen(prev => !prev)}>
                 <FontAwesomeIcon icon={faCheckToSlot}/>
                 <span>{isEditorOpen?'Tutup':'Tambah'}</span>
@@ -66,7 +65,7 @@ export default function DisplayDailyContainer() {
             </div>
         </div>
         <DailyTaskEditor open={isEditorOpen} cb={fetchData} close={() => setIsEditorOpen(false)}/>
-        <div className='flex-1 flex flex-col pb-[38px]'>
+        <div className='flex-1 flex flex-col'>
             {isLoading && <MyLoading className='mb-2'/>}
             {list.map((item, index) => <Task data={item} key={index} cb={fetchData}/>)}
         </div>

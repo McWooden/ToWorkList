@@ -8,6 +8,7 @@
     position: sticky;
     bottom: 4px;
     gap: 2px;
+    margin-top: auto;
 }
 .detail-back {
     gap: 10px;
