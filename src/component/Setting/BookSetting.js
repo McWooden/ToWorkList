@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencil, faMap, faUserGroup, faEnvelope } from '@fortawesome/free-solid-svg-icons'
+import { faPencil, faMap, faUserGroup, faEnvelope, faMask } from '@fortawesome/free-solid-svg-icons'
 import { SettingClose } from "./SettingClose"
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
@@ -8,6 +8,7 @@ import BookProfile from './BookSetting/BookProfile'
 import BookMember from './BookSetting/BookMember'
 import BookMail from './BookSetting/BookMail'
 import BookPage from './BookSetting/BookPage'
+import BookRole from './BookSetting/BookRole'
 
 export default function BookSetting({open, close}) {
     const [select, setSelect] = useState('profile')
@@ -36,6 +37,10 @@ export default function BookSetting({open, close}) {
                         <FontAwesomeIcon icon={faUserGroup} className='setting_full_nav_list_icon'/>
                         <p>orang</p>
                     </li>
+                    <li className={`setting_full_nav_list d-flex ai-center pointer ${select === 'role' && 'active'}`} onClick={() => handleSelectOnChange('role')}>
+                        <FontAwesomeIcon icon={faMask} className='setting_full_nav_list_icon'/>
+                        <p>Peran</p>
+                    </li>
                 </ul>
             </div>
             <div className="setting_full_body p-relative of-auto">
@@ -44,6 +49,7 @@ export default function BookSetting({open, close}) {
                     {select === 'room' && <BookPage/>}
                     {select === 'mail' && <BookMail/>}
                     {select === 'member' && <BookMember/>}
+                    {select === 'role' && <BookRole/>}
                 </section>
                 <SettingClose callback={close}/>
             </div>

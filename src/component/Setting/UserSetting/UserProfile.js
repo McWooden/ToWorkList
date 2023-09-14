@@ -80,7 +80,7 @@ export default function UserProfile() {
             </div>
         </div>
         <h5 className='mt-2'>Bergabung pada</h5>
-        <p className='setting_profile_date mb-2'>{format(parseISO(myAccount.created_at), 'EEEE, MMM yyyy', {locale: id})}</p>
+        <p className='setting_profile_date mb-2'>{format(new Date(myAccount.created_at), 'EEEE, MMM yyyy', {locale: id})}</p>
         <p className='text-zinc-600'>Nickname terakhir diubah pada {myAccount.last_changes.nickname_change_date?format(parseISO(myAccount.last_changes.nickname_change_date), 'EEEE, MMM yyyy - HH.mm', {locale: id}):'-'}</p>
         {showInput?
             <form className="flex gap-2 items-center" onSubmit={handleSubmit}>

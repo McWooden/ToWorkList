@@ -7,9 +7,7 @@ import { toast } from 'react-toastify'
 import { setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import { useDispatch } from 'react-redux'
 import { setBooksProfile, refreshProfile } from '../../redux/sourceSlice'
-
-const API = process.env.REACT_APP_API
-
+import { API } from '../../utils/variableGlobal'
 
 export default function Register() {
     const [msg, setMsg] = useState(null)
@@ -27,8 +25,9 @@ export default function Register() {
                                     onSuccess={credentialResponse => {
                                         setMsg(null)
                                         const promise = loadingToast('mencari akun dengan email yang sama')
-                                        axios.post(`${API}/user/quick`, {user: credentialResponse.credential})
+                                        axios.post(`${API}/user`, {user: credentialResponse.credential})
                                         .then(res => {
+                                            console.log(res);
                                             setLocalAccountWithoutEncrypt(res.data.account)
                                             dispatch(refreshProfile())
                                             dispatch(setBooksProfile(null))

@@ -68,6 +68,9 @@
     min-height: 45px;
     transition: .3s;
 }
+.form-modal textarea {
+    min-height: 10rem;
+}
 .form-modal textarea, .img-form d-flex fd-column textarea {
     flex: 1;
 }

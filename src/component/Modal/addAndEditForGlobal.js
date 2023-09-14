@@ -230,7 +230,7 @@ export function AddAndEditForGlobal() {
               name="desc"
               value={inputDesc}
               onChange={(x) => setInputDesc(x.target.value)}
-              className="flex-1-1 m-1"
+              className="flex-1-1 m-1 min-h-[10rem]"
             />
             <button type="submit" className="task-submit pointer" form="addAndEditForm">
               {type==='EDIT_TODO_INSIDE' || type==='EDIT_TODO_OUTSIDE' || type==='EDIT_NOTE' ? 'Simpan' : 'Tambah'}
