@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
-import { useEffect } from "react"
+import { faCheck, faChevronDown, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { Modal } from "../../Modal/Modal"
 import { useState } from 'react'
 import { format, parseISO } from 'date-fns'
@@ -9,13 +8,10 @@ import { useSelector } from 'react-redux'
 
 export default function HistoryDaily({history, open, close}) {
     const [task, setTask] = useState(null)
-    useEffect(() => {
-
-    })
     return (
         <Modal open={open} close={close}>
-            <div className="m-2 flex flex-col w-full items-center justify-center">
-                {task? <DetailTask task={task}/> : <ListTask history={history} cb={(task) => setTask(task)}/>}
+            <div className="p-2 flex flex-col">
+                {task? <DetailTask task={task} resetTask={() => setTask(null)}/> : <ListTask history={history} cb={(task) => setTask(task)} />}
             </div>
         </Modal>
     )
@@ -23,7 +19,7 @@ export default function HistoryDaily({history, open, close}) {
 
 function ListTask({history, cb}) {
     return (
-        <div className="flex flex-col w-[90%]">
+        <div className="flex flex-col w-full">
             {history?.map((item, index) => (
                 <div className='bg-zinc-800 border-primary-bright p-2 rounded' key={index} onClick={()=> cb(item)}>
                     <div className='flex items-center gap-2 items-center'>
@@ -38,11 +34,11 @@ function ListTask({history, cb}) {
     )
 }
 
-function DetailTask({task}) {
+function DetailTask({task, resetTask}) {
     return (
         <div className='flex flex-col w-full h-full'>
             <div className='p-2 px-4 rounded mb-2'>
-                <p>{task.detail.title}</p>
+                <p className='flex gap-2 items-center pointer' onClick={resetTask}><FontAwesomeIcon icon={faChevronLeft}/> {task.detail.title}</p>
                 <p>{task.detail.desc}</p>
             </div>
             <div className='flex flex-col gap-2'>
