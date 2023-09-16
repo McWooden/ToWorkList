@@ -10,7 +10,7 @@ export default function HistoryDaily({history, open, close}) {
     const [task, setTask] = useState(null)
     return (
         <Modal open={open} close={close}>
-            <div className="p-2 flex flex-col">
+            <div className="p-2 flex flex-col w-full">
                 {task? <DetailTask task={task} resetTask={() => setTask(null)}/> : <ListTask history={history} cb={(task) => setTask(task)} />}
             </div>
         </Modal>

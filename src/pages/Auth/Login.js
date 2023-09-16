@@ -6,7 +6,8 @@ import { loadingToast, accountToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
 import { setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import { useDispatch } from 'react-redux'
-import { setBooksProfile, refreshProfile } from '../../redux/sourceSlice'
+import { setBooksProfile, refreshProfile, setPages, setGuildProfile, setPageType } from '../../redux/sourceSlice'
+import { setFetch, setPathBook, setPathPageOfBook } from '../../redux/fetchSlice'
 
 const API = process.env.REACT_APP_API
 
@@ -18,15 +19,22 @@ export default function Login() {
     const [msg, setMsg] = useState(null)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    function handleSuccess(response) {
+    async function handleSuccess(response) {
         setMsg(null)
         const credential = response.credential
         const promise = loadingToast('Mendapatkan data akun')
-        axios.put(`${API}/user/login/google`, {credential})
+        await axios.put(`${API}/user/login/google`, {credential})
         .then(res => {
-            setLocalAccountWithoutEncrypt(res.data.account)
+            setLocalAccountWithoutEncrypt(res?.data?.account)
             dispatch(refreshProfile())
             dispatch(setBooksProfile(null))
+            dispatch(setGuildProfile(null))
+            dispatch(setPages(null))
+            dispatch(setFetch({id: null, path: null}))
+            dispatch(setPageType('welcome'))
+            dispatch(setPathBook({path: '@me', id: '@me'}))
+            dispatch(setPathPageOfBook({path: '', id: ''}))
+            
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')

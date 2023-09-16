@@ -71,6 +71,14 @@ export default function BookPage() {
                     event: `${idBook}:pageShouldUpdate`,
                     payload: {...dataToSend, message: `${nickname} mengubah susunan halaman`},
                 })
+                const order = pages.map((old, i) => {
+                    const matchingNew = list.find(newItem => newItem._id === old._id)
+                    if (matchingNew) {
+                      return { ...old, order: i }
+                    }
+                    return old
+                  })                  
+                dispatch(setPages(order))
             }).catch(err => {
                 console.log(err)
                 
@@ -83,6 +91,10 @@ export default function BookPage() {
         handleSourceToListSorted(pages)
         setSaveIt(false)
     }
+
+    // useEffect(() => {
+    //     console.log(list.map(x => x.order));
+    // },[list])
 
     const [value, setValue] = useState('')
     const [btnLoading, setBtnLoading] = useState(false)

@@ -52,6 +52,9 @@
 .border-l-no {
     border: 1px solid #774360 !important;
 }
+.border-l-yes {
+    border: 1px solid #0d7377 !important;
+}
 .text-ok {
     color: #0d7377;
 }

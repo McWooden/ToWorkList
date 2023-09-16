@@ -1,16 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { getLocalAccount, getLocalStorage, getStorage, setLocalStorage, setStorage } from '../utils/localstorage'
 
+const LocalGuildProfile = getLocalStorage('guildProfile')
+
 export const sourceSlice = createSlice({
     name: 'source',
     initialState: {
         pageType: getStorage('pageType') || 'welcome',
         source: null,
         profile: getLocalAccount(),
-        guildProfile: getLocalStorage('guildProfile') ||  null,
+        guildProfile: LocalGuildProfile ||  null,
         members: null,
         noteEditor: null,
-        booksProfile: null,
+        roles: [],
+        isAdmin: LocalGuildProfile?.isAdmin || false,
         pages: null,
     },
     reducers: {
@@ -28,7 +31,8 @@ export const sourceSlice = createSlice({
             state.profile = getLocalAccount()
         },
         setGuildProfile: (state, action) => {
-            setLocalStorage('guildProfile',action.payload)
+            setLocalStorage('guildProfile', action.payload)
+            state.isAdmin = action.payload?.isAdmin || false
             state.guildProfile = action.payload
         },
         setUpdateGuildProfile: (state, action) => {
@@ -45,6 +49,9 @@ export const sourceSlice = createSlice({
         },
         setJadwalSource: (state, action) => {
             state.source.details.jadwal_url = action.payload
+        },
+        setIsAdmin: (state, action) => {
+            state.isAdmin = action.payload || false
         }
     },
 })

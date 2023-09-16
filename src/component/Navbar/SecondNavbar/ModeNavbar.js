@@ -3,12 +3,12 @@ import { ModeNavbarHeader } from "./ModeNavbarHeader"
 import { Profile } from "./Profile"
 import { PageAccountList } from "./PageAccountList"
 import { PageList } from "./PageList"
-import { useDispatch } from "react-redux"
-import { reverseNavbar } from "../../../redux/hideAndShowSlice"
+// import { useDispatch } from "react-redux"
+// import { reverseNavbar } from "../../../redux/hideAndShowSlice"
 
 export function ModeNavbar() {
     const pathBook = useSelector(state => state.fetch.pathBook)
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     return (
         <div className='flex flex-col of-hidden relative'>
             <div className='modeNavbar flex flex-col of-hidden border-burlywood bg-primary shadow-lg flex-1'>
@@ -20,7 +20,7 @@ export function ModeNavbar() {
                 {pathBook === '@me' ? <PageAccountList/> : <PageList/>}
                 <Profile/>
             </div>
-            <div className="h-16 border-l-burlywood" onClick={() => dispatch(reverseNavbar())}/>
+            {/* <div className="h-16 border-l-burlywood" onClick={() => dispatch(reverseNavbar())}/> */}
         </div>
     )
 }

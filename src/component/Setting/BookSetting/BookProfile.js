@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark, faPenToSquare, faTrash, faImage, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
-import { convertDateToString } from '../../../utils/convertDateFormat'
 import { DeleteBookModal } from '../../Modal/DeleteBookModal'
 import { FileDrop } from '../../Modal/FileDrop'
 import { toast } from 'react-toastify'
@@ -13,6 +12,8 @@ import axios from 'axios'
 import Confirm from '../../Modal/Confirm'
 import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { format } from 'date-fns'
+import { id } from 'date-fns/locale'
 
 
 export default function BookProfile() {
@@ -190,7 +191,8 @@ export default function BookProfile() {
                     profile: profile,
                     userClientProfile: {
                         nickname: myAccount.nickname,
-                        tag: myAccount.tag
+                        tag: myAccount.tag,
+                        _id: myAccount._id
                     }
                 }
             })
@@ -277,7 +279,7 @@ export default function BookProfile() {
                     }
                 </div>
                 <h5>Dibuat pada</h5>
-                <p className='setting_profile_date'>{convertDateToString(profile.created_at)} oleh {profile.author.nickname}#{profile.author.tag}</p>
+                <p className='setting_profile_date'>{format(new Date(profile.created_at), 'EEEE, dd MMM yyyy', {locale: id})} oleh {profile.author.nickname}#{profile.author.tag}</p>
             </div>
         </div>
         <div className="setting_action d-flex">

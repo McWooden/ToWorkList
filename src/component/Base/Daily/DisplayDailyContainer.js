@@ -29,6 +29,7 @@ export default function DisplayDailyContainer() {
         const promise = loadingToast('Memuat')
         try {
         await axios.get(`${API}/source/page/${idPageOfBook}`).then(res => {
+            console.log(res.data);
             dispatch(setSource(res.data))
           }).catch(err => {
             throw new Error(err)
