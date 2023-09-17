@@ -1,6 +1,8 @@
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
+import { alertToast } from "./utils/notif";
+
 // This lets the app load faster on subsequent visits in production, and gives
 // it offline capabilities. However, it also means that developers (and users)
 // will only see deployed updates on subsequent visits to a page, after all the
@@ -67,6 +69,7 @@ function registerValidSW(swUrl, config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
+              alertToast('Konten terbaru tersedia!')
               console.log(
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See https://cra.link/PWA.'
@@ -80,6 +83,7 @@ function registerValidSW(swUrl, config) {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
+              alertToast('Konten disipan untuk penggunaan offline')
               console.log('Content is cached for offline use.');
 
               // Execute callback
@@ -120,6 +124,7 @@ function checkValidServiceWorker(swUrl, config) {
       }
     })
     .catch(() => {
+      alertToast('Tidak ada internet. Aplikasi berjalan di offline mode')
       console.log('No internet connection found. App is running in offline mode.');
     });
 }

@@ -19,6 +19,7 @@ export function AddAndEditForGlobal() {
     const addAndEdit = useSelector((state) => state.addAndEdit)
     const { type, item_title, desc, color, deadline, _id } = addAndEdit
     const profileNickname = useSelector(state => state.source?.profile?.nickname || null)
+    const myId = useSelector(state => state.source?.profile?._id || null)
 
     const channel = useSelector(state => state.channel.book)
 
@@ -40,7 +41,7 @@ export function AddAndEditForGlobal() {
     const borderStyle = { border: `1px solid ${currentColor}` }
   
     useEffect(() => {
-      if (type === 'ADD_TODO' || type === 'ADD_NOTE') {
+      if (type === 'ADD_TODO' || type === 'TODO_ADD_NOTE' || type === 'ADD_NOTE') {
         if (!currentColor) setCurrentColor(colors[Math.floor(Math.random() * colors.length)]) // random warna
         const currentDate = {color: currentColor, deadline: new Date().setHours(0,0,0,0)}
         setColorsTileSource([currentDate])
@@ -68,7 +69,7 @@ export function AddAndEditForGlobal() {
             deadline: colorsTileSource[0].deadline,
             item_title: e.target.title.value,
             returnPage: type === 'EDIT_TODO_INSIDE' ? false : true,
-            by: profileNickname
+            by: {nickname: profileNickname, _id: myId}
         }
       try {
           if (type === 'ADD_TODO') {
@@ -91,6 +92,26 @@ export function AddAndEditForGlobal() {
               toast.dismiss(promise)
             })
         } else if (type === 'ADD_NOTE') {
+          const promise = loadingToast('Membuat catatan baru')
+          await axios.post(`${API}/notes/${idPageOfBook}`, dataToSend)
+            .then((res) => {
+                noteToast(dataToSend)
+                dispatch(setSource(res.data))
+                dispatch(resetAddAndEdit())
+                channel.send({
+                  type: 'broadcast',
+                  event: `${idPageOfBook}:shouldUpdate`,
+                  payload: `${profileNickname} menambah catatan`,
+              })
+            })
+            .catch(err => {
+                noteToast({color : 'var(--danger)'})
+            })
+            .finally(() => {
+              toast.dismiss(promise)
+            })
+        } else if (type === 'TODO_ADD_NOTE') {
+          const promise = loadingToast('Membuat catatan baru')
           await axios.post(`${API}/todo-notes/${idPageOfBook}/${_id}`, dataToSend)
             .then((res) => {
                 noteToast(dataToSend)
@@ -104,7 +125,10 @@ export function AddAndEditForGlobal() {
             })
             .catch(err => {
                 noteToast({color : 'var(--danger)'})
-            }) 
+            })
+            .finally(() => {
+              toast.dismiss(promise)
+            })
         } else {
           await axios.put(`${API}/source/addTodo/${idPageOfBook}/${_id}`, dataToSend)
             .then((res) => {
@@ -149,7 +173,7 @@ export function AddAndEditForGlobal() {
       <Modal open={type} close={() => dispatch(resetAddAndEdit())}>
           <div className="AE_main flex-1-1 d-grid pi-center">
             {
-                type === 'ADD_NOTE' || type === 'EDIT_NOTE' ? <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/> :
+                type === 'TODO_ADD_NOTE' || type === 'TODO_EDIT_NOTE' || type === 'ADD_NOTE' ? <FontAwesomeIcon icon={faNoteSticky} className="icon-modal" style={{color: currentColor}}/> :
                 <Calendar
                 onClickDay={dayTileClick}
                 className="calendar-dark"
@@ -194,11 +218,11 @@ export function AddAndEditForGlobal() {
             <div className="general-info" style={{ borderBottom: `1px solid ${currentColor}` }}>
               <h3>{item_title || pathPageOfBook}</h3>
               <p className="date">
-                {deadline ? <div className="card-deadline">{format(deadline, 'iiii, dd LLL yyyy', {locale: id})}</div> : type === 'ADD_NOTE' ? 'Menambah catatan baru...' : 'Menambah tugas baru...'}
+                {deadline ? <div className="card-deadline">{format(deadline, 'iiii, dd LLL yyyy', {locale: id})}</div> : type === 'TODO_ADD_NOTE' || type === 'ADD_NOTE' ? 'Menambah catatan baru...' : 'Menambah tugas baru...'}
               </p>
             </div>
             <div className="input-left d-flex fd-row m-1">
-                {type === 'ADD_NOTE' || type === 'EDIT_NOTE' ? null : 
+                {type === 'TODO_ADD_NOTE' || type === 'TODO_EDIT_NOTE' || type === 'ADD_NOTE' ? null : 
                     <input
                         name="title"
                         type="text"
@@ -233,7 +257,7 @@ export function AddAndEditForGlobal() {
               className="flex-1-1 m-1 min-h-[10rem]"
             />
             <button type="submit" className="task-submit pointer" form="addAndEditForm">
-              {type==='EDIT_TODO_INSIDE' || type==='EDIT_TODO_OUTSIDE' || type==='EDIT_NOTE' ? 'Simpan' : 'Tambah'}
+              {type==='EDIT_TODO_INSIDE' || type==='EDIT_TODO_OUTSIDE' || type==='TODO_EDIT_NOTE' ? 'Simpan' : 'Tambah'}
             </button>
           </form>
       </Modal>

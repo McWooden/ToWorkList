@@ -3,14 +3,10 @@ import { faArrowLeft, faAdd  } from '@fortawesome/free-solid-svg-icons'
 import { clearTodo } from '../../../redux/todo';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAddAndEdit } from '../../../redux/addAndEditForGlobalStore';
-import { useEffect } from 'react';
 
 export function CenterActionButton() {
     const todoId = useSelector(state => state.todo.id)
     const isAdmin = useSelector(state => state.source.isAdmin)
-    useEffect(() => {
-        console.log(isAdmin);
-    },[isAdmin])
     function handleClick() {
         dispatch(clearTodo())
     }
@@ -28,7 +24,7 @@ export function CenterActionButton() {
             {isAdmin &&
                 <div className='flex flex-1 justify-end'>
                     <div className="action-add">
-                        <FontAwesomeIcon icon={faAdd} className='add-btn pointer bg-burlywood' onClick={() => dispatch(setAddAndEdit({type: todoId ? 'ADD_NOTE' : 'ADD_TODO', id: todoId && todoId}))}/>
+                        <FontAwesomeIcon icon={faAdd} className='add-btn pointer bg-burlywood' onClick={() => dispatch(setAddAndEdit({type: todoId ? 'TODO_ADD_NOTE' : 'ADD_TODO', id: todoId && todoId}))}/>
                     </div>
                 </div>
             }

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSelector, useDispatch } from "react-redux"
-import { setSource, setPageType } from "../../../redux/sourceSlice"
+import { setPageType } from "../../../redux/sourceSlice"
 import { setPathPageOfBook } from "../../../redux/fetchSlice"
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { clearTodo } from '../../../redux/todo'
@@ -13,7 +13,6 @@ export function PageListItem({data}) {
     const dispatch = useDispatch()
     function handleClick() {
         dispatch(clearTodo())
-        dispatch(setSource(null))
         dispatch(setPageType(icon))
         dispatch(setPathPageOfBook({path: title, id}))
     }
