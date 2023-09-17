@@ -19,7 +19,6 @@ export function BookList() {
         setIsLoading(true)
         try {
             const response = await axios.get(`${API}/book/${myAccount._id}`)
-            console.log(response.data);
             dispatch(setBooksProfile(response.data))
         } catch (err) {
             setReload(true)

@@ -35,10 +35,10 @@ export function Image({data, handleAreaToDrag}) {
     return (
         <>
         <div className='card-img d-flex of-hidden bg-primary-dark-25' {...handleAreaToDrag}>
-            <img alt={data.by} className={`card-img-pic pointer ${full&&'full p-fixed zi-3'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
+            <img alt={data.by.nickname} className={`card-img-pic pointer ${full&&'full p-fixed zi-3'}`} src={`${url}/${data.pic}`} onClick={handleFull}/>
             <div className='card-img-context d-flex fd-column'>
                 <div className='flex-1'>
-                    <div className="card-img-by">{data.by}</div>
+                    <div className="card-img-by">{data.by.nickname}</div>
                     <p className="card-img-desc text-xs">{data.desc}</p>
                 </div>
                 <div className="card-img-date pointer as-flex-end text-zinc-500" onClick={() => setDeleteOpen(true)}>{convertDateToString(data.date)}</div>

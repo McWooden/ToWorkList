@@ -46,7 +46,7 @@ export function NoteEditor() {
             context: noteVal
         }
         try {
-            await axios.put(`${API}/notes/${idPageOfBook}/${todoId}/${data._id}`, dataToSend)
+            await axios.put(`${API}/todo-notes/${idPageOfBook}/${todoId}/${data._id}`, dataToSend)
             .then(res => {
                 noteToastSecond({text: 'catatan berhasil diperbarui', color: data.color})
                 dispatch(setTodo(res.data))
@@ -87,12 +87,12 @@ export function NoteEditor() {
                         onChange={handleChange}
                     />
                     <span className='note-info ai-flex-end'>
-                        {`${data.by}, ${convertDateToString(data.date)}`}
+                        {`${data.by.nickname}, ${convertDateToString(data.date)}`}
                     </span>
                 </div>
             </form>
         </Modal>
-        <Confirm open={discard} close={() => setDiscard(false)} target={`${data.by}, ${convertDateToString(data.date)}`} metode='discard' color={data.color} callback={modalClose}/>
+        <Confirm open={discard} close={() => setDiscard(false)} target={`${data.by.nickname}, ${convertDateToString(data.date)}`} metode='discard' color={data.color} callback={modalClose}/>
         </>
     )
 }

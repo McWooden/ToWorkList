@@ -8,6 +8,7 @@ import Summary from '../Page/summary';
 import Email from '../Page/email';
 import { DailyTask } from '../Page/DailyTask';
 import Daily from './Daily/Daily';
+import NotesPage from './Note/NotesPage';
 
 // const pages = useMemo(() => [
 //     {
@@ -51,6 +52,7 @@ export function Base() {
                     {pageType === 'faCheck' && <><TodoPage/><TodoRight/></>}
                     {pageType === 'faEnvelope' && <Email/>}
                     {pageType === 'faChartBar' && <Daily/>}
+                    {pageType === 'faNoteSticky' && <NotesPage/>}
                 </>)
             }
         </div>

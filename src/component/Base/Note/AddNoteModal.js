@@ -35,7 +35,7 @@ export function AddNoteModal({modalOpen, handleModalClose, title}) {
             context: e.target.desc.value
         }
         try {
-            await axios.post(`${API}/notes/${idPageOfBook}/${todoId}`, dataToSend)
+            await axios.post(`${API}/todo-notes/${idPageOfBook}/${todoId}`, dataToSend)
             .then((res) => {
                 noteToast(dataToSend)
                 dispatch(setTodo(res.data))

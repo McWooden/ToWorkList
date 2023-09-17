@@ -21,7 +21,7 @@ export function NoteItem({data, handleAreaToDrag}) {
     const channel = useSelector(state => state.channel.book)
     async function handleDelete() {
         try {
-            await axios.delete(`${API}/notes/${idPageOfBook}/${todoId}/${data._id}`)
+            await axios.delete(`${API}/todo-notes/${idPageOfBook}/${todoId}/${data._id}`)
             .then((res) => {
                 deleteToast('catatan berhasil dihapus')
                 dispatch(setTodo(res.data))
@@ -59,10 +59,10 @@ export function NoteItem({data, handleAreaToDrag}) {
                 <pre className='of-auto'>
                     <Markdown className="markdown">{data.context}</Markdown>
                 </pre>
-                <span className='note-info as-flex-end'>{`${data.by}, ${convertDateToString(data.date)}`}</span>
+                <span className='note-info as-flex-end'>{`${data.by.nickname}, ${convertDateToString(data.date)}`}</span>
             </div>
         </div>
-        <Confirm open={confirmOpen} close={() => setConfirmOpen(false)} target={`${data.by}, ${convertDateToString(data.date)}`} metode='delete' color={data.color} callback={handleDelete}/>
+        <Confirm open={confirmOpen} close={() => setConfirmOpen(false)} target={`${data.by.nickname}, ${convertDateToString(data.date)}`} metode='delete' color={data.color} callback={handleDelete}/>
         </>
     )
 }

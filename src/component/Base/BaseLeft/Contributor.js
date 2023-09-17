@@ -5,9 +5,9 @@ export function Contributor() {
     const box = []
     const nicknames = []
     todo.notes.forEach((note, index) => {
-        if (nicknames.includes(note.by)) return
-        box.push(<p key={index} >{note.by}</p>)
-        nicknames.push(note.by)
+        if (nicknames.includes(note.by.nickname)) return
+        box.push(<p key={index} >{note.by.nickname}</p>)
+        nicknames.push(note.by.nickname)
     })
     return (
         <div className="contributor-container text-zinc-400">

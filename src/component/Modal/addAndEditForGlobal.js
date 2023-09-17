@@ -91,7 +91,7 @@ export function AddAndEditForGlobal() {
               toast.dismiss(promise)
             })
         } else if (type === 'ADD_NOTE') {
-          await axios.post(`${API}/notes/${idPageOfBook}/${_id}`, dataToSend)
+          await axios.post(`${API}/todo-notes/${idPageOfBook}/${_id}`, dataToSend)
             .then((res) => {
                 noteToast(dataToSend)
                 dispatch(setTodo(res.data))

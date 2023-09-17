@@ -57,6 +57,6 @@ export const sourceSlice = createSlice({
     },
 })
 
-export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile, setIsAdmin } = sourceSlice.actions
 
 export default sourceSlice.reducer

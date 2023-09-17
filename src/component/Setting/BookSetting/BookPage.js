@@ -92,10 +92,6 @@ export default function BookPage() {
         setSaveIt(false)
     }
 
-    // useEffect(() => {
-    //     console.log(list.map(x => x.order));
-    // },[list])
-
     const [value, setValue] = useState('')
     const [btnLoading, setBtnLoading] = useState(false)
     const formRef = useRef()
@@ -136,13 +132,18 @@ export default function BookPage() {
                         <p className='small bold'>Tipe halaman</p>
                         <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row ${tipeNewRoom === 'faCheck' && 'active'}`} onClick={() => setTipeNewRoom('faCheck')}>
                             <FontAwesomeIcon icon={fontawesome['faCheck']} className={`room-icon page_icon`}/>
-                            <span className={`page_type active`}>Todo </span>
+                            <span className={`page_type active`}>Todo</span>
                             <span className={`page_desc active`}>Daftar, Pesan, Foto, Catatan</span>
+                        </div>
+                        <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row ${tipeNewRoom === 'faNoteSticky' && 'active'}`} onClick={() => setTipeNewRoom('faNoteSticky')}>
+                            <FontAwesomeIcon icon={fontawesome['faNoteSticky']} className={`room-icon page_icon`}/>
+                            <span className={`page_type active`}>Catatan</span>
+                            <span className={`page_desc active`}>Catatan</span>
                         </div>
                         <div className={`room d-flex ai-center p-relative pointer room-grid d-grid gaf-row ${tipeNewRoom === 'faChartBar' && 'active'}`} onClick={() => setTipeNewRoom('faChartBar')}>
                             <FontAwesomeIcon icon={fontawesome['faChartBar']} className={`room-icon page_icon`}/>
-                            <span className={`page_type active`}>Daily</span>
-                            <span className={`page_desc active`}>Voting, Daily reset</span>
+                            <span className={`page_type active`}>Harian</span>
+                            <span className={`page_desc active`}>Voting, Direset jam 00.00 WIB</span>
                         </div>
                     </div>
                     <p className='small bold'>Nama halaman</p>
