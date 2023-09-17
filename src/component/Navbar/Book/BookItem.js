@@ -11,7 +11,7 @@ export function BookItem({data}) {
     function handleClick() {
         dispatch(setPageType('welcome'))
         dispatch(setFetch({path: data.profile.book_title, id: data._id}))
-        dispatch(setGuildProfile({...data.profile, _id: data._id}))
+        dispatch(setGuildProfile({...data.profile, _id: data._id, isAdmin: data.isAdmin}))
         dispatch(setMembers(null))
         dispatch(setPages(null))
         dispatch(clearTodo())

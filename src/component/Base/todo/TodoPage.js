@@ -23,7 +23,6 @@ export function TodoPage() {
                     throw new Error(err)
                 })
                 dispatch(setSource(response.data))
-                console.log(response.data);
             } catch (err) {
                 console.error(err)
                 setIsReload(true)
