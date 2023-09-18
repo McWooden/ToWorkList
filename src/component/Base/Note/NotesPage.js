@@ -14,8 +14,9 @@ import axios from 'axios'
 import { setSource } from '../../../redux/sourceSlice'
 import { API } from '../../../utils/variableGlobal'
 import MyLoading from '../../../utils/myLoading'
+import Notes from './Notes'
+import { NoteEditor } from './NoteEditor'
 
-// setAddAndEdit({type: 'EDIT_TODO_INSIDE', ...item})
 export default function NotesPage() {
     return (
         <>
@@ -70,7 +71,6 @@ function NoteCenter() {
 }
 
 function NoteContainer() {
-    const source = useSelector(state => state.source.source)
     const [isLoading, setIsLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
     const dispatch = useDispatch()
@@ -93,9 +93,6 @@ function NoteContainer() {
     useEffect(() => {
         fetchData()
       }, [fetchData])
-    useEffect(() => {
-        console.log(source);
-    }, [source])
     return (
         <div className='flex-1 flex-col flex'>
             <p className='bg-primary-dark-25 rounded text-center text-xs'>Masi dalam tahap pengembangan (Tunggu senin 18 september 2023)</p>
@@ -106,7 +103,8 @@ function NoteContainer() {
                 </div>
             }
             {isLoading && <MyLoading/>}
-            {source?.noteList?.map((e, i) => <p key={i}>{e.context}</p>)||'ok'}
+            <NoteEditor/>
+            <Notes/>
         </div>
     )
 }

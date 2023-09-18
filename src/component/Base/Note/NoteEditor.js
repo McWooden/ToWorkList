@@ -8,12 +8,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { convertDateToString } from '../../../utils/convertDateFormat'
 import { setTodo } from '../../../redux/todo'
 import { noteToastSecond } from '../../../utils/notif'
-import { setNoteEditor } from '../../../redux/sourceSlice'
+import { setNoteEditor, setSource } from '../../../redux/sourceSlice'
 import { Modal } from '../../Modal/Modal'
+import { format } from 'date-fns'
+import { id } from 'date-fns/locale'
 
 
 export function NoteEditor() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const pageType = useSelector(state => state.source.pageType)
     const todoId = useSelector(state => state.todo.id)
     const data = useSelector(state => state.source.noteEditor)
     const nickname = useSelector(state => state.source.profile.nickname)
@@ -42,18 +45,31 @@ export function NoteEditor() {
     }
     async function handleSubmit(e) {
         e.preventDefault()
+        let path
+        let eventPath
+        if (pageType === 'faNoteSticky') {
+            path = `${API}/notes/${idPageOfBook}/${data._id}`
+            eventPath = `${idPageOfBook}:shouldUpdate`
+        } else {
+            path = `${API}/todo-notes/${idPageOfBook}/${todoId}/${data._id}`
+            eventPath = `${idPageOfBook}/${todoId}:shouldUpdate`
+        }
         const dataToSend = {
             context: noteVal
         }
         try {
-            await axios.put(`${API}/todo-notes/${idPageOfBook}/${todoId}/${data._id}`, dataToSend)
+            await axios.put(path, dataToSend)
             .then(res => {
                 noteToastSecond({text: 'catatan berhasil diperbarui', color: data.color})
-                dispatch(setTodo(res.data))
+                if (pageType === 'faNoteSticky') {
+                    dispatch(setSource(res.data))
+                } else {
+                    dispatch(setTodo(res.data))
+                }
                 modalClose()
                 channel.send({
                     type: 'broadcast',
-                    event: `${idPageOfBook}/${todoId}:shouldUpdate`,
+                    event: eventPath,
                     payload: `${nickname} memperbarui catatan`,
                 })
             })
@@ -87,7 +103,7 @@ export function NoteEditor() {
                         onChange={handleChange}
                     />
                     <span className='note-info ai-flex-end'>
-                        {`${data.by.nickname}, ${convertDateToString(data.date)}`}
+                        {`${data.by.nickname || data.by}, ${format(new Date(data.date), 'iiii, dd LLL yyyy', { locale: id })}`}
                     </span>
                 </div>
             </form>

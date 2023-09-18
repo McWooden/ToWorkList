@@ -7,27 +7,38 @@ import { setTodo } from '../../../redux/todo';
 import { setNoteEditor } from '../../../redux/sourceSlice';
 import Confirm from '../../Modal/Confirm';
 import axios from 'axios';
-import { useState } from 'react'
-import { convertDateToString } from '../../../utils/convertDateFormat';
+import { useEffect, useState } from 'react'
 import Markdown from 'markdown-to-jsx';
+import { id } from 'date-fns/locale';
+import { format } from 'date-fns';
 
 
 export function NoteItem({data, handleAreaToDrag}) {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const pageType = useSelector(state => state.source.pageType)
     const todoId = useSelector(state => state.todo.id)
     const [confirmOpen, setConfirmOpen] = useState(false)
     const dispatch = useDispatch()
     const nickname = useSelector(state => state.source.profile.nickname)
     const channel = useSelector(state => state.channel.book)
     async function handleDelete() {
+        let path
+        let eventPath
+        if (pageType === 'faNoteSticky') {
+            path = `${API}/notes/${idPageOfBook}/${data._id}`
+            eventPath = `${idPageOfBook}:shouldUpdate`
+        } else {
+            path = `${API}/todo-notes/${idPageOfBook}/${todoId}/${data._id}`
+            eventPath = `${idPageOfBook}/${todoId}:shouldUpdate`
+        }
         try {
-            await axios.delete(`${API}/todo-notes/${idPageOfBook}/${todoId}/${data._id}`)
+            await axios.delete(path)
             .then((res) => {
                 deleteToast('catatan berhasil dihapus')
                 dispatch(setTodo(res.data))
                 channel.send({
                     type: 'broadcast',
-                    event: `${idPageOfBook}/${todoId}:shouldUpdate`,
+                    event: eventPath,
                     payload: `${nickname} menghapus catatan`,
                 })
             })
@@ -38,6 +49,9 @@ export function NoteItem({data, handleAreaToDrag}) {
             
         }
     }
+    useEffect(() => {
+        console.log(data);
+    },[data])
     function confirmToDelete() {
         setConfirmOpen(true)
     }
@@ -59,10 +73,10 @@ export function NoteItem({data, handleAreaToDrag}) {
                 <pre className='of-auto'>
                     <Markdown className="markdown">{data.context}</Markdown>
                 </pre>
-                <span className='note-info as-flex-end'>{`${data.by.nickname}, ${convertDateToString(data.date)}`}</span>
+                <span className='note-info as-flex-end'>{`${data.by.nickname || data.by}, ${format(new Date(data.date), 'iiii, dd LLL yyyy', { locale: id })}`}</span>
             </div>
         </div>
-        <Confirm open={confirmOpen} close={() => setConfirmOpen(false)} target={`${data.by.nickname}, ${convertDateToString(data.date)}`} metode='delete' color={data.color} callback={handleDelete}/>
+        <Confirm open={confirmOpen} close={() => setConfirmOpen(false)} target={`${data.by.nickname || data.by}, ${format(new Date(data.date), 'iiii, dd LLL yyyy', { locale: id })}`} metode='delete' color={data.color} callback={handleDelete}/>
         </>
     )
 }

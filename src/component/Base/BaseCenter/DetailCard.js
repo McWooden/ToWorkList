@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import { CardImages } from "../Image/CardImages"
-import { Notes } from "../Note/Notes"
+import Notes from "../Note/Notes"
 import { NoteEditor } from "../Note/NoteEditor"
 
 export function DetailCard() {

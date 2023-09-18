@@ -11,9 +11,11 @@ import { blankToast, loadingToast } from '../../../utils/notif'
 import { useDispatch } from 'react-redux'
 import { setNotes } from '../../../redux/todo'
 
-export function Notes() {
+export default function Notes() {
     const pageId = useSelector(state => state.fetch.idPageOfBook)
     const todoId = useSelector(state => state.todo.id)
+    const pageType = useSelector(state => state.source.pageType)
+    const sourceNotes = useSelector(state => state.source?.source?.noteList)
     const todoNotes = useSelector(state => state.todo.notes)
     const [list, setList] = useState(todoNotes)
     const [saveIt, setSaveIt] = useState(false)
@@ -21,16 +23,29 @@ export function Notes() {
     const myNickname = useSelector(state => state.source.profile.nickname)
     const dispatch = useDispatch()
 
-    const handleSourceToListSorted = useCallback((dataToSort) => {
-        const sortedList = dataToSort ? [...todoNotes].sort((a, b) => a.order - b.order) : []
+    const handleSourceToListSorted = useCallback(() => {
+        let data
+        if (pageType === 'faNoteSticky') {
+            data = sourceNotes ? [...sourceNotes] : []
+        } else {
+            data = todoNotes ? [...todoNotes] : []
+        }
+
+        const sortedList = data ? data.sort((a, b) => a.order - b.order) : []
         setList(sortedList)
-    }, [todoNotes])
+    }, [pageType, sourceNotes, todoNotes])
 
     useEffect(() => {
-        handleSourceToListSorted(todoNotes)
+        handleSourceToListSorted()
     }, [handleSourceToListSorted, todoNotes])
 
     function handleOnDragEnd(result) {
+        let data
+        if (pageType === 'faNoteSticky') {
+            data = [...sourceNotes]
+        } else {
+            data = [...todoNotes]
+        }
         try {
             const { destination, source } = result
             if (source.index === destination.index) return
@@ -40,7 +55,7 @@ export function Notes() {
             items.splice(destination.index, 0, recordedItems)
             setList(items)
 
-            const sortedReduxList = [...todoNotes].sort((a, b) => a.order - b.order)
+            const sortedReduxList = data.sort((a, b) => a.order - b.order)
             const changesDetected = sortedReduxList.some((e, i) => e._id !== items[i]._id)
             setSaveIt(changesDetected)
         } catch (error) {
@@ -48,16 +63,25 @@ export function Notes() {
         }
     }
     async function handleSaveIt() {
+        let path
+        let eventPath
+        if (pageType === 'faNoteSticky') {
+            path = API+`/order/notes/${pageId}`
+            eventPath = `${pageId}:shouldUpdate`
+        } else {
+            path = API+`/order/todo-notes/${pageId}/${todoId}`
+            eventPath = `${pageId}/${todoId}:notesUpdate`
+        }
         const dataToSend = {newOrder: list.map((data, index) => ({_id: data._id, order: index}))}
         const promise = loadingToast('Menyimpan susunan')
         try {
-            await axios.put(API+`/order/todo-notes/${pageId}/${todoId}`, dataToSend)
+            await axios.put(path, dataToSend)
             .then(res => {
                 blankToast("Susunan berhasil disimpan")
                 setSaveIt(false)
                 channel.send({
                     type: 'broadcast',
-                    event: `${pageId}/${todoId}:notesUpdate`,
+                    event: eventPath,
                     payload: {...dataToSend, message: `${myNickname} mengubah susunan catatan`},
                 })
             }).catch(err => {
@@ -65,6 +89,7 @@ export function Notes() {
                 
             }).finally(() => toast.dismiss(promise))
         } catch (error) {
+            console.log(error);
             toast.dismiss(promise)
         }
     }
@@ -73,7 +98,13 @@ export function Notes() {
         setSaveIt(false)
     }
     useEffect(() => {
-        channel.on('broadcast', {event: `${pageId}/${todoId}:notesUpdate`}, payload => {
+        let eventPath
+        if (pageType === 'faNoteSticky') {
+            eventPath = `${pageId}:shouldUpdate`
+        } else {
+            eventPath = `${pageId}/${todoId}:notesUpdate`
+        }
+        channel.on('broadcast', {event: eventPath}, payload => {
             try {
                 const data = todoNotes
                 
@@ -89,7 +120,7 @@ export function Notes() {
                 blankToast(payload.payload.message)
             } catch (err) {}
         })
-    }, [channel, dispatch, handleSourceToListSorted, pageId, todoId, todoNotes])
+    }, [channel, dispatch, handleSourceToListSorted, pageId, pageType, todoId, todoNotes])
     
 
     return(
