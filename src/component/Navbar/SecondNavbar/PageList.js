@@ -39,6 +39,7 @@ export function PageList() {
             })
             dispatch(setPages(response.data.pages.pages))
             dispatch(setIsAdmin(response.data.isAdmin))
+            alert(String(response.data.isAdmin)
         } catch (error) {
             setReloading(true)
         }
