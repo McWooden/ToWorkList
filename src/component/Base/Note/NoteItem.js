@@ -7,7 +7,7 @@ import { setTodo } from '../../../redux/todo';
 import { setNoteEditor } from '../../../redux/sourceSlice';
 import Confirm from '../../Modal/Confirm';
 import axios from 'axios';
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Markdown from 'markdown-to-jsx';
 import { id } from 'date-fns/locale';
 import { format } from 'date-fns';
@@ -49,9 +49,6 @@ export function NoteItem({data, handleAreaToDrag}) {
             
         }
     }
-    useEffect(() => {
-        console.log(data);
-    },[data])
     function confirmToDelete() {
         setConfirmOpen(true)
     }

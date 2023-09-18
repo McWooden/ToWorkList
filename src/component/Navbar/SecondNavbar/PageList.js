@@ -8,7 +8,7 @@ import { PageListItem } from './PageListItem'
 import supabase from '../../../utils/supabase'
 import { pageToast } from '../../../utils/notif'
 import { setChannel } from '../../../redux/channelReducer'
-import { setPages, setUpdateGuildProfile } from '../../../redux/sourceSlice'
+import { setIsAdmin, setPages, setUpdateGuildProfile } from '../../../redux/sourceSlice'
 import MyLoading from '../../../utils/myLoading'
 
 export function PageList() {
@@ -17,6 +17,7 @@ export function PageList() {
     const [reloading, setReloading] = useState(false)
     const dispatch = useDispatch()
     const nickname = useSelector(state => state.source.profile.nickname)
+    const userId = useSelector(state => state.source.profile._id)
     const pages = useSelector(state => state.source.pages)
     const [list, setList] = useState(pages)
 
@@ -33,15 +34,16 @@ export function PageList() {
         setLoading(true)
         setReloading(false)
         try {
-            const response = await axios.get(`${API}/book/${idBook}/get/pages/details`).catch(err => {
+            const response = await axios.get(`${API}/book/${idBook}/get/pages/details?userId=${userId}`).catch(err => {
                 throw new Error(err)
             })
-            dispatch(setPages(response.data.pages))
+            dispatch(setPages(response.data.pages.pages))
+            dispatch(setIsAdmin(response.data.IsAdmin))
         } catch (error) {
             setReloading(true)
         }
         setLoading(false)
-    }, [dispatch, idBook])
+    }, [dispatch, idBook, userId])
 
     useEffect(() => {
         setLoading(false)

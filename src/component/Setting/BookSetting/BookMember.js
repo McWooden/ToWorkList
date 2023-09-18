@@ -13,7 +13,6 @@ import { toast } from 'react-toastify'
 export default function BookMember() {
     const [isLoading, setIsLoading] = useState(false)
     const members = useSelector(state => state.source.members)
-    useEffect(() => console.log('bookMember',members),[members])
     const idBook = useSelector(state => state.fetch.idBook)
     function handleEmpety() {
         setIsLoading(false)
@@ -64,9 +63,6 @@ function MemberCard({user}) {
     let menuRef = useRef()
     let btnRef = useRef()
     const dispatch = useDispatch()
-    useEffect(() => {
-      console.log('User',user)
-    }, [user])
     
     useEffect(() => {
         let handler = (e) => {
@@ -92,7 +88,8 @@ function MemberCard({user}) {
         console.log(user);
         try {
             await axios.get(API+`/book/reverseAdmin/${idBook}/${user._id}`).then(res => {
-                dispatch(setMembers(res.data.member))
+                dispatch(setMembers(res.data.users))
+                console.log(res.data.users);
                 toast.dismiss(promise)
             })
             .catch(err => {

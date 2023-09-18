@@ -1,6 +1,6 @@
 import { faCheck, faNoteSticky, faImage, faMessage} from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux'
-import { InfoMenu } from './InfoMenu'
+import InfoMenu from './InfoMenu'
 import { Contributor } from './Contributor'
 import format from 'date-fns/format'
 import id from 'date-fns/locale/id'

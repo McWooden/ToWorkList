@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAdd, faRotateRight  } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faRotateRight, faNoteSticky } from '@fortawesome/free-solid-svg-icons'
 import { TodoRight } from "../todo/todoRight"
 import { Left, Center } from "../BaseComponent"
 import { Greeting } from "../../../utils/greeting"
@@ -16,6 +16,7 @@ import { API } from '../../../utils/variableGlobal'
 import MyLoading from '../../../utils/myLoading'
 import Notes from './Notes'
 import { NoteEditor } from './NoteEditor'
+import InfoMenu from '../BaseLeft/InfoMenu'
 
 export default function NotesPage() {
     return (
@@ -28,6 +29,7 @@ export default function NotesPage() {
 }
 
 function NoteLeft() {
+    const noteList = useSelector(state => state.source?.source?.noteList)
     return (
         <Left>
             <div className="p-2 flex flex-col gap-3">
@@ -38,6 +40,9 @@ function NoteLeft() {
                     next2Label={null}
                     prev2Label={null}
                 />
+                <div>
+                    <InfoMenu icon={faNoteSticky} count={noteList?.length || 0}/>
+                </div>
             </div>
         </Left>
     )
@@ -77,10 +82,12 @@ function NoteContainer() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const channel = useSelector(state => state.channel.book)
     const fetchData = useCallback(async() => {
-        setShouldUpdate(false)
         setIsLoading(true)
-        const {data} = await axios.get(`${API}/source/page/${idPageOfBook}`)
-        dispatch(setSource(data))
+        try {
+            setShouldUpdate(false)
+            const {data} = await axios.get(`${API}/source/page/${idPageOfBook}`)
+            dispatch(setSource(data))
+        } catch (error) {}
         setIsLoading(false)
       },
       [dispatch, idPageOfBook],
@@ -95,7 +102,6 @@ function NoteContainer() {
       }, [fetchData])
     return (
         <div className='flex-1 flex-col flex'>
-            <p className='bg-primary-dark-25 rounded text-center text-xs'>Masi dalam tahap pengembangan (Tunggu senin 18 september 2023)</p>
             {shouldUpdate && 
                 <div className="p-[15px] flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
                     <FontAwesomeIcon icon={faRotateRight}/>
