@@ -32,7 +32,6 @@ export const sourceSlice = createSlice({
         },
         setGuildProfile: (state, action) => {
             setLocalStorage('guildProfile', action.payload)
-            console.log(action.payload);
             state.isAdmin = action.payload?.isAdmin || false
             state.guildProfile = action.payload
         },
@@ -52,6 +51,7 @@ export const sourceSlice = createSlice({
             state.source.details.jadwal_url = action.payload
         },
         setIsAdmin: (state, action) => {
+            console.log(action.payload, action.payload?.isAdmin || false);
             state.isAdmin = action.payload || false
         }
     },

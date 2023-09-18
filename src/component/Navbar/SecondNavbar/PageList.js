@@ -38,7 +38,7 @@ export function PageList() {
                 throw new Error(err)
             })
             dispatch(setPages(response.data.pages.pages))
-            dispatch(setIsAdmin(response.data.IsAdmin))
+            dispatch(setIsAdmin(response.data.isAdmin))
         } catch (error) {
             setReloading(true)
         }

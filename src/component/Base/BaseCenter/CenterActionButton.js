@@ -3,6 +3,7 @@ import { faArrowLeft, faAdd  } from '@fortawesome/free-solid-svg-icons'
 import { clearTodo } from '../../../redux/todo';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAddAndEdit } from '../../../redux/addAndEditForGlobalStore';
+import { useEffect } from 'react';
 
 export function CenterActionButton() {
     const todoId = useSelector(state => state.todo.id)
@@ -11,6 +12,9 @@ export function CenterActionButton() {
         dispatch(clearTodo())
     }
     const dispatch = useDispatch()
+    useEffect(() => {
+        console.log(isAdmin);
+    },[isAdmin])
     return (
         <div className={`center-action-btn d-flex ai-center jc-flex-end as-flex-end text-primary w-full`}>
             <div className='flex-1'>
