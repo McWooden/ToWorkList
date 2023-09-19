@@ -11,6 +11,7 @@ export function FormBaseRight() {
     const channel = useSelector(state => state.channel.book)
     const profile = useSelector(state => state.source.profile)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const todoTitle = useSelector(state => state.todo.details.item_title)
     const todoId = useSelector(state => state.todo.id)
     const dispatch = useDispatch()
 
@@ -55,7 +56,7 @@ export function FormBaseRight() {
     return (
         <form className='base-right-form zi-1 of-auto d-flex ai-flex-end' onSubmit={handleSubmit}>
             <div className="textarea-container d-flex ai-center of-auto bg-primary shadow-lg">
-                <textarea id="myTextarea" rows="1" placeholder='messege main todo' name='msg' onChange={handleInput} value={msg} ref={textarea} style={{height: '15px'}} className='d-flex bg-inherit ai-center of-auto text-white placeholder:text-zinc-400'/>
+                <textarea id="myTextarea" rows="1" placeholder={`Pesan ${todoTitle}`} name='msg' onChange={handleInput} value={msg} ref={textarea} style={{height: '15px'}} className='d-flex bg-inherit ai-center of-auto text-white placeholder:text-zinc-400'/>
             </div>
             {
                 msg ? 

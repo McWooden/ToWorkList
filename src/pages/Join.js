@@ -10,8 +10,9 @@ import { setFetch } from '../redux/fetchSlice'
 import { useDispatch } from 'react-redux'
 import { setBooksProfile, setGuildProfile, setMembers, setPageType } from '../redux/sourceSlice'
 import {url, API} from '../utils/variableGlobal'
-import { convertDateToString } from '../utils/convertDateFormat'
 import supabase from '../utils/supabase'
+import { format } from 'date-fns'
+import { id } from 'date-fns/locale'
 export default function Join(){
     const [data, setData] = useState(null)
     const [isReload, setIsReload] = useState(false)
@@ -113,18 +114,27 @@ export default function Join(){
                         <p className='title'>{data.profile.book_title}</p>
                         <div className='flex gap-4'>
                             <div className='flex-1 flex flex-col gap-2'>
-                                <p className='as-flex-end'>Dibuat sejak {convertDateToString(data.profile.created_at)} oleh {data.profile.author.nickname}#{data.profile.author.tag}</p>
+                                <p className='as-flex-end'>Dibuat sejak {format(new Date(data.profile.created_at), 'dd LLL yyyy', { locale: id })} oleh {data.profile.author.nickname}#{data.profile.author.tag}</p>
                                 <p className='as-flex-end'>{data.users_length} Anggota</p>
                             </div>
                             <div className='flex-2'>
                                 <p>{data.profile.desc}</p>
+                                {myAccount?
                                 <div className='join_btn d-flex jc-center ai-center mt-2 w-full pointer shadow-md text-primary bg-burlywood' onClick={gabung}>
-                                    <img src={myAccount.avatar} alt={myAccount.nickname} />
+                                    <img src={myAccount.avatar||''} alt={myAccount.nickname||''} />
                                     <span className='d-flex ai-center jc-flex-end'>
                                         Bergabung
                                         <FontAwesomeIcon icon={fontawesome.faChevronRight}/>
                                     </span>
                                 </div>
+                                :
+                                <>
+                                <div className='join_btn d-flex jc-center ai-center mt-2 w-full pointer shadow-md text-primary bg-burlywood' onClick={() => navigate('/auth/login')}>
+                                    <span>Login</span>
+                                </div>
+                                <span className='text-[0.5rem]'>Pengguna perlu masuk ke akun sebelum bergabung!</span>
+                                </>
+                                }
                             </div>
                         </div>
                     </div>

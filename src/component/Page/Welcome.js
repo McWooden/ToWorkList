@@ -8,10 +8,10 @@ import { isoToString } from '../../utils/convertDateFormat'
 import { ChatModel } from '../Model/Chat'
 import { sendToast } from '../../utils/notif'
 import { useDispatch } from 'react-redux'
-import { reverseNavbar } from '../../redux/hideAndShowSlice'
+import { reverseNavbar, reverseRightSide } from '../../redux/hideAndShowSlice'
+import { useSwipeable } from 'react-swipeable'
 
 export function Welcome() {
-  
   const dispatch = useDispatch()
   const taglines = [
     "Simplify your tasks",
@@ -20,10 +20,14 @@ export function Welcome() {
     "Transform your to-do lists",
     "Next level task management"
   ]
+  const handlers = useSwipeable({
+    onSwipedRight: () => dispatch(reverseNavbar()),
+    onSwipedLeft: () => dispatch(reverseRightSide()),
+  })
 
   return (
     <div className="flex w-full sm:flex-row flex-col">
-      <div className="welcome flex flex-col overflow-auto flex-3">
+      <div className="welcome flex flex-col overflow-auto flex-3" {...handlers}>
         <Greeting />
         <div className="welcome_page d-flex fd-column ai-center jc-flex-start">
           <p className="welcome_name as-flex-start">Toworklist</p>
@@ -56,6 +60,12 @@ function GlobalChat() {
 
   const [chats, setChats] = useState([])
   const chatRef = useRef(null)
+
+  const dispatch = useDispatch()
+
+  const handlers = useSwipeable({
+    onSwipedRight: () => dispatch(reverseRightSide()),
+})
 
   const [scrollToBottom, setScrollToBottom] = useState(true)
 
@@ -141,7 +151,7 @@ function GlobalChat() {
   }  
 
   return (
-    <div className={`base-right of-auto ${isRightSideShow ? 'base-right-show' : 'base-right-hide'} d-flex fd-column h-full flex-1 bg-indianred`}>
+    <div className={`base-right of-auto ${isRightSideShow ? 'base-right-show' : 'base-right-hide'} d-flex fd-column h-full flex-1 bg-indianred`} {...handlers}>
         <div className="sidebar-right d-flex fd-column of-auto scroll-smooth" ref={chatRef} onScroll={handleScroll}>
           <FontAwesomeIcon icon={faChevronDown} onClick={clickToBottom} className={`scrollToBottom zi-1 pointer ${scrollToBottom ? '' : 'active'} p-fixed`} />
           {box}

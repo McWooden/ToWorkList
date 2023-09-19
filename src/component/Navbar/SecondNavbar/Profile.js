@@ -71,7 +71,7 @@ export function Profile() {
                         <div className="profile_pop-nickname">{profile.nickname}<span>#{profile.tag}</span></div>
                         <div className="profile_pop-created_at">
                             <p>Bergabung sejak</p>
-                            <span>{format(new Date(profile.created_at), 'EEEE, dd MMM yyyy', {locale: id})}</span>
+                            <span>{profile.created_at && format(new Date(profile.created_at), 'EEEE, dd MMM yyyy', {locale: id})}</span>
                         </div>
                         <div className="profile_pop-btn d-flex ai-center pointer bg-primary-dark-25 shadow" onClick={() => navigate('/auth/login')}>
                             <FontAwesomeIcon icon={faRepeat}/>
