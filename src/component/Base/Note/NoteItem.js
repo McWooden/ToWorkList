@@ -4,7 +4,7 @@ import { deleteToast, editToast } from '../../../utils/notif';
 import { useSelector, useDispatch } from 'react-redux';
 import { API } from '../../../utils/variableGlobal';
 import { setTodo } from '../../../redux/todo';
-import { setNoteEditor } from '../../../redux/sourceSlice';
+import { setNoteEditor, setSource } from '../../../redux/sourceSlice';
 import Confirm from '../../Modal/Confirm';
 import axios from 'axios';
 import { useState } from 'react'
@@ -35,7 +35,11 @@ export function NoteItem({data, handleAreaToDrag}) {
             await axios.delete(path)
             .then((res) => {
                 deleteToast('catatan berhasil dihapus')
-                dispatch(setTodo(res.data))
+                if (pageType === 'faNoteSticky') {
+                    dispatch(setSource(res.data))
+                } else {
+                    dispatch(setTodo(res.data))
+                }
                 channel.send({
                     type: 'broadcast',
                     event: eventPath,

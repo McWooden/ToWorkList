@@ -51,7 +51,6 @@ export const sourceSlice = createSlice({
             state.source.details.jadwal_url = action.payload
         },
         setIsAdmin: (state, action) => {
-            console.log(action.payload, action.payload?.isAdmin || false);
             state.isAdmin = action.payload || false
         }
     },
