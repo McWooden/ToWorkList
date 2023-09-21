@@ -26,8 +26,8 @@ export const fetchSlice = createSlice({
             setLocalStorage('pathBook', action.payload)
             state.pathBook = action.payload.path
             state.idBook = action.payload.id
-            state.pathPageOfBook = action.payload.path
-            state.idPageOfBook = action.payload.id
+            state.pathPageOfBook = action.payload?.page || action.payload.path
+            state.idPageOfBook = action.payload?.idPage || action.payload.id
         },
     },
 })
