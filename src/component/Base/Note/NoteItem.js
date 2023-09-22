@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faNoteSticky, faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faNoteSticky, faTrash, faPenToSquare, faLock } from '@fortawesome/free-solid-svg-icons'
 import { deleteToast, editToast } from '../../../utils/notif';
 import { useSelector, useDispatch } from 'react-redux';
 import { API } from '../../../utils/variableGlobal';
@@ -21,6 +21,7 @@ export function NoteItem({data, handleAreaToDrag}) {
     const dispatch = useDispatch()
     const nickname = useSelector(state => state.source.profile.nickname)
     const channel = useSelector(state => state.channel.book)
+    const isAdmin = useSelector(state => state.source.isAdmin)
     async function handleDelete() {
         let path
         let eventPath
@@ -66,8 +67,14 @@ export function NoteItem({data, handleAreaToDrag}) {
             <div className='note-head d-flex jc-space-between ai-center bg-primary-dark-25 shadow' {...handleAreaToDrag}>
                 <FontAwesomeIcon icon={faNoteSticky} style={{color: data.color}} className='note-color'/>
                 <div className="note-btn ai-center text-zinc-400">
-                    <FontAwesomeIcon icon={faTrash} className='pointer' onClick={confirmToDelete}/>
-                    <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
+                    {isAdmin ? 
+                        <>
+                            <FontAwesomeIcon icon={faTrash} className='pointer' onClick={confirmToDelete}/>
+                            <FontAwesomeIcon icon={faPenToSquare} className='pointer' onClick={handleEdit}/>
+                        </>
+                        :
+                        <FontAwesomeIcon icon={faLock}/>
+                    }
                 </div>
             </div>
             <div className='note-body d-flex fd-column'>

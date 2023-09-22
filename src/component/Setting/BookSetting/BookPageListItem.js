@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faTrash, faEye } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare, faTrash, faEye, faLock } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState, useEffect } from 'react'
 import { deleteToast, pageToast } from '../../../utils/notif'
@@ -24,6 +24,7 @@ export default function BookPageListItem({data, callback, handleAreaToDrag}) {
     const dispatch = useDispatch()
     const channel = useSelector(state => state.channel.book)
     const nickname = useSelector(state => state.source.profile.nickname)
+    const isAdmin = useSelector(state => state.source.isAdmin)
     function handleClick() {
         dispatch(setSource(null))
         dispatch(setPageType(icon))
@@ -102,19 +103,27 @@ export default function BookPageListItem({data, callback, handleAreaToDrag}) {
             <span className={`${active?'active':''}`}>{title}</span>
             <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                 <ul className='d-flex fd-column of-hidden p-absolute pointer'>
-                    
                     <li className='d-flex ai-center' onClick={handleClick}>
                         <FontAwesomeIcon icon={faEye} className='card-dd-btn' />
                         <span>Pergi</span>
                     </li>
-                    <li className='d-flex ai-center' onClick={() => setOpenAdd(true)}>
-                        <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
-                        <span>Ubah</span>
-                    </li>
-                    <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
-                        <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
-                        <span>Hapus</span>
-                    </li>
+                    {isAdmin ?
+                        <>
+                        <li className='d-flex ai-center' onClick={() => setOpenAdd(true)}>
+                            <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
+                            <span>Ubah</span>
+                        </li>
+                        <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
+                            <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                            <span>Hapus</span>
+                        </li>
+                        </>
+                        :
+                        <li className='d-flex ai-center'>
+                            <FontAwesomeIcon icon={faLock} className='card-dd-btn'/>
+                            <span>Admin</span>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

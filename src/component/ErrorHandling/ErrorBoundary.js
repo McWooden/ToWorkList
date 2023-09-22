@@ -10,7 +10,7 @@ function ErrorFallback({ error }) {
   return (
     <div className='p-2 w-full h-screen flex items-center justify-center flex-col gap-2'>
       <div className='w-full bg-burlywood p-2 rounded-md shadow text-primary max-w-[720px]'>
-        <h1>Something went wrong :(</h1>
+        <h1>Ada yang tidak beres :(</h1>
         <p className='my-2 bg-indianred p-2 rounded shadow'>Message: {error.message}</p>
         {error.code && <p>Code: {error.code}</p>}
         <div className='flex justify-end'>

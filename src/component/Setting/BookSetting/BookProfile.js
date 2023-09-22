@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faXmark, faPenToSquare, faTrash, faImage, faFloppyDisk } from '@fortawesome/free-solid-svg-icons'
+import { faXmark, faPenToSquare, faTrash, faImage, faFloppyDisk, faLock } from '@fortawesome/free-solid-svg-icons'
 import * as fontawesome from '@fortawesome/free-solid-svg-icons'
 import { DeleteBookModal } from '../../Modal/DeleteBookModal'
 import { FileDrop } from '../../Modal/FileDrop'
@@ -24,6 +24,8 @@ export default function BookProfile() {
     const dispatch = useDispatch()
     const [dropDown, setDropDown] = useState(false)
     const [openUnggah, setOpenUnggah] = useState(false)
+
+    const isAdmin = useSelector(state => state.source.isAdmin)
     
     let menuRef = useRef()
     let btnRef = useRef()
@@ -225,14 +227,23 @@ export default function BookProfile() {
                     <img src={`${url}/${profile.avatar_url}`} alt={profile.book_title} className='setting_full_pp_guild pointer' onClick={() => setDropDown(!dropDown)} ref={btnRef}/>
                     <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                         <ul className='reverse d-flex fd-column of-hidden p-absolute pointer'>
-                            <li className='d-flex ai-center' onClick={() => setOpenUnggah(true)}>
-                                <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
-                                <span>Unggah</span>
-                            </li>
-                            <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
-                                <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
-                                <span>Hapus</span>
-                            </li>
+                            {isAdmin?
+                                <>
+                                    <li className='d-flex ai-center' onClick={() => setOpenUnggah(true)}>
+                                        <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
+                                        <span>Unggah</span>
+                                    </li>
+                                    <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
+                                        <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                                        <span>Hapus</span>
+                                    </li>
+                                </>
+                                :
+                                <li className='d-flex ai-center' onClick={() => setDeleteOpen(true)}>
+                                    <FontAwesomeIcon icon={faLock} className='card-dd-btn'/>
+                                    <span>Admin</span>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -283,7 +294,11 @@ export default function BookProfile() {
             </div>
         </div>
         <div className="setting_action d-flex">
+            {isAdmin ? 
             <span className="setting_btn d-flex ai-center pointer delete_btn"  onClick={() => setDeleteGuildOpen(true)}>hapus guild</span>
+            :
+            <span className="setting_btn d-flex ai-center pointer delete_btn flex gap-2"><FontAwesomeIcon icon={faLock}/>Admin</span>
+            }
             <span className="setting_btn d-flex ai-center pointer keluar_btn" onClick={() => setLeaveOpen(true)}>Keluar guild</span>
         </div>
         <DeleteBookModal open={deleteGuildOpen} close={() => setDeleteGuildOpen(false)} data={profile} callback={deleteBook}/>

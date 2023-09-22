@@ -94,7 +94,7 @@
 .note-head {
     padding: 5px;
 }
-.note-head:hover .note-btn {
+.note:hover .note-btn {
     display: inherit;
 }
 .note-btn {

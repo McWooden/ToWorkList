@@ -1,14 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLink } from '@fortawesome/free-solid-svg-icons'
+import { faLink, faLock } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { alertToast, blankToast, loadingToast } from '../../../utils/notif'
+import { alertToast, blankToast, leaveToast, loadingToast } from '../../../utils/notif'
 import { useCallback } from 'react'
 import axios from 'axios'
 import { setMembers } from '../../../redux/sourceSlice'
 import { API } from '../../../utils/variableGlobal'
 import { useRef } from 'react'
 import { toast } from 'react-toastify'
+import Confirm from '../../Modal/Confirm'
 
 export default function BookMember() {
     const [isLoading, setIsLoading] = useState(false)
@@ -57,13 +58,15 @@ export default function BookMember() {
 }
 
 function MemberCard({user}) {
+    const pathBook = useSelector(state => state.fetch.pathBook)
     const idBook = useSelector(state => state.fetch.idBook)
     const isAdmin = useSelector(state => state.source.isAdmin)
     const [dropDown, setDropDown] = useState(false)
     let menuRef = useRef()
     let btnRef = useRef()
     const dispatch = useDispatch()
-    
+    const channel = useSelector(state => state.channel.book)
+    const [kickOpen, setKickOpen] = useState(false)
     useEffect(() => {
         let handler = (e) => {
             try {
@@ -80,7 +83,6 @@ function MemberCard({user}) {
         return () => document.removeEventListener("mousedown", handler)
     })
     function showDropDown() {
-        if (!isAdmin) return
         setDropDown(!dropDown)
     }
     async function reverseAdmin() {
@@ -100,7 +102,24 @@ function MemberCard({user}) {
             alertToast(`Gagal ${user.isAdmin?'Memberhentikan':'Menjadikan'} Admin`)
         }
     }
+    async function tendangMember() {
+        try {
+            await axios.put(`${API}/book/leave/${idBook}?userId=${user._id}&?returnMember=true`).then(res => {
+                if (res.data.msg !== 'ok') return
+                leaveToast(`berhasil dikeluarkan dari ${pathBook}`)
+                channel.send({
+                    type: 'broadcast',
+                    event: 'memberShouldUpdate',
+                    payload: `${user.nickname} dikeluarkan`
+                })
+                dispatch(setMembers(res.data.users))
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
+        <>
         <div className='group-user pointer d-flex ai-center flex-row relative hover:bg-zinc-800'>
             <div ref={btnRef} className='flex-1 flex gap-2 items-center' onClick={showDropDown}>
                 <img src={user.avatar} alt={user.nickname} />
@@ -112,11 +131,24 @@ function MemberCard({user}) {
             </div>
             <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                 <ul className='d-flex fd-column of-hidden p-absolute pointer'>
+                    { isAdmin ?
+                    <>
                     <li className='d-flex ai-center' onClick={reverseAdmin}>
                         <span>{user.isAdmin?'Berhentikan sebagai':'Jadikan sebagai'} Admin</span>
                     </li>
+                    <li className='d-flex ai-center' onClick={() => setKickOpen(true)}>
+                        <span>Keluarkan {user.nickname}</span>
+                    </li>
+                    </>
+                    :
+                    <li className='d-flex ai-center'>
+                        <span><FontAwesomeIcon icon={faLock}/> Admin</span>
+                    </li>
+                    }
                 </ul>
             </div>
         </div>
+        <Confirm metode={'delete'} color='indianred' open={kickOpen} close={() => setKickOpen(false)} callback={tendangMember} deleteText='akan dikeluarkan' target={user.nickname} nextText=''/>
+        </>
     )
 }

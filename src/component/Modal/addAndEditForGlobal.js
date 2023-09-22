@@ -93,7 +93,7 @@ export function AddAndEditForGlobal() {
             })
         } else if (type === 'ADD_NOTE') {
           const promise = loadingToast('Membuat catatan baru')
-          await axios.post(`${API}/notes/${idPageOfBook}`, dataToSend)
+          await axios.post(`${API}/todo-notes/${idPageOfBook}`, dataToSend)
             .then((res) => {
                 noteToast(dataToSend)
                 dispatch(setSource(res.data))

@@ -3,14 +3,10 @@ import { setPageType, setMembers, setGuildProfile, setPages } from "../../../red
 import { setFetch } from "../../../redux/fetchSlice"
 import { url } from "../../../utils/variableGlobal"
 import { clearTodo } from "../../../redux/todo"
-import { useEffect } from "react"
 
 export function BookItem({data}) {
     const idBook = useSelector(state => state.fetch.idBook)
     const dispatch = useDispatch()
-    useEffect(() => {
-        console.log(data);
-    },[data])
     
     function handleClick() {
         dispatch(setPageType('welcome'))

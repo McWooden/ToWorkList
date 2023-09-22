@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faTextSlash, faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
-export default function Confirm({ metode, open, close, target, color = 'grey', callback, timeout = 0, deleteText = 'akan terhapus secara permanen' }) {
+export default function Confirm({ metode, open, close, target, color = 'grey', callback, timeout = 0, deleteText = 'akan terhapus secara permanen', nextText = 'kamu yakin?' }) {
     const [remainingTime, setRemainingTime] = useState(timeout)
 
     useEffect(() => {
@@ -35,7 +35,7 @@ export default function Confirm({ metode, open, close, target, color = 'grey', c
             <div className="confirm-context">
                 <h3>Hapus</h3>
                 {msg}
-                <p className="next-text">kamu yakin?</p>
+                <p className="next-text">{nextText}</p>
             </div>
         )
     }

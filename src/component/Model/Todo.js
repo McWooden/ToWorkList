@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faBars, faEllipsisVertical, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
+import {faBars, faEllipsisVertical, faPenToSquare, faTrash, faLock} from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from "react-redux"
 import Confirm from "../Modal/Confirm"
 import { setAllTodo } from "../../redux/todo"
@@ -23,6 +23,7 @@ export function TodoModel({item, handleAreaToDrag}) {
     const title = item.details.item_title
 
     const channel = useSelector(state => state.channel.book)
+    const isAdmin = useSelector(state => state.source.isAdmin)
 
     useEffect(() => {
         let handler = (e) => {
@@ -102,14 +103,23 @@ export function TodoModel({item, handleAreaToDrag}) {
                 </div>
                 <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
                     <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300'>
-                        <li className='d-flex ai-center hover:brightness-110 pt-2' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_OUTSIDE', ...item}))}>
-                            <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
-                            <span>edit</span>
-                        </li>
-                        <li className='d-flex ai-center hover:brightness-110 pb-2' onClick={() => setDeleteOpen(true)}>
-                            <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
-                            <span>delete</span>
-                        </li>
+                        {isAdmin ?
+                            <>
+                            <li className='d-flex ai-center hover:brightness-110 pt-2' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_OUTSIDE', ...item}))}>
+                                <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
+                                <span>edit</span>
+                            </li>
+                            <li className='d-flex ai-center hover:brightness-110 pb-2' onClick={() => setDeleteOpen(true)}>
+                                <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
+                                <span>delete</span>
+                            </li>
+                            </>
+                            :
+                            <li className='d-flex ai-center hover:brightness-110 pb-2'>
+                                <FontAwesomeIcon icon={faLock} className='card-dd-btn'/>
+                                <span>Admin</span>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
