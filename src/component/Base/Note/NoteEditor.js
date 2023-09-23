@@ -1,5 +1,6 @@
+import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faNoteSticky } from '@fortawesome/free-solid-svg-icons'
+import { faNoteSticky, faExpand, faCompress } from '@fortawesome/free-solid-svg-icons'
 import Confirm from '../../Modal/Confirm'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -24,6 +25,7 @@ export function NoteEditor() {
     const [noteVal, setNoteVal] = useState(null)
     const [discard, setDiscard] = useState(false)
     const dispatch = useDispatch()
+    const [isFull, setIsFull] = useState(false)
     useEffect(() => {
         if (data) {
             setNoteVal(data.context)
@@ -81,34 +83,34 @@ export function NoteEditor() {
             
         }
     }
-    return (
-        <>
-        <Modal open={true} close={confirmToClose} costum={true}>
-            <form className='note p-fixed note-editor zi-3 bg-zinc-900 text-whitesmoke' onSubmit={handleSubmit}>
-                <div className='note-head d-flex ai-center jc-space-between'>
-                    <FontAwesomeIcon 
-                    icon={faNoteSticky} 
-                    style={{color: data.color}} 
-                    className='note-color'/>
-                    <div className='self-end flex'>
-                        <a className='note-btn-simpan pointer d-flex text-whitesmoke' target='_blank' href='https://dev.to/codeninjausman/markdown-a-simple-guide-1f2f' rel="noreferrer">Docs</a>
-                        <button type='submit' className='note-btn-simpan pointer d-flex'>Simpan</button>
-                    </div>
+    const element = <>
+        <form className={`${isFull ? 'absolute top-[47px] left-0 right-0 bottom-0 z-[1]' : 'p-fixed note-editor zi-3'} flex flex-col note bg-zinc-900 text-whitesmoke`} onSubmit={handleSubmit}>
+            <div className='note-head d-flex ai-center jc-space-between'>
+                <FontAwesomeIcon 
+                icon={faNoteSticky} 
+                style={{color: data.color}} 
+                className='note-color'/>
+                <div className='self-end flex items-center gap-5'>
+                    <FontAwesomeIcon icon={isFull?faCompress:faExpand} className='pointer' onClick={() => setIsFull(prev => !prev)}/>
+                    <button type='submit' className='note-btn-simpan pointer d-flex'>Simpan</button>
                 </div>
-                <div className='note-body fd-column d-flex'>
-                    <textarea
-                        className='note_editor-textarea'
-                        placeholder={data.context}
-                        value={noteVal || ''}
-                        onChange={handleChange}
-                    />
-                    <span className='note-info ai-flex-end'>
-                        {`${data.by.nickname || data.by}, ${format(new Date(data.date), 'iiii, dd LLL yyyy', { locale: id })}`}
-                    </span>
+            </div>
+            <div className='note-body fd-column d-flex flex-1'>
+                <textarea
+                    className='note_editor-textarea flex-1'
+                    placeholder={data.context}
+                    value={noteVal || ''}
+                    onChange={handleChange}
+                />
+                <div className='note-info justify-between gap-2 flex items-center'>
+                    <span>{`${data.by.nickname || data.by}, ${format(new Date(data.date), 'iiii, dd LLL yyyy', { locale: id })}`}</span>
+                    <a className='note-btn-simpan pointer d-flex text-whitesmoke' target='_blank' href='https://dev.to/codeninjausman/markdown-a-simple-guide-1f2f' rel="noreferrer">Docs</a>
                 </div>
-            </form>
-        </Modal>
+            </div>
+        </form>
         <Confirm open={discard} close={() => setDiscard(false)} target={`${data.by.nickname}, ${convertDateToString(data.date)}`} metode='discard' color={data.color} callback={modalClose}/>
-        </>
-    )
+    </>
+    return isFull ? ReactDOM.createPortal(element, document.getElementById('fullscreen')) : <Modal open={true} close={confirmToClose} costum={true}>
+        {element}
+    </Modal>
 }
