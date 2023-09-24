@@ -64,6 +64,9 @@ function Task({data, cb}) {
   let menuRef = useRef()
   let btnRef = useRef()
   useEffect(() => {
+    setThisData(data)
+  },[data])
+  useEffect(() => {
     let handler = (e) => {
         try {
             if (menuRef.current.contains(e.target) || btnRef.current.contains(e.target)) {

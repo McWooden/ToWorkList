@@ -17,7 +17,7 @@ function Navbar() {
     })
     return (
         <div {...handlers}>
-        <MyBlock active={isNavbarShow} cb={() => dispatch(reverseNavbar())}/>
+        <MyBlock active={isNavbarShow} cb={() => dispatch(reverseNavbar())} component={'nav'}/>
         <div className={`navigation zi-2 d-flex fd-row p-fixed rounded ${isNavbarShow?'showNavbar':'hideNavbar'}`}>
             <nav className='d-flex fw-wrap jc-center d-flex fd-column ai-center bg-primary border-burlywood text-primary shadow-lg'>
                 <HomeButton/>

@@ -3,9 +3,11 @@ import { useState } from "react"
 import axios from "axios"
 import { url, API } from "../../../utils/variableGlobal"
 import { deleteToast } from "../../../utils/notif"
-import { convertDateToString } from "../../../utils/convertDateFormat"
 import { setTodo } from "../../../redux/todo"
 import Confirm from "../../Modal/Confirm"
+import { useEffect } from "react"
+import { format } from "date-fns"
+import { id } from "date-fns/locale"
 
 export function Image({data, handleAreaToDrag}) {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
@@ -32,6 +34,7 @@ export function Image({data, handleAreaToDrag}) {
 
         }
     }
+    useEffect(() => console.log(data),[data])
     return (
         <>
         <div className='card-img d-flex of-hidden bg-primary-dark-25' {...handleAreaToDrag}>
@@ -41,7 +44,7 @@ export function Image({data, handleAreaToDrag}) {
                     <div className="card-img-by">{data.by.nickname}</div>
                     <p className="card-img-desc text-xs">{data.desc}</p>
                 </div>
-                <div className="card-img-date pointer as-flex-end text-zinc-500" onClick={() => setDeleteOpen(true)}>{convertDateToString(data.date)}</div>
+                <div className="card-img-date pointer as-flex-end text-zinc-500" onClick={() => setDeleteOpen(true)}>{format(new Date(data.date), 'dd LLL yyyy', {locale: id})}</div>
             </div>
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={pathSplit[pathSplit.length - 1]} metode='delete' color={'var(--danger)'} callback={deleteImage}/>

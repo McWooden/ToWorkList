@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFloppyDisk, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faFloppyDisk, faLock, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux"
 import { TodoModel } from "../../Model/Todo"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
@@ -20,6 +20,7 @@ export function CardContainer() {
   const channel = useSelector((state) => state.channel.book)
   const myNickname = useSelector((state) => state.source.profile.nickname)
   const dispatch = useDispatch()
+  const isAdmin = useSelector(state => state.source.isAdmin)
 
   const handleSourceToListSorted = useCallback((dataToSort) => {
     const sortedList = dataToSort
@@ -111,6 +112,7 @@ export function CardContainer() {
       <div className="dragArea">
         {saveIt && (
           <div className="flex bg-info shadow m-2 rounded items-center">
+            {isAdmin ?
             <div
               className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]"
               onClick={handleSaveIt}
@@ -118,6 +120,12 @@ export function CardContainer() {
               <FontAwesomeIcon icon={faFloppyDisk} />
               <p>Simpan susunan</p>
             </div>
+            :
+            <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]">
+              <FontAwesomeIcon icon={faLock} />
+              <p>Admin</p>
+            </div>
+            }
             <div
               className="h-[45px] flex justify-center shadow items-center gap-x-2 text-xs rounded m-2 pointer bg-no flex-1"
               onClick={handleCancelSaveIt}

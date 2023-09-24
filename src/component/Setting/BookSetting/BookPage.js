@@ -20,6 +20,7 @@ export default function BookPage() {
     const [saveIt, setSaveIt] = useState(false)
     const dispatch = useDispatch()
     const [tipeNewRoom, setTipeNewRoom] = useState('faCheck')
+    const isAdmin = useSelector(state => state.source.isAdmin)
 
     const handleSourceToListSorted = useCallback((dataToSort) => {
         const sortedList = dataToSort ? [...pages].sort((a, b) => a.order - b.order) : []
@@ -171,10 +172,17 @@ export default function BookPage() {
         <DragDropContext onDragEnd={handleOnDragEnd}>
             {saveIt && (
                 <div className='flex bg-info shadow m-2 rounded items-center'>
-                    <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]" onClick={handleSaveIt}>
-                        <FontAwesomeIcon icon={fontawesome.faFloppyDisk}/>
-                        <p>Simpan susunan</p>
-                    </div>
+                    {isAdmin ?
+                        <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]" onClick={handleSaveIt}>
+                            <FontAwesomeIcon icon={fontawesome.faFloppyDisk}/>
+                            <p>Simpan susunan</p>
+                        </div>
+                        :
+                        <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]">
+                            <FontAwesomeIcon icon={fontawesome.faLock}/>
+                            <p>Admin</p>
+                        </div>
+                    }
                     <div className="h-[45px] flex justify-center shadow items-center gap-x-2 text-xs rounded m-2 pointer bg-no flex-1" onClick={handleCancelSaveIt}>
                         <FontAwesomeIcon icon={fontawesome.faXmark}/>
                     </div>

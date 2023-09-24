@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faImage, faFloppyDisk, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faImage, faFloppyDisk, faXmark, faLock, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { useCallback, useEffect, useState } from 'react'
 import { setImages, setTodo } from '../../../redux/todo'
 import { blankToast, imageToast, loadingToast } from '../../../utils/notif'
@@ -24,6 +24,8 @@ export function CardImages() {
     const [modalOpen, setModalOpen] = useState(false)
     const [list, setList] = useState(todoImages)
     const [saveIt, setSaveIt] = useState(false)
+    const isAdmin = useSelector(state => state.source.isAdmin)    
+    const [isOrderMode, setIsOrderMode] = useState(false)
 
     const handleSourceToListSorted = useCallback((dataToSort) => {
         const sortedList = dataToSort ? [...todoImages].sort((a, b) => a.order - b.order) : []
@@ -158,13 +160,22 @@ export function CardImages() {
     }
     const [isFetching, setIsFetching] = useState(false)
     return (
-        <div className='images-container d-flex fd-column'>
-            {saveIt && (
-                <div className='flex bg-info shadow m-2 rounded items-center'>
-                    <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]" onClick={handleSaveIt}>
-                        <FontAwesomeIcon icon={faFloppyDisk}/>
-                        <p>Simpan susunan</p>
-                    </div>
+        <div className='images-container d-flex fd-column items-end'>
+            <FontAwesomeIcon icon={isOrderMode ? faXmark : faPenToSquare} className='py-2 pointer min-w-[16px]' onClick={() => setIsOrderMode(!isOrderMode)}/>
+            {isOrderMode && saveIt && (
+                <div className='flex bg-info shadow m-2 rounded items-center self-stretch'>
+                    {isAdmin ?
+                        <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]" onClick={handleSaveIt}>
+                            <FontAwesomeIcon icon={faFloppyDisk}/>
+                            <p>Simpan susunan</p>
+                        </div>
+                        :
+                        <div className="h-[45px] flex justify-center items-center gap-x-2 text-xs pointer flex-[5_5_0%]">
+                            <FontAwesomeIcon icon={faLock}/>
+                            <p>Admin</p>
+                        </div>
+                    }
+                    
                     <div className="h-[45px] flex justify-center shadow items-center gap-x-2 text-xs rounded m-2 pointer bg-no flex-1" onClick={handleCancelSaveIt}>
                         <FontAwesomeIcon icon={faXmark}/>
                     </div>
@@ -173,11 +184,11 @@ export function CardImages() {
             <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId='imageModel'>
                 {(provided) => (
-                    <ul {...provided.droppableProps} ref={provided.innerRef} className='list-none flex flex-wrap gap-1'>
+                    <ul {...provided.droppableProps} ref={provided.innerRef} className={`list-none flex ${isOrderMode ? 'flex-col self-stretch' : 'flex-wrap'} gap-1`}>
                     {list?.map((data, index) => (
-                        <Draggable key={data._id} draggableId={data._id} index={index}>
+                        <Draggable key={data._id} draggableId={data._id} index={index} isDragDisabled={!isOrderMode}>
                             {(provided) => (
-                                <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className='basis-36 grow'>
+                                <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className={`${!isOrderMode && 'basis-36'} grow`}>
                                     <Image data={data} />
                                 </li>
                             )}

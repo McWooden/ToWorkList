@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faRotateBack, faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faTrash, faUser, faChevronDown, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faRotateBack, faCheckToSlot, faCircle, faCircleCheck, faEllipsisVertical, faRotate, faTrash, faUser, faChevronDown, faChevronRight, faLock } from '@fortawesome/free-solid-svg-icons'
 import { useRef } from "react"
 import { useCallback } from "react"
 import { useState } from "react"
@@ -23,13 +23,13 @@ export default function DisplayDailyContainer() {
     const [isEditorOpen, setIsEditorOpen] = useState(false)
     const dispatch = useDispatch()
     const [isReload, setIsReload] = useState(false)
+    const isAdmin = useSelector(state => state.source.isAdmin)
     const fetchData = useCallback(async() => {
         setIsLoading(true)
         setIsReload(false)
         const promise = loadingToast('Memuat')
         try {
         await axios.get(`${API}/source/page/${idPageOfBook}`).then(res => {
-            console.log(res.data);
             dispatch(setSource(res.data))
           }).catch(err => {
             throw new Error(err)
@@ -56,10 +56,17 @@ export default function DisplayDailyContainer() {
     return (
         <>
         <div className='flex gap-2'>
+          {isAdmin ? 
             <div className='bg-burlywood text-primary flex place-items-center py-2 px-6 rounded shadow-md my-2 w-fit gap-3 pointer' onClick={() => setIsEditorOpen(prev => !prev)}>
                 <FontAwesomeIcon icon={faCheckToSlot}/>
                 <span>{isEditorOpen?'Tutup':'Tambah'}</span>
             </div>
+            :
+            <div className='bg-burlywood text-primary flex place-items-center py-2 px-6 rounded shadow-md my-2 w-fit gap-3 pointer'>
+                <FontAwesomeIcon icon={faLock}/>
+                <span>Admin</span>
+            </div>
+          }
             <div className='flex-1 bg-burlywood text-primary flex place-items-center py-2 px-6 rounded shadow-md my-2 w-fit gap-3 pointer self-end my-2' onClick={() => fetchData()}>
                 <FontAwesomeIcon icon={faRotate}/>
                 <span>Segarkan</span>
@@ -67,8 +74,7 @@ export default function DisplayDailyContainer() {
         </div>
         <DailyTaskEditor open={isEditorOpen} cb={fetchData} close={() => setIsEditorOpen(false)}/>
         <div className='flex-1 flex flex-col'>
-            {isLoading && <MyLoading className='mb-2'/>}
-            {list.map((item, index) => <Task data={item} key={index} cb={fetchData}/>)}
+          {isLoading ? <MyLoading className='mb-2'/> : list.map((item, index) => <Task data={item} key={index} cb={fetchData}/>)}
         </div>
         </>
     )
@@ -206,6 +212,10 @@ function Task({data, cb}) {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const userId = useSelector(state => state.source.profile._id)
     const [thisData, setThisData] = useState(data)
+    const isAdmin = useSelector(state => state.source.isAdmin)
+    useEffect(() => {
+      setThisData(data)
+    },[data])
     const [dropDown, setDropDown] = useState(false)
     const [maxScore, setMaxScore] = useState(0)
     let menuRef = useRef()
@@ -277,7 +287,7 @@ function Task({data, cb}) {
                   <p className='flex-1'>{data.detail.title}</p>
                   <FontAwesomeIcon icon={showDetail?faChevronDown:faChevronRight} className='p-2 ai-center-btn pointer'/>
                 </div>
-                {showDetail && <div>
+                {isAdmin && <div>
                   <p className='text-sm'>{data.detail.desc}</p>
                 </div>}
               </div>
