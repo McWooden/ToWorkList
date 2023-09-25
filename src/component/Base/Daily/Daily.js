@@ -3,7 +3,6 @@ import { faHistory } from '@fortawesome/free-solid-svg-icons'
 import { Greeting } from "../../../utils/greeting"
 import DisplayDailyContainer from "./DisplayDailyContainer"
 import { Center, Left } from "../BaseComponent"
-import { useSelector } from 'react-redux'
 import HistoryDaily from './HistoryDaily'
 import { useState } from 'react'
 
@@ -18,7 +17,6 @@ export default function Daily() {
 }
 
 function DailyTaskLeft() {
-    const history = useSelector(state => state.source?.source?.history)
     const [historyOpen, setHistoryOpen] = useState(false)
     return (
     <Left>
@@ -28,7 +26,7 @@ function DailyTaskLeft() {
                 <FontAwesomeIcon icon={faHistory}/>
                 <span>Riwayat</span>
             </div>
-            <HistoryDaily history={history} open={historyOpen} close={() => setHistoryOpen(false)}/>
+            <HistoryDaily open={historyOpen} close={() => setHistoryOpen(false)}/>
         </div>
     </Left>
     )
