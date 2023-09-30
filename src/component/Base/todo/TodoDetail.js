@@ -19,6 +19,7 @@ export function TodoDetail() {
     const todoDetails = useSelector(state => state.todo.details)
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const dispatch = useDispatch()
+    const isAdmin = useSelector(state => state.source.isAdmin)
     const [modalOpen, setModalOpen] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
 
@@ -55,6 +56,7 @@ export function TodoDetail() {
         {/* center */}
             <Center>
                 <div className='center d-flex p-relative fd-column'>
+                {!isAdmin && <p className='text-whitesmoke text-xs text-center px-2 bg-primary-dark-25 p-1'>Hanya Admin yang dapat mengedit</p>}
                     {shouldUpdate && 
                         <div className="p-[15px] bg-info flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
                             <FontAwesomeIcon icon={faRotateRight}/>

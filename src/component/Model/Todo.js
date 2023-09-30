@@ -41,6 +41,7 @@ export function TodoModel({item, handleAreaToDrag}) {
         return () => document.removeEventListener("mousedown", handler)
     }, [])
     function handleTextClick() {
+        console.log(item);
         dispatch(setAllTodo(item))
     }
     async function deleteTodo() {

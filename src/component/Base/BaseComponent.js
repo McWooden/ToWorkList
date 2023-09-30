@@ -10,10 +10,8 @@ export function Center({children, className = 'of-auto'}) {
         onSwipedRight: () => dispatch(reverseLeftSide()),
         onSwipedLeft: () => dispatch(reverseRightSide()),
     })
-    const isAdmin = useSelector(state => state.source.isAdmin)
     return (
         <div {...handlers} className={`base-center relative ${className}`}>
-            {!isAdmin && <p className='text-whitesmoke text-xs text-center px-2 bg-primary-dark-25 p-1'>Hanya Admin yang dapat mengedit</p>}
             {children}
         </div>
     )
@@ -41,7 +39,7 @@ export function Left({children}) {
     const handlers = useSwipeable({
         onSwipedRight: () => dispatch(reverseNavbar()),
         onSwipedLeft: () => dispatch(reverseLeftSide()),
-      })
+    })
       
     return (
         <>

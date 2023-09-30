@@ -1,14 +1,22 @@
 
 import { useSelector } from 'react-redux'
 import { Welcome } from '../Page/Welcome'
-import { TodoDetail } from './todo/TodoDetail';
-import { TodoPage } from './todo/TodoPage';
-import { TodoRight } from './todo/todoRight';
-import Summary from '../Page/summary';
-import Email from '../Page/email';
-import { DailyTask } from '../Page/DailyTask';
-import Daily from './Daily/Daily';
-import NotesPage from './Note/NotesPage';
+import { TodoDetail } from './todo/TodoDetail'
+import { TodoPage } from './todo/TodoPage'
+import { TodoRight } from './todo/todoRight'
+import Summary from '../Page/summary'
+import Email from '../Page/email'
+import { DailyTask } from '../Page/DailyTask'
+import Daily from './Daily/Daily'
+import NotesPage from './Note/NotesPage'
+import { useLocation } from 'react-router-dom'
+import { useCallback, useEffect, useState } from 'react'
+import MyLoading from '../../utils/myLoading'
+import axios from 'axios'
+import { API } from '../../utils/variableGlobal'
+import { setTodo } from '../../redux/todo'
+import { setPageType, setSource } from '../../redux/sourceSlice'
+import { useDispatch } from 'react-redux'
 
 // const pages = useMemo(() => [
 //     {
@@ -41,6 +49,48 @@ import NotesPage from './Note/NotesPage';
 export function Base() {
     const pageType = useSelector(state => state.source.pageType)
     const todoId = useSelector(state => state.todo.id)
+    const [isLink, setIsLink] = useState('')
+    const dispatch = useDispatch()
+
+    const location = useLocation()
+
+    const fetchData = useCallback(async(short) => {
+        await axios.get(API+`/short/${short}`)
+        .then(res => {
+            if (res.data.type === 'TODO') {
+                dispatch(setTodo(res.data.data))
+                dispatch(setPageType('faCheck'))
+                setIsLink('')
+            } else {
+                dispatch(setSource(res.data.data))
+                dispatch(setPageType(res.data.type))
+                setIsLink('')
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    },[dispatch])
+
+    useEffect(() => {
+        const queryString = window.location.search
+        const queryParams = new URLSearchParams(queryString)
+        const paramValue = queryParams.get('src')
+
+        if (paramValue) {
+            setIsLink(paramValue)
+            fetchData(paramValue)
+        }
+
+        console.log(paramValue)
+    },[fetchData, location])
+
+    if (isLink) return (
+        <div className='base of-hidden d-flex text-whitesmoke flex-col'>
+            <MyLoading className='w-full'/>
+            <p>{isLink}</p>
+        </div>
+    )
 
     return (
         <div className='base of-hidden d-flex text-whitesmoke'>
@@ -55,6 +105,7 @@ export function Base() {
                     {pageType === 'faNoteSticky' && <NotesPage/>}
                 </>)
             }
+            
         </div>
     )
 }

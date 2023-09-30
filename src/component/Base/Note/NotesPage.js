@@ -11,7 +11,7 @@ import { useEffect } from "react"
 import { useState } from "react"
 import { useCallback } from 'react'
 import axios from 'axios'
-import { setSource } from '../../../redux/sourceSlice'
+import { setPageType, setSource } from '../../../redux/sourceSlice'
 import { API } from '../../../utils/variableGlobal'
 import MyLoading from '../../../utils/myLoading'
 import Notes from './Notes'
@@ -55,6 +55,7 @@ function NoteCenter() {
     
     return (
         <Center className="of-auto flex flex-col">
+            {!isAdmin && <p className='text-whitesmoke text-xs text-center px-2 bg-primary-dark-25 p-1'>Hanya Admin yang dapat mengedit</p>}
             <div className="p-2 flex flex-col flex-1 gap-2">
                 <div className="flex-1 flex">
                     <NoteContainer/>
@@ -78,6 +79,7 @@ function NoteCenter() {
 function NoteContainer() {
     const [isLoading, setIsLoading] = useState(false)
     const [shouldUpdate, setShouldUpdate] = useState(false)
+    const source = useSelector(state => state.source.source)
     const dispatch = useDispatch()
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const channel = useSelector(state => state.channel.book)
@@ -86,6 +88,7 @@ function NoteContainer() {
         try {
             setShouldUpdate(false)
             const {data} = await axios.get(`${API}/source/page/${idPageOfBook}`)
+            dispatch(setPageType(data.details.icon))
             dispatch(setSource(data))
         } catch (error) {}
         setIsLoading(false)
@@ -98,8 +101,8 @@ function NoteContainer() {
         })
       }, [channel, dispatch, idPageOfBook])
     useEffect(() => {
-        fetchData()
-      }, [fetchData])
+        if (!source) fetchData()
+      }, [fetchData, source])
     return (
         <div className='flex-1 flex-col flex'>
             {shouldUpdate && 

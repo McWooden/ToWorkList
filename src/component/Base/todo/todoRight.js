@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRotateBack } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect, useCallback } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
@@ -13,6 +15,7 @@ export function TodoRight() {
     const [box, setBox] = useState([])
     const channel = useSelector(state => state.channel.book)
     const dispatch = useDispatch()
+    const [isReload, setIsReload] = useState(false)
     function handleEmpety() {
         setIsLoading(false)
         setBox('Empety')
@@ -33,11 +36,12 @@ export function TodoRight() {
         setBox(sessionBox)
     }
     const fetchData = useCallback(async () => {
+        setIsReload(false)
         try {
             const {data} = await axios.get(`${API}/book/${idBook}/get/users`)
             dispatch(setMembers(data.users))
         } catch (err) {
-            handleEmpety()
+            setIsReload(true)
         }
     } ,[dispatch, idBook])
     useEffect(() => {
@@ -63,10 +67,16 @@ export function TodoRight() {
     }, [channel, fetchData])
     return (
         <Right>
+            {isReload ? 
+                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
+                <FontAwesomeIcon icon={faRotateBack} className="reload_btn" />
+                </div>
+            :
             <div className="sidebar-right d-flex fd-column of-auto">
                 {isLoading && <div className="loading sidebar_right_loading d-grid pi-center"/>}
                 {box}
             </div>
+            }
         </Right>
     )
 }

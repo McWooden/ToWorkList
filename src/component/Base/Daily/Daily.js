@@ -5,6 +5,7 @@ import DisplayDailyContainer from "./DisplayDailyContainer"
 import { Center, Left } from "../BaseComponent"
 import HistoryDaily from './HistoryDaily'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 
 export default function Daily() {
@@ -33,9 +34,12 @@ function DailyTaskLeft() {
 }
 
 function DailyTaskRight() {
+  const isAdmin = useSelector(state => state.source.isAdmin)
+
     return (
         <Center>
             <div className="welcome flex flex-col overflow-auto flex-3 p-[.5em]">
+            {!isAdmin && <p className='text-whitesmoke text-xs text-center px-2 bg-primary-dark-25 p-1'>Hanya Admin yang dapat mengedit</p>}
             <DisplayDailyContainer/>
             </div>
         </Center>

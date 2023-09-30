@@ -13,11 +13,12 @@ import MyLoading from '../../../utils/myLoading'
 import Confirm from '../../Modal/Confirm'
 import { useMemo } from 'react'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
-import { setSource } from '../../../redux/sourceSlice'
+import { setPageType, setSource } from '../../../redux/sourceSlice'
 import { useDispatch } from 'react-redux'
 
 export default function DisplayDailyContainer() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const source = useSelector(state => state.source.source)
     const list = useSelector(state => state.source?.source?.dailyList || null)
     const [isLoading, setIsLoading] = useState(false)
     const [isEditorOpen, setIsEditorOpen] = useState(false)
@@ -30,6 +31,7 @@ export default function DisplayDailyContainer() {
         const promise = loadingToast('Memuat')
         try {
         await axios.get(`${API}/source/page/${idPageOfBook}`).then(res => {
+            dispatch(setPageType(res.data.details.icon))
             dispatch(setSource(res.data))
           }).catch(err => {
             throw new Error(err)
@@ -44,8 +46,8 @@ export default function DisplayDailyContainer() {
     }, [dispatch, idPageOfBook])
 
     useEffect(() => {
-        fetchData()
-    },[fetchData])
+      if (!source) fetchData()
+    },[fetchData, source])
 
     if (isReload) return (<div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
       <FontAwesomeIcon icon={faRotateBack} className="reload_btn" />

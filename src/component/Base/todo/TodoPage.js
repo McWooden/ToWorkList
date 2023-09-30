@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import axios from "axios"
 import { useCallback, useEffect, useState } from "react"
 import { API } from "../../../utils/variableGlobal"
-import { setSource } from "../../../redux/sourceSlice"
+import { setPageType, setSource } from "../../../redux/sourceSlice"
 import { TodoLeft } from "./todoLeft"
 import MyLoading from "../../../utils/myLoading"
 import { TodoCenter } from './todoCenter'
@@ -22,6 +22,7 @@ export function TodoPage() {
                 const response = await axios.get(`${API}/source/page/${idPageOfBook}`).catch(err => {
                     throw new Error(err)
                 })
+                dispatch(setPageType(response.data.details.icon))
                 dispatch(setSource(response.data))
             } catch (err) {
                 console.error(err)
@@ -29,8 +30,9 @@ export function TodoPage() {
             }
     },[dispatch, idPageOfBook])
     useEffect(() => {
-        fetchData()
-    }, [fetchData])
+        console.log('sors',source);
+        if (!source) fetchData()
+    }, [fetchData, source])
     return (
         <>  
             {isReload && 

@@ -1,12 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setPageType, setMembers, setGuildProfile, setPages } from "../../../redux/sourceSlice"
+import { setPageType, setMembers, setGuildProfile, setPages, setSource } from "../../../redux/sourceSlice"
 import { setFetch } from "../../../redux/fetchSlice"
 import { url } from "../../../utils/variableGlobal"
 import { clearTodo } from "../../../redux/todo"
+import { useNavigate } from "react-router-dom"
 
 export function BookItem({data}) {
     const idBook = useSelector(state => state.fetch.idBook)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     
     function handleClick() {
         dispatch(setPageType('welcome'))
@@ -15,6 +17,8 @@ export function BookItem({data}) {
         dispatch(setGuildProfile({...data.profile, _id: data._id, isAdmin: data.isAdmin}))
         dispatch(setMembers(null))
         dispatch(setPages(null))
+        navigate('/')
+        dispatch(setSource(null))
         dispatch(clearTodo())
     }
     return (
