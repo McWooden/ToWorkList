@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAdd, faRotateRight, faNoteSticky } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faRotateRight, faNoteSticky, faShare } from '@fortawesome/free-solid-svg-icons'
 import { TodoRight } from "../todo/todoRight"
 import { Left, Center } from "../BaseComponent"
 import { Greeting } from "../../../utils/greeting"
@@ -17,6 +17,7 @@ import MyLoading from '../../../utils/myLoading'
 import Notes from './Notes'
 import { NoteEditor } from './NoteEditor'
 import InfoMenu from '../BaseLeft/InfoMenu'
+import ShareModal from '../../Modal/ShareModal'
 
 export default function NotesPage() {
     return (
@@ -30,6 +31,12 @@ export default function NotesPage() {
 
 function NoteLeft() {
     const noteList = useSelector(state => state.source?.source?.noteList)
+    const bookId = useSelector(state => state.fetch.idBook)
+    const pageId = useSelector(state => state.fetch.idPageOfBook)
+    const [isShareOpen, setIsShareOpen] = useState(false)
+    function handleShareModal() {
+        setIsShareOpen(true)
+    }
     return (
         <Left>
             <div className="p-2 flex flex-col gap-3">
@@ -43,7 +50,12 @@ function NoteLeft() {
                 <div>
                     <InfoMenu icon={faNoteSticky} count={noteList?.length || 0}/>
                 </div>
+                <div className='text-sm shadow rounded flex gap-2 px-2 py-1 items-center bg-primary-dark-25 w-fit pointer' onClick={handleShareModal}>
+                    <FontAwesomeIcon icon={faShare}/>
+                    <span>Bagikan</span>
+                </div>
             </div>
+        <ShareModal open={isShareOpen} close={() => setIsShareOpen(false)} path={{bookId, pageId}}/>
         </Left>
     )
 }

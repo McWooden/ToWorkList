@@ -7,6 +7,9 @@ import { alertToast, blankToast } from "../../utils/notif"
 import { useEffect } from "react"
 import MyLoading from "../../utils/myLoading"
 import { useState } from "react"
+import { format } from "date-fns"
+import { id } from "date-fns/locale"
+import moment from "moment"
 
 
 export default function ShareModal({open, close, path}) {
@@ -68,6 +71,10 @@ export default function ShareModal({open, close, path}) {
                 <div className="bg-primary flex rounded p-1">
                     <input type="text" readOnly value={`${origin}/?src=${short?.short}`} className="flex-1"/>
                     <span className="bg-info rounded-full px-3 text-primary-dark-50 shadow h-fit pointer" onClick={handleSalin}>Salin</span>
+                </div>
+                <div className="text-xs mt-2">
+                    {/* <span>Kadaluarsa dalam {format(new Date(short?.createdAt||null).setDate(new Date(short?.createdAt||null).getDate()  + 7), 'iiii, dd LLL yyyy', { locale: id })}</span> */}
+                    <span>Link akan kadaluarsa dalam {moment(short?.createdAt || null).add(7, 'days').diff(moment(), 'days')} hari lagi</span>
                 </div>
             </>
             }

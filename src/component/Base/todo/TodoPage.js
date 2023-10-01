@@ -30,7 +30,6 @@ export function TodoPage() {
             }
     },[dispatch, idPageOfBook])
     useEffect(() => {
-        console.log('sors',source);
         if (!source) fetchData()
     }, [fetchData, source])
     return (
