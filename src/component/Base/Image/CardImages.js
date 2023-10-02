@@ -15,6 +15,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
 export function CardImages() {
     const nickname = useSelector(state => state.source.profile.nickname)
+    const userId = useSelector(state => state.source.profile._id)
     const channel = useSelector(state => state.channel.book)
     const idBook = useSelector(state => state.fetch.idBook)
     const todoId = useSelector(state => state.todo.id)
@@ -85,6 +86,7 @@ export function CardImages() {
         e.preventDefault()
         const formData = new FormData()
         formData.append('nickname', nickname)
+        formData.append('_id', userId)
         formData.append('image', image)
         formData.append('desc', e.target.desc.value)
         const promise = loadingToast('Mengunggah gambar')
