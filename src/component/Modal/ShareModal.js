@@ -8,17 +8,20 @@ import { useEffect } from "react"
 import MyLoading from "../../utils/myLoading"
 import { useState } from "react"
 import moment from "moment"
-
+import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
+import { setShort } from "../../redux/sourceSlice"
 
 export default function ShareModal({open, close, path}) {
     const origin = window.location.origin
-    const [short, setShort] = useState(null)
+    const short = useSelector(state => state.source.short)
     const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useDispatch()
     const fetchData = useCallback(async () => {
         try {
             await axios.post(API+'/short', path)
             .then(res => {
-                setShort(res.data.short)
+                dispatch(setShort(res.data.short))
             })
             .catch(err => {
                 throw new Error(err)
@@ -26,7 +29,7 @@ export default function ShareModal({open, close, path}) {
         } catch (error) {
             console.log(error);
         }
-    },[path])
+    },[dispatch, path])
 
     useEffect(() => {
         if (!short) {
@@ -71,7 +74,6 @@ export default function ShareModal({open, close, path}) {
                     <span className="bg-info rounded-full px-3 text-primary-dark-50 shadow h-fit pointer" onClick={handleSalin}>Salin</span>
                 </div>
                 <div className="text-xs mt-2">
-                    {/* <span>Kadaluarsa dalam {format(new Date(short?.createdAt||null).setDate(new Date(short?.createdAt||null).getDate()  + 7), 'iiii, dd LLL yyyy', { locale: id })}</span> */}
                     <span>Link akan kadaluarsa dalam {moment(short?.createdAt || null).add(7, 'days').diff(moment(), 'days')} hari lagi</span>
                 </div>
             </>

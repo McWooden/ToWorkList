@@ -6,6 +6,7 @@ import { reverseLeftSide, reverseNavbar, reverseRightSide } from '../../redux/hi
 
 export function NavTop() {
     const pathPageOfBook = useSelector(state => state.fetch.pathPageOfBook)
+    const source = useSelector(state => state.source.source)
     const dispatch = useDispatch()
     function handleClickNavbar() {
         dispatch(reverseNavbar())
@@ -21,7 +22,7 @@ export function NavTop() {
             <header className='zi-1 d-flex ai-center jc-space-between p-fixed bg-burlywood text-primary'>
             <div className='header-left d-flex pointer' onClick={handleClickNavbar}>
                 <FontAwesomeIcon icon={faBars} className='bars'/>
-                <h4 className='of-hidden'>{pathPageOfBook}</h4>
+                <h4 className='of-hidden'>{source?.detils?.page_title||pathPageOfBook}</h4>
             </div>
             <div className="sidebar-button d-flex ai-center">
                 <FontAwesomeIcon icon={faCube} className='btn-sidebar btn-sidebar-left pointer' onClick={left}/>

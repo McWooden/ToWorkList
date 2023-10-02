@@ -15,8 +15,12 @@ export const sourceSlice = createSlice({
         roles: [],
         isAdmin: LocalGuildProfile?.isAdmin || false,
         pages: null,
+        short: false
     },
     reducers: {
+        setShort: (state, action) => {
+            state.short = action.payload
+        },
         setPageType: (state, action) => {
             setStorage('pageType', action.payload)
             state.pageType = action.payload
@@ -59,6 +63,6 @@ export const sourceSlice = createSlice({
     },
 })
 
-export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile, setIsAdmin, setProfie } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile, setIsAdmin, setProfie, setShort } = sourceSlice.actions
 
 export default sourceSlice.reducer
