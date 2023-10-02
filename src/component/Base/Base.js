@@ -81,8 +81,6 @@ export function Base() {
             setIsLink(paramValue)
             fetchData(paramValue)
         }
-
-        console.log(paramValue)
     },[fetchData, location])
 
     if (isLink) return (

@@ -3,12 +3,10 @@ import { Modal } from "./Modal"
 import { WhatsappShareButton, FacebookShareButton, TelegramShareButton, EmailShareButton, TelegramIcon, EmailIcon, FacebookIcon, WhatsappIcon } from "react-share"
 import axios from "axios"
 import { API } from "../../utils/variableGlobal"
-import { alertToast, blankToast } from "../../utils/notif"
+import { blankToast } from "../../utils/notif"
 import { useEffect } from "react"
 import MyLoading from "../../utils/myLoading"
 import { useState } from "react"
-import { format } from "date-fns"
-import { id } from "date-fns/locale"
 import moment from "moment"
 
 
@@ -26,7 +24,7 @@ export default function ShareModal({open, close, path}) {
                 throw new Error(err)
             })
         } catch (error) {
-            alertToast('err')
+            console.log(error);
         }
     },[path])
 

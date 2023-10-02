@@ -30,6 +30,9 @@ export const sourceSlice = createSlice({
         refreshProfile: (state, action) => {
             state.profile = getLocalAccount()
         },
+        setProfie: (state, action) => {
+            state.profile = action.payload
+        },
         setGuildProfile: (state, action) => {
             setLocalStorage('guildProfile', action.payload)
             state.isAdmin = action.payload?.isAdmin || false
@@ -56,6 +59,6 @@ export const sourceSlice = createSlice({
     },
 })
 
-export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile, setIsAdmin } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile, setIsAdmin, setProfie } = sourceSlice.actions
 
 export default sourceSlice.reducer

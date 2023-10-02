@@ -6,6 +6,9 @@ import { useState, useEffect, useRef } from "react"
 import UserSetting from '../../Setting/UserSetting'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
+import { useDispatch } from 'react-redux'
+import { url } from '../../../utils/variableGlobal'
+import { setProfie } from '../../../redux/sourceSlice'
 
 export function Profile() {
     const navigate = useNavigate()
@@ -14,13 +17,20 @@ export function Profile() {
     const userPopRef = useRef()
     const profileRef = useRef()
     const [openSetting, setOpenSetting] = useState(false)
+    const dispatch = useDispatch()
     function handlePop() {
         setUserPop(!userPop)
     }
     useEffect(() => {
-        if (!profile) {
-            navigate('/auth')
-        }
+        !profile && dispatch(setProfie({
+            nickname: 'guest',
+            avatar: url+`/default`,
+            email: 'guest@example.com',
+            created_at: new Date().toISOString(),
+            tag: '12345',
+        }))
+    }, [profile, dispatch])
+    useEffect(() => {
         let handler = (e) => {
             try {
                 if (userPopRef.current.contains(e.target) || profileRef.current.contains(e.target)) {
@@ -39,7 +49,7 @@ export function Profile() {
     }, [profile, navigate]);
     function handleLogout() {
         localStorage.removeItem('account')        
-        window.location.reload()
+        navigate('/auth')
     }
     useEffect(() => {
         function handleKeyDown(event) {

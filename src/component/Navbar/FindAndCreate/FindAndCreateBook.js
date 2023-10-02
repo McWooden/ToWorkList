@@ -8,9 +8,8 @@ import { toast } from 'react-toastify'
 import { imageToast, loadingToast } from '../../../utils/notif';
 import { ModalSecond } from '../../Modal/ModalSecond'
 import { useRef } from 'react'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import { API } from '../../../utils/variableGlobal'
 import { DisplaySearchKey } from './DisplaySearchList'
 import { Modal } from '../../Modal/Modal'
@@ -18,14 +17,10 @@ import { Modal } from '../../Modal/Modal'
 
 export function FindAndCreateBook() {
     const myAccount = useSelector(state => state.source.profile)
-    const navigate = useNavigate()
-    useEffect(() => {
-        !myAccount && navigate('/auth')
-    }, [navigate, myAccount])
+    const dispatch = useDispatch()
     const [addServerModal, setAddServerModal] = useState(false)
     const [modalOpen, setModalOpen] = useState(false)
     const [searchText, setSearchText] = useState('')
-    const dispatch = useDispatch()
     const [dataSearch, setDataSearch] = useState([])
 
     const [loading, setLoading] = useState(false)
