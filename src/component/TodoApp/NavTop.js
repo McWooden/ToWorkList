@@ -18,7 +18,7 @@ export function NavTop() {
         dispatch(reverseRightSide())
     }
     return (
-        <section id='navTop'>
+        <section id='navTop' className='relative z-[3]'>
             <header className='zi-1 d-flex ai-center jc-space-between p-fixed bg-burlywood text-primary'>
             <div className='header-left d-flex pointer' onClick={handleClickNavbar}>
                 <FontAwesomeIcon icon={faBars} className='bars'/>

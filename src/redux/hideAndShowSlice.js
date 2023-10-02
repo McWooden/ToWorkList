@@ -22,10 +22,12 @@ export const fetchSlice = createSlice({
         reverseLeftSide: (state, action) => {
             state.leftSide = !state.leftSide
             state.rightSide = false
+            state.navbar = false
         },
         reverseRightSide: (state, action) => {
             state.rightSide = !state.rightSide
             state.leftSide = false
+            state.navbar = false
         },
     },
 })
