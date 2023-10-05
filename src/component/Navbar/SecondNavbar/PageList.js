@@ -38,7 +38,13 @@ export function PageList() {
                 throw new Error(err)
             })
             dispatch(setPages(response.data.pages.pages))
-            dispatch(setIsAdmin(response.data.isAdmin))
+            const queryParams = new URLSearchParams(window.location.search)
+            const paramValue = queryParams.get('src')
+            if (paramValue) {
+                dispatch(setIsAdmin(false))
+            } else {
+                dispatch(setIsAdmin(response.data.isAdmin))
+            }
         } catch (error) {
             setReloading(true)
         }

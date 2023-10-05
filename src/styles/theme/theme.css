@@ -85,3 +85,7 @@
 .overflow-unset-important {
     overflow: unset !important;
 }
+
+.text-shadow {
+    text-shadow: black 0 0 .5px;
+}

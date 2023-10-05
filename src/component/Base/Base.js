@@ -15,7 +15,7 @@ import MyLoading from '../../utils/myLoading'
 import axios from 'axios'
 import { API } from '../../utils/variableGlobal'
 import { setTodo } from '../../redux/todo'
-import { setPageType, setSource } from '../../redux/sourceSlice'
+import { setIsAdmin, setPageType, setSource } from '../../redux/sourceSlice'
 import { useDispatch } from 'react-redux'
 
 // const pages = useMemo(() => [
@@ -78,10 +78,11 @@ export function Base() {
         const paramValue = queryParams.get('src')
 
         if (paramValue) {
+            dispatch(setIsAdmin(false))
             setIsLink(paramValue)
             fetchData(paramValue)
         }
-    },[fetchData, location])
+    },[dispatch, fetchData, location])
 
     if (isLink) return (
         <div className='base of-hidden d-flex text-whitesmoke flex-col'>
@@ -103,7 +104,6 @@ export function Base() {
                     {pageType === 'faNoteSticky' && <NotesPage/>}
                 </>)
             }
-            
         </div>
     )
 }
