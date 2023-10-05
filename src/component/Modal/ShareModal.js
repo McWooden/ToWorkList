@@ -39,6 +39,15 @@ export default function ShareModal({open, close, path}) {
         }
     },[fetchData, short])
 
+    useEffect(() => {
+      
+    
+      return () => {
+        dispatch(setShort(null))
+      }
+    }, [dispatch])
+    
+
     function handleSalin() {
         navigator.clipboard.writeText(`${origin}/?src=${short.short}`)
         blankToast('Link tersalin di papan klip')
