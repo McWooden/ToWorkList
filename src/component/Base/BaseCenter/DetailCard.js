@@ -8,7 +8,7 @@ export function DetailCard() {
     return(
         <>
         <div className='detail-desc d-flex bg-primary-dark-50 text-zinc-300 mb-1'>
-            <div className="h-full w-[10px] rounded-[3px]" style={{backgroundColor: todo.details.color}}></div>
+            <div className="max-h-[45px] w-[10px] rounded-[3px]" style={{backgroundColor: todo.details.color}}></div>
             <div className='detail-desc-context flex flex-col w-full'>
                 <div className="overflow-auto">
                     <p>{todo.details.desc}</p>

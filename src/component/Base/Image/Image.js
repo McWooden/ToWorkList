@@ -5,7 +5,6 @@ import { url, API } from "../../../utils/variableGlobal"
 import { deleteToast } from "../../../utils/notif"
 import { setTodo } from "../../../redux/todo"
 import Confirm from "../../Modal/Confirm"
-import { useEffect } from "react"
 import { format } from "date-fns"
 import { id } from "date-fns/locale"
 
@@ -34,7 +33,6 @@ export function Image({data, handleAreaToDrag}) {
 
         }
     }
-    useEffect(() => console.log(data),[data])
     return (
         <>
         <div className='card-img d-flex of-hidden bg-primary-dark-25' {...handleAreaToDrag}>

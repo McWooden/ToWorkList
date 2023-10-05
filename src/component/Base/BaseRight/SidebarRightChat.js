@@ -8,6 +8,8 @@ import { FormBaseRight } from './FormBaseRight'
 import { ChatModel } from '../../Model/Chat'
 import { setChat } from '../../../redux/todo'
 import { Right } from '../BaseComponent'
+import { format } from 'date-fns'
+import { id } from 'date-fns/locale'
 
 export function SidebarRightChat() {
     const chat = useSelector(state => state.todo.chat)
@@ -42,8 +44,9 @@ export function SidebarRightChat() {
         const newBox = []
     
             chat?.forEach((item, index) => {
-                if (convertDateToString(item.date) !== lastDate) {
-                    newBox.push(<div key={`${index}-${item.date}`} className='chat-card-date shadow as-center'>{convertDateToString(item.date)}</div>)
+                console.log(item);
+                if (new Date(item.date).toLocaleDateString() !== lastDate) {
+                    newBox.push(<div key={`${index}-${item.date}`} className='chat-card-date shadow as-center'>{format(new Date(item.date), 'EEE, d LLL yyyy', {locale: id})}</div>)
                     lastDate = convertDateToString(item.date)
                     lastNickname = null
                 }
@@ -70,7 +73,7 @@ export function SidebarRightChat() {
         <Right>
             <div className="sidebar-right d-flex fd-column of-auto" ref={chatRef} onScroll={handleScroll}>
             <FontAwesomeIcon icon={faChevronDown} onClick={() => setScrollToBottom(true)} className={`scrollToBottom zi-1 pointer ${scrollToBottom?'':'active'} p-fixed`}/>
-                {box || ''}
+                {box || 'Tidak ada percakapan'}
             </div>
             <FormBaseRight/>
         </Right>

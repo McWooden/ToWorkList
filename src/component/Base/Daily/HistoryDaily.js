@@ -41,7 +41,7 @@ function ListTask({history, cb}) {
     return (
         <div className="flex flex-col w-full last:mb-2">
             {history?.map((item, index) => (
-                <div className='bg-zinc-800 border-primary-bright p-2 rounded' key={index} onClick={()=> cb(item)}>
+                <div className='bg-zinc-800 p-2 rounded' key={index} onClick={()=> cb(item)}>
                     <div className='flex items-center gap-2 items-center'>
                         <div className='flex-1 flex items-center pointer'>
                             <p className='flex-1'>{item.detail.title}</p>

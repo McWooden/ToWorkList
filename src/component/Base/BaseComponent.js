@@ -9,6 +9,7 @@ export function Center({children, className = 'of-auto'}) {
     const handlers = useSwipeable({
         onSwipedRight: () => dispatch(reverseLeftSide()),
         onSwipedLeft: () => dispatch(reverseRightSide()),
+        swipeDuration: 1000,
     })
     return (
         <div {...handlers} className={`base-center relative ${className}`}>
@@ -22,6 +23,7 @@ export function Right({children}) {
     const dispatch = useDispatch()
     const handlers = useSwipeable({
         onSwipedRight: () => dispatch(reverseRightSide()),
+        swipeDuration: 1000,
     })
     return (
         <>
@@ -39,6 +41,7 @@ export function Left({children}) {
     const handlers = useSwipeable({
         onSwipedRight: () => dispatch(reverseNavbar()),
         onSwipedLeft: () => dispatch(reverseLeftSide()),
+        swipeDuration: 1000,
     })
       
     return (

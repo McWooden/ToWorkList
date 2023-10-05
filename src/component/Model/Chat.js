@@ -6,6 +6,8 @@ import axios from 'axios'
 import { API } from '../../utils/variableGlobal'
 import { deleteToast } from '../../utils/notif'
 import { useEffect, useRef, useState } from 'react'
+import { id } from 'date-fns/locale'
+import { format } from 'date-fns'
 
 export function ChatModel({item, global}) {
     const [dropDown, setDropDown] = useState(false)
@@ -16,7 +18,7 @@ export function ChatModel({item, global}) {
     const itsMe = item.nickname === myAccount.nickname
     let cardRef = useRef()
     const disable = item.msg === 'Pesan ini telah dihapus'
-    const time = item.time || new Date(Number(item.date)).toLocaleTimeString('id-ID', {hour24: true, hour: '2-digit', minute: '2-digit'}).replace(':', '.')
+    const time = format(new Date(item.date), 'HH:mm', {locale: id})
     useEffect(() => {
         let handler = (e) => {
             try {

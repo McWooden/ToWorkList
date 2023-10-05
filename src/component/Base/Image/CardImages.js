@@ -162,8 +162,10 @@ export function CardImages() {
     }
     const [isFetching, setIsFetching] = useState(false)
     return (
-        <div className='images-container d-flex fd-column items-end'>
-            <FontAwesomeIcon icon={isOrderMode ? faXmark : faPenToSquare} className='py-2 pointer min-w-[16px]' onClick={() => setIsOrderMode(!isOrderMode)}/>
+        <div className='images-container d-flex fd-column items-end gap-2'>
+            {list?.length !== 0 &&
+                <FontAwesomeIcon icon={isOrderMode ? faXmark : faPenToSquare} className='pointer min-w-[16px]' onClick={() => setIsOrderMode(!isOrderMode)}/>
+            }
             {isOrderMode && saveIt && (
                 <div className='flex bg-info shadow m-2 rounded items-center self-stretch'>
                     {isAdmin ?
@@ -183,24 +185,27 @@ export function CardImages() {
                     </div>
                 </div>
             )}
-            <DragDropContext onDragEnd={handleOnDragEnd}>
-            <Droppable droppableId='imageModel'>
-                {(provided) => (
-                    <ul {...provided.droppableProps} ref={provided.innerRef} className={`list-none flex ${isOrderMode ? 'flex-col self-stretch' : 'flex-wrap'} gap-1`}>
-                    {list?.map((data, index) => (
-                        <Draggable key={data._id} draggableId={data._id} index={index} isDragDisabled={!isOrderMode}>
-                            {(provided) => (
-                                <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className={`${!isOrderMode && 'basis-36'} grow`}>
-                                    <Image data={data} />
-                                </li>
-                            )}
-                        </Draggable>
-                    ))||''}
-                    {provided.placeholder}
-                    </ul>
-                )}
-                </Droppable>
-            </DragDropContext>
+            <div className='self-stretch'>
+                <DragDropContext onDragEnd={handleOnDragEnd}>
+                <Droppable droppableId='imageModel'>
+                    {(provided) => (
+                        <ul {...provided.droppableProps} ref={provided.innerRef} className={`list-none flex ${isOrderMode ? 'flex-col self-stretch' : 'flex-wrap'} gap-1`}>
+                        {list?.map((data, index) => (
+                            <Draggable key={data._id} draggableId={data._id} index={index} isDragDisabled={!isOrderMode}>
+                                {(provided) => (
+                                    <li {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} className={`${!isOrderMode && 'basis-36'} grow`}>
+                                        <Image data={data} />
+                                    </li>
+                                )}
+                            </Draggable>
+                        ))||''}
+                        {provided.placeholder}
+                        </ul>
+                    )}
+                    </Droppable>
+                </DragDropContext>
+            </div>
+
             <div className='add-image pointer flex justify-center gap-x-1 items-center bg-info' onClick={handleModalOpen}>
                 <FontAwesomeIcon icon={faImage}/>
                 <span>Foto baru</span>
