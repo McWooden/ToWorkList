@@ -206,10 +206,17 @@ export function CardImages() {
                 </DragDropContext>
             </div>
 
+            {isAdmin? 
             <div className='add-image pointer flex justify-center gap-x-1 items-center bg-info' onClick={handleModalOpen}>
                 <FontAwesomeIcon icon={faImage}/>
                 <span>Foto baru</span>
             </div>
+            :
+            <div className='add-image pointer flex justify-center gap-x-1 items-center bg-info'>
+                <FontAwesomeIcon icon={faLock}/>
+                <span>Admin</span>
+            </div>
+            }
             <FileDrop open={modalOpen} close={handleModalClose}>
                 <form ref={formRef} className='file-drop d-flex of-scroll' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
                     <div className="img-view d-flex ai-center jc-center" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>

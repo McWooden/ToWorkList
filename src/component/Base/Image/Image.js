@@ -13,11 +13,16 @@ export function Image({data, handleAreaToDrag}) {
     const todoId = useSelector(state => state.todo.id)
     const dispatch = useDispatch()
     const [deleteOpen, setDeleteOpen] = useState(false)
+    const isAdmin = useSelector(state => state.source.isAdmn)
     
     const pathSplit = data.pic.split('/')
     const [full, setFull] = useState(false)
     function handleFull() {
         setFull(!full)
+    }
+    function handleDelete() {
+        if (!isAdmin) return
+        setDeleteOpen(true)
     }
     async function deleteImage() {
         try {
@@ -42,7 +47,7 @@ export function Image({data, handleAreaToDrag}) {
                     <div className="card-img-by">{data?.by?.nickname || ''}</div>
                     <p className="card-img-desc text-xs">{data.desc}</p>
                 </div>
-                <div className="card-img-date pointer as-flex-end text-zinc-500" onClick={() => setDeleteOpen(true)}>{format(new Date(data.date), 'dd LLL yyyy', {locale: id})}</div>
+                <div className="card-img-date pointer as-flex-end text-zinc-500" onClick={handleDelete}>{format(new Date(data.date), 'dd LLL yyyy', {locale: id})}</div>
             </div>
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={pathSplit[pathSplit.length - 1]} metode='delete' color={'var(--danger)'} callback={deleteImage}/>

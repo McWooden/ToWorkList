@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
+import { faLock, faPenToSquare, faTrash} from '@fortawesome/free-solid-svg-icons'
 import { deleteToast } from '../../../utils/notif';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,6 +18,7 @@ export function DetailLeftAction() {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const dispatch = useDispatch()
     const title = item.details.item_title
+    const isAdmin = useSelector(state => state.source.isAdmin)
     async function deleteTodo() {
         try {
             await axios.delete(`${API}/source/addTodo/${idPageOfBook}/${item.id}`)
@@ -45,8 +46,14 @@ export function DetailLeftAction() {
     return (
         <>
         <div className='detail-Left-action d-flex'>
+            {isAdmin ? 
+            <>
             <FontAwesomeIcon icon={faTrash} className='action-left pointer action-trash-left bg-primary-dark-50 text-no' onClick={() => setDeleteOpen(true)}/>
             <FontAwesomeIcon icon={faPenToSquare} className='action-left pointer action-edit-left bg-primary-dark-50 text-info' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_INSIDE', ...item}))}/>
+            </>
+            :
+            <FontAwesomeIcon icon={faLock} className='action-left pointer action-edit-left bg-primary-dark-50 text-info'/>
+            }
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
         </>
