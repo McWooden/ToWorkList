@@ -154,7 +154,7 @@ export default function BookPage() {
                     </div>
                 </div>
                 <div className="addPage_action d-flex jc-flex-end">
-                    <span className='btn_action' onClick={handleClose}>Batal</span>
+                    <span className='btn_action flex justify-center items-center' onClick={handleClose}>Batal</span>
                     {btnLoading?
                     (<button className={`btn_action btn_add`}>Loading</button>)
                     :
@@ -206,7 +206,13 @@ export default function BookPage() {
             </Droppable>
         </DragDropContext>
         <div className="setting_action d-flex">
-            <span className="setting_btn d-flex ai-center pointer blue_btn text-primary bg-burlywood shadow" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
+            {isAdmin ? 
+                <span className="setting_btn d-flex ai-center pointer blue_btn text-primary bg-burlywood shadow" onClick={() => setOpenAdd(true)}>Tambah Halaman</span>
+                :
+                <span className="setting_btn d-flex ai-center pointer blue_btn text-primary bg-burlywood shadow">
+                    <FontAwesomeIcon icon={fontawesome.faLock}/>
+                </span>
+            }
         </div>
         {modalElement}
         </>

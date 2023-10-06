@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft, faRotate, faSquare, faSquareCheck, faSquareMinus, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faArrowLeft, faLock, faRotate, faSquare, faSquareCheck, faSquareMinus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { useCallback, useState } from "react"
 import { blankToast, loadingToast } from '../../../utils/notif'
 import { useEffect } from 'react'
@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import Reading from '../email/Reading'
 import EmailElement from '../email/emailElement'
 
-export default function DisplayMail({thisProfile}) {
+export default function DisplayMail({thisProfile, isAdmin = true}) {
     const [mails, setMails] = useState([])
     const [mailsElement, setMailsElement] = useState([])
     const [isReading, setIsReading] = useState(null)
@@ -105,7 +105,7 @@ export default function DisplayMail({thisProfile}) {
                 <span>Segarkan</span>
             </div>
         </div>
-        {isReading ? <Reading data={isReading} thisProfile={thisProfile}/>:
+        {isReading ? <Reading data={isReading} thisProfile={thisProfile} isAdmin={isAdmin}/>:
         <div className='max-w-full flex-1'>
             <table className='table-fixed w-full bg-primary-bright rounded h-full'>
                 <thead className='bg-primary-dark-25'>
@@ -115,11 +115,19 @@ export default function DisplayMail({thisProfile}) {
                                 {checkAllElement} 
                                 {checkArray.length !== 0 && <span>{checkArray.length}</span>}
                             </div>
-                            <div className='flex items-center'>
-                                {checkArray.length !== 0 &&
-                                <FontAwesomeIcon icon={faTrash} className='p-2 m-0.5 hover:bg-orange-500/[.5] rounded pointer' onClick={handleDeleteInCheckArray}/>
-                                }
-                            </div>
+                            {isAdmin?
+                                <div className='flex items-center'>
+                                    {checkArray.length !== 0 &&
+                                    <FontAwesomeIcon icon={faTrash} className='p-2 m-0.5 hover:bg-orange-500/[.5] rounded pointer' onClick={handleDeleteInCheckArray}/>
+                                    }
+                                </div>
+                                :
+                                <div className='flex items-center'>
+                                    {checkArray.length !== 0 &&
+                                        <FontAwesomeIcon icon={faLock} className='p-2 m-0.5 hover:bg-orange-500/[.5] rounded pointer'/>
+                                    }
+                                </div>
+                            }
                         </th>
                     </tr>
                 </thead>

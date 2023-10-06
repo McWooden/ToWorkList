@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faReply, faShare } from '@fortawesome/free-solid-svg-icons'
+import { faLock, faReply, faShare } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from "react"
 import { blankToast } from '../../../utils/notif'
 import { format, parseISO } from 'date-fns'
@@ -10,7 +10,7 @@ import Balas from './Balas'
 
 
 
-export default function Reading({data, thisProfile}) {
+export default function Reading({data, thisProfile, isAdmin = true}) {
     const [item, setItem] = useState(data)
     const [teruskan, setTeruskan] = useState(false)
     const [balasan, setBalasan] = useState(false)
@@ -50,6 +50,8 @@ export default function Reading({data, thisProfile}) {
             <Markdown>{item.body}</Markdown>
           </div>
           <div className='flex gap-3'>
+            {isAdmin?
+            <>
             <div className='border-burlywood text-burlywood flex place-items-center px-3 py-2 rounded-3xl shadow-md my-2 gap-3 pointer' onClick={() => setBalasan(true)} >
               <FontAwesomeIcon icon={faReply}/>
               <p>Balas</p>
@@ -58,6 +60,13 @@ export default function Reading({data, thisProfile}) {
               <FontAwesomeIcon icon={faShare}/>
               <p>Teruskan</p>
             </div>
+            </>
+            :
+            <div className='border-burlywood text-burlywood flex place-items-center px-3 py-2 rounded-3xl shadow-md my-2 gap-3 pointer'>
+              <FontAwesomeIcon icon={faLock}/>
+              <p>Admin</p>
+            </div>
+            }
           </div>
           <div className='flex flex-col m-5 pb-5'>
             {balasanElement}

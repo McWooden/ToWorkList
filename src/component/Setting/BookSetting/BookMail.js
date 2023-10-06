@@ -14,10 +14,11 @@ export default function BookMail() {
         avatar: `${url}/${guildProfile.avatar_url}`,
         _id: guildProfile._id
     }
+    const isAdmin = useSelector(state => state.source.isAdmin)
     return (
         <>
         <SettingMailLeft profile={profile}/>
-        <DisplayMail thisProfile={profile}/>
+        <DisplayMail thisProfile={profile} isAdmin={isAdmin}/>
         </>
     )
 }
