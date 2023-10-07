@@ -54,7 +54,7 @@ export default function ShareModal({open, close, path}) {
     }
 
     return <Modal open={open} close={close} costum={true}>
-        <div className='fixed_center bg-primary-dark-25 text-whitesmoke rounded shadow max-w-[550px] h-fit w-full p-4'>
+        <div className='fixed_center bg-primary-dark-25 text-whitesmoke rounded shadow max-w-[550px] h-fit w-full p-4 scale-fade-in'>
             <h3>Bagikan</h3>
             {isLoading? 
                 <MyLoading/>

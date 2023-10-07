@@ -84,7 +84,7 @@ export function NoteEditor() {
         }
     }
     const element = <>
-        <form className={`${isFull ? 'absolute top-[47px] left-0 right-0 bottom-0 z-[1]' : 'p-fixed note-editor zi-3'} flex flex-col note bg-zinc-900 text-whitesmoke`} onSubmit={handleSubmit}>
+        <form className={`${isFull ? 'absolute top-[47px] left-0 right-0 bottom-0 z-[1]' : 'p-fixed note-editor zi-3'} flex flex-col note bg-zinc-900 text-whitesmoke scale-fade-in`} onSubmit={handleSubmit}>
             <div className='note-head d-flex ai-center jc-space-between'>
                 <FontAwesomeIcon 
                 icon={faNoteSticky} 

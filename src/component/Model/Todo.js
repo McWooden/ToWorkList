@@ -84,7 +84,7 @@ export function TodoModel({item, handleAreaToDrag}) {
     }
     return (
         <>
-        <div className="todo-card d-flex fd-row  jc-space-between bg-primary-dark-50 shadow" {...handleAreaToDrag}>
+        <div className={`todo-card d-flex fd-row  jc-space-between bg-primary-dark-50 ${dropDown?'border-burlywood':''} ${!dones.includes(myNickname) && 'scale-fade-in'}`} {...handleAreaToDrag}>
             <div className="todo-left d-flex fd-row p-relative">
             <div className="card-color" style={{backgroundColor: item.details.color}}></div>
             <div className="card-text d-flex fd-column jc-center pointer" onClick={handleTextClick}>
@@ -102,14 +102,14 @@ export function TodoModel({item, handleAreaToDrag}) {
                     <FontAwesomeIcon icon={faEllipsisVertical} className='card-more-btn ai-center-btn pointer' onClick={() => setDropDown(!dropDown)}/>
                 </div>
                 <div className={`card-drop-down zi-1 ${dropDown?'active':'inactive'}`} ref={menuRef}>
-                    <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary border-burlywood text-zinc-300'>
+                    <ul className='d-flex fd-column of-hidden p-absolute pointer bg-primary text-zinc-300'>
                         {isAdmin ?
                             <>
-                            <li className='d-flex ai-center hover:brightness-110 pt-2' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_OUTSIDE', ...item}))}>
+                            <li className='d-flex ai-center hover:brightness-110 pt-2 bg-inherit' onClick={() => dispatch(setAddAndEdit({type: 'EDIT_TODO_OUTSIDE', ...item}))}>
                                 <FontAwesomeIcon icon={faPenToSquare} className='card-dd-btn' />
                                 <span>edit</span>
                             </li>
-                            <li className='d-flex ai-center hover:brightness-110 pb-2' onClick={() => setDeleteOpen(true)}>
+                            <li className='d-flex ai-center hover:brightness-110 pb-2 bg-inherit' onClick={() => setDeleteOpen(true)}>
                                 <FontAwesomeIcon icon={faTrash} className='card-dd-btn'/>
                                 <span>delete</span>
                             </li>

@@ -14,12 +14,12 @@
     margin-top: 48px;
 }
 .hideNavbar {
-    opacity: 0;
+    transform: translateX(-100%);
     visibility: hidden;
     transition: .1s ease;
 }
 .showNavbar {
-    opacity: 1;
+    transform: translateX(0);
     visibility: visible;
     transition: .1s ease;
 }

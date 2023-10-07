@@ -27,6 +27,7 @@ import './styles/other/loading.css'
 import './styles/pages/App.css'
 import './styles/theme/theme.css'
 import './styles/welcome.css'
+import './styles/animation.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

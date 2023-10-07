@@ -11,7 +11,7 @@ export function Modal({children, open, close, costum}) {
         {costum ? 
             <>{children}</>
         :
-            <div className='modal d-flex zi-3 p-fixed of-auto text-whitesmoke shadow-lg'>
+            <div className='modal d-flex zi-3 p-fixed of-auto text-whitesmoke shadow-lg scale-fade-in'>
                 {children}
             </div>
         }
