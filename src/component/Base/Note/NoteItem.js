@@ -67,7 +67,7 @@ export function NoteItem({data, handleAreaToDrag}) {
         setIsFull(prev => !prev)
     }
     const element = <>
-    <div className={`${isFull && 'absolute top-[47px] z-[1] left-0 right-0 bottom-0'} note of-hidden bg-primary-dark-50 text-whitesmoke shadow flex flex-col`}>
+    <div className={`${isFull && 'absolute top-[47px] z-[1] left-0 right-0 bottom-0'} note of-hidden bg-primary-dark-50 text-whitesmoke shadow flex flex-col scale-fade-in`}>
         <div className='note-head d-flex jc-space-between ai-center bg-primary-dark-25 shadow' {...handleAreaToDrag}>
             <FontAwesomeIcon icon={faNoteSticky} style={{color: data.color}} className='note-color'/>
             <div className="note-btn ai-center text-zinc-400">

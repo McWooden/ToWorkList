@@ -84,7 +84,7 @@ export function TodoModel({item, handleAreaToDrag}) {
     }
     return (
         <>
-        <div className={`todo-card d-flex fd-row  jc-space-between bg-primary-dark-50 ${dropDown?'border-burlywood':''} ${!dones.includes(myNickname) && 'scale-fade-in'}`} {...handleAreaToDrag}>
+        <div className={`todo-card d-flex fd-row  jc-space-between bg-primary-dark-50 ${dropDown?'border-burlywood':''} scale-fade-in`} {...handleAreaToDrag}>
             <div className="todo-left d-flex fd-row p-relative">
             <div className="card-color" style={{backgroundColor: item.details.color}}></div>
             <div className="card-text d-flex fd-column jc-center pointer" onClick={handleTextClick}>

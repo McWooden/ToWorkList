@@ -25,11 +25,11 @@
 .text-primary {
     color: #2A394E;
 }
+.text-whitesmoke-transparent {
+    color: rgba(245, 245, 245, 0.6);
+}
 .bg-secondary {
     background-color: #7253ee;
-}
-.text-azure {
-    color: #2A394E;
 }
 .text-indianred {
     color: indianred;

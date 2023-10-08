@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFloppyDisk, faLock, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faFloppyDisk, faLock, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux"
 import { TodoModel } from "../../Model/Todo"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
@@ -21,6 +21,7 @@ export function CardContainer() {
   const myNickname = useSelector((state) => state.source.profile.nickname)
   const dispatch = useDispatch()
   const isAdmin = useSelector(state => state.source.isAdmin)
+  const [filter, setFilter] = useState('all')
 
   const handleSourceToListSorted = useCallback((dataToSort) => {
     const sortedList = dataToSort
@@ -134,10 +135,27 @@ export function CardContainer() {
             </div>
           </div>
         )}
+        <div className='w-full pb-1 flex justify-end gap-2'>
+          <div className={`px-2 ${filter === 'all' && 'bg-primary-dark-25'} text-whitesmoke-transparent rounded items-center flex items-center`} onClick={() => setFilter('all')}>
+            <FontAwesomeIcon icon={faCheck} className={`${filter === 'all' && 'text-ok'}`} />
+            <FontAwesomeIcon icon={faXmark} className={`${filter === 'all' && 'text-no'}`} />
+          </div>
+          <div className={`${filter === 'checked' && 'bg-primary-dark-25 text-ok'} text-whitesmoke-transparent p-0.5 px-2 rounded`} onClick={() => setFilter('checked')}>
+            <FontAwesomeIcon icon={faCheck} />
+          </div>
+          <div className={`${filter === 'unchecked' && 'bg-primary-dark-25 text-no'} text-whitesmoke-transparent p-0.5 px-3 rounded`} onClick={() => setFilter('unchecked')}>
+            <FontAwesomeIcon icon={faXmark}  />
+          </div>
+        </div>
         <Droppable droppableId="todoModel">
           {(provided) => (
             <ul {...provided.droppableProps} ref={provided.innerRef} className="list-none">
-              {list.map((data, index) => (
+              {list.filter(data => {
+                console.log(filter)
+                if (filter === 'checked') return data.dones.includes(myNickname)
+                if (filter === 'unchecked') return !data.dones.includes(myNickname)
+                return true            
+              }).map((data, index) => (
                 <Draggable key={data._id} draggableId={data._id} index={index}>
                   {(provided) => (
                     <li {...provided.draggableProps} ref={provided.innerRef} className="mb-2">

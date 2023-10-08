@@ -37,7 +37,7 @@ export function Greeting() {
             </div>
             <div className="greeting-context d-flex fd-column jc-center text-sm">
                 <p className='selamat'>Selamat {time}!</p>
-                <p className='date'>{format(new Date(), 'EEEE, MMM yyyy', {locale: id})}</p>
+                <p className='date'>{format(new Date(), 'EEEE, d MMM yyyy', {locale: id})}</p>
             </div>
         </div>
     )

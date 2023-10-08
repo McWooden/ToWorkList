@@ -8,7 +8,7 @@ export function FileDrop({children, open, close}) {
     return ReactDOM.createPortal(
         <>
         <div className='overlay zi-3 p-fixed' onClick={setClose}/>
-        <div className='modal zi-3 shadow-lg p-fixed of-auto'>
+        <div className='modal zi-3 shadow-lg p-fixed of-auto scale-fade-in'>
             {children}
         </div>
         </>,
