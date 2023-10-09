@@ -24,7 +24,7 @@ export function TodoRight() {
         let sessionBox = []
         data.forEach((user, index) => {
             sessionBox.push(
-                <div className='group-user bg-primary shadow pointer d-flex ai-center' key={`${user.nickname}-${index}`}>
+                <div className='group-user bg-primary shadow pointer d-flex ai-center' key={`${user.nickname}-${index} scale-fade-in`}>
                     <img src={user.avatar} alt={user.nickname} />
                     <div className="d-flex fd-column">
                         <p>{user.nickname}</p>

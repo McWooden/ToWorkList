@@ -136,14 +136,14 @@ export function CardContainer() {
           </div>
         )}
         <div className='w-full pb-1 flex justify-end gap-2'>
-          <div className={`px-2 ${filter === 'all' && 'bg-primary-dark-25'} text-whitesmoke-transparent rounded items-center flex items-center`} onClick={() => setFilter('all')}>
+          <div className={`px-2 ${filter === 'all' && 'bg-primary-dark-25'} pointer text-whitesmoke-transparent rounded items-center flex items-center flex-3`} onClick={() => setFilter('all')}>
             <FontAwesomeIcon icon={faCheck} className={`${filter === 'all' && 'text-ok'}`} />
             <FontAwesomeIcon icon={faXmark} className={`${filter === 'all' && 'text-no'}`} />
           </div>
-          <div className={`${filter === 'checked' && 'bg-primary-dark-25 text-ok'} text-whitesmoke-transparent p-0.5 px-2 rounded`} onClick={() => setFilter('checked')}>
+          <div className={`${filter === 'checked' && 'bg-primary-dark-25 text-ok'} pointer text-whitesmoke-transparent p-0.5 px-2 rounded flex-1`} onClick={() => setFilter('checked')}>
             <FontAwesomeIcon icon={faCheck} />
           </div>
-          <div className={`${filter === 'unchecked' && 'bg-primary-dark-25 text-no'} text-whitesmoke-transparent p-0.5 px-3 rounded`} onClick={() => setFilter('unchecked')}>
+          <div className={`${filter === 'unchecked' && 'bg-primary-dark-25 text-no'} pointer text-whitesmoke-transparent p-0.5 px-3 rounded flex-1`} onClick={() => setFilter('unchecked')}>
             <FontAwesomeIcon icon={faXmark}  />
           </div>
         </div>

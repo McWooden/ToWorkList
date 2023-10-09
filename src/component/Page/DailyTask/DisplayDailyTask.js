@@ -124,7 +124,7 @@ function Task({data, cb}) {
   }
   return (
     <>
-    <div className='bg-primary-dark-50 rounded-md p-4 mb-2'>
+    <div className='bg-primary-dark-50 rounded-md p-4 mb-2 scale-fade-in'>
       <div className='mb-2'>
         <div className='mb-3 relative flex items-center'>
           <p className='flex-1'>{data.detail.title}</p>

@@ -172,9 +172,6 @@
     height: 50vh;
     margin: 1em 0;
 }
-.roomList .room, .addPage .room {
-    border-radius: 8px;
-}
 .setting_full .roomList .room span {
     flex: 1;
 }
