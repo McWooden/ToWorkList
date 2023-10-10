@@ -4,10 +4,10 @@
   @keyframes fade-in {
     0% { 
         opacity: 0;
-        scale: .99;
+        scale: .995;
     }
     50% {
-        scale: 1.01;
+        scale: 1.005;
         opacity: 1;
     }
     100% { 

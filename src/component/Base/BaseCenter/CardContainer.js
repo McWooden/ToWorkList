@@ -111,7 +111,7 @@ export function CardContainer() {
   return (
     <DragDropContext onDragEnd={handleOnDragEnd}>
       <div className="dragArea">
-        {saveIt && (
+        {saveIt && filter === 'all' && (
           <div className="flex bg-info shadow m-2 rounded items-center">
             {isAdmin ?
             <div
@@ -156,7 +156,7 @@ export function CardContainer() {
                 if (filter === 'unchecked') return !data.dones.includes(myNickname)
                 return true            
               }).map((data, index) => (
-                <Draggable key={data._id} draggableId={data._id} index={index}>
+                <Draggable key={data._id} draggableId={data._id} index={index} isDragDisabled={filter !== 'all'}>
                   {(provided) => (
                     <li {...provided.draggableProps} ref={provided.innerRef} className="mb-2">
                       <TodoModel item={data} handleAreaToDrag={provided.dragHandleProps} />
