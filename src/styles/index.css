@@ -37,10 +37,13 @@ body {
   background: linear-gradient(180deg, #2f4058, #2A394E);
 }
 
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+ol {
+  padding-inline-start: 30px;
 }
 
 .hr-w-75 {

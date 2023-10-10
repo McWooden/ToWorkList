@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck, faFloppyDisk, faLock, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faFilter, faFloppyDisk, faLock, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from "react-redux"
 import { TodoModel } from "../../Model/Todo"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
@@ -137,8 +137,7 @@ export function CardContainer() {
         )}
         <div className='w-full pb-1 flex justify-end gap-2'>
           <div className={`px-2 ${filter === 'all' && 'bg-primary-dark-25'} pointer text-whitesmoke-transparent rounded items-center flex items-center flex-3`} onClick={() => setFilter('all')}>
-            <FontAwesomeIcon icon={faCheck} className={`${filter === 'all' && 'text-ok'}`} />
-            <FontAwesomeIcon icon={faXmark} className={`${filter === 'all' && 'text-no'}`} />
+            <FontAwesomeIcon icon={faFilter} className='text-whitesmoke-transparent' />
           </div>
           <div className={`${filter === 'checked' && 'bg-primary-dark-25 text-ok'} pointer text-whitesmoke-transparent p-0.5 px-2 rounded flex-1`} onClick={() => setFilter('checked')}>
             <FontAwesomeIcon icon={faCheck} />
