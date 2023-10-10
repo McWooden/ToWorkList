@@ -34,7 +34,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #2A394E;
+  background: linear-gradient(180deg, #2f4058, #2A394E);
 }
 
 
@@ -72,6 +72,13 @@ box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 backdrop-filter: blur(8.5px);
 -webkit-backdrop-filter: blur(8.5px);
 border: 1px solid rgba(255, 255, 255, 0.16);
+}
+.noclickable {
+  background-image: radial-gradient(#f5f5f513 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+.bg-primary-dark {
+  background: linear-gradient(135deg, var(--primary-dark-25) 20%, var(--primary-dark-50) 100%)
 }
 @tailwind base;
 @tailwind components;

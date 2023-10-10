@@ -21,7 +21,7 @@
 }
 .add-btn {
     padding: 12px 13px;
-    border-radius: 50px;
+    border-radius: 8px;
     font-size: 21px;
     transition: .1s ease;
 }

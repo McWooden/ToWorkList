@@ -36,6 +36,7 @@
 }
 .greeting {
     min-height: 58px;
+    /* background: linear-gradient(135deg, #ff634739 1%, var(--primary-dark-50) 100%) */
 }
 .greeting, .jadwal {
     border-radius: 5px;

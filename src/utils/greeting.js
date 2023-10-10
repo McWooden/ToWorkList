@@ -29,9 +29,8 @@ export function Greeting() {
             color = ('goldenrod')
             greetingIcon = <FontAwesomeIcon icon={faMoon}/>
         }
-
     return (
-        <div className='greeting d-flex fd-row of-hidden bg-primary-dark-50 text-white shadow'>
+        <div className='greeting d-flex fd-row of-hidden bg-primary-dark-50 text-white noclickable'>
             <div className="color d-grid pi-center" style={{color: color}}>
                 {greetingIcon}
             </div>
