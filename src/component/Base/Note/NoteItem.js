@@ -76,7 +76,6 @@ export function NoteItem({data, handleAreaToDrag}) {
     }
     function handleEdit() {
         setIsEditMode(prev => !prev)
-        if (isEditMode) adjustTextareaHeight()
     }
     function toggleZoom() {
         setIsFull(prev => !prev)
@@ -119,11 +118,6 @@ export function NoteItem({data, handleAreaToDrag}) {
             
         }
     }
-    const adjustTextareaHeight = (event) => {
-        const textarea = event.target
-        textarea.style.height = 'auto'
-        textarea.style.height = `${textarea.scrollHeight}px`
-    }    
     const element = <>
     <form className={`${isFull && 'absolute top-[47px] z-[1] left-0 right-0 bottom-0'} note of-hidden bg-primary-dark-50 text-whitesmoke shadow flex flex-col scale-fade-in`} onSubmit={handleSubmit}>
         <div className='note-head d-flex jc-space-between ai-center bg-primary-dark-25 shadow' {...handleAreaToDrag}>
@@ -146,17 +140,16 @@ export function NoteItem({data, handleAreaToDrag}) {
                 }
             </div>
         </div>
-        <div className='note-body flex-1'>
+        <div className={`note-body flex-1 ${isFull && 'flex flex-col'}`}>
             {isEditMode?
                 <textarea
-                    className='block rounded-none min-h-[100px] py-[5px] px-[10px] font-size-small resize-y w-full'
+                    className={`block rounded-none min-h-[100px] py-[5px] px-[10px] font-size-small resize-y w-full ${isFull && 'flex-1'}`}
                     placeholder={data.context}
                     value={noteVal || ''}
                     onChange={handleChange}
-                    onInput={adjustTextareaHeight}
                 />
             :
-                <pre className='of-auto'>
+                <pre className={`of-auto ${isFull && 'flex-1'}`}>
                     <Markdown className="markdown">{noteVal}</Markdown>
                 </pre>
             }
