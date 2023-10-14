@@ -41,10 +41,10 @@ export default function Confirm({ metode, open, close, target, color = 'grey', c
     }
     if (metode === 'discard') {
         icon = <FontAwesomeIcon icon={faTextSlash} />
-        msg = <p className="msg">Yakin menutup editor?</p>
+        msg = <p className="msg">Yakin membuang perubahan?</p>
         context = (
             <div className="confirm-context">
-                <h3>Tutup</h3>
+                <h3>Mengatur ulang</h3>
                 {msg}
             </div>
         )

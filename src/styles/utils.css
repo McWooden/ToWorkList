@@ -118,3 +118,7 @@
 .pointer {
     cursor: pointer;
 }
+/* fontsize */
+.font-size-small {
+    font-size: small;
+}

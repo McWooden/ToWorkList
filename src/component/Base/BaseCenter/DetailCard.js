@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux"
 import { CardImages } from "../Image/CardImages"
 import Notes from "../Note/Notes"
-import { NoteEditor } from "../Note/NoteEditor"
 
 export function DetailCard() {
     const todo = useSelector(state => state.todo)
@@ -18,7 +17,6 @@ export function DetailCard() {
         <div className='detail-desc d-flex bg-primary-dark-50 text-zinc-300 mb-1 flex-col'>
             <CardImages/>
         </div>
-        <NoteEditor/>
         <Notes/>
         </>
     )

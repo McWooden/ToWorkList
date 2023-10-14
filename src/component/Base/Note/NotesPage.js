@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAdd, faRotateRight, faNoteSticky, faShare } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faRotateRight, faNoteSticky, faShare, faRotateBack } from '@fortawesome/free-solid-svg-icons'
 import { TodoRight } from "../todo/todoRight"
 import { Left, Center } from "../BaseComponent"
 import { Greeting } from "../../../utils/greeting"
@@ -15,7 +15,6 @@ import { setPageType, setSource } from '../../../redux/sourceSlice'
 import { API } from '../../../utils/variableGlobal'
 import MyLoading from '../../../utils/myLoading'
 import Notes from './Notes'
-import { NoteEditor } from './NoteEditor'
 import InfoMenu from '../BaseLeft/InfoMenu'
 import ShareModal from '../../Modal/ShareModal'
 
@@ -94,15 +93,19 @@ function NoteContainer() {
     const source = useSelector(state => state.source.source)
     const dispatch = useDispatch()
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
+    const [isReload, setIsReload] = useState(false)
     const channel = useSelector(state => state.channel.book)
     const fetchData = useCallback(async() => {
         setIsLoading(true)
+        setIsReload(false)
         try {
             setShouldUpdate(false)
             const {data} = await axios.get(`${API}/source/page/${idPageOfBook}`)
             dispatch(setPageType(data.details.icon))
             dispatch(setSource(data))
-        } catch (error) {}
+        } catch (error) {
+            setIsReload(true)
+        }
         setIsLoading(false)
       },
       [dispatch, idPageOfBook],
@@ -117,6 +120,11 @@ function NoteContainer() {
       }, [fetchData, source])
     return (
         <div className='flex-1 flex-col flex'>
+            {isReload && 
+                <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
+                    <FontAwesomeIcon icon={faRotateBack} className="reload_btn" />
+                </div>
+            }
             {shouldUpdate && 
                 <div className="p-[15px] flex justify-center items-center gap-x-2 text-xs rounded m-2 pointer sticky top-1 bg-info" onClick={fetchData}>
                     <FontAwesomeIcon icon={faRotateRight}/>
@@ -124,7 +132,6 @@ function NoteContainer() {
                 </div>
             }
             {isLoading && <MyLoading/>}
-            <NoteEditor/>
             <Notes/>
         </div>
     )

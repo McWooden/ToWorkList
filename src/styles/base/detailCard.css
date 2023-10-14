@@ -92,12 +92,15 @@
 .note-head {
     padding: 5px;
 }
-.note:hover .note-btn {
-    display: inherit;
-}
 .note-btn {
     gap: 5px;
     display: none;
+}
+.note-btn.flex {
+    display: flex !important;
+}
+.note:hover .note-btn {
+    display: inherit;
 }
 .note-btn-simpan {
     font-size: small;
