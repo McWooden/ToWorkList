@@ -64,9 +64,12 @@ export default function SearchDaily({cb}) {
 }
 
 export function DisplaySearchKey({dataSearch, cb}) {
+    useEffect(() => {
+    }, [dataSearch])
+    
     return (
         <div className="book_card_container d-flex flex-col jc-center">
-            {dataSearch?.map((x,i) => <CardList item={x} key={i} cb={cb}/>)}
+            {dataSearch?.map((x,i) => <CardList item={x} key={x._id} cb={cb}/>)}
         </div>
     )
 }
@@ -74,7 +77,7 @@ export function DisplaySearchKey({dataSearch, cb}) {
 function CardList({item, cb}) {
     const myProfile = useSelector(state => state.source.profile)
     const [detailOpen, setDetailOpen] = useState(false)
-    const [isFollow, setIsFollow] = useState(!item.isUserInclude)
+    const [isFollow, setIsFollow] = useState(item.isUserInclude)
     async function reverseIkuti() {
         const dataToSend = {
             name: `${myProfile.nickname}#${myProfile.tag}`,
@@ -84,7 +87,7 @@ function CardList({item, cb}) {
         try {
             await axios.put(API+`/daily/task/follow/${item._id}/${myProfile._id}`, dataToSend)
             .then(res => {
-                setIsFollow(!res.data.isFollow)
+                setIsFollow(res.data.isFollow)
                 cb()
             })
             .catch(err => {throw new Error(err)})
@@ -94,7 +97,7 @@ function CardList({item, cb}) {
         toast.dismiss(promise)
     }
     useEffect(() => {
-        console.log(item.isUserInclude);
+        console.log(item.isUserInclude)
     },[item])
     return (
         <div className='bg-zinc-800 border-primary-bright p-2 rounded mt-auto'>
@@ -108,8 +111,8 @@ function CardList({item, cb}) {
             {detailOpen && 
                 <div className='flex text-xs gap-2 flex-col'>
                     <div className='flex flex-wrap gap-2'>
-                        {item.list.map(x => (
-                            <div className='px-2 rounded-lg bg-zinc-700'>{x}</div>
+                        {item.list.map((x, i) => (
+                            <div className='px-2 rounded-lg bg-zinc-700' key={i}>{x}</div>
                         ))}
                     </div>
                     <div>

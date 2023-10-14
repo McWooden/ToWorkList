@@ -24,6 +24,7 @@ export default function TaskContainer() {
     try {
       await axios.get(API+`/daily/task/${myId}`).then(res => {
         setlist(res.data.all)
+        console.log('response fetch', res.data);
       }).catch(err => console.log(err))
     } catch (error) {}
     toast.dismiss(promise)
