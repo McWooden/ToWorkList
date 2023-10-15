@@ -150,7 +150,6 @@ export function CardContainer() {
           {(provided) => (
             <ul {...provided.droppableProps} ref={provided.innerRef} className="list-none">
               {list.filter(data => {
-                console.log(filter)
                 if (filter === 'checked') return data.dones.includes(myNickname)
                 if (filter === 'unchecked') return !data.dones.includes(myNickname)
                 return true            

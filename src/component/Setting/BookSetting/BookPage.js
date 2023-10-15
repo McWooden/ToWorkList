@@ -23,12 +23,14 @@ export default function BookPage() {
     const isAdmin = useSelector(state => state.source.isAdmin)
 
     const handleSourceToListSorted = useCallback((dataToSort) => {
-        const sortedList = dataToSort ? [...pages].sort((a, b) => a.order - b.order) : []
+        const sortedList = dataToSort ? [...dataToSort].sort((a, b) => a.order - b.order) : []
+        console.log(sortedList);
         setList(sortedList)
-    }, [pages])
+    }, [])
 
     useEffect(() => {
         handleSourceToListSorted(pages)
+        console.log('shorting pages');
     }, [handleSourceToListSorted, pages])
 
     const dataToRedux = useCallback((data) => {
@@ -102,6 +104,7 @@ export default function BookPage() {
         try {
             const response = await axios.post(`${API}/book/${idBook}/page`, {page_title: value, icon: tipeNewRoom})
             pageToast(`${value} berhasil dibuat`)
+            console.log('add pages response', response.data.pages);
             dataToRedux(response.data.pages)
             channel.send({
                 type: 'broadcast',

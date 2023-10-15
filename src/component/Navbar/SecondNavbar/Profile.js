@@ -70,7 +70,7 @@ export function Profile() {
         <div className="profile-container">
             {profile && (
                 <>
-                <div className={`profile_pop bg-primary-bright d-flex fd-column p-fixed shadow-lg ${userPop?'active':'inactive'}`} ref={userPopRef}>
+                <div key={userPop} className={`profile_pop bg-primary-bright d-flex fd-column p-fixed shadow-lg ${userPop?'active':'inactive'} scale-fade-in`} ref={userPopRef}>
                     <div className='min-h-120px flex justify-between'>
                         <a href={profile.avatar} target='_blank' rel="noreferrer" style={{width:'120px'}}>
                             <img src={profile.avatar} alt={profile.nickname}/>

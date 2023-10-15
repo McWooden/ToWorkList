@@ -127,7 +127,7 @@ export default function BookPageListItem({data, callback, handleAreaToDrag}) {
                 </ul>
             </div>
         </div>
-        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deletePage} timeout={10} deleteText={'akan dihapus beserta isinya'}/>
+        <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color='var(--purple-1)' callback={deletePage} timeout={3} deleteText={'akan dihapus beserta isinya'}/>
         <ModalSecond open={openAdd} close={handleClose}>
         <div className="addPage">
             <form className="form-modal" onSubmit={handleSubmit} ref={formRef}>

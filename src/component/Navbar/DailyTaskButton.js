@@ -1,16 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons'
-import { setMembers, setPageType } from '../../redux/sourceSlice'
+import { setIsAdmin, setMembers, setPageType, setSource } from '../../redux/sourceSlice'
 import { useDispatch } from 'react-redux'
-import { setPathBook, setPathPageOfBook } from '../../redux/fetchSlice'
+import { setFetch } from '../../redux/fetchSlice'
 
 export function DailyTask() {
     const dispatch = useDispatch()
     function handleClick() {
         dispatch(setPageType('dailyTask'))
-        dispatch(setPathBook({path: '@me', id: '@me'}))
-        dispatch(setPathPageOfBook({path: 'Harian', id: ''}))
+        dispatch(setFetch({path: '@me', id: '@me', pathPage: 'Global DailyTask'}))
         dispatch(setMembers(null))
+        dispatch(setSource(null))
+        dispatch(setIsAdmin())
     }
     return (
         <div className='nav-icon-frame of-hidden jc-center d-flex' onClick={handleClick}>

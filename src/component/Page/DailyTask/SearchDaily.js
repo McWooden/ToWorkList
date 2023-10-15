@@ -96,11 +96,8 @@ function CardList({item, cb}) {
         }
         toast.dismiss(promise)
     }
-    useEffect(() => {
-        console.log(item.isUserInclude)
-    },[item])
     return (
-        <div className='bg-zinc-800 border-primary-bright p-2 rounded mt-auto'>
+        <div className='bg-zinc-800 border-primary-bright p-2 rounded mt-auto scale-fade-in'>
             <div className='flex items-center gap-2 items-center'>
                 <div className='flex-1 flex items-center pointer' onClick={() => setDetailOpen(prev => !prev)}>
                     <p className='flex-1'>{item.title}</p>
