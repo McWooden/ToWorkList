@@ -42,8 +42,8 @@ code {
     monospace;
 }
 
-ol {
-  padding-inline-start: 30px;
+.note ol, .note ul {
+  padding-inline-start: 35px;
 }
 
 .hr-w-75 {
