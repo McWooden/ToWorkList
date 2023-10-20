@@ -40,6 +40,9 @@
 .text-burlywood {
     color: burlywood;
 }
+.border-primary-dark-50 {
+    border: 4px solid var(--primary-dark-50);
+}
 .border-burlywood {
     border: 1px solid burlywood;
 }

@@ -71,13 +71,13 @@ export function Profile() {
             {profile && (
                 <>
                 <div key={userPop} className={`profile_pop bg-primary-bright d-flex fd-column p-fixed shadow-lg ${userPop?'active':'inactive'} scale-fade-in`} ref={userPopRef}>
-                    <div className='min-h-120px flex justify-between'>
-                        <a href={profile.avatar} target='_blank' rel="noreferrer" style={{width:'120px'}}>
-                            <img src={profile.avatar} alt={profile.nickname}/>
-                        </a>
-                        <FontAwesomeIcon icon={faGear} className='settingNavbar pointer bg-primary-bright mr-[10px]' onClick={() => setOpenSetting(true)}/>
+                    <div className='min-h-120px flex justify-end mx-3'>
+                        <FontAwesomeIcon icon={faGear} className='settingNavbar pointer bg-primary-bright' onClick={() => setOpenSetting(true)}/>
                     </div>
-                    <div className="profile_pop-body bg-primary-dark-50">
+                    <div className="profile_pop-body bg-primary-dark-50 p-3 pt-10 mx-3">
+                        <a href={profile.avatar} target='_blank' rel="noreferrer" style={{width:'120px'}} className='absolute top-2 left-2'>
+                            <img src={profile.avatar} alt={profile.nickname} className='border-primary-dark-50'/>
+                        </a>
                         <div className="profile_pop-nickname">{profile.nickname}<span>#{profile.tag}</span></div>
                         <div className="profile_pop-created_at">
                             <p>Bergabung sejak</p>

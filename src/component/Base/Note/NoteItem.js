@@ -140,7 +140,7 @@ export function NoteItem({data, handleAreaToDrag}) {
                 }
             </div>
         </div>
-        <div className={`note-body flex-1 ${isFull && 'flex flex-col'}`}>
+        <div className={`note-body overflow-auto flex-1 ${isFull && 'flex flex-col'}`}>
             {isEditMode?
                 <textarea
                     className={`block rounded-none min-h-[100px] py-[5px] px-[10px] font-size-small resize-y w-full ${isFull && 'flex-1'}`}
@@ -149,7 +149,7 @@ export function NoteItem({data, handleAreaToDrag}) {
                     onChange={handleChange}
                 />
             :
-                <pre className={`of-auto ${isFull && 'flex-1'}`}>
+                <pre className={`of-auto ${isFull && 'flex-1'} shadow-inner`}>
                     <Markdown className="markdown">{noteVal}</Markdown>
                 </pre>
             }

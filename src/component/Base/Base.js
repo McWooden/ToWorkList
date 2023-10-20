@@ -86,8 +86,8 @@ export function Base() {
 
     if (isLink) return (
         <div className='base of-hidden d-flex text-whitesmoke flex-col'>
+            <p className='p-2 m-2 bg-burlywood rounded shadow text-primary'>Target: {isLink}</p>
             <MyLoading className='w-full'/>
-            <p>{isLink}</p>
         </div>
     )
 
