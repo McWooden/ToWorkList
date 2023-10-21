@@ -15,7 +15,8 @@ export const sourceSlice = createSlice({
         roles: [],
         isAdmin: LocalGuildProfile?.isAdmin || false,
         pages: null,
-        short: false
+        short: false,
+        guestMode: false
     },
     reducers: {
         setShort: (state, action) => {
@@ -59,10 +60,13 @@ export const sourceSlice = createSlice({
         },
         setIsAdmin: (state, action) => {
             state.isAdmin = action.payload || false
+        },
+        setGuestMode: (state, action) => {
+            state.guestMode = action.payload || false
         }
     },
 })
 
-export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile, setIsAdmin, setProfie, setShort } = sourceSlice.actions
+export const { setPageType, setPageDetails, setSource, refreshProfile, setGuildProfile, setMembers, setNoteEditor, setBooksProfile, setJadwalSource, setPages, setUpdateGuildProfile, setIsAdmin, setProfie, setShort, setGuestMode } = sourceSlice.actions
 
 export default sourceSlice.reducer

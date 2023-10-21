@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFloppyDisk, faLock, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { NoteItem } from "./NoteItem"
+import Note from "../../Model/Note"
 import { useSelector } from "react-redux"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 import { useState, useCallback, useEffect } from "react"
@@ -152,7 +152,7 @@ export default function Notes() {
                                 <Draggable key={data._id} draggableId={data._id} index={index}>
                                     {(provided) => (
                                         <li {...provided.draggableProps} ref={provided.innerRef} className="mb-2">
-                                            <NoteItem data={data} handleAreaToDrag={provided.dragHandleProps}/>
+                                            <Note data={data} handleAreaToDrag={provided.dragHandleProps}/>
                                         </li>
                                     )}
                                 </Draggable>

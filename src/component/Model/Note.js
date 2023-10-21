@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faNoteSticky, faTrash, faPenToSquare, faLock, faExpand, faCompress, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { deleteToast, noteToastSecond } from '../../../utils/notif';
+import { deleteToast, noteToastSecond } from '../../utils/notif';
 import { useSelector, useDispatch } from 'react-redux';
-import { API } from '../../../utils/variableGlobal';
-import { setTodo } from '../../../redux/todo';
-import { setSource } from '../../../redux/sourceSlice';
-import Confirm from '../../Modal/Confirm';
+import { API } from '../../utils/variableGlobal';
+import { setTodo } from '../../redux/todo';
+import { setSource } from '../../redux/sourceSlice';
+import Confirm from '../Modal/Confirm';
 import axios from 'axios';
 import { useState } from 'react'
 import Markdown from 'markdown-to-jsx';
@@ -15,7 +15,7 @@ import { format } from 'date-fns';
 import { useEffect } from 'react';
 
 
-export function NoteItem({data, handleAreaToDrag}) {
+export default function Note({data, handleAreaToDrag}) {
     const idPageOfBook = useSelector(state => state.fetch.idPageOfBook)
     const pageType = useSelector(state => state.source.pageType)
     const todoId = useSelector(state => state.todo.id)

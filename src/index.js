@@ -11,9 +11,9 @@ import Join from './pages/Join'
 import { AddAndEditForGlobal } from './component/Modal/addAndEditForGlobal'
 import { Flip } from 'react-toastify'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
-import Register from './pages/Auth/Register'
-import Login from './pages/Auth/Login'
-import Pemulihan from './pages/Auth/Pemulihan'
+import Register from './component/Auth/Register'
+import Login from './component/Auth/Login'
+import Pemulihan from './component/Auth/Pemulihan'
 import MyErrorBoundary from './component/ErrorHandling/ErrorBoundary'
 
 // import all css

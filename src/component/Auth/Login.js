@@ -6,7 +6,7 @@ import { loadingToast, accountToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
 import { setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import { useDispatch } from 'react-redux'
-import { setBooksProfile, refreshProfile, setPages, setGuildProfile, setPageType } from '../../redux/sourceSlice'
+import { setBooksProfile, refreshProfile, setPages, setGuildProfile, setPageType, setGuestMode } from '../../redux/sourceSlice'
 import { setFetch, setPathBook, setPathPageOfBook } from '../../redux/fetchSlice'
 
 const API = process.env.REACT_APP_API
@@ -38,6 +38,7 @@ export default function Login() {
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')
+            dispatch(setGuestMode(false))
         })
         .catch(err => {
             toast.dismiss(promise)
@@ -60,6 +61,7 @@ export default function Login() {
             toast.dismiss(promise)
             accountToast('Berhasil masuk ke akun')
             navigate('/')
+            dispatch(setGuestMode(false))
         })
         .catch((err) => {
             setMsg(err.response.data)

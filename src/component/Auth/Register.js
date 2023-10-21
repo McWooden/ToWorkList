@@ -6,7 +6,7 @@ import { loadingToast, accountToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
 import { setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import { useDispatch } from 'react-redux'
-import { setBooksProfile, refreshProfile } from '../../redux/sourceSlice'
+import { setBooksProfile, refreshProfile, setGuestMode } from '../../redux/sourceSlice'
 import { API } from '../../utils/variableGlobal'
 
 export default function Register() {
@@ -35,6 +35,7 @@ export default function Register() {
                                             accountToast('Berhasil membuat')
                                             navigate('/')
                                             toast.dismiss(promise)
+                                            dispatch(setGuestMode(false))
                                         })
                                         .catch(err => {
                                             setMsg(err.response.data)

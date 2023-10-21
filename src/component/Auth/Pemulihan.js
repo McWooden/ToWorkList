@@ -6,7 +6,7 @@ import { loadingToast, accountToast } from '../../utils/notif'
 import { toast } from 'react-toastify'
 import { decrypt, setLocalAccountWithoutEncrypt } from '../../utils/localstorage'
 import { useDispatch } from 'react-redux'
-import { refreshProfile } from '../../redux/sourceSlice'
+import { refreshProfile, setGuestMode } from '../../redux/sourceSlice'
 
 const API = process.env.REACT_APP_API
 
@@ -61,6 +61,7 @@ export default function Pemulihan() {
             dispatch(refreshProfile())
             toast.dismiss(promise)
             accountToast('Berhasil mengganti password dan masuk ke akun')
+            dispatch(setGuestMode(false))
             navigate('/')
         })
         .catch((err) => {

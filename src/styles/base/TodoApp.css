@@ -37,11 +37,11 @@ header h4 {
 }
 @media (min-width: 768px) {
     .btn-sidebar-right {
-        opacity: .25;
+        display: none;
     }
 }
 @media (min-width: 892px) {
     .btn-sidebar-left {
-        opacity: .25;
+        display: none;
     }
 }

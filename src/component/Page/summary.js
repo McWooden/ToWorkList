@@ -12,6 +12,7 @@ import { decrypt, setLocalAccountWithoutEncrypt } from '../../utils/localstorage
 import Markdown from 'markdown-to-jsx'
 import { setSummary } from '../../redux/summaryStore'
 import { useCallback } from 'react'
+import { disableIcon } from '../../redux/hideAndShowSlice'
 
 export default function Summary() {
     const mySummary = useSelector(state => state.source.profile)
@@ -36,6 +37,13 @@ export default function Summary() {
     const [listLabel, setListLabel] = useState([])
 
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(disableIcon({left: true, right: true}))
+        return () => {
+          dispatch(disableIcon({left: false, right: false}))
+        }
+    },[dispatch])
     
     const fetchOtherSummary = useCallback(async () => {
         await axios.get(`${API}/user/summary/${otherSummaryUserId}`).then(res => {
@@ -153,7 +161,7 @@ export default function Summary() {
         <div className="flex flex-3 fd-column of-auto p-4 overflow-auto text-whitesmoke">
             <div className="min-h-48 p-8 flex items-center gap-4 flex-col sm:flex-row rounded-t-[10px] bg-primary-dark-50">
                 <div>
-                    <img src={summaryData.avatar} alt={summaryData.nickname} className="rounded-full" />
+                    <img src={summaryData.avatar} alt={summaryData.nickname} className="rounded-full max-h-[96px]" />
                 </div>
                 <div>
                     <p className="text-xl font-bold">{summaryData.nickname}<sup className='ordinal text-xs font-normal'>{summaryData?.panggilan || ''}</sup></p>

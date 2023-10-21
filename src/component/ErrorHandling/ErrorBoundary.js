@@ -5,7 +5,6 @@ function ErrorFallback({ error }) {
     localStorage.clear()
     sessionStorage.clear()
     window.location.reload()
-    
   }
   return (
     <div className='p-2 w-full h-screen flex items-center justify-center flex-col gap-2'>

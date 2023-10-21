@@ -8,7 +8,7 @@ import { isoToString } from '../../utils/convertDateFormat'
 import { ChatModel } from '../Model/Chat'
 import { sendToast } from '../../utils/notif'
 import { useDispatch } from 'react-redux'
-import { reverseNavbar, reverseRightSide } from '../../redux/hideAndShowSlice'
+import { disableIcon, reverseNavbar, reverseRightSide } from '../../redux/hideAndShowSlice'
 import { useSwipeable } from 'react-swipeable'
 
 export function Welcome() {
@@ -24,6 +24,13 @@ export function Welcome() {
     onSwipedRight: () => dispatch(reverseNavbar()),
     onSwipedLeft: () => dispatch(reverseRightSide()),
   })
+
+  useEffect(() => {
+    dispatch(disableIcon({left: true}))
+    return () => {
+      dispatch(disableIcon({left: false}))
+    }
+  },[dispatch])
 
   return (
     <div className="flex w-full sm:flex-row flex-col">

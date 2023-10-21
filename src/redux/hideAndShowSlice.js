@@ -9,6 +9,10 @@ export const fetchSlice = createSlice({
         navbar: oldShowNavbarState,
         leftSide: false,
         rightSide: false,
+        iconLeftSide: null,
+        iconRightSide: null,
+        disableIconLeft: false,
+        disableIconRight: false
     },
     reducers: {
         reverseNavbar: (state, action) => {
@@ -29,9 +33,21 @@ export const fetchSlice = createSlice({
             state.leftSide = false
             state.navbar = false
         },
+        setIcon: (state, action) => {
+            state.iconLeftSide = action.payload.hasOwnProperty('left') ? action.payload.left : state.iconLeftSide
+            state.iconRightSide = action.payload.hasOwnProperty('right') ? action.payload.right : state.iconRightSide
+        },
+        resetIcon: (state, action) => {
+            state.iconLeftSide = null
+            state.iconRightSide = null
+        },
+        disableIcon: (state, action) => {
+            state.disableIconLeft = action.payload.hasOwnProperty('left') ? action.payload.left : state.disableIconLeft
+            state.disableIconRight = action.payload.hasOwnProperty('right') ? action.payload.right : state.disableIconRight
+        }
     },
 })
 
-export const { reverseNavbar, reverseLeftSide, reverseRightSide } = fetchSlice.actions
+export const { reverseNavbar, reverseLeftSide, reverseRightSide, setIcon, resetIcon, disableIcon } = fetchSlice.actions
 
 export default fetchSlice.reducer

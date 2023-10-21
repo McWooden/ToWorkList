@@ -1,5 +1,5 @@
 import Navbar from '../component/Navbar/Navbar';
-import TodoApp from '../component/TodoApp/TodoApp';
+import TodoApp from '../component/App/TodoApp';
 
 function App() {
   return (

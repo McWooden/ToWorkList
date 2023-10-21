@@ -6,6 +6,9 @@ import KirimSurat from './email/KirimSurat'
 import DisplayMail from './email/DisplayMail'
 import { useSelector } from 'react-redux'
 import { Center, Left } from '../Base/BaseComponent'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { disableIcon } from '../../redux/hideAndShowSlice'
 
 export default function Email() {
   const myProfile = useSelector(state => state.source.profile)
@@ -14,6 +17,14 @@ export default function Email() {
     avatar: myProfile.avatar,
     _id: myProfile._id
   }
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(disableIcon({right: true}))
+    return () => {
+      dispatch(disableIcon({right: false}))
+    }
+  }, [dispatch])
+  
   return (
     <>
     <MailLeft thisProfile={thisProfile}/>
