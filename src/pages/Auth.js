@@ -23,7 +23,7 @@ export function Auth() {
                     </div>
                 </div>
                 <div className="navigate_to pointer">
-                    <div className="auth_btn d-flex ai-center pointer navigate_back" onClick={() => navigate('/')}>
+                    <div className="auth_btn d-flex ai-center pointer navigate_back" onClick={() => navigate('/home')}>
                         <FontAwesomeIcon icon={faChevronLeft}/>
                         <span>Kembali</span>
                     </div>

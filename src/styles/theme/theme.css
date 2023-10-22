@@ -3,6 +3,8 @@
     --primary: #2A394E;
     --primary-dark-25: #1c2635;
     --primary-dark-50: #141c27;
+    --burlywood: #deb887;
+    --indianred: #cd5c5c;
 }
 .bg-indianred {
     background-color: indianred;

@@ -20,7 +20,7 @@ export default function Notes() {
     const [list, setList] = useState(todoNotes)
     const [saveIt, setSaveIt] = useState(false)
     const channel = useSelector(state => state.channel.book)
-    const myNickname = useSelector(state => state.source.profile.nickname)
+    const myNickname = useSelector(state => state.source?.profile?.nickname)
     const dispatch = useDispatch()
     const isAdmin = useSelector(state => state.source.isAdmin)
 

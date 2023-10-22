@@ -1,7 +1,7 @@
 #todoApp {
     height: 100vh;
 }
-header {
+#navigasiTop {
     padding: 0 8px;
     height: 48px;
     top: 0;
@@ -19,7 +19,7 @@ header {
     border-radius: 5px;
     transition: .1s ease;
 }
-header h4 {
+#navigasiTop h4 {
     margin: 0;
     font-size: 20px;
     white-space: nowrap;

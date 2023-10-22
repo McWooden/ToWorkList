@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -102,6 +104,10 @@ export default function Login() {
                 <div className="navigate_to pointer">
                     <p>Lupa <span onClick={() => navigate('/auth/pemulihan')}>password</span></p>
                     <p>Belum memiliki akun? <span onClick={() => navigate('/auth/register')}>Sign up</span></p>
+                </div>
+                <div className="auth_btn d-flex ai-center pointer navigate_back w-full" onClick={() => navigate('/home')}>
+                    <FontAwesomeIcon icon={faChevronLeft}/>
+                    <span>Kembali</span>
                 </div>
             </div>
         </div>

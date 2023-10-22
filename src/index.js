@@ -15,6 +15,7 @@ import Register from './component/Auth/Register'
 import Login from './component/Auth/Login'
 import Pemulihan from './component/Auth/Pemulihan'
 import MyErrorBoundary from './component/ErrorHandling/ErrorBoundary'
+import Home from './pages/Home'
 
 // import all css
 import 'react-toastify/dist/ReactToastify.css'
@@ -45,6 +46,7 @@ root.render(
           <Route path='pemulihan' element={<Pemulihan />}/>
         </Route>
         <Route path='/join' element={<Join />}/>
+        <Route path='/home' element={<Home />}/>
       </Routes>
       <AddAndEditForGlobal/>
     </BrowserRouter>

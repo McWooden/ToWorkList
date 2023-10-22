@@ -23,7 +23,7 @@ export function NavTop() {
     }
     return (
         <section id='navTop' className='relative z-[3]'>
-            <header className='zi-1 d-flex ai-center jc-space-between p-fixed bg-burlywood text-primary'>
+            <header className='zi-1 d-flex ai-center jc-space-between p-fixed bg-burlywood text-primary' id='navigasiTop'>
             <div className='header-left d-flex pointer' onClick={handleClickNavbar}>
                 <div className='relative flex items-center'>
                     {guestMode && <AnimatePing className={'absolute top-0 right-0 mt-0.5 mr-2.5'}/>}
