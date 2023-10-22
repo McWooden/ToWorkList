@@ -83,6 +83,9 @@ border: 1px solid rgba(255, 255, 255, 0.16);
 .bg-primary-dark {
   background: linear-gradient(135deg, var(--primary-dark-25) 20%, var(--primary-dark-50) 100%)
 }
+.h-fill {
+  height: -webkit-fill-available;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
