@@ -2,9 +2,9 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCalendar, faCheck, faStickyNote } from '@fortawesome/free-solid-svg-icons'
-import icon from '../assets/images/toworklist.png'
-import headerImg from '../assets/images/header.png'
-import workGroup from '../assets/images/group-of-work.png'
+import icon from '../assets/images/toworklist.webp'
+import headerImg from '../assets/images/header.webp'
+import workGroup from '../assets/images/group-of-work.webp'
 import '../styles/pages/Home.css'
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
             <header>
                 <nav className='bg-burlywood p-3 px-5 w-full flex flex-col sm:flex-row justify-between items-center'>
                     <div className='flex items-center text-primary gap-2'>
-                        <img src={icon} alt="icon" className='w-12 drop-shadow-md'/>
+                        <img src={icon} alt="icon" className='w-12 h-12 drop-shadow-md'/>
                         <p className='font-unbounded font-extrabold text-xl text-shadow'>Toworklist</p>
                     </div>
                     <div className='flex gap-2'>
@@ -24,7 +24,7 @@ export default function Home() {
                 </nav>
             </header>
             <section className='flex flex-col sm:flex-row'>
-                <img src={headerImg} alt="Group of work" className='h-72 w-72 drop-shadow' />
+                <img src={headerImg} alt="Group of work" className='h-72 w-72 drop-shadow'/>
                 <div className='flex-1 p-5 flex items-center justify-center h-72 flex flex-col text-whitesmoke gap-4'>
                     <p className='font-unbounded font-medium text-3xl'>Dalam Setiap Klik, Tersembunyi Keajaiban!</p>
                     <div className='bg-primary-dark-50 rounded-full py-4 px-10 pointer shadow' onClick={() => navigate('/')}>

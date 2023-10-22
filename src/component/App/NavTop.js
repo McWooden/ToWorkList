@@ -27,7 +27,7 @@ export function NavTop() {
             <div className='header-left d-flex pointer' onClick={handleClickNavbar}>
                 <div className='relative flex items-center'>
                     {guestMode && <AnimatePing className={'absolute top-0 right-0 mt-0.5 mr-2.5'}/>}
-                    <FontAwesomeIcon icon={faBars} className='bars'/>
+                    <FontAwesomeIcon icon={faBars} className='bars drop-shadow-sm'/>
                 </div>
                 <h4 className='of-hidden text-shadow'>{source?.details?.page_title||pathPageOfBook}</h4>
             </div>

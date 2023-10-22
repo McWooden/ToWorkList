@@ -6,7 +6,7 @@
 .react-calendar__navigation {
     display: flex; 
     align-items: center;
-    padding: 0 10px;
+    background-color: var(--primary-dark-25);
 }
 .react-calendar__navigation__arrow {
     border: none;
@@ -21,7 +21,7 @@
     color: whitesmoke;
 }
 .react-calendar__navigation__arrow:hover, .react-calendar__navigation__label:hover {
-    background-color: inherit;
+    background-color: var(--primary-bright);
 }
 .react-calendar__navigation__label {
     border: none;
@@ -33,6 +33,7 @@
     text-align: left;
     background-color: inherit;
     color: whitesmoke;
+    padding-left: 10px;
 }
 .react-calendar__viewContainer {
     margin-top: 5px;

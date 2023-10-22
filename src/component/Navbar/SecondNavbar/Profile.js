@@ -23,7 +23,6 @@ export function Profile() {
     function handlePop() {
         setUserPop(!userPop)
     }
-    useEffect(() => console.log(guestMode))
     useEffect(() => {
         if (!profile) {
             dispatch(setProfie({
