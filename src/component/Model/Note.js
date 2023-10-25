@@ -149,7 +149,7 @@ export default function Note({data, handleAreaToDrag}) {
                     onChange={handleChange}
                 />
             :
-                <pre className={`of-auto ${isFull && 'flex-1'} shadow-inner`}>
+                <pre className={`of-auto ${isFull && 'flex-1'} shadow-inner break-words`}>
                     <Markdown className="markdown">{noteVal}</Markdown>
                 </pre>
             }
