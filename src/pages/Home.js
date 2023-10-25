@@ -15,7 +15,7 @@ export default function Home() {
                 <nav className='bg-burlywood p-3 px-5 w-full flex flex-col sm:flex-row justify-between items-center'>
                     <div className='flex items-center text-primary gap-2'>
                         <img src={icon} alt="icon" className='w-12 h-12 drop-shadow-md'/>
-                        <p className='font-unbounded font-extrabold text-xl text-shadow'>Toworklist</p>
+                        <p className='font-unbounded font-extrabold text-2xl text-shadow'>Toworklist</p>
                     </div>
                     <div className='flex gap-2'>
                         <div className='text-primary px-5 text-shadow shadow flex items-center rounded h-9 pointer' onClick={() => navigate('/auth/login')}>Masuk</div>

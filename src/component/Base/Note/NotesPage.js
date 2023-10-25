@@ -62,7 +62,6 @@ function NoteLeft() {
 function NoteCenter() {
     const isAdmin = useSelector(state => state.source.isAdmin)
     const dispatch = useDispatch()
-
     
     return (
         <Center className="of-auto flex flex-col">
@@ -119,7 +118,7 @@ function NoteContainer() {
         if (!source) fetchData()
       }, [fetchData, source])
     return (
-        <div className='flex-1 flex-col flex'>
+        <div className='w-full flex-1 flex-col flex'>
             {isReload && 
                 <div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>
                     <FontAwesomeIcon icon={faRotateBack} className="reload_btn" />
