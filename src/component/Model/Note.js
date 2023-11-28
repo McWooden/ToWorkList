@@ -155,7 +155,7 @@ export default function Note({data, handleAreaToDrag}) {
             }
             <div className='note-info flex justify-end align-center'>
                 <span className='flex items-center'>{`${data.by.nickname || data.by}, ${format(new Date(data.date), 'iiii, dd LLL yyyy', { locale: id })}`}</span>
-                {isEditMode && <a className='note-btn-simpan pointer d-flex text-whitesmoke' target='_blank' href='https://dev.to/codeninjausman/markdown-a-simple-guide-1f2f' rel="noreferrer">Docs</a>}
+                {isEditMode && <a className='note-btn-simpan pointer d-flex text-whitesmoke' target='_blank' href='https://www.markdownguide.org/basic-syntax/' rel="noreferrer">Docs</a>}
             </div>
         </div>
     </form>

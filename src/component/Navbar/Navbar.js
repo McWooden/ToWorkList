@@ -14,7 +14,8 @@ function Navbar() {
     const dispatch = useDispatch()
     const handlers = useSwipeable({
         onSwipedLeft: () => dispatch(reverseNavbar()),
-        swipeDuration: 1000,
+        swipeDuration: 500,
+        delta: 300,
     })
     return (
         <div {...handlers}>

@@ -29,7 +29,8 @@ export default function MyBlock({active, className, cb, component}) {
                     break
             }
         },
-        swipeDuration: 1000,
+        swipeDuration: 500,
+        delta: 300,
     })
 
     return <div className={`navigation_block zi-2 p-fixed ${active?'active':'inactive'} ${className}`} onClick={cb} {...handlers}/>

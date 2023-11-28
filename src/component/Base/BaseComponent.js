@@ -9,7 +9,8 @@ export function Center({children, className = 'of-auto'}) {
     const handlers = useSwipeable({
         onSwipedRight: () => dispatch(reverseLeftSide()),
         onSwipedLeft: () => dispatch(reverseRightSide()),
-        swipeDuration: 1000,
+        swipeDuration: 500,
+        delta: 300,
     })
     return (
         <aside {...handlers} className={`base-center relative ${className}`}>
@@ -23,7 +24,8 @@ export function Right({children}) {
     const dispatch = useDispatch()
     const handlers = useSwipeable({
         onSwipedRight: () => dispatch(reverseRightSide()),
-        swipeDuration: 1000,
+        swipeDuration: 500,
+        delta: 300,
     })
     return (
         <>
@@ -41,9 +43,10 @@ export function Left({children}) {
     const handlers = useSwipeable({
         onSwipedRight: () => dispatch(reverseNavbar()),
         onSwipedLeft: () => dispatch(reverseLeftSide()),
-        swipeDuration: 1000,
+        swipeDuration: 500,
+        delta: 300,
     })
-      
+
     return (
         <>
             <MyBlock className={'base-left_block'} cb={() => dispatch(reverseLeftSide())} active={active} component={'left'}/>
