@@ -30,6 +30,7 @@ import './styles/theme/theme.css'
 import './styles/welcome.css'
 import './styles/animation.css'
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <>
@@ -51,13 +52,13 @@ root.render(
       <AddAndEditForGlobal/>
     </BrowserRouter>
     <ToastContainer
-              pauseOnFocusLoss={false}
-              theme="colored"
-              autoClose={1000}
-              position="top-center"
-              closeButton={false}
-              transition={Flip}
-              />
+      pauseOnFocusLoss={false}
+      theme="colored"
+      autoClose={1000}
+      position="top-center"
+      closeButton={false}
+      transition={Flip}
+    />
   </Provider>
   </MyErrorBoundary>
   {/* </React.StrictMode> */}

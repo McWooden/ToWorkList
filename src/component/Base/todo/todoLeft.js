@@ -1,20 +1,17 @@
 import { PageProggress } from '../../../utils/progress'
 import { Greeting } from '../../../utils/greeting'
 import Calendar from 'react-calendar';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMoneyCheck, faShare } from '@fortawesome/free-solid-svg-icons'
+import { faMoneyCheck } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux';
 import { JadwalRoom } from '../BaseLeft/JadwalRoom';
 import { Left } from '../BaseComponent';
 import InfoMenu from '../BaseLeft/InfoMenu';
-import { useState } from 'react';
 import ShareModal from '../../Modal/ShareModal';
 
 export function TodoLeft() {
     const bookId = useSelector(state => state.fetch.idBook)
     const pageId = useSelector(state => state.fetch.idPageOfBook)
     const source = useSelector(state => state.source.source)
-    const [isShareOpen, setIsShareOpen] = useState(false)
     let colors = null
     try {
         colors = source.list.map(item => {
@@ -28,9 +25,6 @@ export function TodoLeft() {
 
     } catch (error) {
         console.log(source)
-    }
-    function handleShareModal() {
-        setIsShareOpen(true)
     }
     return (
         <Left>
@@ -58,12 +52,8 @@ export function TodoLeft() {
             />
                 <PageProggress/>
                 <InfoMenu icon={faMoneyCheck} count={source.list ? source.list.length : 0}/>
-                <div className='text-sm shadow rounded flex gap-2 px-2 py-1 items-center bg-primary-dark-25 w-fit pointer' onClick={handleShareModal}>
-                    <FontAwesomeIcon icon={faShare}/>
-                    <span>Bagikan</span>
-                </div>
+                <ShareModal path={{bookId, pageId}}/>
             </div>
-            <ShareModal open={isShareOpen} close={() => setIsShareOpen(false)} path={{bookId, pageId}}/>
         </Left>
     )
 }

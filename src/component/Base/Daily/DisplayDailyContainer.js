@@ -25,8 +25,9 @@ export default function DisplayDailyContainer() {
     const [isReload, setIsReload] = useState(false)
     const isAdmin = useSelector(state => state.source.isAdmin)
     const fetchData = useCallback(async() => {
-        setIsLoading(true)
         setIsReload(false)
+        if (idPageOfBook) return
+        setIsLoading(true)
         const promise = loadingToast('Memuat')
         try {
         await axios.get(`${API}/source/page/${idPageOfBook}`).then(res => {
@@ -36,9 +37,9 @@ export default function DisplayDailyContainer() {
             throw new Error(err)
           })
         } catch (error) {
-          setIsReload(false)
-          setIsLoading(false)
-          console.log(error)
+            setIsReload(false)
+            setIsLoading(false)
+            console.log(error)
         }
         toast.dismiss(promise)
         setIsLoading(false)

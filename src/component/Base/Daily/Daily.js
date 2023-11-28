@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHistory, faShare } from '@fortawesome/free-solid-svg-icons'
+import { faHistory } from '@fortawesome/free-solid-svg-icons'
 import { Greeting } from "../../../utils/greeting"
 import DisplayDailyContainer from "./DisplayDailyContainer"
 import { Center, Left } from "../BaseComponent"
@@ -22,10 +22,6 @@ function DailyTaskLeft() {
     const [historyOpen, setHistoryOpen] = useState(false)
     const bookId = useSelector(state => state.fetch.idBook)
     const pageId = useSelector(state => state.fetch.idPageOfBook)
-    const [isShareOpen, setIsShareOpen] = useState(false)
-    function handleShareModal() {
-        setIsShareOpen(true)
-    }
     return (
     <Left>
         <div className='p-2'>
@@ -35,12 +31,8 @@ function DailyTaskLeft() {
                 <span>Riwayat</span>
             </div>
             <HistoryDaily open={historyOpen} close={() => setHistoryOpen(false)}/>
-            <div className='text-sm shadow rounded flex gap-2 px-2 py-1 items-center bg-primary-dark-25 w-fit pointer' onClick={handleShareModal}>
-                <FontAwesomeIcon icon={faShare}/>
-                <span>Bagikan</span>
-            </div>
+            <ShareModal path={{bookId, pageId}}/>
         </div>
-        <ShareModal open={isShareOpen} close={() => setIsShareOpen(false)} path={{bookId, pageId}}/>
     </Left>
     )
 }

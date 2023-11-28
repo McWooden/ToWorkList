@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShare } from '@fortawesome/free-solid-svg-icons'
 import { useCallback } from "react"
 import { Modal } from "./Modal"
 import { WhatsappShareButton, FacebookShareButton, TelegramShareButton, EmailShareButton, TelegramIcon, EmailIcon, FacebookIcon, WhatsappIcon } from "react-share"
@@ -12,12 +14,21 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { setShort } from "../../redux/sourceSlice"
 
-export default function ShareModal({open, close, path}) {
+export default function ShareModal({close, path}) {
     const origin = window.location.origin
     const short = useSelector(state => state.source.short)
+    const guestMode = useSelector(state => state.source.guestMode)
+
     const [isLoading, setIsLoading] = useState(false)
+    const [isShareOpen, setIsShareOpen] = useState(false)
+
+    function handleShareModal() {
+        setIsShareOpen(true)
+    }
+
     const dispatch = useDispatch()
     const fetchData = useCallback(async () => {
+        if (guestMode || !path.pageId) return
         try {
             await axios.post(API+'/short', path)
             .then(res => {
@@ -29,7 +40,7 @@ export default function ShareModal({open, close, path}) {
         } catch (error) {
             console.log(error);
         }
-    },[dispatch, path])
+    },[dispatch, guestMode, path])
 
     useEffect(() => {
         if (!short) {
@@ -40,20 +51,25 @@ export default function ShareModal({open, close, path}) {
     },[fetchData, short])
 
     useEffect(() => {
-      
     
-      return () => {
+    return () => {
         dispatch(setShort(null))
-      }
+    }
     }, [dispatch])
-    
 
     function handleSalin() {
         navigator.clipboard.writeText(`${origin}/?src=${short.short}`)
         blankToast('Link tersalin di papan klip')
     }
 
-    return <Modal open={open} close={close} costum={true}>
+    if (guestMode) return null
+
+    return <>
+    <div className='text-sm shadow rounded flex gap-2 px-2 py-1 items-center bg-primary-dark-25 w-fit pointer' onClick={handleShareModal}>
+        <FontAwesomeIcon icon={faShare}/>
+        <span>Bagikan</span>
+    </div>
+    <Modal open={isShareOpen} close={close} costum={true}>
         <div className='fixed_center bg-primary-dark-25 text-whitesmoke rounded shadow max-w-[550px] h-fit w-full p-4 scale-fade-in'>
             <h3>Bagikan</h3>
             {isLoading? 
@@ -89,4 +105,5 @@ export default function ShareModal({open, close, path}) {
             }
         </div>
     </Modal>
+    </>
 }

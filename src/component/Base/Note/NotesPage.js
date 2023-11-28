@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAdd, faRotateRight, faNoteSticky, faShare, faRotateBack } from '@fortawesome/free-solid-svg-icons'
+import { faAdd, faRotateRight, faNoteSticky, faRotateBack } from '@fortawesome/free-solid-svg-icons'
 import { TodoRight } from "../todo/todoRight"
 import { Left, Center } from "../BaseComponent"
 import { Greeting } from "../../../utils/greeting"
@@ -32,10 +32,7 @@ function NoteLeft() {
     const noteList = useSelector(state => state.source?.source?.noteList)
     const bookId = useSelector(state => state.fetch.idBook)
     const pageId = useSelector(state => state.fetch.idPageOfBook)
-    const [isShareOpen, setIsShareOpen] = useState(false)
-    function handleShareModal() {
-        setIsShareOpen(true)
-    }
+    
     return (
         <Left>
             <div className="p-2 flex flex-col gap-3">
@@ -49,12 +46,8 @@ function NoteLeft() {
                 <div>
                     <InfoMenu icon={faNoteSticky} count={noteList?.length || 0}/>
                 </div>
-                <div className='text-sm shadow rounded flex gap-2 px-2 py-1 items-center bg-primary-dark-25 w-fit pointer' onClick={handleShareModal}>
-                    <FontAwesomeIcon icon={faShare}/>
-                    <span>Bagikan</span>
-                </div>
+                <ShareModal path={{bookId, pageId}}/>
             </div>
-        <ShareModal open={isShareOpen} close={() => setIsShareOpen(false)} path={{bookId, pageId}}/>
         </Left>
     )
 }
@@ -95,8 +88,9 @@ function NoteContainer() {
     const [isReload, setIsReload] = useState(false)
     const channel = useSelector(state => state.channel.book)
     const fetchData = useCallback(async() => {
-        setIsLoading(true)
         setIsReload(false)
+        if (!idPageOfBook) return
+        setIsLoading(true)
         try {
             setShouldUpdate(false)
             const {data} = await axios.get(`${API}/source/page/${idPageOfBook}`)

@@ -18,6 +18,7 @@ export function TodoPage() {
     const [isReload, setIsReload] = useState(false)
     const fetchData = useCallback(async () => {
         setIsReload(false)
+        if (!idPageOfBook) return
             try {
                 const response = await axios.get(`${API}/source/page/${idPageOfBook}`).catch(err => {
                     throw new Error(err)

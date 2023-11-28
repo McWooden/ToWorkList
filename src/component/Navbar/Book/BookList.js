@@ -16,6 +16,7 @@ export function BookList() {
     const myAccount = useSelector(state => state.source.profile)
     const fetchData = useCallback(async () => {
         setReload(false)
+        if (!myAccount?._id) return dispatch(setBooksProfile([]))
         setIsLoading(true)
         try {
             const response = await axios.get(`${API}/book/${myAccount._id}`)
@@ -43,9 +44,9 @@ export function BookList() {
         }
     }, [dispatch, booksProfile, fetchData])
     useEffect(() => {
-      return () => {
+    return () => {
         setBooksProfile(null)
-      }
+    }
     }, [])
     return (
         <div className="nav-guild of-auto d-flex fd-column bg-primary-bright rounded shadow">

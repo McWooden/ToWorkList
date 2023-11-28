@@ -15,10 +15,14 @@ export function TodoCenter() {
     const dispatch = useDispatch()
     const isAdmin = useSelector(state => state.source.isAdmin)
     const fetchData = useCallback(async() => {
+      try {
         const {data} = await axios.get(`${API}/source/page/${idPageOfBook}`)
         dispatch(setPageType(data.details.icon))
         dispatch(setSource(data))
         setShouldUpdate(false)
+      } catch (error) {
+        console.log(error);
+      }
       },
       [dispatch, idPageOfBook],
     )
