@@ -68,7 +68,7 @@ export default function KirimSurat({mail, open, close, type, thisProfile}) {
               setSearch('')
               setKepadaBox(prev => [...prev, {nama: item.book_title, _id: item._id, avatar: item.avatar_url, type: 'book'}])
             }}>
-            <img src={url+'/'+item.avatar_url} alt='avatar' className='w-[32px] rounded-full'/>
+            <img src={url+'/'+item.avatar_url} alt='avatar' className='w-[32px] rounded-full' referrerPolicy='no-referrer'/>
             <span className="overflow-hidden text-ellipsis whitespace-nowrap">{item.book_title}@{item.author_nickname}#{item.author_tag}</span>
             </div>)
         } else {
@@ -78,7 +78,7 @@ export default function KirimSurat({mail, open, close, type, thisProfile}) {
               setSearch('')
               setKepadaBox(prev => [...prev, {nama: item.nickname, _id: item._id, avatar: item.avatar, type: 'user'}])
             }}>
-            <img src={item.avatar} alt='avatar' className='w-[32px] rounded-full'/>
+            <img src={item.avatar} alt='avatar' className='w-[32px] rounded-full' referrerPolicy='no-referrer'/>
             <span className="overflow-hidden text-ellipsis whitespace-nowrap">{item.nickname}#{item.tag}</span>
           </div>)
         }
@@ -92,13 +92,13 @@ export default function KirimSurat({mail, open, close, type, thisProfile}) {
         if (item.type === 'book') {
           box.push(
             <div key={index} className='flex flex-nowrap m-0.5 items-center border-burlywood gap-1 rounded-3xl overflow-hidden w-fit pr-1' onClick={() => setKepadaBox(prev => prev.filter(x => x._id !== item._id))}>
-              <img src={`${url}/${item.avatar}`} alt='avatar' className='w-[24px] rounded-full m-0.5' />
+              <img src={`${url}/${item.avatar}`} alt='avatar' className='w-[24px] rounded-full m-0.5' referrerPolicy='no-referrer'/>
               <span className='text-xs'>{item.nama}</span>
             </div>)
         } else {
           box.push(
             <div key={index} className='flex flex-nowrap m-0.5 items-center border-burlywood gap-1 rounded-3xl overflow-hidden w-fit pr-1' onClick={() => setKepadaBox(prev => prev.filter(x => x._id !== item._id))}>
-              <img src={item.avatar} alt='avatar' className='w-[24px] rounded-full m-0.5' />
+              <img src={item.avatar} alt='avatar' className='w-[24px] rounded-full m-0.5' referrerPolicy='no-referrer'/>
               <span className='text-xs'>{item.nama}</span>
             </div>)
         }

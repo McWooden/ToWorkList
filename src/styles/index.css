@@ -27,6 +27,10 @@ html {
   background-color: rgba(96, 96, 102, 0.5);
 }
 
+img {
+  max-width: 100% !important;
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

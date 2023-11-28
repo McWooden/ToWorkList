@@ -71,11 +71,11 @@ export default function UserProfile() {
         </div>
         <div className="setting_full_profile_view d-flex fd-column">
             <div className='setting_full_profile_view_banner'>
-                <img className={`setting_banner pointer ${full?'full zi-3 p-fixed':''}`} src={myAccount.avatar} alt={myAccount.nickname} onClick={() => setFull(!full)}/>
+                <img className={`setting_banner pointer ${full?'full zi-3 p-fixed':''}`} src={myAccount.avatar} alt={myAccount.nickname} onClick={() => setFull(!full)} referrerPolicy='no-referrer'/>
             </div>
             <div className="setting_full_profile_view_body p-relative">
                 <div className="setting_full_profile_view_float d-fle ai-center p-absolute bg-zinc-900">
-                    <img src={myAccount.avatar} alt={myAccount.nickname} className='setting_full_pp_guild pointer'/>
+                    <img src={myAccount.avatar} alt={myAccount.nickname} className='setting_full_pp_guild pointer' referrerPolicy='no-referrer'/>
                 </div>
             </div>
         </div>

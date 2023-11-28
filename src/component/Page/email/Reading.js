@@ -26,7 +26,7 @@ export default function Reading({data, thisProfile, isAdmin = true}) {
         box.push(
           <div key={index} className='flex flex-col border-burlywood rounded shadow text-sm p-2'>
             <div className='flex flex-row items-center gap-3'>
-              <img src={item.avatar} alt="avatar" className='w-[42px] rounded-full' />
+              <img src={item.avatar} alt="avatar" className='w-[42px] rounded-full' referrerPolicy='no-referrer'/>
               <p>{item.nama}</p>
             </div>
             <p className='p-3'>{item.balas}</p>
@@ -40,7 +40,7 @@ export default function Reading({data, thisProfile, isAdmin = true}) {
         <div className='h-full flex flex-col'>
           <h2 className='m-5'>{item.subjek}</h2>
           <div className='flex gap-2 items-center'>
-            <img src={item.pengirim.avatar} alt="avatar" className='rounded-full w-[48px] shadow'/>
+            <img src={item.pengirim.avatar} alt="avatar" className='rounded-full w-[48px] shadow' referrerPolicy='no-referrer'/>
             <div>
               <p>{item.pengirim.nama}</p>
               <p>{format(parseISO(item.createdAt), 'd MMMM, HH.mm', { id })}</p>

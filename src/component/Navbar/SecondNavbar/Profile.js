@@ -83,7 +83,7 @@ export function Profile() {
                     </div>
                     <div className="profile_pop-body bg-primary-dark-50 p-3 pt-10 mx-3">
                         <a href={profile.avatar} target='_blank' rel="noreferrer" style={{width:'120px'}} className='absolute top-2 left-2'>
-                            <img src={profile.avatar} alt={profile.nickname} className='border-primary-dark-50'/>
+                            <img src={profile.avatar} alt={profile.nickname} className='border-primary-dark-50' referrerPolicy='no-referrer'/>
                         </a>
                         <div className="profile_pop-nickname">{profile.nickname}<span>#{profile.tag}</span></div>
                         <div className="profile_pop-created_at">
@@ -114,7 +114,7 @@ export function Profile() {
                 </div>
                 <div className='relative profile d-flex ai-center pointer bg-primary-bright shadow' ref={profileRef} onClick={handlePop}>
                     {guestMode && <AnimatePing className={'absolute top-0 right-0 -mt-1 -mr-1'}/>}
-                    <img src={profile.avatar} alt={profile.nickname} className='w-[32px] h-[32px]'/>
+                    <img src={profile.avatar} alt={profile.nickname} className='w-[32px] h-[32px]' referrerPolicy='no-referrer'/>
                     <div className="profile-body">
                         <div className="profile-nickname">{profile.nickname}</div>
                         <div className="profile-id">#{profile.tag}</div>

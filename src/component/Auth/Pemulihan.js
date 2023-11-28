@@ -80,7 +80,7 @@ export default function Pemulihan() {
                     account ?
                     <>
                         <div className='flex flex-col'>
-                            <img src={account.avatar} alt={account.name} className='rounded-full h-16 w-16'/>
+                            <img src={account.avatar} alt={account.name} className='rounded-full h-16 w-16' referrerPolicy='no-referrer'/>
                             <div>
                                 <p>{account.nickname}<span>#{account.tag}</span></p>
                                 <p className='nickname_preview'>{account.name}</p>

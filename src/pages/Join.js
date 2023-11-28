@@ -89,7 +89,7 @@ export default function Join(){
                                     <p>{data.profile.desc}</p>
                                     {myAccount?
                                         <div className='join_btn d-flex jc-center ai-center mt-2 w-full pointer shadow-md text-primary bg-burlywood' onClick={gabung}>
-                                            <img src={myAccount.avatar||''} alt={myAccount.nickname||''} />
+                                            <img src={myAccount.avatar||''} alt={myAccount.nickname||''} referrerPolicy='no-referrer'/>
                                             <span className='d-flex ai-center jc-flex-end'>
                                                 Bergabung
                                                 <FontAwesomeIcon icon={fontawesome.faChevronRight}/>

@@ -42,7 +42,7 @@ function CardList({item, closeModalCallback}) {
         return (
             <div className="rounded flex items-center p-2 gap-x-3 bg-zinc-800" onClick={seeUserProfile}>
                 <div className="grid place-content-center">
-                    <img className="w-[48px] rounded-full" src={item.avatar} alt={item.nickname} />
+                    <img className="w-[48px] rounded-full" src={item.avatar} alt={item.nickname} referrerPolicy='no-referrer'/>
                 </div>
                 <div>
                     <p className="text-sm">{item.nickname}</p>

@@ -161,7 +161,7 @@ export default function Summary() {
         <div className="flex flex-3 fd-column of-auto p-4 overflow-auto text-whitesmoke">
             <div className="min-h-48 p-8 flex items-center gap-4 flex-col sm:flex-row rounded-t-[10px] bg-primary-dark-50">
                 <div>
-                    <img src={summaryData.avatar} alt={summaryData.nickname} className="rounded-full max-h-[96px]" />
+                    <img src={summaryData.avatar} alt={summaryData.nickname} className="rounded-full max-h-[96px]" referrerPolicy='no-referrer'/>
                 </div>
                 <div>
                     <p className="text-xl font-bold">{summaryData.nickname}<sup className='ordinal text-xs font-normal'>{summaryData?.panggilan || ''}</sup></p>

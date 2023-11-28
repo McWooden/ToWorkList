@@ -122,7 +122,7 @@ function MemberCard({user}) {
         <>
         <div className='group-user pointer d-flex ai-center flex-row relative hover:bg-zinc-800'>
             <div ref={btnRef} className='flex-1 flex gap-2 items-center' onClick={showDropDown}>
-                <img src={user.avatar} alt={user.nickname} />
+                <img src={user.avatar} alt={user.nickname} referrerPolicy='no-referrer'/>
                 <div className="user-context flex-1">
                     <p>{user.nickname}</p>
                     <p className='user-status'>{user.status}</p>
