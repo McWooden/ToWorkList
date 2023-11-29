@@ -33,13 +33,12 @@ export function TodoDetail() {
         const {data} = await axios.get(`${API}/source/list/${idPageOfBook}/${todoId}`)
         dispatch(setTodo(data))
         setShouldUpdate(false)
-      },
-      [dispatch, idPageOfBook, todoId],
-    )
+    }, [dispatch, idPageOfBook, todoId])
     const channel = useSelector(state => state.channel.book)
     useEffect(() => {
         if (!todoDetails) fetchData()
         channel.on('broadcast', { event: `${idPageOfBook}/${todoId}:shouldUpdate` }, payload => {
+            console.log(payload);
             setShouldUpdate(payload.payload)
         })
     }, [channel, dispatch, fetchData, idPageOfBook, todoDetails, todoId])
