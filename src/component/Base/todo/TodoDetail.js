@@ -37,7 +37,7 @@ export function TodoDetail() {
     const channel = useSelector(state => state.channel.book)
     useEffect(() => {
         if (!todoDetails) fetchData()
-        channel.on('broadcast', { event: `${idPageOfBook}/${todoId}:shouldUpdate` }, payload => {
+        channel.on('broadcast', { event: `${idPageOfBook}/${todoId}:notesUpdate` }, payload => {
             console.log(payload);
             setShouldUpdate(payload.payload)
         })

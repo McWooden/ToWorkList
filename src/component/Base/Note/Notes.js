@@ -71,7 +71,7 @@ export default function Notes() {
             eventPath = `${pageId}:shouldUpdate`
         } else {
             path = API+`/order/todo-notes/${pageId}/${todoId}`
-            eventPath = `${pageId}/${todoId}:shouldUpdate`
+            eventPath = `${pageId}/${todoId}:notesUpdate`
         }
         const dataToSend = {newOrder: list.map((data, index) => ({_id: data._id, order: index}))}
         const promise = loadingToast('Menyimpan susunan')
