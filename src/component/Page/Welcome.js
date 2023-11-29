@@ -23,8 +23,8 @@ export function Welcome() {
   const handlers = useSwipeable({
     onSwipedRight: () => dispatch(reverseNavbar()),
     onSwipedLeft: () => dispatch(reverseRightSide()),
-    swipeDuration: 500,
-    delta: 300,
+    swipeDuration: 1000,
+    delta: 250,
   })
 
   useEffect(() => {
@@ -74,8 +74,8 @@ function GlobalChat() {
 
   const handlers = useSwipeable({
     onSwipedRight: () => dispatch(reverseRightSide()),
-    swipeDuration: 500,
-    delta: 300,
+    swipeDuration: 1000,
+    delta: 250,
 })
 
   const [scrollToBottom, setScrollToBottom] = useState(true)

@@ -39,7 +39,7 @@ export function TodoDetail() {
         if (!todoDetails) fetchData()
         channel.on('broadcast', { event: `${idPageOfBook}/${todoId}:notesUpdate` }, payload => {
             console.log(payload);
-            setShouldUpdate(payload.payload)
+            setShouldUpdate(payload.payload.message)
         })
     }, [channel, dispatch, fetchData, idPageOfBook, todoDetails, todoId])
     
