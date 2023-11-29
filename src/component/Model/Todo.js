@@ -21,6 +21,7 @@ export function TodoModel({item, handleAreaToDrag}) {
     let btnRef = useRef()
     const [deleteOpen, setDeleteOpen] = useState(false)
     const title = item.details.item_title
+    const guestMode = useSelector(state => state.source.guestMode)
 
     const channel = useSelector(state => state.channel.book)
     const isAdmin = useSelector(state => state.source.isAdmin)
@@ -92,6 +93,7 @@ export function TodoModel({item, handleAreaToDrag}) {
                 <div className="card-description">{item.details.desc.slice(0, 103)}</div>
             </div>
             </div>
+            {!guestMode &&
             <div className="todo-right d-flex fd-row p-relative">
                 <div className={`card-finish bg-primary-dark-25 pointer ${dones.includes(myNickname)?'finish-on':'finish-off'} shadow-inner`} onClick={handleReverse}>
                     <div className={`card-finish-value bg-zinc-300 shadow flex place-items-center`}>
@@ -123,6 +125,7 @@ export function TodoModel({item, handleAreaToDrag}) {
                     </ul>
                 </div>
             </div>
+            }
         </div>
         <Confirm open={deleteOpen} close={() => setDeleteOpen(false)} target={title} metode='delete' color={item.details.color} callback={deleteTodo}/>
         </>
