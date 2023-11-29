@@ -38,7 +38,7 @@ function DailyTaskLeft() {
 }
 
 function DailyTaskRight() {
-  const isAdmin = useSelector(state => state.source.isAdmin)
+    const isAdmin = useSelector(state => state.source.isAdmin)
 
     return (
         <Center>

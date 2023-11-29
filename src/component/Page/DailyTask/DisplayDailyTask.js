@@ -23,9 +23,16 @@ export default function TaskContainer() {
     const promise = loadingToast('Memuat')
     try {
       await axios.get(API+`/daily/task/${myId}`).then(res => {
+        console.log(res);
         setlist(res.data.all)
-      }).catch(err => console.log(err))
-    } catch (error) {}
+        setIsLoading(false)
+      }).catch(err => {
+        throw new Error(err)
+      })
+    } catch (error) {
+      console.log(error)
+      setIsLoading(false)
+    }
     toast.dismiss(promise)
     setIsLoading(false)
   }, [myId])

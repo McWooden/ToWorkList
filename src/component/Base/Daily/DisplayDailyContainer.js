@@ -25,28 +25,32 @@ export default function DisplayDailyContainer() {
     const [isReload, setIsReload] = useState(false)
     const isAdmin = useSelector(state => state.source.isAdmin)
     const fetchData = useCallback(async() => {
+        if (!idPageOfBook) return
         setIsReload(false)
-        if (idPageOfBook) return
+        console.log('fetchdata');
         setIsLoading(true)
         const promise = loadingToast('Memuat')
         try {
-        await axios.get(`${API}/source/page/${idPageOfBook}`).then(res => {
-            dispatch(setPageType(res.data.details.icon))
-            dispatch(setSource(res.data))
-          }).catch(err => {
-            throw new Error(err)
-          })
+            await axios.get(`${API}/source/page/${idPageOfBook}`).then(res => {
+                dispatch(setPageType(res.data.details.icon))
+                dispatch(setSource(res.data))
+                setIsLoading(false)
+                toast.dismiss(promise)
+                console.log(res);
+            }).catch(err => {
+                throw new Error(err)
+            })
         } catch (error) {
             setIsReload(false)
             setIsLoading(false)
             console.log(error)
+            toast.dismiss(promise)
         }
-        toast.dismiss(promise)
-        setIsLoading(false)
     }, [dispatch, idPageOfBook])
 
     useEffect(() => {
-      if (!source) fetchData()
+        if (!source) fetchData()
+        console.log(source);
     },[fetchData, source])
 
     if (isReload) return (<div className="reload_btn-frame d-grid pi-center" onClick={fetchData}>

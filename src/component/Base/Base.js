@@ -1,4 +1,3 @@
-
 import { useSelector } from 'react-redux'
 import { Welcome } from '../Page/Welcome'
 import { TodoDetail } from './todo/TodoDetail'
@@ -17,34 +16,6 @@ import { API } from '../../utils/variableGlobal'
 import { setTodo } from '../../redux/todo'
 import { setIsAdmin, setPageType, setSource } from '../../redux/sourceSlice'
 import { useDispatch } from 'react-redux'
-
-// const pages = useMemo(() => [
-//     {
-//         details: {
-//             page_title: 'Ringkasan',
-//             icon: 'faAddressBook',
-//         }
-//     },
-//     {
-//         details: {
-//             page_title: 'Notifikasi',
-//             icon: 'faBell',
-//         }
-//     },
-//     {
-//         details: {
-//             page_title: 'Surat',
-//             icon: 'faEnvelope',
-//         }
-//     },
-//     {
-//         details: {
-//             page_title: 'Berita',
-//             icon: 'faNewspaper',
-//         }
-//     }
-// ], [])
-
 
 export function Base() {
     const pageType = useSelector(state => state.source.pageType)
@@ -71,6 +42,10 @@ export function Base() {
             console.log(err)
         })
     },[dispatch])
+
+    useEffect(() => {
+        console.log(pageType)
+    },[pageType])
 
     useEffect(() => {
         const queryString = window.location.search
