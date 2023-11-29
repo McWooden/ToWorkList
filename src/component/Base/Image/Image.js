@@ -13,7 +13,7 @@ export function Image({data, handleAreaToDrag}) {
     const todoId = useSelector(state => state.todo.id)
     const dispatch = useDispatch()
     const [deleteOpen, setDeleteOpen] = useState(false)
-    const isAdmin = useSelector(state => state.source.isAdmn)
+    const isAdmin = useSelector(state => state.source.isAdmin)
     
     const pathSplit = data.pic.split('/')
     const [full, setFull] = useState(false)
