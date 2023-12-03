@@ -83,7 +83,7 @@ export function Profile() {
                     </div>
                     <div className="profile_pop-body bg-primary-dark-50 p-3 pt-10 mx-3">
                         <a href={profile.avatar} target='_blank' rel="noreferrer" style={{width:'120px'}} className='absolute top-2 left-2'>
-                            <img src={profile.avatar} alt={profile.nickname} className='border-primary-dark-50' referrerPolicy='no-referrer'/>
+                            <img src={profile.avatar} alt={profile.nickname} className='border-primary-dark-50 w-20 h-20' referrerPolicy='no-referrer'/>
                         </a>
                         <div className="profile_pop-nickname">{profile.nickname}<span>#{profile.tag}</span></div>
                         <div className="profile_pop-created_at">

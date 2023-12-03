@@ -23,7 +23,7 @@ export function BookItem({data}) {
     }
     return (
         <div onClick={handleClick} className={`guild-frame pointer ${idBook===data._id ? 'active' : ''} scale-fade-in`}>
-            <img src={`${url}/${data.profile.avatar_url}`} className='guild-photo-profile d-flex jc-center ai-center shadow' alt={data.profile.book_title} title={data.profile.book_title}/>
+            <img src={`${url}/${data.profile.avatar_url}`} className='guild-photo-profile d-flex jc-center ai-center shadow' alt={data.profile.book_title} title={data.profile.book_title} loading="lazy"/>
         </div>
     )
 }

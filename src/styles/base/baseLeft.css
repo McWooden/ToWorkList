@@ -55,12 +55,11 @@
     min-height: 38px;
     color: whitesmoke;
 }
-.jadwal .preview {
-    flex: 1;
+/* .jadwal .preview img {
     background-position: center !important;
     background-size: contain !important;
     background-repeat: no-repeat !important;
-}
+} */
 .jadwal .preview:hover .setting-btn {
     opacity: 1;
 }

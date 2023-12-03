@@ -78,8 +78,9 @@ export function JadwalRoom() {
     const [isFetching, setIsFetching] = useState(false)
     return (
         <div className="jadwal d-flex fd-row of-hidden p-relative shadow bg-primary-dark-50">
-            <div className='preview' style={{background: `url(${url}/${jadwalUrl})`}}>
-                <div className="setting pointer d-flex jc-center ai-center shadow" onClick={() => setModalOpen(true)}>
+            <div className='preview relative w-10'>
+                <img src={`${url}/${jadwalUrl}`} alt="jadwal" loading='lazy' className='h-10 w-10 absolute right-0 left-0 bottom-0 top-0'/>
+                <div className="setting pointer d-flex jc-center ai-center shadow absolute right-0 left-0 bottom-0 top-0" onClick={() => setModalOpen(true)}>
                     <FontAwesomeIcon icon={faGear} className='setting-btn'/>
                 </div>
             </div>
@@ -91,7 +92,7 @@ export function JadwalRoom() {
                 <form ref={formRef} className='file-drop d-flex of-scroll jadwal-form' onDragOver={handleOndragOver} onDrop={handleOndrop} onSubmit={handleSubmit}>
                     <div className="img-view d-flex ai-center jc-center" onClick = { () => {try{fileInput.current.click()} catch(err){}}}>
                     { previewUrl ? 
-                        <img src={previewUrl} alt={image.name} /> 
+                        <img src={previewUrl} alt={image.name} loading="lazy"/> 
                     :
                         <div className="drop-zone d-flex fd-column ai-center jc-center p-relative pointer border-8 border-zinc-600 border-dashed">
                             <FontAwesomeIcon icon={faImage} className='drop-icon'/>
@@ -121,7 +122,7 @@ export function JadwalRoom() {
             </FileDrop>
             <ModalSecond open={full} close={() => setFull(false)}>
                 <div onClick={() => setFull(false)} className='flex justify-center'>
-                    <img src={`${url}/${jadwalUrl}`} alt="jadwal room" className='h-screen' />
+                    <img src={`${url}/${jadwalUrl}`} alt="jadwal room" className='h-screen' loading="lazy"/>
                 </div>
             </ModalSecond>
         </div>
