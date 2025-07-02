@@ -107,7 +107,9 @@ function GlobalChat() {
   
   useEffect(() =>{
     async function fetchData() {
-      const { data } = await supabase.from('broadcast').select()
+      const { data, error } = await supabase.from('broadcast').select('*')
+      
+      console.log(data, error)
       if (data) setChats(data.map(x => ({ nickname: x.data.nickname, msg: x.data.msg, date: x.data.date })))
     }
     fetchData()
@@ -145,7 +147,10 @@ function GlobalChat() {
     }
     try {
       await supabase.from('broadcast').insert({ data: dataToSend })
-    } catch (error) {}
+      
+    } catch (error) {
+      console.log(error)
+    }
     setMsg('')
   }
   function handleInput(e) {
