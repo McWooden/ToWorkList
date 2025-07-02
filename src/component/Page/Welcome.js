@@ -186,7 +186,7 @@ function GlobalChat() {
                 null
             }
           </div>
-          <p className='p-2 pt-0 text-stone-400 rounded text-[6px] text-center text-zinc-200'>
+          <p className='p-2 pt-0 rounded text-[6px] text-center text-zinc-200'>
             Perhatikan privasi Anda! Jangan memposting informasi pribadi di pesan global.
           </p>
         </form>
